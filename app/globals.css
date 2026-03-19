@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
 @import "tailwindcss";
 
@@ -16,8 +15,9 @@
   
   --color-neutral-950: #1A1A1A;
   
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Playfair Display", serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif-custom: var(--font-serif), serif;
+
 }
 
 @layer base {
@@ -30,13 +30,13 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-serif);
+    font-family: var(--font-serif-custom);
     @apply font-bold text-neutral-950;
   }
 }
 
 .font-serif {
-  font-family: var(--font-serif);
+  font-family: var(--font-serif-custom);
 }
 
 /* Custom scrollbar */

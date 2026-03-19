@@ -75,7 +75,7 @@ const RoomyDemo = ({ animate = true, scale = 1 }: { animate?: boolean, scale?: n
       {/* CONTENT AREA */}
       <div className="p-6 space-y-6">
         <div className="flex items-center justify-between">
-          <h4 className="text-lg font-bold">Rent Status</h4>
+          <h3 className="text-lg font-bold">Rent Status</h3>
           <span className="text-[9px] font-bold bg-slate-200 text-slate-500 px-2 py-1 rounded-md uppercase tracking-wider">March 2026</span>
         </div>
 
