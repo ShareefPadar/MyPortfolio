@@ -3,9 +3,9 @@ import { ArrowLeft } from "lucide-react";
 
 export default function NotFound() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-[70vh] px-6 text-center">
+    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-200px)] px-6 text-center">
       <div className="space-y-6 max-w-lg">
-        <span className="text-accent text-xs font-bold uppercase tracking-[0.3em] block font-sans">
+        <span className="text-accent text-xs font-bold uppercase tracking-widest block font-sans">
           404 ERROR
         </span>
         <h1 className="text-5xl md:text-7xl font-bold font-serif leading-tight text-neutral-950">

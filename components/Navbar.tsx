@@ -18,7 +18,7 @@ const Navbar = () => {
         initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        className="pointer-events-auto w-full max-w-7xl bg-white/60 backdrop-blur-3xl border border-white/40 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] rounded-[2.5rem] px-5 sm:px-10 py-5 sm:py-6 flex justify-between items-center transition-all duration-300"
+        className="pointer-events-auto w-full max-w-7xl bg-white/60 backdrop-blur-3xl border border-white/40 shadow-xl rounded-3xl px-5 sm:px-10 py-5 sm:py-6 flex justify-between items-center transition-all duration-300"
       >
         <Link href="/" className="hover:opacity-80 transition-opacity flex items-center shrink-0 group">
           <img src="/assets/logo.svg" alt="Logo" className="w-8 h-8 transition-all duration-300" />
@@ -30,7 +30,7 @@ const Navbar = () => {
               <Link 
                 key={link.name} 
                 href={link.path}
-                className={`relative py-1 text-xs sm:text-[13px] font-bold tracking-[0.2em] uppercase transition-all duration-300 ${
+                className={`relative py-1 text-xs sm:text-sm font-bold tracking-widest uppercase transition-all duration-300 ${
                   isActive ? "text-accent" : "text-neutral-500 hover:text-neutral-950"
                 }`}
               >
@@ -48,7 +48,7 @@ const Navbar = () => {
           <div className="w-px h-4 bg-neutral-200 mx-2 hidden sm:block"></div>
           <a 
             href="mailto:shareefpadar@gmail.com" 
-            className="text-xs sm:text-[13px] font-bold tracking-[0.2em] uppercase text-neutral-950 hover:text-accent transition-colors duration-300"
+            className="text-xs sm:text-sm font-bold tracking-widest uppercase text-neutral-950 hover:text-accent transition-colors duration-300"
           >
             CONTACT
           </a>

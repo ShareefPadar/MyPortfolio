@@ -10,10 +10,10 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="w-full bg-[#FAFAFA] pb-24 md:pb-32 pt-20 flex flex-col items-center overflow-hidden">
+    <footer className="w-full bg-neutral-50 pb-24 md:pb-32 pt-20 flex flex-col items-center overflow-hidden">
       <ParallaxSection delay={0.1} className="w-full flex flex-col items-center">
         <div className="text-center mb-16 px-4">
-          <h2 className="text-[2rem] md:text-[2.5rem] font-serif font-bold mb-4 text-[#0a0a14]">Let&apos;s Connect</h2>
+          <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4 text-neutral-950">Let&apos;s Connect</h2>
           <p className="text-base md:text-xl font-sans text-neutral-500 leading-relaxed mb-4 max-w-lg mx-auto">
             Feel free to reach out for collaborations or just a friendly hello.
           </p>

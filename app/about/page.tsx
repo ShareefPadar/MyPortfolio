@@ -20,7 +20,7 @@ export default function About() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <span className="text-accent text-xs font-bold uppercase tracking-[0.3em] mb-8 block font-sans">ABOUT ME</span>
+            <span className="text-accent text-xs font-bold uppercase tracking-widest mb-8 block font-sans">ABOUT ME</span>
             <h1 className="text-5xl md:text-8xl font-bold font-serif leading-tight mb-12">
               The Bridge Between <span className="italic">Engineering</span> and <span className="italic">Empathy</span>.
             </h1>
@@ -69,11 +69,11 @@ export default function About() {
 
       {/* Philosophy */}
       <ParallaxSection className="mt-32">
-        <section className="bg-surface-peach -mx-6 md:-mx-12 lg:-mx-20 px-6 md:px-24 py-32 rounded-[4rem] text-center mb-32">
+        <section className="bg-surface-peach -mx-6 md:-mx-12 lg:-mx-20 px-6 md:px-24 py-32 rounded-3xl text-center mb-32">
           <h2 className="text-3xl md:text-5xl font-serif font-bold mb-12 italic leading-tight">
             &quot;AI makes life easier, but only for those who know how to steer it. I use my engineering roots and my design seniority to build software that is technically sound, commercially viable, and a joy to use.&quot;
           </h2>
-          <span className="text-xs font-bold uppercase tracking-[0.4em] text-neutral-900 font-sans">— MY PHILOSOPHY</span>
+          <span className="text-xs font-bold uppercase tracking-widest text-neutral-900 font-sans">— MY PHILOSOPHY</span>
         </section>
       </ParallaxSection>
     </motion.div>

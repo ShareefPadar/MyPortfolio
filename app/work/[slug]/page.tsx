@@ -31,12 +31,12 @@ export default function WorkItem() {
         style={{ backgroundColor: project.bgColor }}
       >
         <div className="container-wide">
-          <Link href="/" className="inline-flex items-center gap-2 text-neutral-900/60 hover:text-neutral-900 font-bold uppercase tracking-widest text-[9px] md:text-xs transition-all mb-8 group px-4 md:px-12">
+          <Link href="/" className="inline-flex items-center gap-2 text-neutral-900/60 hover:text-neutral-900 font-bold uppercase tracking-widest text-xs md:text-xs transition-all mb-8 group px-4 md:px-12">
             <ArrowLeft className="w-4 h-4 transform group-hover:-translate-x-1 transition-transform" /> BACK TO HOME
           </Link>
           
           {slug !== "roomy" && (
-            <div className="max-w-[1440px] mx-auto px-4 md:px-12 pb-16 md:pb-24">
+            <div className="max-w-7xl mx-auto px-4 md:px-12 pb-16 md:pb-24">
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -47,7 +47,7 @@ export default function WorkItem() {
                    style={{ y: yImage }}
                    src={project.imageUrl} 
                    alt={project.title} 
-                   className="w-full h-auto object-contain max-h-[750px] drop-shadow-[0_35px_35px_rgba(0,0,0,0.15)] rounded-[1.5rem] md:rounded-[2.5rem]"
+                   className="w-full h-auto object-contain max-h-screen drop-shadow-2xl rounded-3xl md:rounded-3xl"
                  />
               </motion.div>
             </div>
@@ -57,27 +57,27 @@ export default function WorkItem() {
 
       {/* THE SUMMARY GRID */}
       <section className="bg-white py-12 md:py-20">
-        <div className="container-wide px-4 md:px-12 max-w-[1440px] mx-auto space-y-20">
+        <div className="container-wide px-4 md:px-12 max-w-7xl mx-auto space-y-20">
           
           {/* 02. OVERVIEW */}
           <div className="space-y-6">
-            <span className="text-[9px] font-bold text-neutral-900/40 uppercase tracking-[0.3em] block">02 — OVERVIEW</span>
+            <span className="text-xs font-bold text-neutral-900/40 uppercase tracking-widest block">02 — OVERVIEW</span>
             <div className="space-y-6">
               <h1 className="text-4xl md:text-6xl font-serif font-bold text-neutral-950 leading-tight tracking-tight">
                 {project.title}.
               </h1>
               <div className="flex flex-wrap gap-x-12 gap-y-4 pt-2">
                 <div className="space-y-1">
-                   <p className="text-[10px] font-bold text-neutral-400 tracking-widest uppercase">My Role</p>
+                   <p className="text-xs font-bold text-neutral-400 tracking-widest uppercase">My Role</p>
                    <p className="text-sm md:text-base font-medium text-neutral-800">{project.role}</p>
                 </div>
                 <div className="space-y-1">
-                   <p className="text-[10px] font-bold text-neutral-400 tracking-widest uppercase">Period</p>
+                   <p className="text-xs font-bold text-neutral-400 tracking-widest uppercase">Period</p>
                    <p className="text-sm md:text-base font-medium text-neutral-800">{project.duration}</p>
                 </div>
                 {project.stack && (
                   <div className="space-y-1">
-                     <p className="text-[10px] font-bold text-neutral-400 tracking-widest uppercase">The Stack</p>
+                     <p className="text-xs font-bold text-neutral-400 tracking-widest uppercase">The Stack</p>
                      <p className="text-sm md:text-base font-medium text-neutral-800 tracking-tight">{project.stack}</p>
                   </div>
                 )}
@@ -90,7 +90,7 @@ export default function WorkItem() {
 
           {/* 03. THE FRICTION (Problem) */}
           <ScrollReveal className="space-y-6 pt-12 border-t border-neutral-100">
-            <span className="text-[9px] font-bold text-neutral-900/40 uppercase tracking-[0.3em] block">03 — THE FRICTION</span>
+            <span className="text-xs font-bold text-neutral-900/40 uppercase tracking-widest block">03 — THE FRICTION</span>
             <div className="space-y-4">
               <h3 className="text-2xl md:text-3xl font-serif font-bold">The Strategic Friction.</h3>
               <p className="text-base md:text-xl text-neutral-800 leading-relaxed font-sans opacity-90 max-w-2xl">
@@ -101,7 +101,7 @@ export default function WorkItem() {
 
           {/* 04. THE EXECUTION (Solution) */}
           <ScrollReveal className="space-y-6 pt-12 border-t border-neutral-100">
-            <span className="text-[9px] font-bold text-neutral-900/40 uppercase tracking-[0.3em] block">04 — THE EXECUTION</span>
+            <span className="text-xs font-bold text-neutral-900/40 uppercase tracking-widest block">04 — THE EXECUTION</span>
             <div className="space-y-4">
               <h3 className="text-2xl md:text-3xl font-serif font-bold">The Strategic Execution.</h3>
               <p className="text-base md:text-xl text-neutral-800 leading-relaxed font-sans opacity-90 max-w-2xl">
@@ -112,7 +112,7 @@ export default function WorkItem() {
 
           {/* 05. WHAT I LEARNED */}
           <ScrollReveal className="space-y-6 pt-12 border-t border-neutral-100">
-            <span className="text-[9px] font-bold text-neutral-900/40 uppercase tracking-[0.3em] block">05 — WHAT I LEARNED</span>
+            <span className="text-xs font-bold text-neutral-900/40 uppercase tracking-widest block">05 — WHAT I LEARNED</span>
             <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-12">
               <div className="space-y-4">
                 <h3 className="text-2xl md:text-3xl font-serif font-bold italic text-neutral-950">Growth & Takeaways.</h3>
@@ -122,14 +122,14 @@ export default function WorkItem() {
               </div>
               <div className="flex flex-col justify-end pt-4 md:pt-0">
                  <div className="text-5xl font-serif font-bold text-neutral-950">{project.metric || "+45%"}</div>
-                 <p className="text-[10px] font-bold text-neutral-400 tracking-widest uppercase mt-2">{project.metricLabel || "User Growth"}</p>
+                 <p className="text-xs font-bold text-neutral-400 tracking-widest uppercase mt-2">{project.metricLabel || "User Growth"}</p>
               </div>
             </div>
           </ScrollReveal>
 
           {/* 06. THE CALL TO ACTION */}
           <ScrollReveal className="pt-12 border-t border-neutral-200">
-            <span className="text-[9px] font-bold text-neutral-900/40 uppercase tracking-[0.3em] block mb-8">06 — CALL TO ACTION</span>
+            <span className="text-xs font-bold text-neutral-900/40 uppercase tracking-widest block mb-8">06 — CALL TO ACTION</span>
             <div className="space-y-8">
               <h2 className="text-2xl md:text-4xl font-serif font-bold text-neutral-950 leading-snug max-w-xl">
                 Ready to explore the full story?
@@ -165,11 +165,11 @@ export default function WorkItem() {
 
       {/* Refined Footer Navigation */}
       <section className="py-24 md:py-32 bg-neutral-50 border-t border-neutral-100">
-         <div className="container-wide max-w-[1440px] mx-auto px-4 md:px-12">
+         <div className="container-wide max-w-7xl mx-auto px-4 md:px-12">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                {/* BACK HOME */}
                <Link href="/" className="group flex flex-col items-start gap-4">
-                  <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-[0.3em]">Return home</span>
+                  <span className="text-xs font-bold text-neutral-400 uppercase tracking-widest">Return home</span>
                   <div className="text-2xl md:text-3xl font-serif font-bold text-neutral-950 group-hover:text-neutral-600 transition-colors flex items-center gap-3 underline decoration-neutral-200 decoration-1 underline-offset-8">
                      <ArrowLeft className="w-5 h-5" /> Back to Home
                   </div>
@@ -177,7 +177,7 @@ export default function WorkItem() {
 
                {/* NEXT PROJECT */}
                <Link href={`/work/${nextSlug}`} className="group flex flex-col items-end text-right gap-4">
-                  <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-[0.3em]">next story</span>
+                  <span className="text-xs font-bold text-neutral-400 uppercase tracking-widest">next story</span>
                   <div className="text-3xl md:text-5xl font-serif font-bold text-neutral-950 group-hover:text-neutral-600 transition-all duration-300">
                      {nextProject.title} <ArrowRight className="inline-block ml-2 w-6 h-6 md:w-8 md:h-8 transform group-hover:translate-x-3 transition-transform duration-300" />
                   </div>

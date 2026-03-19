@@ -53,15 +53,15 @@ export default function Home() {
 
       {/* FEATURED PRODUCT SECTION */}
       <section className="container-wide mb-32 w-full px-4 md:px-12">
-        <div className="max-w-[1440px] mx-auto">
+        <div className="max-w-7xl mx-auto">
           <div className="flex items-center gap-4 mb-12">
-            <span className="text-sm md:text-base font-bold text-neutral-900 uppercase tracking-[0.4em]">Featured Product</span>
+            <span className="text-sm md:text-base font-bold text-neutral-900 uppercase tracking-widest">Featured Product</span>
             <div className="h-px flex-1 bg-neutral-100" />
           </div>
-          <div className="bg-[#5C45D3]/[0.03] rounded-[2.5rem] md:rounded-[4rem] px-6 py-10 md:p-20 grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-8 md:gap-20 items-center border border-[#5C45D3]/5">
+          <div className="bg-purple-600/5 rounded-3xl md:rounded-3xl px-6 py-10 md:p-20 grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-8 md:gap-20 items-center border border-purple-600/5">
             <ScrollReveal className="space-y-8">
               <div className="space-y-4">
-                <h2 className="text-[2rem] leading-[1.1] md:text-5xl lg:text-6xl font-serif font-bold text-neutral-950 tracking-tight md:leading-tight">
+                <h2 className="text-4xl leading-none md:text-5xl lg:text-6xl font-serif font-bold text-neutral-950 tracking-tight md:leading-tight">
                   Roomy: The effortless expense tracker.
                 </h2>
                 <p className="text-lg md:text-2xl text-neutral-600 font-sans leading-relaxed max-w-xl">
@@ -93,7 +93,7 @@ export default function Home() {
                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                  className="w-full relative"
               >
-                 <div className="absolute inset-0 bg-gradient-to-tr from-[#5C45D3]/20 via-transparent to-transparent blur-3xl -z-10" />
+                 <div className="absolute inset-0 bg-gradient-to-tr from-purple-600/20 via-transparent to-transparent blur-3xl -z-10" />
                  <RoomyDemo />
               </motion.div>
             </ParallaxSection>
@@ -102,13 +102,13 @@ export default function Home() {
       </section>
       
       <section className="container-wide mb-32 w-full">
-        <ScrollReveal className="max-w-[1440px] mx-auto px-4 md:px-12 mb-16">
+        <ScrollReveal className="max-w-7xl mx-auto px-4 md:px-12 mb-16">
           <div className="flex items-center gap-4">
-            <span className="text-sm md:text-base font-bold text-neutral-900 uppercase tracking-[0.4em]">Case Studies</span>
+            <span className="text-sm md:text-base font-bold text-neutral-900 uppercase tracking-widest">Case Studies</span>
             <div className="h-px flex-1 bg-neutral-100" />
           </div>
         </ScrollReveal>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12 max-w-[1440px] mx-auto w-full px-4 md:px-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12 max-w-7xl mx-auto w-full px-4 md:px-12">
           {projects.map((project, index) => (
             <ParallaxSection 
               key={project.title} 

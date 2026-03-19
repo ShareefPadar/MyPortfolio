@@ -21,7 +21,7 @@ const Hero = () => {
           initial={{ y: 40, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-          className="text-4xl md:text-[3.5rem] font-bold leading-[1.2] md:leading-[1.3] mb-8 md:mb-12 font-sans tracking-tight text-neutral-900"
+          className="text-4xl md:text-6xl font-bold leading-tight md:leading-snug mb-8 md:mb-12 font-sans tracking-tight text-neutral-900"
         >
           6 years of <span className="text-gradient">UX strategy.</span><br className="hidden md:block" />
           Now shipping with <span className="text-gradient">code.</span>
@@ -35,13 +35,13 @@ const Hero = () => {
       >
         <motion.div 
           style={{ y: yBg }} 
-          className="absolute top-0 right-10 bottom-10 left-0 bg-gradient-to-br from-accent to-[#8E24AA] rounded-[2.5rem] -z-10" 
+          className="absolute top-0 right-10 bottom-10 left-0 bg-gradient-to-br from-accent to-purple-700 rounded-3xl -z-10" 
         />
         <motion.img 
           style={{ y: yImage }}
           src="/assets/hero-portrait.webp" 
           alt="Shareef Padar Portrait"
-          className="w-full h-auto aspect-[4/5] object-cover rounded-[3.5rem] shadow-2xl mt-6 ml-6 border border-white/10"
+          className="w-full h-auto aspect-[4/5] object-cover rounded-3xl shadow-2xl mt-6 ml-6 border border-white/10"
         />
       </motion.div>
     </section>
