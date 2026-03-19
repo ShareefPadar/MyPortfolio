@@ -6,25 +6,16 @@ import ParallaxSection from "@/components/ParallaxSection";
 
 export default function About() {
   return (
-    <motion.div 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
-      className="container-wide py-12 md:py-24 max-w-4xl"
-    >
+    <div className="container-wide py-12 md:py-24 max-w-4xl">
       {/* Intro Section */}
       <section className="space-y-16">
-        <ParallaxSection>
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
+        <ParallaxSection priority={true}>
+          <div className="pt-4">
             <span className="text-accent text-xs font-bold uppercase tracking-widest mb-8 block font-sans">ABOUT ME</span>
             <h1 className="text-5xl md:text-8xl font-bold font-serif leading-tight mb-12">
               The Bridge Between <span className="italic">Engineering</span> and <span className="italic">Empathy</span>.
             </h1>
-          </motion.div>
+          </div>
         </ParallaxSection>
 
         <ParallaxSection delay={0.2}>
@@ -76,6 +67,6 @@ export default function About() {
           <span className="text-xs font-bold uppercase tracking-widest text-neutral-900 font-sans">— MY PHILOSOPHY</span>
         </section>
       </ParallaxSection>
-    </motion.div>
+    </div>
   );
 }

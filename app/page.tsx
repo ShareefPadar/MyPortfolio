@@ -41,13 +41,8 @@ const projects = [
 
 export default function Home() {
   return (
-    <motion.div 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
-      className="flex flex-col w-full overflow-hidden"
-    >
-      <ParallaxSection>
+    <div className="flex flex-col w-full overflow-hidden">
+      <ParallaxSection priority={true}>
         <Hero />
       </ParallaxSection>
 
@@ -121,7 +116,7 @@ export default function Home() {
           ))}
         </div>
       </section>
-    </motion.div>
+    </div>
   );
 }
 

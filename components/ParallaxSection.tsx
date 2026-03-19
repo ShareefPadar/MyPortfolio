@@ -8,9 +8,10 @@ interface ParallaxSectionProps {
   offset?: number;
   className?: string;
   delay?: number;
+  priority?: boolean;
 }
 
-export default function ParallaxSection({ children, className = "", delay = 0 }: ParallaxSectionProps) {
+export default function ParallaxSection({ children, className = "", delay = 0, priority = false }: ParallaxSectionProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-10%" });
   
@@ -30,8 +31,8 @@ export default function ParallaxSection({ children, className = "", delay = 0 }:
     <div ref={ref} className={`relative w-full ${className}`}>
       <motion.div 
         style={{ y }} 
-        initial={{ opacity: 0, scale: 0.98, filter: "blur(10px)" }}
-        animate={isInView ? { 
+        initial={priority ? { opacity: 1, scale: 1, filter: "blur(0px)" } : { opacity: 0, scale: 0.98, filter: "blur(10px)" }}
+        animate={(isInView || priority) ? { 
           opacity: 1, 
           scale: 1, 
           filter: "blur(0px)",

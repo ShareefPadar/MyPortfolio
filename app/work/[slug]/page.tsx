@@ -37,19 +37,13 @@ export default function WorkItem() {
           
           {slug !== "roomy" && (
             <div className="max-w-7xl mx-auto px-4 md:px-12 pb-16 md:pb-24">
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                className="relative z-10 w-full hidden md:flex justify-center"
-              >
-                 <motion.img 
-                   style={{ y: yImage }}
+              <div className="relative z-10 w-full hidden md:flex justify-center">
+                 <img 
                    src={project.imageUrl} 
                    alt={project.title} 
-                   className="w-full h-auto object-contain max-h-screen drop-shadow-2xl rounded-3xl md:rounded-3xl"
+                   className="w-full h-auto object-contain max-h-screen drop-shadow-2xl rounded-3xl"
                  />
-              </motion.div>
+              </div>
             </div>
           )}
         </div>
