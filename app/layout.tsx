@@ -51,7 +51,7 @@ export default function RootLayout({
       <body className="flex flex-col min-h-screen font-sans">
         <CustomCursor />
         <Navbar />
-        <main className="flex-grow pt-8 md:pt-12 pb-12 relative z-10">
+        <main className="flex-grow pt-28 md:pt-32 pb-12 relative z-10">
           {children}
         </main>
         <Footer />
