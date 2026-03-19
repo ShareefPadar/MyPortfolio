@@ -16,7 +16,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://shareefpadar.com'),
+  metadataBase: new URL('https://www.shareefpadar.com'),
   title: 'Shareef Padar | Design Engineer | UX Strategy & Code',
   description: 'Specializing in B2B SaaS, mobile-first systems, and AI-assisted development.',
   icons: {
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Shareef Padar | Design Engineer',
     description: 'Bridging the gap between UX strategy and production-ready code.',
-    url: 'https://shareefpadar.com', 
+    url: 'https://www.shareefpadar.com', 
     siteName: 'Shareef Padar Portfolio',
     images: [
       {
