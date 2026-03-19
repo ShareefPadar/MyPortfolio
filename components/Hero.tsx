@@ -39,7 +39,7 @@ const Hero = () => {
         />
         <motion.img 
           style={{ y: yImage }}
-          src="/assets/hero-portrait.png" 
+          src="/assets/hero-portrait.webp" 
           alt="Shareef Padar Portrait"
           className="w-full h-auto aspect-[4/5] object-cover rounded-[3.5rem] shadow-2xl mt-6 ml-6 border border-white/10"
         />
