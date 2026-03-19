@@ -47,8 +47,16 @@ const Navbar = () => {
           })}
           <div className="w-px h-4 bg-neutral-200 mx-2 hidden sm:block"></div>
           <a 
+            href="/assets/Shareef_Padar_Design_Engineer.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs sm:text-[13px] font-bold tracking-[0.2em] uppercase text-neutral-950 hover:text-accent transition-colors duration-300 flex items-center gap-2"
+          >
+            📄 Resume
+          </a>
+          <a 
             href="mailto:shareefpadar@gmail.com" 
-            className="text-xs sm:text-[13px] font-bold tracking-[0.2em] uppercase text-neutral-950 hover:text-accent transition-colors duration-300"
+            className="text-xs sm:text-[13px] font-bold tracking-[0.2em] uppercase text-white bg-neutral-950 hover:bg-accent px-4 py-2 rounded-full transition-colors duration-300 ml-2"
           >
             CONTACT
           </a>

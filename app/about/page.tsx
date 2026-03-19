@@ -57,8 +57,8 @@ export default function About() {
 
         <ParallaxSection delay={0.4}>
           <div className="pt-16 flex flex-wrap gap-6">
-            <a href="/assets/resume.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 bg-neutral-950 text-white px-10 py-4 font-bold hover:bg-accent hover:shadow-2xl transition-all duration-300 rounded-full font-sans tracking-wide">
-              RESUME <Download className="w-5 h-5" />
+            <a href="/assets/Shareef_Padar_Design_Engineer.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 bg-neutral-950 text-white px-10 py-4 font-bold hover:bg-accent hover:shadow-2xl transition-all duration-300 rounded-full font-sans tracking-wide">
+              📄 Download Resume <Download className="w-5 h-5" />
             </a>
             <a href="mailto:shareefpadar@gmail.com" className="flex items-center gap-3 border-2 border-neutral-950 text-neutral-950 px-10 py-4 font-bold hover:border-accent hover:text-accent transition-all duration-300 rounded-full font-sans tracking-wide">
               GET IN TOUCH <ArrowRight className="w-5 h-5" />
