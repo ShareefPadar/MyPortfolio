@@ -29,9 +29,6 @@ const Hero = () => {
         </motion.h1>
       </motion.div>
       <motion.div 
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
         className="relative hidden md:flex justify-end md:justify-center w-full max-w-md mx-auto"
       >
         <motion.div 
