@@ -36,7 +36,7 @@ export default function About() {
               <span className="font-bold border-b-2 border-accent">From Strategy to Shipping:</span> I don’t just stop at the mockup. I believe that in the age of "vibe coding," the gap between a designer and an engineer should be zero. Leveraging tools like Cursor and AI-assisted development, I now execute the work of an entire product team solo.
             </p>
             <div className="pt-8">
-              <h3 className="text-3xl font-bold font-serif mb-6 italic">What I Bring to the Table:</h3>
+              <h2 className="text-3xl font-bold font-serif mb-6 italic">What I Bring to the Table:</h2>
               <ul className="list-none space-y-6">
                 <li>
                   <span className="font-bold text-neutral-900 block mb-1">B2B Specialization:</span>

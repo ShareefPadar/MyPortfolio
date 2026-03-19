@@ -92,7 +92,7 @@ export default function WorkItem() {
           <ScrollReveal className="space-y-6 pt-12 border-t border-neutral-100">
             <span className="text-xs font-bold text-neutral-900/40 uppercase tracking-widest block">03 — THE FRICTION</span>
             <div className="space-y-4">
-              <h3 className="text-2xl md:text-3xl font-serif font-bold">The Strategic Friction.</h3>
+              <h2 className="text-2xl md:text-3xl font-serif font-bold">The Strategic Friction.</h2>
               <p className="text-base md:text-xl text-neutral-800 leading-relaxed font-sans opacity-90 max-w-2xl">
                 {project.problem}
               </p>
@@ -103,7 +103,7 @@ export default function WorkItem() {
           <ScrollReveal className="space-y-6 pt-12 border-t border-neutral-100">
             <span className="text-xs font-bold text-neutral-900/40 uppercase tracking-widest block">04 — THE EXECUTION</span>
             <div className="space-y-4">
-              <h3 className="text-2xl md:text-3xl font-serif font-bold">The Strategic Execution.</h3>
+              <h2 className="text-2xl md:text-3xl font-serif font-bold">The Strategic Execution.</h2>
               <p className="text-base md:text-xl text-neutral-800 leading-relaxed font-sans opacity-90 max-w-2xl">
                 {project.solution}
               </p>
@@ -115,7 +115,7 @@ export default function WorkItem() {
             <span className="text-xs font-bold text-neutral-900/40 uppercase tracking-widest block">05 — WHAT I LEARNED</span>
             <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-12">
               <div className="space-y-4">
-                <h3 className="text-2xl md:text-3xl font-serif font-bold italic text-neutral-950">Growth & Takeaways.</h3>
+                <h2 className="text-2xl md:text-3xl font-serif font-bold italic text-neutral-950">Growth & Takeaways.</h2>
                 <p className="text-base md:text-lg text-neutral-800 leading-relaxed font-sans opacity-80 max-w-2xl">
                   {project.growth}
                 </p>

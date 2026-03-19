@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import Image from "next/image";
 
 const Hero = () => {
   const { scrollY } = useScroll();
@@ -37,12 +38,15 @@ const Hero = () => {
           style={{ y: yBg }} 
           className="absolute top-0 right-10 bottom-10 left-0 bg-gradient-to-br from-accent to-purple-700 rounded-3xl -z-10" 
         />
-        <motion.img 
-          style={{ y: yImage }}
-          src="/assets/hero-portrait.webp" 
-          alt="Shareef Padar Portrait"
-          className="w-full h-auto aspect-[4/5] object-cover rounded-3xl shadow-2xl mt-6 ml-6 border border-white/10"
-        />
+        <motion.div style={{ y: yImage }} className="relative w-full aspect-[4/5] mt-6 ml-6">
+          <Image
+            src="/assets/hero-portrait.webp" 
+            alt="Shareef Padar Portrait"
+            fill
+            priority
+            className="object-cover rounded-3xl shadow-2xl border border-white/10"
+          />
+        </motion.div>
       </motion.div>
     </section>
   );
