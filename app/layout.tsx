@@ -16,10 +16,25 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Shareef Padar | CS Engineer & Product Designer",
-  description: "Portfolio for Shareef Padar, showcasing B2B SaaS design, engineering, and product strategy.",
+  title: 'Shareef Padar | Design Engineer',
+  description: 'Specializing in B2B SaaS, mobile-first systems, and AI-assisted development.',
   icons: {
     icon: "/assets/logo.svg",
+  },
+  openGraph: {
+    title: 'Shareef Padar | Design Engineer',
+    description: 'Bridging the gap between UX strategy and production-ready code.',
+    url: 'https://shareefpadar.com', 
+    siteName: 'Shareef Padar Portfolio',
+    images: [
+      {
+        url: '/og-image.png', 
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
   },
 };
 
