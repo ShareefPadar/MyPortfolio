@@ -16,7 +16,8 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: 'Shareef Padar | Design Engineer',
+  metadataBase: new URL('https://shareefpadar.com'),
+  title: 'Shareef Padar | Design Engineer | UX Strategy & Code',
   description: 'Specializing in B2B SaaS, mobile-first systems, and AI-assisted development.',
   icons: {
     icon: "/assets/logo.svg",
