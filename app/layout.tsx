@@ -5,7 +5,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CustomCursor from "@/components/CustomCursor";
-import { GoogleAnalytics } from '@next/third-parties/google';
+
 
 const inter = Inter({ 
   subsets: ["latin"],
@@ -55,7 +55,21 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
-        <GoogleAnalytics gaId="G-FH9B5ZDHV0" />
+        {/* Google Analytics (Manually Deferred) */}
+        <Script 
+          src="https://www.googletagmanager.com/gtag/js?id=G-FH9B5ZDHV0" 
+          strategy="lazyOnload" 
+        />
+        <Script id="google-analytics" strategy="lazyOnload">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-FH9B5ZDHV0', {
+              page_path: window.location.pathname,
+            });
+          `}
+        </Script>
         {/* Microsoft Clarity */}
         <Script id="microsoft-clarity" strategy="lazyOnload">
           {`

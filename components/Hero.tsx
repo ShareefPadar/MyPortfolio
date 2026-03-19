@@ -10,21 +10,17 @@ const Hero = () => {
 
   return (
     <section className="container-wide px-4 md:px-12 pt-16 pb-16 md:pt-24 md:pb-32 grid grid-cols-1 md:grid-cols-[1.2fr_0.8fr] items-center gap-12 md:gap-24">
-      <motion.div 
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-      >
+      <div>
         <p className="text-xl md:text-2xl text-neutral-900 font-sans font-medium mb-4 md:mb-6">
           I&apos;m Shareef Padar
         </p>
-        <motion.h1 
+        <h1 
           className="text-4xl md:text-6xl font-bold leading-tight md:leading-snug mb-8 md:mb-12 font-sans tracking-tight text-neutral-900"
         >
           6 years of <span className="text-gradient">UX strategy.</span><br className="hidden md:block" />
           Now shipping with <span className="text-gradient">code.</span>
-        </motion.h1>
-      </motion.div>
+        </h1>
+      </div>
       <motion.div 
         className="relative hidden md:flex justify-end md:justify-center w-full max-w-md mx-auto"
       >

@@ -5,6 +5,7 @@ import { motion, useMotionValue, useSpring } from "framer-motion";
 
 export default function CustomCursor() {
   const [isHovered, setIsHovered] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
   
   // High-performance motion values for raw mouse coordinates
   const mouseX = useMotionValue(0);
@@ -19,6 +20,14 @@ export default function CustomCursor() {
   const ringY = useSpring(mouseY, { damping: 20, stiffness: 100, mass: 0.4 });
 
   useEffect(() => {
+    // Only mount cursor if device has an accurate pointing device (mouse)
+    if (window.matchMedia("(pointer: fine)").matches) {
+      setIsDesktop(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!isDesktop) return;
     // Only hide cursor on desktop (matches md: breakpoint)
     const mediaQuery = window.matchMedia("(min-width: 768px)");
     
@@ -51,6 +60,8 @@ export default function CustomCursor() {
       document.body.style.cursor = "auto";
     };
   }, [mouseX, mouseY]);
+
+  if (!isDesktop) return null;
 
   return (
     <>
