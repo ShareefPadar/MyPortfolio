@@ -31,7 +31,7 @@ const Navbar = () => {
                 key={link.name} 
                 href={link.path}
                 className={`relative py-1 text-xs sm:text-sm font-bold tracking-widest uppercase transition-all duration-300 ${
-                  isActive ? "text-accent" : "text-neutral-500 hover:text-neutral-950"
+                  isActive ? "text-accent" : "text-neutral-600 hover:text-neutral-950"
                 }`}
               >
                 {link.name}
