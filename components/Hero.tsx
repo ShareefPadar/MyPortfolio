@@ -19,9 +19,6 @@ const Hero = () => {
           I&apos;m Shareef Padar
         </p>
         <motion.h1 
-          initial={{ y: 40, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
           className="text-4xl md:text-6xl font-bold leading-tight md:leading-snug mb-8 md:mb-12 font-sans tracking-tight text-neutral-900"
         >
           6 years of <span className="text-gradient">UX strategy.</span><br className="hidden md:block" />
