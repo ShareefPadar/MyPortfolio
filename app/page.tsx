@@ -9,35 +9,18 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-const projects = [
-  {
-    title: "Instagram Local Feed",
-    description: "Bridging global reach with local connections to help users discover events and businesses in their neighborhood.",
-    category: "Product Design",
-    imageUrl: "https://miro.medium.com/v2/resize:fit:780/1*3sIpxdG2WHXa9JyB9dI_lA.png",
-    href: "/work/instagram-local",
-    bgColor: "#EDF9FF", // Light Blue
-  },
+import { projects as allProjects } from "@/app/work/data";
 
-  {
-    title: "OmniCast AI",
-    description: "AI-powered publishing assistant that predicts performance and optimizes multi-channel campaigns in real-time.",
-    category: "Product Design",
-    imageUrl: "/assets/omnicast-preview.png",
-    href: "/work/omni-cast-ai",
-    bgColor: "#F5F3FF", // Light Purple
-  },
-  {
-    title: "Almosafer UX Audit",
-    description: "Applying Hick's Law and Visual Hierarchy to streamline the Middle East's leading travel platform.",
-    category: "UX Audit",
-    imageUrl: "/assets/almosafer-preview.png",
-    href: "/work/almosafer-audit",
-    bgColor: "#FEFCE8", // Light Yellow
-  },
-];
-
-
+const projects = Object.entries(allProjects)
+  .filter(([slug]) => slug !== "roomy") // Roomy is featured separately above
+  .map(([slug, p]) => ({
+    title: p.title,
+    description: (p as any).homeDescription || p.description,
+    category: p.tags?.[0] || "Case Study",
+    imageUrl: (p as any).homeImageUrl || p.imageUrl,
+    href: `/work/${slug}`,
+    bgColor: p.bgColor,
+  }));
 
 export default function Home() {
   return (
@@ -59,7 +42,7 @@ export default function Home() {
                 <h2 className="text-4xl leading-none md:text-5xl lg:text-6xl font-serif font-bold text-neutral-950 tracking-tight md:leading-tight">
                   Roomy: The effortless expense tracker.
                 </h2>
-                <p className="text-lg md:text-2xl text-neutral-600 font-sans leading-relaxed max-w-xl">
+                <p className="text-base md:text-lg text-neutral-600 font-sans leading-relaxed max-w-xl">
                   A full-stack solution built to manage shared living without the friction. Split bills, track utilities, and settle debts in real-time.
                 </p>
               </div>

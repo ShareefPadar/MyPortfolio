@@ -24,10 +24,10 @@ const ProjectCard = ({ title, description, imageUrl, href, bgColor = "#F5F5F7" }
         >
           {/* Typography Section */}
           <div className="p-8 pb-12 md:p-14 lg:p-16 flex flex-col">
-            <h2 className="text-4xl md:text-5xl font-serif font-bold text-neutral-900 mb-6 tracking-tight leading-none">
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-neutral-950 mb-6 tracking-tight leading-none">
               {title}
             </h2>
-            <p className="text-base md:text-xl text-neutral-800 leading-relaxed font-sans mb-8 w-11/12">
+            <p className="text-base md:text-lg text-neutral-600 leading-relaxed font-sans mb-8 max-w-xl">
               {description}
             </p>
             <div className="flex items-center gap-2 text-neutral-900 font-bold text-base md:text-lg font-sans">

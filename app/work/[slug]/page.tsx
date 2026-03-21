@@ -24,40 +24,25 @@ export default function WorkItem() {
   const nextProject = projects[nextSlug as keyof typeof projects];
 
   return (
-    <div className="w-full">
-      {/* 01. THE IMAGE (Top Hero) */}
-      <section 
-        className="w-full pt-8 pb-12 md:pt-12 md:pb-16"
-        style={{ backgroundColor: project.bgColor }}
-      >
+    <div className="w-full bg-white">
+      {/* 01. NAVIGATION (Back Button) */}
+      <nav className="w-full pt-8 pb-4 bg-white">
         <div className="container-wide">
-          <Link href="/" className="inline-flex items-center gap-2 text-neutral-900/60 hover:text-neutral-900 font-bold uppercase tracking-widest text-xs md:text-xs transition-all mb-8 group px-4 md:px-12">
+          <Link href="/" className="inline-flex items-center gap-2 text-neutral-900/60 hover:text-neutral-900 font-bold uppercase tracking-widest text-xs md:text-xs transition-all group px-4 md:px-12">
             <ArrowLeft className="w-4 h-4 transform group-hover:-translate-x-1 transition-transform" /> BACK TO HOME
           </Link>
-          
-          {slug !== "roomy" && (
-            <div className="max-w-7xl mx-auto px-4 md:px-12 pb-16 md:pb-24">
-              <div className="relative z-10 w-full hidden md:flex justify-center">
-                 <img 
-                   src={project.imageUrl} 
-                   alt={project.title} 
-                   className="w-full h-auto object-contain max-h-screen drop-shadow-2xl rounded-3xl"
-                 />
-              </div>
-            </div>
-          )}
         </div>
-      </section>
+      </nav>
 
       {/* THE SUMMARY GRID */}
       <section className="bg-white py-12 md:py-20">
         <div className="container-wide px-4 md:px-12 max-w-7xl mx-auto space-y-20">
           
-          {/* 02. OVERVIEW */}
+          {/* 01. OVERVIEW */}
           <div className="space-y-6">
-            <span className="text-xs font-bold text-neutral-900/40 uppercase tracking-widest block">02 — OVERVIEW</span>
+            <span className="text-xs font-bold text-neutral-900/40 uppercase tracking-widest block">01 — OVERVIEW</span>
             <div className="space-y-6">
-              <h1 className="text-4xl md:text-6xl font-serif font-bold text-neutral-950 leading-tight tracking-tight">
+              <h1 className="text-3xl md:text-5xl font-serif font-bold text-neutral-950 leading-tight tracking-tight">
                 {project.title}.
               </h1>
               <div className="flex flex-wrap gap-x-12 gap-y-4 pt-2">
@@ -76,56 +61,79 @@ export default function WorkItem() {
                   </div>
                 )}
               </div>
-              <p className="text-xl md:text-2xl text-neutral-800 leading-relaxed font-sans font-light max-w-4xl pt-4">
+              <p className="text-base md:text-lg text-neutral-600 leading-relaxed font-sans max-w-3xl pt-4">
                 {project.description}
               </p>
+
+              {/* Hook / Quote Banner */}
+              {(project as any).quote && (
+                <ScrollReveal className="pt-8">
+                  <div 
+                    className="relative rounded-2xl p-6 md:p-8 overflow-hidden group"
+                    style={{ backgroundColor: project.bgColor }}
+                  >
+                    <div className="absolute top-0 right-0 -mt-8 -mr-8 text-neutral-950 opacity-[0.04] transform rotate-12 pointer-events-none group-hover:scale-110 group-hover:opacity-[0.06] transition-all duration-700">
+                      <svg width="140" height="140" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z" />
+                      </svg>
+                    </div>
+                    
+                    <div className="relative z-10 flex gap-6 items-center">
+                      <div className="w-1.5 h-full min-h-[4rem] bg-neutral-950/15 rounded-full shrink-0"></div>
+                      <p className="text-xl md:text-3xl font-serif font-medium text-neutral-900 leading-relaxed italic pr-4 md:pr-12">
+                        "{(project as any).quote}"
+                      </p>
+                    </div>
+                  </div>
+                </ScrollReveal>
+              )}
             </div>
           </div>
 
-          {/* 03. THE FRICTION (Problem) */}
+          {/* 02. THE FRICTION (Problem) */}
           <ScrollReveal className="space-y-6 pt-12 border-t border-neutral-100">
-            <span className="text-xs font-bold text-neutral-900/40 uppercase tracking-widest block">03 — THE FRICTION</span>
+            <span className="text-xs font-bold text-neutral-900/40 uppercase tracking-widest block">02 — THE FRICTION</span>
             <div className="space-y-4">
-              <h2 className="text-2xl md:text-3xl font-serif font-bold">The Strategic Friction.</h2>
-              <p className="text-base md:text-xl text-neutral-800 leading-relaxed font-sans opacity-90 max-w-2xl">
+              <h2 className="text-xl md:text-2xl font-serif font-bold text-neutral-950">The Strategic Friction.</h2>
+              <p className="text-base md:text-lg text-neutral-600 leading-relaxed font-sans max-w-2xl">
                 {project.problem}
               </p>
             </div>
           </ScrollReveal>
 
-          {/* 04. THE EXECUTION (Solution) */}
+          {/* 03. THE EXECUTION (Solution) */}
           <ScrollReveal className="space-y-6 pt-12 border-t border-neutral-100">
-            <span className="text-xs font-bold text-neutral-900/40 uppercase tracking-widest block">04 — THE EXECUTION</span>
+            <span className="text-xs font-bold text-neutral-900/40 uppercase tracking-widest block">03 — THE EXECUTION</span>
             <div className="space-y-4">
-              <h2 className="text-2xl md:text-3xl font-serif font-bold">The Strategic Execution.</h2>
-              <p className="text-base md:text-xl text-neutral-800 leading-relaxed font-sans opacity-90 max-w-2xl">
+              <h2 className="text-xl md:text-2xl font-serif font-bold text-neutral-950">The Strategic Execution.</h2>
+              <p className="text-base md:text-lg text-neutral-600 leading-relaxed font-sans max-w-2xl">
                 {project.solution}
               </p>
             </div>
           </ScrollReveal>
 
-          {/* 05. WHAT I LEARNED */}
+          {/* 04. WHAT I LEARNED */}
           <ScrollReveal className="space-y-6 pt-12 border-t border-neutral-100">
-            <span className="text-xs font-bold text-neutral-900/40 uppercase tracking-widest block">05 — WHAT I LEARNED</span>
+            <span className="text-xs font-bold text-neutral-900/40 uppercase tracking-widest block">04 — WHAT I LEARNED</span>
             <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-12">
               <div className="space-y-4">
-                <h2 className="text-2xl md:text-3xl font-serif font-bold italic text-neutral-950">Growth & Takeaways.</h2>
-                <p className="text-base md:text-lg text-neutral-800 leading-relaxed font-sans opacity-80 max-w-2xl">
+                <h2 className="text-xl md:text-2xl font-serif font-bold italic text-neutral-950">Growth & Takeaways.</h2>
+                <p className="text-base md:text-lg text-neutral-600 leading-relaxed font-sans max-w-2xl">
                   {project.growth}
                 </p>
               </div>
               <div className="flex flex-col justify-end pt-4 md:pt-0">
-                 <div className="text-5xl font-serif font-bold text-neutral-950">{project.metric || "+45%"}</div>
+                 <div className="text-4xl font-serif font-bold text-neutral-950">{project.metric || "+45%"}</div>
                  <p className="text-xs font-bold text-neutral-400 tracking-widest uppercase mt-2">{project.metricLabel || "User Growth"}</p>
               </div>
             </div>
           </ScrollReveal>
 
-          {/* 06. THE CALL TO ACTION */}
+          {/* 05. THE CALL TO ACTION */}
           <ScrollReveal className="pt-12 border-t border-neutral-200">
-            <span className="text-xs font-bold text-neutral-900/40 uppercase tracking-widest block mb-8">06 — CALL TO ACTION</span>
+            <span className="text-xs font-bold text-neutral-900/40 uppercase tracking-widest block mb-8">05 — CALL TO ACTION</span>
             <div className="space-y-8">
-              <h2 className="text-2xl md:text-4xl font-serif font-bold text-neutral-950 leading-snug max-w-xl">
+              <h2 className="text-xl md:text-2xl font-serif font-bold text-neutral-950 leading-snug max-w-xl">
                 Ready to explore the full story?
               </h2>
               
@@ -172,8 +180,8 @@ export default function WorkItem() {
                {/* NEXT PROJECT */}
                <Link href={`/work/${nextSlug}`} className="group flex flex-col items-end text-right gap-4">
                   <span className="text-xs font-bold text-neutral-400 uppercase tracking-widest">next story</span>
-                  <div className="text-3xl md:text-5xl font-serif font-bold text-neutral-950 group-hover:text-neutral-600 transition-all duration-300">
-                     {nextProject.title} <ArrowRight className="inline-block ml-2 w-6 h-6 md:w-8 md:h-8 transform group-hover:translate-x-3 transition-transform duration-300" />
+                  <div className="text-2xl md:text-3xl font-serif font-bold text-neutral-950 group-hover:text-neutral-600 transition-all duration-300">
+                     {nextProject.title} <ArrowRight className="inline-block ml-2 w-5 h-5 md:w-6 md:h-6 transform group-hover:translate-x-3 transition-transform duration-300" />
                   </div>
                </Link>
             </div>

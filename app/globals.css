@@ -23,7 +23,7 @@
 @layer base {
   body {
     @apply text-neutral-950 antialiased;
-    background-color: #FAFAFA;
+    background-color: #FFFFFF;
     font-family: var(--font-sans);
     letter-spacing: -0.01em;
     overflow-x: hidden;

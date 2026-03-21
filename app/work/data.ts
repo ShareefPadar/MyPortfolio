@@ -2,10 +2,12 @@ export const projects = {
   "instagram-local": {
     title: "Instagram Local Feed",
     description: "Instagram connects us to the world, but when it comes to our own neighborhoods, the experience falls short. Bridging global reach with local connections to help users discover events and businesses in their neighborhood.",
+    homeDescription: "Bridging global reach with local connections to help users discover events and businesses in their neighborhood.",
     role: "Product Designer",
     duration: "2-4 weeks",
     imageUrl: "/assets/instagram-local.png",
-    bgColor: "#E1F5FE",
+    homeImageUrl: "https://miro.medium.com/v2/resize:fit:780/1*3sIpxdG2WHXa9JyB9dI_lA.png",
+    bgColor: "#EDF9FF",
     tags: ["Product Design", "UX Strategy", "Neighborhoods"],
     externalUrl: "https://shareefpadar167.medium.com/designing-instagrams-local-feed-bridging-global-reach-with-local-connections-82e6dbbc813f",
     externalLabel: "Read full story on Medium",
@@ -16,7 +18,8 @@ export const projects = {
     solution: "A hyper-local feed integrated into the home navigation, utilizing geolocation to surface community-driven content and small business highlights seamlessly.",
     growth: "Navigating the thin line between personalization and privacy was the biggest takeaway. Local trust is a currency managed through clear UI patterns and user-consented geolocation mapping.",
     metric: "+45%",
-    metricLabel: "User growth"
+    metricLabel: "User growth",
+    quote: "Uncovered a critical gap: 85% of users want local content but 50%+ can't find it. Surveyed 20 users, designed 2 discovery solutions for passive and active browsing modes."
   },
 
   "omni-cast-ai": {
@@ -25,7 +28,7 @@ export const projects = {
     role: "Senior Product Designer",
     duration: "2-4 weeks",
     imageUrl: "/assets/omnicast-preview.png",
-    bgColor: "#F0F4F8",
+    bgColor: "#F5F3FF",
     tags: ["AI", "SaaS", "Product Design"],
     externalUrl: "https://www.notion.so/shareef-padar/OmniCast-AI-AI-Powered-Multi-Channel-Publishing-Assistant-23a967e98ad980d88a54ffac2e1e4e93",
     externalLabel: "Read on Notion",
@@ -36,7 +39,8 @@ export const projects = {
     solution: "We replaced 'black box' automation with an in-line AI workflow. By integrating predictive scheduling and real-time engagement insights directly into the content calendar, we eliminated the friction between planning and execution.",
     growth: "Achieved a significant uplift in engagement and saved users hours of manual work. Key takeaway: Explainability is critical. Users trust AI more when it provides clear confidence scores and allows for manual overrides.",
     metric: "+20%",
-    metricLabel: "Engagement Lift"
+    metricLabel: "Engagement Lift",
+    quote: "AI-powered publishing assistant built on 8 interviews and 4 competitor audits. Projected 30–40% time savings and 15–20% engagement uplift across 6 platforms."
   },
   "roomy": {
     title: "Roomy: The Bedspace OS",
@@ -55,15 +59,17 @@ export const projects = {
     solution: "I architected a custom Pseudo-Relational Database Engine using LocalStorage. The system features Smart Ledger Logic for real-time balance recalculation, a Live-Status Scheduler for laundry with hard daily limits, and a role-based UI for Admins and Members.",
     growth: "This project was a deep dive into Vibe Coding. By using AI to handle boilerplate and complex state synchronization, I was able to focus on the system architecture. I learned to build a database client that provides a zero-latency user experience that feels like a native app.",
     metric: "-85%",
-    metricLabel: "Manual Overhead Reduction"
+    metricLabel: "Manual Overhead Reduction",
+    quote: ""
   },
   "almosafer-audit": {
     title: "Almosafer UX Audit",
     description: "Refining the interface of the Middle East's leading travel platform by applying core UX principles to eliminate decision fatigue.",
+    homeDescription: "Applying Hick's Law and Visual Hierarchy to streamline the Middle East's leading travel platform.",
     role: "Product Designer",
     duration: "2-4 weeks",
     imageUrl: "/assets/almosafer-preview.png",
-    bgColor: "#E3F2FD",
+    bgColor: "#FEFCE8",
     tags: ["UX Research", "Hick's Law", "Travel"],
     externalUrl: "https://shareefpadar167.medium.com/applying-hicks-law-and-visual-hierarchy-to-almosafer-s-interface-e2aa36a0d932",
     externalLabel: "Read full story on Medium",
@@ -74,6 +80,7 @@ export const projects = {
     solution: "I consolidated niche services into a streamlined 'Travel Essentials' category and redefined the visual hierarchy. By creating distinct primary and secondary signifiers, we cleared the user's path toward the most important booking actions.",
     growth: "Significant reduction in time-to-decision and improved booking velocity. The audit proved that even minor, time-boxed UX corrections can drastically improve user confidence and conversion in high-traffic travel platforms.",
     metric: "Fast",
-    metricLabel: "Booking Velocity"
+    metricLabel: "Booking Velocity",
+    quote: "Audited the Middle East's leading travel platform. Identified 3 critical friction points in the booking funnel — resolved with zero brand changes."
   },
 };
