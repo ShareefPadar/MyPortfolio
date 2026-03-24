@@ -83,4 +83,23 @@ export const projects = {
     metricLabel: "Booking Velocity",
     quote: "Audited the Middle East's leading travel platform. Identified 3 critical friction points in the booking funnel — resolved with zero brand changes."
   },
+  "google-maps-route-pass": {
+    title: "Google Maps Route Pass",
+    description: "A privacy-first, encrypted handshake for instant multi-stop navigation transfers between passengers and drivers.",
+    homeDescription: "Bridging the digital handshake with an encrypted solution for universal multi-stop navigation.",
+    homeImageUrl: "/assets/google-maps-preview.png",
+    role: "Lead Product Designer",
+    duration: "4 weeks",
+    imageUrl: "/assets/google-maps-preview.png",
+    bgColor: "#E1F2ED",
+    tags: ["UX Research", "Privacy", "Navigation"],
+    externalUrl: "https://shareef-padar.notion.site/Google-Maps-Route-Pass-UX-Case-Study-32c967e98ad98113aacfe1ab0817022e",
+    externalLabel: "Read full study on Notion",
+    problem: "53% of users avoid multi-stop routes because they are too difficult to explain, while 63% rely on error-prone verbal directions that often lead to privacy vulnerabilities.",
+    solution: "A QR-based, encrypted handshake that allows for the instant transfer of multi-stop routes. Includes 'Destination Masking' to protect user privacy for final stops.",
+    growth: "100% of surveyed users cited the passive handshake as 'faster' and 'safer.' The project successfully shifted the focus from purely functional speed to establishing emotional trust.",
+    metric: "100%",
+    metricLabel: "Interest Rate",
+    quote: "By treating privacy as a core product feature rather than an afterthought, the solution becomes a viable tool for global commuters in diverse privacy-conscious markets."
+  },
 };
