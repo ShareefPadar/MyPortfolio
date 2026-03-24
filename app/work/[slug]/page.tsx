@@ -54,10 +54,10 @@ export default function WorkItem() {
                    <p className="text-xs font-bold text-neutral-400 tracking-widest uppercase">Period</p>
                    <p className="text-sm md:text-base font-medium text-neutral-800">{project.duration}</p>
                 </div>
-                {project.stack && (
+                {(project as any).stack && (
                   <div className="space-y-1">
                      <p className="text-xs font-bold text-neutral-400 tracking-widest uppercase">The Stack</p>
-                     <p className="text-sm md:text-base font-medium text-neutral-800 tracking-tight">{project.stack}</p>
+                     <p className="text-sm md:text-base font-medium text-neutral-800 tracking-tight">{(project as any).stack}</p>
                   </div>
                 )}
               </div>
@@ -149,14 +149,14 @@ export default function WorkItem() {
                   </a>
                 )}
 
-                {project.secondaryUrl && project.secondaryUrl !== "#" && (
+                {(project as any).secondaryUrl && (project as any).secondaryUrl !== "#" && (
                   <a 
-                    href={project.secondaryUrl} 
+                    href={(project as any).secondaryUrl} 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="inline-flex justify-center w-full md:w-auto items-center gap-3 bg-white text-neutral-950 border border-neutral-200 px-6 py-4 md:px-10 md:py-5 rounded-full font-bold text-sm md:text-base hover:bg-neutral-50 transition-all shadow-sm group"
                   >
-                    {project.secondaryLabel} <ArrowRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" />
+                    {(project as any).secondaryLabel} <ArrowRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" />
                   </a>
                 )}
               </div>
