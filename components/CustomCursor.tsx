@@ -6,6 +6,7 @@ import { motion, useMotionValue, useSpring } from "framer-motion";
 export default function CustomCursor() {
   const [isHovered, setIsHovered] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   
   // High-performance motion values for raw mouse coordinates
   const mouseX = useMotionValue(0);
@@ -41,6 +42,7 @@ export default function CustomCursor() {
     const updateMouseInfo = (e: MouseEvent) => {
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
+      setIsVisible(true);
       
       // Check if hovering over interactive elements
       const target = e.target as HTMLElement;
@@ -65,9 +67,12 @@ export default function CustomCursor() {
 
   return (
     <>
+      <style>{`* { cursor: none !important; }`}</style>
+
       {/* Outer Magnetic Halo */}
       <motion.div
         className="fixed top-0 left-0 pointer-events-none z-[9999] hidden md:flex items-center justify-center rounded-full border-2 border-neutral-400"
+        style={{ opacity: isVisible ? 1 : 0 }}
         style={{
           x: ringX,
           y: ringY,
@@ -88,6 +93,7 @@ export default function CustomCursor() {
       <motion.div
         className="fixed top-0 left-0 pointer-events-none z-[10000] hidden md:block rounded-full"
         style={{
+          opacity: isVisible ? 1 : 0,
           x: dotX,
           y: dotY,
           width: 8,
@@ -97,7 +103,7 @@ export default function CustomCursor() {
           backgroundColor: isHovered ? "transparent" : "#A3A3A3",
         }}
         animate={{
-          scale: isHovered ? 0 : 1, // Shrink dot when hovering
+          scale: isHovered ? 0 : 1,
         }}
         transition={{ duration: 0.15 }}
       />

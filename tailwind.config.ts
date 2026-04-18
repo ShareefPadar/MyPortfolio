@@ -27,10 +27,6 @@ const config: Config = {
           cyan: "#00c8dc",
         },
       },
-      blur: {
-        glow: "100px",
-        "glow-lg": "120px",
-      },
       borderRadius: {
         device: "2.5rem",
         "device-lg": "3.5rem",

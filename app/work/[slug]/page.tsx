@@ -5,6 +5,8 @@ import dynamic from "next/dynamic";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
+import SectionLabel from "@/components/SectionLabel";
+import CountUp from "@/components/CountUp";
 import MDXComponents from "@/components/MDXComponents";
 import { useParams } from "next/navigation";
 import { MDXProvider } from "@mdx-js/react";
@@ -51,7 +53,7 @@ export default function WorkItem() {
 
           {/* 01 OVERVIEW */}
           <div className="space-y-6">
-            <span className="text-xs font-bold text-neutral-900/40 uppercase tracking-widest block">01 — OVERVIEW</span>
+            <SectionLabel number={1} title="OVERVIEW" />
             <div className="space-y-6">
               <h1 className="text-3xl md:text-5xl font-serif font-bold text-neutral-950 leading-tight tracking-tight">
                 {project.title}.
@@ -112,21 +114,21 @@ export default function WorkItem() {
           {!MDXContent && (
             <>
               <ScrollReveal className="space-y-6 pt-12 border-t border-neutral-100">
-                <span className="text-xs font-bold text-neutral-900/40 uppercase tracking-widest block">02 — THE FRICTION</span>
+                <SectionLabel number={2} title="THE FRICTION" />
                 <div className="space-y-4">
                   <h2 className="text-xl md:text-2xl font-serif font-bold text-neutral-950">The Strategic Friction.</h2>
                   <p className="text-base md:text-lg text-neutral-600 leading-relaxed font-sans max-w-2xl">{project.problem}</p>
                 </div>
               </ScrollReveal>
               <ScrollReveal className="space-y-6 pt-12 border-t border-neutral-100">
-                <span className="text-xs font-bold text-neutral-900/40 uppercase tracking-widest block">03 — THE EXECUTION</span>
+                <SectionLabel number={3} title="THE EXECUTION" />
                 <div className="space-y-4">
                   <h2 className="text-xl md:text-2xl font-serif font-bold text-neutral-950">The Strategic Execution.</h2>
                   <p className="text-base md:text-lg text-neutral-600 leading-relaxed font-sans max-w-2xl">{project.solution}</p>
                 </div>
               </ScrollReveal>
               <ScrollReveal className="space-y-6 pt-12 border-t border-neutral-100">
-                <span className="text-xs font-bold text-neutral-900/40 uppercase tracking-widest block">04 — WHAT I LEARNED</span>
+                <SectionLabel number={4} title="WHAT I LEARNED" />
                 <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-12">
                   <div className="space-y-4">
                     <h2 className="text-xl md:text-2xl font-serif font-bold italic text-neutral-950">Growth & Takeaways.</h2>
@@ -143,9 +145,7 @@ export default function WorkItem() {
 
           {/* 05 CALL TO ACTION */}
           <ScrollReveal className="pt-12 border-t border-neutral-200">
-            <span className="text-xs font-bold text-neutral-900/40 uppercase tracking-widest block mb-8">
-              {MDXContent ? "02" : "05"} — CALL TO ACTION
-            </span>
+            <SectionLabel number={MDXContent ? 2 : 5} title="CALL TO ACTION" className="mb-8" />
             <div className="space-y-8">
               <h2 className="text-xl md:text-2xl font-serif font-bold text-neutral-950 leading-snug max-w-xl">
                 Ready to explore the full story?

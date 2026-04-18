@@ -6,6 +6,9 @@ import ParallaxSection from "@/components/ParallaxSection";
 import ScrollReveal from "@/components/ScrollReveal";
 import RoomyDemo from "@/components/RoomyDemo";
 import FormDemo from "@/components/FormDemo";
+import Magnetic from "@/components/Magnetic";
+import Marquee from "@/components/Marquee";
+import ReactiveGlow from "@/components/ReactiveGlow";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
@@ -30,9 +33,16 @@ export default function Home() {
         <Hero />
       </ParallaxSection>
 
+      {/* MARQUEE STRIP */}
+      <Marquee
+        items={["Design Engineering", "UX Strategy", "Full-Stack", "Research", "Systems Thinking", "Shipping Products"]}
+        speed={50}
+        className="border-y border-neutral-100"
+      />
+
       {/* FEATURED PRODUCTS — DARK BAND */}
-      <section className="w-full bg-neutral-950 py-20 md:py-32 mb-0">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
+      <section className="w-full bg-neutral-950 py-20 md:py-32 mb-0 relative overflow-hidden">
+        <ReactiveGlow glowClassName="bg-purple-500/25" size={600} className="max-w-7xl mx-auto px-6 md:px-12">
 
           {/* Section label */}
           <div className="flex items-center gap-4 mb-16">
@@ -42,8 +52,8 @@ export default function Home() {
 
           {/* ROOMY */}
           <div className="relative grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-8 md:gap-20 items-center">
-            <div className="absolute -top-32 -left-32 w-[500px] h-[500px] bg-purple-600/20 rounded-full blur-glow-lg pointer-events-none" />
-            <div className="absolute -bottom-32 right-0 w-80 h-80 bg-purple-800/15 rounded-full blur-glow pointer-events-none" />
+            <div className="absolute -top-32 -left-32 w-[500px] h-[500px] bg-purple-600/20 rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute -bottom-32 right-0 w-80 h-80 bg-purple-800/15 rounded-full blur-[100px] pointer-events-none" />
             <ScrollReveal className="space-y-8 relative">
               <div className="space-y-4">
                 <h2 className="text-4xl leading-none md:text-5xl lg:text-6xl font-serif font-bold text-white tracking-tight md:leading-tight">
@@ -63,12 +73,14 @@ export default function Home() {
                 </div>
               </div>
               <div className="pt-4">
-                <Link
-                  href="/work/roomy"
-                  className="inline-flex justify-center w-full md:w-auto items-center gap-3 bg-white text-neutral-950 px-6 py-4 md:px-10 md:py-5 rounded-full font-bold text-sm md:text-base hover:bg-neutral-100 transition-all shadow-xl group"
-                >
-                  Explore the Product <ArrowRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" />
-                </Link>
+                <Magnetic strength={0.25}>
+                  <Link
+                    href="/work/roomy"
+                    className="inline-flex justify-center w-full md:w-auto items-center gap-3 bg-white text-neutral-950 px-6 py-4 md:px-10 md:py-5 rounded-full font-bold text-sm md:text-base hover:bg-neutral-100 transition-all shadow-xl group"
+                  >
+                    Explore the Product <ArrowRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </Magnetic>
               </div>
             </ScrollReveal>
             <ParallaxSection delay={0.1} className="relative lg:ml-auto w-full max-w-md hidden lg:flex justify-center py-8">
@@ -88,8 +100,8 @@ export default function Home() {
 
           {/* FORM */}
           <div className="relative grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-8 md:gap-20 items-center">
-            <div className="absolute -top-32 -left-32 w-[500px] h-[500px] bg-cyan-500/15 rounded-full blur-glow-lg pointer-events-none" />
-            <div className="absolute -bottom-32 right-0 w-80 h-80 bg-cyan-700/10 rounded-full blur-glow pointer-events-none" />
+            <div className="absolute -top-32 -left-32 w-[500px] h-[500px] bg-cyan-500/15 rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute -bottom-32 right-0 w-80 h-80 bg-cyan-700/10 rounded-full blur-[100px] pointer-events-none" />
             <ScrollReveal className="space-y-8 relative">
               <div className="space-y-4">
                 <h2 className="text-4xl leading-none md:text-5xl lg:text-6xl font-serif font-bold text-white tracking-tight md:leading-tight">
@@ -109,12 +121,14 @@ export default function Home() {
                 </div>
               </div>
               <div className="pt-4">
-                <Link
-                  href="/work/form"
-                  className="inline-flex justify-center w-full md:w-auto items-center gap-3 bg-white text-neutral-950 px-6 py-4 md:px-10 md:py-5 rounded-full font-bold text-sm md:text-base hover:bg-neutral-100 transition-all shadow-xl group"
-                >
-                  Explore the Product <ArrowRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" />
-                </Link>
+                <Magnetic strength={0.25}>
+                  <Link
+                    href="/work/form"
+                    className="inline-flex justify-center w-full md:w-auto items-center gap-3 bg-white text-neutral-950 px-6 py-4 md:px-10 md:py-5 rounded-full font-bold text-sm md:text-base hover:bg-neutral-100 transition-all shadow-xl group"
+                  >
+                    Explore the Product <ArrowRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </Magnetic>
               </div>
             </ScrollReveal>
             <ParallaxSection delay={0.1} className="relative lg:ml-auto w-full max-w-md hidden lg:flex justify-center py-8">
@@ -129,8 +143,14 @@ export default function Home() {
             </ParallaxSection>
           </div>
 
-        </div>
+        </ReactiveGlow>
       </section>
+
+      <Marquee
+        items={["Research", "Prototype", "Build", "Iterate", "Ship", "Refine"]}
+        speed={55}
+        className="border-b border-neutral-100"
+      />
 
       <section id="work" className="container-wide mt-32 mb-32 w-full">
         <ScrollReveal className="max-w-7xl mx-auto px-6 md:px-12 mb-16">
