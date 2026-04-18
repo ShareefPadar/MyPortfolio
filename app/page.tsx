@@ -158,13 +158,13 @@ export default function Home() {
       />
 
       <section id="work" className="container-wide mt-16 md:mt-32 mb-16 md:mb-32 w-full">
-        <ScrollReveal className="max-w-7xl mx-auto px-4 md:px-12 mb-10 md:mb-16">
+        <ScrollReveal className="mb-10 md:mb-16">
           <div className="flex items-center gap-4">
             <span className="text-sm md:text-base font-bold text-neutral-900 uppercase tracking-widest">Case Studies</span>
             <div className="h-px flex-1 bg-neutral-100" />
           </div>
         </ScrollReveal>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12 max-w-7xl mx-auto w-full px-4 md:px-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12 w-full">
           {projects.map((project, index) => (
             <ParallaxSection 
               key={project.title} 

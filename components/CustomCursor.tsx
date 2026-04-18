@@ -67,6 +67,7 @@ export default function CustomCursor() {
       <style>{`
         @media (pointer: fine) and (min-width: 768px) {
           *, *::before, *::after { cursor: none !important; }
+          input, textarea, select, [contenteditable="true"] { cursor: text !important; }
         }
       `}</style>
 

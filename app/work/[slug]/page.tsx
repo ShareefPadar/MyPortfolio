@@ -2,14 +2,12 @@
 
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import RevealText from "@/components/RevealText";
 import SectionLabel from "@/components/SectionLabel";
-import CountUp from "@/components/CountUp";
 import MDXComponents from "@/components/MDXComponents";
-import { useParams } from "next/navigation";
+import { useParams, notFound } from "next/navigation";
 import { MDXProvider } from "@mdx-js/react";
 
 import { projects } from '../data';
@@ -27,10 +25,8 @@ const mdxMap: Record<string, React.ComponentType> = {
 export default function WorkItem() {
   const { slug } = useParams();
 
-  const { scrollY } = useScroll();
-  const yImage = useSpring(useTransform(scrollY, [0, 800], [0, 80]), { damping: 20, stiffness: 45 });
-
-  const project = projects[slug as keyof typeof projects] || projects["instagram-local"];
+  const project = projects[slug as keyof typeof projects];
+  if (!project) notFound();
   const projectSlugs = Object.keys(projects);
   const currentIndex = projectSlugs.indexOf(slug as string);
   const nextSlug = projectSlugs[(currentIndex + 1) % projectSlugs.length];
@@ -43,14 +39,14 @@ export default function WorkItem() {
       {/* BACK NAV */}
       <nav className="w-full pt-8 pb-4 bg-white">
         <div className="container-wide">
-          <Link href="/" className="inline-flex items-center gap-2 text-neutral-900/60 hover:text-neutral-900 font-bold uppercase tracking-widest text-xs transition-all group px-6 md:px-12">
+          <Link href="/" className="inline-flex items-center gap-2 text-neutral-900/60 hover:text-neutral-900 font-bold uppercase tracking-widest text-xs transition-all group">
             <ArrowLeft className="w-4 h-4 transform group-hover:-translate-x-1 transition-transform" /> BACK TO HOME
           </Link>
         </div>
       </nav>
 
       <section className="bg-white py-12 md:py-20">
-        <div className="container-wide px-6 md:px-12 max-w-7xl mx-auto space-y-20">
+        <div className="container-wide space-y-20">
 
           {/* 01 OVERVIEW */}
           <div className="space-y-6">
@@ -90,8 +86,8 @@ export default function WorkItem() {
                         <path d="M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z" />
                       </svg>
                     </div>
-                    <div className="relative z-10 flex gap-6 items-center">
-                      <div className="w-1.5 h-full min-h-[4rem] bg-neutral-950/15 rounded-full shrink-0" />
+                    <div className="relative z-10 flex gap-6 items-stretch">
+                      <div className="w-1.5 bg-neutral-950/15 rounded-full shrink-0 self-stretch" />
                       <p className="text-xl md:text-3xl font-serif font-medium text-neutral-900 leading-relaxed italic pr-4 md:pr-12">
                         "{(project as any).quote}"
                       </p>
@@ -182,7 +178,7 @@ export default function WorkItem() {
 
       {/* FOOTER NAV */}
       <section className="py-24 md:py-32 bg-neutral-50 border-t border-neutral-100">
-        <div className="container-wide max-w-7xl mx-auto px-4 md:px-12">
+        <div className="container-wide">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             <Link href="/" className="group flex flex-col items-start gap-4">
               <span className="text-xs font-bold text-neutral-400 uppercase tracking-widest">Return home</span>
