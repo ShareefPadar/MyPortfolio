@@ -7,6 +7,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import RoomyDemo from "@/components/RoomyDemo";
 import FormDemo from "@/components/FormDemo";
 import Magnetic from "@/components/Magnetic";
+import RevealText from "@/components/RevealText";
 import Marquee from "@/components/Marquee";
 import ReactiveGlow from "@/components/ReactiveGlow";
 import { motion } from "framer-motion";
@@ -56,9 +57,11 @@ export default function Home() {
             <div className="absolute -bottom-32 right-0 w-80 h-80 bg-purple-800/15 rounded-full blur-[100px] pointer-events-none" />
             <ScrollReveal className="space-y-8 relative">
               <div className="space-y-4">
-                <h2 className="text-4xl leading-none md:text-5xl lg:text-6xl font-serif font-bold text-white tracking-tight md:leading-tight">
-                  Roomy: The effortless expense tracker.
-                </h2>
+                <RevealText
+                  text="Roomy: The effortless expense tracker."
+                  tag="h2"
+                  className="text-4xl leading-none md:text-5xl lg:text-6xl font-serif font-bold text-white tracking-tight md:leading-tight"
+                />
                 <p className="text-base md:text-lg text-neutral-400 font-sans leading-relaxed max-w-xl">
                   A full-stack solution built to manage shared living without the friction. Split bills, track utilities, and settle debts in real-time.
                 </p>
@@ -104,9 +107,11 @@ export default function Home() {
             <div className="absolute -bottom-32 right-0 w-80 h-80 bg-cyan-700/10 rounded-full blur-[100px] pointer-events-none" />
             <ScrollReveal className="space-y-8 relative">
               <div className="space-y-4">
-                <h2 className="text-4xl leading-none md:text-5xl lg:text-6xl font-serif font-bold text-white tracking-tight md:leading-tight">
-                  Form: Privacy-first health.
-                </h2>
+                <RevealText
+                  text="Form: Privacy-first health."
+                  tag="h2"
+                  className="text-4xl leading-none md:text-5xl lg:text-6xl font-serif font-bold text-white tracking-tight md:leading-tight"
+                />
                 <p className="text-base md:text-lg text-neutral-400 font-sans leading-relaxed max-w-xl">
                   An offline-ready, local-first tracker for weight, BMI, and body composition. No account required — your data stays on your device, syncs only when you want.
                 </p>

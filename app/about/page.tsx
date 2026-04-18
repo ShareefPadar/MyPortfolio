@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Download } from "lucide-react";
 import ParallaxSection from "@/components/ParallaxSection";
+import RevealText from "@/components/RevealText";
 
 export default function About() {
   return (
@@ -12,9 +13,11 @@ export default function About() {
         <ParallaxSection priority={true}>
           <div className="pt-4">
             <span className="text-xs font-bold text-neutral-900/40 uppercase tracking-widest mb-8 block font-sans">About Me</span>
-            <h1 className="text-4xl md:text-6xl font-bold font-serif leading-tight tracking-tight mb-12">
-              The Bridge Between <span className="italic">Engineering</span> and <span className="italic">Empathy</span>.
-            </h1>
+            <RevealText
+              text="The Bridge Between Engineering and Empathy."
+              tag="h1"
+              className="text-4xl md:text-6xl font-bold font-serif leading-tight tracking-tight mb-12"
+            />
           </div>
         </ParallaxSection>
 

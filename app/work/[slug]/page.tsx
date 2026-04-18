@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
+import RevealText from "@/components/RevealText";
 import SectionLabel from "@/components/SectionLabel";
 import CountUp from "@/components/CountUp";
 import MDXComponents from "@/components/MDXComponents";
@@ -55,9 +56,11 @@ export default function WorkItem() {
           <div className="space-y-6">
             <SectionLabel number={1} title="OVERVIEW" />
             <div className="space-y-6">
-              <h1 className="text-3xl md:text-5xl font-serif font-bold text-neutral-950 leading-tight tracking-tight">
-                {project.title}.
-              </h1>
+              <RevealText
+                text={`${project.title}.`}
+                tag="h1"
+                className="text-3xl md:text-5xl font-serif font-bold text-neutral-950 leading-tight tracking-tight"
+              />
               <div className="flex flex-wrap gap-x-12 gap-y-4 pt-2">
                 <div className="space-y-1">
                   <p className="text-xs font-bold text-neutral-400 tracking-widest uppercase">My Role</p>
