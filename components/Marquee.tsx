@@ -12,7 +12,7 @@ const Marquee = ({ items, speed = 30, className = "" }: MarqueeProps) => {
   const loop = [...items, ...items];
 
   return (
-    <div className={`relative overflow-hidden py-8 ${className}`}>
+    <div aria-hidden="true" className={`relative overflow-hidden py-8 ${className}`}>
       <div
         className="marquee-track flex gap-12 whitespace-nowrap"
         style={{ "--marquee-duration": `${speed}s` } as React.CSSProperties}
