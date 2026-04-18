@@ -85,6 +85,28 @@ export const projects = {
     quote: "Uncovered a critical gap: 85% of users want local content but 50%+ can't find it. Surveyed 20 users, designed 2 discovery solutions for passive and active browsing modes."
   },
 
+  "form": {
+    title: "Form: Privacy-First Health",
+    description: "A high-performance, offline-first web app for tracking weight, BMI, and body composition — with optional cloud sync and zero data lock-in.",
+    homeDescription: "A privacy-first, offline-ready health tracker with smart goal forecasting and AI-driven macro targets.",
+    role: "Founding Engineer & Designer",
+    duration: "2-4 weeks",
+    imageUrl: "/assets/fitness-tracker-preview.png",
+    bgColor: "#0D1117",
+    tags: ["Full Stack", "Offline-First", "Health Tech"],
+    stack: "React + Vite • IndexedDB (Dexie.js) • Supabase • Recharts",
+    externalUrl: "https://fitness-tracker-pi-tan.vercel.app/",
+    externalLabel: "Launch Live App",
+    secondaryUrl: "https://github.com/ShareefPadar/fitness-tracker",
+    secondaryLabel: "View Repository",
+    problem: "Most fitness apps are cloud-dependent, privacy-invasive, and locked behind subscriptions. Users with intermittent connectivity or privacy concerns had no premium alternative that worked offline-first without sacrificing UX quality.",
+    solution: "Built a local-first architecture using IndexedDB (Dexie.js) as the primary data layer, with optional Supabase sync for multi-device users. Guest Mode enables full-featured tracking without an account — privacy as a core product feature, not a settings toggle. Macro targets are calculated on-device using the Mifflin-St Jeor BMR formula.",
+    growth: "Building local-first taught me to design around data ownership: schema, sync conflict resolution, and export formats are user-controlled by default. The dual Guest/Sync mode pattern proved that reducing account friction is a stronger retention hook than feature richness.",
+    metric: "0ms",
+    metricLabel: "Load Time (Offline)",
+    quote: "Privacy-first doesn't mean feature-poor. Guest Mode plus offline-first architecture delivers a premium UX with zero account friction."
+  },
+
   "roomy": {
     title: "Roomy: The Bedspace OS",
     description: "A high-performance, mobile-first system designed to automate the management of 21-person shared living spaces.",

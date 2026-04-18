@@ -5,6 +5,8 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CustomCursor from "@/components/CustomCursor";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 
 const inter = Inter({ 
@@ -70,6 +72,8 @@ export default function RootLayout({
             });
           `}
         </Script>
+        <Analytics />
+        <SpeedInsights />
         {/* Microsoft Clarity */}
         <Script id="microsoft-clarity" strategy="lazyOnload">
           {`

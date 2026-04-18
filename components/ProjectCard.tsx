@@ -38,7 +38,7 @@ const ProjectCard = ({ title, description, imageUrl, href, bgColor = "#F5F5F7" }
           {/* Bottom Image / Device Mockup */}
           <div className="mt-auto relative w-full h-1/2 md:h-1/2 hidden md:flex justify-center items-end px-12 md:px-20">
             <motion.div 
-              className="w-full h-full bg-white rounded-t-[2.5rem] md:rounded-t-[3.5rem] shadow-2xl overflow-hidden border-x-8 md:border-x-8 border-t-8 md:border-t-8 border-white transform transition-all duration-700 ease-[0.23, 1, 0.32, 1] group-hover:scale-105 group-hover:-translate-y-4"
+              className="w-full h-full bg-white rounded-t-device md:rounded-t-device-lg shadow-2xl overflow-hidden border-x-8 md:border-x-8 border-t-8 md:border-t-8 border-white transform transition-all duration-700 ease-[0.23, 1, 0.32, 1] group-hover:scale-105 group-hover:-translate-y-4"
             >
               <img 
                 src={imageUrl} 

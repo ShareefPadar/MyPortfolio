@@ -1,0 +1,48 @@
+## The Problem
+
+Co-living in high-density cities like Dubai creates a logistical disaster at scale. I was living in a 21-person shared apartment — and the financial management was entirely manual. WhatsApp groups for rent reminders. Cash handoffs with no receipts. Laundry machines with no scheduling system. Disputes with no paper trail.
+
+The core failure: **no shared system of record** for money, facilities, or accountability.
+
+## System Architecture
+
+Before writing a single line of UI code, I designed the data architecture. The central challenge: building a relational data model without a backend, so the app would work instantly with zero latency.
+
+### The Pseudo-Relational Database Engine
+
+I built a custom database layer on top of `localStorage` that mimics relational behaviour:
+
+- **Entities:** Tenants, Rooms, Rent Ledger, Payments, Laundry Slots
+- **Relations:** Foreign key-style references between tenant IDs and payment records
+- **Transactions:** Atomic write operations that update multiple entities simultaneously (e.g., confirming a payment updates the ledger, the tenant balance, and the admin summary in one operation)
+- **Live Queries:** A subscription model that re-renders UI components when underlying data changes — similar to Supabase's real-time, but fully client-side
+
+This eliminated all network latency. Every interaction — checking a balance, confirming a payment, booking a laundry slot — responds in under 16ms.
+
+## Key Features
+
+### Smart Rent Ledger
+The ledger auto-calculates each tenant's balance based on their room type, shared utility split, and any outstanding arrears from previous months. Admins see a summary view; tenants see only their own balance.
+
+### Role-Based UI
+Two distinct interfaces share the same codebase:
+
+- **Admin view:** Full ledger, payment confirmation, tenant management, arrears tracking
+- **Member view:** Personal balance, payment history, laundry booking
+
+Role is determined by a PIN-based login stored locally — no backend authentication required.
+
+### Live-Status Laundry Scheduler
+The laundry scheduler enforces hard daily limits (max 2 bookings per tenant per day) and displays real-time slot availability. Conflicts are prevented at the data layer, not the UI layer.
+
+## What I Learned About Vibe Coding
+
+This project was my deepest experiment with AI-assisted development using Cursor. The workflow that worked:
+
+- **AI for boilerplate** — state management, CRUD operations, form handling
+- **Human for architecture** — the database schema, the role system, the conflict resolution logic
+- **AI for debugging** — identifying edge cases in the localStorage transaction model
+
+The most important lesson: AI accelerates execution but cannot replace systems thinking. The pseudo-relational engine required understanding *why* relational databases work before I could replicate the behaviour without one.
+
+> This project was a deep dive into Vibe Coding. By using AI to handle boilerplate and complex state synchronisation, I was able to focus on the system architecture — and ship a zero-latency experience that feels like a native app.

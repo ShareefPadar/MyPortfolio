@@ -9,6 +9,7 @@ const Navbar = () => {
 
   const navLinks = [
     { name: "Home", path: "/" },
+    { name: "Work", path: "/#work" },
     { name: "About", path: "/about" },
   ];
 
@@ -25,7 +26,9 @@ const Navbar = () => {
         </Link>
         <div className="flex gap-4 sm:gap-10 items-center">
           {navLinks.map((link) => {
-            const isActive = pathname === link.path;
+            const isActive = link.path === "/#work"
+              ? pathname.startsWith("/work")
+              : pathname === link.path;
             return (
               <Link 
                 key={link.name} 

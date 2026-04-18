@@ -9,9 +9,8 @@ const config: Config = {
     extend: {
       colors: {
         accent: {
-          DEFAULT: "#E21D70", // Vibrant magenta
+          DEFAULT: "#E21D70",
           hover: "#C21861",
-          gradient: "linear-gradient(to right, #E21D70, #FF3D81)",
         },
         surface: {
           peach: "#FFF0EB",
@@ -22,7 +21,19 @@ const config: Config = {
         },
         neutral: {
           950: "#1A1A1A",
-        }
+        },
+        form: {
+          bg: "#0A0C14",
+          cyan: "#00c8dc",
+        },
+      },
+      blur: {
+        glow: "100px",
+        "glow-lg": "120px",
+      },
+      borderRadius: {
+        device: "2.5rem",
+        "device-lg": "3.5rem",
       },
       fontFamily: {
         sans: ["Inter", "sans-serif"],

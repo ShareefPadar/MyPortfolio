@@ -1,0 +1,57 @@
+## The Problem
+
+Most fitness apps share the same fundamental flaw: they require an account before you can do anything. Your data lives on their servers, behind their subscription, subject to their privacy policy. For users who are privacy-conscious, or who simply don't want to commit before trying, the friction is a dealbreaker.
+
+The second problem: fitness apps are cloud-dependent. No internet? No access to your history.
+
+## Architecture: Local-First
+
+The core architectural decision was to make **IndexedDB the primary data layer**, not a remote database. This means:
+
+- The app loads and works instantly — no auth, no network request, no spinner
+- All data is stored on the user's device by default
+- Supabase sync is **opt-in**, triggered only when the user creates an account
+
+I used **Dexie.js** as the IndexedDB wrapper. It provides a clean, Promise-based API and live query hooks that re-render React components when data changes — similar to how Supabase's real-time works, but entirely offline.
+
+### The Dual-Mode Pattern
+
+```
+Guest Mode  →  IndexedDB only  →  Zero account friction
+Sync Mode   →  IndexedDB + Supabase  →  Multi-device access
+```
+
+Critically, switching from Guest to Sync Mode **migrates local data to the cloud** — nothing is lost. Users can try the full product before committing.
+
+## Key Features
+
+### Weight & BMI Tracking
+Daily weight logs stored locally with automatic BMI calculation. The trend chart uses Recharts with a custom gradient fill and reference lines for goal weight and rolling average.
+
+### Smart Goal Forecasting
+The forecast engine calculates a daily rate of change from the last 30 days of data and projects a goal completion date. Edge cases handled explicitly:
+
+- **Not enough data** (< 7 days): prompts user to keep logging
+- **Plateau** (< 0.01kg/day change): flags as stagnant
+- **Off track** (trending away from goal): flags as off track
+- **Unrealistic forecast** (> 730 days): shows "Long Term Goal" rather than a specific date
+
+### AI-Driven Macro Targets
+Macro targets are calculated on-device using the **Mifflin-St Jeor BMR formula** — no third-party nutrition API required. Inputs: weight, height, age, gender, activity level, fitness goal. Output: daily calorie target, protein, carbs, and fat in grams.
+
+### Body Measurements
+Waist, chest, hips, and arms tracked over time — because scale weight alone is a poor measure of body composition change.
+
+### Google Fit Integration
+Optional sync with Google Fit via the Google Fit API, so Form fits into an existing health data ecosystem rather than replacing it.
+
+### CSV Import / Export
+Full data portability. Users can import historical data from other apps (if exported as CSV) and export their Form data at any time. No lock-in.
+
+## What I Learned
+
+Building local-first forced me to think about data ownership as a design constraint, not just a technical one. Every schema decision had to account for: what happens when this data needs to sync? What happens when there's a conflict between local and remote?
+
+The Guest/Sync dual mode also taught me that **reducing friction at the top of the funnel is more valuable than adding features**. The single biggest driver of retention in early testing was the ability to start tracking without creating an account.
+
+> Privacy-first doesn't mean feature-poor. Guest Mode plus offline-first architecture delivers a premium UX with zero account friction.

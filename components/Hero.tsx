@@ -2,6 +2,8 @@
 
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
+import { ArrowDown } from "lucide-react";
 
 const Hero = () => {
   const { scrollY } = useScroll();
@@ -14,12 +16,22 @@ const Hero = () => {
         <p className="text-xl md:text-2xl text-neutral-900 font-sans font-medium mb-4 md:mb-6">
           I&apos;m Shareef Padar
         </p>
-        <h1 
-          className="text-4xl md:text-6xl font-bold leading-tight md:leading-snug mb-8 md:mb-12 font-sans tracking-tight text-neutral-900"
+        <h1
+          className="text-4xl md:text-6xl font-bold leading-tight md:leading-snug mb-6 font-sans tracking-tight text-neutral-900"
         >
           6 years of <span className="text-gradient">UX strategy.</span><br className="hidden md:block" />
           Now shipping with <span className="text-gradient">code.</span>
         </h1>
+        <p className="text-base md:text-lg text-neutral-500 font-sans leading-relaxed max-w-lg mb-10">
+          Design engineer based in Dubai — I research, design, and build products end-to-end. From UX audits to full-stack apps shipped in production.
+        </p>
+        <Link
+          href="/#work"
+          className="inline-flex items-center gap-3 bg-neutral-950 text-white px-8 py-4 rounded-full font-bold text-sm hover:bg-neutral-800 transition-all shadow-lg group"
+        >
+          View my work
+          <ArrowDown className="w-4 h-4 group-hover:translate-y-1 transition-transform" />
+        </Link>
       </div>
       <motion.div 
         className="relative hidden md:flex justify-end md:justify-center w-full max-w-md mx-auto"
