@@ -1,112 +1,84 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 
 export default function CustomCursor() {
-  const [isHovered, setIsHovered] = useState(false);
-  const [isDesktop, setIsDesktop] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
-  
-  // High-performance motion values for raw mouse coordinates
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  // The small inner dot follows instantly
-  const dotX = useSpring(mouseX, { damping: 40, stiffness: 400, mass: 0.1 });
-  const dotY = useSpring(mouseY, { damping: 40, stiffness: 400, mass: 0.1 });
-
-  // The outer ring ("Halo") lags smoothly behind
-  const ringX = useSpring(mouseX, { damping: 20, stiffness: 100, mass: 0.4 });
-  const ringY = useSpring(mouseY, { damping: 20, stiffness: 100, mass: 0.4 });
+  const dotRef = useRef<HTMLDivElement>(null);
+  const ringRef = useRef<HTMLDivElement>(null);
+  const [hovered, setHovered] = useState(false);
+  const pos = useRef({ x: -100, y: -100 });
+  const ring = useRef({ x: -100, y: -100 });
+  const rafRef = useRef<number>(0);
 
   useEffect(() => {
-    // Only mount cursor if device has an accurate pointing device (mouse)
-    if (window.matchMedia("(pointer: fine)").matches) {
-      setIsDesktop(true);
-    }
-  }, []);
+    const onMove = (e: MouseEvent) => {
+      pos.current = { x: e.clientX, y: e.clientY };
 
-  useEffect(() => {
-    if (!isDesktop) return;
-    // Only hide cursor on desktop (matches md: breakpoint)
-    const mediaQuery = window.matchMedia("(min-width: 768px)");
-    
-    const applyCursor = (matches: boolean) => {
-      document.body.style.cursor = matches ? "none" : "auto";
-    };
-    
-    applyCursor(mediaQuery.matches);
-    mediaQuery.addEventListener("change", (e) => applyCursor(e.matches));
-
-    const updateMouseInfo = (e: MouseEvent) => {
-      mouseX.set(e.clientX);
-      mouseY.set(e.clientY);
-      setIsVisible(true);
-      
-      // Check if hovering over interactive elements
       const target = e.target as HTMLElement;
-      const isInteractive = 
-        target.tagName.toLowerCase() === "a" ||
-        target.tagName.toLowerCase() === "button" ||
-        !!target.closest("a") ||
-        !!target.closest("button");
-      setIsHovered(isInteractive);
+      setHovered(!!target.closest("a, button, [role='button']"));
     };
 
-    window.addEventListener("mousemove", updateMouseInfo);
+    window.addEventListener("mousemove", onMove);
+
+    const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+
+    const tick = () => {
+      ring.current.x = lerp(ring.current.x, pos.current.x, 0.12);
+      ring.current.y = lerp(ring.current.y, pos.current.y, 0.12);
+
+      if (dotRef.current) {
+        dotRef.current.style.transform = `translate(${pos.current.x}px, ${pos.current.y}px)`;
+      }
+      if (ringRef.current) {
+        ringRef.current.style.transform = `translate(${ring.current.x}px, ${ring.current.y}px)`;
+      }
+
+      rafRef.current = requestAnimationFrame(tick);
+    };
+
+    rafRef.current = requestAnimationFrame(tick);
 
     return () => {
-      window.removeEventListener("mousemove", updateMouseInfo);
-      mediaQuery.removeEventListener("change", (e) => applyCursor(e.matches));
-      document.body.style.cursor = "auto";
+      window.removeEventListener("mousemove", onMove);
+      cancelAnimationFrame(rafRef.current);
     };
-  }, [mouseX, mouseY]);
-
-  if (!isDesktop) return null;
+  }, []);
 
   return (
     <>
-      <style>{`* { cursor: none !important; }`}</style>
+      <style>{`
+        @media (min-width: 768px) {
+          *, *::before, *::after { cursor: none !important; }
+        }
+      `}</style>
 
-      {/* Outer Magnetic Halo */}
-      <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[9999] hidden md:flex items-center justify-center rounded-full border-2 border-neutral-400"
-        style={{ opacity: isVisible ? 1 : 0 }}
-        style={{
-          x: ringX,
-          y: ringY,
-          width: 48,
-          height: 48,
-          marginLeft: -24,
-          marginTop: -24,
-        }}
-        animate={{
-          scale: isHovered ? 1.5 : 1,
-          backgroundColor: isHovered ? "rgba(163, 163, 163, 0.15)" : "rgba(163,163,163,0)",
-          borderColor: isHovered ? "rgba(163,163,163,0)" : "rgba(163, 163, 163, 1)",
-        }}
-        transition={{ duration: 0.2 }}
-      />
+      {/* Dot */}
+      <div
+        ref={dotRef}
+        className="fixed top-0 left-0 z-[9999] pointer-events-none hidden md:block"
+        style={{ willChange: "transform", marginLeft: -4, marginTop: -4 }}
+      >
+        <div
+          className="w-2 h-2 rounded-full bg-neutral-500 transition-all duration-150"
+          style={{ transform: hovered ? "scale(0)" : "scale(1)" }}
+        />
+      </div>
 
-      {/* Inner Dot */}
-      <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[10000] hidden md:block rounded-full"
-        style={{
-          opacity: isVisible ? 1 : 0,
-          x: dotX,
-          y: dotY,
-          width: 8,
-          height: 8,
-          marginLeft: -4,
-          marginTop: -4,
-          backgroundColor: isHovered ? "transparent" : "#A3A3A3",
-        }}
-        animate={{
-          scale: isHovered ? 0 : 1,
-        }}
-        transition={{ duration: 0.15 }}
-      />
+      {/* Ring */}
+      <div
+        ref={ringRef}
+        className="fixed top-0 left-0 z-[9998] pointer-events-none hidden md:block"
+        style={{ willChange: "transform", marginLeft: -24, marginTop: -24 }}
+      >
+        <div
+          className="w-12 h-12 rounded-full border-2 border-neutral-400 transition-all duration-200"
+          style={{
+            transform: hovered ? "scale(1.6)" : "scale(1)",
+            backgroundColor: hovered ? "rgba(163,163,163,0.12)" : "transparent",
+            borderColor: hovered ? "transparent" : undefined,
+          }}
+        />
+      </div>
     </>
   );
 }
