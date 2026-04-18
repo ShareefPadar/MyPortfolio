@@ -6,8 +6,12 @@ import Link from "next/link";
 import { ArrowDown } from "lucide-react";
 import Magnetic from "./Magnetic";
 import ScrambleText from "./ScrambleText";
+import { useEffect, useState } from "react";
 
 const Hero = () => {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
+
   const { scrollY } = useScroll();
   const yImage = useSpring(useTransform(scrollY, [0, 800], [0, -60]), { damping: 20, stiffness: 45 });
   const yBg = useSpring(useTransform(scrollY, [0, 800], [0, 20]), { damping: 20, stiffness: 45 });
@@ -42,7 +46,7 @@ const Hero = () => {
                 <motion.span
                   custom={i}
                   initial="hidden"
-                  animate="show"
+                  animate={mounted ? "show" : "hidden"}
                   variants={wordVariants}
                   className="inline-block"
                 >
@@ -54,7 +58,7 @@ const Hero = () => {
               <motion.span
                 custom={line1.length}
                 initial="hidden"
-                animate="show"
+                animate={mounted ? "show" : "hidden"}
                 variants={wordVariants}
                 className="inline-block text-gradient"
               >
@@ -69,7 +73,7 @@ const Hero = () => {
                 <motion.span
                   custom={line1.length + 1 + i}
                   initial="hidden"
-                  animate="show"
+                  animate={mounted ? "show" : "hidden"}
                   variants={wordVariants}
                   className="inline-block"
                 >
@@ -81,7 +85,7 @@ const Hero = () => {
               <motion.span
                 custom={line1.length + 1 + line2.length}
                 initial="hidden"
-                animate="show"
+                animate={mounted ? "show" : "hidden"}
                 variants={wordVariants}
                 className="inline-block text-gradient"
               >
@@ -92,7 +96,7 @@ const Hero = () => {
         </h1>
         <motion.p
           initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={mounted ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
           transition={{ delay: 0.9, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="text-base md:text-lg text-neutral-500 font-sans leading-relaxed max-w-lg mb-6"
         >
@@ -100,7 +104,7 @@ const Hero = () => {
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={mounted ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
           transition={{ delay: 1.05, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
           <Magnetic strength={0.3}>

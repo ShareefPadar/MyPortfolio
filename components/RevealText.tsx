@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import { useRef, ElementType } from "react";
+import { useRef, ElementType, useEffect, useState } from "react";
 
 interface RevealTextProps {
   text: string;
@@ -20,6 +20,8 @@ const RevealText = ({
 }: RevealTextProps) => {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: "0px 0px -60px 0px" });
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
   const words = text.split(" ");
 
   return (
@@ -30,7 +32,7 @@ const RevealText = ({
             <motion.span
               className="inline-block"
               initial={{ y: "110%", opacity: 0 }}
-              animate={inView ? { y: 0, opacity: 1 } : {}}
+              animate={mounted && inView ? { y: 0, opacity: 1 } : {}}
               transition={{
                 delay: delay + i * stagger,
                 duration: 0.7,
