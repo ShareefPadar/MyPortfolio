@@ -42,7 +42,7 @@ export default function Home() {
       />
 
       {/* FEATURED PRODUCTS — DARK BAND */}
-      <section className="w-full bg-neutral-950 py-20 md:py-32 mb-0 relative overflow-hidden">
+      <section className="w-full bg-neutral-950 py-14 md:py-32 mb-0 relative overflow-hidden">
         <ReactiveGlow glowClassName="bg-purple-500/25" size={600} className="max-w-7xl mx-auto px-6 md:px-12">
 
           {/* Section label */}
@@ -157,14 +157,14 @@ export default function Home() {
         className="border-b border-neutral-100"
       />
 
-      <section id="work" className="container-wide mt-32 mb-32 w-full">
-        <ScrollReveal className="max-w-7xl mx-auto px-6 md:px-12 mb-16">
+      <section id="work" className="container-wide mt-16 md:mt-32 mb-16 md:mb-32 w-full">
+        <ScrollReveal className="max-w-7xl mx-auto px-4 md:px-12 mb-10 md:mb-16">
           <div className="flex items-center gap-4">
             <span className="text-sm md:text-base font-bold text-neutral-900 uppercase tracking-widest">Case Studies</span>
             <div className="h-px flex-1 bg-neutral-100" />
           </div>
         </ScrollReveal>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12 max-w-7xl mx-auto w-full px-6 md:px-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12 max-w-7xl mx-auto w-full px-4 md:px-12">
           {projects.map((project, index) => (
             <ParallaxSection 
               key={project.title} 

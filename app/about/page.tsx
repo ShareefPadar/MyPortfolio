@@ -70,8 +70,8 @@ export default function About() {
       </section>
 
       {/* Philosophy */}
-      <ParallaxSection className="mt-32">
-        <section className="bg-surface-peach -mx-6 md:-mx-12 lg:-mx-20 px-6 md:px-24 py-24 md:py-32 rounded-3xl text-center mb-32">
+      <ParallaxSection className="mt-16 md:mt-32">
+        <section className="bg-surface-peach -mx-4 md:-mx-12 lg:-mx-20 px-8 md:px-24 py-14 md:py-32 rounded-3xl text-center mb-16 md:mb-32">
           <p className="text-2xl md:text-4xl font-serif font-bold mb-8 italic leading-snug text-neutral-950">
             &quot;AI makes life easier, but only for those who know how to steer it. I use my engineering roots and design seniority to build software that is technically sound, commercially viable, and a joy to use.&quot;
           </p>
