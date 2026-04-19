@@ -29,18 +29,18 @@ export default function ParallaxSection({ children, className = "", delay = 0, p
 
   return (
     <div ref={ref} className={`relative w-full ${className}`}>
-      <motion.div 
-        style={{ y }} 
+      <motion.div
+        style={{ y, willChange: "opacity, transform" }}
         initial={priority ? { opacity: 1, scale: 1, filter: "blur(0px)" } : { opacity: 0, scale: 0.98, filter: "blur(10px)" }}
-        animate={(isInView || priority) ? { 
-          opacity: 1, 
-          scale: 1, 
+        animate={(isInView || priority) ? {
+          opacity: 1,
+          scale: 1,
           filter: "blur(0px)",
-          transition: { 
-            duration: 1.2, 
+          transition: {
+            duration: 1.2,
             ease: [0.22, 1, 0.36, 1],
             delay: delay
-          } 
+          }
         } : {}}
         className="w-full"
       >

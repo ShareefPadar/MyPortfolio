@@ -29,7 +29,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="container-wide px-6 md:px-12 pt-4 pb-8 md:pt-6 md:pb-12 grid grid-cols-1 md:grid-cols-[1.2fr_0.8fr] items-center gap-8 md:gap-16">
+    <section className="container-wide pt-4 pb-8 md:pt-6 md:pb-12 grid grid-cols-1 md:grid-cols-[1.2fr_0.8fr] items-center gap-8 md:gap-16">
       <div>
         <motion.p
           initial={{ opacity: 0, y: 10 }}

@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import Script from 'next/script';
+import dynamic from "next/dynamic";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import CustomCursor from "@/components/CustomCursor";
-import Noise from "@/components/Noise";
 import PageTransition from "@/components/PageTransition";
+
+const CustomCursor = dynamic(() => import("@/components/CustomCursor"), { ssr: false });
+const Noise = dynamic(() => import("@/components/Noise"), { ssr: false });
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
