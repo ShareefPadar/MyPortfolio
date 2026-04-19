@@ -16,6 +16,12 @@ const ScrambleText = ({ text, className = "", duration = 900, delay = 0 }: Scram
   const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
+    // Skip scramble animation on mobile — rAF loop contributes to TBT on throttled CPUs.
+    if (window.matchMedia("(max-width: 767px)").matches) {
+      setDisplay(text);
+      return;
+    }
+
     const start = performance.now() + delay;
     const end = start + duration;
 

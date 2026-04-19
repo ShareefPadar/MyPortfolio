@@ -11,16 +11,9 @@ interface ParallaxSectionProps {
   priority?: boolean;
 }
 
-export default function ParallaxSection({ children, className = "", delay = 0, priority = false }: ParallaxSectionProps) {
+function ParallaxSectionDesktop({ children, className, delay, priority }: Required<Pick<ParallaxSectionProps, "children" | "className" | "delay" | "priority">>) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-10%" });
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(max-width: 767px)");
-    setIsMobile(mq.matches);
-    mq.addEventListener("change", (e) => setIsMobile(e.matches));
-  }, []);
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -33,32 +26,48 @@ export default function ParallaxSection({ children, className = "", delay = 0, p
     springConfig
   );
 
-  // blur(10px) is extremely expensive on throttled mobile CPUs — skip it on mobile
-  const hiddenState = isMobile
-    ? { opacity: 0, scale: 0.98 }
-    : { opacity: 0, scale: 0.98, filter: "blur(10px)" };
-  const visibleState = isMobile
-    ? { opacity: 1, scale: 1 }
-    : { opacity: 1, scale: 1, filter: "blur(0px)" };
-
   return (
     <div ref={ref} className={`relative w-full ${className}`}>
       <motion.div
         style={{ y }}
-        initial={priority ? visibleState : hiddenState}
+        initial={priority ? { opacity: 1, scale: 1, filter: "blur(0px)" } : { opacity: 0, scale: 0.98, filter: "blur(10px)" }}
         animate={(isInView || priority) ? {
-          ...visibleState,
+          opacity: 1,
+          scale: 1,
+          filter: "blur(0px)",
           transition: {
             duration: 1.2,
             ease: [0.22, 1, 0.36, 1],
             delay: delay
           }
         } : {}}
-        className="w-full"
+        className="w-full fm-anim"
       >
         {children}
       </motion.div>
     </div>
   );
+}
+
+export default function ParallaxSection({ children, className = "", delay = 0, priority = false }: ParallaxSectionProps) {
+  const [isMobile, setIsMobile] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    const mq = window.matchMedia("(max-width: 767px)");
+    setIsMobile(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
+  // After mount on mobile, render plain div — removes useScroll + useSpring + useInView subscriptions.
+  // Before mount (SSR + hydration), render the desktop version; CSS `.fm-anim` override makes it visible on mobile.
+  if (mounted && isMobile) {
+    return <div className={`relative w-full ${className}`}>{children}</div>;
+  }
+
+  return <ParallaxSectionDesktop className={className} delay={delay} priority={priority}>{children}</ParallaxSectionDesktop>;
 }
 

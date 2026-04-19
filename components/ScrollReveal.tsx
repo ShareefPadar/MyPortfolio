@@ -22,7 +22,7 @@ export default function ScrollReveal({
       whileInView={{ y: 0, opacity: 1 }}
       viewport={{ once: true, margin: "0px 0px -60px 0px" }}
       transition={{ duration: 0.75, delay, ease: [0.22, 1, 0.36, 1] }}
-      className={className}
+      className={`fm-anim ${className}`}
     >
       {children}
     </motion.div>

@@ -35,7 +35,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="text-lg md:text-xl text-neutral-900 font-sans font-medium mb-2"
+          className="text-lg md:text-xl text-neutral-900 font-sans font-medium mb-2 fm-anim"
         >
           I&apos;m <ScrambleText text="Shareef Padar" duration={800} delay={200} />
         </motion.p>
@@ -48,7 +48,7 @@ const Hero = () => {
                   initial="hidden"
                   animate={mounted ? "show" : "hidden"}
                   variants={wordVariants}
-                  className="inline-block"
+                  className="inline-block fm-anim"
                 >
                   {w}
                 </motion.span>
@@ -60,7 +60,7 @@ const Hero = () => {
                 initial="hidden"
                 animate={mounted ? "show" : "hidden"}
                 variants={wordVariants}
-                className="inline-block text-gradient"
+                className="inline-block text-gradient fm-anim"
               >
                 UX strategy.
               </motion.span>
@@ -75,7 +75,7 @@ const Hero = () => {
                   initial="hidden"
                   animate={mounted ? "show" : "hidden"}
                   variants={wordVariants}
-                  className="inline-block"
+                  className="inline-block fm-anim"
                 >
                   {w}
                 </motion.span>
@@ -87,7 +87,7 @@ const Hero = () => {
                 initial="hidden"
                 animate={mounted ? "show" : "hidden"}
                 variants={wordVariants}
-                className="inline-block text-gradient"
+                className="inline-block text-gradient fm-anim"
               >
                 code.
               </motion.span>
@@ -98,7 +98,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 10 }}
           animate={mounted ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
           transition={{ delay: 0.9, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="text-base md:text-lg text-neutral-500 font-sans leading-relaxed max-w-lg mb-6"
+          className="text-base md:text-lg text-neutral-500 font-sans leading-relaxed max-w-lg mb-6 fm-anim"
         >
           Design engineer based in Dubai — I research, design, and build products end-to-end. From UX audits to full-stack apps shipped in production.
         </motion.p>
@@ -106,6 +106,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 10 }}
           animate={mounted ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
           transition={{ delay: 1.05, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="fm-anim"
         >
           <Magnetic strength={0.3}>
             <Link

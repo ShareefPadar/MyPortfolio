@@ -63,6 +63,23 @@
   }
 }
 
+/* Mobile-only: neutralize Framer Motion initial-hidden states so content is
+   visible in SSR (fixes LCP) and entrance animations don't cost CPU on throttled
+   devices. Desktop (min-width: 768px) is entirely untouched. */
+@media (max-width: 767px) {
+  .fm-anim {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
+
+/* Skip off-screen rendering work for below-fold sections. No visual change. */
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 1200px;
+}
+
 .text-gradient {
   background: var(--color-accent-gradient);
   -webkit-background-clip: text;

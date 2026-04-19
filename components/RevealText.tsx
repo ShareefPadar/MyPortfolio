@@ -30,7 +30,7 @@ const RevealText = ({
         {words.map((word, i) => (
           <span key={i} className="inline-block overflow-hidden align-bottom">
             <motion.span
-              className="inline-block"
+              className="inline-block fm-anim"
               initial={{ y: "110%", opacity: 0 }}
               animate={mounted && inView ? { y: 0, opacity: 1 } : {}}
               transition={{
