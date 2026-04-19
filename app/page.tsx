@@ -11,7 +11,7 @@ import Magnetic from "@/components/Magnetic";
 import RevealText from "@/components/RevealText";
 import ReactiveGlow from "@/components/ReactiveGlow";
 
-const Marquee = dynamic(() => import("@/components/Marquee"), { ssr: false });
+const Marquee = dynamic(() => import("@/components/Marquee"));
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";

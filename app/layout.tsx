@@ -7,8 +7,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageTransition from "@/components/PageTransition";
 
-const CustomCursor = dynamic(() => import("@/components/CustomCursor"), { ssr: false });
-const Noise = dynamic(() => import("@/components/Noise"), { ssr: false });
+const CustomCursor = dynamic(() => import("@/components/CustomCursor"));
+const Noise = dynamic(() => import("@/components/Noise"));
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
