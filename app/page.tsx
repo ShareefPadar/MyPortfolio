@@ -1,6 +1,5 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import Hero from "@/components/Hero";
 import ProjectCard from "@/components/ProjectCard";
 import ParallaxSection from "@/components/ParallaxSection";
@@ -9,9 +8,8 @@ import RoomyDemo from "@/components/RoomyDemo";
 import FormDemo from "@/components/FormDemo";
 import Magnetic from "@/components/Magnetic";
 import RevealText from "@/components/RevealText";
+import Marquee from "@/components/Marquee";
 import ReactiveGlow from "@/components/ReactiveGlow";
-
-const Marquee = dynamic(() => import("@/components/Marquee"));
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
