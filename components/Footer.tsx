@@ -1,12 +1,11 @@
-import { FaLinkedin, FaMedium, FaInstagram, FaBehance } from "react-icons/fa6";
+import { FaLinkedin, FaMedium, FaBehance } from "react-icons/fa6";
 import ParallaxSection from "./ParallaxSection";
 
 export default function Footer() {
   const socialLinks = [
     { name: "LinkedIn", url: "https://www.linkedin.com/in/shareef-padar/", icon: FaLinkedin },
-    { name: "Medium", url: "https://medium.com/@shareefpadar167", icon: FaMedium },
-    { name: "Instagram", url: "https://www.instagram.com/cheppu_padar", icon: FaInstagram },
     { name: "Behance", url: "https://www.behance.net/shareefpadar", icon: FaBehance },
+    { name: "Medium", url: "https://medium.com/@shareefpadar167", icon: FaMedium },
   ];
 
   return (

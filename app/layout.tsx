@@ -25,14 +25,14 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.shareefpadar.com'),
-  title: 'Shareef Padar | Design Engineer | UX Strategy & Code',
-  description: 'Specializing in B2B SaaS, mobile-first systems, and AI-assisted development.',
+  title: 'Shareef Padar | Senior Product Designer — Dubai',
+  description: 'Senior Product Designer with 6 years of B2B UX experience. Research, design systems, and production-ready code — based in Dubai.',
   icons: {
     icon: "/assets/logo.svg",
   },
   openGraph: {
-    title: 'Shareef Padar | Design Engineer',
-    description: 'Bridging the gap between UX strategy and production-ready code.',
+    title: 'Shareef Padar | Senior Product Designer',
+    description: '6 years of B2B product design. Research to shipped interfaces, end to end.',
     url: 'https://www.shareefpadar.com', 
     siteName: 'Shareef Padar Portfolio',
     images: [

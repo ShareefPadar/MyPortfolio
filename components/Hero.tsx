@@ -3,7 +3,7 @@
 import { motion, useScroll, useTransform, useSpring, type Variants } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowDown } from "lucide-react";
+import { ArrowDown, Download } from "lucide-react";
 import Magnetic from "./Magnetic";
 import ScrambleText from "./ScrambleText";
 import { useEffect, useState } from "react";
@@ -16,8 +16,7 @@ const Hero = () => {
   const yImage = useSpring(useTransform(scrollY, [0, 800], [0, -60]), { damping: 20, stiffness: 45 });
   const yBg = useSpring(useTransform(scrollY, [0, 800], [0, 20]), { damping: 20, stiffness: 45 });
 
-  const line1 = ["6", "years", "of"];
-  const line2 = ["Now", "shipping", "with"];
+  const headWords = ["Senior", "Product", "Designer", "who"];
 
   const wordVariants: Variants = {
     hidden: { y: "110%", opacity: 0 },
@@ -39,9 +38,12 @@ const Hero = () => {
         >
           I&apos;m <ScrambleText text="Shareef Padar" duration={800} delay={200} />
         </motion.p>
-        <h1 className="text-4xl md:text-6xl font-bold leading-tight md:leading-snug mb-3 font-sans tracking-tight text-neutral-900">
-          <span className="inline-flex flex-wrap gap-x-[0.3em] overflow-hidden">
-            {line1.map((w, i) => (
+        <h1
+          aria-label="Senior Product Designer who ships."
+          className="text-4xl md:text-6xl font-bold leading-tight md:leading-snug mb-3 font-sans tracking-tight text-neutral-900"
+        >
+          <span aria-hidden="true" className="inline-flex flex-wrap gap-x-[0.3em] overflow-hidden">
+            {headWords.map((w, i) => (
               <span key={i} className="inline-block overflow-hidden align-bottom">
                 <motion.span
                   custom={i}
@@ -56,40 +58,13 @@ const Hero = () => {
             ))}
             <span className="inline-block overflow-hidden align-bottom">
               <motion.span
-                custom={line1.length}
+                custom={headWords.length}
                 initial="hidden"
                 animate={mounted ? "show" : "hidden"}
                 variants={wordVariants}
                 className="inline-block text-gradient fm-anim"
               >
-                UX strategy.
-              </motion.span>
-            </span>
-          </span>
-          <br className="hidden md:block" />
-          <span className="inline-flex flex-wrap gap-x-[0.3em] overflow-hidden">
-            {line2.map((w, i) => (
-              <span key={i} className="inline-block overflow-hidden align-bottom">
-                <motion.span
-                  custom={line1.length + 1 + i}
-                  initial="hidden"
-                  animate={mounted ? "show" : "hidden"}
-                  variants={wordVariants}
-                  className="inline-block fm-anim"
-                >
-                  {w}
-                </motion.span>
-              </span>
-            ))}
-            <span className="inline-block overflow-hidden align-bottom">
-              <motion.span
-                custom={line1.length + 1 + line2.length}
-                initial="hidden"
-                animate={mounted ? "show" : "hidden"}
-                variants={wordVariants}
-                className="inline-block text-gradient fm-anim"
-              >
-                code.
+                ships.
               </motion.span>
             </span>
           </span>
@@ -100,23 +75,32 @@ const Hero = () => {
           transition={{ delay: 0.9, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="text-base md:text-lg text-neutral-500 font-sans leading-relaxed max-w-lg mb-6 fm-anim"
         >
-          Design engineer based in Dubai — I research, design, and build products end-to-end. From UX audits to full-stack apps shipped in production.
+          6 years of B2B UX — research, strategy, and design, end to end. Based in Dubai. I also build and ship my own products in React and Tailwind.
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={mounted ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
           transition={{ delay: 1.05, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="fm-anim"
+          className="fm-anim flex flex-wrap items-center gap-3 md:gap-4"
         >
           <Magnetic strength={0.3}>
             <Link
               href="/#work"
               className="inline-flex items-center gap-3 bg-neutral-950 text-white px-8 py-4 rounded-full font-bold text-sm hover:bg-neutral-800 transition-all shadow-lg group"
             >
-              View my work
+              View work
               <ArrowDown className="w-4 h-4 group-hover:translate-y-1 transition-transform" />
             </Link>
           </Magnetic>
+          <a
+            href="/assets/Shareef_Padar_Design_Engineer.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 border border-neutral-200 text-neutral-950 px-8 py-4 rounded-full font-bold text-sm hover:border-neutral-950 transition-all group"
+          >
+            Download résumé
+            <Download className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
+          </a>
         </motion.div>
       </div>
       <motion.div

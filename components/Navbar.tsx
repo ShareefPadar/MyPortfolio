@@ -52,6 +52,15 @@ const Navbar = () => {
             {isAboutActive && <motion.div layoutId="nav-indicator" className="absolute -bottom-1 left-0 right-0 h-0.5 bg-accent rounded-full" transition={{ type: "spring", bounce: 0.25, duration: 0.5 }} />}
           </Link>
 
+          <a
+            href="/assets/Shareef_Padar_Design_Engineer.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={linkClass(false)}
+          >
+            Résumé
+          </a>
+
           <div className="w-px h-4 bg-neutral-200 hidden sm:block" />
 
           <a

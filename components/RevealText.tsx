@@ -25,8 +25,8 @@ const RevealText = ({
   const words = text.split(" ");
 
   return (
-    <Tag ref={ref as any} className={`overflow-hidden ${className}`}>
-      <span className="inline-flex flex-wrap gap-x-[0.3em]">
+    <Tag ref={ref as any} className={`overflow-hidden ${className}`} aria-label={text}>
+      <span className="inline-flex flex-wrap gap-x-[0.3em]" aria-hidden="true">
         {words.map((word, i) => (
           <span key={i} className="inline-block overflow-hidden align-bottom">
             <motion.span
