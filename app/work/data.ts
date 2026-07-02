@@ -5,6 +5,7 @@ export const projects = {
     homeDescription: "Bridging the digital handshake with an encrypted solution for universal multi-stop navigation.",
     homeImageUrl: "/assets/google-maps-preview.png",
     role: "Lead Product Designer",
+    type: "Product concept",
     duration: "4 weeks",
     imageUrl: "/assets/google-maps-preview.png",
     bgColor: "#E1F2ED",
@@ -14,8 +15,8 @@ export const projects = {
     problem: "53% of users avoid multi-stop routes because they are too difficult to explain, while 63% rely on error-prone verbal directions that often lead to privacy vulnerabilities.",
     solution: "A QR-based, encrypted handshake that allows for the instant transfer of multi-stop routes. Includes 'Destination Masking' to protect user privacy for final stops.",
     growth: "100% of surveyed users cited the passive handshake as 'faster' and 'safer.' The project successfully shifted the focus from purely functional speed to establishing emotional trust.",
-    metric: "100%",
-    metricLabel: "Interest Rate",
+    metric: "<5s",
+    metricLabel: "Handshake time",
     quote: "By treating privacy as a core product feature rather than an afterthought, the solution becomes a viable tool for global commuters in diverse privacy-conscious markets."
   },
 
@@ -23,6 +24,7 @@ export const projects = {
     title: "OmniCast AI",
     description: "AI-powered publishing assistant that predicts performance and optimizes multi-channel campaigns in real-time.",
     role: "Senior Product Designer",
+    type: "Product concept",
     duration: "2-4 weeks",
     imageUrl: "/assets/omnicast-preview.png",
     bgColor: "#F5F3FF",
@@ -35,8 +37,8 @@ export const projects = {
     problem: "Agencies and creators were drowning in fragmented workflows. Marketing teams had to guess optimal posting times and switch between four different AI tools just to draft a single omnichannel campaign.",
     solution: "We replaced 'black box' automation with an in-line AI workflow. By integrating predictive scheduling and real-time engagement insights directly into the content calendar, we eliminated the friction between planning and execution.",
     growth: "Achieved a significant uplift in engagement and saved users hours of manual work. Key takeaway: Explainability is critical. Users trust AI more when it provides clear confidence scores and allows for manual overrides.",
-    metric: "+20%",
-    metricLabel: "Engagement Lift",
+    metric: "+15–20%",
+    metricLabel: "Projected engagement lift",
     quote: "AI-powered publishing assistant built on 8 interviews and 4 competitor audits. Projected 30–40% time savings and 15–20% engagement uplift across 6 platforms."
   },
 
@@ -45,6 +47,7 @@ export const projects = {
     description: "Refining the interface of the Middle East's leading travel platform by applying core UX principles to eliminate decision fatigue.",
     homeDescription: "Applying Hick's Law and Visual Hierarchy to streamline the Middle East's leading travel platform.",
     role: "Product Designer",
+    type: "Self-initiated UX audit",
     duration: "2-4 weeks",
     imageUrl: "/assets/almosafer-preview.png",
     bgColor: "#FEFCE8",
@@ -57,9 +60,9 @@ export const projects = {
     problem: "The homepage was a minefield of decision paralysis. Hick's Law was regularly violated with repetitive icons, equal-weight service buttons, and visual clutter that overwhelmed users during the critical booking moments.",
     solution: "I consolidated niche services into a streamlined 'Travel Essentials' category and redefined the visual hierarchy. By creating distinct primary and secondary signifiers, we cleared the user's path toward the most important booking actions.",
     growth: "Significant reduction in time-to-decision and improved booking velocity. The audit proved that even minor, time-boxed UX corrections can drastically improve user confidence and conversion in high-traffic travel platforms.",
-    metric: "Fast",
-    metricLabel: "Booking Velocity",
-    quote: "Audited the Middle East's leading travel platform. Identified 3 critical friction points in the booking funnel — resolved with zero brand changes."
+    metric: "2",
+    metricLabel: "High-stakes fixes",
+    quote: "Audited the Middle East's leading travel platform. Identified two high-stakes friction points in the booking funnel — resolved with zero brand changes."
   },
 
   "instagram-local": {
@@ -67,6 +70,7 @@ export const projects = {
     description: "Instagram connects us to the world, but when it comes to our own neighborhoods, the experience falls short. Bridging global reach with local connections to help users discover events and businesses in their neighborhood.",
     homeDescription: "Bridging global reach with local connections to help users discover events and businesses in their neighborhood.",
     role: "Product Designer",
+    type: "Product concept",
     duration: "2-4 weeks",
     imageUrl: "/assets/instagram-local.png",
     homeImageUrl: "https://miro.medium.com/v2/resize:fit:780/1*3sIpxdG2WHXa9JyB9dI_lA.png",
@@ -80,16 +84,17 @@ export const projects = {
     problem: "Instagram's local discoverability was underwhelming, with content buried under global hashtags. Users lacked a direct, intuitive way to connect with nearby events and creators in real-time.",
     solution: "A hyper-local feed integrated into the home navigation, utilizing geolocation to surface community-driven content and small business highlights seamlessly.",
     growth: "Navigating the thin line between personalization and privacy was the biggest takeaway. Local trust is a currency managed through clear UI patterns and user-consented geolocation mapping.",
-    metric: "+45%",
-    metricLabel: "User growth",
-    quote: "Uncovered a critical gap: 85% of users want local content but 50%+ can't find it. Surveyed 20 users, designed 2 discovery solutions for passive and active browsing modes."
+    metric: "20",
+    metricLabel: "Users surveyed",
+    quote: "Uncovered a critical gap: 86% of users value local content, but fewer than half can find it. Surveyed 20 users, designed 2 discovery solutions for passive and active browsing modes."
   },
 
   "form": {
     title: "Form: Privacy-First Health",
-    description: "A high-performance, offline-first web app for tracking weight, BMI, and body composition — with optional cloud sync and zero data lock-in.",
+    description: "A health tracker built on one product insight: removing account friction beats adding features. Works fully offline with no sign-up — weight, BMI, and body composition stay on your device, syncing only when you choose.",
     homeDescription: "A privacy-first, offline-ready health tracker with smart goal forecasting and AI-driven macro targets.",
-    role: "Founding Engineer & Designer",
+    role: "Product Designer & Builder",
+    type: "Live product",
     duration: "2-4 weeks",
     imageUrl: "/assets/fitness-tracker-preview.png",
     bgColor: "#0D1117",
@@ -109,8 +114,9 @@ export const projects = {
 
   "roomy": {
     title: "Roomy: The Bedspace OS",
-    description: "A high-performance, mobile-first system designed to automate the management of 21-person shared living spaces.",
-    role: "Founding Engineer & Designer",
+    description: "Living with 21 roommates broke every spreadsheet — so I designed and shipped a role-based system of record for rent, utilities, and shared facilities, now in daily use.",
+    role: "Product Designer & Builder",
+    type: "Live product",
     duration: "2-4 weeks",
     imageUrl: "/assets/roomy-preview.png",
     bgColor: "#F5F3FF",

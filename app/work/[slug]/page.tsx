@@ -62,6 +62,12 @@ export default function WorkItem() {
                   <p className="text-xs font-bold text-neutral-400 tracking-widest uppercase">My Role</p>
                   <p className="text-sm md:text-base font-medium text-neutral-800">{project.role}</p>
                 </div>
+                {(project as any).type && (
+                  <div className="space-y-1">
+                    <p className="text-xs font-bold text-neutral-400 tracking-widest uppercase">Type</p>
+                    <p className="text-sm md:text-base font-medium text-neutral-800">{(project as any).type}</p>
+                  </div>
+                )}
                 <div className="space-y-1">
                   <p className="text-xs font-bold text-neutral-400 tracking-widest uppercase">Period</p>
                   <p className="text-sm md:text-base font-medium text-neutral-800">{project.duration}</p>

@@ -5,10 +5,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Add your project slugs here as you grow
   const projects = [
-    '/work/roomy',
-    '/work/instagram-local',
-    '/work/omni-cast-ai',
+    '/work',
     '/work/almosafer-audit',
+    '/work/omni-cast-ai',
+    '/work/google-maps-route-pass',
+    '/work/instagram-local',
+    '/work/roomy',
+    '/work/form',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),

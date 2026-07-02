@@ -24,7 +24,7 @@ export default function About() {
         <ParallaxSection delay={0.2}>
           <div className="space-y-8 text-base md:text-lg text-neutral-600 leading-relaxed font-sans">
             <p>
-              I&apos;m a <span className="font-bold text-neutral-900">Senior Product Designer</span> with 6 years of experience in B2B SaaS — taking complex products from early research through to shipped, production-ready interfaces. I&apos;ve worked as the sole designer across platforms in logistics, healthcare, gym management, and travel, which means I&apos;m used to owning the entire design process without hand-holding.
+              I&apos;m a <span className="font-bold text-neutral-900">Senior Product Designer</span> with 6 years of experience in B2B SaaS — taking complex products from early research through to shipped, production-ready interfaces. I&apos;ve worked as the sole designer across platforms in logistics, healthcare, gym management, and travel, which means I&apos;m used to owning the entire design process without hand-holding. Most of that client work sits under NDA — detailed case studies are available on request.
             </p>
             <p>
               My background is in <span className="font-bold text-neutral-900">computer science</span>, which means I design with the implementation in mind. I don&apos;t hand off mockups and disappear — I understand the constraints, collaborate closely with engineers, and increasingly ship front-end code directly using React, Tailwind, and AI-assisted workflows with Cursor and Claude Code.

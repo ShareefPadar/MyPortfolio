@@ -10,9 +10,11 @@ export interface WorkCardProps {
   href: string;
   thumbnail?: string | null;
   bgColor?: string;
+  badge?: string;
+  featured?: boolean;
 }
 
-const WorkCard = ({ title, category, description, href, thumbnail, bgColor = "#F5F5F7" }: WorkCardProps) => {
+const WorkCard = ({ title, category, description, href, thumbnail, bgColor = "#F5F5F7", badge, featured = false }: WorkCardProps) => {
   return (
     <Link
       href={href}
@@ -20,7 +22,10 @@ const WorkCard = ({ title, category, description, href, thumbnail, bgColor = "#F
       className="group flex h-full flex-col overflow-hidden rounded-3xl border border-neutral-200 bg-white shadow-sm transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-xl"
     >
       {/* Thumbnail — real asset, or a solid-colour placeholder when none exists */}
-      <div className="relative h-[180px] w-full overflow-hidden" style={{ backgroundColor: bgColor }}>
+      <div
+        className={`relative w-full overflow-hidden ${featured ? "h-[220px] md:h-[320px]" : "h-[180px]"}`}
+        style={{ backgroundColor: bgColor }}
+      >
         {thumbnail ? (
           <Image
             src={thumbnail}
@@ -40,10 +45,17 @@ const WorkCard = ({ title, category, description, href, thumbnail, bgColor = "#F
 
       {/* Body */}
       <div className="flex flex-1 flex-col p-6 md:p-8">
-        <span className="mb-3 text-[11px] font-bold uppercase tracking-widest text-accent">
-          {category}
-        </span>
-        <h3 className="mb-2 font-serif text-2xl font-bold leading-tight tracking-tight text-neutral-950">
+        <div className="mb-3 flex flex-wrap items-center gap-2">
+          <span className="text-[11px] font-bold uppercase tracking-widest text-accent">
+            {category}
+          </span>
+          {badge && (
+            <span className="rounded-full border border-neutral-200 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-widest text-neutral-500">
+              {badge}
+            </span>
+          )}
+        </div>
+        <h3 className={`mb-2 font-serif font-bold leading-tight tracking-tight text-neutral-950 ${featured ? "text-2xl md:text-3xl" : "text-2xl"}`}>
           {title}
         </h3>
         <p className="mb-6 font-sans text-sm leading-relaxed text-neutral-600 md:text-base">

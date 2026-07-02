@@ -42,7 +42,7 @@ const Navbar = () => {
             {isHomeActive && <motion.div layoutId="nav-indicator" className="absolute -bottom-1 left-0 right-0 h-0.5 bg-accent rounded-full" transition={{ type: "spring", bounce: 0.25, duration: 0.5 }} />}
           </Link>
 
-          <Link href="/#work" className={linkClass(isWorkActive)}>
+          <Link href="/work" className={linkClass(isWorkActive)}>
             Work
             {isWorkActive && <motion.div layoutId="nav-indicator" className="absolute -bottom-1 left-0 right-0 h-0.5 bg-accent rounded-full" transition={{ type: "spring", bounce: 0.25, duration: 0.5 }} />}
           </Link>
