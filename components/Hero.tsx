@@ -120,6 +120,12 @@ const Hero = () => {
             priority
             unoptimized
             className="object-contain"
+            style={{
+              WebkitMaskImage:
+                "linear-gradient(to bottom, black 58%, transparent 90%)",
+              maskImage:
+                "linear-gradient(to bottom, black 58%, transparent 90%)",
+            }}
           />
         </motion.div>
       </motion.div>
