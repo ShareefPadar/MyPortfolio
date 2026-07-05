@@ -107,23 +107,33 @@ const Hero = () => {
         className="relative hidden md:flex justify-end md:justify-center w-full max-w-md mx-auto"
       >
         <motion.div
-          style={{ y: yBg }}
-          className="absolute top-0 right-10 bottom-10 left-0 bg-gradient-to-br from-accent to-purple-700 rounded-3xl -z-10"
-        />
-        <motion.div
           style={{ y: yImage }}
-          className="relative w-full aspect-[3/4] mt-4 ml-4"
+          className="group relative w-full aspect-[3/4] overflow-hidden rounded-3xl border border-neutral-200 bg-white shadow-2xl"
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.3, duration: 1, ease: [0.22, 1, 0.36, 1] }}
         >
+          {/* Real photo — default state */}
           <Image
             src="/assets/hero-portrait.webp"
-            alt="Shareef Padar Portrait"
+            alt="Shareef Padar"
             fill
             priority
-            className="object-cover rounded-3xl shadow-2xl border border-white/10"
+            className="object-cover transition-opacity duration-500 ease-out group-hover:opacity-0"
           />
+          {/* ASCII portrait — revealed on hover */}
+          <Image
+            src="/assets/hero-portrait-ascii.png"
+            alt=""
+            aria-hidden="true"
+            fill
+            unoptimized
+            className="object-contain bg-white opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100"
+          />
+          {/* Hover hint */}
+          <span className="pointer-events-none absolute bottom-3 right-3 rounded-full bg-neutral-950/70 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-white opacity-0 transition-opacity duration-300 group-hover:opacity-0 md:opacity-100">
+            Hover me
+          </span>
         </motion.div>
       </motion.div>
     </section>
