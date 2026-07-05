@@ -1,11 +1,11 @@
 "use client";
 
 import { motion, useScroll, useTransform, useSpring, type Variants } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowDown, Download } from "lucide-react";
 import Magnetic from "./Magnetic";
 import ScrambleText from "./ScrambleText";
+import AsciiPortrait from "./AsciiPortrait";
 import { useEffect, useState } from "react";
 
 const Hero = () => {
@@ -14,7 +14,6 @@ const Hero = () => {
 
   const { scrollY } = useScroll();
   const yImage = useSpring(useTransform(scrollY, [0, 800], [0, -60]), { damping: 20, stiffness: 45 });
-  const yBg = useSpring(useTransform(scrollY, [0, 800], [0, 20]), { damping: 20, stiffness: 45 });
 
   const headWords = ["Senior", "Product", "Designer", "who"];
 
@@ -108,29 +107,12 @@ const Hero = () => {
       >
         <motion.div
           style={{ y: yImage }}
-          className="group relative w-full aspect-[3/4]"
+          className="relative w-full aspect-[3/4]"
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.3, duration: 1, ease: [0.22, 1, 0.36, 1] }}
         >
-          {/* Sparse ASCII — default (airier) */}
-          <Image
-            src="/assets/hero-portrait-ascii.png"
-            alt="Shareef Padar"
-            fill
-            priority
-            unoptimized
-            className="object-contain"
-          />
-          {/* Dense ASCII — fills in on hover */}
-          <Image
-            src="/assets/hero-portrait-ascii-dense.png"
-            alt=""
-            aria-hidden="true"
-            fill
-            unoptimized
-            className="object-contain opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100"
-          />
+          <AsciiPortrait />
         </motion.div>
       </motion.div>
     </section>
