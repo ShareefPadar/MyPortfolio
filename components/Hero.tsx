@@ -108,7 +108,7 @@ const Hero = () => {
       >
         <motion.div
           style={{ y: yImage }}
-          className="relative w-full aspect-[3/4] overflow-hidden rounded-3xl border border-neutral-200 bg-white shadow-2xl"
+          className="relative w-full aspect-[3/4]"
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.3, duration: 1, ease: [0.22, 1, 0.36, 1] }}
