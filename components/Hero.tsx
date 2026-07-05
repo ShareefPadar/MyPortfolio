@@ -108,11 +108,12 @@ const Hero = () => {
       >
         <motion.div
           style={{ y: yImage }}
-          className="relative w-full aspect-[3/4]"
+          className="group relative w-full aspect-[3/4]"
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.3, duration: 1, ease: [0.22, 1, 0.36, 1] }}
         >
+          {/* Sparse ASCII — default (airier) */}
           <Image
             src="/assets/hero-portrait-ascii.png"
             alt="Shareef Padar"
@@ -120,6 +121,15 @@ const Hero = () => {
             priority
             unoptimized
             className="object-contain"
+          />
+          {/* Dense ASCII — fills in on hover */}
+          <Image
+            src="/assets/hero-portrait-ascii-dense.png"
+            alt=""
+            aria-hidden="true"
+            fill
+            unoptimized
+            className="object-contain opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100"
           />
         </motion.div>
       </motion.div>
