@@ -8,8 +8,16 @@ const CELL_ASPECT = 27 / 16;
 const INK: [number, number, number] = [12, 12, 12];
 const PINK: [number, number, number] = [226, 29, 112]; // brand accent #E21D70
 
-// A few characters glow pink at any moment; the set continuously re-picks.
-const TWINKLE_COUNT = 16;
+// Characters glow pink at any moment; the set continuously re-picks.
+const TWINKLE_COUNT = 48;
+
+// Trapezoidal fade: quick ramp up, hold at full pink, quick ramp down —
+// so a character reads as clearly pink for most of its cycle.
+const twinkleAlpha = (x: number) => {
+  if (x < 0.18) return x / 0.18;
+  if (x > 0.82) return (1 - x) / 0.18;
+  return 1;
+};
 
 interface Particle {
   ch: string;
@@ -166,7 +174,7 @@ const AsciiPortrait = () => {
       // pink twinkle — redraw selected base chars in an animated colour
       for (const tw of twinkles) {
         if (tw.t < 0) continue;
-        const a = Math.sin(Math.PI * Math.min(tw.t / tw.ttl, 1)); // 0→1→0
+        const a = twinkleAlpha(Math.min(tw.t / tw.ttl, 1)); // 0→1 hold 1→0
         if (a <= 0.01) continue;
         const cr = Math.round(INK[0] + (PINK[0] - INK[0]) * a);
         const cg = Math.round(INK[1] + (PINK[1] - INK[1]) * a);
