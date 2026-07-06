@@ -9,7 +9,7 @@ const INK: [number, number, number] = [12, 12, 12];
 const PINK: [number, number, number] = [226, 29, 112]; // brand accent #E21D70
 
 // Characters glow pink at any moment; the set continuously re-picks.
-const TWINKLE_COUNT = 48;
+const TWINKLE_COUNT = 240;
 
 // Trapezoidal fade: quick ramp up, hold at full pink, quick ramp down —
 // so a character reads as clearly pink for most of its cycle.
@@ -68,6 +68,7 @@ const AsciiPortrait = () => {
     let H = 0;
     let dpr = 1;
     let baseLayer: HTMLCanvasElement | null = null;
+    let atlas: Map<string, HTMLCanvasElement> = new Map();
     let particles: Particle[] = [];
     let twinkles: Twinkle[] = [];
     let hovered = false;
@@ -125,6 +126,24 @@ const AsciiPortrait = () => {
       bctx.fillStyle = `rgb(${INK[0]},${INK[1]},${INK[2]})`;
       for (const [c, r, ch] of base) bctx.fillText(ch, c * cw, r * chH);
 
+      // Pre-render each unique glyph to a sprite — drawImage is far cheaper
+      // than fillText when thousands of particles are in flight.
+      atlas = new Map();
+      const uniq = new Set<string>();
+      for (const [, , ch] of extra) uniq.add(ch);
+      for (const ch of uniq) {
+        const s = document.createElement("canvas");
+        s.width = Math.ceil((cw + 2) * dpr);
+        s.height = Math.ceil((chH + 2) * dpr);
+        const sctx = s.getContext("2d")!;
+        sctx.scale(dpr, dpr);
+        sctx.font = `${fontPx}px Menlo, Consolas, monospace`;
+        sctx.textBaseline = "top";
+        sctx.fillStyle = `rgb(${INK[0]},${INK[1]},${INK[2]})`;
+        sctx.fillText(ch, 1, 1);
+        atlas.set(ch, s);
+      }
+
       particles = extra.map(([c, r, ch]) => {
         const homeX = c * cw;
         const homeY = r * chH;
@@ -158,16 +177,21 @@ const AsciiPortrait = () => {
       ctx.font = `${fontPx}px Menlo, Consolas, monospace`;
       ctx.textBaseline = "top";
 
-      // moving/settled extra characters (black)
-      ctx.fillStyle = `rgb(${INK[0]},${INK[1]},${INK[2]})`;
+      // moving/settled extra characters (black), via sprite atlas
       const maxDist = Math.hypot(W, H) * 0.5;
+      const sw = cw + 2;
+      const sh = chH + 2;
       for (const p of particles) {
         if (p.settled && !hovered) continue;
+        // cull anything outside the canvas — during scatter most particles are
+        if (p.x < -sw || p.x > W + sw || p.y < -sh || p.y > H + sh) continue;
         const dHome = Math.hypot(p.x - p.homeX, p.y - p.homeY);
         const alpha = Math.max(0, Math.min(1, 1 - dHome / maxDist));
         if (alpha <= 0.01) continue;
+        const sprite = atlas.get(p.ch);
+        if (!sprite) continue;
         ctx.globalAlpha = alpha;
-        ctx.fillText(p.ch, p.x, p.y);
+        ctx.drawImage(sprite, p.x - 1, p.y - 1, sw, sh);
       }
       ctx.globalAlpha = 1;
 
@@ -184,8 +208,9 @@ const AsciiPortrait = () => {
       }
     };
 
-    const STIFF = 120;
-    const DAMP = 14;
+    // Softer spring: damping ratio ≈ 0.9 → glides in and settles without jitter
+    const STIFF = 90;
+    const DAMP = 17;
 
     const loop = (now: number) => {
       const dt = Math.min((now - last) / 1000, 1 / 30);
