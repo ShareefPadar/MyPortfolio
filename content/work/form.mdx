@@ -23,21 +23,27 @@ Sync Mode   →  IndexedDB + Supabase  →  Multi-device access
 
 Critically, switching from Guest to Sync Mode **migrates local data to the cloud** — nothing is lost. Users can try the full product before committing.
 
+![Form dashboard — weight, BMI, and trend with goal and average reference lines](/assets/work/form-dashboard.png)
+
 ## Key Features
 
 ### Weight & BMI Tracking
 Daily weight logs stored locally with automatic BMI calculation. The trend chart uses Recharts with a custom gradient fill and reference lines for goal weight and rolling average.
 
-### Smart Goal Forecasting
-The forecast engine calculates a daily rate of change from the last 30 days of data and projects a goal completion date. Edge cases handled explicitly:
+### Designing the Forecast States
+A naive forecast engine happily tells a plateauing user "goal in 4,000 days." Forecasts fail in predictable ways — so instead of letting failures surface as nonsense numbers, each one became a designed state:
 
-- **Not enough data** (< 7 days): prompts user to keep logging
-- **Plateau** (< 0.01kg/day change): flags as stagnant
-- **Off track** (trending away from goal): flags as off track
-- **Unrealistic forecast** (> 730 days): shows "Long Term Goal" rather than a specific date
+- **Not enough data** (< 7 days): prompts the user to keep logging instead of guessing
+- **Plateau** (< 0.01kg/day change): named honestly as stagnant, not projected forward
+- **Off track** (trending away from goal): flagged clearly rather than showing a receding date
+- **Unrealistic horizon** (> 730 days): shows "Long Term Goal" rather than a fake-precise date
 
-### AI-Driven Macro Targets
-Macro targets are calculated on-device using the **Mifflin-St Jeor BMR formula** — no third-party nutrition API required. Inputs: weight, height, age, gender, activity level, fitness goal. Output: daily calorie target, protein, carbs, and fat in grams.
+The forecast is only trustworthy because it admits when it shouldn't be trusted.
+
+### On-Device Macro Targets
+Macro targets are calculated on-device using the **Mifflin-St Jeor BMR formula** — no third-party nutrition API, no cloud round-trip, consistent with the privacy-first architecture. Inputs: weight, height, age, gender, activity level, fitness goal. Output: daily calorie target, protein, carbs, and fat in grams.
+
+![Form daily targets — on-device calorie and macro calculation](/assets/work/form-daily-targets.png)
 
 ### Body Measurements
 Waist, chest, hips, and arms tracked over time — because scale weight alone is a poor measure of body composition change.

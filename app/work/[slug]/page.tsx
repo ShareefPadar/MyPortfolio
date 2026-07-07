@@ -83,6 +83,16 @@ export default function WorkItem() {
                 {project.description}
               </p>
 
+              {/* Outcome — the recruiter's punchline, up front */}
+              {(project as any).outcome && (
+                <div className="flex gap-4 items-start max-w-3xl rounded-2xl bg-neutral-50 border border-neutral-100 p-4 md:p-5">
+                  <span className="text-xs font-bold text-accent tracking-widest uppercase shrink-0 mt-0.5">Outcome</span>
+                  <p className="text-sm md:text-base font-medium text-neutral-800 leading-relaxed">
+                    {(project as any).outcome}
+                  </p>
+                </div>
+              )}
+
               {/* Quote banner */}
               {(project as any).quote && (
                 <ScrollReveal className="pt-8">
@@ -148,12 +158,13 @@ export default function WorkItem() {
             </>
           )}
 
-          {/* 05 CALL TO ACTION */}
+          {/* CALL TO ACTION — live products only; case studies end on their own reflection */}
+          {(project as any).type === "Live product" && (
           <ScrollReveal className="pt-12 border-t border-neutral-200">
-            <SectionLabel number={MDXContent ? 2 : 5} title="CALL TO ACTION" className="mb-8" />
+            <SectionLabel number={MDXContent ? 2 : 5} title="SEE IT LIVE" className="mb-8" />
             <div className="space-y-8">
               <h2 className="text-xl md:text-2xl font-serif font-bold text-neutral-950 leading-snug max-w-xl">
-                Ready to explore the full story?
+                Don&apos;t take the case study&apos;s word for it — use the product.
               </h2>
               <div className="flex flex-wrap gap-4">
                 {(project as any).externalUrl && (project as any).externalUrl !== "#" && (
@@ -179,6 +190,7 @@ export default function WorkItem() {
               </div>
             </div>
           </ScrollReveal>
+          )}
         </div>
       </section>
 
