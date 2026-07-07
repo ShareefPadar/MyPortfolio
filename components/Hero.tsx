@@ -27,7 +27,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="container-wide pt-4 pb-8 md:pt-6 md:pb-12 grid grid-cols-1 md:grid-cols-[1.2fr_0.8fr] items-center gap-8 md:gap-16">
+    <section className="container-wide pt-4 pb-8 md:pt-6 md:pb-12 grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr] items-center gap-8 md:gap-12">
       <div>
         <motion.p
           initial={{ opacity: 0, y: 10 }}
@@ -103,7 +103,7 @@ const Hero = () => {
         </motion.div>
       </div>
       <motion.div
-        className="relative hidden md:flex justify-end md:justify-center w-full max-w-md mx-auto"
+        className="relative hidden md:flex justify-center w-full max-w-lg mx-auto"
       >
         <motion.div
           style={{ y: yImage }}

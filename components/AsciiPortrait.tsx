@@ -8,8 +8,8 @@ const CELL_ASPECT = 27 / 16;
 const INK: [number, number, number] = [12, 12, 12];
 const PINK: [number, number, number] = [226, 29, 112]; // brand accent #E21D70
 
-// Characters glow pink at any moment; the set continuously re-picks.
-const TWINKLE_COUNT = 240;
+// Fraction of the base set glowing pink at any moment; continuously re-picks.
+const TWINKLE_RATIO = 0.12;
 
 // Trapezoidal fade: quick ramp up, hold at full pink, quick ramp down —
 // so a character reads as clearly pink for most of its cycle.
@@ -164,7 +164,8 @@ const AsciiPortrait = () => {
       });
 
       if (twinkles.length === 0 && !reduceMotion) {
-        twinkles = Array.from({ length: TWINKLE_COUNT }, () => newTwinkle(true));
+        const count = Math.round(base.length * TWINKLE_RATIO);
+        twinkles = Array.from({ length: count }, () => newTwinkle(true));
       }
       drawFrame();
     };
@@ -342,7 +343,7 @@ const AsciiPortrait = () => {
       ref={wrapRef}
       role="img"
       aria-label="ASCII art portrait of Shareef Padar"
-      className="relative flex h-full w-full items-start justify-center"
+      className="relative flex h-full w-full items-center justify-center"
     >
       <canvas ref={canvasRef} />
     </div>
