@@ -1,3 +1,5 @@
+import Flow from "@/components/Flow";
+
 ## The Friction Gap Nobody Talks About
 
 Google Maps lets you plan a perfect multi-stop route in under 60 seconds. But the moment you get into a taxi, that plan stays on your phone — invisible to the person driving you.
@@ -117,6 +119,15 @@ The driver's phone shows: *"3 stops detected. 45 mins. Start?"* — and navigati
 
 The entire interaction takes under 5 seconds.
 
+<Flow
+  steps={[
+    { src: "/assets/work/routepass-plan.png", label: "Plan → Share", number: "1" },
+    { src: "/assets/work/routepass-qr.png", label: "Generate", number: "2" },
+    { src: "/assets/work/routepass-driver.png", label: "Handshake", number: "3" },
+  ]}
+  caption="High-fidelity mockups of the passenger and driver flow, built to Material Design 3 — the concept was never shipped by Google, so these are my own screens, not product screenshots. Click any screen to view full size."
+/>
+
 ---
 
 ## Privacy Controls
@@ -124,6 +135,14 @@ The entire interaction takes under 5 seconds.
 - **Mask Home Address** — hides the precise final stop until the driver is within 500m
 - **One-Time Use** — link expires automatically when the trip is marked complete
 - **Session Expiry** — route data purged from driver's device 30 minutes after arrival
+
+<Flow
+  steps={[
+    { src: "/assets/work/routepass-privacy.png", label: "Privacy Controls", number: "4" },
+  ]}
+  aspect="aspect-[9/16]"
+  caption="Every control defaults on. Nothing here requires the passenger to configure anything before their first Route Pass."
+/>
 
 ---
 
