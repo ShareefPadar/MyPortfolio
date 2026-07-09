@@ -19,9 +19,11 @@ const sideProjects = sideProjectSlugs
 export default function Home() {
   return (
     <div className="flex flex-col w-full overflow-hidden">
-      <ParallaxSection priority={true}>
-        <Hero />
-      </ParallaxSection>
+      <div data-guide="Hey — I'm Shareef 👋 A senior product designer who also ships code. Let me walk you through.">
+        <ParallaxSection priority={true}>
+          <Hero />
+        </ParallaxSection>
+      </div>
 
       {/* Skills strip — visual break between hero and work */}
       <Marquee
@@ -31,7 +33,7 @@ export default function Home() {
       />
 
       {/* SELECTED WORK — curated, strongest three */}
-      <section id="work" className="container-wide mt-16 md:mt-28 w-full cv-auto">
+      <section id="work" data-guide="These are my selected case studies — the work I'm proudest of. Click any card to go deep." className="container-wide mt-16 md:mt-28 w-full cv-auto">
         <ScrollReveal className="mb-10 md:mb-16">
           <div className="flex items-center gap-4">
             <span className="text-sm md:text-base font-bold text-neutral-900 uppercase tracking-widest">Selected Work</span>
@@ -61,7 +63,7 @@ export default function Home() {
       </section>
 
       {/* SIDE PROJECTS — live products that back up "who ships" */}
-      <section className="container-wide mt-12 md:mt-16 w-full cv-auto">
+      <section data-guide="I didn't just design these two — I built and shipped them. They're live; go press some buttons." className="container-wide mt-12 md:mt-16 w-full cv-auto">
         <ScrollReveal className="mb-8 md:mb-10">
           <div className="flex items-center gap-4">
             <span className="text-sm md:text-base font-bold text-neutral-900 uppercase tracking-widest">Designed, Built &amp; Live</span>
@@ -108,7 +110,7 @@ export default function Home() {
       </section>
 
       {/* NDA note + all work */}
-      <section className="container-wide mt-14 md:mt-20 mb-16 md:mb-32 w-full">
+      <section data-guide="Plenty more sits under NDA. Want the full story? Let's connect — I'd love to talk. 👇" className="container-wide mt-14 md:mt-20 mb-16 md:mb-32 w-full">
         <ScrollReveal>
           <div className="flex flex-col items-center gap-6 rounded-3xl bg-neutral-50 px-6 py-12 text-center md:py-16">
             <p className="max-w-2xl font-sans text-base leading-relaxed text-neutral-600 md:text-lg">

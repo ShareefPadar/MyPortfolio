@@ -7,7 +7,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageTransition from "@/components/PageTransition";
 
-const CustomCursor = dynamic(() => import("@/components/CustomCursor"));
+const FigmaCursors = dynamic(() => import("@/components/FigmaCursors"));
 const Noise = dynamic(() => import("@/components/Noise"));
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -55,7 +55,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
       <body className="flex flex-col min-h-screen font-sans">
-        <CustomCursor />
+        <FigmaCursors />
         <Noise />
         <Navbar />
         <main className="flex-grow pt-28 md:pt-32 pb-12 relative z-10">
