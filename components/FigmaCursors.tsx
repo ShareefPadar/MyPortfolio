@@ -4,43 +4,54 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 const PINK = "#E21D70";
-const BLACK = "#1a1a1a";
-const BUBBLE_MS = 5200; // how long a bubble stays before auto-dismiss
+const BLACK = "#1f1f1f";
 
-// The multiplayer arrow, tilted like Figma's cursor.
-function Arrow({ color }: { color: string }) {
+const DOTS_MS = 700; // "..." thinking state before typing starts
+const TYPE_MS = 26; // per character
+const HOLD_MS = 4200; // after fully typed, before dismiss
+
+// Figma's multiplayer cursor — the rounded "kite" arrow (post-2022 shape).
+function FigCursor({ color }: { color: string }) {
   return (
-    <svg width="26" height="26" viewBox="0 0 26 26" fill="none" style={{ display: "block" }}>
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      style={{ display: "block", filter: "drop-shadow(0 1px 2px rgba(0,0,0,.28))" }}
+    >
       <path
-        d="M5 3.5 L5 20.5 L9.6 16 L12.5 22.5 L15.2 21.3 L12.3 15 L18.5 15 Z"
+        d="M4.037 4.688a.495.495 0 0 1 .651-.651l16 6.5a.5.5 0 0 1-.063.947l-6.124 1.58a2 2 0 0 0-1.438 1.435l-1.579 6.126a.5.5 0 0 1-.947.063l-6.5-16Z"
         fill={color}
-        stroke="#fff"
-        strokeWidth="1.4"
-        strokeLinejoin="round"
       />
     </svg>
   );
 }
 
+type Phase = "hidden" | "dots" | "typing" | "hold" | "exit";
+
 export default function FigmaCursors() {
   const pathname = usePathname();
   const [isDesktop, setIsDesktop] = useState(false);
-  // The message currently shown by Shareef (null = hidden)
-  const [bubble, setBubble] = useState<string | null>(null);
-  // Whether this route has anything to guide (hides Shareef otherwise)
   const [guiding, setGuiding] = useState(false);
 
-  // refs for the two cursors + bubble container (imperative for 60fps)
+  // chat bubble state machine
+  const [phase, setPhase] = useState<Phase>("hidden");
+  const [message, setMessage] = useState("");
+  const [chars, setChars] = useState(0);
+
   const youRef = useRef<HTMLDivElement>(null);
   const shareefRef = useRef<HTMLDivElement>(null);
 
   const mouse = useRef({ x: -100, y: -100 });
-  const shareef = useRef({ x: -100, y: -100 });
+  const shareef = useRef({ x: -120, y: -120 });
   const target = useRef({ x: 0, y: 0 });
   const activeEl = useRef<HTMLElement | null>(null);
   const shown = useRef<Set<string>>(new Set());
-  const bubbleTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
+  const typeInterval = useRef<ReturnType<typeof setInterval> | null>(null);
   const raf = useRef(0);
+  const cleanup = useRef<(() => void) | null>(null);
 
   useEffect(() => {
     const mq = window.matchMedia("(pointer: fine) and (min-width: 768px)");
@@ -50,28 +61,59 @@ export default function FigmaCursors() {
     return () => mq.removeEventListener("change", apply);
   }, []);
 
-  // Discover guide stops + observe which one is most in view.
+  const clearTimers = () => {
+    timers.current.forEach(clearTimeout);
+    timers.current = [];
+    if (typeInterval.current) clearInterval(typeInterval.current);
+    typeInterval.current = null;
+  };
+
+  const showBubble = (msg: string) => {
+    clearTimers();
+    setMessage(msg);
+    setChars(0);
+    setPhase("dots");
+    timers.current.push(
+      setTimeout(() => {
+        setPhase("typing");
+        typeInterval.current = setInterval(() => {
+          setChars((c) => {
+            if (c + 1 >= msg.length) {
+              if (typeInterval.current) clearInterval(typeInterval.current);
+              typeInterval.current = null;
+              setPhase("hold");
+              timers.current.push(
+                setTimeout(() => {
+                  setPhase("exit");
+                  timers.current.push(setTimeout(() => setPhase("hidden"), 220));
+                }, HOLD_MS)
+              );
+              return msg.length;
+            }
+            return c + 1;
+          });
+        }, TYPE_MS);
+      }, DOTS_MS)
+    );
+  };
+
+  // Discover guide stops on this route + track the most-visible one.
   useEffect(() => {
-    // wait a tick for the new route's DOM
     const t = setTimeout(() => {
-      const stops = Array.from(
-        document.querySelectorAll<HTMLElement>("[data-guide]")
-      );
+      const stops = Array.from(document.querySelectorAll<HTMLElement>("[data-guide]"));
       if (stops.length === 0) {
         setGuiding(false);
         activeEl.current = null;
         return;
       }
-
       const ratios = new Map<HTMLElement, number>();
       const io = new IntersectionObserver(
         (entries) => {
           for (const e of entries) {
             ratios.set(e.target as HTMLElement, e.isIntersecting ? e.intersectionRatio : 0);
           }
-          // pick the most-visible stop as active
           let best: HTMLElement | null = null;
-          let bestR = 0.15; // require a minimum presence
+          let bestR = 0.15;
           ratios.forEach((r, el) => {
             if (r > bestR) {
               bestR = r;
@@ -98,84 +140,129 @@ export default function FigmaCursors() {
     return () => {
       clearTimeout(t);
       cleanup.current?.();
+      clearTimers();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
-  const cleanup = useRef<(() => void) | null>(null);
-
-  const showBubble = (msg: string) => {
-    setBubble(msg);
-    if (bubbleTimer.current) clearTimeout(bubbleTimer.current);
-    bubbleTimer.current = setTimeout(() => setBubble(null), BUBBLE_MS);
-  };
-
-  // Cursor motion loop (desktop only).
+  // Motion loop (desktop only)
   useEffect(() => {
     if (!isDesktop) return;
-
     const onMove = (e: MouseEvent) => {
       mouse.current = { x: e.clientX, y: e.clientY };
     };
     window.addEventListener("mousemove", onMove, { passive: true });
-
     const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
     const tick = () => {
-      // You cursor — tracks the real pointer exactly
       if (youRef.current) {
         youRef.current.style.transform = `translate(${mouse.current.x}px, ${mouse.current.y}px)`;
       }
-
-      // Shareef target — a point near the active section, clamped to the viewport
       const el = activeEl.current;
       if (el) {
         const r = el.getBoundingClientRect();
-        const tx = Math.min(Math.max(r.left + 56, 90), window.innerWidth - 90);
-        const ty = Math.min(Math.max(r.top + 90, 130), window.innerHeight - 150);
-        // subtle idle drift so it feels alive/robotic
+        const tx = Math.min(Math.max(r.left + 64, 100), window.innerWidth - 320);
+        const ty = Math.min(Math.max(r.top + 96, 140), window.innerHeight - 200);
         const now = performance.now() / 1000;
-        target.current.x = tx + Math.sin(now * 1.1) * 6;
-        target.current.y = ty + Math.cos(now * 0.9) * 5;
+        target.current.x = tx + Math.sin(now * 1.1) * 5;
+        target.current.y = ty + Math.cos(now * 0.9) * 4;
       }
-      shareef.current.x = lerp(shareef.current.x, target.current.x, 0.055);
-      shareef.current.y = lerp(shareef.current.y, target.current.y, 0.055);
+      shareef.current.x = lerp(shareef.current.x, target.current.x, 0.07);
+      shareef.current.y = lerp(shareef.current.y, target.current.y, 0.07);
       if (shareefRef.current) {
         shareefRef.current.style.transform = `translate(${shareef.current.x}px, ${shareef.current.y}px)`;
       }
-
       raf.current = requestAnimationFrame(tick);
     };
     raf.current = requestAnimationFrame(tick);
-
     return () => {
       window.removeEventListener("mousemove", onMove);
       cancelAnimationFrame(raf.current);
     };
   }, [isDesktop]);
 
-  // ---- MOBILE: no cursors, just the auto-tour bubble pinned bottom-center ----
+  const bubbleOpen = phase !== "hidden";
+  const typed = phase === "typing" ? message.slice(0, chars) : message;
+
+  // ----- shared bubble (Figma cursor-chat replica) -----
+  const Bubble = (
+    <div
+      className={bubbleOpen && phase !== "exit" ? "fig-pop" : "fig-out"}
+      style={{
+        transformOrigin: "top left",
+        backgroundColor: PINK,
+        borderRadius: "4px 18px 18px 18px",
+        padding: "8px 14px 9px 12px",
+        maxWidth: 260,
+        width: "max-content",
+        boxShadow: "0 4px 14px rgba(226,29,112,.35), 0 1px 3px rgba(0,0,0,.15)",
+      }}
+    >
+      <div style={{ fontSize: 10.5, fontWeight: 600, color: "rgba(255,255,255,.72)", letterSpacing: ".02em", marginBottom: 2 }}>
+        Shareef
+      </div>
+      {phase === "dots" ? (
+        <div style={{ display: "flex", gap: 4, padding: "5px 2px 4px" }}>
+          <span className="fig-dot" style={{ animationDelay: "0ms" }} />
+          <span className="fig-dot" style={{ animationDelay: "150ms" }} />
+          <span className="fig-dot" style={{ animationDelay: "300ms" }} />
+        </div>
+      ) : (
+        <div style={{ fontSize: 13, fontWeight: 500, lineHeight: 1.45, color: "#fff" }}>
+          {typed}
+          {phase === "typing" && <span className="fig-caret" />}
+        </div>
+      )}
+    </div>
+  );
+
+  const styles = (
+    <style>{`
+      @keyframes figPop {
+        0% { transform: scale(.35); opacity: 0; }
+        65% { transform: scale(1.04); opacity: 1; }
+        100% { transform: scale(1); opacity: 1; }
+      }
+      .fig-pop { animation: figPop 300ms cubic-bezier(.21,1.02,.55,1) both; }
+      @keyframes figOut {
+        0% { transform: scale(1); opacity: 1; }
+        100% { transform: scale(.5); opacity: 0; }
+      }
+      .fig-out { animation: figOut 200ms ease-in both; }
+      .fig-dot {
+        width: 5px; height: 5px; border-radius: 50%;
+        background: rgba(255,255,255,.9); display: inline-block;
+        animation: figDot 900ms ease-in-out infinite;
+      }
+      @keyframes figDot {
+        0%, 60%, 100% { opacity: .35; transform: translateY(0); }
+        30% { opacity: 1; transform: translateY(-2px); }
+      }
+      .fig-caret {
+        display: inline-block; width: 1.5px; height: 12px;
+        background: #fff; margin-left: 2px; vertical-align: -1.5px;
+        animation: figCaret 750ms steps(1) infinite;
+      }
+      @keyframes figCaret { 0%, 55% { opacity: 1; } 56%, 100% { opacity: 0; } }
+    `}</style>
+  );
+
+  // ---- MOBILE: no cursors; bubble tours pinned bottom-left ----
   if (!isDesktop) {
     return (
-      <div className="pointer-events-none fixed inset-x-0 bottom-4 z-[9998] flex justify-center px-4">
-        <div
-          className={`flex max-w-sm items-start gap-2.5 rounded-2xl rounded-bl-sm px-4 py-3 text-sm font-medium text-white shadow-xl transition-all duration-300 ${
-            bubble ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-3 opacity-0"
-          }`}
-          style={{ backgroundColor: PINK }}
-        >
-          <span className="mt-0.5 shrink-0 text-[11px] font-bold uppercase tracking-wide opacity-80">
-            Shareef
-          </span>
-          <span className="leading-snug">{bubble}</span>
+      <>
+        {styles}
+        <div className="pointer-events-none fixed bottom-5 left-4 right-4 z-[9998]">
+          {bubbleOpen && Bubble}
         </div>
-      </div>
+      </>
     );
   }
 
-  // ---- DESKTOP: hide native cursor, render both cursors + Shareef's bubble ----
+  // ---- DESKTOP ----
   return (
     <>
+      {styles}
       <style>{`
         @media (pointer: fine) and (min-width: 768px) {
           *, *::before, *::after { cursor: none !important; }
@@ -183,42 +270,62 @@ export default function FigmaCursors() {
         }
       `}</style>
 
-      {/* Shareef (pink, robot guide) */}
+      {/* Shareef — pink robot guide */}
       <div
         aria-hidden
         ref={shareefRef}
         className="fixed left-0 top-0 z-[9998] transition-opacity duration-500 will-change-transform"
         style={{ pointerEvents: "none", opacity: guiding ? 1 : 0 }}
       >
-        <Arrow color={PINK} />
+        <FigCursor color={PINK} />
+        {/* name label (hidden while the chat bubble is open, like Figma) */}
         <div
-          className="absolute left-4 top-4 whitespace-nowrap rounded-md px-1.5 py-0.5 text-[11px] font-bold text-white shadow"
-          style={{ backgroundColor: PINK }}
+          style={{
+            position: "absolute",
+            left: 15,
+            top: 19,
+            backgroundColor: PINK,
+            color: "#fff",
+            fontSize: 11.5,
+            fontWeight: 600,
+            letterSpacing: ".01em",
+            padding: "3px 8px 4px",
+            borderRadius: 6,
+            whiteSpace: "nowrap",
+            boxShadow: "0 1px 3px rgba(0,0,0,.2)",
+            opacity: bubbleOpen ? 0 : 1,
+            transition: "opacity 150ms",
+          }}
         >
           Shareef
         </div>
-        {/* chat bubble */}
-        <div
-          className={`absolute left-3 top-9 w-[230px] rounded-2xl rounded-tl-sm px-3.5 py-2.5 text-[13px] font-medium leading-snug text-white shadow-xl transition-all duration-300 ${
-            bubble ? "translate-y-0 scale-100 opacity-100" : "pointer-events-none translate-y-1 scale-95 opacity-0"
-          }`}
-          style={{ backgroundColor: PINK }}
-        >
-          {bubble}
-        </div>
+        {/* cursor chat bubble */}
+        <div style={{ position: "absolute", left: 15, top: 19 }}>{bubbleOpen && Bubble}</div>
       </div>
 
-      {/* You (black, follows the real pointer) */}
+      {/* You — black, real pointer */}
       <div
         aria-hidden
         ref={youRef}
         className="fixed left-0 top-0 z-[9999] will-change-transform"
         style={{ pointerEvents: "none" }}
       >
-        <Arrow color={BLACK} />
+        <FigCursor color={BLACK} />
         <div
-          className="absolute left-4 top-4 whitespace-nowrap rounded-md px-1.5 py-0.5 text-[11px] font-bold text-white shadow"
-          style={{ backgroundColor: BLACK }}
+          style={{
+            position: "absolute",
+            left: 15,
+            top: 19,
+            backgroundColor: BLACK,
+            color: "#fff",
+            fontSize: 11.5,
+            fontWeight: 600,
+            letterSpacing: ".01em",
+            padding: "3px 8px 4px",
+            borderRadius: 6,
+            whiteSpace: "nowrap",
+            boxShadow: "0 1px 3px rgba(0,0,0,.2)",
+          }}
         >
           You
         </div>
