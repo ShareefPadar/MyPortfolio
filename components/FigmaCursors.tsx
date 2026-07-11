@@ -55,7 +55,6 @@ export default function FigmaCursors() {
   const activeEl = useRef<HTMLElement | null>(null);
   const shown = useRef<Set<string>>(new Set());
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
-  const typeInterval = useRef<ReturnType<typeof setInterval> | null>(null);
   const raf = useRef(0);
   const cleanup = useRef<(() => void) | null>(null);
 
@@ -70,37 +69,26 @@ export default function FigmaCursors() {
   const clearTimers = () => {
     timers.current.forEach(clearTimeout);
     timers.current = [];
-    if (typeInterval.current) clearInterval(typeInterval.current);
-    typeInterval.current = null;
   };
 
+  // Drive the whole bubble with plain scheduled timeouts. No side effects
+  // inside state updaters, so it can't wedge under StrictMode double-invokes.
   const showBubble = (msg: string) => {
     clearTimers();
+    const push = (fn: () => void, ms: number) => timers.current.push(setTimeout(fn, ms));
     setMessage(msg);
     setChars(0);
     setPhase("dots");
-    timers.current.push(
-      setTimeout(() => {
-        setPhase("typing");
-        typeInterval.current = setInterval(() => {
-          setChars((c) => {
-            if (c + 1 >= msg.length) {
-              if (typeInterval.current) clearInterval(typeInterval.current);
-              typeInterval.current = null;
-              setPhase("hold");
-              timers.current.push(
-                setTimeout(() => {
-                  setPhase("exit");
-                  timers.current.push(setTimeout(() => setPhase("hidden"), 220));
-                }, HOLD_MS)
-              );
-              return msg.length;
-            }
-            return c + 1;
-          });
-        }, TYPE_MS);
-      }, DOTS_MS)
-    );
+
+    const typeStart = DOTS_MS;
+    push(() => setPhase("typing"), typeStart);
+    for (let i = 1; i <= msg.length; i++) {
+      push(() => setChars(i), typeStart + i * TYPE_MS);
+    }
+    const typeEnd = typeStart + msg.length * TYPE_MS;
+    push(() => setPhase("hold"), typeEnd);
+    push(() => setPhase("exit"), typeEnd + HOLD_MS);
+    push(() => setPhase("hidden"), typeEnd + HOLD_MS + 220);
   };
 
   // Discover guide stops on this route + track the most-visible one.
