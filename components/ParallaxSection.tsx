@@ -41,7 +41,7 @@ function ParallaxSectionDesktop({ children, className, delay, priority }: Requir
             delay: delay
           }
         } : {}}
-        className="w-full fm-anim"
+        className="w-full h-full fm-anim"
       >
         {children}
       </motion.div>

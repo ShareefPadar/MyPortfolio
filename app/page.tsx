@@ -33,7 +33,7 @@ export default function Home() {
       />
 
       {/* SELECTED WORK — the two strongest case studies */}
-      <section id="work" data-guide="My favourite case studies live here. Click any card to dig in." className="container-wide mt-16 md:mt-28 w-full cv-auto">
+      <section id="work" data-guide="My favourite case studies live here. Click any card to dig in." className="container-wide mt-16 md:mt-28 w-full">
         <ScrollReveal className="mb-10 md:mb-16">
           <div className="flex items-center gap-4">
             <span className="text-sm md:text-base font-bold text-neutral-900 uppercase tracking-widest">Selected Work</span>
@@ -42,7 +42,7 @@ export default function Home() {
         </ScrollReveal>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 w-full">
           {featured.map((project, index) => (
-            <ParallaxSection key={project.slug} delay={index * 0.1}>
+            <ParallaxSection key={project.slug} delay={index * 0.1} className="h-full">
               <WorkCard
                 title={project.title}
                 category={project.category}
@@ -59,7 +59,7 @@ export default function Home() {
       </section>
 
       {/* SIDE PROJECTS — live products that back up "who ships" */}
-      <section data-guide="I designed and built these two myself. They're live, so go press some buttons." className="container-wide mt-12 md:mt-16 w-full cv-auto">
+      <section data-guide="I designed and built these two myself. They're live, so go press some buttons." className="container-wide mt-12 md:mt-16 w-full">
         <ScrollReveal className="mb-8 md:mb-10">
           <div className="flex items-center gap-4">
             <span className="text-sm md:text-base font-bold text-neutral-900 uppercase tracking-widest">Designed, Built &amp; Live</span>
@@ -68,7 +68,7 @@ export default function Home() {
         </ScrollReveal>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 w-full">
           {sideProjects.map((project, index) => (
-            <ParallaxSection key={project.slug} delay={index * 0.1}>
+            <ParallaxSection key={project.slug} delay={index * 0.1} className="h-full">
               <div className="flex h-full flex-col rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-xl md:p-8">
                 <div className="mb-3 flex items-center gap-2">
                   <span className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-neutral-500">
