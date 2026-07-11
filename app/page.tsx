@@ -32,7 +32,7 @@ export default function Home() {
         className="border-y border-neutral-100"
       />
 
-      {/* SELECTED WORK — curated, strongest three */}
+      {/* SELECTED WORK — the two strongest case studies */}
       <section id="work" data-guide="My favourite case studies live here. Click any card to dig in." className="container-wide mt-16 md:mt-28 w-full cv-auto">
         <ScrollReveal className="mb-10 md:mb-16">
           <div className="flex items-center gap-4">
@@ -42,11 +42,7 @@ export default function Home() {
         </ScrollReveal>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 w-full">
           {featured.map((project, index) => (
-            <ParallaxSection
-              key={project.slug}
-              delay={index * 0.1}
-              className={index === 0 ? "md:col-span-2" : undefined}
-            >
+            <ParallaxSection key={project.slug} delay={index * 0.1}>
               <WorkCard
                 title={project.title}
                 category={project.category}
@@ -55,7 +51,7 @@ export default function Home() {
                 href={`/work/${project.slug}`}
                 thumbnail={project.thumbnail}
                 bgColor={project.bgColor}
-                featured={index === 0}
+                featured
               />
             </ParallaxSection>
           ))}

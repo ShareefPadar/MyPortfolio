@@ -76,6 +76,7 @@ export const workEntries: WorkEntry[] = [
   },
 ];
 
-// Homepage curation: the three strongest case studies + the two live products.
-export const featuredSlugs = ["almosafer-audit", "omni-cast-ai", "google-maps-route-pass"];
+// Homepage curation: the two strongest case studies + the two live products.
+// OmniCast and Instagram live on the full /work index, not the homepage.
+export const featuredSlugs = ["almosafer-audit", "google-maps-route-pass"];
 export const sideProjectSlugs = ["roomy", "form"];
