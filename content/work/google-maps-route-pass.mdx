@@ -10,94 +10,41 @@ So you're left with two bad options: shouting directions across a language barri
 
 ---
 
-## Survey Snapshot
+## The Research
 
-19 urban commuters surveyed across Dubai, January 2026.
+I ran a two-phase study: a survey of 19 Dubai commuters (Google Forms, January 2026), then guerrilla interviews with both passengers and drivers about what actually goes wrong.
 
-- **74%** rated their comfort sharing a phone number with a driver at 1 or 2 out of 5
-- **53%** have avoided a multi-stop route because it was too hard to explain
+- **74%** rated their comfort sharing a number with a driver at 1 or 2 out of 5
 - **63%** rely only on verbal directions to share where they're going
-- **100%** answered "Yes, definitely" or "Maybe, if it's fast" to the Route Pass idea
-- **42%** named "the driver not knowing how to scan" as their top worry
+- **53%** have avoided a multi-stop route because it was too hard to explain
+- **42%** worried most that the driver wouldn't know how to scan
+- **100%** said they'd use Route Pass ("definitely" or "if it's fast")
 
 ---
 
-## Research Methodology
+## What the Data Told Me
 
-A two-phase study focused on urban commuters.
+**Privacy is the real blocker.** People weren't using risky workarounds because they wanted to. They did it because nothing safer existed. So the design starts from zero data exchange: no account syncing, no contact sharing, nothing personal crossing between devices.
 
-### Phase 1: Quantitative Survey
-19 respondents in Dubai, covering transport habits, route-sharing methods, privacy comfort, and how likely they'd be to adopt the feature. Tool: Google Forms, January 2026.
+**The friction changes behaviour.** When half your users avoid multi-stop routes because they're too hard to explain, that isn't just annoying, it's reshaping trips. Passengers become human GPS units, tense and watching every turn. The fix: load the whole itinerary at once so the driver never has to ask "where to next?"
 
-### Phase 2: Guerrilla Interviews
-Passengers talked about the stress of backseat driving and the anxiety of handing over a phone. Drivers talked about the technical barriers, typing while driving, and why they need a one-tap solution.
+**Speed decides adoption.** If it's slower than saying an address out loud, nobody uses it. The QR screen jumps to full brightness on its own and has to scan in under two seconds. Plus Codes cover the dead-signal areas.
 
----
-
-## Key Insights
-
-### Insight 1: The Privacy Disconnect
-74% rated their comfort sharing a number with a driver at 1 or 2 out of 5. People weren't using risky workarounds because they wanted to. They did it because nothing safer existed.
-
-**Design decision:** zero data exchange. No account syncing, no contact sharing, nothing personal crossing between devices.
-
-### Insight 2: The Navigation Friction
-63% rely only on verbal directions, and 53% have avoided multi-stop routes because they're too hard to explain. That's not just inconvenient; it changes how people travel. Passengers turn into human GPS units: tense, watching every turn, never able to relax.
-
-**Design decision:** the sync has to load the whole itinerary at once. The driver should never have to ask "where to next?"
-
-### Insight 3: The Speed Barrier
-42% worried the driver wouldn't know how to scan. Another 32% worried it would take too long. If the feature is slower than saying an address out loud, nobody uses it.
-
-**Design decision:** a high-contrast QR screen that jumps to full brightness on its own. It has to scan in under two seconds or it fails. Plus Codes cover the areas with no signal.
-
----
-
-## Personas
-
-### Maya: The Privacy-Conscious Commuter
-29 · Marketing Consultant · Dubai / London / Singapore
-
-*"I just want the driver to follow my route without me acting like a human GPS or giving away my WhatsApp number."*
-
-Pain points: handing an unlocked phone to a stranger, spelling out street names across a language barrier, low comfort sharing her number. Goals: make sure the driver takes the efficient route, finish the sync in under five seconds, skip the verbal back-and-forth.
-
-### Samuel: The Efficiency-Focused Driver
-45 · Professional Taxi Driver · Global Urban Centres
-
-*"If it's faster than me typing an address in traffic, I'll use it. But it has to work the first time, every time."*
-
-Pain points: last-second directions, the danger of typing while moving, wariness of anything with a learning curve. Goals: less idle time between trips, hands on the wheel.
-
----
-
-## Why Existing Tools Fail
-
-**Apple Maps AirDrop.** Fast and clean, but Apple-only. That leaves out every Android driver on earth.
-
-**WhatsApp.** The common workaround, and it means handing your number to a stranger.
-
-**Uber / Careem.** A perfect handshake, but only inside their own closed apps.
-
-**NFC.** Needs physical proximity and hardware not everyone has.
-
-Google Maps is the one tool positioned to close this gap: it runs on any platform, needs no shared infrastructure, and can put privacy first by default.
+I built the flow around two people. Maya is a privacy-conscious commuter who doesn't want to hand over her phone or her number. Samuel is a driver who'll adopt anything faster than typing in traffic, as long as it works the first time, every time.
 
 ---
 
 ## Why QR Won
 
-I weighed three options for the handshake:
+The handshake could have used NFC or Bluetooth. I ruled both out:
 
-**QR code.** Works with any camera. Broadcasts one way. Readable from the back seat. ✓
+- **QR code** works with any camera, broadcasts one way, and reads from the back seat. ✓
+- **NFC** isn't on every device, needs physical contact, and exposes data both ways. ✗
+- **Bluetooth** is widely supported, but it's a two-way link that can leak device IDs. ✗
 
-**NFC.** Not on every device. Exposes data both ways. Needs physical contact. ✗
+A QR code only sends the route the passenger chooses to share. It can't expose a device ID or anything personal. The one catch: long URLs make dense codes that fail in low light, so Route Pass compresses each route into a short link that scans cleanly even in a dark cab.
 
-**Bluetooth.** Widely supported, but it's a two-way link that can leak device IDs. ✗
-
-A QR code only sends the route the passenger chooses to share. Unlike Bluetooth or NFC, it can't expose a device ID or anything personal.
-
-**The catch, and the fix.** Long URLs make dense QR codes that fail in low light. Route Pass compresses each multi-stop route into a short link (`goo.gl/route/xxxx`), which thins out the pattern so it scans cleanly even in a dark cab at night.
+The tools people already reach for all fall short. AirDrop is Apple-only. WhatsApp means sharing your number. Uber and Careem only work inside their own apps. Google Maps is the one that runs everywhere and can put privacy first by default.
 
 ---
 
@@ -144,25 +91,17 @@ The whole thing takes under five seconds.
 
 ## Key Design Decisions
 
-### Luminance Override
-Opening the Route Pass screen forces the phone to 100% brightness, so the driver's camera can read it through tinted windows or in direct sun.
+**Luminance override.** Opening the screen forces the phone to 100% brightness, so the driver's camera can read it through tinted glass or direct sun.
 
-### The Driver Screen
-One rule for the driver's view: no complexity. A single big confirmation, one button, large high-contrast text, no decisions to make in traffic.
+**A driver screen with one job.** One big confirmation, one button, large high-contrast text, no decisions to make in traffic.
 
-### Offline Fallback with Plus Codes
-Where there's no signal, the QR carries Google Plus Codes for every waypoint, so turn-by-turn still works without the cloud.
-
-### Universal Link Protocol
-If the driver has Google Maps, the route opens right in it. If they use a partner app or a built-in meter, the coordinates get pushed to that interface through an API.
+**Offline by default.** The QR carries Plus Codes for every waypoint, so turn-by-turn still works with no signal. If the driver has Google Maps it opens right in it; a partner app or built-in meter gets the coordinates through an API.
 
 ---
 
 ## Reflection
 
 The biggest surprise wasn't the navigation frustration. It was the emotional weight of handing over a phone. People didn't call it inconvenient. They called it invasive, and anxious. That one insight moved my whole priority from speed to trust. Privacy wasn't a feature to bolt on at the end. It was the product.
-
-Designing inside Material Design 3 taught me something about constraint. A mature design system isn't a cage, it's a filter. Every decision has to earn its place.
 
 **Honest limitations.** 19 respondents gives direction, not statistical confidence. A study of 100+ across several cities would put this on firmer ground. And the scan flow and driver screen stay hypotheses until they're tested with real drivers, in moving cars, in different light, on different phones.
 
