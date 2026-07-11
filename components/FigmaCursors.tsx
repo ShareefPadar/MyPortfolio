@@ -50,6 +50,8 @@ export default function FigmaCursors() {
   const mouse = useRef({ x: -100, y: -100 });
   const shareef = useRef({ x: -120, y: -120 });
   const target = useRef({ x: 0, y: 0 });
+  const chatOpen = useRef(false); // freeze roaming while a bubble is up
+  const repickAt = useRef(0); // when to choose the next roam waypoint
   const activeEl = useRef<HTMLElement | null>(null);
   const shown = useRef<Set<string>>(new Set());
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
@@ -162,17 +164,19 @@ export default function FigmaCursors() {
       if (youRef.current) {
         youRef.current.style.transform = `translate(${mouse.current.x}px, ${mouse.current.y}px)`;
       }
-      const el = activeEl.current;
-      if (el) {
-        const r = el.getBoundingClientRect();
-        const tx = Math.min(Math.max(r.left + 64, 100), window.innerWidth - 320);
-        const ty = Math.min(Math.max(r.top + 96, 140), window.innerHeight - 200);
-        const now = performance.now() / 1000;
-        target.current.x = tx + Math.sin(now * 1.1) * 5;
-        target.current.y = ty + Math.cos(now * 0.9) * 4;
+      const now = performance.now();
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      if (!chatOpen.current && now >= repickAt.current) {
+        // free roam — wander to a fresh random point across the viewport
+        target.current.x = 130 + Math.random() * Math.max(120, w - 300);
+        target.current.y = 130 + Math.random() * Math.max(120, h - 280);
+        repickAt.current = now + 1300 + Math.random() * 1700;
       }
-      shareef.current.x = lerp(shareef.current.x, target.current.x, 0.07);
-      shareef.current.y = lerp(shareef.current.y, target.current.y, 0.07);
+      // slow dreamy glide while roaming, a touch snappier settling to chat
+      const k = chatOpen.current ? 0.085 : 0.038;
+      shareef.current.x = lerp(shareef.current.x, target.current.x, k);
+      shareef.current.y = lerp(shareef.current.y, target.current.y, k);
       if (shareefRef.current) {
         shareefRef.current.style.transform = `translate(${shareef.current.x}px, ${shareef.current.y}px)`;
       }
@@ -184,6 +188,21 @@ export default function FigmaCursors() {
       cancelAnimationFrame(raf.current);
     };
   }, [isDesktop]);
+
+  // While a bubble is up, hold the cursor at a readable spot; roam again after.
+  useEffect(() => {
+    if (phase === "dots") {
+      chatOpen.current = true;
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      // ease to the upper-left half so the bubble always fits on screen
+      target.current.x = Math.min(Math.max(shareef.current.x, 150), w * 0.5);
+      target.current.y = Math.min(Math.max(shareef.current.y, 130), h * 0.5);
+    } else if (phase === "hidden") {
+      chatOpen.current = false;
+      repickAt.current = 0; // wander off immediately
+    }
+  }, [phase]);
 
   const bubbleOpen = phase !== "hidden";
   const typed = phase === "typing" ? message.slice(0, chars) : message;
