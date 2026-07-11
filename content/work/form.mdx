@@ -1,18 +1,18 @@
 ## The Problem
 
-Most fitness apps share the same fundamental flaw: they require an account before you can do anything. Your data lives on their servers, behind their subscription, subject to their privacy policy. For users who are privacy-conscious, or who simply don't want to commit before trying, the friction is a dealbreaker.
+Most fitness apps share one flaw: they want an account before you can do anything. Your data lives on their servers, behind their subscription, under their privacy policy. For anyone privacy-conscious, or just not ready to commit before trying, that's a dealbreaker.
 
-The second problem: fitness apps are cloud-dependent. No internet? No access to your history.
+The second problem: they're cloud-dependent. No internet means no access to your own history.
 
 ## Architecture: Local-First
 
-The core architectural decision was to make **IndexedDB the primary data layer**, not a remote database. This means:
+The core decision was to make **IndexedDB the primary data layer** instead of a remote database. That means:
 
-- The app loads and works instantly — no auth, no network request, no spinner
-- All data is stored on the user's device by default
-- Supabase sync is **opt-in**, triggered only when the user creates an account
+- The app loads and works instantly. No auth, no network request, no spinner.
+- Everything lives on the device by default.
+- Supabase sync is **opt-in**, and only kicks in when you create an account.
 
-I used **Dexie.js** as the IndexedDB wrapper. It provides a clean, Promise-based API and live query hooks that re-render React components when data changes — similar to how Supabase's real-time works, but entirely offline.
+I used **Dexie.js** as the IndexedDB wrapper for its clean promise-based API and live query hooks that re-render React components when data changes. It behaves like Supabase's real-time, but fully offline.
 
 ### The Dual-Mode Pattern
 
@@ -21,43 +21,43 @@ Guest Mode  →  IndexedDB only  →  Zero account friction
 Sync Mode   →  IndexedDB + Supabase  →  Multi-device access
 ```
 
-Critically, switching from Guest to Sync Mode **migrates local data to the cloud** — nothing is lost. Users can try the full product before committing.
+Switching from Guest to Sync **migrates your local data to the cloud**, so nothing is lost. You get to try the whole product before committing to anything.
 
-![Form dashboard — weight, BMI, and trend with goal and average reference lines](/assets/work/form-dashboard.png)
+![Form dashboard: weight, BMI, and trend with goal and average reference lines](/assets/work/form-dashboard.png)
 
 ## Key Features
 
 ### Weight & BMI Tracking
-Daily weight logs stored locally with automatic BMI calculation. The trend chart uses Recharts with a custom gradient fill and reference lines for goal weight and rolling average.
+Daily weight logs stored locally, with BMI calculated automatically. The trend chart uses Recharts with a custom gradient fill and reference lines for goal weight and rolling average.
 
 ### Designing the Forecast States
-A naive forecast engine happily tells a plateauing user "goal in 4,000 days." Forecasts fail in predictable ways — so instead of letting failures surface as nonsense numbers, each one became a designed state:
+A naive forecast engine will happily tell a plateauing user "goal in 4,000 days." Forecasts fail in predictable ways, so rather than let those failures surface as nonsense numbers, I turned each one into a designed state:
 
-- **Not enough data** (< 7 days): prompts the user to keep logging instead of guessing
-- **Plateau** (< 0.01kg/day change): named honestly as stagnant, not projected forward
-- **Off track** (trending away from goal): flagged clearly rather than showing a receding date
-- **Unrealistic horizon** (> 730 days): shows "Long Term Goal" rather than a fake-precise date
+- **Not enough data** (under 7 days): asks you to keep logging instead of guessing
+- **Plateau** (under 0.01kg/day change): called out honestly as stagnant, not projected forward
+- **Off track** (trending away from goal): flagged plainly instead of showing a receding date
+- **Unrealistic horizon** (over 730 days): reads "Long Term Goal" instead of a fake-precise date
 
-The forecast is only trustworthy because it admits when it shouldn't be trusted.
+The forecast earns trust precisely because it admits when it shouldn't be trusted.
 
 ### On-Device Macro Targets
-Macro targets are calculated on-device using the **Mifflin-St Jeor BMR formula** — no third-party nutrition API, no cloud round-trip, consistent with the privacy-first architecture. Inputs: weight, height, age, gender, activity level, fitness goal. Output: daily calorie target, protein, carbs, and fat in grams.
+Macro targets are calculated on the device with the **Mifflin-St Jeor BMR formula**. No third-party nutrition API, no cloud round-trip, all in keeping with the privacy-first architecture. Inputs: weight, height, age, gender, activity level, goal. Output: daily calories, protein, carbs, and fat in grams.
 
-![Form daily targets — on-device calorie and macro calculation](/assets/work/form-daily-targets.png)
+![Form daily targets: on-device calorie and macro calculation](/assets/work/form-daily-targets.png)
 
 ### Body Measurements
-Waist, chest, hips, and arms tracked over time — because scale weight alone is a poor measure of body composition change.
+Waist, chest, hips, and arms tracked over time, since scale weight alone is a poor read on body composition.
 
 ### Google Fit Integration
-Optional sync with Google Fit via the Google Fit API, so Form fits into an existing health data ecosystem rather than replacing it.
+Optional sync with Google Fit through its API, so Form slots into an existing health setup instead of replacing it.
 
 ### CSV Import / Export
-Full data portability. Users can import historical data from other apps (if exported as CSV) and export their Form data at any time. No lock-in.
+Full data portability. Import history from other apps (if they export CSV) and export your Form data whenever you like. No lock-in.
 
 ## What I Learned
 
-Building local-first forced me to think about data ownership as a design constraint, not just a technical one. Every schema decision had to account for: what happens when this data needs to sync? What happens when there's a conflict between local and remote?
+Building local-first made me treat data ownership as a design constraint, not just a technical one. Every schema decision had to answer two questions: what happens when this data needs to sync, and what happens when local and remote disagree?
 
-The Guest/Sync dual mode also taught me that **reducing friction at the top of the funnel is more valuable than adding features**. The single biggest driver of retention in early testing was the ability to start tracking without creating an account.
+The Guest/Sync split also taught me that **cutting friction at the top of the funnel beats adding features**. In early testing, the biggest driver of retention was letting people start tracking without an account.
 
-> Privacy-first doesn't mean feature-poor. Guest Mode plus offline-first architecture delivers a premium UX with zero account friction.
+> Privacy-first doesn't mean feature-poor. Guest Mode plus offline-first gives you a premium experience with zero account friction.

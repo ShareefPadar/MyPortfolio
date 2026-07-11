@@ -7,7 +7,7 @@ export const projects = {
     role: "Lead Product Designer",
     type: "Product concept",
     duration: "4 weeks",
-    outcome: "Concept validated with 19 commuters — unanimous adoption intent; the QR handshake flow is designed to complete in under 5 seconds.",
+    outcome: "19 commuters tested the concept and every one said they'd use it. The QR handshake is designed to complete in under five seconds.",
     imageUrl: "/assets/google-maps-preview.png",
     bgColor: "#E1F2ED",
     tags: ["UX Research", "Privacy", "Navigation"],
@@ -18,7 +18,7 @@ export const projects = {
     growth: "100% of surveyed users cited the passive handshake as 'faster' and 'safer.' The project successfully shifted the focus from purely functional speed to establishing emotional trust.",
     metric: "<5s",
     metricLabel: "Handshake time",
-    quote: "By treating privacy as a core product feature rather than an afterthought, the solution becomes a viable tool for global commuters in diverse privacy-conscious markets."
+    quote: "Treating privacy as a core feature instead of an afterthought is what makes this work for commuters anywhere."
   },
 
   "omni-cast-ai": {
@@ -51,7 +51,7 @@ export const projects = {
     role: "Product Designer",
     type: "Self-initiated UX audit",
     duration: "2-4 weeks",
-    outcome: "Two high-stakes booking-funnel friction points resolved entirely within the existing design system — zero brand changes.",
+    outcome: "Two high-stakes friction points in the booking funnel, both fixed inside the existing design system with no brand changes.",
     imageUrl: "/assets/almosafer-preview.png",
     bgColor: "#FEFCE8",
     tags: ["UX Research", "Hick's Law", "Travel"],
@@ -65,17 +65,17 @@ export const projects = {
     growth: "Significant reduction in time-to-decision and improved booking velocity. The audit proved that even minor, time-boxed UX corrections can drastically improve user confidence and conversion in high-traffic travel platforms.",
     metric: "2",
     metricLabel: "High-stakes fixes",
-    quote: "Audited the Middle East's leading travel platform. Identified two high-stakes friction points in the booking funnel — resolved with zero brand changes."
+    quote: "Audited the Middle East's leading travel platform and found two high-stakes friction points in the booking funnel, both fixable without touching a single brand token."
   },
 
   "instagram-local": {
     title: "Instagram Local Feed",
-    description: "Instagram connects us to the world, but when it comes to our own neighborhoods, the experience falls short. Bridging global reach with local connections to help users discover events and businesses in their neighborhood.",
-    homeDescription: "Bridging global reach with local connections to help users discover events and businesses in their neighborhood.",
+    description: "Instagram connects you to the whole world but falls short two streets away. This concept adds a local layer for finding nearby events and businesses.",
+    homeDescription: "A local layer for Instagram: nearby events and businesses, without fighting the algorithm.",
     role: "Product Designer",
     type: "Product concept",
     duration: "2-4 weeks",
-    outcome: "Two discovery patterns — passive and active intent — designed from a 20-user survey that found 86% value local content but fewer than half can find it.",
+    outcome: "A 20-user survey found 86% value local content but fewer than half can find it, so I designed two discovery patterns for passive and active browsing.",
     imageUrl: "/assets/instagram-local.png",
     homeImageUrl: "https://miro.medium.com/v2/resize:fit:780/1*3sIpxdG2WHXa9JyB9dI_lA.png",
     bgColor: "#EDF9FF",
@@ -95,11 +95,11 @@ export const projects = {
 
   "form": {
     title: "Form: Privacy-First Health",
-    description: "A health tracker built on one product insight: removing account friction beats adding features. Works fully offline with no sign-up — weight, BMI, and body composition stay on your device, syncing only when you choose.",
+    description: "A health tracker built on one insight: removing sign-up friction beats adding features. It works fully offline with no account. Your weight, BMI, and body composition stay on your device and sync only when you choose.",
     homeDescription: "A privacy-first, offline-ready health tracker with smart goal forecasting and on-device macro targets.",
     role: "Product Designer & Builder",
     type: "Live product",
-    outcome: "Live and offline-first — full tracking with zero sign-up; data stays on-device and syncs only when the user opts in.",
+    outcome: "Live and offline-first. Full tracking with no sign-up, and data stays on the device until you choose to sync.",
     duration: "2-4 weeks",
     imageUrl: "/assets/fitness-tracker-preview.png",
     bgColor: "#0D1117",
@@ -119,11 +119,11 @@ export const projects = {
 
   "roomy": {
     title: "Roomy: The Bedspace OS",
-    description: "Living with 21 roommates broke every spreadsheet — so I designed and shipped a role-based system of record for rent, utilities, and shared facilities, now in daily use.",
+    description: "Living with 21 roommates broke every spreadsheet, so I designed and shipped a shared system of record for rent, utilities, and facilities. It's in daily use.",
     role: "Product Designer & Builder",
     type: "Live product",
     duration: "2-4 weeks",
-    outcome: "Running in production for a 21-person flat — rent, utilities, and laundry on one shared system of record.",
+    outcome: "Running in production for a 21-person flat, with rent, utilities, and laundry on one shared system of record.",
     imageUrl: "/assets/roomy-preview.png",
     bgColor: "#F5F3FF",
     tags: ["Full Stack", "SaaS", "Bedspace OS"],

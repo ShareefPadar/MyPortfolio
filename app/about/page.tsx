@@ -24,28 +24,28 @@ export default function About() {
         <ParallaxSection delay={0.2}>
           <div className="space-y-8 text-base md:text-lg text-neutral-600 leading-relaxed font-sans">
             <p>
-              I&apos;m a <span className="font-bold text-neutral-900">Senior Product Designer</span> with 6 years of experience in B2B SaaS — taking complex products from early research through to shipped, production-ready interfaces. I&apos;ve worked as the sole designer across platforms in logistics, healthcare, gym management, and travel, which means I&apos;m used to owning the entire design process without hand-holding. Most of that client work sits under NDA — detailed case studies are available on request.
+              I&apos;m a <span className="font-bold text-neutral-900">Senior Product Designer</span> with six years in B2B SaaS. I take complex products from early research all the way to shipped, production-ready interfaces. Across logistics, healthcare, gym management, and travel, I&apos;ve usually been the only designer in the room, so I&apos;m used to owning the whole process on my own. Most of that work sits under NDA, but I&apos;m happy to walk you through it on request.
             </p>
             <p>
-              My background is in <span className="font-bold text-neutral-900">computer science</span>, which means I design with the implementation in mind. I don&apos;t hand off mockups and disappear — I understand the constraints, collaborate closely with engineers, and increasingly ship front-end code directly using React, Tailwind, and AI-assisted workflows with Cursor and Claude Code.
+              My background is in <span className="font-bold text-neutral-900">computer science</span>, so I design with the build in mind. I don&apos;t hand off a mockup and disappear. I know where the constraints are, I work closely with engineers, and these days I ship a lot of the front-end myself in React and Tailwind, with help from Cursor and Claude Code.
             </p>
             <p>
-              What I bring to a product team: deep user research capability, a strong system-level design instinct, and the ability to move fast without breaking consistency. I&apos;ve built design systems from zero, run usability testing, conducted stakeholder interviews, and delivered WCAG-aligned responsive interfaces across web and mobile.
+              On a product team I bring solid user research, a system-level eye, and a habit of moving fast without letting the UI drift. I&apos;ve built design systems from scratch, run usability tests and stakeholder interviews, and shipped WCAG-aligned responsive work across web and mobile.
             </p>
             <div className="pt-8">
               <h2 className="text-xl md:text-2xl font-bold font-serif mb-6 italic leading-snug text-neutral-950">What I Bring to the Table.</h2>
               <ul className="list-none space-y-6">
                 <li>
                   <span className="font-bold text-neutral-900 block mb-1">B2B product depth</span>
-                  I thrive in complexity. I&apos;ve designed ERP platforms, logistics booking systems, and CRM tools — always as sole designer, always end to end.
+                  Complex products are where I do my best work. ERP platforms, logistics booking systems, CRM tools, usually as the only designer and always end to end.
                 </li>
                 <li>
                   <span className="font-bold text-neutral-900 block mb-1">Research-led decisions</span>
-                  I run user interviews, usability tests, and competitor audits to ground design decisions in real data — not assumptions.
+                  I run user interviews, usability tests, and competitor audits so decisions rest on evidence instead of opinion.
                 </li>
                 <li>
                   <span className="font-bold text-neutral-900 block mb-1">From design to shipped code</span>
-                  I build what I design. Two live products — Roomy and Form — designed and coded entirely by me, in production.
+                  I build what I design. Two of my products, Roomy and Form, are live and were designed and coded start to finish by me.
                 </li>
               </ul>
             </div>
@@ -76,7 +76,7 @@ export default function About() {
       <ParallaxSection className="mt-16 md:mt-32">
         <section className="bg-surface-peach -mx-4 md:-mx-12 lg:-mx-20 px-8 md:px-24 py-14 md:py-32 rounded-3xl text-center mb-16 md:mb-32">
           <p className="text-2xl md:text-4xl font-serif font-bold mb-8 italic leading-snug text-neutral-950">
-            &quot;AI makes execution faster, but only for those who understand the design problem first. I use my engineering background and design seniority to build software that is technically sound, commercially viable, and a joy to use.&quot;
+            &quot;AI makes execution faster, but only if you understand the design problem first. My engineering background lets me build software that&apos;s technically sound, commercially viable, and a pleasure to use.&quot;
           </p>
           <span className="text-xs font-bold uppercase tracking-widest text-neutral-900/40 font-sans">— My Philosophy</span>
         </section>

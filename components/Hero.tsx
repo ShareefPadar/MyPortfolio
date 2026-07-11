@@ -74,7 +74,7 @@ const Hero = () => {
           transition={{ delay: 0.9, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="text-base md:text-lg text-neutral-500 font-sans leading-relaxed max-w-lg mb-6 fm-anim"
         >
-          6 years of B2B UX — research, strategy, and design, end to end. Based in Dubai. I also build and ship my own products in React and Tailwind.
+          Six years in B2B UX, from research to shipped interface. Based in Dubai. I build and ship my own products in React and Tailwind too.
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 10 }}

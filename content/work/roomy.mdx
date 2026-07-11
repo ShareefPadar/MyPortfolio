@@ -1,38 +1,38 @@
 ## The Problem — Research by Living It
 
-Co-living in high-density cities like Dubai creates a logistical disaster at scale. I wasn't observing this problem from the outside — I was living inside it, in a 21-person shared apartment. Rent chased through WhatsApp groups. Cash handoffs with no receipts. One laundry machine, no booking system. Disputes with no paper trail.
+Co-living at high density is a logistics mess, and I wasn't studying it from the outside. I was living in it: a 21-person shared apartment in Dubai. Rent chased through WhatsApp groups. Cash handoffs with no receipts. One washing machine and no way to book it. Disputes with no paper trail.
 
-Being embedded with my users meant research wasn't a phase — it was daily life. And it showed me where the arguments actually started: not with the money itself, but with **missing shared truth**. Nobody could see who had paid, who owed what, or who booked the machine.
+Being one of the users meant research wasn't a phase, it was daily life. It also showed me where the arguments actually started. Not the money itself, but the **missing shared truth** behind it. Nobody could see who had paid, who owed what, or who had the machine.
 
-The core failure: **no shared system of record** for money, facilities, or accountability.
+The core failure was simple: **no shared system of record** for money, facilities, or accountability.
 
 ## Designing for Two Roles
 
-The same product serves two very different users, so I designed two interfaces on one codebase:
+One product, two very different users, so I built two interfaces on a single codebase.
 
-- **The admin** — the flat lead collecting rent — needs the full picture: a ledger across 21 tenants, payment confirmation, arrears tracking. Their success metric is chasing less.
-- **Members** need exactly one number — *"what do I owe?"* — plus proof of what they've paid and a fair shot at the washing machine.
+- **The admin** is the flat lead collecting rent. They need the whole picture: a ledger across 21 tenants, payment confirmation, arrears tracking. Success for them means chasing less.
+- **Members** need one number, *"what do I owe?"*, plus proof of what they've paid and a fair shot at the laundry.
 
-Members see only their own balance; the admin sees everyone's. That scoping was the core design decision, not a technical one: most trust problems in shared living are really **visibility problems**.
+Members see only their own balance. The admin sees everyone's. That scoping was the core design decision, and it wasn't a technical one. Most trust problems in shared living are really **visibility problems**.
 
-![Roomy admin dashboard — rent ledger with per-tenant payment status](/assets/work/roomy-admin-ledger.png)
+![Roomy admin dashboard: rent ledger with per-tenant payment status](/assets/work/roomy-admin-ledger.png)
 
 ## Key Features
 
 ### Smart Rent Ledger
-The ledger auto-calculates each tenant's balance from their room type, shared utility split, and any outstanding arrears from previous months. Payment status is one tap to confirm for the admin, and always visible to the member it belongs to — no more screenshot wars in the group chat.
+The ledger works out each tenant's balance from their room type, their share of utilities, and any arrears carried over. The admin confirms a payment in one tap, and the member it belongs to always sees the same status. No more screenshot wars in the group chat.
 
 ### Live-Status Laundry Scheduler
-Real-time machine status with hard daily limits (max 2 bookings per tenant per day). Conflicts are prevented at the data layer — not argued about in the corridor.
+Real-time machine status with a hard cap of two bookings per tenant per day. Conflicts get prevented in the data layer instead of argued about in the corridor.
 
 ![Roomy live-status laundry scheduler](/assets/work/roomy-laundry.png)
 
 ## The Architecture, Briefly
 
-To make every interaction feel instant, I built a pseudo-relational database engine on top of `localStorage`: entities with foreign-key-style relations, atomic multi-entity transactions (confirming a payment updates the ledger, the tenant balance, and the admin summary in one operation), and live queries that re-render the UI when data changes. No network, no spinner — every tap responds in under 16ms.
+To make every tap feel instant, I built a pseudo-relational database engine on top of `localStorage`: entities with foreign-key-style relations, atomic transactions across multiple entities (confirming a payment updates the ledger, the tenant balance, and the admin summary in one go), and live queries that re-render the UI when data changes. No network, no spinner, every tap under 16ms.
 
 ## What I Learned About AI-Assisted Building
 
-This project was my deepest experiment with AI-assisted development using Cursor: AI for boilerplate, state sync, and edge-case hunting — me for the data model, the role system, and the conflict-resolution logic. The lesson that stuck: **AI accelerates execution but cannot replace systems thinking.** I had to understand why relational databases work before I could fake one convincingly without a backend.
+This was my deepest run at AI-assisted development with Cursor. I let the AI handle boilerplate, state sync, and edge-case hunting, and kept the data model, the role system, and the conflict-resolution logic for myself. The lesson that stuck: **AI speeds up execution, but it can't do the systems thinking for you.** I had to understand why relational databases work before I could fake one convincingly without a backend.
 
-> The most valuable research tool I had was a lease. Living with your users beats interviewing them.
+> The best research tool I had was a lease. Living with your users beats interviewing them.

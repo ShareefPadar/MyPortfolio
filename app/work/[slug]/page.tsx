@@ -164,7 +164,7 @@ export default function WorkItem() {
             <SectionLabel number={MDXContent ? 2 : 5} title="SEE IT LIVE" className="mb-8" />
             <div className="space-y-8">
               <h2 className="text-xl md:text-2xl font-serif font-bold text-neutral-950 leading-snug max-w-xl">
-                Don&apos;t take the case study&apos;s word for it — use the product.
+                Don&apos;t take the case study&apos;s word for it. Go use the product.
               </h2>
               <div className="flex flex-wrap gap-4">
                 {(project as any).externalUrl && (project as any).externalUrl !== "#" && (
