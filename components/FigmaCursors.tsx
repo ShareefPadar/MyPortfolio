@@ -10,7 +10,8 @@ const DOTS_MS = 700; // "..." thinking state before typing starts
 const TYPE_MS = 26; // per character
 const HOLD_MS = 4200; // after fully typed, before dismiss
 
-// Figma's multiplayer cursor — the rounded "kite" arrow (post-2022 shape).
+// Figma's classic multiplayer cursor — sharp straight-edged kite with a
+// thin white outline, exactly as rendered on the canvas.
 function FigCursor({ color }: { color: string }) {
   return (
     <svg
@@ -18,11 +19,14 @@ function FigCursor({ color }: { color: string }) {
       height="24"
       viewBox="0 0 24 24"
       fill="none"
-      style={{ display: "block", filter: "drop-shadow(0 1px 2px rgba(0,0,0,.28))" }}
+      style={{ display: "block", filter: "drop-shadow(0 1px 2.5px rgba(0,0,0,.25))" }}
     >
       <path
-        d="M4.037 4.688a.495.495 0 0 1 .651-.651l16 6.5a.5.5 0 0 1-.063.947l-6.124 1.58a2 2 0 0 0-1.438 1.435l-1.579 6.126a.5.5 0 0 1-.947.063l-6.5-16Z"
+        d="M3.2 3.2 L20.5 10.1 L12.4 12.4 L10.1 20.5 Z"
         fill={color}
+        stroke="#fff"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
       />
     </svg>
   );
@@ -191,24 +195,21 @@ export default function FigmaCursors() {
       style={{
         transformOrigin: "top left",
         backgroundColor: PINK,
-        borderRadius: "4px 18px 18px 18px",
-        padding: "8px 14px 9px 12px",
-        maxWidth: 260,
+        borderRadius: "10px 26px 26px 26px",
+        padding: "12px 18px 13px 17px",
+        maxWidth: 290,
         width: "max-content",
-        boxShadow: "0 4px 14px rgba(226,29,112,.35), 0 1px 3px rgba(0,0,0,.15)",
+        boxShadow: "0 4px 16px rgba(226,29,112,.35), 0 1px 3px rgba(0,0,0,.15)",
       }}
     >
-      <div style={{ fontSize: 10.5, fontWeight: 600, color: "rgba(255,255,255,.72)", letterSpacing: ".02em", marginBottom: 2 }}>
-        Shareef
-      </div>
       {phase === "dots" ? (
-        <div style={{ display: "flex", gap: 4, padding: "5px 2px 4px" }}>
+        <div style={{ display: "flex", gap: 4.5, padding: "7px 4px 6px" }}>
           <span className="fig-dot" style={{ animationDelay: "0ms" }} />
           <span className="fig-dot" style={{ animationDelay: "150ms" }} />
           <span className="fig-dot" style={{ animationDelay: "300ms" }} />
         </div>
       ) : (
-        <div style={{ fontSize: 13, fontWeight: 500, lineHeight: 1.45, color: "#fff" }}>
+        <div style={{ fontSize: 14.5, fontWeight: 500, lineHeight: 1.4, color: "#fff", letterSpacing: ".005em" }}>
           {typed}
           {phase === "typing" && <span className="fig-caret" />}
         </div>
@@ -282,17 +283,17 @@ export default function FigmaCursors() {
         <div
           style={{
             position: "absolute",
-            left: 15,
-            top: 19,
+            left: 17,
+            top: 21,
             backgroundColor: PINK,
             color: "#fff",
-            fontSize: 11.5,
-            fontWeight: 600,
-            letterSpacing: ".01em",
-            padding: "3px 8px 4px",
-            borderRadius: 6,
+            fontSize: 13,
+            fontWeight: 500,
+            letterSpacing: ".005em",
+            padding: "6px 13px 7px",
+            borderRadius: 999,
             whiteSpace: "nowrap",
-            boxShadow: "0 1px 3px rgba(0,0,0,.2)",
+            boxShadow: "0 2px 6px rgba(0,0,0,.18)",
             opacity: bubbleOpen ? 0 : 1,
             transition: "opacity 150ms",
           }}
@@ -300,7 +301,7 @@ export default function FigmaCursors() {
           Shareef
         </div>
         {/* cursor chat bubble */}
-        <div style={{ position: "absolute", left: 15, top: 19 }}>{bubbleOpen && Bubble}</div>
+        <div style={{ position: "absolute", left: 17, top: 21 }}>{bubbleOpen && Bubble}</div>
       </div>
 
       {/* You — black, real pointer */}
@@ -314,17 +315,17 @@ export default function FigmaCursors() {
         <div
           style={{
             position: "absolute",
-            left: 15,
-            top: 19,
+            left: 17,
+            top: 21,
             backgroundColor: BLACK,
             color: "#fff",
-            fontSize: 11.5,
-            fontWeight: 600,
-            letterSpacing: ".01em",
-            padding: "3px 8px 4px",
-            borderRadius: 6,
+            fontSize: 13,
+            fontWeight: 500,
+            letterSpacing: ".005em",
+            padding: "6px 13px 7px",
+            borderRadius: 999,
             whiteSpace: "nowrap",
-            boxShadow: "0 1px 3px rgba(0,0,0,.2)",
+            boxShadow: "0 2px 6px rgba(0,0,0,.18)",
           }}
         >
           You
