@@ -53,7 +53,7 @@ const Navbar = () => {
           </Link>
 
           <a
-            href="/assets/Shareef_Padar_Design_Engineer.pdf"
+            href="/assets/Shareef_Padar_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className={linkClass(false)}

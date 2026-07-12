@@ -92,7 +92,7 @@ const Hero = () => {
             </Link>
           </Magnetic>
           <a
-            href="/assets/Shareef_Padar_Design_Engineer.pdf"
+            href="/assets/Shareef_Padar_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 border border-neutral-200 text-neutral-950 px-8 py-4 rounded-full font-bold text-sm hover:border-neutral-950 transition-all group"

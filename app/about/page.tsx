@@ -52,10 +52,62 @@ export default function About() {
           </div>
         </ParallaxSection>
 
+        <ParallaxSection delay={0.3}>
+          <div className="pt-4">
+            <h2 className="text-xl md:text-2xl font-bold font-serif mb-8 italic leading-snug text-neutral-950">Where I&apos;ve Worked.</h2>
+            <div className="space-y-9">
+              {[
+                {
+                  role: "Senior UI/UX Designer & UX Engineer",
+                  company: "Cargoz · Dubai",
+                  period: "2025 – Present",
+                  desc: "Shipped Cargoz Connect, a B2B product for booking warehouse space within 24 hours, from wireframes to live UI. Building the design system for a 6-developer team and shipping front-end code in React and Tailwind.",
+                },
+                {
+                  role: "Senior UI/UX Designer",
+                  company: "Pixelmind IT Solutions · Dubai (Remote)",
+                  period: "2023 – 2025",
+                  desc: "Led UX and UI for a B2B Gym & Healthcare ERP/CRM across web and mobile, working directly with the CEO. Built the component library, design tokens, and developer docs, and delivered WCAG-aligned responsive interfaces.",
+                },
+                {
+                  role: "UX Designer",
+                  company: "Illuminz · India",
+                  period: "2022",
+                  desc: "Sole UX lead across two mobile apps at once, grounding features in personas and journey maps and using rapid prototyping to shorten feedback loops.",
+                },
+                {
+                  role: "UI/UX Designer",
+                  company: "iOSys Software · India",
+                  period: "2021 – 2022",
+                  desc: "Designed client websites across industries as part of a three-designer agency team.",
+                },
+                {
+                  role: "UI & Graphic Designer",
+                  company: "Addwiser · India",
+                  period: "2019 – 2021",
+                  desc: "Client UI and brand visuals across e-commerce, tech, and services.",
+                },
+              ].map((job) => (
+                <div key={job.company} className="border-l-2 border-neutral-100 pl-5 md:pl-6">
+                  <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                    <h3 className="text-base md:text-lg font-bold text-neutral-900 font-sans">{job.role}</h3>
+                    <span className="text-xs font-bold uppercase tracking-widest text-neutral-400 shrink-0">{job.period}</span>
+                  </div>
+                  <p className="text-sm font-semibold text-accent mb-2">{job.company}</p>
+                  <p className="text-sm md:text-base text-neutral-600 leading-relaxed">{job.desc}</p>
+                </div>
+              ))}
+            </div>
+            <p className="mt-9 pt-6 border-t border-neutral-100 text-sm text-neutral-500">
+              <span className="font-semibold text-neutral-700">B.E. Computer Science &amp; Engineering</span>, Sahyadri College of Engineering &amp; Management (2019) · UX Design, Interaction Design Foundation.
+            </p>
+          </div>
+        </ParallaxSection>
+
         <ParallaxSection delay={0.4}>
           <div className="pt-8 flex flex-wrap gap-4">
             <a
-              href="/assets/Shareef_Padar_Design_Engineer.pdf"
+              href="/assets/Shareef_Padar_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 bg-neutral-950 text-white px-8 py-4 font-bold hover:bg-neutral-800 transition-all duration-300 rounded-full font-sans text-sm md:text-base"
