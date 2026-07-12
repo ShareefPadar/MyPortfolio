@@ -45,6 +45,40 @@ export const metadata: Metadata = {
     locale: 'en_US',
     type: 'website',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Shareef Padar | Senior Product Designer',
+    description: '6 years of B2B product design. Research to shipped interfaces, end to end.',
+    images: ['/og-image.png'],
+  },
+};
+
+// Structured data — helps search engines understand who this is.
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Shareef Padar",
+  jobTitle: "Senior Product Designer",
+  url: "https://www.shareefpadar.com",
+  email: "mailto:shareefpadar@gmail.com",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Dubai",
+    addressCountry: "AE",
+  },
+  sameAs: [
+    "https://www.linkedin.com/in/shareef-padar/",
+    "https://www.behance.net/shareefpadar",
+    "https://medium.com/@shareefpadar167",
+  ],
+  knowsAbout: [
+    "Product Design",
+    "UX Research",
+    "Design Systems",
+    "B2B SaaS",
+    "React",
+    "Tailwind CSS",
+  ],
 };
 
 export default function RootLayout({
@@ -54,6 +88,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+        />
+      </head>
       <body className="flex flex-col min-h-screen font-sans">
         <FigmaCursors />
         <Noise />
