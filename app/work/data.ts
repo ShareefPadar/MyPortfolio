@@ -93,6 +93,29 @@ export const projects = {
     quote: "Uncovered a critical gap: 86% of users value local content, but fewer than half can find it. Surveyed 20 users, designed 2 discovery solutions for passive and active browsing modes."
   },
 
+  "sanad": {
+    title: "Sanad: KYB Onboarding",
+    description: "New businesses have to prove they're legitimate before they can move money. I designed the full KYB onboarding flow for Sanad, a fictional business-banking product, and built it as a working React prototype. One rule shaped everything: you can't make the process easier by making it less rigorous.",
+    role: "Product Designer & Builder",
+    type: "Product concept",
+    duration: "2026",
+    outcome: "A working six-screen prototype, embedded in the case study. Every decision earns its place against a constraint that can't move: regulators decide the steps, design decides how they feel.",
+    imageUrl: "/assets/work/sanad-thumb.png",
+    bgColor: "#E9F1EC",
+    tags: ["B2B Fintech", "KYB", "UX + Front-end"],
+    externalUrl: "",
+    externalLabel: "",
+    stack: "React · Tailwind-style CSS · Built with AI-assisted workflows",
+    secondaryUrl: "",
+    secondaryLabel: "",
+    problem: "KYB verification is slow, document-heavy, and legally mandatory. Businesses start it, hit friction, and abandon, so the company loses a customer it already paid to acquire.",
+    solution: "A six-screen flow built on two principles: explain why at every sensitive request, and never hard-block a willing user. The full path is shown up front, documents can be added later, the wait is honest, and rejection is specific and blameless.",
+    growth: "Because this is a concept, the outcome is a set of testable hypotheses rather than invented metrics: does the escape hatch recover droppers, does per-field reasoning reduce abandonment, does the honest wait lower support load.",
+    metric: "6",
+    metricLabel: "Screens, one constraint",
+    quote: "The interesting part isn't the screens. It's the constraint: make a legally rigid process feel fast, clear, and trustworthy without weakening what it's required to do."
+  },
+
   "form": {
     title: "Form: Privacy-First Health",
     description: "A health tracker built on one insight: removing sign-up friction beats adding features. It works fully offline with no account. Your weight, BMI, and body composition stay on your device and sync only when you choose.",

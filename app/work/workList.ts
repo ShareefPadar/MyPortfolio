@@ -45,6 +45,16 @@ export const workEntries: WorkEntry[] = [
     bgColor: "#E1F2ED",
   },
   {
+    slug: "sanad",
+    title: "Sanad: KYB Onboarding",
+    category: "B2B Fintech",
+    badge: "Concept",
+    description:
+      "Business verification that feels fast without being less rigorous. A working KYB flow, designed and built.",
+    thumbnail: "/assets/work/sanad-thumb.png",
+    bgColor: "#E9F1EC",
+  },
+  {
     slug: "instagram-local",
     title: "Instagram Local Feed",
     category: "Product Design",
