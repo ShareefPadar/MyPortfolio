@@ -52,7 +52,7 @@ export const workEntries: WorkEntry[] = [
     description:
       "Business verification that feels fast without being less rigorous. A working KYB flow, designed and built.",
     thumbnail: "/assets/work/sanad-thumb.png",
-    bgColor: "#E9F1EC",
+    bgColor: "#EEF0FD",
   },
   {
     slug: "instagram-local",

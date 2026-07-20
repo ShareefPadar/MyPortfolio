@@ -14,10 +14,12 @@ That reframe is the whole project. It rules out the easy answer (fewer fields) a
 <DeviceFrame
   url="sanad.app/verify"
   label="Live prototype · click through the real flow"
-  caption="The actual working prototype, not a video. Six screens: overview, business details, owners, documents, the wait, and rejection. On the pending screen you can simulate either outcome."
+  caption="The actual working prototype, not a video. Six screens: overview, business details, owners, documents, the wait, and rejection. On the pending screen you can simulate either outcome. This is the post-audit v2 build."
 >
   <SanadPrototype />
 </DeviceFrame>
+
+**A note on the visual language.** The prototype is deliberately built in a Mercury-inspired visual system: lavender canvas, white cards, indigo accents, a geometric sans. That comes straight from the desk research. Executing inside an established fintech design language, rather than inventing a novel one, mirrors the actual job of joining a fintech design team.
 
 ---
 
@@ -42,6 +44,8 @@ I ran focused desk research on how three leaders handle business onboarding: **S
 **The worst pattern.** Across all three, the waiting state after submission is thin. Users are told review takes days, then handed a vague "we'll be in touch." The moment that most needs reassurance gets the least design.
 
 **The gap nobody fills.** The emotional design of rejection. Every product documents what to resubmit. None make a rejected document feel non-accusatory. That gap became the screen I invested the most in.
+
+Beyond the patterns, I studied screenshots of Mercury's live signup and pulled four interaction signatures into the build: the oversized step numeral ("01 / 04") for instant orientation, field labels that take on the brand colour on focus, inline green validation checks as each field completes, and helper hints at the point of typing ("Numbers, letters, and dashes only please"). Small details, but they're a large part of why that flow feels calm. Adapting them was cheaper than reinventing them.
 
 ---
 
@@ -108,6 +112,22 @@ I documented each key decision the same way: problem, constraint, the options I 
 **Options.** (a) A generic "verification failed, please resubmit." (b) Name the exact item and reason, reassure that everything else is saved, and drop them straight to fixing just that one thing.
 
 **Choice.** Specific, blameless, one tap forward. This is the gap from research, and the screen I'm proudest of. I rejected (a) because "verification failed" reads as an accusation and a dead end. "Your proof of address is a little out of date, everything else is verified" is the same information delivered as a small fixable task instead of a verdict.
+
+---
+
+## Auditing My Own Build
+
+Because the prototype is real working code, I could hold it to the same standard as the narrative. After the first build, I ran a best-practice audit against it. It failed in four places, and the failures are worth showing.
+
+**My consent checkbox was a dark pattern.** V1 shipped with the "I confirm this is accurate" box pre-checked and non-interactive. Legal consent has to be an affirmative act. The fix was a real checkbox, with submit disabled until it's ticked.
+
+**The build contradicted my own Decision 4.** Never hard-block a willing user, yet the "add later" escape hatch only existed on the optional document, where it does nothing. The fix extended it to required documents, which is the entire point.
+
+**"Saved automatically" was a lie.** The label was on screen, but navigating back actually wiped uploads and owners. The fix moved state up, so the promise the UI makes is one the prototype keeps.
+
+**A date that didn't add up.** The rejected address document was named as a June bill while the rejection reason said it was issued in January, older than three months. A compliance reviewer would catch that in seconds; so should I. Fixed, along with accessibility gaps: unlinked labels, a step rail unreachable by keyboard, missing focus states.
+
+None of these were visible in a screenshot. They only surfaced because the artifact is functional. That's the argument for designing in code in the first place: it makes your design claims testable, including against yourself.
 
 ---
 
