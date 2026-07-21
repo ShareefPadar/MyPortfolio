@@ -14,7 +14,11 @@ interface DeviceFrameProps {
 // margins rather than viewport tricks, so it survives transformed ancestors).
 const DeviceFrame = ({ children, url = "prototype", label, caption }: DeviceFrameProps) => {
   return (
-    <figure className="not-prose my-10 md:my-14 lg:-mx-12 xl:-mx-40">
+    <figure
+      className="not-prose my-10 md:my-14"
+      style={{ width: "100vw", maxWidth: "100vw", marginLeft: "calc(50% - 50vw)" }}
+    >
+      <div className="mx-auto w-full max-w-[1160px] px-4 sm:px-6 lg:px-8">
       {label && (
         <div className="mb-3 flex items-center justify-center gap-2">
           <span className="h-2 w-2 animate-pulse rounded-full bg-green-500" />
@@ -55,6 +59,7 @@ const DeviceFrame = ({ children, url = "prototype", label, caption }: DeviceFram
           {caption}
         </figcaption>
       )}
+      </div>
     </figure>
   );
 };

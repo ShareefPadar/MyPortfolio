@@ -50,7 +50,7 @@ export default function WorkItem() {
         <div className="container-wide space-y-20">
 
           {/* 01 OVERVIEW */}
-          <div className="space-y-6">
+          <div className="space-y-6 max-w-3xl mx-auto">
             <SectionLabel number={1} title="OVERVIEW" />
             <div className="space-y-6">
               <RevealText
@@ -118,7 +118,7 @@ export default function WorkItem() {
           {/* MDX CONTENT — full case study */}
           {MDXContent && (
             <ScrollReveal className="pt-4 border-t border-neutral-100">
-              <div className="max-w-3xl">
+              <div className="max-w-3xl mx-auto">
                 <MDXProvider components={MDXComponents}>
                   <MDXContent />
                 </MDXProvider>
