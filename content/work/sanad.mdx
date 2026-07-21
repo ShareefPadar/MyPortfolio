@@ -1,149 +1,92 @@
 import DeviceFrame from "@/components/DeviceFrame";
 import SanadPrototype from "@/components/SanadPrototype";
+import Shot from "@/components/Shot";
 
-## The Tension That Shapes Everything
+New businesses can't move money on a fintech product until they pass KYB (Know Your Business) verification. It's slow, document-heavy, and legally mandatory, so businesses start it, hit friction, and quit. The company loses a customer it already paid to acquire.
 
-New businesses signing up for a fintech product have to prove they're real before they can move money. The process is called KYB, Know Your Business. It's slow, document-heavy, and legally mandatory. So businesses start it, hit friction, and abandon, and the company loses a customer it already paid to acquire at the worst possible moment.
+You can't fix this the usual way. Regulators require every step, so "remove friction" is off the table. The real problem is narrower:
 
-You cannot delete steps. Regulators require this verification, so "reduce friction" in the usual sense is off the table. The real design problem is narrower and harder:
+> How do you make a legally rigid, unavoidable process *feel* fast and trustworthy, without weakening what it's required to do?
 
-> How do you make a legally rigid, unavoidable process feel fast, clear, and trustworthy, without weakening what it's legally required to do?
-
-That reframe is the whole project. It rules out the easy answer (fewer fields) and forces every decision to earn its place against a constraint I couldn't move. I designed the full flow for a fictional business-banking product, Sanad, and built it as a working React prototype. It's below. Click through it.
+I designed the full flow for a fictional business-banking product, Sanad, and built it as a working prototype. Then I audited my own build against best practice and published what it got wrong. Click through it below.
 
 <DeviceFrame
   url="sanad.app/verify"
   label="Live prototype · click through the real flow"
-  caption="The actual working prototype, not a video. Six screens: overview, business details, owners, documents, the wait, and rejection. On the pending screen you can simulate either outcome. This is the post-audit v2 build."
+  caption="The actual working prototype, not a video. Reach the rejection path by simulating that outcome on the pending screen. This is the post-audit v2 build. Prefer to skim? The key screens are captured below."
 >
   <SanadPrototype />
 </DeviceFrame>
 
-**A note on the visual language.** The prototype is deliberately built in a Mercury-inspired visual system: lavender canvas, white cards, indigo accents, a geometric sans. That comes straight from the desk research. Executing inside an established fintech design language, rather than inventing a novel one, mirrors the actual job of joining a fintech design team.
+---
+
+## The Short Version
+
+**Who it's for:** a founder or ops lead, busy, not a compliance expert, often missing a document, and a little guarded about handing over sensitive data. Not someone who reads instructions.
+
+**Scope:** the six-screen verification journey only. Not the banking product, back-office tools, or pricing. Depth on the journey, not breadth.
+
+**Research:** I studied how Stripe, Mercury, and Airwallex handle onboarding. Three things stood out, and each became a design move:
+
+- **Best pattern:** Mercury asks for light info first, heavy KYB later. Commitment builds before documents do.
+- **Worst pattern:** the waiting screen after you submit. All three leave it thin. The moment that most needs reassurance gets the least design.
+- **The gap nobody fills:** the emotional design of *rejection*. Everyone tells you what to fix; nobody makes a rejected document feel non-accusatory.
 
 ---
 
-## Who I Designed For
+## Six Decisions
 
-A founder or ops lead completing verification for their company. Busy. Not a compliance expert. Often missing at least one document. And mildly distrustful, because they're handing sensitive company and personal data to a product they met ten minutes ago.
-
-So I designed for someone impatient, under-informed, and a little guarded, not a patient user who reads instructions.
-
-## Scope
-
-The verification journey only, six screens: onboarding overview, business details, beneficial owners, document upload, verification-pending, and rejection with resubmit. Deliberately out of scope: the banking product itself, back-office review tooling, and pricing. I wanted depth on the journey, not breadth across a product.
-
----
-
-## Research
-
-I ran focused desk research on how three leaders handle business onboarding: **Stripe**, **Mercury**, and **Airwallex**, through their docs, help centers, and an annotated teardown of Mercury's live flow. Three findings shaped the design.
-
-**The best pattern I saw.** Mercury splits onboarding into two phases: create the account with light info first, then do the heavy KYB. It builds commitment before asking for documents, and it means a drop-off isn't a dead loss, since there's enough info to re-engage the user.
-
-**The worst pattern.** Across all three, the waiting state after submission is thin. Users are told review takes days, then handed a vague "we'll be in touch." The moment that most needs reassurance gets the least design.
-
-**The gap nobody fills.** The emotional design of rejection. Every product documents what to resubmit. None make a rejected document feel non-accusatory. That gap became the screen I invested the most in.
-
-Beyond the patterns, I studied screenshots of Mercury's live signup and pulled four interaction signatures into the build: the oversized step numeral ("01 / 04") for instant orientation, field labels that take on the brand colour on focus, inline green validation checks as each field completes, and helper hints at the point of typing ("Numbers, letters, and dashes only please"). Small details, but they're a large part of why that flow feels calm. Adapting them was cheaper than reinventing them.
-
----
-
-## The Design Decisions
-
-I documented each key decision the same way: problem, constraint, the options I weighed, and what I chose. The rejected option stays visible, because what you decide not to do says as much as what you ship.
+Each one is the same shape: the problem, what I chose, and the option I rejected. What you decide *not* to do says as much as what you ship.
 
 ### 1. Show the whole path up front
+A busy, anxious user needs to know what they're in for before they commit. The process really is long, so I show the entire map (every step, with time estimates) instead of revealing it one screen at a time. Hidden scope doesn't reduce drop-off; it just delays it to the moment the user feels misled.
 
-**Problem.** An anxious, busy user needs to know what they're in for before they'll commit.
+<Shot src="/assets/work/sanad-overview.png" alt="Sanad overview screen showing the full four-step map with time estimates" caption="Decision 1 — the whole path, with per-step time estimates and the 1–2 day wait, set before the user starts." />
 
-**Constraint.** The process genuinely is long. I can't pretend it's two fields.
+### 2. Explain *why* at every sensitive request
+Non-experts abandon when asked for something invasive with no reason. Some requests genuinely are invasive and can't be removed, so I put a one-line "why we ask" *next to* each sensitive field rather than a generic privacy blurb up top. Blanket reassurance is wallpaper; a specific reason lands where the anxiety actually is.
 
-**Options.** (a) Reveal steps one at a time to make it feel shorter. (b) Show the entire map, every step with time estimates, before they start.
-
-**Choice.** The full map. I rejected (a) because hidden scope doesn't reduce drop-off, it delays it to the moment the user feels misled. Honesty about length ("four steps, about 10 minutes, then 1 to 2 days to verify") is what earns the first click.
-
-### 2. Explain why at every sensitive request
-
-**Problem.** Non-experts abandon when asked for something invasive with no reason given.
-
-**Constraint.** Some requests genuinely are invasive (registration numbers, owner IDs) and can't be removed.
-
-**Options.** (a) A generic "we take privacy seriously" reassurance up top. (b) An inline, per-field "why we ask" tied to the specific request.
-
-**Choice.** Inline and specific. I rejected (a) because blanket reassurance is wallpaper; users don't read it. A one-line reason next to the scary field ("this confirms your company legally exists") converts anxiety into trust exactly where the anxiety occurs.
+<Shot src="/assets/work/sanad-why.png" alt="Business details screen with the 'why we ask' reason shown beneath the registration number field" caption="Decision 2 — the reason sits inline, next to the field that triggers the worry." />
 
 ### 3. Build momentum before the heavy lifting
+Early confidence carries people into the hard parts. I sequence easy-to-hard and pre-fill what's already known so the user just confirms it, instead of one long form up front. Front-loading effort before any sense of progress is the fastest way to lose someone at step one.
 
-**Problem.** Confidence early keeps people moving into the hard parts.
-
-**Constraint.** The hard parts, documents and multiple owners, are unavoidable.
-
-**Options.** (a) Ask for everything in one long, honest form. (b) Sequence easy-to-hard, pre-filling and confirming what's already known.
-
-**Choice.** Sequenced, with pre-filled fields the user just confirms, borrowed from Mercury. I rejected (a) because front-loading effort before any sense of progress is the fastest way to lose someone at step one.
+<Shot src="/assets/work/sanad-owners.png" alt="Owners screen with the applicant pre-added as primary owner" caption="Decision 3 — the applicant is pre-added; the user confirms rather than starts from blank." />
 
 ### 4. Never hard-block a willing user
+The most common real-world drop-off is "I don't have that document right now." The document is still required, but I let the user mark it "add later," keep moving, and save automatically. A hard block turns a temporary problem into a permanent one. Required doesn't mean required *this second*.
 
-**Problem.** The most common real-world drop-off cause is "I don't have that document right now."
-
-**Constraint.** The document is still required. I can't waive it.
-
-**Options.** (a) Block progress until every required file is uploaded. (b) Let the user mark a document "add later," keep moving, and save automatically.
-
-**Choice.** The escape hatch. I rejected (a) because a hard block turns a temporary problem (missing a file today) into a permanent one (never comes back). Required doesn't mean required this second. Save-and-resume keeps a willing user from becoming a lost one.
+<Shot src="/assets/work/sanad-documents.png" alt="Documents screen with a required document marked 'add later'" caption="Decision 4 — the escape hatch works on required documents too, which is the whole point." />
 
 ### 5. Make the wait honest instead of empty
+Review takes days on the backend, and a silent "pending" screen erodes the trust the flow just built. I can't make the review faster, so I made the wait honest: a real timeline, plain-language status, what to do meanwhile, and how they'll be told. A cheerful "almost done!" breaks trust the moment it turns out to be untrue.
 
-**Problem.** Verification takes days on the backend, and a silent "pending" screen erodes the trust the flow just built.
-
-**Constraint.** I can't make the review faster. That's a compliance-team reality.
-
-**Options.** (a) A spinner and "we'll be in touch." (b) An honest status: a real timeline, plain-language "what's happening," what they can do meanwhile, and how they'll be told.
-
-**Choice.** The honest status. This is the worst pattern from research turned into an opportunity. I rejected (a) because false brevity ("almost done!") breaks trust the moment it turns out to be untrue. Transparency about a slow step beats a cheerful lie about a fast one.
+<Shot src="/assets/work/sanad-pending.png" alt="Pending screen with a real timeline and plain-language status" caption="Decision 5 — the research's worst pattern, turned into the screen that reassures." />
 
 ### 6. Handle rejection with dignity
+A document gets rejected. Told badly, the user feels accused and quits at the finish line. I name the exact item and reason, reassure that everything else is saved, and drop them straight to fixing that one thing. "Verification failed" reads as an accusation and a dead end. "Your proof of address is a little out of date, everything else is verified" is the same fact delivered as a small, fixable task.
 
-**Problem.** A document gets rejected. Told badly, the user feels accused and quits at the finish line.
-
-**Constraint.** I have to be specific about the failure. Vagueness helps no one fix it.
-
-**Options.** (a) A generic "verification failed, please resubmit." (b) Name the exact item and reason, reassure that everything else is saved, and drop them straight to fixing just that one thing.
-
-**Choice.** Specific, blameless, one tap forward. This is the gap from research, and the screen I'm proudest of. I rejected (a) because "verification failed" reads as an accusation and a dead end. "Your proof of address is a little out of date, everything else is verified" is the same information delivered as a small fixable task instead of a verdict.
+<Shot src="/assets/work/sanad-rejection.png" alt="Rejection screen naming the exact document and reason, with everything else marked saved" caption="Decision 6 — the screen I invested the most in: specific, blameless, one tap forward." />
 
 ---
 
 ## Auditing My Own Build
 
-Because the prototype is real working code, I could hold it to the same standard as the narrative. After the first build, I ran a best-practice audit against it. It failed in four places, and the failures are worth showing.
+Because the prototype is real code, I could hold it to the same standard as the writing. After the first build, I audited it against best practice. It failed in four places, and the failures are worth showing.
 
-**My consent checkbox was a dark pattern.** V1 shipped with the "I confirm this is accurate" box pre-checked and non-interactive. Legal consent has to be an affirmative act. The fix was a real checkbox, with submit disabled until it's ticked.
+- **The consent checkbox was a dark pattern.** V1 shipped it pre-checked. Legal consent has to be an affirmative act, so now it starts empty and Submit stays disabled until it's ticked.
+- **The build contradicted my own Decision 4.** "Never hard-block" — yet "add later" only existed on the *optional* document, where it does nothing. I extended it to required documents.
+- **"Saved automatically" was a lie.** The label was there, but going back wiped uploads and owners. I moved state up so the promise the UI makes is one the prototype keeps.
+- **A date that didn't add up.** The rejected document was named as a June bill while the reason said January. A compliance reviewer would catch that in seconds; so should I. Fixed, along with accessibility gaps: unlinked labels, a keyboard-unreachable step rail, missing focus states.
 
-**The build contradicted my own Decision 4.** Never hard-block a willing user, yet the "add later" escape hatch only existed on the optional document, where it does nothing. The fix extended it to required documents, which is the entire point.
-
-**"Saved automatically" was a lie.** The label was on screen, but navigating back actually wiped uploads and owners. The fix moved state up, so the promise the UI makes is one the prototype keeps.
-
-**A date that didn't add up.** The rejected address document was named as a June bill while the rejection reason said it was issued in January, older than three months. A compliance reviewer would catch that in seconds; so should I. Fixed, along with accessibility gaps: unlinked labels, a step rail unreachable by keyboard, missing focus states.
-
-None of these were visible in a screenshot. They only surfaced because the artifact is functional. That's the argument for designing in code in the first place: it makes your design claims testable, including against yourself.
+None of these showed up in a screenshot. They only surfaced because the artifact runs, which is the argument for designing in code: it makes your claims testable, including against yourself.
 
 ---
 
-## Two Threads That Tie It Together
+## Two Threads, and What's Next
 
-Every screen is really an expression of two principles:
+Every screen comes back to two ideas: **explain *why* at every sensitive moment**, and **never hard-block a willing user.** Trust is built request by request, and momentum is the scarcest resource in onboarding.
 
-1. **Explain why at every sensitive moment.** Trust is built request by request, not with a policy page.
-2. **Never hard-block a willing user.** Momentum is the scarcest resource in onboarding. Protect it everywhere.
-
----
-
-## What I'd Test Next
-
-Because this is a concept, I have design intent, not proof, and I'd rather be honest about that than invent a "40% lift." If I took this further I'd test three things: whether the "add later" escape hatch actually recovers droppers or just defers them, whether the per-field "why we ask" reduces abandonment on the owners step specifically, and whether the honest waiting screen lowers support tickets during the review window.
-
-Those are the hypotheses the design is built to test.
+Because this is a concept, I have design intent, not proof. Rather than invent a "40% lift," here's what I'd test: whether "add later" actually recovers droppers, whether the per-field reasons cut abandonment on the owners step, and whether the honest wait lowers support tickets during review.
 
 > Regulators decide what the steps are. Design decides how they feel. That gap is the whole job.
