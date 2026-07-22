@@ -17,7 +17,7 @@ const MDXComponents = {
     <ol className="space-y-3 mb-8 pl-0 list-none counter-reset-item" {...props} />
   ),
   li: (props: React.HTMLAttributes<HTMLLIElement>) => (
-    <li className="flex gap-3 text-base md:text-lg text-neutral-600 leading-relaxed font-sans before:content-['—'] before:text-accent before:font-bold before:shrink-0" {...props} />
+    <li className="relative pl-6 text-base md:text-lg text-neutral-600 leading-relaxed font-sans before:content-['—'] before:absolute before:left-0 before:text-accent before:font-bold" {...props} />
   ),
   strong: (props: React.HTMLAttributes<HTMLElement>) => (
     <strong className="font-bold text-neutral-900" {...props} />
