@@ -4,6 +4,9 @@
 
 export interface WorkEntry {
   slug: string;
+  // Outcome-led hook — the card's headline. Leads with what the work achieved,
+  // not the product name. The product name lives in `title` as a subtitle.
+  headline: string;
   title: string;
   category: string;
   badge: "Self-initiated" | "Concept" | "Live";
@@ -15,68 +18,75 @@ export interface WorkEntry {
 
 export const workEntries: WorkEntry[] = [
   {
-    slug: "almosafer-audit",
-    title: "Almosafer UX Audit",
-    category: "UX Audit",
-    badge: "Self-initiated",
-    description:
-      "Applied Hick's Law and visual hierarchy to simplify the Middle East's leading travel platform.",
-    thumbnail: "/assets/almosafer-preview.png",
-    bgColor: "#FEFCE8",
-  },
-  {
-    slug: "omni-cast-ai",
-    title: "OmniCast AI",
-    category: "Product Design",
-    badge: "Concept",
-    description:
-      "AI publishing assistant that predicts performance and optimises campaigns across channels.",
-    thumbnail: "/assets/omnicast-preview.png",
-    bgColor: "#F5F3FF",
-  },
-  {
-    slug: "google-maps-route-pass",
-    title: "Google Maps Route Pass",
-    category: "Product Design",
-    badge: "Concept",
-    description:
-      "An encrypted QR handshake that passes a full multi-stop route from a passenger's phone to their driver's.",
-    thumbnail: "/assets/google-maps-preview.png",
-    bgColor: "#E1F2ED",
-  },
-  {
     slug: "sanad",
-    title: "Sanad: KYB Onboarding",
+    headline: "Onboarding that feels fast without cutting corners",
+    title: "Sanad · KYB verification",
     category: "B2B Fintech",
     badge: "Concept",
     description:
-      "Business verification that feels fast without being less rigorous. A working KYB flow, designed and built.",
+      "A full six-screen KYB flow for a fictional business bank, designed and built as a working prototype.",
     thumbnail: "/assets/work/sanad-thumb.png",
     bgColor: "#EEF0FD",
   },
   {
-    slug: "instagram-local",
-    title: "Instagram Local Feed",
+    slug: "almosafer-audit",
+    headline: "Cutting decision fatigue on a top travel platform",
+    title: "Almosafer · UX audit",
+    category: "UX Audit",
+    badge: "Self-initiated",
+    description:
+      "Hick's Law and visual hierarchy applied to two high-stakes screens in the booking funnel.",
+    thumbnail: "/assets/almosafer-preview.png",
+    bgColor: "#FEFCE8",
+  },
+  {
+    slug: "google-maps-route-pass",
+    headline: "Handing off a full route between phones in one scan",
+    title: "Google Maps · Route Pass",
     category: "Product Design",
     badge: "Concept",
     description:
-      "Local discovery built into Instagram: events and businesses happening near you.",
+      "An encrypted QR handshake for multi-stop navigation, with destination privacy built in.",
+    thumbnail: "/assets/google-maps-preview.png",
+    bgColor: "#E1F2ED",
+  },
+  {
+    slug: "omni-cast-ai",
+    headline: "AI publishing that shows its work, not a black box",
+    title: "OmniCast AI",
+    category: "Product Design",
+    badge: "Concept",
+    description:
+      "Predictive scheduling and inline performance insights, shaped by 8 interviews and 4 competitor audits.",
+    thumbnail: "/assets/omnicast-preview.png",
+    bgColor: "#F5F3FF",
+  },
+  {
+    slug: "instagram-local",
+    headline: "Finding what's happening two streets away",
+    title: "Instagram · Local Feed",
+    category: "Product Design",
+    badge: "Concept",
+    description:
+      "A local discovery layer for Instagram: nearby events and businesses, without fighting the algorithm.",
     thumbnail: null,
     bgColor: "#EDF9FF",
   },
   {
     slug: "roomy",
-    title: "Roomy",
+    headline: "Running rent and chores for a 21-person flat",
+    title: "Roomy · Bedspace OS",
     category: "Side Project",
     badge: "Live",
-    description: "A bedspace management app I designed and built end to end.",
+    description: "A bedspace management app I designed and built end to end. In daily production use.",
     thumbnail: "/assets/roomy-preview.png",
     bgColor: "#F5F3FF",
     liveUrl: "https://roomy-delta.vercel.app/",
   },
   {
     slug: "form",
-    title: "Form",
+    headline: "Health tracking with zero sign-up friction",
+    title: "Form · Privacy-first health",
     category: "Side Project",
     badge: "Live",
     description: "A privacy-first, offline-first health tracker I designed and built end to end.",

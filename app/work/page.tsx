@@ -36,6 +36,7 @@ export default function WorkIndex() {
         {workEntries.map((project) => (
           <WorkCard
             key={project.slug}
+            headline={project.headline}
             title={project.title}
             category={project.category}
             badge={project.badge}

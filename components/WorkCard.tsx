@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 export interface WorkCardProps {
+  headline?: string;
   title: string;
   category: string;
   description: string;
@@ -14,7 +15,8 @@ export interface WorkCardProps {
   featured?: boolean;
 }
 
-const WorkCard = ({ title, category, description, href, thumbnail, bgColor = "#F5F5F7", badge, featured = false }: WorkCardProps) => {
+const WorkCard = ({ headline, title, category, description, href, thumbnail, bgColor = "#F5F5F7", badge, featured = false }: WorkCardProps) => {
+  const heading = headline ?? title;
   return (
     <Link
       href={href}
@@ -55,9 +57,14 @@ const WorkCard = ({ title, category, description, href, thumbnail, bgColor = "#F
             </span>
           )}
         </div>
-        <h3 className={`mb-2 font-serif font-bold leading-tight tracking-tight text-neutral-950 ${featured ? "text-2xl md:text-3xl" : "text-2xl"}`}>
-          {title}
+        <h3 className={`mb-1 font-serif font-bold leading-tight tracking-tight text-neutral-950 ${featured ? "text-2xl md:text-3xl" : "text-2xl"}`}>
+          {heading}
         </h3>
+        {headline && (
+          <p className="mb-3 font-sans text-sm font-medium text-neutral-400">
+            {title}
+          </p>
+        )}
         <p className="mb-6 font-sans text-sm leading-relaxed text-neutral-600 md:text-base">
           {description}
         </p>

@@ -44,6 +44,7 @@ export default function Home() {
           {featured.map((project, index) => (
             <ParallaxSection key={project.slug} delay={index * 0.1} className="h-full">
               <WorkCard
+                headline={project.headline}
                 title={project.title}
                 category={project.category}
                 badge={project.badge}
@@ -76,9 +77,12 @@ export default function Home() {
                     Live · Side project
                   </span>
                 </div>
-                <h3 className="mb-2 font-serif text-2xl font-bold leading-tight tracking-tight text-neutral-950">
-                  {project.title}
+                <h3 className="mb-1 font-serif text-2xl font-bold leading-tight tracking-tight text-neutral-950">
+                  {project.headline}
                 </h3>
+                <p className="mb-3 font-sans text-sm font-medium text-neutral-400">
+                  {project.title}
+                </p>
                 <p className="mb-6 font-sans text-sm leading-relaxed text-neutral-600 md:text-base">
                   {project.description}
                 </p>
