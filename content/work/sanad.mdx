@@ -8,15 +8,7 @@ You can't fix this the usual way. Regulators require every step, so "remove fric
 
 > How do you make a legally rigid, unavoidable process *feel* fast and trustworthy, without weakening what it's required to do?
 
-I designed the full flow for a fictional business-banking product, Sanad, and built it as a working prototype. Then I audited my own build against best practice and published what it got wrong. Click through it below.
-
-<DeviceFrame
-  url="sanad.app/verify"
-  label="Live prototype · click through the real flow"
-  caption="The actual working prototype, not a video. Reach the rejection path by simulating that outcome on the pending screen. This is the post-audit v2 build. Prefer to skim? The key screens are captured below."
->
-  <SanadPrototype />
-</DeviceFrame>
+I designed the full flow for a fictional business-banking product, Sanad, and built it as a working prototype. Then I audited my own build against best practice and published what it got wrong. Six decisions shaped it, each below with the actual screen. The full clickable build is at the end if you want to try it yourself.
 
 ---
 
@@ -88,5 +80,17 @@ None of these showed up in a screenshot. They only surfaced because the artifact
 Every screen comes back to two ideas: **explain *why* at every sensitive moment**, and **never hard-block a willing user.** Trust is built request by request, and momentum is the scarcest resource in onboarding.
 
 Because this is a concept, I have design intent, not proof. Rather than invent a "40% lift," here's what I'd test: whether "add later" actually recovers droppers, whether the per-field reasons cut abandonment on the owners step, and whether the honest wait lowers support tickets during review.
+
+---
+
+## Try the Whole Flow Yourself
+
+<DeviceFrame
+  url="sanad.app/verify"
+  label="Live prototype · click through the real flow"
+  caption="The actual working prototype, not a video. Reach the rejection path by simulating that outcome on the pending screen. This is the post-audit v2 build."
+>
+  <SanadPrototype />
+</DeviceFrame>
 
 > Regulators decide what the steps are. Design decides how they feel. That gap is the whole job.
