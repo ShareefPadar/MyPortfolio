@@ -10,15 +10,16 @@ interface DeviceFrameProps {
 }
 
 // A framed "browser" shell for live, clickable prototypes embedded in case
-// studies. Breaks out wider than the text column on large screens (negative
-// margins rather than viewport tricks, so it survives transformed ancestors).
+// studies. Full-bleed to the viewport, then re-centered on a capped inner
+// width (max-w-860) so the frame hugs the prototype's own content instead of
+// leaving wide empty canvas gutters on either side.
 const DeviceFrame = ({ children, url = "prototype", label, caption }: DeviceFrameProps) => {
   return (
     <figure
       className="not-prose my-10 md:my-14"
       style={{ width: "100vw", maxWidth: "100vw", marginLeft: "calc(50% - 50vw)" }}
     >
-      <div className="mx-auto w-full max-w-[1160px] px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto w-full max-w-[860px] px-4 sm:px-6 lg:px-8">
       {label && (
         <div className="mb-3 flex items-center justify-center gap-2">
           <span className="h-2 w-2 animate-pulse rounded-full bg-green-500" />
