@@ -116,6 +116,29 @@ export const projects = {
     quote: "A real problem, a concept product. The frustration, the research, and the working prototype are all real. Sanad, the business-banking brand they're wrapped in, is the part I invented so I could solve the problem end to end."
   },
 
+  "mizan": {
+    title: "When the Bank Knows and the Customer Doesn't",
+    description: "A business account was frozen for an ownership change. Every document went in that day. A month later the account was still frozen, the POS couldn't settle, and support said \"please wait another 24 hours\" on every call for four weeks. The bank knew exactly what stage the review was at. The customer never did. I designed the communication layer that gap leaves missing.",
+    role: "Design & front-end",
+    type: "Product concept",
+    duration: "2026",
+    outcome: "A working prototype for the wait itself, not the decision. Built against dated public complaints rather than an invented brief, and constrained by what compliance genuinely cannot disclose.",
+    imageUrl: "/assets/work/mizan-thumb.png",
+    bgColor: "#F7F7F5",
+    tags: ["B2B Fintech", "Service Design", "UX + Front-end"],
+    externalUrl: "",
+    externalLabel: "",
+    stack: "React · Custom CSS · AI-assisted build",
+    secondaryUrl: "",
+    secondaryLabel: "",
+    problem: "Business accounts get frozen for compliance reviews that are often mandatory and sometimes cannot be explained. Customers are left with no stage, no clock, and a rolling \"wait another 24 hours\" while their POS stops settling.",
+    solution: "Six screens that design the wait instead of the decision: a stage tracker that works without disclosing the reason, a running clock against the stated maximum, a proactive admission when the estimate slips, an honest paused state when the customer is the blocker, a dated activity log, and a scoped restriction that keeps the business trading.",
+    growth: "Because this is a concept, the outcome is a set of testable hypotheses rather than invented metrics: whether the activity log reduces inbound support calls, whether the paused state reduces perceived unfairness, and whether publishing the access scope reduces account closures during long reviews.",
+    metric: "6",
+    metricLabel: "Screens for the wait",
+    quote: "Several of the causes here cannot be designed away: mandatory holds, external registry timelines, reasons the bank is not allowed to give. What can be designed is what the customer is told while they wait."
+  },
+
   "form": {
     title: "Form: Privacy-First Health",
     description: "A health tracker built on one insight: removing sign-up friction beats adding features. It works fully offline with no account. Your weight, BMI, and body composition stay on your device and sync only when you choose.",

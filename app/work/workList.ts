@@ -29,6 +29,17 @@ export const workEntries: WorkEntry[] = [
     bgColor: "#EEF0FD",
   },
   {
+    slug: "mizan",
+    headline: "Designing the wait, when you can't remove it",
+    title: "Mizan · account-hold communication",
+    category: "B2B Fintech",
+    badge: "Concept",
+    description:
+      "Business accounts frozen for weeks with no stage and no clock. A communication layer built against dated public complaints.",
+    thumbnail: "/assets/work/mizan-thumb.png",
+    bgColor: "#F7F7F5",
+  },
+  {
     slug: "almosafer-audit",
     headline: "Cutting decision fatigue on a top travel platform",
     title: "Almosafer · UX audit",

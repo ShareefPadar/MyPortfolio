@@ -18,6 +18,7 @@ const mdxMap: Record<string, React.ComponentType> = {
   "omni-cast-ai":           dynamic(() => import("@/content/work/omni-cast-ai.mdx")),
   "almosafer-audit":        dynamic(() => import("@/content/work/almosafer-audit.mdx")),
   "sanad":                  dynamic(() => import("@/content/work/sanad.mdx")),
+  "mizan":                  dynamic(() => import("@/content/work/mizan.mdx")),
   "instagram-local":        dynamic(() => import("@/content/work/instagram-local.mdx")),
   "roomy":                  dynamic(() => import("@/content/work/roomy.mdx")),
   "form":                   dynamic(() => import("@/content/work/form.mdx")),

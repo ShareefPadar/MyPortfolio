@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/work/omni-cast-ai',
     '/work/google-maps-route-pass',
     '/work/sanad',
+    '/work/mizan',
     '/work/instagram-local',
     '/work/roomy',
     '/work/form',
