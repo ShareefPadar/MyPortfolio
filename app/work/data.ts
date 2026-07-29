@@ -95,7 +95,7 @@ export const projects = {
 
   "sanad": {
     title: "Sanad: KYB Onboarding",
-    description: "New businesses have to prove they're legitimate before they can move money. I designed the full KYB onboarding flow for Sanad, a fictional business-banking product, and built it as a working React prototype. One rule shaped everything: you can't make the process easier by making it less rigorous.",
+    description: "New businesses have to prove they're legitimate before they can move money. I hit this wall myself going through Companies House verification, so I designed the full KYB onboarding flow for Sanad, a concept business-banking brand, and built it as a working React prototype. One rule shaped everything: you can't make the process easier by making it less rigorous.",
     role: "Product Designer & Builder",
     type: "Product concept",
     duration: "2026",
@@ -113,7 +113,7 @@ export const projects = {
     growth: "Because this is a concept, the outcome is a set of testable hypotheses rather than invented metrics: does the escape hatch recover droppers, does per-field reasoning reduce abandonment, does the honest wait lower support load.",
     metric: "6",
     metricLabel: "Screens, one constraint",
-    quote: "The interesting part isn't the screens. It's the constraint: make a legally rigid process feel fast, clear, and trustworthy without weakening what it's required to do."
+    quote: "A real problem, a concept product. The frustration, the research, and the working prototype are all real. Sanad, the business-banking brand they're wrapped in, is the part I invented so I could solve the problem end to end."
   },
 
   "form": {

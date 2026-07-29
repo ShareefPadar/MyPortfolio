@@ -2,88 +2,127 @@ import DeviceFrame from "@/components/DeviceFrame";
 import SanadPrototype from "@/components/SanadPrototype";
 import Shot from "@/components/Shot";
 
-New businesses can't move money on a fintech product until they pass KYB (Know Your Business) verification. It's slow, document-heavy, and legally mandatory, so businesses start it, hit friction, and quit. The company loses a customer it already paid to acquire.
+New businesses signing up for a fintech product have to prove they're real and legitimate before they can move money. The process is called KYB, Know Your Business. It's slow, document-heavy, and legally mandatory. So businesses start it, hit friction, and give up. The company loses a customer it already paid to acquire, at the worst possible moment.
 
-You can't fix this the usual way. Regulators require every step, so "remove friction" is off the table. The real problem is narrower:
+I know this one firsthand, because it happened to me. Going through Companies House verification in the UK, I didn't know how many steps were coming. I was missing one document. There was no way to save and come back, so stopping halfway meant starting over. And when a document got rejected, I was back at the beginning again, with no way to set aside the one thing I still needed time to track down. The verification itself couldn't change. The experience of it clearly could. That gap is what Sanad exists to close.
 
-> How do you make a legally rigid, unavoidable process *feel* fast and trustworthy, without weakening what it's required to do?
-
-I designed the full flow for a fictional business-banking product, Sanad, and built it as a working prototype. Then I audited my own build against best practice and published what it got wrong. Six decisions shaped it, each below with the actual screen. The full clickable build is at the end if you want to try it yourself.
+So the problem is real. The only invented part is the product wrapper. I designed the full KYB onboarding flow for Sanad, a concept business-banking brand, and built it as a working React prototype. The interesting part isn't the screens. It's the constraint: you're not allowed to make the process easier by making it less rigorous. Every decision lives inside that.
 
 ---
 
-## The Short Version
+## The tension that shapes everything
 
-**Who it's for:** a founder or ops lead, busy, not a compliance expert, often missing a document, and a little guarded about handing over sensitive data. Not someone who reads instructions.
+You cannot delete steps. Regulators require this verification, so "reduce friction" in the usual sense is off the table. The real problem is narrower and harder than that:
 
-**Scope:** the six-screen verification journey only. Not the banking product, back-office tools, or pricing. Depth on the journey, not breadth.
+> How do you make a legally rigid, unavoidable process feel fast, clear, and trustworthy, without weakening what it's legally required to do?
 
-**Research:** I studied how Stripe, Mercury, and Airwallex handle onboarding. Three things stood out, and each became a design move:
+That reframe is the whole project. It rules out the easy answer, fewer fields, and forces every decision to earn its place against a constraint I couldn't move.
 
-- **Best pattern:** Mercury asks for light info first, heavy KYB later. Commitment builds before documents do.
-- **Worst pattern:** the waiting screen after you submit. All three leave it thin. The moment that most needs reassurance gets the least design.
-- **The gap nobody fills:** the emotional design of *rejection*. Everyone tells you what to fix; nobody makes a rejected document feel non-accusatory.
+**Who I designed for:** a founder or ops lead completing verification for their company. Busy. Not a compliance expert. Often doesn't have every document on hand. And a little distrustful, because they're handing sensitive company and personal data to a product they met ten minutes ago. So I designed for someone impatient, under-informed, and slightly guarded, not a patient user who reads instructions.
+
+**Scope:** the verification journey only. Six screens: onboarding overview, business details, beneficial owners, document upload, verification-pending, and rejection/resubmit. Out of scope, deliberately: the banking product itself, back-office review tooling, and pricing. I wanted depth on the journey, not breadth across a product.
 
 ---
 
-## Six Decisions, and What I Rejected
+## Research: the waiting screen and the rejection screen are where everyone gives up
 
-Each one is the same shape: the problem, what I chose, and the option I rejected. What you decide *not* to do says as much as what you ship.
+I ran focused desk research on how three leaders handle business onboarding, Stripe, Mercury, and Airwallex, through their docs, help centers, and an annotated teardown of Mercury's live flow. Three findings shaped the design.
+
+**The best pattern** I saw was Mercury's. It splits onboarding into two phases: create the account with light info first, then do the heavy KYB. Commitment builds before documents get asked for, and a drop-off isn't a dead loss, because there's enough info left behind to re-engage the user.
+
+**The worst pattern** showed up in all three. The waiting state after submission is thin. Users get told review takes days, then handed a vague "we'll be in touch." The moment that most needs reassurance gets the least design.
+
+**The gap nobody fills** is the emotional design of rejection. Every product documents what to resubmit. None of them make a rejected document feel non-accusatory. That gap became the screen I put the most into.
+
+Beyond the patterns, I studied screenshots of Mercury's live signup and pulled four interaction signatures into the build. The oversized step numeral ("01 / 04") for instant orientation. Field labels that take on the brand color on focus. Inline green validation checks as each field completes. Helper hints right at the point of typing ("Numbers, letters, and dashes only please"). Small things, but they're a big part of why that flow feels calm, and adapting them was cheaper than reinventing them.
+
+---
+
+## The design decisions
+
+I worked through each key decision the same way: the problem, the options I weighed, and what I chose. Where it matters I've kept the option I rejected visible, because what you decide not to do says as much as what you ship.
 
 ### 1. Show the whole path up front
-A busy, anxious user needs to know what they're in for before they commit. The process really is long, so I show the entire map (every step, with time estimates) instead of revealing it one screen at a time. Hidden scope doesn't reduce drop-off; it just delays it to the moment the user feels misled.
 
-<Shot src="/assets/work/sanad-overview.png" alt="Sanad overview screen showing the full four-step map with time estimates" caption="Decision 1 — the whole path, with per-step time estimates and the 1–2 day wait, set before the user starts." />
+An anxious, busy user needs to know what they're in for before they'll commit. The process genuinely is long, and I can't pretend it's two fields. So the choice was between revealing steps one at a time to make it feel shorter, or showing the entire map, every step with time estimates, before they start.
 
-### 2. Explain *why* at every sensitive request
-Non-experts abandon when asked for something invasive with no reason. Some requests genuinely are invasive and can't be removed, so I put a one-line "why we ask" *next to* each sensitive field rather than a generic privacy blurb up top. Blanket reassurance is wallpaper; a specific reason lands where the anxiety actually is.
+I showed the full map. Revealing it piece by piece doesn't reduce drop-off, it just delays it to the moment the user feels misled. Being honest about the length up front ("four steps, about 10 minutes, then 1 to 2 days to verify") is what earns the first click.
 
-<Shot src="/assets/work/sanad-why.png" alt="Business details screen with the 'why we ask' reason shown beneath the registration number field" caption="Decision 2 — the reason sits inline, next to the field that triggers the worry." />
+<Shot src="/assets/work/sanad-overview.png" alt="Sanad overview screen showing the full four-step map with per-step time estimates" caption="The full step map with per-step time estimates and the 1 to 2 day expectation, set before the user starts." />
+
+### 2. Explain why at every sensitive request
+
+Non-experts abandon when they're asked for something invasive with no reason given. Some of these requests really are invasive, registration numbers, owner IDs, and they can't be removed. The options were a generic "we take privacy seriously" line up top, or an inline "why we ask" tied to each specific request.
+
+I went inline and specific. Blanket reassurance is wallpaper, nobody reads it. A one-line reason sitting next to the scary field ("this confirms your company legally exists") turns anxiety into trust exactly where the anxiety is.
+
+<Shot src="/assets/work/sanad-why.png" alt="Business details screen with the 'why we ask' reason shown beside the registration number field" caption="The reason sits inline, next to the field that triggers the worry, not in a privacy blurb up top." />
 
 ### 3. Build momentum before the heavy lifting
-Early confidence carries people into the hard parts. I sequence easy-to-hard and pre-fill what's already known so the user just confirms it, instead of one long form up front. Front-loading effort before any sense of progress is the fastest way to lose someone at step one.
 
-<Shot src="/assets/work/sanad-owners.png" alt="Owners screen with the applicant pre-added as primary owner" caption="Decision 3 — the applicant is pre-added; the user confirms rather than starts from blank." />
+Confidence early keeps people moving into the hard parts, and the hard parts, documents and multiple owners, are unavoidable. I could ask for everything in one long honest form, or sequence it easy-to-hard and pre-fill what's already known so the user just confirms it.
+
+I sequenced it, with pre-filled fields the user confirms rather than types. That last bit is borrowed straight from Mercury. Front-loading effort before any sense of progress is the fastest way to lose someone at step one.
+
+<Shot src="/assets/work/sanad-owners.png" alt="Owners screen with the applicant already added as primary owner" caption="The applicant is pre-added from sign-up, so the user confirms rather than starting from a blank form." />
 
 ### 4. Never hard-block a willing user
-The most common real-world drop-off is "I don't have that document right now." The document is still required, but I let the user mark it "add later," keep moving, and save automatically. A hard block turns a temporary problem into a permanent one. Required doesn't mean required *this second*.
 
-<Shot src="/assets/work/sanad-documents.png" alt="Documents screen with a required document marked 'add later'" caption="Decision 4 — the escape hatch works on required documents too, which is the whole point." />
+The single most common real-world reason people drop off is "I don't have that document right now." The document is still required, I can't waive it. So the choice was to block progress until every required file is uploaded, or let the user mark a document "add later," keep moving, and save automatically.
+
+I built the escape hatch. A hard block turns a temporary problem, missing a file today, into a permanent one, never coming back. Required doesn't mean required this second. Save-and-resume is what keeps a willing user from turning into a lost one. This is the exact wall I hit at Companies House, so it wasn't a hypothetical to me.
+
+<Shot src="/assets/work/sanad-documents.png" alt="Documents screen with one file uploaded and one required document marked 'add later'" caption="One file uploaded, one marked 'add later' with a reminder, and the path forward still open." />
 
 ### 5. Make the wait honest instead of empty
-Review takes days on the backend, and a silent "pending" screen erodes the trust the flow just built. I can't make the review faster, so I made the wait honest: a real timeline, plain-language status, what to do meanwhile, and how they'll be told. A cheerful "almost done!" breaks trust the moment it turns out to be untrue.
 
-<Shot src="/assets/work/sanad-pending.png" alt="Pending screen with a real timeline and plain-language status" caption="Decision 5 — the research's worst pattern, turned into the screen that reassures." />
+Verification takes days on the backend, and a silent "pending" screen quietly erodes all the trust the flow just built. I can't make the review faster, that's a compliance-team reality. So the choice was a spinner and "we'll be in touch," or an honest status: a real timeline, plain-language "here's what's happening," what to do in the meantime, and how they'll be told.
+
+I built the honest status. This was the worst pattern from my research, turned into an opportunity. A cheerful "almost done!" breaks trust the second it turns out not to be true. Being transparent about a slow step beats lying about a fast one.
+
+<Shot src="/assets/work/sanad-pending.png" alt="Pending screen with a real timeline, plain-language status, and a reference number" caption="Real timeline, plain-language status, what to do while waiting, and a reference number." />
 
 ### 6. Handle rejection with dignity
-A document gets rejected. Told badly, the user feels accused and quits at the finish line. I name the exact item and reason, reassure that everything else is saved, and drop them straight to fixing that one thing. "Verification failed" reads as an accusation and a dead end. "Your proof of address is a little out of date, everything else is verified" is the same fact delivered as a small, fixable task.
 
-<Shot src="/assets/work/sanad-rejection.png" alt="Rejection screen naming the exact document and reason, with everything else marked saved" caption="Decision 6 — the screen I invested the most in: specific, blameless, one tap forward." />
+A document gets rejected. Told badly, the user feels accused and quits right at the finish line. I still have to be specific about what failed, because vagueness helps no one fix it. The options were a generic "verification failed, please resubmit," or naming the exact item and reason, reassuring that everything else is saved, and dropping them straight to fixing that one thing.
 
----
+I went specific, blameless, one tap forward. This is the gap from my research, and it's the screen I'm proudest of. "Verification failed" reads as an accusation and a dead end. "Your proof of address is a little out of date, everything else is verified" is the same fact delivered as a small fixable task instead of a verdict. It's also, again, the exact thing that sent me back to square one in real life.
 
-## Auditing My Own Build
-
-Because the prototype is real code, I could hold it to the same standard as the writing. After the first build, I audited it against best practice. It failed in four places, and the failures are worth showing.
-
-- **The consent checkbox was a dark pattern.** V1 shipped it pre-checked. Legal consent has to be an affirmative act, so now it starts empty and Submit stays disabled until it's ticked.
-- **The build contradicted my own Decision 4.** "Never hard-block" — yet "add later" only existed on the *optional* document, where it does nothing. I extended it to required documents.
-- **"Saved automatically" was a lie.** The label was there, but going back wiped uploads and owners. I moved state up so the promise the UI makes is one the prototype keeps.
-- **A date that didn't add up.** The rejected document was named as a June bill while the reason said January. A compliance reviewer would catch that in seconds; so should I. Fixed, along with accessibility gaps: unlinked labels, a keyboard-unreachable step rail, missing focus states.
-
-None of these showed up in a screenshot. They only surfaced because the artifact runs, which is the argument for designing in code: it makes your claims testable, including against yourself.
+<Shot src="/assets/work/sanad-rejection.png" alt="Rejection screen naming the exact document and reason, with everything else marked verified and saved" caption="Names the exact document and reason, reassures that everything else is saved, and offers one clear action that lands on the flagged item rather than a restart." />
 
 ---
 
-## Two Threads, and What's Next
+## Auditing my own build: the running code failed in four places a screenshot would have hidden
 
-Every screen comes back to two ideas: **explain *why* at every sensitive moment**, and **never hard-block a willing user.** Trust is built request by request, and momentum is the scarcest resource in onboarding.
+Because the prototype is real working code, I could hold it to the same standard as the writing. So after the first build, I audited it against best practice. It failed in four places, and the failures are worth showing.
 
-Because this is a concept, I have design intent, not proof. Rather than invent a "40% lift," here's what I'd test: whether "add later" actually recovers droppers, whether the per-field reasons cut abandonment on the owners step, and whether the honest wait lowers support tickets during review.
+**The consent checkbox was a dark pattern.** V1 shipped with the "I confirm this is accurate" box pre-checked and non-interactive. Legal consent has to be an affirmative act, so the fix was a real checkbox with Submit disabled until it's ticked.
+
+**The build contradicted my own Decision 4.** "Never hard-block a willing user," and yet the "add later" escape hatch only existed on the optional document, where it does nothing. I extended it to required documents, which was the entire point.
+
+**"Saved automatically" was a lie.** The label was right there on screen, but going back actually wiped uploads and owners. I moved state up so the promise the UI makes is one the prototype actually keeps.
+
+**A date that didn't add up.** The rejected address document was named as a June bill while the rejection reason said "issued in January, older than 3 months." A compliance reviewer would catch that in seconds, so I should too. Fixed, along with a set of accessibility gaps: unlinked labels, a step rail you couldn't reach by keyboard, missing focus states.
+
+None of these showed up in a screenshot. They only surfaced because the thing runs. Which is the whole argument for designing in code: it makes your claims testable, including against yourself.
 
 ---
 
-## Try the Whole Flow Yourself
+## Two threads that tie it together
+
+Every screen comes back to two ideas. **Explain why at every sensitive moment**, because trust gets built request by request, not with a policy page. And **never hard-block a willing user**, because momentum is the scarcest resource in onboarding and it needs protecting everywhere.
+
+---
+
+## What I'd do next
+
+This is a concept, so what I have is design intent, not proof. I'd rather say that plainly than invent a "40% lift." If I took it further, there are three things I'd test. Whether the "add later" hatch actually recovers droppers or just defers them. Whether the per-field "why we ask" cuts abandonment on the owners step specifically. And whether the honest waiting screen lowers support tickets during the review window. Those are the hypotheses the design is built to test.
+
+---
+
+## Try the whole flow yourself
+
+**A note on the visual language:** the prototype is built in a Mercury-inspired system on purpose. Lavender canvas, white cards, indigo accents, geometric sans, all pulled from my desk research. Working inside an established fintech design language, rather than inventing a novel one, is closer to the actual job of joining a fintech design team.
 
 <DeviceFrame
   url="sanad.app/verify"
