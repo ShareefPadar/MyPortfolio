@@ -108,6 +108,8 @@ export const workEntries: WorkEntry[] = [
 ];
 
 // Homepage curation: the strongest case studies first + the two live products.
-// OmniCast and Instagram live on the full /work index, not the homepage.
-export const featuredSlugs = ["sanad", "almosafer-audit", "google-maps-route-pass"];
+// The two fintech studies lead as a paired specialisation signal, then the
+// real-product audit, then the concept. OmniCast and Instagram live on the
+// full /work index, not the homepage.
+export const featuredSlugs = ["sanad", "mizan", "almosafer-audit", "google-maps-route-pass"];
 export const sideProjectSlugs = ["roomy", "form"];
