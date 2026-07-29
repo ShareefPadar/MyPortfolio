@@ -96,7 +96,7 @@ I went specific, blameless, one tap forward. This is the gap from my research, a
 
 Because the prototype is real working code, I could hold it to the same standard as the writing. So after the first build, I audited it against best practice. It failed in four places, and the failures are worth showing.
 
-**The consent checkbox was a dark pattern.** V1 shipped with the "I confirm this is accurate" box pre-checked and non-interactive. Legal consent has to be an affirmative act, so the fix was a real checkbox with Submit disabled until it's ticked.
+**The consent checkbox was a dark pattern.** V1 had the "I confirm this is accurate" box pre-checked and non-interactive. Legal consent has to be an affirmative act, so the fix was a real checkbox with Submit disabled until it's ticked.
 
 **The build contradicted my own Decision 4.** "Never hard-block a willing user," and yet the "add later" escape hatch only existed on the optional document, where it does nothing. I extended it to required documents, which was the entire point.
 
