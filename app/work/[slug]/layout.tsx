@@ -25,6 +25,14 @@ export async function generateMetadata({ params }: any): Promise<Metadata> {
         },
       ],
     },
+    // Without this the Twitter card falls back to the root layout's homepage
+    // defaults, so every shared case-study link previews as the homepage.
+    twitter: {
+      card: "summary_large_image",
+      title: `${project.title} | Shareef Padar`,
+      description: project.description,
+      images: [project.imageUrl],
+    },
   };
 }
 
