@@ -1,6 +1,7 @@
 export const projects = {
   "google-maps-route-pass": {
     title: "Google Maps Route Pass",
+    headline: "Passing a full multi-stop route between phones in one scan",
     description: "A privacy-first, encrypted handshake for instant multi-stop navigation transfers between passengers and drivers.",
     homeDescription: "Bridging the digital handshake with an encrypted solution for universal multi-stop navigation.",
     homeImageUrl: "/assets/google-maps-preview.png",
@@ -23,6 +24,7 @@ export const projects = {
 
   "omni-cast-ai": {
     title: "OmniCast AI",
+    headline: "AI publishing that shows its reasoning instead of hiding it",
     description: "AI-powered publishing assistant that predicts performance and optimizes multi-channel campaigns in real-time.",
     role: "Senior Product Designer",
     type: "Product concept",
@@ -46,6 +48,7 @@ export const projects = {
 
   "almosafer-audit": {
     title: "Almosafer UX Audit",
+    headline: "Cutting decision fatigue in Almosafer's booking funnel",
     description: "Refining the interface of the Middle East's leading travel platform by applying core UX principles to eliminate decision fatigue.",
     homeDescription: "Applying Hick's Law and Visual Hierarchy to streamline the Middle East's leading travel platform.",
     role: "Product Designer",
@@ -70,6 +73,7 @@ export const projects = {
 
   "instagram-local": {
     title: "Instagram Local Feed",
+    headline: "Giving Instagram a local layer people can actually find",
     description: "Instagram connects you to the whole world but falls short two streets away. This concept adds a local layer for finding nearby events and businesses.",
     homeDescription: "A local layer for Instagram: nearby events and businesses, without fighting the algorithm.",
     role: "Product Designer",
@@ -95,6 +99,7 @@ export const projects = {
 
   "sanad": {
     title: "Sanad: KYB Onboarding",
+    headline: "Making business verification feel fast without making it less rigorous",
     description: "New businesses have to prove they're legitimate before they can move money. I hit this wall myself going through Companies House verification, so I designed the full KYB onboarding flow for Sanad, a concept business-banking brand, and built it as a working React prototype. One rule shaped everything: you can't make the process easier by making it less rigorous.",
     role: "Product Designer & Builder",
     type: "Product concept",
@@ -118,6 +123,7 @@ export const projects = {
 
   "mizan": {
     title: "When the Bank Knows and the Customer Doesn't",
+    headline: "When the bank knows and the customer doesn't",
     description: "A business account was frozen for an ownership change. Every document went in that day. A month later the account was still frozen, the POS couldn't settle, and support said \"please wait another 24 hours\" on every call for four weeks. The bank knew exactly what stage the review was at. The customer never did. I designed the communication layer that gap leaves missing.",
     role: "Design & front-end",
     type: "Product concept",
@@ -141,6 +147,7 @@ export const projects = {
 
   "form": {
     title: "Form: Privacy-First Health",
+    headline: "Health tracking that works offline, with no account",
     description: "A health tracker built on one insight: removing sign-up friction beats adding features. It works fully offline with no account. Your weight, BMI, and body composition stay on your device and sync only when you choose.",
     homeDescription: "A privacy-first, offline-ready health tracker with smart goal forecasting and on-device macro targets.",
     role: "Product Designer & Builder",
@@ -165,6 +172,7 @@ export const projects = {
 
   "roomy": {
     title: "Roomy: The Bedspace OS",
+    headline: "Rent, bills, and laundry for 21 flatmates on one ledger",
     description: "Living with 21 roommates broke every spreadsheet, so I designed and shipped a shared system of record for rent, utilities, and facilities. It's in daily use.",
     role: "Product Designer & Builder",
     type: "Live product",

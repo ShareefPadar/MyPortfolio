@@ -54,8 +54,10 @@ export default function WorkItem() {
           <div className="space-y-6 max-w-3xl mx-auto">
             <SectionLabel number={1} title="OVERVIEW" />
             <div className="space-y-6">
+              {/* The H1 states the problem solved; `title` stays short for the
+                  footer "next story" link and the page/meta title. */}
               <RevealText
-                text={`${project.title}.`}
+                text={`${(project as any).headline ?? project.title}.`}
                 tag="h1"
                 className="text-3xl md:text-5xl font-serif font-bold text-neutral-950 leading-tight tracking-tight"
               />

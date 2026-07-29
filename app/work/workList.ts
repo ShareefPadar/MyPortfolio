@@ -30,7 +30,7 @@ export const workEntries: WorkEntry[] = [
   },
   {
     slug: "mizan",
-    headline: "Designing the wait, when you can't remove it",
+    headline: "Telling a frozen business where it actually stands",
     title: "Mizan · account-hold communication",
     category: "B2B Fintech",
     badge: "Concept",
@@ -74,7 +74,7 @@ export const workEntries: WorkEntry[] = [
   },
   {
     slug: "instagram-local",
-    headline: "Finding what's happening two streets away",
+    headline: "Surfacing the local content the algorithm buries",
     title: "Instagram · Local Feed",
     category: "Product Design",
     badge: "Concept",
@@ -85,7 +85,7 @@ export const workEntries: WorkEntry[] = [
   },
   {
     slug: "roomy",
-    headline: "Running rent and chores for a 21-person flat",
+    headline: "Ending spreadsheet chaos for a 21-person flat",
     title: "Roomy · Bedspace OS",
     category: "Side Project",
     badge: "Live",
