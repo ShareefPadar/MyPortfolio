@@ -41,20 +41,26 @@ const Hero = () => {
           aria-label="Senior Product Designer who ships."
           className="text-4xl md:text-6xl font-bold leading-tight md:leading-snug mb-3 font-sans tracking-tight text-neutral-900"
         >
-          <span aria-hidden="true" className="inline-flex flex-wrap gap-x-[0.3em] overflow-hidden">
+          {/* Real spaces between words, not a flex gap: a gap renders correctly
+              but leaves textContent as "SeniorProductDesignerwhoships." for
+              copy, search engines, and AI summarisers. */}
+          <span aria-hidden="true" className="overflow-hidden">
             {headWords.map((w, i) => (
-              <span key={i} className="inline-block overflow-hidden align-bottom">
-                <motion.span
-                  custom={i}
-                  initial="hidden"
-                  animate={mounted ? "show" : "hidden"}
-                  variants={wordVariants}
-                  className="inline-block fm-anim"
-                >
-                  {w}
-                </motion.span>
+              <span key={i}>
+                {i > 0 && " "}
+                <span className="inline-block overflow-hidden align-bottom">
+                  <motion.span
+                    custom={i}
+                    initial="hidden"
+                    animate={mounted ? "show" : "hidden"}
+                    variants={wordVariants}
+                    className="inline-block fm-anim"
+                  >
+                    {w}
+                  </motion.span>
+                </span>
               </span>
-            ))}
+            ))}{" "}
             <span className="inline-block overflow-hidden align-bottom">
               <motion.span
                 custom={headWords.length}
