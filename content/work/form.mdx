@@ -1,3 +1,12 @@
+import Summary from "@/components/Summary";
+
+<Summary
+  readTime="3 min"
+  problem="Most fitness apps demand an account before you can log anything, keep your data on their servers, and stop working the moment you lose signal."
+  approach="Built a local-first tracker on IndexedDB with opt-in cloud sync, on-device macro calculations, and forecast states that admit when the data cannot support a prediction."
+  constraint="Making offline-first feel premium rather than stripped back, and deciding what a forecast should say when it genuinely does not know."
+/>
+
 ## The Problem
 
 Most fitness apps share one flaw: they want an account before you can do anything. Your data lives on their servers, behind their subscription, under their privacy policy. For anyone privacy-conscious, or just not ready to commit before trying, that's a dealbreaker.
