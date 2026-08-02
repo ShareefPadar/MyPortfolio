@@ -87,11 +87,12 @@ export default function WorkItem() {
                 {project.description}
               </p>
 
-              {/* Outcome — the recruiter's punchline, up front */}
+              {/* Outcome — the recruiter's punchline, up front. Ruled rather
+                  than boxed: the quote banner below is the one card here. */}
               {(project as any).outcome && (
-                <div className="flex gap-4 items-start max-w-3xl rounded-2xl bg-neutral-50 border border-neutral-100 p-4 md:p-5">
-                  <span className="text-xs font-bold text-accent tracking-widest uppercase shrink-0 mt-0.5">Outcome</span>
-                  <p className="text-sm md:text-base font-medium text-neutral-800 leading-relaxed">
+                <div className="flex flex-col gap-2 max-w-3xl border-t border-neutral-200 pt-4 md:flex-row md:gap-8">
+                  <span className="text-[11px] font-bold text-accent tracking-widest uppercase shrink-0 md:w-[8rem] md:pt-1.5">Outcome</span>
+                  <p className="text-base md:text-[1.0625rem] font-medium text-neutral-800 leading-relaxed">
                     {(project as any).outcome}
                   </p>
                 </div>
@@ -121,7 +122,9 @@ export default function WorkItem() {
           {/* MDX CONTENT — full case study */}
           {MDXContent && (
             <ScrollReveal className="pt-4 border-t border-neutral-100">
-              <div className="max-w-3xl mx-auto">
+              {/* The first paragraph runs larger and darker as a standfirst, so
+                  the body opens with a change of scale instead of a flat wall. */}
+              <div className="max-w-3xl mx-auto [&>p:first-of-type]:text-lg [&>p:first-of-type]:md:text-xl [&>p:first-of-type]:leading-relaxed [&>p:first-of-type]:text-neutral-800">
                 <MDXProvider components={MDXComponents}>
                   <MDXContent />
                 </MDXProvider>

@@ -7,12 +7,10 @@ interface ShotProps {
   src: string;
   alt: string;
   caption?: string;
-  /** background tint behind the framed screenshot; defaults to the Sanad lavender */
-  bg?: string;
 }
 
 // A single framed, captioned, click-to-zoom UI screenshot for case studies.
-const Shot = ({ src, alt, caption, bg = "#EEF0FD" }: ShotProps) => {
+const Shot = ({ src, alt, caption }: ShotProps) => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -23,13 +21,15 @@ const Shot = ({ src, alt, caption, bg = "#EEF0FD" }: ShotProps) => {
   }, [open]);
 
   return (
-    <figure className="not-prose my-6">
+    // Breaks wider than the reading column so the page has more than one
+    // measure. No border, fill, or shadow: the screenshot carries its own
+    // edge, and one less framed box per screenful.
+    <figure className="not-prose my-10 lg:-mx-12 xl:-mx-20">
       <button
         type="button"
         onClick={() => setOpen(true)}
         aria-label={`View ${alt} full size`}
-        className="group relative block w-full cursor-zoom-in overflow-hidden rounded-2xl border border-neutral-200 shadow-md"
-        style={{ backgroundColor: bg }}
+        className="group relative block w-full cursor-zoom-in overflow-hidden rounded-lg"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={src} alt={alt} loading="lazy" className="block h-auto w-full" />
@@ -39,7 +39,7 @@ const Shot = ({ src, alt, caption, bg = "#EEF0FD" }: ShotProps) => {
         </span>
       </button>
       {caption && (
-        <figcaption className="mt-3 font-sans text-sm leading-relaxed text-neutral-500">
+        <figcaption className="mt-3 border-t border-neutral-200/70 pt-3 font-sans text-sm leading-relaxed text-neutral-500 lg:mx-12 xl:mx-20">
           {caption}
         </figcaption>
       )}

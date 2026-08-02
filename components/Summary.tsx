@@ -21,27 +21,29 @@ const Summary = ({ problem, approach, constraint, readTime }: SummaryProps) => {
   ];
 
   return (
-    <aside
-      aria-label="Case study summary"
-      className="not-prose my-8 overflow-hidden rounded-2xl border border-neutral-200 bg-neutral-50"
-    >
-      <div className="flex items-center justify-between gap-4 border-b border-neutral-200 px-5 py-3 md:px-6">
+    // A ruled table, not a filled card: rules carry the structure so this
+    // reads as a spec block in an article rather than one more UI container.
+    <aside aria-label="Case study summary" className="not-prose my-10 border-t-2 border-neutral-900">
+      <div className="flex items-baseline justify-between gap-4 py-3">
         <span className="text-[11px] font-bold uppercase tracking-widest text-accent">
           The short version
         </span>
         {readTime && (
-          <span className="shrink-0 font-sans text-[11px] font-medium text-neutral-500">
+          <span className="shrink-0 font-sans text-[11px] font-medium text-neutral-400">
             {readTime} read
           </span>
         )}
       </div>
-      <dl className="divide-y divide-neutral-200">
+      <dl className="border-t border-neutral-200">
         {rows.map(([label, value]) => (
-          <div key={label} className="grid gap-1 px-5 py-3.5 md:grid-cols-[150px_1fr] md:gap-5 md:px-6">
-            <dt className="font-sans text-[11px] font-bold uppercase tracking-widest text-neutral-400 md:pt-0.5">
+          <div
+            key={label}
+            className="grid gap-1 border-b border-neutral-200 py-4 md:grid-cols-[8rem_1fr] md:gap-8"
+          >
+            <dt className="font-sans text-[11px] font-bold uppercase tracking-widest text-neutral-400 md:pt-1.5">
               {label}
             </dt>
-            <dd className="font-sans text-sm leading-relaxed text-neutral-700 md:text-base">
+            <dd className="font-sans text-base leading-relaxed text-neutral-700 md:text-[1.0625rem]">
               {value}
             </dd>
           </div>
