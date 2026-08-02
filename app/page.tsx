@@ -64,7 +64,7 @@ export default function Home() {
           <ScrollReveal className="mt-8 md:mt-10">
             <div className="flex flex-col items-start gap-3 border-t border-neutral-100 pt-6 sm:flex-row sm:items-center sm:justify-between">
               <p className="font-sans text-sm leading-relaxed text-neutral-500 md:text-base">
-                This is the work I can show publicly. Six years of production B2B design, across logistics, healthcare, and travel, sits under NDA. Ask me about it in an interview.
+                This is the work I can show publicly. Six years of production B2B design, across logistics, healthcare, and travel, sits under NDA. Ask me about it on a call.
               </p>
               <Link
                 href="/work"
