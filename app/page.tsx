@@ -57,10 +57,29 @@ export default function Home() {
             </ParallaxSection>
           ))}
         </div>
+
+        {/* NDA note — right under the work a recruiter just scanned, not
+            several scrolls down where it reads as an afterthought */}
+        <div data-guide="There's real production work behind this too. Six years of it sits under NDA, and I'll walk you through it live.">
+          <ScrollReveal className="mt-8 md:mt-10">
+            <div className="flex flex-col items-start gap-3 border-t border-neutral-100 pt-6 sm:flex-row sm:items-center sm:justify-between">
+              <p className="font-sans text-sm leading-relaxed text-neutral-500 md:text-base">
+                This is the work I can show publicly. Six years of production B2B design, across logistics, healthcare, and travel, sits under NDA. Ask me about it in an interview.
+              </p>
+              <Link
+                href="/work"
+                className="inline-flex shrink-0 items-center gap-2 font-sans text-sm font-bold text-neutral-900 transition-colors hover:text-accent"
+              >
+                View all work
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </ScrollReveal>
+        </div>
       </section>
 
       {/* SIDE PROJECTS — live products that back up "who ships" */}
-      <section data-guide="I designed and built these two myself. They're live, so go press some buttons." className="container-wide mt-12 md:mt-16 w-full">
+      <section data-guide="I designed and built these two myself. They're live, so go press some buttons." className="container-wide mt-12 md:mt-16 mb-16 md:mb-32 w-full">
         <ScrollReveal className="mb-8 md:mb-10">
           <div className="flex items-center gap-4">
             <span className="text-sm md:text-base font-bold text-neutral-900 uppercase tracking-widest">Designed, Built &amp; Live</span>
@@ -107,25 +126,6 @@ export default function Home() {
             </ParallaxSection>
           ))}
         </div>
-      </section>
-
-      {/* NDA note + all work */}
-      <section data-guide="Plenty more sits under NDA. Want the full story? Let's talk. 👇" className="container-wide mt-14 md:mt-20 mb-16 md:mb-32 w-full">
-        <ScrollReveal>
-          <div className="flex flex-col items-center gap-6 rounded-3xl bg-neutral-50 px-6 py-12 text-center md:py-16">
-            <p className="max-w-2xl font-sans text-base leading-relaxed text-neutral-600 md:text-lg">
-              Six years of client work in logistics, healthcare, and travel sits under NDA.
-              I&apos;m happy to walk you through it on request.
-            </p>
-            <Link
-              href="/work"
-              className="inline-flex items-center gap-3 rounded-full border border-neutral-200 bg-white px-8 py-4 font-sans text-sm font-bold text-neutral-950 transition-all hover:border-neutral-950 group"
-            >
-              View all work
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Link>
-          </div>
-        </ScrollReveal>
       </section>
     </div>
   );
