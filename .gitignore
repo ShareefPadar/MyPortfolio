@@ -32,3 +32,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local working files: source briefs, draft notes, résumé copies.
+# Not served, and not for the public repo. Leading slash keeps public/assets tracked.
+/assets/
