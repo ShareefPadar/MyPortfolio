@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ArrowRight, Download } from "lucide-react";
 import ParallaxSection from "@/components/ParallaxSection";
 import RevealText from "@/components/RevealText";
@@ -14,7 +13,7 @@ export default function About() {
           <div className="pt-4">
             <span className="text-xs font-bold text-neutral-900/40 uppercase tracking-widest mb-8 block font-sans">About Me</span>
             <RevealText
-              text="The bridge between empathy and engineering."
+              text="Usually the only designer in the room."
               tag="h1"
               className="text-4xl md:text-6xl font-bold font-serif leading-tight tracking-tight mb-12"
             />
@@ -24,28 +23,28 @@ export default function About() {
         <ParallaxSection delay={0.2}>
           <div className="space-y-8 text-base md:text-lg text-neutral-600 leading-relaxed font-sans">
             <p>
-              I&apos;m a <span className="font-bold text-neutral-900">Senior Product Designer</span> with six years in B2B SaaS. I take complex products from early research all the way to shipped, production-ready interfaces. Across logistics, healthcare, gym management, and travel, I&apos;ve usually been the only designer in the room, so I&apos;m used to owning the whole process on my own. Most of that work sits under NDA, but I&apos;m happy to walk you through it on request.
+              I&apos;m a <span className="font-bold text-neutral-900">Senior Product Designer</span> with six years in B2B SaaS, based in Dubai. Logistics, healthcare, gym management, travel. In most of those rooms I was the only designer, which meant doing the research, making the call, drawing the screens, and then sitting with the engineers while it got built. Most of that work sits under NDA, so ask me about it on a call.
             </p>
             <p>
-              My background is in <span className="font-bold text-neutral-900">computer science</span>, so I design with the build in mind. I don&apos;t hand off a mockup and disappear. I know where the constraints are, I work closely with engineers, and these days I ship a lot of the front-end myself in React and Tailwind, with help from Cursor and Claude Code.
+              At Cargoz I designed <span className="font-bold text-neutral-900">Cargoz Connect</span>, a product that gets a business into warehouse space inside 24 hours, from the first wireframe to the live UI, and built the design system six developers now work from. Before that I ran UX for a gym and healthcare ERP, reporting straight to the CEO, which mostly taught me how to defend a design decision to someone who owns the P&amp;L.
             </p>
             <p>
-              On a product team I bring solid user research, a system-level eye, and a habit of moving fast without letting the UI drift. I&apos;ve built design systems from scratch, run usability tests and stakeholder interviews, and shipped WCAG-aligned responsive work across web and mobile.
+              My degree is in <span className="font-bold text-neutral-900">computer science</span>, and I treat that as a design advantage rather than a second job. I know what is expensive to build, so I stop proposing it. I can read the codebase to check whether a pattern already exists before inventing another one. And when an idea needs proving, I would rather build it than describe it, which is why the prototypes in the Sanad and Mizan case studies are real working software instead of screenshots.
             </p>
             <div className="pt-8">
-              <h2 className="text-xl md:text-2xl font-bold font-serif mb-6 italic leading-snug text-neutral-950">What I Bring to the Table.</h2>
+              <h2 className="text-xl md:text-2xl font-bold font-serif mb-6 italic leading-snug text-neutral-950">How I Work.</h2>
               <ul className="list-none space-y-6">
                 <li>
-                  <span className="font-bold text-neutral-900 block mb-1">B2B product depth</span>
-                  Complex products are where I do my best work. ERP platforms, logistics booking systems, CRM tools, usually as the only designer and always end to end.
+                  <span className="font-bold text-neutral-900 block mb-1">I show the constraint instead of hiding it</span>
+                  In the Sanad flow the honest move was telling people the form takes ten minutes and the review takes two days, rather than pretending it was shorter. Hidden scope does not reduce drop-off, it just delays it to the moment someone feels misled.
                 </li>
                 <li>
-                  <span className="font-bold text-neutral-900 block mb-1">Research-led decisions</span>
-                  I run user interviews, usability tests, and competitor audits so decisions rest on evidence instead of opinion.
+                  <span className="font-bold text-neutral-900 block mb-1">Research until the decision is obvious, then stop</span>
+                  Interviews, competitor teardowns, usability tests. All of it useful right up to the point where it stops changing what I would draw. Process theatre helps nobody.
                 </li>
                 <li>
-                  <span className="font-bold text-neutral-900 block mb-1">From design to shipped code</span>
-                  I build what I design. Two of my products, Roomy and Form, are live and were designed and coded start to finish by me.
+                  <span className="font-bold text-neutral-900 block mb-1">I audit my own work like someone else made it</span>
+                  After building the Sanad prototype I held it to the same standard as the writing and found four things wrong, including a consent checkbox that was a dark pattern. That audit is still published on the case study.
                 </li>
               </ul>
             </div>
@@ -128,7 +127,7 @@ export default function About() {
       <ParallaxSection className="mt-16 md:mt-32">
         <section className="bg-surface-peach -mx-4 md:-mx-12 lg:-mx-20 px-8 md:px-24 py-14 md:py-32 rounded-3xl text-center mb-16 md:mb-32">
           <p className="text-2xl md:text-4xl font-serif font-bold mb-8 italic leading-snug text-neutral-950">
-            &quot;AI makes execution faster, but only if you understand the design problem first. My engineering background lets me build software that&apos;s technically sound, commercially viable, and a pleasure to use.&quot;
+            &quot;The problems worth taking are the ones where the constraint does not move. You cannot delete the compliance step or shorten the ten-day wait, so the only thing left to design is how it feels to live through. That is the work I want.&quot;
           </p>
           <span className="text-xs font-bold uppercase tracking-widest text-neutral-900/40 font-sans">— My Philosophy</span>
         </section>
