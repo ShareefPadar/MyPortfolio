@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Script from 'next/script';
 import dynamic from "next/dynamic";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Inter, Playfair_Display, Geist, Geist_Mono, Silkscreen } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -18,9 +18,37 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-const playfair = Playfair_Display({ 
+const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-serif",
+});
+
+/* ── 8-bit design system faces (spec §2) ──────────────────────────
+   Three faces, gated by what a string IS, not by heading level:
+     sentence  → Geist        (even a 40px H1)
+     label     → Geist Mono   (tags, meta, eyebrows, nav, timestamps)
+     statement → Silkscreen   (max 5 words: hero, page titles, buttons)
+
+   Geist Mono stands in for Departure Mono, which the spec names but which
+   is not on Google Fonts. Swapping it later is one @font-face change.
+
+   Silkscreen uses display:'block', not 'swap': its metrics are unlike any
+   fallback, so swapping mid-load throws the hero around violently. */
+const geist = Geist({
+  subsets: ["latin"],
+  variable: "--font-geist",
+});
+
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+  variable: "--font-geist-mono",
+});
+
+const silkscreen = Silkscreen({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  display: "block",
+  variable: "--font-silkscreen",
 });
 
 export const metadata: Metadata = {
@@ -87,7 +115,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
+    <html
+      lang="en"
+      className={`${inter.variable} ${playfair.variable} ${geist.variable} ${geistMono.variable} ${silkscreen.variable}`}
+    >
       <head>
         <script
           type="application/ld+json"

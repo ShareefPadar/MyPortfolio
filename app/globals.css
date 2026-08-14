@@ -1,24 +1,114 @@
 
 @import "tailwindcss";
 
+/* ══════════════════════════════════════════════════════════════════
+   LEGACY TOKENS — the pre-redesign editorial look.
+   Still load-bearing until every consumer is rebuilt. Removed in Phase 11.
+   ══════════════════════════════════════════════════════════════════ */
 @theme {
   --color-accent: #E21D70;
   --color-accent-hover: #C21861;
-  
+
   --color-accent-gradient: linear-gradient(to right, #E21D70, #FF3D81);
-  
+
   --color-surface-peach: #F7E1D7;
   --color-surface-lavender: #E0DBE7;
   --color-surface-mint: #E1F2ED;
   --color-surface-sky: #D9E4F5;
   --color-surface-amber: #F9F1D1;
-  
+
   --color-neutral-950: #1A1A1A;
-  
+
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-serif-custom: var(--font-serif), serif;
 
 }
+
+/* ══════════════════════════════════════════════════════════════════
+   8-BIT DESIGN SYSTEM — see "8 bit/CLAUDE.md" (the authority).
+   Tailwind v4 is CSS-first, so the spec's §1.2 tailwind.config.ts is
+   translated into @theme here. tailwind.config.ts in this repo is INERT
+   (no @config directive) — never add tokens to it.
+   ══════════════════════════════════════════════════════════════════ */
+@theme {
+  /* colour — spec §1.3 governs what each is allowed to be used for */
+  --color-lime:  #CDF22B;   /* accents, callouts, LEDs. NEVER a button fill */
+  --color-blue:  #1E45FB;   /* primary button, section numerals, links, focus */
+  --color-ink:   #14140F;   /* outlines, body text, rules */
+  --color-error: #C4482E;   /* form errors only */
+  --color-paper: #FAFAF8;
+  --color-plate: #D8D8D0;
+  --color-panel: #F0F0EA;
+  --color-line:  #DEDED8;
+  /* --color-mute is #6E6E62 on purpose. #87877A measured 4.0:1 and FAILED
+     on 9–11px meta labels. Do not lighten it — spec §11 and §12 mistake 11. */
+  --color-mute:  #6E6E62;
+
+  /* dark surfaces — hero and footer bookend the light page (spec §6.5) */
+  --color-night:  #0B0B0C;
+  --color-night2: #16161A;
+  --color-nline:  #26262A;
+  --color-ntext:  #9A9A94;
+
+  /* containers — v4 reads --container-* for max-w-*, not --max-width-* */
+  --container-prose: 60ch;
+  --container-lead:  52ch;
+  --container-col:   720px;
+  --container-wide:  1100px;
+}
+
+/* Font families reference other custom properties, so they need @theme inline
+   or the utilities snapshot the value instead of resolving the reference. */
+@theme inline {
+  --font-pix:  var(--font-silkscreen), monospace;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-geist-sans: var(--font-geist), system-ui, sans-serif;
+}
+
+/* Primitives with no Tailwind utility namespace: units, frame timing, the
+   notch polygon, and the two bevel tones the sprite generator consumes. */
+:root {
+  --u: 4px;        /* one pixel unit — every dimension is a multiple */
+  --f: 60ms;       /* one animation frame */
+  --type: 45ms;    /* one typed character */
+
+  --hi: #FFFFFF;   /* bevel highlight (top-left) */
+  --sh: #8A8A80;   /* bevel shade (bottom-right) */
+
+  /* Aliases so the spec's hand-written CSS works verbatim against one
+     source of truth. Do not restate the hex values here. */
+  --lime:  var(--color-lime);
+  --blue:  var(--color-blue);
+  --ink:   var(--color-ink);
+  --error: var(--color-error);
+  --paper: var(--color-paper);
+  --plate: var(--color-plate);
+  --panel: var(--color-panel);
+  --line:  var(--color-line);
+  --mute:  var(--color-mute);
+  --night:  var(--color-night);
+  --night2: var(--color-night2);
+  --nline:  var(--color-nline);
+  --ntext:  var(--color-ntext);
+
+  /* spacing ramp for hand-written CSS blocks (the prose kit).
+     Tailwind utilities cover the same values; see Phase 11 for enforcement. */
+  --s4: 4px;   --s8: 8px;    --s12: 12px;  --s16: 16px;  --s24: 24px;
+  --s32: 32px; --s48: 48px;  --s64: 64px;  --s96: 96px;  --s128: 128px;
+
+  /* the notch — reused by buttons, tabs, and the focus plate */
+  --notch: polygon(
+    4px 0, calc(100% - 4px) 0,
+    calc(100% - 4px) 4px, 100% 4px,
+    100% calc(100% - 4px),
+    calc(100% - 4px) calc(100% - 4px),
+    calc(100% - 4px) 100%, 4px 100%,
+    4px calc(100% - 4px), 0 calc(100% - 4px),
+    0 4px, 4px 4px
+  );
+}
+
+::selection { background: var(--lime); color: var(--ink); }
 
 @layer base {
   body {
@@ -54,11 +144,13 @@
   background: #007991;
 }
 
+/* Spec §1.1 / §5.5: content renders at its final state, not at 0.01ms.
+   Focus indication is never suppressed — it's the one thing that must
+   always be visible (§4.2). */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    animation: none !important;
+    transition: none !important;
     scroll-behavior: auto !important;
   }
 }
