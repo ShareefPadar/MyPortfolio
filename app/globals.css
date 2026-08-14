@@ -141,6 +141,120 @@
    Any raster in the pixel layer must not be smoothed when scaled. */
 .pixelated { image-rendering: pixelated; }
 
+/* ══════════════════════════════════════════════════════════════════
+   MOTION (spec §5)
+
+   Everything uses steps(). Nothing eases, nothing interpolates. Both axes
+   quantise: time steps into frames AND space snaps to 4px, because stepping
+   the timing while an element lands on 37.5px still reads wrong (§5.4).
+
+   One motion per face (§5.1):
+     Silkscreen  → typewriter        (Typewriter.tsx, 45ms/char, max 1.5s)
+     Geist head  → scanline, 4 frames
+     containers  → scanline, 6 frames, whole object
+     Geist body  → binary opacity, staggered one frame apart
+     mono        → binary, instant
+     numerals    → pop with overshoot, 4 frames
+     nav flatten → instant, no transition at all
+     LED         → blink, 2.6s — the only looping animation
+
+   Nothing runs past 12 frames (§5.5).
+   ══════════════════════════════════════════════════════════════════ */
+
+@keyframes scanClip {
+  0%   { clip-path: inset(0 0 100% 0); }
+  100% { clip-path: inset(0 0 0% 0); }
+}
+
+/* Scanline bands widen as the wipe completes, so the reveal reads as a CRT
+   drawing itself rather than a bar sliding down. */
+@keyframes scanBands {
+  0% {
+    -webkit-mask-image: repeating-linear-gradient(#000 0 1px, transparent 1px 6px);
+            mask-image: repeating-linear-gradient(#000 0 1px, transparent 1px 6px);
+  }
+  30% {
+    -webkit-mask-image: repeating-linear-gradient(#000 0 3px, transparent 3px 6px);
+            mask-image: repeating-linear-gradient(#000 0 3px, transparent 3px 6px);
+  }
+  60% {
+    -webkit-mask-image: repeating-linear-gradient(#000 0 5px, transparent 5px 6px);
+            mask-image: repeating-linear-gradient(#000 0 5px, transparent 5px 6px);
+  }
+  100% {
+    -webkit-mask-image: none;
+            mask-image: none;
+  }
+}
+
+/* Binary appearance. No fade — one step, on or off. */
+@keyframes on {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Numerals land with a single overshoot frame, snapped to the 4px grid. */
+@keyframes pop {
+  0%   { transform: scale(0.75); }
+  50%  { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+
+@keyframes caret {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0; }
+}
+
+/* The only looping animation in the system. */
+@keyframes led {
+  0%, 45%   { opacity: 1; }
+  50%, 95%  { opacity: 0.25; }
+  100%      { opacity: 1; }
+}
+
+/* Reveals are opt-in and JS-gated: without JS, or before the observer fires,
+   content must still be readable. `.has-js` is set by a blocking inline
+   script in the document head, so there is no flash of visible-then-hidden. */
+.has-js .reveal { visibility: hidden; }
+.has-js .reveal.is-in { visibility: visible; }
+
+/* Containers, cards, screenshots: the whole object animates as one (§12 #10). */
+.has-js .reveal.is-in {
+  animation:
+    scanClip  calc(var(--f) * 6) steps(6, end) both,
+    scanBands calc(var(--f) * 8) steps(1, end) both;
+}
+
+/* Geist headings scan faster than containers. */
+.has-js .reveal-head.is-in {
+  animation:
+    scanClip  calc(var(--f) * 4) steps(4, end) both,
+    scanBands calc(var(--f) * 6) steps(1, end) both;
+}
+
+/* Body copy and mono labels appear binary, never wiped. */
+.has-js .reveal-on.is-in {
+  animation: on 1ms steps(1, end) both;
+}
+
+/* Stagger: one frame apart, capped so a long list never runs past 12 frames. */
+.has-js .reveal-on.is-in:nth-child(2) { animation-delay: calc(var(--f) * 1); }
+.has-js .reveal-on.is-in:nth-child(3) { animation-delay: calc(var(--f) * 2); }
+.has-js .reveal-on.is-in:nth-child(4) { animation-delay: calc(var(--f) * 3); }
+.has-js .reveal-on.is-in:nth-child(n + 5) { animation-delay: calc(var(--f) * 4); }
+
+.has-js .reveal-pop.is-in {
+  animation: pop calc(var(--f) * 4) steps(4, end) both;
+}
+
+.led { animation: led 2.6s steps(1, end) infinite; }
+
+/* Under reduced motion the observer still runs, but content must never be
+   left hidden and nothing may animate. */
+@media (prefers-reduced-motion: reduce) {
+  .has-js .reveal { visibility: visible; }
+}
+
 @layer base {
   body {
     @apply text-neutral-950 antialiased;

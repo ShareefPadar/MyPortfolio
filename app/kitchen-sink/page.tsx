@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Button from "@/components/px/Button";
 import PixelIcon, { ICONS, type IconName } from "@/components/px/PixelIcon";
+import Reveal from "@/components/px/Reveal";
+import Typewriter from "@/components/px/Typewriter";
 import { PALETTE_NAMES, SCALES } from "@/lib/sprite";
 import type { IconSize } from "@/lib/tokens";
 
@@ -172,8 +174,78 @@ export default function KitchenSink() {
         </div>
       </Section>
 
+      {/* ── motion ──────────────────────────────────────────────── */}
+      <Section n="05" title="MOTION">
+        <p className="mb-8 max-w-prose font-sans text-[16px] leading-[1.7] text-ink">
+          Everything is <span className="font-mono text-[0.88em]">steps()</span>. Nothing eases.
+          Scroll each block into view: it fires once and never re-triggers on the way back up.
+          Toggle Reduce Motion and every one of these renders at its final state instead.
+        </p>
+
+        <div className="space-y-10">
+          <div>
+            <Label>typewriter · Silkscreen only · 45ms/char, capped at 1.5s</Label>
+            <Typewriter
+              text="SENIOR PRODUCT DESIGNER"
+              as="p"
+              className="mt-2 font-pix text-[20px] leading-[1.8] text-ink"
+            />
+          </div>
+
+          <div>
+            <Label>scanline, 4 frames · Geist headings</Label>
+            <Reveal variant="head">
+              <p className="mt-2 max-w-prose font-sans text-[26px] font-medium leading-[1.3] tracking-[-0.016em] text-ink">
+                A sentence-length heading always scans, never types.
+              </p>
+            </Reveal>
+          </div>
+
+          <div>
+            <Label>scanline, 6 frames · containers animate as one object</Label>
+            <Reveal className="mt-2">
+              <div className="sp sp-neutral-4 sp-s4 grid h-32 w-full max-w-md place-items-center">
+                <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-mute">
+                  whole card, one reveal
+                </span>
+              </div>
+            </Reveal>
+          </div>
+
+          <div>
+            <Label>binary, staggered one frame apart · body copy</Label>
+            <div className="mt-2 space-y-2">
+              {["First line appears.", "Then the second.", "Then the third."].map((t) => (
+                <Reveal key={t} variant="on" as="p" className="font-sans text-[16px] text-ink">
+                  {t}
+                </Reveal>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <Label>pop with overshoot · numerals</Label>
+            <div className="mt-2 flex gap-6">
+              {["01", "02", "03"].map((n) => (
+                <Reveal key={n} variant="pop" as="span" className="font-pix text-[40px] font-bold leading-[0.9] text-blue">
+                  {n}
+                </Reveal>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <Label>LED · the only looping animation, 2.6s</Label>
+            <div className="mt-3 flex items-center gap-2">
+              <span className="led inline-block h-2 w-2 bg-lime" />
+              <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-mute">live</span>
+            </div>
+          </div>
+        </div>
+      </Section>
+
       {/* ── well + focus ────────────────────────────────────────── */}
-      <Section n="05" title="WELL & FOCUS">
+      <Section n="06" title="WELL & FOCUS">
         <div className="grid gap-10 md:grid-cols-2">
           <div>
             <Label>well — recessed, for screenshots</Label>

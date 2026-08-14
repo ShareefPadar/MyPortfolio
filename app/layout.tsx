@@ -120,6 +120,14 @@ export default function RootLayout({
       className={`${inter.variable} ${playfair.variable} ${geist.variable} ${geistMono.variable} ${silkscreen.variable}`}
     >
       <head>
+        {/* Gates the scroll-reveal hidden state on JS being available, and runs
+            before paint so there is no flash of visible-then-hidden content.
+            Without JS every .reveal stays visible and readable. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "document.documentElement.classList.add('has-js')",
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
