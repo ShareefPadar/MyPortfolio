@@ -1,5 +1,7 @@
 
 @import "tailwindcss";
+/* Sprite classes, generated alongside the PNGs by scripts/build-sprites.ts. */
+@import "./sprites.generated.css";
 
 /* ══════════════════════════════════════════════════════════════════
    LEGACY TOKENS — the pre-redesign editorial look.
@@ -109,6 +111,35 @@
 }
 
 ::selection { background: var(--lime); color: var(--ink); }
+
+/* ── Focus ring (spec §4.2) ────────────────────────────────────────
+   A square outline around a notched sprite reads as a rendering bug, so the
+   ring is a notched plate behind the element instead. Focus is INSTANT and
+   never animated — the one place in the system where motion is banned. */
+.focusable { position: relative; display: inline-block; }
+.focusable::before {
+  content: "";
+  position: absolute;
+  inset: -7px;
+  background: var(--blue);
+  clip-path: var(--notch);
+  z-index: -1;
+  opacity: 0;
+}
+.focusable:focus-within::before { opacity: 1; }
+/* Safe only because the plate replaces it. Never remove focus indication. */
+.focusable :is(button, a, input, select, textarea):focus { outline: none; }
+
+/* ── The well (spec §4.4) ──────────────────────────────────────────
+   A recessed screenshot. Sunk, so it reads as contained rather than
+   interactive. */
+.well {
+  box-shadow: 0 0 0 3px var(--ink), inset 4px 4px 0 rgb(0 0 0 / 0.4);
+}
+
+/* ── Pixel rendering ───────────────────────────────────────────────
+   Any raster in the pixel layer must not be smoothed when scaled. */
+.pixelated { image-rendering: pixelated; }
 
 @layer base {
   body {
