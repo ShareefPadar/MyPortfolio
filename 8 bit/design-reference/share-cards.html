@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Share cards — OG</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+@font-face{
+  font-family:'Departure Mono';
+  src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2409-1@1.0/DepartureMono-Regular.woff2') format('woff2');
+  font-weight:400;font-display:swap;
+}
+:root{
+  --u:4px;
+  --lime:#CDF22B; --blue:#1E45FB; --ink:#14140F;
+  --paper:#FAFAF8; --panel:#F0F0EA; --line:#DEDED8; --mute:#87877A;
+  --plate:#D8D8D0; --hi:#FFFFFF; --sh:#8A8A80;
+  --mono:'Departure Mono',ui-monospace,monospace;
+  --pix:'Silkscreen',monospace;
+  --sans:'Geist',-apple-system,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:#E6E6E2;font-family:var(--sans);color:var(--ink);padding:20px 14px 60px;line-height:1.55}
+.wrap{max-width:700px;margin:0 auto}
+
+.head{margin-bottom:24px}
+.head h1{font-family:var(--pix);font-weight:700;font-size:clamp(14px,3.8vw,18px);line-height:1.7;margin-bottom:12px}
+.head p{font-size:14px;color:#4A4A46;max-width:56ch}
+
+.sec{border:2px solid var(--ink);margin-bottom:16px;background:var(--paper)}
+.sec-h{display:flex;justify-content:space-between;gap:10px;padding:8px 14px;background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:11px;letter-spacing:.05em}
+.sec-h i{font-style:normal;opacity:.55;font-size:10px;text-align:right}
+.sec-b{padding:24px 18px}
+.desc{font-size:13.5px;color:#5C5C52;margin-bottom:16px;max-width:54ch}
+.sub{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin:32px 0 12px;padding-bottom:6px;border-bottom:1px dashed var(--line)}
+.sub:first-child{margin-top:0}
+
+/* ── scaler: renders a 1200×630 card at any width ── */
+.frame{width:100%;aspect-ratio:1200/630;position:relative;overflow:hidden;border:2px solid var(--ink)}
+.card{position:absolute;top:0;left:0;width:1200px;height:630px;transform-origin:top left;display:flex;overflow:hidden}
+.small{max-width:340px;margin:0 auto}
+.feedrow{display:grid;gap:16px}
+@media(min-width:600px){.feedrow{grid-template-columns:1fr 1fr;align-items:start}}
+.feedlbl{font-family:var(--mono);font-size:9px;letter-spacing:.08em;color:var(--mute);margin-bottom:8px}
+
+/* ══ A · HOMEPAGE ══ */
+.cA{background:#0B0B0C;color:#F2F2EE;padding:70px 76px;flex-direction:column;justify-content:space-between}
+.cA .top{display:flex;align-items:center;gap:20px}
+.cA .top canvas{width:52px;height:52px;image-rendering:pixelated}
+.cA .top span{font-family:var(--pix);font-weight:700;font-size:28px;letter-spacing:.02em}
+.cA h2{font-family:var(--pix);font-weight:700;font-size:66px;line-height:1.6;letter-spacing:.01em}
+.cA h2 em{font-style:normal;color:var(--lime)}
+.cA .foot{display:flex;justify-content:space-between;align-items:flex-end;gap:30px}
+.cA .foot p{font-family:var(--mono);font-size:24px;letter-spacing:.06em;color:#9A9A94}
+.cA .foot .url{font-family:var(--mono);font-size:22px;color:var(--lime);letter-spacing:.06em}
+
+/* ══ B · CASE STUDY ══ */
+.cB{background:var(--paper);flex-direction:row}
+.cB .left{flex:1;padding:64px 56px;display:flex;flex-direction:column;justify-content:space-between}
+.cB .tab{align-self:flex-start;border:6px solid var(--ink);background:var(--lime);padding:10px 22px 12px;
+  font-family:var(--mono);font-size:26px;letter-spacing:.08em;
+  clip-path:polygon(8px 0,calc(100% - 8px) 0,calc(100% - 8px) 8px,100% 8px,100% calc(100% - 8px),calc(100% - 8px) calc(100% - 8px),calc(100% - 8px) 100%,8px 100%,8px calc(100% - 8px),0 calc(100% - 8px),0 8px,8px 8px)}
+.cB h2{font-weight:500;font-size:56px;line-height:1.16;letter-spacing:-.024em;margin:34px 0 0}
+.cB .meta{font-family:var(--mono);font-size:24px;letter-spacing:.07em;color:var(--mute)}
+.cB .who{display:flex;align-items:center;gap:16px;font-family:var(--pix);font-weight:700;font-size:22px}
+.cB .who canvas{width:38px;height:38px;image-rendering:pixelated}
+.cB .right{width:420px;background:var(--plate);border-left:8px solid var(--ink);padding:40px 34px;
+  display:flex;align-items:center;box-shadow:inset 8px 0 0 var(--hi)}
+.cB .shot{width:100%;aspect-ratio:3/4;background:#EEEDF8;box-shadow:0 0 0 6px var(--ink), inset 8px 8px 0 rgba(0,0,0,.35);
+  display:flex;flex-direction:column;gap:14px;padding:26px 22px;font-size:15px;color:#5A5F6B}
+.cB .shot b{display:block;font-family:var(--sans);font-weight:600;font-size:21px;color:#16181D}
+.cB .shot .li{display:flex;gap:10px;align-items:center;border-top:1px solid #E2E2EC;padding-top:12px}
+.cB .shot .li i{width:20px;height:20px;border-radius:50%;background:#EEEDF8;border:2px solid #C8C8DC;flex:none}
+.cB .shot .li i.d{background:#4B3FD4;border-color:#4B3FD4}
+
+/* ══ C · STATEMENT (LinkedIn posts) ══ */
+.cC{background:var(--lime);padding:72px 80px;flex-direction:column;justify-content:space-between}
+.cC .k{font-family:var(--mono);font-size:24px;letter-spacing:.14em}
+.cC q{quotes:none;font-weight:500;font-size:62px;line-height:1.22;letter-spacing:-.024em;display:block}
+.cC .foot{display:flex;align-items:center;gap:18px}
+.cC .foot canvas{width:44px;height:44px;image-rendering:pixelated}
+.cC .foot span{font-family:var(--pix);font-weight:700;font-size:24px}
+.cC .foot em{font-style:normal;font-family:var(--mono);font-size:22px;color:#4A5A0E;margin-left:auto;letter-spacing:.06em}
+
+/* ══ D · MINIMAL / PLATE ══ */
+.cD{background:var(--plate);padding:0;flex-direction:column;justify-content:center;align-items:center;
+  box-shadow:inset 12px 12px 0 var(--hi), inset -12px -12px 0 var(--sh)}
+.cD .inner{background:var(--paper);border:8px solid var(--ink);padding:56px 64px;width:88%;text-align:center}
+.cD .k{font-family:var(--mono);font-size:22px;letter-spacing:.14em;color:var(--mute);margin-bottom:26px}
+.cD h2{font-family:var(--pix);font-weight:700;font-size:52px;line-height:1.65}
+.cD h2 em{font-style:normal;color:var(--blue)}
+.cD .url{font-family:var(--mono);font-size:22px;letter-spacing:.07em;color:var(--blue);margin-top:28px}
+
+/* code */
+pre{font-family:var(--mono);font-size:11px;line-height:1.8;background:var(--panel);border:1px solid var(--line);
+  padding:14px;overflow-x:auto;color:#3C3C34}
+pre b{color:var(--blue);font-weight:400}
+
+/* favicon */
+.fav{display:flex;flex-wrap:wrap;gap:20px;align-items:flex-end}
+.fav figure{text-align:center}
+.fav canvas{image-rendering:pixelated;border:1px solid var(--line);display:block;margin-bottom:7px}
+.fav figcaption{font-family:var(--mono);font-size:8.5px;letter-spacing:.06em;color:var(--mute)}
+
+.rules{list-style:none;font-size:13.5px}
+.rules li{padding:9px 0 9px 26px;border-bottom:1px solid var(--line);position:relative;color:#3E3E36}
+.rules li:last-child{border-bottom:0}
+.rules li::before{content:"▸";position:absolute;left:4px;color:var(--blue)}
+.rules.no li::before{content:"✕";color:#C4482E}
+.rules code{font-family:var(--mono);font-size:12px;color:var(--blue)}
+
+.note{border-top:1px solid var(--line);background:var(--panel);padding:12px 18px;font-size:13px;color:#5C5C52;line-height:1.6}
+.note b{font-family:var(--mono);font-size:11px;color:var(--ink);font-weight:400}
+.warn{border-left:4px solid #C4482E}
+
+@media (max-width:520px){.sec-b{padding:18px 12px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="head">
+  <h1>SHARE CARDS</h1>
+  <p>1200×630, the size Open Graph and LinkedIn both use. The real constraint isn't the canvas — it's that in a mobile feed this renders about 340px wide.</p>
+</div>
+
+<!-- A -->
+<div class="sec">
+  <div class="sec-h"><span>A — HOMEPAGE</span><i>shareefpadar.com</i></div>
+  <div class="sec-b">
+    <div class="desc">Dark, so it stands out against LinkedIn's white feed — the single most useful thing a share card can do. Silkscreen carries it because the string is short by design.</div>
+    <div class="frame"><div class="card cA" data-scale>
+      <div class="top"><canvas data-logo data-c="#CDF22B"></canvas><span>SHAREEF PADAR</span></div>
+      <h2>SENIOR PRODUCT<br>DESIGNER WHO <em>SHIPS.</em></h2>
+      <div class="foot">
+        <p>B2B · FINTECH · DUBAI</p>
+        <span class="url">SHAREEFPADAR.COM</span>
+      </div>
+    </div></div>
+  </div>
+</div>
+
+<!-- B -->
+<div class="sec">
+  <div class="sec-h"><span>B — CASE STUDY</span><i>one per case study</i></div>
+  <div class="sec-b">
+    <div class="desc">Tab carries the domain, title stays in Geist because it's a sentence. The screenshot sits in the same sunk well as everywhere else, cropped tall so it reads at small size.</div>
+    <div class="frame"><div class="card cB" data-scale>
+      <div class="left">
+        <span class="tab">FINTECH</span>
+        <h2>Onboarding that feels fast without cutting corners</h2>
+        <div>
+          <div class="meta" style="margin-bottom:22px">SANAD · KYB VERIFICATION · CONCEPT</div>
+          <div class="who"><canvas data-logo data-c="#1E45FB"></canvas>SHAREEF PADAR</div>
+        </div>
+      </div>
+      <div class="right">
+        <div class="shot">
+          <b>Verify your business</b>
+          <div style="font-size:14px">Here's the whole path up front — no surprises.</div>
+          <div class="li"><i class="d"></i><span><b style="font-size:15px">Business details</b>~3 min</span></div>
+          <div class="li"><i></i><span><b style="font-size:15px">Owners</b>~4 min</span></div>
+          <div class="li"><i></i><span><b style="font-size:15px">Documents</b>~3 min</span></div>
+          <div class="li"><i></i><span><b style="font-size:15px">Review</b>~1 min</span></div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+</div>
+
+<!-- C -->
+<div class="sec">
+  <div class="sec-h"><span>C — STATEMENT</span><i>for LinkedIn posts</i></div>
+  <div class="sec-b">
+    <div class="desc">A quote card for your weekly posts. Lime fill so it stops a scroll, one line of Geist, attribution at the bottom. Swap the line per post — the template never changes.</div>
+    <div class="frame"><div class="card cC" data-scale>
+      <div class="k">ON DESIGNING FOR COMPLIANCE</div>
+      <q>Regulators decide what the steps are. Design decides how they feel.</q>
+      <div class="foot">
+        <canvas data-logo data-c="#14140F"></canvas>
+        <span>SHAREEF PADAR</span>
+        <em>SHAREEFPADAR.COM</em>
+      </div>
+    </div></div>
+  </div>
+  <div class="note"><b>Read</b> — this is the one doing the most work for your job search. Text posts get scrolled past; a lime card with one strong line stops the thumb.</div>
+</div>
+
+<!-- D -->
+<div class="sec">
+  <div class="sec-h"><span>D — FALLBACK</span><i>any page without its own card</i></div>
+  <div class="sec-b">
+    <div class="desc">About, Contact, 404 — anything without a bespoke card. Plate frame, nothing to update.</div>
+    <div class="frame"><div class="card cD" data-scale>
+      <div class="inner">
+        <div class="k">PORTFOLIO</div>
+        <h2>SHAREEF <em>PADAR</em></h2>
+        <div class="url">SHAREEFPADAR.COM</div>
+      </div>
+    </div></div>
+  </div>
+</div>
+
+<!-- FEED TEST -->
+<div class="sec">
+  <div class="sec-h"><span>THE FEED TEST</span><i>340px — actual mobile size</i></div>
+  <div class="sec-b">
+    <div class="desc">This is how big your card really is when someone scrolls past it on their phone. Anything you can't read here isn't on the card.</div>
+    <div class="feedrow">
+      <div>
+        <div class="feedlbl">A — HOMEPAGE</div>
+        <div class="frame small"><div class="card cA" data-scale>
+          <div class="top"><canvas data-logo data-c="#CDF22B"></canvas><span>SHAREEF PADAR</span></div>
+          <h2>SENIOR PRODUCT<br>DESIGNER WHO <em>SHIPS.</em></h2>
+          <div class="foot"><p>B2B · FINTECH · DUBAI</p><span class="url">SHAREEFPADAR.COM</span></div>
+        </div></div>
+      </div>
+      <div>
+        <div class="feedlbl">C — STATEMENT</div>
+        <div class="frame small"><div class="card cC" data-scale>
+          <div class="k">ON DESIGNING FOR COMPLIANCE</div>
+          <q>Regulators decide what the steps are. Design decides how they feel.</q>
+          <div class="foot"><canvas data-logo data-c="#14140F"></canvas><span>SHAREEF PADAR</span><em>SHAREEFPADAR.COM</em></div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+  <div class="note warn"><b>Rule</b> — nothing below 22px on the 1200px canvas. That's about 6px in feed, which is the floor.</div>
+</div>
+
+<!-- FAVICON -->
+<div class="sec">
+  <div class="sec-h"><span>FAVICON</span><i>same mark, four sizes</i></div>
+  <div class="sec-b">
+    <div class="desc">A pixel mark is the one case where a favicon is easier than usual — it's already designed for a 16px grid. Drawn once at 8×8 and scaled by whole multiples, so it stays crisp at every size.</div>
+    <div class="fav" id="fav"></div>
+  </div>
+  <div class="note"><b>Note</b> — ship <code style="font-family:var(--mono);color:var(--blue)">.ico</code> at 16/32, plus a 180px apple-touch-icon on the blue plate.</div>
+</div>
+
+<!-- META -->
+<div class="sec">
+  <div class="sec-h"><span>THE TAGS</span><i>per page</i></div>
+  <div class="sec-b">
+<pre>&lt;meta property="<b>og:title</b>" content="Onboarding that feels fast without cutting corners" /&gt;
+&lt;meta property="<b>og:description</b>" content="A six-screen KYB flow for a fictional business bank, designed and built as a working prototype." /&gt;
+&lt;meta property="<b>og:image</b>" content="https://shareefpadar.com/og/sanad.png" /&gt;
+&lt;meta property="<b>og:image:width</b>" content="1200" /&gt;
+&lt;meta property="<b>og:image:height</b>" content="630" /&gt;
+&lt;meta property="<b>og:type</b>" content="article" /&gt;
+&lt;meta name="<b>twitter:card</b>" content="summary_large_image" /&gt;</pre>
+    <div class="sub">Generating them</div>
+    <div class="desc" style="margin-bottom:0">You're on Next.js and Vercel, so these don't need to be exported by hand — <code style="font-family:var(--mono);color:var(--blue)">next/og</code> renders JSX to an image at request time. The card markup above is close to what you'd paste in, and every case study gets one automatically from its frontmatter.</div>
+  </div>
+</div>
+
+<!-- RULES -->
+<div class="sec">
+  <div class="sec-h"><span>RULES</span><i>short</i></div>
+  <div class="sec-b">
+    <ul class="rules">
+      <li>Nothing smaller than <code>22px</code> on the 1200px canvas</li>
+      <li>Six words maximum in the largest text</li>
+      <li>The URL appears on every card — it's the only call to action</li>
+      <li>Case study cards use the tab and the well, so the card looks like the page it opens</li>
+      <li>Dark or lime fill, never paper — the card has to break out of a white feed</li>
+    </ul>
+    <div class="sub">Never</div>
+    <ul class="rules no">
+      <li>Put a full case study title in Silkscreen</li>
+      <li>Rely on detail in a screenshot — crop to one legible element</li>
+      <li>Reuse one generic card across every page</li>
+      <li>Place anything important within 40px of an edge</li>
+    </ul>
+  </div>
+</div>
+
+</div>
+
+<script>
+/* scale 1200×630 cards to their container */
+function scale(){
+  document.querySelectorAll('[data-scale]').forEach(el=>{
+    const w=el.parentElement.clientWidth;
+    el.style.transform='scale('+(w/1200)+')';
+  });
+}
+addEventListener('resize',scale);
+
+/* logo */
+const LOGO=['..XXXX..','.XX..XX.','XX......','XX..XXX.','.XXXXXX.','.....XX.','.XX..XX.','..XXXX..'];
+function drawLogo(c,size,colour,bg){
+  c.width=size;c.height=size;
+  const x=c.getContext('2d'), s=size/8;
+  if(bg){x.fillStyle=bg;x.fillRect(0,0,size,size);}
+  x.fillStyle=colour;
+  for(let r=0;r<8;r++)for(let q=0;q<8;q++) if(LOGO[r][q]==='X') x.fillRect(q*s,r*s,s,s);
+}
+document.querySelectorAll('[data-logo]').forEach(c=>{
+  const size=Math.max(16,parseInt(getComputedStyle(c).width)||52);
+  drawLogo(c,64,c.dataset.c);
+  c.style.width=c.style.width||'';
+});
+
+/* favicon set */
+const fav=document.getElementById('fav');
+[[16,'16'],[32,'32'],[64,'64'],[180,'180 · APPLE TOUCH']].forEach(([sz,lab])=>{
+  const fig=document.createElement('figure');
+  const c=document.createElement('canvas');
+  drawLogo(c,sz,sz>=180?'#CDF22B':'#1E45FB',sz>=180?'#1E45FB':'#FAFAF8');
+  c.style.width=Math.max(sz,32)+'px';
+  c.style.height=Math.max(sz,32)+'px';
+  fig.appendChild(c);
+  const cap=document.createElement('figcaption');cap.textContent=lab;fig.appendChild(cap);
+  fav.appendChild(fig);
+});
+
+scale();
+document.fonts.ready.then(scale);
+</script>
+</body>
+</html>

@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ASCII portrait — pixel system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+@font-face{
+  font-family:'Departure Mono';
+  src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2409-1@1.0/DepartureMono-Regular.woff2') format('woff2');
+  font-weight:400;font-display:swap;
+}
+:root{
+  --u:4px; --f:60ms;
+  --lime:#CDF22B; --blue:#1E45FB; --ink:#14140F;
+  --paper:#FAFAF8; --panel:#F0F0EA; --line:#DEDED8; --mute:#87877A;
+  --plate:#D8D8D0; --hi:#FFFFFF; --sh:#8A8A80;
+  --mono:'Departure Mono',ui-monospace,monospace;
+  --pix:'Silkscreen',monospace;
+  --sans:'Geist',-apple-system,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:#E6E6E2;font-family:var(--sans);color:var(--ink);padding:20px 14px 60px;line-height:1.55}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.wrap{max-width:680px;margin:0 auto}
+
+.head{margin-bottom:22px}
+.head h1{font-family:var(--pix);font-weight:700;font-size:clamp(14px,3.8vw,18px);line-height:1.7;margin-bottom:12px}
+.head p{font-size:14px;color:#4A4A46;max-width:56ch}
+
+.sec{border:2px solid var(--ink);margin-bottom:16px;background:var(--paper)}
+.sec-h{display:flex;justify-content:space-between;gap:10px;padding:8px 14px;background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:11px;letter-spacing:.05em}
+.sec-h i{font-style:normal;opacity:.55;font-size:10px;text-align:right}
+.sec-b{padding:20px 18px 24px}
+.desc{font-size:13.5px;color:#5C5C52;margin-bottom:16px;max-width:52ch}
+
+.ctrl{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
+.opt{font-family:var(--mono);font-size:9px;letter-spacing:.05em;padding:6px 10px;border:2px solid var(--ink);
+  background:var(--paper);cursor:pointer;color:var(--ink)}
+.opt.on{background:var(--lime)}
+
+.art{font-family:var(--mono);font-size:7px;line-height:1;letter-spacing:.5px;white-space:pre;
+  user-select:none;touch-action:none;cursor:crosshair;overflow:hidden;
+  display:block;margin:0 auto;width:fit-content}
+.artbox{background:var(--paper);border:1px solid var(--line);padding:14px 8px;overflow:hidden;display:flex;justify-content:center}
+.artbox.night{background:#0B0B0C;border-color:#2A2A2E}
+.artbox.plate{background:var(--plate);box-shadow:inset var(--u) var(--u) 0 var(--hi), inset calc(var(--u)*-1) calc(var(--u)*-1) 0 var(--sh);border:3px solid var(--ink)}
+.hint{font-family:var(--mono);font-size:9px;letter-spacing:.08em;color:var(--mute);text-align:center;margin-top:12px}
+
+/* hero comp */
+.hero{background:var(--paper);border:2px solid var(--ink);padding:26px 18px 30px;display:grid;gap:24px}
+@media(min-width:600px){.hero{grid-template-columns:1fr 1fr;align-items:center}}
+.hero .eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--mute);margin-bottom:10px}
+.hero h2{font-family:var(--pix);font-weight:700;font-size:clamp(15px,3.6vw,20px);line-height:1.75;margin-bottom:16px}
+.hero h2 em{font-style:normal;color:var(--blue)}
+.hero p{font-size:14.5px;color:#4A4A42;margin-bottom:20px;max-width:34ch}
+.btns{display:flex;gap:9px;flex-wrap:wrap}
+.b{font-family:var(--pix);font-size:10px;line-height:1;border:8px solid transparent;border-image-slice:8 fill;
+  border-image-repeat:stretch;padding:6px 10px;cursor:pointer;background:none;color:var(--ink)}
+
+.rules{list-style:none;font-size:14px}
+.rules li{padding:10px 0 10px 26px;border-bottom:1px solid var(--line);position:relative;color:#3E3E36}
+.rules li:last-child{border-bottom:0}
+.rules li::before{content:"▸";position:absolute;left:4px;color:var(--blue)}
+.rules.no li::before{content:"✕";color:#C4482E}
+.rules code{font-family:var(--mono);font-size:12px;color:var(--blue)}
+
+.note{border-top:1px solid var(--line);background:var(--panel);padding:12px 18px;font-size:13px;color:#5C5C52;line-height:1.6}
+.note b{font-family:var(--mono);font-size:11px;color:var(--ink);font-weight:400}
+.warn{border-left:4px solid #C4482E}
+
+@media (max-width:520px){.sec-b{padding:16px 12px 20px}.art{font-size:6px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="head">
+  <h1>ASCII PORTRAIT</h1>
+  <p>The mechanic survives the redesign intact — it's already the most on-theme thing on your current site. What changes is the ramp and the palette.</p>
+</div>
+
+<!-- RAMP -->
+<div class="sec">
+  <div class="sec-h"><span>01 — THE RAMP</span><i>move over it</i></div>
+  <div class="sec-b">
+    <div class="desc">Your current version uses a classic ASCII ramp — punctuation and letters standing in for tone. Swapping to block characters turns the same mechanic into dithering, which is what the rest of your system already speaks.</div>
+    <div class="ctrl">
+      <button class="opt" data-ramp="ascii">ASCII — CURRENT</button>
+      <button class="opt on" data-ramp="dither">DITHER BLOCKS</button>
+      <button class="opt" data-ramp="mixed">MIXED</button>
+      <button class="opt" data-ramp="solid">SOLID PIXELS</button>
+    </div>
+    <div class="artbox"><pre class="art" id="a1"></pre></div>
+    <div class="hint">MOVE ACROSS THE PORTRAIT — DENSITY FOLLOWS THE POINTER</div>
+  </div>
+  <div class="note"><b>Read</b> — dither blocks tie it directly to the dissolve you already use for screenshots. Same visual language, no new idea introduced.</div>
+</div>
+
+<!-- COLOUR -->
+<div class="sec">
+  <div class="sec-h"><span>02 — PALETTE</span><i>lime replaces magenta</i></div>
+  <div class="sec-b">
+    <div class="desc">Currently the accent characters are magenta. Same treatment with lime picking out the densest cells, on the three surfaces you might place it.</div>
+    <div class="ctrl">
+      <button class="opt on" data-surface="paper">ON PAPER</button>
+      <button class="opt" data-surface="plate">IN A PLATE</button>
+      <button class="opt" data-surface="night">ON DARK</button>
+    </div>
+    <div class="artbox" id="box2"><pre class="art" id="a2"></pre></div>
+  </div>
+  <div class="note"><b>Note</b> — on dark it stops reading as a document and starts reading as a display. Another argument for the dark hero block.</div>
+</div>
+
+<!-- MOBILE -->
+<div class="sec">
+  <div class="sec-h"><span>03 — MOBILE</span><i>no pointer exists</i></div>
+  <div class="sec-b">
+    <div class="desc">The whole effect is hover-driven, so on a phone it currently just sits there — and your hero is the first thing most recruiters see on mobile. Three fallbacks, all stepped.</div>
+    <div class="ctrl">
+      <button class="opt on" data-mob="sweep">AUTO SWEEP</button>
+      <button class="opt" data-mob="pulse">BREATHE</button>
+      <button class="opt" data-mob="scroll">SCROLL-LINKED</button>
+      <button class="opt" data-mob="tap">TAP TO RESOLVE</button>
+    </div>
+    <div class="artbox"><pre class="art" id="a3"></pre></div>
+    <div class="hint" id="mobHint">A BAND OF DENSITY SWEEPS ACROSS ON A LOOP</div>
+  </div>
+  <div class="note"><b>Read</b> — sweep is the safest. Scroll-linked is the most interesting, because it ties the portrait resolving to the visitor arriving.</div>
+</div>
+
+<!-- IN CONTEXT -->
+<div class="sec">
+  <div class="sec-h"><span>04 — IN THE HERO</span><i>composed</i></div>
+  <div class="sec-b">
+    <div class="hero">
+      <div>
+        <div class="eyebrow">I'M SHAREEF PADAR</div>
+        <h2>SENIOR PRODUCT<br>DESIGNER WHO <em>SHIPS.</em></h2>
+        <p>Six years in B2B UX, from research to shipped interface. Based in Dubai.</p>
+        <div class="btns">
+          <button class="b" data-set="blue" style="color:#CDF22B">VIEW WORK</button>
+          <button class="b" data-set="neutral">RÉSUMÉ</button>
+        </div>
+      </div>
+      <div><pre class="art" id="a4"></pre></div>
+    </div>
+  </div>
+  <div class="note"><b>Note</b> — the portrait sits at the same character size as your meta labels, so it reads as part of the mono layer rather than as an image dropped in.</div>
+</div>
+
+<!-- RULES -->
+<div class="sec">
+  <div class="sec-h"><span>05 — RULES</span><i>short</i></div>
+  <div class="sec-b">
+    <ul class="rules">
+      <li>Density steps through <code>4 discrete levels</code>, never a smooth gradient</li>
+      <li>Character grid aligns to the same cell size as the mono label layer</li>
+      <li>Lime marks only the densest cells — never more than about a fifth of them</li>
+      <li>Pointer influence has a hard radius, quantised to whole cells</li>
+      <li>Mobile always has a non-hover fallback running</li>
+    </ul>
+    <div class="desc" style="margin:20px 0 10px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);border-bottom:1px dashed var(--line);padding-bottom:6px">Never</div>
+    <ul class="rules no">
+      <li>Smooth-interpolate the density — it becomes a blur effect, not a dither</li>
+      <li>Let the grid reflow mid-animation on resize</li>
+      <li>Run it behind readable text</li>
+    </ul>
+  </div>
+</div>
+
+</div>
+
+<script>
+/* ── ramps: sparse → dense ── */
+const RAMPS={
+  ascii:[' ','.',':','-','=','+','*','%','$','@','B'],
+  dither:[' ','·','░','░','▒','▒','▓','▓','█','█','█'],
+  mixed :[' ','·','.','░','▒','+','▓','#','█','█','█'],
+  solid :[' ',' ','▪','▪','■','■','█','█','█','█','█']
+};
+let RAMP='dither';
+
+/* ── build a bust silhouette on an offscreen canvas ── */
+const COLS=54, ROWS=44;
+const src=document.createElement('canvas');
+src.width=COLS; src.height=ROWS;
+(function draw(){
+  const x=src.getContext('2d');
+  x.fillStyle='#000'; x.fillRect(0,0,COLS,ROWS);
+  const g=x.createRadialGradient(COLS*.44,ROWS*.30,2,COLS*.5,ROWS*.34,15);
+  g.addColorStop(0,'#fff'); g.addColorStop(1,'#4a4a4a');
+  /* head */
+  x.fillStyle=g;
+  x.beginPath(); x.ellipse(COLS*.5,ROWS*.32,COLS*.17,ROWS*.22,0,0,7); x.fill();
+  /* hair mass */
+  x.fillStyle='#6a6a6a';
+  x.beginPath(); x.ellipse(COLS*.5,ROWS*.20,COLS*.19,ROWS*.13,0,0,7); x.fill();
+  /* neck */
+  x.fillStyle='#8a8a8a';
+  x.fillRect(COLS*.44,ROWS*.48,COLS*.12,ROWS*.09);
+  /* shoulders */
+  const s=x.createLinearGradient(0,ROWS*.55,0,ROWS);
+  s.addColorStop(0,'#d8d8d8'); s.addColorStop(1,'#2a2a2a');
+  x.fillStyle=s;
+  x.beginPath();
+  x.moveTo(COLS*.14,ROWS);
+  x.quadraticCurveTo(COLS*.20,ROWS*.60,COLS*.42,ROWS*.55);
+  x.lineTo(COLS*.58,ROWS*.55);
+  x.quadraticCurveTo(COLS*.80,ROWS*.60,COLS*.86,ROWS);
+  x.closePath(); x.fill();
+})();
+const DATA=src.getContext('2d').getImageData(0,0,COLS,ROWS).data;
+const BASE=[];
+for(let r=0;r<ROWS;r++){
+  BASE[r]=[];
+  for(let c=0;c<COLS;c++){
+    const i=(r*COLS+c)*4;
+    BASE[r][c]=(DATA[i]*.3+DATA[i+1]*.59+DATA[i+2]*.11)/255;
+  }
+}
+
+/* ── render ── */
+function render(el,px,py,opts={}){
+  const ramp=RAMPS[opts.ramp||RAMP];
+  const R=opts.radius||9;
+  let out='';
+  for(let r=0;r<ROWS;r++){
+    for(let c=0;c<COLS;c++){
+      let v=BASE[r][c];
+      if(px!==null){
+        const d=Math.hypot(c-px,(r-py)*1.6);
+        if(d<R) v+=(1-d/R)*.55;
+      }
+      /* quantise to 4 discrete levels, then map onto the ramp */
+      const q=Math.min(3,Math.floor(v*4))/3;
+      const idx=Math.min(ramp.length-1,Math.round(q*(ramp.length-1)));
+      const ch=ramp[idx];
+      if(idx>=ramp.length-2 && ch!==' '){
+        out+='<span style="color:'+(opts.accent||'#CDF22B')+'">'+ch+'</span>';
+      } else {
+        out+=ch==='&'?'&amp;':ch;
+      }
+    }
+    out+='\n';
+  }
+  el.innerHTML=out;
+}
+
+/* ── pointer wiring ── */
+function wire(el,opts={}){
+  let raf=false, px=null, py=null;
+  function upd(){ render(el,px,py,opts); raf=false; }
+  el.addEventListener('pointermove',e=>{
+    const b=el.getBoundingClientRect();
+    px=Math.round(((e.clientX-b.left)/b.width)*COLS);
+    py=Math.round(((e.clientY-b.top)/b.height)*ROWS);
+    if(!raf){requestAnimationFrame(upd);raf=true;}
+  });
+  el.addEventListener('pointerleave',()=>{px=null;py=null;render(el,null,null,opts)});
+  render(el,null,null,opts);
+}
+
+const a1=document.getElementById('a1'), a2=document.getElementById('a2'),
+      a3=document.getElementById('a3'), a4=document.getElementById('a4');
+wire(a1);
+wire(a4,{radius:8});
+
+/* ramp switch */
+document.querySelectorAll('[data-ramp]').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('[data-ramp]').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on'); RAMP=b.dataset.ramp;
+    render(a1,null,null,{}); render(a4,null,null,{radius:8});
+  });
+});
+
+/* surface switch */
+let surf={accent:'#CDF22B',color:'#14140F'};
+const box2=document.getElementById('box2');
+function paint2(){
+  box2.className='artbox'+(surf.cls?' '+surf.cls:'');
+  a2.style.color=surf.color;
+  render(a2,null,null,{accent:surf.accent});
+}
+document.querySelectorAll('[data-surface]').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('[data-surface]').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    const s=b.dataset.surface;
+    surf = s==='night' ? {cls:'night',color:'#6A6A62',accent:'#CDF22B'}
+         : s==='plate' ? {cls:'plate',color:'#4A4A42',accent:'#1E45FB'}
+         : {cls:'',color:'#14140F',accent:'#CDF22B'};
+    paint2();
+  });
+});
+wire(a2); paint2();
+
+/* mobile fallbacks */
+let mobMode='sweep', mobT=0, mobId;
+const hint=document.getElementById('mobHint');
+const HINTS={
+  sweep:'A BAND OF DENSITY SWEEPS ACROSS ON A LOOP',
+  pulse:'DENSITY RISES AND FALLS FROM THE CENTRE',
+  scroll:'SCROLL THE PAGE — RESOLUTION FOLLOWS POSITION',
+  tap:'TAP THE PORTRAIT TO RESOLVE IT'
+};
+function mobFrame(){
+  mobT++;
+  if(mobMode==='sweep'){
+    const x=(mobT*2)%(COLS+24)-12;
+    render(a3,x,ROWS*.42,{radius:11});
+  } else if(mobMode==='pulse'){
+    const r=6+Math.round(Math.abs(Math.sin(mobT/18))*4)*1.5;
+    render(a3,COLS*.5,ROWS*.36,{radius:r});
+  }
+}
+function startMob(){
+  clearInterval(mobId);
+  if(mobMode==='sweep'||mobMode==='pulse') mobId=setInterval(mobFrame,120);
+  else render(a3,null,null,{});
+}
+document.querySelectorAll('[data-mob]').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('[data-mob]').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on'); mobMode=b.dataset.mob; hint.textContent=HINTS[mobMode];
+    startMob();
+  });
+});
+a3.addEventListener('click',()=>{
+  if(mobMode!=='tap')return;
+  let step=0;
+  const id=setInterval(()=>{
+    step++;
+    render(a3,COLS*.5,ROWS*.36,{radius:step*5});
+    if(step>=5){clearInterval(id);setTimeout(()=>render(a3,null,null,{}),700);}
+  },60);
+});
+addEventListener('scroll',()=>{
+  if(mobMode!=='scroll')return;
+  const b=a3.getBoundingClientRect();
+  const p=1-Math.min(1,Math.max(0,(b.top+b.height)/(innerHeight+b.height)));
+  render(a3,COLS*.5,ROWS*.36,{radius:Math.round(p*16)});
+},{passive:true});
+startMob();
+
+/* buttons */
+function mix(h,t,a){const g=x=>parseInt(h.slice(x,x+2),16),k=x=>parseInt(t.slice(x,x+2),16);
+  const c=(p,q)=>Math.round(p+(q-p)*a).toString(16).padStart(2,'0');
+  return '#'+c(g(1),k(1))+c(g(3),k(3))+c(g(5),k(5));}
+const lt=(c,a)=>mix(c,'#ffffff',a), dkn=(c,a)=>mix(c,'#000000',a);
+const SETS={blue:{face:'#1E45FB',hi:lt('#1E45FB',.38),shade:dkn('#1E45FB',.45),outline:'#0A0E2E'},
+            neutral:{face:'#E2E2DC',hi:'#FFFFFF',shade:'#A6A69E',outline:'#14140F'}};
+const BODY=['.DDDD.','DHHHSD','DHFFSD','DHFFSD','DSSSSD','.DDDD.'];
+document.querySelectorAll('[data-set]').forEach(el=>{
+  const p=SETS[el.dataset.set];
+  const M={'.':null,D:p.outline,H:p.hi,S:p.shade,F:p.face};
+  const c=document.createElement('canvas');c.width=24;c.height=24;
+  const x=c.getContext('2d');
+  for(let r=0;r<6;r++)for(let q=0;q<6;q++){const col=M[BODY[r][q]];
+    if(col){x.fillStyle=col;x.fillRect(q*4,r*4,4,4);}}
+  el.style.borderImageSource='url('+c.toDataURL()+')';
+});
+</script>
+</body>
+</html>

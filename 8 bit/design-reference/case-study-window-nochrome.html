@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Case study cards — window, no chrome</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Geist:wght@400;500;600&family=Instrument+Serif&display=swap" rel="stylesheet">
+<style>
+@font-face{
+  font-family:'Departure Mono';
+  src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2409-1@1.0/DepartureMono-Regular.woff2') format('woff2');
+  font-weight:400;font-display:swap;
+}
+:root{
+  --lime:#CDF22B; --blue:#1E45FB; --ink:#14140F;
+  --paper:#FAFAF8; --panel:#F0F0EA; --line:#dedeD8; --mute:#87877a;
+  --plate:#D8D8D0; --hi:#FFFFFF; --sh:#8A8A80;
+  --mono:'Departure Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:#e6e6e2;font-family:'Geist',-apple-system,system-ui,sans-serif;color:var(--ink);padding:20px 14px 60px;line-height:1.5}
+:focus-visible{outline:3px solid var(--blue);outline-offset:4px}
+.wrap{max-width:660px;margin:0 auto}
+
+.head{margin-bottom:24px}
+.head h1{font-family:'Silkscreen',monospace;font-size:clamp(14px,4vw,18px);font-weight:400;line-height:1.7;margin-bottom:12px}
+.head p{font-size:14px;color:#4a4a46;max-width:54ch}
+
+.sec{border:2px solid var(--ink);margin-bottom:16px;background:var(--paper)}
+.sec-h{display:flex;justify-content:space-between;gap:10px;padding:8px 14px;background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:11px;letter-spacing:.05em}
+.sec-h i{font-style:normal;opacity:.55;font-size:10px;text-align:right}
+.sec-b{padding:22px 18px 26px}
+.desc{font-size:13px;color:#5c5c52;margin-bottom:18px;max-width:48ch}
+
+/* ── stand-in screenshot ── */
+.shot{display:flex;aspect-ratio:16/10;font-size:6px;line-height:1.4;overflow:hidden;background:#fff}
+.shot .side{width:34%;background:#16181D;color:#fff;padding:9px 8px;display:flex;flex-direction:column;gap:7px}
+.shot .brand{display:flex;align-items:center;gap:4px;font-weight:600;font-size:7px}
+.shot .brand b{width:9px;height:9px;background:#fff;color:#16181D;display:grid;place-items:center;border-radius:2px;font-size:6px;flex:none}
+.shot .brand span{opacity:.5;font-size:5px;letter-spacing:.1em;display:block;font-weight:400}
+.shot .chip{border:1px solid #333;border-radius:3px;padding:4px 5px;color:#8A8F99;font-size:5px}
+.shot .co{border:1px solid #2A2E36;border-radius:3px;padding:5px;font-size:6px}
+.shot .hold{display:inline-block;margin-top:3px;background:#4A3A12;color:#E8B93C;border-radius:6px;padding:1px 5px;font-size:5px}
+.shot .ref{margin-top:auto;font-size:5px;color:#6A7080;letter-spacing:.08em}
+.shot .ref b{display:block;color:#fff;font-family:var(--mono);font-size:7px;margin:2px 0;letter-spacing:.04em}
+.shot .main{flex:1;background:#F7F7F5;padding:9px 10px;display:flex;flex-direction:column;gap:6px}
+.shot .top{display:flex;justify-content:space-between;font-size:5px;color:#6A7080;gap:6px}
+.shot .top s{text-decoration:none;color:#1A7F37}
+.shot .eyebrow{font-size:4.5px;letter-spacing:.14em;color:#8A8F99}
+.shot h4{font-family:'Instrument Serif',Georgia,serif;font-size:11px;font-weight:400;color:#16181D}
+.shot .lead{font-size:5.5px;color:#5A5F6B}
+.shot .list{background:#fff;border:1px solid #E6E6E2;border-radius:4px;padding:6px 7px;display:flex;flex-direction:column;gap:5px}
+.shot .li{display:flex;align-items:center;gap:5px;font-size:5.5px}
+.shot .li i{width:8px;height:8px;border-radius:50%;border:1px solid #D6D6D2;display:grid;place-items:center;font-style:normal;font-size:4.5px;color:#8A8F99;flex:none}
+.shot .li i.ok{background:#1A7F37;border-color:#1A7F37;color:#fff}
+.shot .li i.now{border-color:#E8B93C;color:#B98A12}
+.shot .li b{font-weight:600;display:block;color:#16181D}
+.shot .li em{font-style:normal;color:#8A8F99;font-size:5px}
+.shot .li u{text-decoration:none;margin-left:auto;color:#8A8F99;font-size:5px;flex:none}
+
+/* ── shared card parts ── */
+.tagrow{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.tag{font-family:var(--mono);font-size:9px;letter-spacing:.08em;padding:4px 7px;border:1px solid var(--ink);background:var(--paper)}
+.tag.on{background:var(--lime)}
+.cs-title{font-size:20px;font-weight:500;line-height:1.35;margin-bottom:7px;letter-spacing:-.01em}
+.cs-sub{font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:var(--mute);margin-bottom:11px}
+.cs-desc{font-size:14px;color:#54544a;line-height:1.6;margin-bottom:16px;max-width:44ch}
+.cta{font-family:'Silkscreen',monospace;font-size:11px;letter-spacing:.03em;line-height:1;
+  border:8px solid transparent;border-image-slice:8 fill;border-image-repeat:stretch;
+  padding:7px 12px;cursor:pointer;background:none;display:inline-block;text-decoration:none;color:var(--ink)}
+
+/* the plate: bevelled body, no chrome */
+.plate{background:var(--plate);border:3px solid var(--ink);
+  box-shadow:inset 4px 4px 0 var(--hi), inset -4px -4px 0 var(--sh)}
+.well{box-shadow:0 0 0 3px var(--ink), inset 4px 4px 0 rgba(0,0,0,.4)}
+.foot{background:var(--paper);border-top:3px solid var(--ink);padding:16px 14px 18px}
+
+/* A — plate */
+.wA{padding:10px}
+.wA .foot{margin:10px -10px -10px}
+
+/* B — bezel */
+.wB{padding:20px 18px 22px;position:relative}
+.wB .well{box-shadow:0 0 0 3px var(--ink), inset 6px 6px 0 rgba(0,0,0,.45)}
+.wB .led{position:absolute;right:20px;bottom:9px;display:flex;gap:5px;align-items:center}
+.wB .led b{width:7px;height:7px;background:var(--lime);display:block;box-shadow:0 0 0 1px rgba(0,0,0,.35)}
+.wB .led span{font-family:var(--mono);font-size:8px;letter-spacing:.1em;color:#6E6E64}
+.wB .foot{margin:16px -18px -22px}
+
+/* C — bottom status strip */
+.wC{padding:10px}
+.wC .strip{display:flex;justify-content:space-between;align-items:center;gap:10px;
+  margin:10px -10px -10px;padding:7px 12px;background:var(--ink);color:var(--paper);
+  font-family:var(--mono);font-size:10px;letter-spacing:.06em}
+.wC .strip s{text-decoration:none;color:var(--lime)}
+.wC .foot{border-top:0;background:none;padding:16px 0 0}
+
+/* D — notched tab on the frame */
+.wD{padding:10px;position:relative;margin-top:16px}
+.wD .tab{position:absolute;top:-16px;left:14px;background:var(--lime);border:3px solid var(--ink);
+  border-bottom:0;padding:4px 10px 5px;font-family:var(--mono);font-size:10px;letter-spacing:.07em;
+  clip-path:polygon(4px 0,calc(100% - 4px) 0,calc(100% - 4px) 4px,100% 4px,100% 100%,0 100%,0 4px,4px 4px)}
+.wD .foot{margin:10px -10px -10px}
+
+/* E — dark plate */
+.wE{padding:14px;background:#1C1C1E;border-color:#000;
+  box-shadow:inset 4px 4px 0 #3A3A3E, inset -4px -4px 0 #08080A}
+.wE .well{box-shadow:0 0 0 3px #000, inset 5px 5px 0 rgba(0,0,0,.6)}
+.wE .foot{margin:14px -14px -14px;background:#0F0F11;border-top:3px solid #000;color:#F2F2EE}
+.wE .cs-title{color:#F2F2EE}
+.wE .cs-desc{color:#9a9a94}
+.wE .tag{background:#1C1C1E;border-color:#4A4A4E;color:#B4B4AE}
+.wE .tag.on{background:var(--lime);border-color:var(--lime);color:var(--ink)}
+
+.grid{display:grid;gap:30px}
+@media(min-width:560px){.grid.two{grid-template-columns:1fr 1fr}.grid.two .cs-title{font-size:16px}}
+
+.note{border-top:1px solid var(--line);background:var(--panel);padding:13px 18px;font-size:13px;color:#5c5c52;line-height:1.6}
+.note b{font-family:var(--mono);font-size:11px;color:var(--ink);font-weight:400}
+
+@media (max-width:520px){.sec-b{padding:18px 14px 22px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="head">
+  <h1>WINDOW,<br>NO CHROME</h1>
+  <p>The plate and the recessed screen, without the title bar. Turns out the bar was carrying the retro signal — losing it leaves the physical quality behind.</p>
+</div>
+
+<!-- A -->
+<div class="sec">
+  <div class="sec-h"><span>A — PLATE</span><i>bevel + recessed screen</i></div>
+  <div class="sec-b">
+    <div class="desc">A raised bevelled body with the screenshot sunk into it. Nothing but the two bevel directions — raised for the case, sunk for the screen.</div>
+    <div class="plate wA">
+      <div class="well"><div class="shot" data-shot></div></div>
+      <div class="foot">
+        <div class="tagrow"><span class="tag on">B2B FINTECH</span><span class="tag">CONCEPT</span></div>
+        <h3 class="cs-title">Telling a frozen business what's actually happening</h3>
+        <div class="cs-sub">MIZAN · ACCOUNT HOLDS</div>
+        <p class="cs-desc">Account-hold communication for business banking, grounded in real published complaints.</p>
+        <a href="#0" class="cta" data-set="blue" style="color:#CDF22B">READ CASE STUDY</a>
+      </div>
+    </div>
+  </div>
+  <div class="note"><b>Read</b> — cleanest. The device metaphor survives without a single piece of OS furniture.</div>
+</div>
+
+<!-- B -->
+<div class="sec">
+  <div class="sec-h"><span>B — BEZEL</span><i>thicker case, indicator</i></div>
+  <div class="sec-b">
+    <div class="desc">More plate around the screen, deeper recess, one small lime indicator. Reads as hardware rather than software — a monitor instead of a window.</div>
+    <div class="plate wB">
+      <div class="well"><div class="shot" data-shot></div></div>
+      <div class="led"><b></b><span>MIZAN</span></div>
+      <div class="foot">
+        <div class="tagrow"><span class="tag on">B2B FINTECH</span><span class="tag">CONCEPT</span></div>
+        <h3 class="cs-title">Telling a frozen business what's actually happening</h3>
+        <p class="cs-desc">Account-hold communication for business banking, grounded in real published complaints.</p>
+        <a href="#0" class="cta" data-set="blue" style="color:#CDF22B">READ CASE STUDY</a>
+      </div>
+    </div>
+  </div>
+  <div class="note"><b>Read</b> — the indicator is the only decoration, and it earns its place by labelling the project.</div>
+</div>
+
+<!-- C -->
+<div class="sec">
+  <div class="sec-h"><span>C — STATUS STRIP</span><i>label moved to the bottom</i></div>
+  <div class="sec-b">
+    <div class="desc">If you want a labelled band, put it underneath. At the bottom it reads as a status readout rather than a title bar, and it carries the project and role without any controls.</div>
+    <div class="plate wC">
+      <div class="well"><div class="shot" data-shot></div></div>
+      <div class="strip"><span>MIZAN · ACCOUNT HOLDS</span><s>CONCEPT</s></div>
+      <div class="foot">
+        <div class="tagrow"><span class="tag on">B2B FINTECH</span></div>
+        <h3 class="cs-title">Telling a frozen business what's actually happening</h3>
+        <p class="cs-desc">Account-hold communication for business banking, grounded in real published complaints.</p>
+        <a href="#0" class="cta" data-set="blue" style="color:#CDF22B">READ CASE STUDY</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- D -->
+<div class="sec">
+  <div class="sec-h"><span>D — NOTCHED TAB</span><i>label built into the frame</i></div>
+  <div class="sec-b">
+    <div class="desc">A small tab grows out of the top edge carrying one word. Same notched geometry as the buttons, so it belongs — and it never looks like a control.</div>
+    <div class="plate wD">
+      <span class="tab">FINTECH</span>
+      <div class="well"><div class="shot" data-shot></div></div>
+      <div class="foot">
+        <div class="tagrow"><span class="tag">CONCEPT</span><span class="tag">2025</span></div>
+        <h3 class="cs-title">Telling a frozen business what's actually happening</h3>
+        <div class="cs-sub">MIZAN · ACCOUNT HOLDS</div>
+        <p class="cs-desc">Account-hold communication for business banking, grounded in real published complaints.</p>
+        <a href="#0" class="cta" data-set="blue" style="color:#CDF22B">READ CASE STUDY</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- E -->
+<div class="sec">
+  <div class="sec-h"><span>E — DARK PLATE</span><i>same build, dark case</i></div>
+  <div class="sec-b">
+    <div class="desc">The plate goes near-black so the screenshot becomes the only lit surface on the card. Strongest separation between your chrome and the work.</div>
+    <div class="plate wE">
+      <div class="well"><div class="shot" data-shot></div></div>
+      <div class="foot">
+        <div class="tagrow"><span class="tag on">B2B FINTECH</span><span class="tag">CONCEPT</span></div>
+        <h3 class="cs-title">Telling a frozen business what's actually happening</h3>
+        <p class="cs-desc">Account-hold communication for business banking, grounded in real published complaints.</p>
+        <a href="#0" class="cta" data-set="blue" style="color:#CDF22B">READ CASE STUDY</a>
+      </div>
+    </div>
+  </div>
+  <div class="note"><b>Read</b> — worth testing against A. Dark chrome makes light screenshots pop; it also commits the whole page to a heavier feel.</div>
+</div>
+
+<!-- GRID -->
+<div class="sec">
+  <div class="sec-h"><span>AS A GRID</span><i>treatment A, four up</i></div>
+  <div class="sec-b">
+    <div class="desc">One card always looks fine. Four together is where the frame either becomes a system or becomes noise.</div>
+    <div class="grid two">
+      <div class="plate wA">
+        <div class="well"><div class="shot" data-shot></div></div>
+        <div class="foot">
+          <div class="tagrow"><span class="tag on">FINTECH</span></div>
+          <h3 class="cs-title">Onboarding that feels fast without cutting corners</h3>
+          <div class="cs-sub">SANAD · KYB</div>
+        </div>
+      </div>
+      <div class="plate wA">
+        <div class="well"><div class="shot" data-shot></div></div>
+        <div class="foot">
+          <div class="tagrow"><span class="tag on">FINTECH</span></div>
+          <h3 class="cs-title">Telling a frozen business what's actually happening</h3>
+          <div class="cs-sub">MIZAN · ACCOUNT HOLDS</div>
+        </div>
+      </div>
+      <div class="plate wA">
+        <div class="well"><div class="shot" data-shot></div></div>
+        <div class="foot">
+          <div class="tagrow"><span class="tag">MARKETPLACE</span></div>
+          <h3 class="cs-title">Booking warehouse space in under 24 hours</h3>
+          <div class="cs-sub">CARGOZ CONNECT</div>
+        </div>
+      </div>
+      <div class="plate wA">
+        <div class="well"><div class="shot" data-shot></div></div>
+        <div class="foot">
+          <div class="tagrow"><span class="tag">CONVERSATIONAL</span></div>
+          <h3 class="cs-title">An agent-side assistant that doesn't guess</h3>
+          <div class="cs-sub">PROPERTY FINDER</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="note"><b>Note</b> — headings stay in the body face. Full sentences carrying the finding are exactly the text that must never be bitmap.</div>
+</div>
+
+</div>
+
+<script>
+const SHOT=`
+<div class="side">
+  <div class="brand"><b>M</b><div>Mizan<span>BUSINESS</span></div></div>
+  <div class="chip">Concept UI · fictional product · not any real bank's interface</div>
+  <div class="co">Meridian Trading FZ-LLC<span class="hold">On hold</span></div>
+  <div class="ref">CASE REFERENCE<b>MZ-4418-06</b>Quote this on any call.</div>
+</div>
+<div class="main">
+  <div class="top"><span><s>&#9679;</s> Working day 6 of up to 10</span><span>Updated today, 09:12</span></div>
+  <div class="eyebrow">REVIEW STATUS</div>
+  <h4>Where your review actually is</h4>
+  <div class="lead">We can't share the details of a compliance review, but we can always tell you which stage it's in and when it last moved.</div>
+  <div class="list">
+    <div class="li"><i class="ok">&#10003;</i><span><b>Documents received</b><em>All 4 files logged</em></span><u>Day 1</u></div>
+    <div class="li"><i class="now">2</i><span><b>Compliance review</b><em>In progress</em></span><u>Now</u></div>
+    <div class="li"><i>3</i><span><b>External verification</b><em>Not started</em></span><u>&mdash;</u></div>
+    <div class="li"><i>4</i><span><b>Decision &amp; reactivation</b><em>Not started</em></span><u>&mdash;</u></div>
+  </div>
+</div>`;
+document.querySelectorAll('[data-shot]').forEach(el=>el.innerHTML=SHOT);
+
+function mix(hex,t,a){
+  const h=x=>parseInt(hex.slice(x,x+2),16), g=x=>parseInt(t.slice(x,x+2),16);
+  const c=(p,q)=>Math.round(p+(q-p)*a).toString(16).padStart(2,'0');
+  return '#'+c(h(1),g(1))+c(h(3),g(3))+c(h(5),g(5));
+}
+const lt=(c,a)=>mix(c,'#ffffff',a), dk=(c,a)=>mix(c,'#000000',a);
+const B='#1E45FB';
+const SETS={blue:{face:B,hi:lt(B,.38),shade:dk(B,.45),outline:'#0A0E2E'}};
+const BODY=['.DDDD.','DHHHSD','DHFFSD','DHFFSD','DSSSSD','.DDDD.'];
+function frame(p,scale,hover){
+  const F=hover?lt(p.face,.14):p.face;
+  const M={'.':null,D:p.outline,H:p.hi,S:p.shade,F};
+  const c=document.createElement('canvas');
+  c.width=6*scale;c.height=6*scale;
+  const x=c.getContext('2d');
+  for(let r=0;r<6;r++)for(let q=0;q<6;q++){
+    const col=M[BODY[r][q]];
+    if(col){x.fillStyle=col;x.fillRect(q*scale,r*scale,scale,scale);}
+  }
+  return 'url('+c.toDataURL()+')';
+}
+document.querySelectorAll('[data-set]').forEach(el=>{
+  const p=SETS[el.dataset.set];
+  el.style.borderImageSource=frame(p,4,false);
+  el.addEventListener('pointerenter',()=>el.style.borderImageSource=frame(p,4,true));
+  el.addEventListener('pointerleave',()=>el.style.borderImageSource=frame(p,4,false));
+});
+</script>
+</body>
+</html>

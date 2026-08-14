@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sticky plate nav</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+@font-face{
+  font-family:'Departure Mono';
+  src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2409-1@1.0/DepartureMono-Regular.woff2') format('woff2');
+  font-weight:400;font-display:swap;
+}
+:root{
+  --u:4px;
+  --lime:#CDF22B; --blue:#1E45FB; --ink:#14140F;
+  --paper:#FAFAF8; --panel:#F0F0EA; --line:#DEDED8; --mute:#87877A;
+  --plate:#D8D8D0; --hi:#FFFFFF; --sh:#8A8A80;
+  --mono:'Departure Mono',ui-monospace,monospace;
+  --pix:'Silkscreen',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--paper);font-family:'Geist',-apple-system,system-ui,sans-serif;color:var(--ink);line-height:1.6}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.wrap{max-width:680px;margin:0 auto;padding:0 20px}
+
+/* ══════ THE NAV ══════ */
+.nav{position:sticky;top:0;z-index:40;background:var(--paper)}
+.nav .plate{
+  background:var(--plate);border:3px solid var(--ink);
+  box-shadow:inset var(--u) var(--u) 0 var(--hi), inset calc(var(--u)*-1) calc(var(--u)*-1) 0 var(--sh);
+  display:flex;align-items:stretch;gap:10px;padding:6px 8px;
+  max-width:680px;margin:0 auto;
+}
+/* flattened state — bevel drops, only the base rule survives */
+.nav.stuck .plate{
+  border-width:0 0 3px 0;
+  box-shadow:none;
+  background:var(--panel);
+  padding:3px 12px;
+  max-width:none;
+}
+.nav.stuck .inner{max-width:680px;margin:0 auto;width:100%;display:flex;align-items:stretch;gap:10px}
+.inner{display:flex;align-items:stretch;gap:10px;flex:1}
+
+.brand{display:flex;align-items:center;gap:8px;font-family:var(--pix);font-size:11px;padding:0 4px;text-decoration:none;color:var(--ink)}
+.logo{width:18px;height:18px;flex:none;image-rendering:pixelated}
+.links{margin-left:auto;display:flex;gap:2px;align-items:stretch}
+.links a{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-decoration:none;
+  padding:9px 11px;display:flex;align-items:center;color:var(--ink)}
+.links a:hover{background:rgba(0,0,0,.06)}
+.links a.on{background:var(--paper);box-shadow:inset 3px 3px 0 var(--sh), inset -3px -3px 0 var(--hi)}
+.nav.stuck .links a{padding:7px 10px}
+.nav.stuck .links a.on{background:var(--paper);box-shadow:inset 2px 2px 0 var(--sh)}
+
+/* résumé — a download, never a page, so never sunk */
+.dl{display:flex;align-items:center;gap:6px;margin-left:6px;align-self:center;
+  font-family:var(--pix);font-size:9px;letter-spacing:.03em;text-decoration:none;
+  border:8px solid transparent;border-image-slice:8 fill;border-image-repeat:stretch;
+  padding:5px 9px;color:var(--lime);cursor:pointer}
+.dl canvas{image-rendering:pixelated;width:9px;height:9px;flex:none}
+
+/* ══════ page content ══════ */
+.hero{padding:56px 0 40px;border-bottom:3px solid var(--ink)}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--mute);margin-bottom:12px}
+.hero h1{font-family:var(--pix);font-weight:700;font-size:clamp(16px,4.6vw,24px);line-height:1.75;margin-bottom:20px}
+.hero h1 em{font-style:normal;color:var(--blue)}
+.hero p{font-size:16px;color:#4A4A42;max-width:40ch;margin-bottom:26px}
+
+.marker{display:flex;align-items:baseline;gap:10px;margin:52px 0 18px}
+.marker b{font-family:var(--pix);font-weight:700;font-size:20px;color:var(--blue);line-height:1}
+.marker span{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--mute)}
+.marker i{flex:1;height:3px;background:var(--ink)}
+
+.plateCard{background:var(--plate);border:3px solid var(--ink);margin-bottom:30px;
+  box-shadow:inset var(--u) var(--u) 0 var(--hi), inset calc(var(--u)*-1) calc(var(--u)*-1) 0 var(--sh);
+  position:relative;margin-top:20px}
+.tab{position:absolute;top:-17px;left:14px;border:3px solid var(--ink);border-bottom:0;
+  padding:4px 10px 5px;font-family:var(--mono);font-size:10px;letter-spacing:.07em;background:var(--lime);
+  min-width:92px;text-align:center;
+  clip-path:polygon(4px 0,calc(100% - 4px) 0,calc(100% - 4px) 4px,100% 4px,100% 100%,0 100%,0 4px,4px 4px)}
+.well{margin:10px;box-shadow:0 0 0 3px var(--ink), inset var(--u) var(--u) 0 rgba(0,0,0,.4)}
+.wellbox{aspect-ratio:16/9;background:#EEEDF8;display:grid;place-items:center;font-family:var(--mono);font-size:10px;color:#8A8AA0}
+.cardBody{background:var(--paper);margin:10px;padding:14px;border:3px solid var(--ink)}
+.cardBody .meta{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--mute);margin-bottom:7px}
+.cardBody h3{font-size:17px;font-weight:500;line-height:1.4}
+
+p.body{font-size:16px;color:#3E3E36;margin-bottom:18px;max-width:60ch}
+
+.callout{background:var(--panel);border-left:4px solid var(--blue);padding:16px 18px;margin:26px 0;font-size:14px;color:#4A4A42}
+.callout b{font-family:var(--mono);font-size:11px;color:var(--ink);font-weight:400;display:block;margin-bottom:6px}
+
+footer{border-top:3px solid var(--ink);background:var(--panel);padding:36px 0 60px;margin-top:60px}
+footer .k{font-family:var(--pix);font-size:13px;margin-bottom:9px}
+footer p{font-size:14px;color:#5C5C52}
+
+@media (max-width:560px){
+  .wrap{padding:0 14px}
+  .nav .plate{padding:5px 6px;gap:6px}
+  .links a{padding:8px 7px;font-size:10px}
+  .brand{font-size:10px;padding:0 2px}
+  .dl{font-size:8px;padding:5px 7px;margin-left:3px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="nav" id="nav">
+  <div class="plate">
+    <div class="inner">
+      <a href="#0" class="brand"><canvas class="logo" data-logo></canvas>SHAREEF</a>
+      <div class="links">
+        <a href="#0" class="on">WORK</a>
+        <a href="#0">ABOUT</a>
+        <a href="#0">CONTACT</a>
+      </div>
+      <a href="#0" class="dl" data-set="blue">RÉSUMÉ<canvas data-dl></canvas></a>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="eyebrow">SCROLL TO SEE THE NAV FLATTEN</div>
+    <h1>SENIOR PRODUCT<br>DESIGNER WHO <em>SHIPS.</em></h1>
+    <p>The bar starts as a full plate with bevel. Past the hero it drops to a flat strip with only the base rule, so nothing scrolls under a raised slab.</p>
+  </div>
+
+  <div class="callout">
+    <b>WHAT CHANGES ON SCROLL</b>
+    The bevel and the three outer borders disappear, the fill drops from plate to panel, height reduces by about 8px, and the bar goes edge to edge while the contents stay on the 680px column. The base rule is the only thing that survives — which is the same rule that already sits under your hero.
+  </div>
+
+  <div class="marker"><b>01</b><span>ACTIVE STATE ON A CASE STUDY</span><i></i></div>
+
+  <p class="body">You're two levels deep here, so WORK stays sunk as the parent. The case study's own back link handles the return upward — the nav never tries to represent depth it can't show.</p>
+
+  <div class="plateCard">
+    <span class="tab">FINTECH</span>
+    <div class="well"><div class="wellbox">[ screenshot ]</div></div>
+    <div class="cardBody">
+      <div class="meta">SANAD · KYB ONBOARDING</div>
+      <h3>Onboarding that feels fast without cutting corners</h3>
+    </div>
+  </div>
+
+  <div class="marker"><b>02</b><span>WHY RÉSUMÉ IS A BUTTON</span><i></i></div>
+
+  <p class="body">Every other nav item is a place you can be, so it can be sunk. Résumé is a file that downloads — there's no state where you're "on" it, and a sunk résumé would be lying about where you are.</p>
+
+  <p class="body">Making it a compact blue button solves that and buys something else: it's the only always-visible call to action on the site, present on every page including deep inside a case study. The download glyph tells you it leaves the page before you tap it.</p>
+
+  <div class="callout">
+    <b>ONE CONSISTENT MEANING</b>
+    Sunk now means exactly one thing everywhere — pressed button, recessed screenshot, failed audit block, current page. No new vocabulary anywhere in the system.
+  </div>
+
+  <div class="marker"><b>03</b><span>ENOUGH ROOM TO SCROLL</span><i></i></div>
+
+  <p class="body">Filler below so the sticky behaviour has somewhere to go. Keep scrolling and watch the bar sit flat against the top while the content column stays where it is.</p>
+  <p class="body">The flatten happens instantly rather than easing — consistent with the motion rule that nothing in the pixel layer interpolates. A smooth height transition here would be the single most obvious break in the system, because it's the element on screen the entire time.</p>
+  <p class="body">Marketplaces, healthcare operations, fintech onboarding. I design the flow, then I build the front end.</p>
+  <p class="body">Six years in B2B UX, from research to shipped interface. Based in Dubai. I build and ship my own products in React and Tailwind too.</p>
+  <p class="body">New businesses have to prove they're legitimate before they can move money. I hit this wall myself going through Companies House verification, so I designed the full KYB onboarding flow and built it as a working React prototype.</p>
+  <p class="body">One rule shaped everything: you can't make the process easier by making it less rigorous.</p>
+  <p class="body">Regulators decide what the steps are. Design decides how they feel. That gap is the whole job.</p>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="k">LET'S CONNECT</div>
+    <p>shareefpadar@gmail.com</p>
+  </div>
+</footer>
+
+<script>
+/* logo */
+const LOGO=['..XXXX..','.XX..XX.','XX......','XX..XXX.','.XXXXXX.','.....XX.','.XX..XX.','..XXXX..'];
+document.querySelectorAll('[data-logo]').forEach(c=>{
+  c.width=18;c.height=18;
+  const x=c.getContext('2d'), s=18/8;
+  x.fillStyle='#1E45FB';
+  for(let r=0;r<8;r++)for(let q=0;q<8;q++) if(LOGO[r][q]==='X') x.fillRect(q*s,r*s,s,s);
+});
+
+/* download glyph */
+const DL=['..XX..','..XX..','..XX..','XXXXXX','.XXXX.','..XX..'];
+document.querySelectorAll('[data-dl]').forEach(c=>{
+  c.width=18;c.height=18;
+  const x=c.getContext('2d'), s=18/6;
+  x.fillStyle='#CDF22B';
+  for(let r=0;r<6;r++)for(let q=0;q<6;q++) if(DL[r][q]==='X') x.fillRect(q*s,r*s,s,s);
+});
+
+/* sprite button */
+function mix(h,t,a){const g=x=>parseInt(h.slice(x,x+2),16),k=x=>parseInt(t.slice(x,x+2),16);
+  const c=(p,q)=>Math.round(p+(q-p)*a).toString(16).padStart(2,'0');
+  return '#'+c(g(1),k(1))+c(g(3),k(3))+c(g(5),k(5));}
+const lt=(c,a)=>mix(c,'#ffffff',a), dkn=(c,a)=>mix(c,'#000000',a);
+const B='#1E45FB';
+const P={face:B,hi:lt(B,.38),shade:dkn(B,.45),outline:'#0A0E2E'};
+const BODY=['.DDDD.','DHHHSD','DHFFSD','DHFFSD','DSSSSD','.DDDD.'];
+function frame(state){
+  const F=state==='sunk'?dkn(P.face,.10):state==='hover'?lt(P.face,.14):P.face;
+  const H=state==='sunk'?P.shade:P.hi, S=state==='sunk'?P.hi:P.shade;
+  const M={'.':null,D:P.outline,H,S,F};
+  const c=document.createElement('canvas');c.width=24;c.height=24;
+  const x=c.getContext('2d');
+  for(let r=0;r<6;r++)for(let q=0;q<6;q++){const col=M[BODY[r][q]];
+    if(col){x.fillStyle=col;x.fillRect(q*4,r*4,4,4);}}
+  return 'url('+c.toDataURL()+')';
+}
+document.querySelectorAll('[data-set]').forEach(el=>{
+  el.style.borderImageSource=frame('base');
+  el.addEventListener('pointerenter',()=>el.style.borderImageSource=frame('hover'));
+  el.addEventListener('pointerleave',()=>el.style.borderImageSource=frame('base'));
+  el.addEventListener('pointerdown',()=>el.style.borderImageSource=frame('sunk'));
+  el.addEventListener('pointerup',()=>el.style.borderImageSource=frame('hover'));
+});
+
+/* flatten on scroll — instant, no easing */
+const nav=document.getElementById('nav');
+let ticking=false;
+function check(){
+  nav.classList.toggle('stuck', window.scrollY > 24);
+  ticking=false;
+}
+addEventListener('scroll',()=>{
+  if(!ticking){requestAnimationFrame(check);ticking=true;}
+},{passive:true});
+check();
+</script>
+</body>
+</html>

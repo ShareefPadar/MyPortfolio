@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Motion by face — typed titles, scanned sections</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+@font-face{
+  font-family:'Departure Mono';
+  src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2409-1@1.0/DepartureMono-Regular.woff2') format('woff2');
+  font-weight:400;font-display:swap;
+}
+:root{
+  --u:4px; --f:60ms;
+  --lime:#CDF22B; --blue:#1E45FB; --ink:#14140F;
+  --paper:#FAFAF8; --panel:#F0F0EA; --line:#DEDED8; --mute:#87877A;
+  --plate:#D8D8D0; --hi:#FFFFFF; --sh:#8A8A80;
+  --mono:'Departure Mono',ui-monospace,monospace;
+  --pix:'Silkscreen',monospace;
+  --sans:'Geist',-apple-system,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:#E6E6E2;font-family:var(--sans);color:var(--ink);padding:20px 14px 60px;line-height:1.55}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.wrap{max-width:680px;margin:0 auto}
+
+.head{margin-bottom:22px}
+.head h1{font-family:var(--pix);font-weight:700;font-size:clamp(14px,3.8vw,18px);line-height:1.7;margin-bottom:12px}
+.head p{font-size:14px;color:#4A4A46;max-width:56ch}
+
+.sec{border:2px solid var(--ink);margin-bottom:16px;background:var(--paper)}
+.sec-h{display:flex;justify-content:space-between;gap:10px;padding:8px 14px;background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:11px;letter-spacing:.05em}
+.sec-h i{font-style:normal;opacity:.55;font-size:10px;text-align:right}
+.sec-b{padding:20px 18px 24px}
+.desc{font-size:13.5px;color:#5C5C52;margin-bottom:16px;max-width:52ch}
+.stage{background:var(--paper);border:1px solid var(--line);padding:26px 18px;margin-bottom:12px;min-height:130px;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+.replay{font-family:var(--pix);font-size:9px;padding:7px 11px;cursor:pointer;background:var(--plate);border:2px solid var(--ink);color:var(--ink);box-shadow:inset 3px 3px 0 var(--hi), inset -3px -3px 0 var(--sh)}
+.replay:active{box-shadow:inset -3px -3px 0 var(--hi), inset 3px 3px 0 var(--sh)}
+.speed{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.speed label{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.speed label b{color:var(--ink);font-weight:400}
+.speed input{accent-color:var(--blue);width:150px}
+
+/* ══ MAP TABLE ══ */
+.map{width:100%;border-collapse:collapse;font-size:13.5px}
+.map th{font-family:var(--mono);font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);text-align:left;padding:0 10px 8px 0;font-weight:400;border-bottom:2px solid var(--ink)}
+.map td{padding:12px 10px 12px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.map td:first-child{white-space:nowrap}
+.map .fc{font-family:var(--mono);font-size:11px;color:var(--blue)}
+.map .r{color:#5C5C52;font-size:12.5px}
+
+/* ══ scanline ══ */
+@keyframes scanClip{0%{clip-path:inset(0 0 100% 0)}100%{clip-path:inset(0 0 0% 0)}}
+@keyframes scanBands{
+  0%  {-webkit-mask-image:repeating-linear-gradient(#000 0 1px,transparent 1px 6px);mask-image:repeating-linear-gradient(#000 0 1px,transparent 1px 6px)}
+  30% {-webkit-mask-image:repeating-linear-gradient(#000 0 3px,transparent 3px 6px);mask-image:repeating-linear-gradient(#000 0 3px,transparent 3px 6px)}
+  60% {-webkit-mask-image:repeating-linear-gradient(#000 0 5px,transparent 5px 6px);mask-image:repeating-linear-gradient(#000 0 5px,transparent 5px 6px)}
+  100%{-webkit-mask-image:none;mask-image:none}
+}
+.scan{animation:scanClip calc(var(--f)*6) steps(6,end) both, scanBands calc(var(--f)*8) steps(1,end) both}
+.scan4{animation:scanClip calc(var(--f)*4) steps(4,end) both, scanBands calc(var(--f)*6) steps(1,end) both}
+
+/* ══ binary ══ */
+@keyframes on{from{opacity:0}to{opacity:1}}
+.in0{animation:on 1ms steps(1,end) both}
+.in2{animation:on 1ms steps(1,end) calc(var(--f)*2) both}
+.in4{animation:on 1ms steps(1,end) calc(var(--f)*4) both}
+.in6{animation:on 1ms steps(1,end) calc(var(--f)*6) both}
+
+@keyframes ruleOut{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.rule{height:3px;background:var(--ink);transform-origin:left;flex:1}
+.rule.draw{animation:ruleOut calc(var(--f)*4) steps(4,end) both}
+
+@keyframes pop{0%{opacity:0;transform:scale(.3)}25%{opacity:1;transform:scale(.6)}50%{transform:scale(.85)}75%{transform:scale(1.1)}100%{transform:scale(1)}}
+.pop{animation:pop calc(var(--f)*4) steps(4,end) both;transform-origin:left center;display:inline-block}
+
+@keyframes caret{0%,50%{opacity:1}50.01%,100%{opacity:0}}
+.caret{display:inline-block;width:.55em;height:.95em;background:var(--blue);vertical-align:-.1em;margin-left:.06em;animation:caret .9s steps(1,end) infinite}
+
+/* ══ type ══ */
+.t-dxl{font-family:var(--pix);font-weight:700;font-size:clamp(18px,4.6vw,30px);line-height:1.75;letter-spacing:.01em;min-height:1.75em}
+.t-dl{font-family:var(--pix);font-weight:700;font-size:clamp(15px,3.4vw,20px);line-height:1.8}
+.t-dm{font-family:var(--pix);font-size:14px;line-height:1.8}
+.t-secnum{font-family:var(--pix);font-weight:700;font-size:20px;line-height:1;color:var(--blue)}
+.t-num{font-family:var(--pix);font-weight:700;font-size:clamp(30px,7vw,40px);line-height:.9;color:var(--lime);-webkit-text-stroke:2px var(--ink);paint-order:stroke fill}
+.t-h1{font-weight:500;font-size:clamp(24px,5.2vw,34px);line-height:1.16;letter-spacing:-.022em}
+.t-h2{font-weight:500;font-size:clamp(20px,4.2vw,25px);line-height:1.3;letter-spacing:-.016em}
+.t-h3{font-weight:600;font-size:18px;line-height:1.4}
+.t-lead{font-size:17px;line-height:1.65;color:#2A2A24}
+.t-body{font-size:15.5px;line-height:1.7;color:#3E3E36}
+.t-cap{font-size:13px;line-height:1.55;color:#5C5C52;border-left:3px solid var(--lime);padding-left:12px}
+.t-micro{font-family:var(--mono);font-size:9px;letter-spacing:.11em;text-transform:uppercase;color:var(--mute)}
+.t-meta{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--mute)}
+
+.marker{display:flex;align-items:baseline;gap:10px;margin-bottom:14px}
+.wellbox{aspect-ratio:16/9;background:#EEEDF8;display:grid;place-items:center;font-family:var(--mono);font-size:10px;color:#8A8AA0;box-shadow:0 0 0 3px var(--ink)}
+.plateCard{background:var(--plate);border:3px solid var(--ink);position:relative;margin-top:20px;
+  box-shadow:inset var(--u) var(--u) 0 var(--hi), inset calc(var(--u)*-1) calc(var(--u)*-1) 0 var(--sh)}
+.tab{position:absolute;top:-17px;left:14px;border:3px solid var(--ink);border-bottom:0;padding:4px 10px 5px;
+  font-family:var(--mono);font-size:10px;letter-spacing:.07em;background:var(--lime);min-width:92px;text-align:center;
+  clip-path:polygon(4px 0,calc(100% - 4px) 0,calc(100% - 4px) 4px,100% 4px,100% 100%,0 100%,0 4px,4px 4px)}
+.cardIn{margin:10px}
+.cardBody{background:var(--paper);margin:10px;padding:13px;border:3px solid var(--ink)}
+
+.rules{list-style:none;font-size:14px}
+.rules li{padding:10px 0 10px 26px;border-bottom:1px solid var(--line);position:relative;color:#3E3E36}
+.rules li:last-child{border-bottom:0}
+.rules li::before{content:"▸";position:absolute;left:4px;color:var(--blue)}
+.rules.no li::before{content:"✕";color:#C4482E}
+.rules code{font-family:var(--mono);font-size:12px;color:var(--blue)}
+
+.note{border-top:1px solid var(--line);background:var(--panel);padding:12px 18px;font-size:13px;color:#5C5C52;line-height:1.6}
+.note b{font-family:var(--mono);font-size:11px;color:var(--ink);font-weight:400}
+.warn{border-left:4px solid #C4482E}
+
+@media (max-width:520px){.sec-b{padding:16px 12px 20px}.stage{padding:20px 12px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="head">
+  <h1>MOTION BY FACE</h1>
+  <p>Each typeface gets one motion. Silkscreen types, Geist and containers scan, body snaps. Nothing has to be remembered per-component — the face already tells you.</p>
+</div>
+
+<!-- MAP -->
+<div class="sec">
+  <div class="sec-h"><span>00 — THE MAP</span><i>three faces, three motions</i></div>
+  <div class="sec-b">
+    <table class="map">
+      <tr><th>Face</th><th>Motion</th><th>Where</th></tr>
+      <tr><td class="fc">Silkscreen</td><td><b>Typewriter</b><br><span class="r">1 char / frame</span></td><td class="r">Hero, page titles, footer headings, section numerals</td></tr>
+      <tr><td class="fc">Geist headings</td><td><b>Scanline</b><br><span class="r">4–6 frames</span></td><td class="r">Case study H1, H2 section headings, H3</td></tr>
+      <tr><td class="fc">Containers</td><td><b>Scanline</b><br><span class="r">6 frames</span></td><td class="r">Cards, screenshots, plates, bezel, callouts</td></tr>
+      <tr><td class="fc">Geist body</td><td><b>Binary</b><br><span class="r">1 step, staggered</span></td><td class="r">Lead, body, captions</td></tr>
+      <tr><td class="fc">Departure Mono</td><td><b>Binary</b><br><span class="r">instant</span></td><td class="r">Tags, meta, labels, eyebrows</td></tr>
+    </table>
+  </div>
+  <div class="note"><b>Why it holds</b> — Silkscreen is capped at five words by the type rule, so anything set in it is short enough to type without stalling the page.</div>
+</div>
+
+<!-- HERO -->
+<div class="sec">
+  <div class="sec-h"><span>01 — HERO</span><i>typed Silkscreen</i></div>
+  <div class="sec-b">
+    <div class="speed">
+      <label>Char speed <b id="sv">45</b>ms</label>
+      <input type="range" id="sp" min="20" max="80" step="5" value="45">
+      <label id="dur" style="color:var(--blue)">total 1.5s</label>
+    </div>
+    <div class="stage">
+      <div class="t-micro in0" data-a style="margin-bottom:10px">I'M SHAREEF PADAR</div>
+      <div class="t-dxl" id="hero"></div>
+      <div class="t-lead" id="heroSub" style="margin-top:16px;max-width:38ch;opacity:0">Six years in B2B UX, from research to shipped interface.</div>
+    </div>
+    <button class="replay" data-hero>REPLAY</button>
+  </div>
+  <div class="note"><b>Timing</b> — 34 characters. At 45ms that's about 1.5 seconds, which is the ceiling I'd accept for a hero. Drag it to 80 and you'll feel where it becomes a wait rather than an entrance.</div>
+</div>
+
+<!-- PAGE TITLE -->
+<div class="sec">
+  <div class="sec-h"><span>02 — PAGE TITLE</span><i>typed · short by design</i></div>
+  <div class="sec-b">
+    <div class="desc">Work, About, 404, footer headings. Thirteen characters or fewer, so under a second every time.</div>
+    <div class="stage" style="min-height:90px"><div class="t-dl" id="pageTitle"></div></div>
+    <button class="replay" data-page>REPLAY</button>
+  </div>
+</div>
+
+<!-- SECTION -->
+<div class="sec">
+  <div class="sec-h"><span>03 — SECTION</span><i>numeral types, heading scans</i></div>
+  <div class="sec-b">
+    <div class="desc">The numeral and its mono label type together, the rule draws, then the Geist heading scans in. Body snaps after.</div>
+    <div class="stage">
+      <div class="marker"><span class="t-secnum" id="secNum"></span><span class="t-micro" id="secLbl"></span><i class="rule draw" data-a style="animation-delay:calc(var(--f)*4)"></i></div>
+      <div class="t-h2 scan4" data-a style="animation-delay:calc(var(--f)*7)">The verification couldn't change. The experience of it clearly could.</div>
+      <div class="t-body in6" data-a style="margin-top:12px;max-width:52ch;animation-delay:calc(var(--f)*11)">Going through Companies House verification, I didn't know how many steps were coming.</div>
+    </div>
+    <button class="replay" data-section>REPLAY</button>
+  </div>
+</div>
+
+<!-- CARD -->
+<div class="sec">
+  <div class="sec-h"><span>04 — CARD</span><i>whole card scans as one</i></div>
+  <div class="sec-b">
+    <div class="desc">The plate, tab, screenshot and text scan together as a single object. Revealing the parts separately makes a card feel assembled rather than placed.</div>
+    <div class="stage">
+      <div class="plateCard scan" data-a>
+        <span class="tab">FINTECH</span>
+        <div class="cardIn"><div class="wellbox">[ screenshot ]</div></div>
+        <div class="cardBody">
+          <div class="t-meta" style="margin-bottom:7px">SANAD · KYB ONBOARDING</div>
+          <div class="t-h3">Onboarding that feels fast without cutting corners</div>
+        </div>
+      </div>
+    </div>
+    <button class="replay" data-replay>REPLAY</button>
+  </div>
+  <div class="note"><b>Rule</b> — scanline applies to the container, never to its children individually. One object, one reveal.</div>
+</div>
+
+<!-- DECISION -->
+<div class="sec">
+  <div class="sec-h"><span>05 — DECISION BLOCK</span><i>numeral pops, screen scans</i></div>
+  <div class="sec-b">
+    <div class="desc">The decision numeral is the exception to the typing rule — it's a single graphic element, so it pops rather than types.</div>
+    <div class="stage">
+      <div style="display:flex;gap:14px;align-items:flex-start;margin-bottom:14px">
+        <span class="t-num pop" data-a>04</span>
+        <span class="t-h3 scan4" data-a style="padding-top:4px;animation-delay:calc(var(--f)*3)">Never hard-block a willing user</span>
+      </div>
+      <div class="wellbox scan" data-a style="animation-delay:calc(var(--f)*5)">[ screenshot ]</div>
+      <div class="t-cap in6" data-a style="margin-top:12px;animation-delay:calc(var(--f)*11)">One file uploaded, one marked "add later" with a reminder set.</div>
+    </div>
+    <button class="replay" data-replay>REPLAY</button>
+  </div>
+</div>
+
+<!-- LIMIT -->
+<div class="sec">
+  <div class="sec-h"><span>06 — WHY LONG HEADINGS CAN'T TYPE</span><i>the carve-out</i></div>
+  <div class="sec-b">
+    <div class="desc">The same case study H1, typed instead of scanned. 72 characters at 45ms — over three seconds before the visitor can read your title.</div>
+    <div class="stage"><div class="t-h1" id="longTyped" style="min-height:3.5em"></div></div>
+    <button class="replay" data-long>REPLAY</button>
+  </div>
+  <div class="note warn"><b>Read</b> — this is why the split exists. Silkscreen is capped at five words, so it can type. Geist headings are sentences, so they scan.</div>
+</div>
+
+<!-- RULES -->
+<div class="sec">
+  <div class="sec-h"><span>07 — RULES</span><i>final</i></div>
+  <div class="sec-b">
+    <ul class="rules">
+      <li>Typewriter runs at <code>45ms</code> per character, never slower</li>
+      <li>Nothing types longer than <code>1.5s</code> total — if it would, it scans instead</li>
+      <li>Caret is a blue block, blinking at <code>steps(1)</code>, removed when typing ends</li>
+      <li>Scanline applies to a container as a whole, never to its children</li>
+      <li>Body and mono stay binary — no scanline over text being read</li>
+      <li>Everything fires once on scroll-in, never on scroll-back</li>
+    </ul>
+    <div class="desc" style="margin:20px 0 10px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);border-bottom:1px dashed var(--line);padding-bottom:6px">Never</div>
+    <ul class="rules no">
+      <li>Type a sentence-length heading or any body copy</li>
+      <li>Scanline a paragraph — banding over reading material</li>
+      <li>Type more than one element at a time on screen</li>
+      <li>Leave the caret blinking after the line finishes</li>
+    </ul>
+  </div>
+</div>
+
+</div>
+
+<script>
+const root=document.documentElement;
+let SPEED=45;
+
+function typeInto(el,text,speed,done){
+  clearInterval(el._t);
+  let i=0;
+  el.innerHTML='<span class="caret"></span>';
+  el._t=setInterval(()=>{
+    i++;
+    const shown=text.slice(0,i).replace(/ /g,'&nbsp;').replace(/\n/g,'<br>');
+    el.innerHTML=shown+(i<text.length?'<span class="caret"></span>':'');
+    if(i>=text.length){clearInterval(el._t); if(done)done();}
+  },speed);
+}
+
+/* hero */
+const HERO='SENIOR PRODUCT\nDESIGNER WHO SHIPS.';
+const hero=document.getElementById('hero'), heroSub=document.getElementById('heroSub');
+function runHero(){
+  heroSub.style.opacity='0';
+  typeInto(hero,HERO,SPEED,()=>{heroSub.style.opacity='1'});
+}
+document.querySelector('[data-hero]').addEventListener('click',runHero);
+
+const sp=document.getElementById('sp'), sv=document.getElementById('sv'), dur=document.getElementById('dur');
+function upd(){
+  SPEED=+sp.value; sv.textContent=SPEED;
+  dur.textContent='total '+((HERO.length*SPEED)/1000).toFixed(1)+'s';
+}
+sp.addEventListener('input',()=>{upd();runHero()});
+upd(); runHero();
+
+/* page title */
+const pageTitle=document.getElementById('pageTitle');
+function runPage(){typeInto(pageTitle,'SELECTED WORK',SPEED)}
+document.querySelector('[data-page]').addEventListener('click',runPage);
+runPage();
+
+/* section */
+const secNum=document.getElementById('secNum'), secLbl=document.getElementById('secLbl');
+function runSection(){
+  typeInto(secNum,'03',SPEED);
+  setTimeout(()=>typeInto(secLbl,'THE TENSION',30),SPEED*2);
+  document.querySelectorAll('[data-section]')[0].closest('.sec-b').querySelectorAll('[data-a]').forEach(el=>{
+    const a=el.style.animation; el.style.animation='none'; void el.offsetWidth; el.style.animation=a||'';
+  });
+}
+document.querySelector('[data-section]').addEventListener('click',runSection);
+runSection();
+
+/* long typed counter-example */
+const LONG='Making business verification feel fast without making it less rigorous.';
+const longTyped=document.getElementById('longTyped');
+function runLong(){typeInto(longTyped,LONG,SPEED)}
+document.querySelector('[data-long]').addEventListener('click',runLong);
+runLong();
+
+/* generic */
+document.querySelectorAll('[data-replay]').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    btn.closest('.sec-b').querySelectorAll('[data-a]').forEach(el=>{
+      const a=el.style.animation; el.style.animation='none'; void el.offsetWidth; el.style.animation=a||'';
+    });
+  });
+});
+</script>
+</body>
+</html>

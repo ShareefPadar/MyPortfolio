@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio design system — v3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+@font-face{
+  font-family:'Departure Mono';
+  src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2409-1@1.0/DepartureMono-Regular.woff2') format('woff2');
+  font-weight:400;font-display:swap;
+}
+:root{
+  --u:4px; --f:60ms; --type:45ms;
+  --s4:4px;--s8:8px;--s12:12px;--s16:16px;--s24:24px;--s32:32px;--s48:48px;--s64:64px;--s96:96px;--s128:128px;
+  --lime:#CDF22B; --blue:#1E45FB; --ink:#14140F; --error:#C4482E;
+  --paper:#FAFAF8; --panel:#F0F0EA; --line:#DEDED8; --mute:#6E6E62;
+  --plate:#D8D8D0; --hi:#FFFFFF; --sh:#8A8A80;
+  --night:#0B0B0C; --night2:#16161A; --nline:#26262A; --ntext:#9A9A94;
+  --mono:'Departure Mono',ui-monospace,monospace;
+  --pix:'Silkscreen',monospace;
+  --sans:'Geist',-apple-system,system-ui,sans-serif;
+  --notch:polygon(4px 0,calc(100% - 4px) 0,calc(100% - 4px) 4px,100% 4px,100% calc(100% - 4px),calc(100% - 4px) calc(100% - 4px),calc(100% - 4px) 100%,4px 100%,4px calc(100% - 4px),0 calc(100% - 4px),0 4px,4px 4px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{background:#E6E6E2;font-family:var(--sans);color:var(--ink);padding:20px 14px 60px;line-height:1.55}
+::selection{background:var(--lime);color:var(--ink)}
+:focus-visible{outline:3px solid var(--blue);outline-offset:4px}
+.wrap{max-width:720px;margin:0 auto}
+
+.head{margin-bottom:var(--s24)}
+.head h1{font-family:var(--pix);font-weight:700;font-size:clamp(15px,4vw,20px);line-height:1.7;margin-bottom:var(--s12)}
+.head p{font-size:14px;color:#4A4A46;max-width:58ch}
+.head .v{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--mute);margin-top:10px}
+
+.toc{border:2px solid var(--ink);background:var(--paper);margin-bottom:var(--s16)}
+.toc .h{background:var(--ink);color:var(--paper);padding:8px 14px;font-family:var(--mono);font-size:11px;letter-spacing:.05em}
+.toc ol{list-style:none;counter-reset:t;padding:6px 0;columns:2;column-gap:0}
+@media(max-width:520px){.toc ol{columns:1}}
+.toc li{counter-increment:t;break-inside:avoid}
+.toc a{display:flex;gap:10px;padding:5px 16px;text-decoration:none;font-size:13px;align-items:baseline;color:var(--ink)}
+.toc a:hover{background:var(--panel)}
+.toc a::before{content:counter(t,decimal-leading-zero);font-family:var(--pix);font-size:9px;color:var(--blue);flex:none}
+
+.sec{border:2px solid var(--ink);margin-bottom:var(--s16);background:var(--paper);scroll-margin-top:12px}
+.sec-h{display:flex;justify-content:space-between;gap:10px;padding:8px 14px;background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:11px;letter-spacing:.05em}
+.sec-h i{font-style:normal;opacity:.55;font-size:10px;text-align:right}
+.sec-b{padding:var(--s24) 18px}
+.desc{font-size:13.5px;color:#5C5C52;margin-bottom:var(--s16);max-width:56ch}
+.sub{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin:var(--s32) 0 var(--s12);padding-bottom:6px;border-bottom:1px dashed var(--line)}
+.sub:first-child{margin-top:0}
+
+.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl th{font-family:var(--mono);font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);text-align:left;padding:0 8px 8px 0;font-weight:400;border-bottom:2px solid var(--ink)}
+.tbl td{padding:9px 8px 9px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl code{font-family:var(--mono);font-size:11.5px;color:var(--blue);white-space:nowrap}
+.tbl .r{color:#5C5C52;font-size:12.5px}
+.sw{width:24px;height:24px;border:2px solid var(--ink);display:block}
+.pill{font-family:var(--mono);font-size:9px;padding:3px 6px;border:2px solid var(--ink);display:inline-block}
+.pill.ok{background:var(--lime)}
+.pill.no{background:var(--error);color:#fff;border-color:var(--error)}
+
+.gate{border:3px solid var(--ink);background:var(--panel);padding:16px 15px}
+.gate .q{font-family:var(--pix);font-size:11px;line-height:1.8;margin-bottom:13px}
+.gate .br{display:flex;gap:10px;padding:8px 0;border-top:2px solid var(--line);font-size:13.5px}
+.gate .br b{font-family:var(--mono);font-size:10px;flex:none;width:60px;color:var(--blue)}
+.gate .br em{font-style:normal;font-family:var(--mono);font-size:12px}
+
+.row{border-bottom:1px solid var(--line);padding:14px 0}
+.row:last-child{border-bottom:0;padding-bottom:0}
+.row .k{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline;margin-bottom:8px}
+.row .k b{font-family:var(--mono);font-size:9px;letter-spacing:.09em;text-transform:uppercase;font-weight:400}
+.row .k span{font-family:var(--mono);font-size:9px;color:var(--mute)}
+.row .k u{text-decoration:none;font-family:var(--mono);font-size:9px;color:var(--blue)}
+.row .use{font-size:12px;color:#6A6A60;margin-top:6px}
+
+.t-dxl{font-family:var(--pix);font-weight:700;font-size:clamp(18px,4.4vw,30px);line-height:1.75}
+.t-dl{font-family:var(--pix);font-weight:700;font-size:clamp(15px,3.2vw,20px);line-height:1.8}
+.t-dm{font-family:var(--pix);font-size:14px;line-height:1.8}
+.t-secnum{font-family:var(--pix);font-weight:700;font-size:20px;line-height:1;color:var(--blue)}
+.t-num{font-family:var(--pix);font-weight:700;font-size:clamp(30px,6vw,40px);line-height:.9;color:var(--lime);-webkit-text-stroke:2px var(--ink);paint-order:stroke fill}
+.t-h1{font-weight:500;font-size:clamp(26px,5.2vw,40px);line-height:1.15;letter-spacing:-.022em}
+.t-h2{font-weight:500;font-size:clamp(20px,4vw,26px);line-height:1.3;letter-spacing:-.016em}
+.t-h3{font-weight:600;font-size:19px;line-height:1.4}
+.t-lead{font-size:19px;line-height:1.65;color:#2A2A24}
+.t-body{font-size:16px;line-height:1.7;color:#3E3E36}
+.t-cap{font-size:13px;line-height:1.55;color:#5C5C52;border-left:3px solid var(--lime);padding-left:12px}
+.t-meta{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--mute)}
+.t-micro{font-family:var(--mono);font-size:9px;letter-spacing:.11em;text-transform:uppercase;color:var(--mute)}
+
+.ramp{display:flex;flex-direction:column;gap:6px}
+.ramp .r2{display:flex;align-items:center;gap:12px}
+.ramp .r2 code{font-family:var(--mono);font-size:11px;color:var(--blue);width:56px;flex:none}
+.ramp .r2 .bar{height:16px;background:var(--blue);flex:none;border:2px solid var(--ink)}
+.ramp .r2 .use{font-size:12px;color:#5C5C52;padding-left:6px}
+
+.anat{display:grid;grid-template-columns:repeat(auto-fit,minmax(86px,1fr));gap:12px}
+.anat figure{text-align:center}
+.anat canvas{image-rendering:pixelated;width:100%;max-width:86px;height:auto;border:1px solid var(--line);background:#fff}
+.anat figcaption{font-family:var(--mono);font-size:8px;letter-spacing:.05em;color:var(--mute);margin-top:6px}
+
+.strip{display:flex;flex-wrap:wrap;gap:var(--s16);align-items:flex-start}
+.item{display:flex;flex-direction:column;gap:7px;align-items:flex-start}
+.item>b{font-family:var(--mono);font-size:8.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);font-weight:400}
+
+.btn{font-family:var(--pix);font-size:11px;line-height:1;border:8px solid transparent;border-image-slice:8 fill;
+  border-image-repeat:stretch;padding:9px 13px;cursor:pointer;background:none;color:var(--ink);
+  display:inline-flex;align-items:center;gap:8px;min-height:44px;text-decoration:none}
+.btn canvas{image-rendering:pixelated;flex:none}
+.btn:disabled{cursor:not-allowed;color:#9A9A92}
+.btn-txt{font-family:var(--pix);font-size:11px;border:0;background:none;cursor:pointer;color:var(--blue);padding:15px 4px;position:relative;text-decoration:none;display:inline-block}
+.btn-txt::after{content:"";position:absolute;left:4px;right:4px;bottom:11px;height:2px;background:var(--blue);opacity:0}
+.btn-txt:hover::after{opacity:1}
+
+.focusable{position:relative;display:inline-block}
+.focusable::before{content:"";position:absolute;inset:-7px;background:var(--blue);clip-path:var(--notch);z-index:-1;opacity:0}
+.focusable:focus-within::before,.focusable.demo::before{opacity:1}
+
+.inp{width:100%;max-width:380px;font-family:var(--sans);font-size:16px;color:var(--ink);background:var(--paper);
+  padding:12px 13px;min-height:48px;border:6px solid transparent;border-image-slice:6 fill;border-image-repeat:stretch;display:block}
+.inp::placeholder{color:#A2A29A}
+.flabel{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+
+.icons{display:grid;grid-template-columns:repeat(auto-fill,minmax(74px,1fr));gap:2px;background:var(--ink);border:3px solid var(--ink)}
+.icons .cell{background:var(--paper);padding:12px 6px 9px;text-align:center}
+.icons canvas{image-rendering:pixelated;display:block;margin:0 auto 6px}
+.icons b{font-family:var(--mono);font-size:7.5px;letter-spacing:.05em;color:var(--mute);font-weight:400}
+
+.navbar{background:var(--plate);border:3px solid var(--ink);display:flex;align-items:stretch;gap:10px;padding:6px 8px;
+  box-shadow:inset var(--u) var(--u) 0 var(--hi), inset calc(var(--u)*-1) calc(var(--u)*-1) 0 var(--sh)}
+.navbar.flat{border-width:0 0 3px 0;box-shadow:none;background:var(--panel);padding:3px 8px}
+.navbar .brand{display:flex;align-items:center;gap:7px;font-family:var(--pix);font-size:10px;padding:0 4px}
+.navbar .lk{margin-left:auto;display:flex;gap:2px}
+.navbar .lk a{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-decoration:none;padding:8px 9px;display:flex;align-items:center;color:var(--ink)}
+.navbar .lk a.on{background:var(--paper);box-shadow:inset 3px 3px 0 var(--sh), inset -3px -3px 0 var(--hi)}
+.navbar .dl{display:flex;align-items:center;gap:5px;align-self:center;font-family:var(--pix);font-size:8px;
+  border:8px solid transparent;border-image-slice:8 fill;border-image-repeat:stretch;padding:5px 8px;color:var(--lime);text-decoration:none}
+
+.plate{background:var(--plate);border:3px solid var(--ink);
+  box-shadow:inset var(--u) var(--u) 0 var(--hi), inset calc(var(--u)*-1) calc(var(--u)*-1) 0 var(--sh)}
+.tabbed{position:relative;margin-top:18px}
+.tab{position:absolute;top:-17px;left:14px;border:3px solid var(--ink);border-bottom:0;padding:4px 10px 5px;
+  font-family:var(--mono);font-size:10px;letter-spacing:.07em;background:var(--plate);min-width:104px;text-align:center;
+  clip-path:polygon(4px 0,calc(100% - 4px) 0,calc(100% - 4px) 4px,100% 4px,100% 100%,0 100%,0 4px,4px 4px)}
+.tab.on{background:var(--lime)}
+.well{box-shadow:0 0 0 3px var(--ink), inset var(--u) var(--u) 0 rgba(0,0,0,.4)}
+.wellbox{aspect-ratio:16/9;background:#EEEDF8;display:grid;place-items:center;font-family:var(--mono);font-size:10px;color:#8A8AA0}
+.pbody{background:var(--paper);margin:10px;padding:13px;border:3px solid var(--ink)}
+
+.bub{position:relative;display:inline-block;max-width:250px;border:8px solid transparent;
+  border-image-slice:8 fill;border-image-repeat:stretch;padding:11px 13px;font-size:14px;line-height:1.5}
+.tailx{position:absolute;left:16px;top:100%;margin-top:-4px;image-rendering:pixelated}
+.tailx.r{left:auto;right:16px}
+.dots{display:flex;gap:5px;padding:3px 0}
+.dots span{width:9px;height:9px;background:var(--ink);display:block;animation:pop3 1.05s steps(1,end) infinite}
+.dots span:nth-child(2){animation-delay:.35s}.dots span:nth-child(3){animation-delay:.7s}
+@keyframes pop3{0%,33%{opacity:1;transform:translateY(-4px)}33.01%,100%{opacity:.28;transform:translateY(0)}}
+
+.marker{display:flex;align-items:baseline;gap:10px;margin:4px 0 12px}
+.marker i{flex:1;height:3px;background:var(--ink)}
+.callout{background:var(--lime);border:3px solid var(--ink);padding:16px 15px;box-shadow:6px 6px 0 var(--ink)}
+.callout .k{font-family:var(--mono);font-size:10px;letter-spacing:.13em;margin-bottom:8px}
+.audit{background:#1C1C1E;border:3px solid #000;color:#E8E8E2;padding:16px 15px;
+  box-shadow:inset var(--u) var(--u) 0 rgba(0,0,0,.55), inset calc(var(--u)*-1) calc(var(--u)*-1) 0 #3A3A3E}
+.audit b{display:block;font-family:var(--mono);font-size:11px;color:var(--lime);margin-bottom:6px}
+.audit p{font-size:13.5px;color:#A8A8A2}
+.bezel{background:var(--plate);border:3px solid var(--ink);padding:14px 12px 9px;
+  box-shadow:inset var(--u) var(--u) 0 var(--hi), inset calc(var(--u)*-1) calc(var(--u)*-1) 0 var(--sh)}
+.bezel .led{display:flex;align-items:center;gap:6px;margin-top:8px}
+.bezel .led b{width:7px;height:7px;background:var(--lime);display:block}
+.bezel .led span{font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:#6E6E64}
+
+.prose{font-size:15.5px;line-height:1.7;color:#3E3E36;max-width:60ch}
+.prose p{margin-bottom:14px}
+.prose a{color:var(--ink);text-decoration:none;background-image:linear-gradient(var(--blue),var(--blue));
+  background-size:100% 2px;background-repeat:no-repeat;background-position:0 100%;padding-bottom:1px}
+.prose a:hover{background-image:linear-gradient(var(--lime),var(--lime));background-size:100% 40%}
+.ui{font-family:var(--mono);font-size:.88em;background:var(--panel);border:1px solid var(--line);padding:1px 5px}
+.prose ul{list-style:none;margin-bottom:14px}
+.prose ul li{position:relative;padding-left:24px;margin-bottom:7px}
+.prose ul li::before{content:"";position:absolute;left:4px;top:.62em;width:8px;height:8px;background:var(--blue)}
+.pull{padding-left:20px;border-left:6px solid var(--lime);max-width:52ch;margin:18px 0}
+.pull q{quotes:none;display:block;font-size:21px;font-weight:500;line-height:1.35;color:var(--ink)}
+.said{background:var(--panel);border:3px solid var(--ink);padding:14px;max-width:52ch}
+.said p{font-size:15px;color:#2A2A24;margin-bottom:10px}
+.said .by{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--mute)}
+.said .by b{width:8px;height:8px;background:var(--lime);border:1px solid var(--ink);display:block}
+.prog{display:flex;gap:2px}
+.prog b{flex:1;height:8px;background:var(--line);border:1px solid rgba(0,0,0,.12);display:block}
+.prog b.f{background:var(--lime);border-color:var(--ink)}
+.rail{border:3px solid var(--ink);background:var(--plate);padding:8px;max-width:200px;
+  box-shadow:inset var(--u) var(--u) 0 var(--hi), inset calc(var(--u)*-1) calc(var(--u)*-1) 0 var(--sh)}
+.rail a{display:flex;gap:8px;align-items:baseline;padding:6px 8px;text-decoration:none;
+  font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--ink)}
+.rail a b{color:var(--blue);font-family:var(--pix);font-size:9px;font-weight:700}
+.rail a.on{background:var(--paper);box-shadow:inset 3px 3px 0 var(--sh), inset -3px -3px 0 var(--hi)}
+.rail a.on b{color:var(--ink)}
+
+.ftdemo{background:var(--night);color:#E8E8E2;padding:28px 20px 20px;text-align:center;border:3px solid var(--ink)}
+.ftdemo .st{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;
+  color:var(--ntext);border:2px solid var(--nline);padding:6px 10px;margin-bottom:14px}
+.ftdemo .st b{width:7px;height:7px;background:var(--lime);display:block;animation:led 2.6s steps(1,end) infinite}
+@keyframes led{0%,86%{opacity:1}86.01%,100%{opacity:.25}}
+.ftdemo h4{font-family:var(--pix);font-weight:700;font-size:18px;line-height:1.7;margin-bottom:10px}
+.ftdemo h4 em{font-style:normal;color:var(--lime)}
+.ftdemo .m{font-family:var(--mono);font-size:15px;color:var(--lime);border-bottom:3px solid currentColor;padding-bottom:2px;text-decoration:none}
+
+.art{font-family:var(--mono);font-size:5.5px;line-height:1;letter-spacing:.5px;white-space:pre;user-select:none;
+  cursor:crosshair;display:block;margin:0 auto;width:fit-content;touch-action:none}
+
+.og{width:100%;aspect-ratio:1200/630;position:relative;overflow:hidden;border:2px solid var(--ink)}
+.ogc{position:absolute;top:0;left:0;width:1200px;height:630px;transform-origin:top left;background:var(--night);
+  color:#F2F2EE;padding:70px 76px;display:flex;flex-direction:column;justify-content:space-between}
+.ogc .t{font-family:var(--pix);font-weight:700;font-size:28px}
+.ogc h5{font-family:var(--pix);font-weight:700;font-size:64px;line-height:1.6}
+.ogc h5 em{font-style:normal;color:var(--lime)}
+.ogc .b{display:flex;justify-content:space-between;font-family:var(--mono);font-size:23px;color:#9A9A94}
+.ogc .b span{color:var(--lime)}
+
+.rules{list-style:none;font-size:13.5px}
+.rules li{padding:9px 0 9px 26px;border-bottom:1px solid var(--line);position:relative;color:#3E3E36}
+.rules li:last-child{border-bottom:0}
+.rules li::before{content:"▸";position:absolute;left:4px;color:var(--blue)}
+.rules.no li::before{content:"✕";color:var(--error)}
+.rules code{font-family:var(--mono);font-size:12px;color:var(--blue)}
+.open li{padding-left:30px}
+.open li::before{content:"";position:absolute;left:2px;top:12px;width:13px;height:13px;border:2px solid var(--ink);background:var(--paper)}
+
+.note{border-top:1px solid var(--line);background:var(--panel);padding:12px 18px;font-size:13px;color:#5C5C52;line-height:1.6}
+.note b{font-family:var(--mono);font-size:11px;color:var(--ink);font-weight:400}
+.warn{border-left:4px solid var(--error)}
+
+@media (max-width:520px){.sec-b{padding:var(--s16) 12px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="head">
+  <h1>PORTFOLIO<br>DESIGN SYSTEM</h1>
+  <p>Every decision in one reference. Sprites, icons and the portrait generate from the tokens in section 01, so changing a value there changes everything downstream.</p>
+  <div class="v">V3 · SUPERSEDES V1 AND V2</div>
+</div>
+
+<div class="toc">
+  <div class="h">CONTENTS</div>
+  <ol>
+    <li><a href="#f">Foundations</a></li>
+    <li><a href="#sp">Spacing &amp; layout</a></li>
+    <li><a href="#ty">Type scale</a></li>
+    <li><a href="#sprite">The sprite</a></li>
+    <li><a href="#btn">Buttons</a></li>
+    <li><a href="#focus">Focus ring</a></li>
+    <li><a href="#form">Forms</a></li>
+    <li><a href="#icon">Icons</a></li>
+    <li><a href="#nav">Nav</a></li>
+    <li><a href="#card">Cards &amp; work index</a></li>
+    <li><a href="#bub">Chat bubbles</a></li>
+    <li><a href="#prose">Prose kit</a></li>
+    <li><a href="#cs">Case study page</a></li>
+    <li><a href="#ft">Footer</a></li>
+    <li><a href="#art">ASCII portrait</a></li>
+    <li><a href="#og">Share cards</a></li>
+    <li><a href="#mo">Motion</a></li>
+    <li><a href="#a11y">Accessibility</a></li>
+    <li><a href="#rules">Rules</a></li>
+    <li><a href="#open">Still open</a></li>
+  </ol>
+</div>
+
+<!-- 01 -->
+<div class="sec" id="f">
+  <div class="sec-h"><span>01 — FOUNDATIONS</span><i>units · colour · faces</i></div>
+  <div class="sec-b">
+    <div class="sub">Units</div>
+    <table class="tbl">
+      <tr><td style="width:110px"><code>--u: 4px</code></td><td class="r">One pixel unit. Every notch, bevel, border and offset is a multiple. Large components step to 6px.</td></tr>
+      <tr><td><code>--f: 60ms</code></td><td class="r">One animation frame. Step count always matches frame count.</td></tr>
+      <tr><td><code>--type: 45ms</code></td><td class="r">One typed character.</td></tr>
+    </table>
+
+    <div class="sub">Colour</div>
+    <table class="tbl">
+      <tr><td style="width:32px"><span class="sw" style="background:#CDF22B"></span></td><td><code>--lime</code><br><code>#CDF22B</code></td><td class="r">Chat speaker, role-relevant tabs, callouts, indicators, portrait accents, selection</td></tr>
+      <tr><td><span class="sw" style="background:#1E45FB"></span></td><td><code>--blue</code><br><code>#1E45FB</code></td><td class="r">Primary button, numerals, links, system messages, caret, focus ring</td></tr>
+      <tr><td><span class="sw" style="background:#14140F"></span></td><td><code>--ink</code><br><code>#14140F</code></td><td class="r">Outlines, body text, rules</td></tr>
+      <tr><td><span class="sw" style="background:#C4482E"></span></td><td><code>--error</code><br><code>#C4482E</code></td><td class="r">Form errors only. Never for emphasis</td></tr>
+      <tr><td><span class="sw" style="background:#FAFAF8"></span></td><td><code>--paper</code><br><code>#FAFAF8</code></td><td class="r">Page base, card interiors</td></tr>
+      <tr><td><span class="sw" style="background:#D8D8D0"></span></td><td><code>--plate</code><br><code>#D8D8D0</code></td><td class="r">Secondary button, card body, nav, bezel</td></tr>
+      <tr><td><span class="sw" style="background:#F0F0EA"></span></td><td><code>--panel</code><br><code>#F0F0EA</code></td><td class="r">Recessed fills, notes, flattened nav</td></tr>
+      <tr><td><span class="sw" style="background:#6E6E62"></span></td><td><code>--mute</code><br><code>#6E6E62</code></td><td class="r">Meta labels. <b>Darkened from #87877A</b> — the original failed contrast at small sizes</td></tr>
+      <tr><td><span class="sw" style="background:#8A8A80"></span></td><td><code>--sh</code><br><code>#8A8A80</code></td><td class="r">Bevel bottom-right only</td></tr>
+      <tr><td><span class="sw" style="background:#0B0B0C"></span></td><td><code>--night</code><br><code>#0B0B0C</code></td><td class="r">Hero block and footer</td></tr>
+    </table>
+    <div class="desc" style="margin-top:12px">Magenta retired. Light page, dark hero and footer — two dark blocks bookending the work.</div>
+
+    <div class="sub">The gate — which face</div>
+    <div class="gate">
+      <div class="q">IS IT READ AS<br>A SENTENCE?</div>
+      <div class="br"><b>YES →</b><span><em>Geist.</em> At any size. Case study titles, headings, captions, body.</span></div>
+      <div class="br"><b>NO →</b><span>Label or statement?</span></div>
+      <div class="br"><b>LABEL →</b><span><em>Departure Mono.</em> Tags, meta, eyebrows, nav links, captions on data.</span></div>
+      <div class="br"><b>STATEMENT →</b><span><em>Silkscreen.</em> Five words max. Hero, page titles, numerals, buttons.</span></div>
+    </div>
+  </div>
+  <div class="note"><b>Why</b> — heading level describes structure; the face describes reading behaviour. Tying them together is what produces bitmap paragraphs.</div>
+</div>
+
+<!-- 02 -->
+<div class="sec" id="sp">
+  <div class="sec-h"><span>02 — SPACING &amp; LAYOUT</span><i>ten values</i></div>
+  <div class="sec-b">
+    <div class="desc">Roughly geometric so adjacent steps are visibly different. A linear ramp gives values too close to tell apart, which is how spacing drifts.</div>
+    <div class="ramp">
+      <div class="r2"><code>--s4</code><span class="bar" style="width:4px"></span><span class="use">Icon to label</span></div>
+      <div class="r2"><code>--s8</code><span class="bar" style="width:8px"></span><span class="use">Label to value, button gaps</span></div>
+      <div class="r2"><code>--s12</code><span class="bar" style="width:12px"></span><span class="use">Tag row to heading</span></div>
+      <div class="r2"><code>--s16</code><span class="bar" style="width:16px"></span><span class="use">Heading to body, card padding</span></div>
+      <div class="r2"><code>--s24</code><span class="bar" style="width:24px"></span><span class="use">Component padding</span></div>
+      <div class="r2"><code>--s32</code><span class="bar" style="width:32px"></span><span class="use">Between components</span></div>
+      <div class="r2"><code>--s48</code><span class="bar" style="width:48px"></span><span class="use">Above a section heading</span></div>
+      <div class="r2"><code>--s64</code><span class="bar" style="width:64px"></span><span class="use">Between case study sections</span></div>
+      <div class="r2"><code>--s96</code><span class="bar" style="width:96px"></span><span class="use">Hero padding, page top/bottom</span></div>
+      <div class="r2"><code>--s128</code><span class="bar" style="width:128px"></span><span class="use">Between major regions</span></div>
+    </div>
+
+    <div class="sub">Vertical rhythm</div>
+    <div class="desc" style="margin-bottom:0">Space above a heading is <b>3–4× the space below it</b> — that's what makes a heading attach to what it introduces. 64 above a section marker, 16 below the heading. 48 above H3, 12 below.</div>
+
+    <div class="sub">Containers</div>
+    <table class="tbl">
+      <tr><td><code>full bleed</code></td><td class="r">Hero block, footer, flattened nav</td></tr>
+      <tr><td><code>1100px</code></td><td class="r">Card grid, work index</td></tr>
+      <tr><td><code>720px</code></td><td class="r">Case study page, default column</td></tr>
+      <tr><td><code>60ch / 52ch</code></td><td class="r">Prose cap / lead cap, regardless of container</td></tr>
+    </table>
+
+    <div class="sub">Breakpoints</div>
+    <table class="tbl">
+      <tr><td><code>&lt; 560</code></td><td class="r">Single column. Gutter 16. Section gap 64→48, hero 96→48. Display type drops hardest; body barely moves.</td></tr>
+      <tr><td><code>560–900</code></td><td class="r">Card grid two-up. Gutter 24.</td></tr>
+      <tr><td><code>&gt; 900</code></td><td class="r">Full scale. Gutter 32. Hero splits, portrait right.</td></tr>
+    </table>
+  </div>
+  <div class="note"><b>Rule</b> — if a value isn't on the ramp it's wrong. No 11px, 15px, 19px. Mobile compresses large steps only; <code style="font-family:var(--mono)">--s16</code> and below never change.</div>
+</div>
+
+<!-- 03 -->
+<div class="sec" id="ty">
+  <div class="sec-h"><span>03 — TYPE SCALE</span><i>desktop / mobile</i></div>
+  <div class="sec-b">
+    <div class="sub">Silkscreen — statements</div>
+    <div class="row"><div class="k"><b>DISPLAY XL</b><span>Bold</span><u>32 / 20 · lh 1.75</u></div><div class="t-dxl">SENIOR PRODUCT<br>DESIGNER WHO SHIPS.</div><div class="use">Homepage hero only.</div></div>
+    <div class="row"><div class="k"><b>DISPLAY L</b><span>Bold</span><u>20 / 15 · lh 1.8</u></div><div class="t-dl">SELECTED WORK</div><div class="use">Page titles, 404.</div></div>
+    <div class="row"><div class="k"><b>DISPLAY M</b><span>Regular</span><u>14 · lh 1.8</u></div><div class="t-dm">LET'S CONNECT</div><div class="use">Footer heading, nav wordmark, button labels.</div></div>
+    <div class="row"><div class="k"><b>SECTION NUMERAL</b><span>Bold</span><u>20 · blue</u></div><div class="marker"><span class="t-secnum">03</span><span class="t-micro">THE TENSION</span><i></i></div></div>
+    <div class="row"><div class="k"><b>DECISION NUMERAL</b><span>Bold</span><u>40 / 30 · lime + stroke</u></div><span class="t-num">04</span></div>
+
+    <div class="sub">Geist — sentences</div>
+    <div class="row"><div class="k"><b>H1</b><span>Medium</span><u>40 / 28 · lh 1.15 · ls −.022em</u></div><div class="t-h1">Making business verification feel fast without making it less rigorous.</div></div>
+    <div class="row"><div class="k"><b>H2</b><span>Medium</span><u>26 / 21 · lh 1.3 · ls −.016em</u></div><div class="t-h2">The verification couldn't change. The experience of it clearly could.</div></div>
+    <div class="row"><div class="k"><b>H3</b><span>Semibold</span><u>19 / 17 · lh 1.4</u></div><div class="t-h3">Never hard-block a willing user</div></div>
+    <div class="row"><div class="k"><b>LEAD</b><span>Regular</span><u>19 / 17 · lh 1.65 · 52ch</u></div><div class="t-lead">New businesses have to prove they're legitimate before they can move money.</div></div>
+    <div class="row"><div class="k"><b>BODY</b><span>Regular</span><u>16 · lh 1.7 · 60ch</u></div><div class="t-body">You cannot delete steps. Regulators require this verification.</div></div>
+    <div class="row"><div class="k"><b>CAPTION</b><span>Regular</span><u>13 · lime rule</u></div><div class="t-cap">The full step map with per-step time estimates.</div></div>
+
+    <div class="sub">Departure Mono — labels</div>
+    <div class="row"><div class="k"><b>META</b><u>11 · ls .08em</u></div><div class="t-meta">SANAD · KYB ONBOARDING · 2026</div></div>
+    <div class="row"><div class="k"><b>MICRO</b><u>9 · ls .11em · uppercase</u></div><div class="t-micro">SELF-INITIATED · CONCEPT</div></div>
+  </div>
+  <div class="note"><b>Rules</b> — Silkscreen never below 1.7 line height or above five words. Negative tracking on H1/H2 only. Captions are Geist, not mono.</div>
+</div>
+
+<!-- 04 -->
+<div class="sec" id="sprite">
+  <div class="sec-h"><span>04 — THE SPRITE</span><i>6×6 · one frame, everything</i></div>
+  <div class="sec-b">
+    <div class="desc">Buttons, bubbles, tabs, cards and fields share one 6×6 map stretched with <code style="font-family:var(--mono);color:var(--blue)">border-image</code>. Only the centre stretches. Each colour expands to four tones — a flat fill kills the bevel.</div>
+    <div class="anat" id="anat"></div>
+  </div>
+  <div class="note"><b>Rule</b> — raised = interactive or containing. Sunk = pressed, recessed, failed, current page, or an input. Nothing else uses shading.</div>
+</div>
+
+<!-- 05 -->
+<div class="sec" id="btn">
+  <div class="sec-h"><span>05 — BUTTONS</span><i>four levels</i></div>
+  <div class="sec-b">
+    <div class="strip">
+      <div class="item"><b>primary</b><button class="btn" data-set="blue" style="color:#CDF22B;font-weight:700">VIEW WORK</button></div>
+      <div class="item"><b>secondary</b><button class="btn" data-set="neutral">GET IN TOUCH</button></div>
+      <div class="item"><b>tertiary</b><a href="#0" class="btn-txt">READ MORE</a></div>
+      <div class="item"><b>disabled</b><button class="btn" data-static="dead" disabled>UNAVAILABLE</button></div>
+    </div>
+    <div class="sub">States</div>
+    <div class="strip">
+      <div class="item"><b>rest</b><button class="btn" data-static="neutral">GET IN TOUCH</button></div>
+      <div class="item"><b>hover</b><button class="btn" data-static="neutral-hover">GET IN TOUCH</button></div>
+      <div class="item"><b>pressed</b><button class="btn" data-static="neutral-sunk">GET IN TOUCH</button></div>
+    </div>
+    <div class="sub">Padding</div>
+    <table class="tbl">
+      <tr><td><code>default</code></td><td class="r">9px 13px · min-height 44px · icon gap 8</td></tr>
+      <tr><td><code>large</code></td><td class="r">10px 16px · sprite drawn at 6× not 4×</td></tr>
+    </table>
+  </div>
+  <div class="note"><b>Rule</b> — one primary per view. Inside a card the secondary drops to tertiary. Two saturated buttons side by side cancel out.</div>
+</div>
+
+<!-- 06 -->
+<div class="sec" id="focus">
+  <div class="sec-h"><span>06 — FOCUS RING</span><i>notched, not square</i></div>
+  <div class="sec-b">
+    <div class="desc">A blue plate 7px behind the component, clipped with the same notch geometry so it hugs the shape. A square outline around a notched sprite reads as a bug.</div>
+    <div class="strip">
+      <div class="item"><b>rest</b><span class="focusable"><button class="btn" data-set="neutral">GET IN TOUCH</button></span></div>
+      <div class="item"><b>focused</b><span class="focusable demo"><button class="btn" data-set="neutral" tabindex="-1">GET IN TOUCH</button></span></div>
+    </div>
+  </div>
+  <div class="note"><b>Rule</b> — instant, never animated, never suppressed. The one place in the system where motion is banned outright.</div>
+</div>
+
+<!-- 07 -->
+<div class="sec" id="form">
+  <div class="sec-h"><span>07 — FORMS</span><i>sunk bevel</i></div>
+  <div class="sec-b">
+    <div class="desc">Inputs use the sunk sprite — a field is a recess, which is exactly what that bevel already means here.</div>
+    <label class="flabel" for="d1">YOUR NAME</label>
+    <span class="focusable" style="display:block;max-width:380px"><input class="inp" id="d1" data-inp placeholder="Jane Okafor"></span>
+    <div style="height:16px"></div>
+    <label class="flabel" for="d2">EMAIL</label>
+    <span class="focusable" style="display:block;max-width:380px"><input class="inp" id="d2" data-inp data-state="error" value="jane@meridian"></span>
+    <div style="font-size:13px;color:var(--error);margin-top:8px;display:flex;gap:6px"><b style="width:9px;height:9px;background:var(--error);display:block;flex:none;margin-top:5px"></b>That address is missing a domain</div>
+    <div class="sub">Rules</div>
+    <ul class="rules">
+      <li>Labels always visible; placeholders are examples, never labels</li>
+      <li>Errors name the problem and show the fix, in text <em>and</em> icon</li>
+      <li>Every target at least <code>44×44px</code></li>
+      <li>Loaders are segmented blocks — nothing rotates</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 08 -->
+<div class="sec" id="icon">
+  <div class="sec-h"><span>08 — ICONS</span><i>8×8 · twenty</i></div>
+  <div class="sec-b">
+    <div class="icons" id="icons"></div>
+    <div class="sub">Sizing</div>
+    <div class="desc" style="margin-bottom:0">Rendered at <code style="font-family:var(--mono);color:var(--blue)">8 / 16 / 24 / 32 / 48</code> only — anything between puts pixels on half-positions. Two-pixel stroke minimum. Icons inherit text colour. Never <code style="font-family:var(--mono);color:var(--blue)">width: 1em</code>.</div>
+  </div>
+  <div class="note warn"><b>Social marks</b> — never pixelate LinkedIn, Behance or Medium logos. Use their official SVG at 14–24px in monochrome, always with a text label.</div>
+</div>
+
+<!-- 09 -->
+<div class="sec" id="nav">
+  <div class="sec-h"><span>09 — NAV</span><i>sticky plate, flattens</i></div>
+  <div class="sec-b">
+    <div class="sub">At rest</div>
+    <div class="navbar">
+      <div class="brand"><canvas class="logo" data-logo></canvas>SHAREEF</div>
+      <div class="lk"><a href="#0" class="on">WORK</a><a href="#0">ABOUT</a><a href="#0">CONTACT</a></div>
+      <a href="#0" class="dl" data-set="blue">RÉSUMÉ</a>
+    </div>
+    <div class="sub">Scrolled</div>
+    <div class="navbar flat">
+      <div class="brand"><canvas class="logo" data-logo></canvas>SHAREEF</div>
+      <div class="lk"><a href="#0" class="on">WORK</a><a href="#0">ABOUT</a><a href="#0">CONTACT</a></div>
+      <a href="#0" class="dl" data-set="blue">RÉSUMÉ</a>
+    </div>
+    <table class="tbl" style="margin-top:18px">
+      <tr><td class="r" style="width:110px">Flatten</td><td class="r">Past 24px. Bevel and three borders drop, plate → panel, height −8px, full-width bar with contents on the column. Instant.</td></tr>
+      <tr><td class="r">Active</td><td class="r">Sunk. On a case study, WORK stays sunk; the back link handles the return.</td></tr>
+      <tr><td class="r">Résumé</td><td class="r">Blue sprite button, never sunk — a download, not a place. The only always-visible CTA.</td></tr>
+      <tr><td class="r">Mobile</td><td class="r">Three ink blocks as the burger. Panel drops full width, items numbered, active in lime.</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- 10 -->
+<div class="sec" id="card">
+  <div class="sec-h"><span>10 — CARDS &amp; WORK INDEX</span><i>plate + tab + well</i></div>
+  <div class="sec-b">
+    <div class="plate tabbed">
+      <span class="tab on">FINTECH</span>
+      <div style="padding:10px"><div class="well"><div class="wellbox">[ screenshot ]</div></div></div>
+      <div class="pbody" style="margin-top:0">
+        <div class="t-meta" style="margin-bottom:7px">SANAD · KYB ONBOARDING</div>
+        <div class="t-h3" style="font-size:16px">Onboarding that feels fast without cutting corners</div>
+      </div>
+    </div>
+    <div class="sub">Rules</div>
+    <ul class="rules">
+      <li>Tab carries <b>domain only</b> — never year or discipline</li>
+      <li>Lime tab for work matching the role applied to, plate tab for the rest</li>
+      <li>Tab min-width <code>104px</code> so labels don't ragged the grid</li>
+      <li>Screenshot sits in the sunk well — the same recess as a pressed button</li>
+    </ul>
+    <div class="sub">Work index structure</div>
+    <table class="tbl">
+      <tr><td class="r" style="width:110px">Tier 1</td><td class="r">Two strongest pieces, full cards with description. Section label "START HERE".</td></tr>
+      <tr><td class="r">Tier 2</td><td class="r">Remaining case studies, compact cards, no description.</td></tr>
+      <tr><td class="r">Archive</td><td class="r">Off-discipline and older work as a collapsed text list — separated, not deleted.</td></tr>
+      <tr><td class="r">Filter</td><td class="r">Domain chips. Deep-linkable so a recruiter opens pre-filtered.</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- 11 -->
+<div class="sec" id="bub">
+  <div class="sec-h"><span>11 — CHAT BUBBLES</span><i>three speakers</i></div>
+  <div class="sec-b">
+    <div style="display:flex;flex-direction:column;gap:24px;align-items:flex-start">
+      <div class="bub" data-set="lime">Hey — I'm Shareef. Senior product designer, and I ship the code too.<span class="tailx" data-set="lime"></span></div>
+      <div class="bub" data-set="neutral" style="align-self:flex-end">Show me the fintech work.<span class="tailx r" data-set="neutral"></span></div>
+      <div class="bub" data-set="blue" style="color:#CDF22B;font-family:var(--mono);font-size:13px">SYSTEM · 2 case studies matched<span class="tailx" data-set="blue"></span></div>
+      <div class="bub" data-set="lime"><div class="dots"><span></span><span></span><span></span></div><span class="tailx" data-set="lime"></span></div>
+    </div>
+  </div>
+  <div class="note"><b>Rule</b> — tails are stepped wedges on the 4px grid overlapping the bottom edge by one unit. Taper for threads, flag for a corner-pinned greeting. Typing dots are ink, never lime.</div>
+</div>
+
+<!-- 12 -->
+<div class="sec" id="prose">
+  <div class="sec-h"><span>12 — PROSE KIT</span><i>case study body</i></div>
+  <div class="sec-b">
+    <div class="prose">
+      <p>Links are ink text with a blue rule that grows into a lime highlight on hover — try <a href="#0">Mercury's live flow</a>. UI copy quoted from a product goes in mono: <span class="ui">Verification failed</span>.</p>
+      <ul>
+        <li>Bullets are blue squares on the grid, never discs</li>
+        <li>Ordered lists use leading zeros, matching section markers</li>
+      </ul>
+    </div>
+    <div class="pull"><q>Regulators decide what the steps are. Design decides how they feel.</q></div>
+    <div class="said"><p>"I didn't know if it had even gone through. I just kept refreshing."</p><div class="by"><b></b>FOUNDER · 12 DAYS INTO REVIEW</div></div>
+
+    <div class="sub">Reading aids</div>
+    <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start">
+      <div style="flex:1;min-width:180px">
+        <div class="t-micro" style="margin-bottom:8px">SCROLL PROGRESS</div>
+        <div class="prog"><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b><b></b><b></b><b></b><b></b><b></b><b></b></div>
+      </div>
+      <div>
+        <div class="t-micro" style="margin-bottom:8px">SECTION RAIL</div>
+        <nav class="rail">
+          <a href="#0"><b>01</b>OVERVIEW</a>
+          <a href="#0" class="on"><b>03</b>THE TENSION</a>
+          <a href="#0"><b>05</b>DECISIONS</a>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <div class="note"><b>Rules</b> — external arrow on external links only. One pull quote per section. Selection is lime on ink. Never underline anything that isn't a link.</div>
+</div>
+
+<!-- 13 -->
+<div class="sec" id="cs">
+  <div class="sec-h"><span>13 — CASE STUDY PAGE</span><i>five parts</i></div>
+  <div class="sec-b">
+    <div class="sub">Section marker</div>
+    <div class="marker"><span class="t-secnum">03</span><span class="t-micro">THE TENSION</span><i></i></div>
+    <div class="sub">Callout</div>
+    <div class="callout"><div class="k">THE REFRAME</div><div style="font-size:18px;font-weight:500;line-height:1.4">How do you make a legally rigid process feel fast without weakening what it must do?</div></div>
+    <div class="sub">Decision block</div>
+    <div style="display:flex;gap:14px;align-items:flex-start"><span class="t-num">04</span><div class="t-h3" style="padding-top:3px">Never hard-block a willing user</div></div>
+    <div class="sub">Audit — inverted</div>
+    <div class="audit"><b>"SAVED AUTOMATICALLY" WAS A LIE</b><p>The label was on screen, but going back wiped uploads. Moved state up so the promise the UI makes is one the prototype keeps.</p></div>
+    <div class="sub">Bezel — live prototype</div>
+    <div class="bezel">
+      <div class="well"><div class="wellbox">[ running prototype ]</div></div>
+      <div class="led"><b></b><span>LIVE · POST-AUDIT V2</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- 14 -->
+<div class="sec" id="ft">
+  <div class="sec-h"><span>14 — FOOTER</span><i>dark, centred</i></div>
+  <div class="sec-b">
+    <div class="ftdemo">
+      <div class="st"><b></b>DUBAI · GMT+4 · USUALLY REPLIES WITHIN A DAY</div>
+      <h4>LET'S <em>CONNECT</em></h4>
+      <a href="#0" class="m">shareefpadar@gmail.com</a>
+    </div>
+    <div class="sub">Contents</div>
+    <table class="tbl">
+      <tr><td class="r" style="width:130px">Status strip</td><td class="r">Location and response time — never availability. Neutral, useful, never goes stale.</td></tr>
+      <tr><td class="r">Email + copy</td><td class="r">Visible as text with a copy button. Recruiters on phones can't select a mailto link.</td></tr>
+      <tr><td class="r">Socials</td><td class="r">Labelled, official brand SVGs, monochrome.</td></tr>
+      <tr><td class="r">Built-by line</td><td class="r">"Designed &amp; built by Shareef Padar · Next.js" — the quietest proof of the differentiator.</td></tr>
+      <tr><td class="r">Back to top</td><td class="r">Required after a ten-minute case study.</td></tr>
+      <tr><td class="r">Case studies</td><td class="r">Minimal footer — a next-story link plus a full sitemap is two navigation systems arguing.</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- 15 -->
+<div class="sec" id="art">
+  <div class="sec-h"><span>15 — ASCII PORTRAIT</span><i>hero · move over it</i></div>
+  <div class="sec-b">
+    <div class="desc">Dither block ramp <code style="font-family:var(--mono);color:var(--blue)">░▒▓█</code>, not ASCII punctuation — it speaks the same language as the screenshot reveals. Density steps through four discrete levels. Lime marks only the densest cells. Auto-sweeps on touch devices, where hover doesn't exist.</div>
+    <div style="background:var(--night);padding:12px;border:3px solid var(--ink)"><pre class="art" id="artc" style="color:#4A4A46"></pre></div>
+  </div>
+</div>
+
+<!-- 16 -->
+<div class="sec" id="og">
+  <div class="sec-h"><span>16 — SHARE CARDS</span><i>1200×630</i></div>
+  <div class="sec-b">
+    <div class="og"><div class="ogc" data-scale>
+      <div class="t">SHAREEF PADAR</div>
+      <h5>SENIOR PRODUCT<br>DESIGNER WHO <em>SHIPS.</em></h5>
+      <div class="b"><span style="color:#9A9A94">B2B · FINTECH · DUBAI</span><span>SHAREEFPADAR.COM</span></div>
+    </div></div>
+    <div class="sub">Four templates</div>
+    <table class="tbl">
+      <tr><td class="r" style="width:110px">Homepage</td><td class="r">Dark, Silkscreen headline, URL. Breaks out of a white feed.</td></tr>
+      <tr><td class="r">Case study</td><td class="r">Tab + Geist title + cropped screenshot in a well. Mirrors the page it opens.</td></tr>
+      <tr><td class="r">Statement</td><td class="r">Lime fill, one line, for LinkedIn posts. Swap the line, keep the template.</td></tr>
+      <tr><td class="r">Fallback</td><td class="r">Plate frame for About, Contact, 404.</td></tr>
+    </table>
+  </div>
+  <div class="note"><b>Rules</b> — nothing below <code style="font-family:var(--mono)">22px</code> on the 1200px canvas (≈6px in a mobile feed). Six words max in the largest text. URL on every card. Generate with <code style="font-family:var(--mono)">next/og</code> rather than exporting PNGs.</div>
+</div>
+
+<!-- 17 -->
+<div class="sec" id="mo">
+  <div class="sec-h"><span>17 — MOTION</span><i>one motion per face</i></div>
+  <div class="sec-b">
+    <table class="tbl">
+      <tr><th>Element</th><th>Motion</th><th>Timing</th></tr>
+      <tr><td><code>Silkscreen</code></td><td class="r"><b>Typewriter</b>, blue block caret</td><td class="r">45ms/char · max 1.5s</td></tr>
+      <tr><td><code>Geist headings</code></td><td class="r"><b>Scanline</b> wipe</td><td class="r">4–6 frames</td></tr>
+      <tr><td><code>Containers</code></td><td class="r"><b>Scanline</b>, whole object</td><td class="r">6 frames</td></tr>
+      <tr><td><code>Screenshots</code></td><td class="r"><b>Scanline</b></td><td class="r">6 frames</td></tr>
+      <tr><td><code>Geist body</code></td><td class="r"><b>Binary</b> opacity, staggered</td><td class="r">1 step, 1 frame apart</td></tr>
+      <tr><td><code>Departure Mono</code></td><td class="r"><b>Binary</b>, instant</td><td class="r">—</td></tr>
+      <tr><td><code>Numerals</code></td><td class="r"><b>Pop</b> with overshoot</td><td class="r">4 frames</td></tr>
+      <tr><td><code>Nav flatten</code></td><td class="r"><b>Instant</b></td><td class="r">no transition</td></tr>
+      <tr><td><code>Loaders</code></td><td class="r"><b>Segmented blocks</b> filling</td><td class="r">1 block / frame</td></tr>
+      <tr><td><code>LED</code></td><td class="r"><b>Blink</b> at steps(1)</td><td class="r">2.6s loop — the only looping animation</td></tr>
+    </table>
+    <div class="sub">Both axes quantise</div>
+    <div class="desc" style="margin-bottom:0">Time steps into frames <b>and</b> space snaps to the 4px grid. Stepping the timing but letting an element land on 37.5px still reads wrong.</div>
+  </div>
+  <div class="note"><b>Never step</b> — page scroll, text being read, focus rings, form validation. Nothing runs past 12 frames. Reveals fire once on scroll-in, never on scroll-back.</div>
+</div>
+
+<!-- 18 -->
+<div class="sec" id="a11y">
+  <div class="sec-h"><span>18 — ACCESSIBILITY</span><i>contrast &amp; behaviour</i></div>
+  <div class="sec-b">
+    <table class="tbl">
+      <tr><th>Pairing</th><th>Ratio</th><th></th></tr>
+      <tr><td class="r">Ink on paper</td><td><code>16.9:1</code></td><td><span class="pill ok">AAA</span></td></tr>
+      <tr><td class="r">Ink on lime</td><td><code>13.0:1</code></td><td><span class="pill ok">AAA</span></td></tr>
+      <tr><td class="r">White on blue</td><td><code>8.6:1</code></td><td><span class="pill ok">AAA</span></td></tr>
+      <tr><td class="r">Mute on paper <b>(fixed)</b></td><td><code>5.7:1</code></td><td><span class="pill ok">AA</span></td></tr>
+      <tr><td class="r">Lime on blue</td><td><code>4.9:1</code></td><td><span class="pill ok">AA</span></td></tr>
+    </table>
+    <div class="sub">Behaviour</div>
+    <table class="tbl">
+      <tr><td class="r" style="width:130px">Touch targets</td><td class="r">Minimum 44×44px everywhere, including nav links on mobile.</td></tr>
+      <tr><td class="r">Skip link</td><td class="r">First focusable element on every page.</td></tr>
+      <tr><td class="r">Reduced motion</td><td class="r">All typing, scanline, pop and blink disabled; content at final state immediately.</td></tr>
+      <tr><td class="r">Alt text</td><td class="r">Screenshots describe what the screen shows and why it matters. Portrait is decorative — <code>alt=""</code>.</td></tr>
+      <tr><td class="r">Colour alone</td><td class="r">Errors carry icon and text. The lime tab pairs with position, not colour alone.</td></tr>
+      <tr><td class="r">Zoom</td><td class="r">Layout holds to 200%. Test the Silkscreen hero specifically.</td></tr>
+    </table>
+  </div>
+  <div class="note"><b>Fixed</b> — mute grey darkened from <code style="font-family:var(--mono)">#87877A</code> (4.0:1, failed at small sizes) to <code style="font-family:var(--mono)">#6E6E62</code>. It's used on 9–11px meta labels throughout, so the token change fixes every instance.</div>
+</div>
+
+<!-- 19 -->
+<div class="sec" id="rules">
+  <div class="sec-h"><span>19 — RULES</span><i>the whole list</i></div>
+  <div class="sec-b">
+    <div class="sub">Always</div>
+    <ul class="rules">
+      <li>Pixel type on short strings only — five words maximum</li>
+      <li>Case study headings are full sentences carrying the finding, always <b>Geist</b></li>
+      <li>Every spacing value comes from the ramp</li>
+      <li>Space above a heading is 3–4× the space below</li>
+      <li>Motion uses <code>steps()</code>; movement lands on multiples of <code>4px</code></li>
+      <li>Raised bevel for interactive, sunk for pressed / recessed / failed / current / input</li>
+      <li>Every colour expands to four tones before it touches a sprite</li>
+      <li>Outlines lighten to mid-grey on dark backgrounds</li>
+      <li>Scanline applies to a container as a whole, never its children</li>
+      <li>Icons render at whole multiples of 8 only</li>
+    </ul>
+    <div class="sub">Never</div>
+    <ul class="rules no">
+      <li>Bitmap type in a paragraph, caption, or sentence-length heading</li>
+      <li>Type out body copy, or scanline a paragraph</li>
+      <li>Two saturated buttons side by side</li>
+      <li>Eased or smooth animation anywhere in the pixel layer</li>
+      <li>Flat neon as a bevel face — lime becomes the highlight, not the fill</li>
+      <li>Step page scroll, focus rings, or form validation</li>
+      <li>Off-ramp spacing — no 11px, 15px, 19px</li>
+      <li>Mute grey below 16px on anything but a label</li>
+      <li>Redraw a third-party brand mark as pixel art</li>
+      <li>A full sitemap footer under a case study</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 20 -->
+<div class="sec" id="open">
+  <div class="sec-h"><span>20 — STILL OPEN</span><i>four</i></div>
+  <div class="sec-b">
+    <ul class="rules open">
+      <li><b>Logo.</b> Recoloured from magenta but still a smooth curve on a 4px-grid site. Redraw as pixel, or keep as a deliberate exception.</li>
+      <li><b>Cursor.</b> Pixel cursor images versus the grid-snap follower. Neither chosen.</li>
+      <li><b>404, About, Contact pages.</b> Components all exist; the compositions don't.</li>
+      <li><b>Cargoz Connect placement.</b> Sitting in tier two with a "client work" label. Once permission lands it arguably belongs in START HERE — it's the only piece answering "has he shipped for a real company".</li>
+    </ul>
+    <div class="sub">Resolved since v2</div>
+    <div class="desc" style="margin-bottom:0">Light or dark base — <b>light page, dark hero and footer</b>. Portrait on mobile — <b>auto sweep</b>. Focus ring — <b>notched blue plate</b>. Mute grey contrast — <b>darkened to #6E6E62</b>.</div>
+  </div>
+</div>
+
+</div>
+
+<script>
+function mix(h,t,a){const g=x=>parseInt(h.slice(x,x+2),16),k=x=>parseInt(t.slice(x,x+2),16);
+  const c=(p,q)=>Math.round(p+(q-p)*a).toString(16).padStart(2,'0');
+  return '#'+c(g(1),k(1))+c(g(3),k(3))+c(g(5),k(5));}
+const lt=(c,a)=>mix(c,'#ffffff',a), dkn=(c,a)=>mix(c,'#000000',a);
+const L='#CDF22B', B='#1E45FB';
+const SETS={
+  lime:{face:L,hi:lt(L,.55),shade:dkn(L,.42),outline:'#14140F'},
+  blue:{face:B,hi:lt(B,.38),shade:dkn(B,.45),outline:'#0A0E2E'},
+  neutral:{face:'#E2E2DC',hi:'#FFFFFF',shade:'#A6A69E',outline:'#14140F',hover:'#EDEDE7'},
+  dead:{face:'#DCDCD6',hi:'#EDEDE8',shade:'#B4B4AC',outline:'#A0A099'},
+  field:{face:'#FAFAF8',hi:'#8A8A80',shade:'#FFFFFF',outline:'#14140F'},
+  fieldErr:{face:'#FDF2EF',hi:'#C4482E',shade:'#FFFFFF',outline:'#C4482E'}
+};
+const BODY=['.DDDD.','DHHHSD','DHFFSD','DHFFSD','DSSSSD','.DDDD.'];
+const TAIL=['FFFFFF','DFFFFS','.DFFSD','..DFSD','...DD.'];
+function px(map,p,s,st){
+  const F=st==='sunk'?dkn(p.face,.10):st==='hover'?(p.hover||lt(p.face,.14)):p.face;
+  const M={'.':null,D:p.outline,H:st==='sunk'?p.shade:p.hi,S:st==='sunk'?p.hi:p.shade,F};
+  const w=map[0].length,h=map.length;
+  const c=document.createElement('canvas');c.width=w*s;c.height=h*s;
+  const x=c.getContext('2d');
+  for(let r=0;r<h;r++)for(let q=0;q<w;q++){const col=M[map[r][q]];
+    if(col){x.fillStyle=col;x.fillRect(q*s,r*s,s,s);}}
+  return c;
+}
+document.querySelectorAll('[data-set]').forEach(el=>{
+  if(el.classList.contains('tailx'))return;
+  const p=SETS[el.dataset.set];
+  const set=st=>el.style.borderImageSource='url('+px(BODY,p,4,st).toDataURL()+')';
+  set('base');
+  if(el.tagName==='BUTTON'||el.tagName==='A'){
+    el.addEventListener('pointerenter',()=>set('hover'));
+    el.addEventListener('pointerleave',()=>set('base'));
+    el.addEventListener('pointerdown',()=>set('sunk'));
+    el.addEventListener('pointerup',()=>set('hover'));
+  }
+});
+document.querySelectorAll('[data-static]').forEach(el=>{
+  const v=el.dataset.static;
+  const st=v.endsWith('-hover')?'hover':v.endsWith('-sunk')?'sunk':'base';
+  el.style.borderImageSource='url('+px(BODY,SETS[v.replace(/-(hover|sunk)$/,'')],4,st).toDataURL()+')';
+});
+document.querySelectorAll('[data-inp]').forEach(el=>{
+  const p=el.dataset.state==='error'?SETS.fieldErr:SETS.field;
+  el.style.borderImageSource='url('+px(BODY,p,3,'base').toDataURL()+')';
+});
+document.querySelectorAll('.tailx').forEach(el=>{
+  const c=px(TAIL,SETS[el.dataset.set],4,'base');
+  const img=document.createElement('img');
+  img.src=c.toDataURL();
+  img.style.cssText='display:block;width:'+c.width+'px;height:'+c.height+'px;image-rendering:pixelated';
+  el.appendChild(img);
+});
+const anat=document.getElementById('anat');
+[['blue','base','BLUE · RAISED'],['blue','sunk','BLUE · SUNK'],['lime','base','LIME · RAISED'],['neutral','base','PLATE · RAISED']]
+.forEach(([n,st,lab])=>{
+  const fig=document.createElement('figure');
+  fig.appendChild(px(BODY,SETS[n],14,st));
+  const cap=document.createElement('figcaption');cap.textContent=lab;fig.appendChild(cap);
+  anat.appendChild(fig);
+});
+
+/* icons */
+const I={
+arrowR:['........','...XX...','....XX..','XXXXXXX.','XXXXXXX.','....XX..','...XX...','........'],
+arrowL:['........','...XX...','..XX....','.XXXXXXX','.XXXXXXX','..XX....','...XX...','........'],
+arrowU:['........','...XX...','..XXXX..','.XX..XX.','...XX...','...XX...','...XX...','........'],
+arrowD:['........','...XX...','...XX...','...XX...','.XX..XX.','..XXXX..','...XX...','........'],
+external:['..XXXXX.','..XXXXX.','.....XX.','....XX..','...XX...','..XX....','.XX.....','........'],
+download:['...XX...','...XX...','...XX...','XXXXXXXX','.XXXXXX.','..XXXX..','...XX...','........'],
+play:['.XX.....','.XXXX...','.XXXXXX.','.XXXXXXX','.XXXXXXX','.XXXXXX.','.XXXX...','.XX.....'],
+close:['........','.XX...XX','..XX.XX.','...XXX..','...XXX..','..XX.XX.','.XX...XX','........'],
+plus:['........','...XX...','...XX...','XXXXXXXX','XXXXXXXX','...XX...','...XX...','........'],
+minus:['........','........','........','XXXXXXXX','XXXXXXXX','........','........','........'],
+chevron:['........','........','XX....XX','.XX..XX.','..XXXX..','...XX...','........','........'],
+check:['........','......XX','.....XX.','XX..XX..','XXX.XX..','.XXXX...','..XX....','........'],
+warning:['...XX...','...XX...','..XXXX..','..X..X..','.XX..XX.','.XXXXXX.','XXX..XXX','XXXXXXXX'],
+info:['XXXXXXXX','X......X','X..XX..X','X......X','X..XX..X','X..XX..X','X......X','XXXXXXXX'],
+clock:['..XXXX..','.X....X.','X..X...X','X..X...X','X..XXX.X','X......X','.X....X.','..XXXX..'],
+search:['.XXXX...','X....X..','X....X..','X....X..','.XXXX...','....XXX.','.....XXX','......XX'],
+mail:['........','XXXXXXXX','XXX..XXX','X.XXXX.X','X..XX..X','X......X','XXXXXXXX','........'],
+copy:['..XXXXX.','..X...X.','XXXXX.X.','X...X.X.','X...XXX.','X...X...','X...X...','XXXXX...'],
+grid:['XXX.XXX.','XXX.XXX.','XXX.XXX.','........','XXX.XXX.','XXX.XXX.','XXX.XXX.','........'],
+menu:['........','XXXXXXXX','XXXXXXXX','........','XXXXXXXX','XXXXXXXX','........','........']
+};
+function icon(c,name,size,colour){
+  const m=I[name],s=size/8;
+  c.width=size;c.height=size;
+  const x=c.getContext('2d');x.fillStyle=colour||'#14140F';
+  for(let r=0;r<8;r++)for(let q=0;q<8;q++) if(m[r][q]==='X') x.fillRect(q*s,r*s,s,s);
+  c.style.width=size+'px';c.style.height=size+'px';
+}
+const ic=document.getElementById('icons');
+Object.keys(I).forEach(k=>{
+  const cell=document.createElement('div');cell.className='cell';
+  const c=document.createElement('canvas');icon(c,k,20,'#14140F');
+  cell.appendChild(c);
+  const b=document.createElement('b');b.textContent=k.toUpperCase();cell.appendChild(b);
+  ic.appendChild(cell);
+});
+const LOGO=['..XXXX..','.XX..XX.','XX......','XX..XXX.','.XXXXXX.','.....XX.','.XX..XX.','..XXXX..'];
+document.querySelectorAll('[data-logo]').forEach(c=>{
+  c.width=16;c.height=16;const x=c.getContext('2d');x.fillStyle='#1E45FB';
+  for(let r=0;r<8;r++)for(let q=0;q<8;q++) if(LOGO[r][q]==='X') x.fillRect(q*2,r*2,2,2);
+});
+
+/* portrait */
+const RAMP=[' ','·','░','░','▒','▒','▓','▓','█','█','█'];
+const COLS=44,ROWS=34;
+const src=document.createElement('canvas');src.width=COLS;src.height=ROWS;
+(function(){
+  const x=src.getContext('2d');
+  x.fillStyle='#000';x.fillRect(0,0,COLS,ROWS);
+  const g=x.createRadialGradient(COLS*.44,ROWS*.30,2,COLS*.5,ROWS*.34,13);
+  g.addColorStop(0,'#fff');g.addColorStop(1,'#4a4a4a');
+  x.fillStyle=g;x.beginPath();x.ellipse(COLS*.5,ROWS*.32,COLS*.17,ROWS*.22,0,0,7);x.fill();
+  x.fillStyle='#6a6a6a';x.beginPath();x.ellipse(COLS*.5,ROWS*.20,COLS*.19,ROWS*.13,0,0,7);x.fill();
+  x.fillStyle='#8a8a8a';x.fillRect(COLS*.44,ROWS*.48,COLS*.12,ROWS*.09);
+  const s=x.createLinearGradient(0,ROWS*.55,0,ROWS);
+  s.addColorStop(0,'#d8d8d8');s.addColorStop(1,'#2a2a2a');
+  x.fillStyle=s;x.beginPath();x.moveTo(COLS*.14,ROWS);
+  x.quadraticCurveTo(COLS*.20,ROWS*.60,COLS*.42,ROWS*.55);
+  x.lineTo(COLS*.58,ROWS*.55);
+  x.quadraticCurveTo(COLS*.80,ROWS*.60,COLS*.86,ROWS);
+  x.closePath();x.fill();
+})();
+const D=src.getContext('2d').getImageData(0,0,COLS,ROWS).data,BASE=[];
+for(let r=0;r<ROWS;r++){BASE[r]=[];for(let c=0;c<COLS;c++){
+  const i=(r*COLS+c)*4;BASE[r][c]=(D[i]*.3+D[i+1]*.59+D[i+2]*.11)/255;}}
+const artc=document.getElementById('artc');
+function renderArt(pxp,pyp,radius){
+  let out='';
+  for(let r=0;r<ROWS;r++){
+    for(let c=0;c<COLS;c++){
+      let v=BASE[r][c];
+      if(pxp!==null){const d=Math.hypot(c-pxp,(r-pyp)*1.6);const R=radius||8;if(d<R)v+=(1-d/R)*.55;}
+      const q=Math.min(3,Math.floor(v*4))/3;
+      const idx=Math.min(RAMP.length-1,Math.round(q*(RAMP.length-1)));
+      const ch=RAMP[idx];
+      out+=(idx>=RAMP.length-2&&ch!==' ')?'<span style="color:#CDF22B">'+ch+'</span>':ch;
+    }
+    out+='\n';
+  }
+  artc.innerHTML=out;
+}
+let raf=false;
+artc.addEventListener('pointermove',e=>{
+  const b=artc.getBoundingClientRect();
+  const ax=Math.round(((e.clientX-b.left)/b.width)*COLS);
+  const ay=Math.round(((e.clientY-b.top)/b.height)*ROWS);
+  if(!raf){requestAnimationFrame(()=>{renderArt(ax,ay);raf=false});raf=true;}
+});
+artc.addEventListener('pointerleave',()=>renderArt(null,null));
+renderArt(null,null);
+if(matchMedia('(hover: none)').matches){
+  let sw=0;setInterval(()=>{sw++;renderArt((sw*2)%(COLS+24)-12,ROWS*.42,10)},130);
+}
+
+/* og scale */
+function scaleOG(){
+  document.querySelectorAll('[data-scale]').forEach(el=>{
+    el.style.transform='scale('+(el.parentElement.clientWidth/1200)+')';
+  });
+}
+addEventListener('resize',scaleOG);scaleOG();
+document.fonts.ready.then(scaleOG);
+</script>
+</body>
+</html>

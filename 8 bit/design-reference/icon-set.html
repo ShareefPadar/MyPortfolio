@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Icon set — pixel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+@font-face{
+  font-family:'Departure Mono';
+  src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2409-1@1.0/DepartureMono-Regular.woff2') format('woff2');
+  font-weight:400;font-display:swap;
+}
+:root{
+  --u:4px;
+  --s4:4px;--s8:8px;--s12:12px;--s16:16px;--s24:24px;--s32:32px;--s48:48px;
+  --lime:#CDF22B; --blue:#1E45FB; --ink:#14140F; --error:#C4482E;
+  --paper:#FAFAF8; --panel:#F0F0EA; --line:#DEDED8; --mute:#6E6E62;
+  --plate:#D8D8D0; --hi:#FFFFFF; --sh:#8A8A80;
+  --mono:'Departure Mono',ui-monospace,monospace;
+  --pix:'Silkscreen',monospace;
+  --sans:'Geist',-apple-system,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:#E6E6E2;font-family:var(--sans);color:var(--ink);padding:20px 14px 60px;line-height:1.55}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.wrap{max-width:700px;margin:0 auto}
+
+.head{margin-bottom:24px}
+.head h1{font-family:var(--pix);font-weight:700;font-size:clamp(14px,3.8vw,18px);line-height:1.7;margin-bottom:12px}
+.head p{font-size:14px;color:#4A4A46;max-width:56ch}
+
+.sec{border:2px solid var(--ink);margin-bottom:16px;background:var(--paper)}
+.sec-h{display:flex;justify-content:space-between;gap:10px;padding:8px 14px;background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:11px;letter-spacing:.05em}
+.sec-h i{font-style:normal;opacity:.55;font-size:10px;text-align:right}
+.sec-b{padding:var(--s24) 18px}
+.desc{font-size:13.5px;color:#5C5C52;margin-bottom:var(--s16);max-width:54ch}
+.sub{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin:var(--s32) 0 var(--s12);padding-bottom:6px;border-bottom:1px dashed var(--line)}
+.sub:first-child{margin-top:0}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:2px;background:var(--ink);border:3px solid var(--ink)}
+.cell{background:var(--paper);padding:var(--s16) var(--s8) var(--s12);text-align:center}
+.cell canvas{image-rendering:pixelated;display:block;margin:0 auto var(--s8)}
+.cell b{font-family:var(--mono);font-size:8px;letter-spacing:.06em;color:var(--mute);font-weight:400;display:block}
+
+.sizes{display:flex;flex-wrap:wrap;gap:var(--s32);align-items:flex-end}
+.sizes figure{text-align:center}
+.sizes canvas{image-rendering:pixelated;display:block;margin:0 auto var(--s8)}
+.sizes figcaption{font-family:var(--mono);font-size:8.5px;letter-spacing:.06em;color:var(--mute)}
+
+.ctx{display:flex;flex-direction:column;gap:var(--s16)}
+.btn{font-family:var(--pix);font-size:11px;line-height:1;border:8px solid transparent;border-image-slice:8 fill;
+  border-image-repeat:stretch;padding:9px 13px;cursor:pointer;background:none;color:var(--ink);
+  display:inline-flex;align-items:center;gap:8px;min-height:44px;text-decoration:none}
+.btn canvas{image-rendering:pixelated;flex:none}
+.link{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;
+  text-decoration:none;color:var(--ink);border-bottom:2px solid var(--ink);padding-bottom:2px}
+.link canvas{image-rendering:pixelated;flex:none}
+.meta{display:flex;flex-wrap:wrap;gap:var(--s16);font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--mute)}
+.meta span{display:inline-flex;align-items:center;gap:6px}
+.meta canvas{image-rendering:pixelated;flex:none}
+.alert{display:flex;gap:var(--s12);align-items:flex-start;border:3px solid var(--error);background:#FDF2EF;padding:var(--s12) var(--s16);max-width:460px}
+.alert canvas{flex:none;margin-top:2px;image-rendering:pixelated}
+.alert p{font-size:14px;color:#7A2A18;line-height:1.55}
+
+.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl th{font-family:var(--mono);font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);text-align:left;padding:0 8px 8px 0;font-weight:400;border-bottom:2px solid var(--ink)}
+.tbl td{padding:9px 8px 9px 0;border-bottom:1px solid var(--line);vertical-align:middle}
+.tbl .r{color:#5C5C52;font-size:12.5px}
+
+.rules{list-style:none;font-size:13.5px}
+.rules li{padding:9px 0 9px 26px;border-bottom:1px solid var(--line);position:relative;color:#3E3E36}
+.rules li:last-child{border-bottom:0}
+.rules li::before{content:"▸";position:absolute;left:4px;color:var(--blue)}
+.rules.no li::before{content:"✕";color:var(--error)}
+.rules code{font-family:var(--mono);font-size:12px;color:var(--blue)}
+
+.note{border-top:1px solid var(--line);background:var(--panel);padding:12px 18px;font-size:13px;color:#5C5C52;line-height:1.6}
+.note b{font-family:var(--mono);font-size:11px;color:var(--ink);font-weight:400}
+.warn{border-left:4px solid var(--error)}
+
+@media (max-width:520px){.sec-b{padding:var(--s16) 12px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="head">
+  <h1>ICON SET</h1>
+  <p>Twenty icons drawn on an 8×8 grid. Everything else in the system lands on 4px; icons were the last primitive still borrowed from elsewhere.</p>
+</div>
+
+<div class="sec">
+  <div class="sec-h"><span>01 — THE SET</span><i>8×8 · shown at 24px</i></div>
+  <div class="sec-b"><div class="grid" id="grid"></div></div>
+  <div class="note"><b>Note</b> — every shape uses a two-pixel stroke so it survives at 16px. One-pixel strokes disappear on a phone.</div>
+</div>
+
+<div class="sec">
+  <div class="sec-h"><span>02 — SIZES</span><i>whole multiples only</i></div>
+  <div class="sec-b">
+    <div class="desc">The grid is 8×8, so valid sizes are 8, 16, 24, 32, 48. Anything between — 18px, 20px, 22px — puts pixels on half-positions and the icon goes soft. Same rule as the button sprite.</div>
+    <div class="sizes" id="sizes"></div>
+  </div>
+  <div class="note warn"><b>Rule</b> — never <code style="font-family:var(--mono)">width: 1em</code> on an icon. Set explicit px from the list.</div>
+</div>
+
+<div class="sec">
+  <div class="sec-h"><span>03 — IN CONTEXT</span><i>where each one lives</i></div>
+  <div class="sec-b">
+    <div class="sub">Buttons</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px">
+      <a href="#0" class="btn" data-set="blue" style="color:#CDF22B">READ CASE STUDY <canvas data-i="arrowR" data-sz="16" data-c="#CDF22B"></canvas></a>
+      <a href="#0" class="btn" data-set="neutral"><canvas data-i="download" data-sz="16" data-c="#14140F"></canvas> RÉSUMÉ</a>
+      <a href="#0" class="btn" data-set="neutral"><canvas data-i="play" data-sz="16" data-c="#14140F"></canvas> PROTOTYPE</a>
+    </div>
+
+    <div class="sub">Navigation</div>
+    <div class="ctx">
+      <a href="#0" class="link"><canvas data-i="arrowL" data-sz="16" data-c="#14140F"></canvas> BACK TO WORK</a>
+      <a href="#0" class="link">MERCURY'S LIVE FLOW <canvas data-i="external" data-sz="16" data-c="#1E45FB"></canvas></a>
+    </div>
+
+    <div class="sub">Case study meta</div>
+    <div class="meta">
+      <span><canvas data-i="clock" data-sz="16" data-c="#6E6E62"></canvas>10 MIN READ</span>
+      <span><canvas data-i="grid" data-sz="16" data-c="#6E6E62"></canvas>6 SCREENS</span>
+      <span><canvas data-i="check" data-sz="16" data-c="#6E6E62"></canvas>PROTOTYPE LIVE</span>
+    </div>
+
+    <div class="sub">Feedback</div>
+    <div class="alert">
+      <canvas data-i="warning" data-sz="24" data-c="#C4482E"></canvas>
+      <p>That address is missing a domain — try <span style="font-family:var(--mono)">jane@meridian.ae</span></p>
+    </div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-h"><span>04 — ONE JOB EACH</span><i>inventory</i></div>
+  <div class="sec-b">
+    <table class="tbl">
+      <tr><th>Icon</th><th>Only used for</th></tr>
+      <tr><td class="r">Arrow right</td><td class="r">Forward action — read case study, next story</td></tr>
+      <tr><td class="r">Arrow left</td><td class="r">Back link out of a case study</td></tr>
+      <tr><td class="r">Arrow up</td><td class="r">Back to top</td></tr>
+      <tr><td class="r">External</td><td class="r">Links that leave the site. Never internal ones</td></tr>
+      <tr><td class="r">Download</td><td class="r">Résumé only</td></tr>
+      <tr><td class="r">Play</td><td class="r">Live prototype, screen recording</td></tr>
+      <tr><td class="r">Close</td><td class="r">Dismiss greeting bubble, close mobile menu</td></tr>
+      <tr><td class="r">Plus / minus</td><td class="r">Expand and collapse</td></tr>
+      <tr><td class="r">Chevron</td><td class="r">Select fields only — not a link affordance</td></tr>
+      <tr><td class="r">Check</td><td class="r">Checkbox, completed step, sent confirmation</td></tr>
+      <tr><td class="r">Warning</td><td class="r">Form errors</td></tr>
+      <tr><td class="r">Info</td><td class="r">"Why we ask" style explanations</td></tr>
+      <tr><td class="r">Clock</td><td class="r">Read time, step estimates</td></tr>
+      <tr><td class="r">Search</td><td class="r">Work index filter, if you add one</td></tr>
+      <tr><td class="r">Mail</td><td class="r">Contact links</td></tr>
+      <tr><td class="r">Copy</td><td class="r">Copy email address</td></tr>
+      <tr><td class="r">Grid</td><td class="r">Screen counts, layout toggle</td></tr>
+      <tr><td class="r">Menu</td><td class="r">Mobile nav only</td></tr>
+    </table>
+  </div>
+  <div class="note warn"><b>Social marks</b> — don't pixelate LinkedIn or GitHub logos. Brand marks have usage guidelines, and a redrawn one reads as sloppy rather than stylish. Use their official SVG at 16 or 24px in monochrome ink.</div>
+</div>
+
+<div class="sec">
+  <div class="sec-h"><span>05 — RULES</span><i>short</i></div>
+  <div class="sec-b">
+    <ul class="rules">
+      <li>Drawn on <code>8×8</code>, rendered at <code>8 / 16 / 24 / 32 / 48</code> only</li>
+      <li>Two-pixel stroke minimum so shapes hold at 16px</li>
+      <li>Icons inherit text colour, never carry their own</li>
+      <li>Icons sit on the text baseline, not centred to the line box</li>
+      <li>An icon beside a label is decorative — <code>aria-hidden="true"</code></li>
+      <li>An icon alone needs an accessible name</li>
+    </ul>
+    <div class="sub">Never</div>
+    <ul class="rules no">
+      <li>Sizes between the multiples — no 18px, 20px, 22px</li>
+      <li>The same icon doing two jobs on one page</li>
+      <li>An icon-only button under <code>44×44px</code></li>
+      <li>Rotate an icon to make a new one — draw the new one</li>
+      <li>Redraw a third-party brand mark as pixel art</li>
+    </ul>
+  </div>
+</div>
+
+</div>
+
+<script>
+const I={
+arrowR:['........','...XX...','....XX..','XXXXXXX.','XXXXXXX.','....XX..','...XX...','........'],
+arrowL:['........','...XX...','..XX....','.XXXXXXX','.XXXXXXX','..XX....','...XX...','........'],
+arrowU:['........','...XX...','..XXXX..','.XX..XX.','...XX...','...XX...','...XX...','........'],
+arrowD:['........','...XX...','...XX...','...XX...','.XX..XX.','..XXXX..','...XX...','........'],
+external:['..XXXXX.','..XXXXX.','.....XX.','....XX..','...XX...','..XX....','.XX.....','........'],
+download:['...XX...','...XX...','...XX...','XXXXXXXX','.XXXXXX.','..XXXX..','...XX...','........'],
+play:['.XX.....','.XXXX...','.XXXXXX.','.XXXXXXX','.XXXXXXX','.XXXXXX.','.XXXX...','.XX.....'],
+close:['........','.XX...XX','..XX.XX.','...XXX..','...XXX..','..XX.XX.','.XX...XX','........'],
+plus:['........','...XX...','...XX...','XXXXXXXX','XXXXXXXX','...XX...','...XX...','........'],
+minus:['........','........','........','XXXXXXXX','XXXXXXXX','........','........','........'],
+chevron:['........','........','XX....XX','.XX..XX.','..XXXX..','...XX...','........','........'],
+check:['........','......XX','.....XX.','XX..XX..','XXX.XX..','.XXXX...','..XX....','........'],
+warning:['...XX...','...XX...','..XXXX..','..X..X..','.XX..XX.','.XXXXXX.','XXX..XXX','XXXXXXXX'],
+info:['XXXXXXXX','X......X','X..XX..X','X......X','X..XX..X','X..XX..X','X......X','XXXXXXXX'],
+clock:['..XXXX..','.X....X.','X..X...X','X..X...X','X..XXX.X','X......X','.X....X.','..XXXX..'],
+search:['.XXXX...','X....X..','X....X..','X....X..','.XXXX...','....XXX.','.....XXX','......XX'],
+mail:['........','XXXXXXXX','XXX..XXX','X.XXXX.X','X..XX..X','X......X','XXXXXXXX','........'],
+copy:['..XXXXX.','..X...X.','XXXXX.X.','X...X.X.','X...XXX.','X...X...','X...X...','XXXXX...'],
+grid:['XXX.XXX.','XXX.XXX.','XXX.XXX.','........','XXX.XXX.','XXX.XXX.','XXX.XXX.','........'],
+menu:['........','XXXXXXXX','XXXXXXXX','........','XXXXXXXX','XXXXXXXX','........','........']
+};
+const LABELS={arrowR:'ARROW R',arrowL:'ARROW L',arrowU:'ARROW UP',arrowD:'ARROW DOWN',external:'EXTERNAL',
+download:'DOWNLOAD',play:'PLAY',close:'CLOSE',plus:'PLUS',minus:'MINUS',chevron:'CHEVRON',check:'CHECK',
+warning:'WARNING',info:'INFO',clock:'CLOCK',search:'SEARCH',mail:'MAIL',copy:'COPY',grid:'GRID',menu:'MENU'};
+
+function draw(c,name,size,colour){
+  const m=I[name], s=size/8;
+  c.width=size;c.height=size;
+  const x=c.getContext('2d');
+  x.fillStyle=colour||'#14140F';
+  for(let r=0;r<8;r++)for(let q=0;q<8;q++) if(m[r][q]==='X') x.fillRect(q*s,r*s,s,s);
+  c.style.width=size+'px';c.style.height=size+'px';
+}
+
+const grid=document.getElementById('grid');
+Object.keys(I).forEach(k=>{
+  const cell=document.createElement('div'); cell.className='cell';
+  const c=document.createElement('canvas'); draw(c,k,24,'#14140F');
+  cell.appendChild(c);
+  const b=document.createElement('b'); b.textContent=LABELS[k]; cell.appendChild(b);
+  grid.appendChild(cell);
+});
+
+const sizes=document.getElementById('sizes');
+[8,16,24,32,48].forEach(sz=>{
+  const fig=document.createElement('figure');
+  const c=document.createElement('canvas'); draw(c,'arrowR',sz,'#1E45FB');
+  fig.appendChild(c);
+  const cap=document.createElement('figcaption'); cap.textContent=sz+'px'; fig.appendChild(cap);
+  sizes.appendChild(fig);
+});
+
+document.querySelectorAll('[data-i]').forEach(c=>draw(c,c.dataset.i,+c.dataset.sz,c.dataset.c));
+
+function mix(h,t,a){const g=x=>parseInt(h.slice(x,x+2),16),k=x=>parseInt(t.slice(x,x+2),16);
+  const c=(p,q)=>Math.round(p+(q-p)*a).toString(16).padStart(2,'0');
+  return '#'+c(g(1),k(1))+c(g(3),k(3))+c(g(5),k(5));}
+const lt=(c,a)=>mix(c,'#ffffff',a), dkn=(c,a)=>mix(c,'#000000',a);
+const B='#1E45FB';
+const SETS={blue:{face:B,hi:lt(B,.38),shade:dkn(B,.45),outline:'#0A0E2E'},
+            neutral:{face:'#E2E2DC',hi:'#FFFFFF',shade:'#A6A69E',outline:'#14140F',hover:'#EDEDE7'}};
+const BODY=['.DDDD.','DHHHSD','DHFFSD','DHFFSD','DSSSSD','.DDDD.'];
+function frame(p,st){
+  const F=st==='hover'?(p.hover||lt(p.face,.14)):p.face;
+  const M={'.':null,D:p.outline,H:p.hi,S:p.shade,F};
+  const c=document.createElement('canvas');c.width=24;c.height=24;
+  const x=c.getContext('2d');
+  for(let r=0;r<6;r++)for(let q=0;q<6;q++){const col=M[BODY[r][q]];
+    if(col){x.fillStyle=col;x.fillRect(q*4,r*4,4,4);}}
+  return 'url('+c.toDataURL()+')';
+}
+document.querySelectorAll('[data-set]').forEach(el=>{
+  const p=SETS[el.dataset.set];
+  el.style.borderImageSource=frame(p,'base');
+  el.addEventListener('pointerenter',()=>el.style.borderImageSource=frame(p,'hover'));
+  el.addEventListener('pointerleave',()=>el.style.borderImageSource=frame(p,'base'));
+});
+</script>
+</body>
+</html>

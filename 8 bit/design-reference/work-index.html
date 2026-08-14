@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Work index</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+@font-face{
+  font-family:'Departure Mono';
+  src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2409-1@1.0/DepartureMono-Regular.woff2') format('woff2');
+  font-weight:400;font-display:swap;
+}
+:root{
+  --u:4px;
+  --s4:4px;--s8:8px;--s12:12px;--s16:16px;--s24:24px;--s32:32px;--s48:48px;--s64:64px;
+  --lime:#CDF22B; --blue:#1E45FB; --ink:#14140F; --error:#C4482E;
+  --paper:#FAFAF8; --panel:#F0F0EA; --line:#DEDED8; --mute:#6E6E62;
+  --plate:#D8D8D0; --hi:#FFFFFF; --sh:#8A8A80;
+  --mono:'Departure Mono',ui-monospace,monospace;
+  --pix:'Silkscreen',monospace;
+  --sans:'Geist',-apple-system,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{background:var(--paper);font-family:var(--sans);color:var(--ink);line-height:1.6}
+:focus-visible{outline:3px solid var(--blue);outline-offset:4px}
+.wrap{max-width:1100px;margin:0 auto;padding:0 var(--s24)}
+@media(max-width:560px){.wrap{padding:0 var(--s16)}}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:40;background:var(--paper);padding-top:var(--s12)}
+.navbar{background:var(--plate);border:3px solid var(--ink);display:flex;align-items:stretch;gap:10px;padding:6px 8px;
+  box-shadow:inset var(--u) var(--u) 0 var(--hi), inset calc(var(--u)*-1) calc(var(--u)*-1) 0 var(--sh)}
+.navbar .brand{display:flex;align-items:center;gap:7px;font-family:var(--pix);font-size:11px;padding:0 4px;text-decoration:none;color:var(--ink)}
+.navbar .lk{margin-left:auto;display:flex;gap:2px}
+.navbar .lk a{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-decoration:none;padding:9px 10px;display:flex;align-items:center;color:var(--ink)}
+.navbar .lk a.on{background:var(--paper);box-shadow:inset 3px 3px 0 var(--sh), inset -3px -3px 0 var(--hi)}
+.logo{width:18px;height:18px;image-rendering:pixelated;flex:none}
+@media(max-width:560px){.navbar .lk a{padding:8px 7px;font-size:10px}}
+
+/* header */
+.phead{padding:var(--s48) 0 var(--s32)}
+.phead h1{font-family:var(--pix);font-weight:700;font-size:clamp(18px,4.6vw,26px);line-height:1.75;margin-bottom:var(--s16);min-height:1.75em}
+.phead p{font-size:17px;color:#4A4A42;max-width:46ch}
+.count{font-family:var(--mono);font-size:10px;letter-spacing:.11em;color:var(--mute);margin-bottom:var(--s12)}
+
+/* filter */
+.filters{display:flex;flex-wrap:wrap;gap:var(--s8);padding-bottom:var(--s24);
+  border-bottom:3px solid var(--ink);margin-bottom:var(--s48)}
+.filt{font-family:var(--mono);font-size:10px;letter-spacing:.07em;padding:8px 12px;cursor:pointer;
+  background:var(--paper);border:2px solid var(--ink);color:var(--ink);min-height:36px;
+  clip-path:polygon(4px 0,calc(100% - 4px) 0,calc(100% - 4px) 4px,100% 4px,100% calc(100% - 4px),calc(100% - 4px) calc(100% - 4px),calc(100% - 4px) 100%,4px 100%,4px calc(100% - 4px),0 calc(100% - 4px),0 4px,4px 4px)}
+.filt:hover{background:var(--panel)}
+.filt.on{background:var(--lime)}
+.filt span{color:var(--mute);margin-left:5px}
+.filt.on span{color:#5A6B1E}
+
+/* section label */
+.slab{display:flex;align-items:baseline;gap:10px;margin-bottom:var(--s24)}
+.slab b{font-family:var(--pix);font-weight:700;font-size:16px;color:var(--blue);line-height:1}
+.slab span{font-family:var(--mono);font-size:10px;letter-spacing:.13em;color:var(--mute)}
+.slab i{flex:1;height:3px;background:var(--ink)}
+
+/* grid */
+.grid{display:grid;gap:var(--s48) var(--s24);margin-bottom:var(--s64)}
+@media(min-width:640px){.grid.two{grid-template-columns:1fr 1fr}}
+@media(min-width:640px){.grid.three{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:920px){.grid.three{grid-template-columns:repeat(3,1fr)}}
+
+/* card */
+.card{position:relative;margin-top:18px;text-decoration:none;color:var(--ink);display:block;
+  background:var(--plate);border:3px solid var(--ink);
+  box-shadow:inset var(--u) var(--u) 0 var(--hi), inset calc(var(--u)*-1) calc(var(--u)*-1) 0 var(--sh)}
+.card .tab{position:absolute;top:-17px;left:14px;border:3px solid var(--ink);border-bottom:0;padding:4px 10px 5px;
+  font-family:var(--mono);font-size:10px;letter-spacing:.07em;background:var(--plate);min-width:104px;text-align:center;
+  clip-path:polygon(4px 0,calc(100% - 4px) 0,calc(100% - 4px) 4px,100% 4px,100% 100%,0 100%,0 4px,4px 4px)}
+.card .tab.on{background:var(--lime)}
+.card .well{margin:10px;box-shadow:0 0 0 3px var(--ink), inset var(--u) var(--u) 0 rgba(0,0,0,.4)}
+.card .shot{aspect-ratio:16/10;display:grid;place-items:center;font-family:var(--mono);font-size:10px;color:#8A8AA0}
+.card .body{background:var(--paper);margin:10px;margin-top:0;padding:var(--s16);border:3px solid var(--ink)}
+.card .meta{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--mute);margin-bottom:var(--s8)}
+.card h3{font-size:18px;font-weight:500;line-height:1.4;margin-bottom:var(--s8)}
+.card p{font-size:14px;color:#4A4A42;line-height:1.6;margin-bottom:var(--s12)}
+.card .go{display:inline-flex;align-items:center;gap:7px;font-family:var(--pix);font-size:10px}
+.card .go canvas{image-rendering:pixelated}
+.card:hover .body{background:#FFFFFF}
+.card:hover .tab{background:var(--lime)}
+
+.grid.three .card h3{font-size:16px}
+.grid.three .card p{display:none}
+
+/* archive */
+.arch{border:3px solid var(--ink);background:var(--panel);margin-bottom:var(--s64)}
+.arch summary{list-style:none;cursor:pointer;padding:var(--s16) var(--s24);display:flex;align-items:center;gap:var(--s12);
+  font-family:var(--mono);font-size:11px;letter-spacing:.08em}
+.arch summary::-webkit-details-marker{display:none}
+.arch summary canvas{image-rendering:pixelated;flex:none}
+.arch summary span{color:var(--mute);margin-left:auto;font-size:10px}
+.arch .inner{padding:0 var(--s24) var(--s24)}
+.arch .row{display:flex;flex-wrap:wrap;gap:var(--s12);align-items:baseline;padding:var(--s12) 0;border-top:2px solid var(--line);text-decoration:none;color:var(--ink)}
+.arch .row b{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--mute);width:110px;flex:none}
+.arch .row h4{font-size:15px;font-weight:500;flex:1;min-width:200px}
+.arch .row:hover h4{text-decoration:underline;text-underline-offset:3px}
+
+/* empty */
+.empty{display:none;border:3px dashed var(--ink);padding:var(--s48) var(--s24);text-align:center;margin-bottom:var(--s64)}
+.empty.show{display:block}
+.empty canvas{image-rendering:pixelated;margin-bottom:var(--s16)}
+.empty h4{font-family:var(--pix);font-size:13px;line-height:1.7;margin-bottom:var(--s12)}
+.empty p{font-size:14px;color:#4A4A42;max-width:34ch;margin:0 auto var(--s16)}
+.empty button{font-family:var(--pix);font-size:10px;padding:9px 13px;cursor:pointer;background:var(--plate);
+  border:2px solid var(--ink);color:var(--ink);box-shadow:inset 3px 3px 0 var(--hi), inset -3px -3px 0 var(--sh);min-height:44px}
+
+.note{border:2px solid var(--ink);background:var(--panel);padding:var(--s16) var(--s24);font-size:13.5px;color:#4A4A42;line-height:1.65;margin-bottom:var(--s48)}
+.note b{font-family:var(--mono);font-size:11px;color:var(--ink);font-weight:400;display:block;margin-bottom:6px;letter-spacing:.08em}
+
+footer{border-top:3px solid var(--ink);background:#0B0B0C;color:#E8E8E2;padding:var(--s48) 0 var(--s32);margin-top:var(--s32)}
+footer .status{display:inline-flex;align-items:center;gap:var(--s8);font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:#9A9A94;margin-bottom:var(--s16)}
+footer .status b{width:8px;height:8px;background:var(--lime);display:block;animation:led 2.6s steps(1,end) infinite}
+@keyframes led{0%,86%{opacity:1}86.01%,100%{opacity:.25}}
+footer .cta{font-family:var(--pix);font-weight:700;font-size:clamp(15px,3.6vw,20px);line-height:1.7;margin-bottom:var(--s16)}
+footer .cta em{font-style:normal;color:var(--lime)}
+footer a.mail{font-family:var(--mono);font-size:15px;color:var(--lime);text-decoration:none;border-bottom:3px solid currentColor;padding-bottom:2px}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <div class="wrap">
+    <div class="navbar">
+      <a href="#0" class="brand"><canvas class="logo" data-logo></canvas>SHAREEF</a>
+      <div class="lk"><a href="#0" class="on">WORK</a><a href="#0">ABOUT</a><a href="#0">CONTACT</a></div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="phead">
+    <div class="count">EIGHT PROJECTS · THREE DOMAINS</div>
+    <h1 id="title"></h1>
+    <p>B2B systems where the workflow is the hard part — marketplaces, compliance onboarding, operational dashboards.</p>
+  </div>
+
+  <div class="filters" id="filters">
+    <button class="filt on" data-f="all">ALL <span>8</span></button>
+    <button class="filt" data-f="fintech">FINTECH <span>3</span></button>
+    <button class="filt" data-f="saas">B2B SAAS <span>3</span></button>
+    <button class="filt" data-f="mobile">MOBILE <span>2</span></button>
+  </div>
+
+  <!-- FEATURED -->
+  <div id="featSec">
+    <div class="slab"><b>01</b><span>START HERE</span><i></i></div>
+    <div class="grid two" id="featured">
+
+      <a href="#0" class="card" data-tags="fintech">
+        <span class="tab on">FINTECH</span>
+        <div class="well"><div class="shot" style="background:#EEEDF8">[ SANAD ]</div></div>
+        <div class="body">
+          <div class="meta">SELF-INITIATED · 2026</div>
+          <h3>Onboarding that feels fast without cutting corners</h3>
+          <p>A six-screen KYB flow for a fictional business bank, designed and built as a working prototype — then audited against itself.</p>
+          <span class="go">READ <canvas data-i="arrowR" data-sz="12" data-c="#14140F"></canvas></span>
+        </div>
+      </a>
+
+      <a href="#0" class="card" data-tags="fintech">
+        <span class="tab on">FINTECH</span>
+        <div class="well"><div class="shot" style="background:#EDEEF2">[ MIZAN ]</div></div>
+        <div class="body">
+          <div class="meta">SELF-INITIATED · 2026</div>
+          <h3>Telling a frozen business what's actually happening</h3>
+          <p>Account-hold communication for business banking, grounded in real published complaints.</p>
+          <span class="go">READ <canvas data-i="arrowR" data-sz="12" data-c="#14140F"></canvas></span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- REST -->
+  <div id="restSec">
+    <div class="slab"><b>02</b><span>ALSO WORTH YOUR TIME</span><i></i></div>
+    <div class="grid three" id="rest">
+
+      <a href="#0" class="card" data-tags="saas">
+        <span class="tab">MARKETPLACE</span>
+        <div class="well"><div class="shot" style="background:#EAF0EE">[ CARGOZ ]</div></div>
+        <div class="body">
+          <div class="meta">CLIENT WORK · 2025</div>
+          <h3>Booking warehouse space in under 24 hours</h3>
+          <span class="go">READ <canvas data-i="arrowR" data-sz="12" data-c="#14140F"></canvas></span>
+        </div>
+      </a>
+
+      <a href="#0" class="card" data-tags="saas fintech">
+        <span class="tab">SCHEDULING</span>
+        <div class="well"><div class="shot" style="background:#F1EEEA">[ STUDIO DESK ]</div></div>
+        <div class="body">
+          <div class="meta">CONCEPT · 2025</div>
+          <h3>A calendar that survives a fully booked Saturday</h3>
+          <span class="go">READ <canvas data-i="arrowR" data-sz="12" data-c="#14140F"></canvas></span>
+        </div>
+      </a>
+
+      <a href="#0" class="card" data-tags="saas">
+        <span class="tab">CONVERSATIONAL</span>
+        <div class="well"><div class="shot" style="background:#EDEAF2">[ LISTING INTAKE ]</div></div>
+        <div class="body">
+          <div class="meta">CONCEPT · 2025</div>
+          <h3>An agent-side assistant that doesn't guess</h3>
+          <span class="go">READ <canvas data-i="arrowR" data-sz="12" data-c="#14140F"></canvas></span>
+        </div>
+      </a>
+
+      <a href="#0" class="card" data-tags="mobile">
+        <span class="tab">MOBILE</span>
+        <div class="well"><div class="shot" style="background:#EAEFF2">[ ROUTE PASS ]</div></div>
+        <div class="body">
+          <div class="meta">CONCEPT · 2024</div>
+          <h3>One pass for a city that runs on four ticket systems</h3>
+          <span class="go">READ <canvas data-i="arrowR" data-sz="12" data-c="#14140F"></canvas></span>
+        </div>
+      </a>
+
+      <a href="#0" class="card" data-tags="mobile">
+        <span class="tab">MOBILE</span>
+        <div class="well"><div class="shot" style="background:#F2EEEA">[ FORM ]</div></div>
+        <div class="body">
+          <div class="meta">CONCEPT · 2024</div>
+          <h3>Training logs you can fill in between sets</h3>
+          <span class="go">READ <canvas data-i="arrowR" data-sz="12" data-c="#14140F"></canvas></span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- EMPTY -->
+  <div class="empty" id="empty">
+    <canvas data-i="search" data-sz="32" data-c="#6E6E62"></canvas>
+    <h4>NOTHING HERE YET</h4>
+    <p>No case studies in that domain. The fintech work is the closest thing.</p>
+    <button id="reset">SHOW ALL</button>
+  </div>
+
+  <div class="note">
+    <b>WHY THIS STRUCTURE</b>
+    Two tiers, not one flat grid. A hiring manager reviewing thirty portfolios opens the first thing they see — so the two strongest pieces get full cards with a description, and everything else gets a compact card. The filter lets you send a fintech recruiter a link that opens pre-filtered, which is the same tailoring you already do on the résumé.
+  </div>
+
+  <!-- ARCHIVE -->
+  <details class="arch">
+    <summary><canvas data-i="plus" data-sz="12" data-c="#14140F"></canvas>EARLIER WORK<span>4 PROJECTS</span></summary>
+    <div class="inner">
+      <a href="#0" class="row"><b>2023 · BRAND</b><h4>Addwiser — marketing visual identity</h4></a>
+      <a href="#0" class="row"><b>2022 · WEB</b><h4>iOSys — agency client sites</h4></a>
+      <a href="#0" class="row"><b>2022 · MOBILE</b><h4>Illuminz — two consumer apps</h4></a>
+      <a href="#0" class="row"><b>2021 · WEB</b><h4>Early freelance work</h4></a>
+    </div>
+  </details>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="status"><b></b>OPEN TO SENIOR PRODUCT DESIGN ROLES · DUBAI</div>
+    <div class="cta">LET'S BUILD SOMETHING <em>REAL.</em></div>
+    <a href="mailto:shareefpadar@gmail.com" class="mail">shareefpadar@gmail.com</a>
+  </div>
+</footer>
+
+<script>
+const I={
+arrowR:['........','...XX...','....XX..','XXXXXXX.','XXXXXXX.','....XX..','...XX...','........'],
+plus:['........','...XX...','...XX...','XXXXXXXX','XXXXXXXX','...XX...','...XX...','........'],
+search:['.XXXX...','X....X..','X....X..','X....X..','.XXXX...','....XXX.','.....XXX','......XX']
+};
+function draw(c,name,size,colour){
+  const m=I[name], s=size/8;
+  c.width=size;c.height=size;
+  const x=c.getContext('2d'); x.fillStyle=colour||'#14140F';
+  for(let r=0;r<8;r++)for(let q=0;q<8;q++) if(m[r][q]==='X') x.fillRect(q*s,r*s,s,s);
+  c.style.width=size+'px';c.style.height=size+'px';
+}
+document.querySelectorAll('[data-i]').forEach(c=>draw(c,c.dataset.i,+c.dataset.sz,c.dataset.c));
+
+const LOGO=['..XXXX..','.XX..XX.','XX......','XX..XXX.','.XXXXXX.','.....XX.','.XX..XX.','..XXXX..'];
+document.querySelectorAll('[data-logo]').forEach(c=>{
+  c.width=18;c.height=18;const x=c.getContext('2d');
+  x.fillStyle='#1E45FB';
+  for(let r=0;r<8;r++)for(let q=0;q<8;q++) if(LOGO[r][q]==='X') x.fillRect(q*2.25,r*2.25,2.25,2.25);
+});
+
+/* typed title */
+const title=document.getElementById('title');
+(function(){
+  const T='SELECTED WORK'; let i=0;
+  title.innerHTML='';
+  const id=setInterval(()=>{
+    i++;
+    title.textContent=T.slice(0,i);
+    if(i>=T.length)clearInterval(id);
+  },45);
+})();
+
+/* filter */
+const cards=[...document.querySelectorAll('.card')];
+const empty=document.getElementById('empty');
+const featSec=document.getElementById('featSec');
+const restSec=document.getElementById('restSec');
+function apply(f){
+  let shown=0;
+  cards.forEach(c=>{
+    const ok = f==='all' || c.dataset.tags.split(' ').includes(f);
+    c.style.display = ok?'block':'none';
+    if(ok)shown++;
+  });
+  const featVisible=[...featSec.querySelectorAll('.card')].some(c=>c.style.display!=='none');
+  const restVisible=[...restSec.querySelectorAll('.card')].some(c=>c.style.display!=='none');
+  featSec.style.display=featVisible?'block':'none';
+  restSec.style.display=restVisible?'block':'none';
+  empty.classList.toggle('show',shown===0);
+}
+document.querySelectorAll('.filt').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('.filt').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    apply(b.dataset.f);
+  });
+});
+document.getElementById('reset').addEventListener('click',()=>{
+  document.querySelectorAll('.filt').forEach(x=>x.classList.remove('on'));
+  document.querySelector('[data-f="all"]').classList.add('on');
+  apply('all');
+});
+</script>
+</body>
+</html>

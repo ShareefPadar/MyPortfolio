@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nine-slice buttons — lime × blue</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Geist:wght@400;500&display=swap" rel="stylesheet">
+<style>
+@font-face{
+  font-family:'Departure Mono';
+  src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2409-1@1.0/DepartureMono-Regular.woff2') format('woff2');
+  font-weight:400;font-display:swap;
+}
+:root{
+  --lime:#CDF22B;
+  --blue:#1E45FB;
+  --ink:#14140F;
+  --paper:#FAFAF8;
+  --panel:#F0F0EA;
+  --line:#dedeD8;
+  --mute:#87877a;
+  --mono:'Departure Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:#e6e6e2;font-family:'Geist',-apple-system,system-ui,sans-serif;color:var(--ink);padding:20px 14px 60px;line-height:1.5}
+:focus-visible{outline:3px solid var(--blue);outline-offset:4px}
+.wrap{max-width:660px;margin:0 auto}
+
+.head{margin-bottom:24px}
+.head h1{font-family:'Silkscreen',monospace;font-size:clamp(14px,4vw,18px);font-weight:400;line-height:1.7;margin-bottom:12px}
+.head p{font-size:14px;color:#4a4a46;max-width:54ch}
+.head code{font-family:var(--mono);font-size:12px;background:#d6d6d0;padding:1px 5px}
+
+.sec{border:2px solid var(--ink);margin-bottom:16px;background:var(--paper)}
+.sec-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:8px 14px;background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:11px;letter-spacing:.05em}
+.sec-h i{font-style:normal;opacity:.55;font-size:10px;text-align:right}
+.sec-b{padding:20px 18px 22px}
+.desc{font-size:13px;color:#5c5c52;margin-bottom:16px;max-width:48ch}
+.states{display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start}
+.st{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.st b{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);font-weight:400}
+
+/* button base — border-image does the framing */
+.b{
+  font-family:'Silkscreen',monospace;font-size:11px;letter-spacing:.03em;line-height:1;
+  border:8px solid transparent;border-image-slice:8 fill;border-image-repeat:stretch;
+  padding:7px 12px;cursor:pointer;background:none;display:inline-block;text-decoration:none;
+}
+.b.lg{font-size:14px;border-width:12px;border-image-slice:12 fill;padding:10px 16px}
+.b.sm{font-size:9px;border-width:8px;padding:5px 8px}
+.b:disabled{cursor:not-allowed}
+
+.on-lime{color:var(--ink)}
+.on-blue{color:var(--lime)}
+.on-blue-w{color:#fff}
+
+/* anatomy */
+.anat{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:14px}
+.anat figure{text-align:center}
+.anat canvas{image-rendering:pixelated;width:100%;max-width:120px;height:auto;border:1px solid var(--line)}
+.anat figcaption{font-family:var(--mono);font-size:9px;letter-spacing:.07em;color:var(--mute);margin-top:7px}
+.legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px;padding-top:14px;border-top:1px dashed var(--line)}
+.legend div{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10px;color:#5c5c52}
+.legend span{width:14px;height:14px;border:1px solid rgba(0,0,0,.25);display:block}
+
+.dark{background:#0B0B0C;margin:-20px -18px -22px;padding:22px 18px 24px}
+.dark .st b{color:#6a6a62}
+.dark .desc{color:#9a9a94}
+
+.ctx{padding:0}
+.ctx-in{background:var(--paper);padding:26px 20px 28px}
+.ctx-in h2{font-family:'Silkscreen',monospace;font-weight:400;font-size:clamp(15px,4.1vw,20px);line-height:1.7;margin-bottom:16px}
+.ctx-in p{font-size:15px;color:#54544a;max-width:40ch;margin-bottom:22px}
+.ctx-row{display:flex;flex-wrap:wrap;gap:12px}
+
+.note{border-top:1px solid var(--line);background:var(--panel);padding:13px 18px;font-size:13px;color:#5c5c52;line-height:1.6}
+.note b{font-family:var(--mono);font-size:11px;color:var(--ink);font-weight:400}
+
+@media (max-width:520px){
+  .sec-b{padding:18px 14px 20px}
+  .dark{margin:-18px -14px -20px;padding:20px 14px 22px}
+  .states{gap:16px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="head">
+  <h1>NINE-SLICE<br>LIME × BLUE</h1>
+  <p>Every frame below is a 6×6 pixel map rendered to a sprite and stretched with <code>border-image</code>. Colours are your <code>#CDF22B</code> and <code>#1E45FB</code>, each expanded into the three tones a bevel needs.</p>
+</div>
+
+<!-- ANATOMY -->
+<div class="sec">
+  <div class="sec-h"><span>SPRITE ANATOMY</span><i>6×6 map · shown at 20×</i></div>
+  <div class="sec-b">
+    <div class="desc">The outer ring is the outline, the second ring carries the bevel. Only the centre two pixels stretch, so the frame stays pixel-perfect at any width.</div>
+    <div class="anat" id="anat"></div>
+    <div class="legend" id="legend"></div>
+  </div>
+</div>
+
+<!-- BLUE PRIMARY -->
+<div class="sec">
+  <div class="sec-h"><span>01 — BLUE PRIMARY</span><i>lime label</i></div>
+  <div class="sec-b">
+    <div class="desc">Blue face, lighter blue highlight, deep blue shade, lime label. Lime on blue measures about 4.9:1 — clears AA for body and large text.</div>
+    <div class="states">
+      <div class="st"><b>live</b><button class="b on-blue" data-set="blue">VIEW WORK</button></div>
+      <div class="st"><b>hover</b><button class="b on-blue" data-static="blue-hover" tabindex="-1">VIEW WORK</button></div>
+      <div class="st"><b>pressed</b><button class="b on-blue" data-static="blue-sunk" tabindex="-1">VIEW WORK</button></div>
+      <div class="st"><b>disabled</b><button class="b" data-static="dead" disabled>VIEW WORK</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- LIME PRIMARY -->
+<div class="sec">
+  <div class="sec-h"><span>02 — LIME PRIMARY</span><i>blue label</i></div>
+  <div class="sec-b">
+    <div class="desc">The inverse. Blue text on lime is the stronger reading of the two — roughly 4.9:1 as well, but the lime carries far more area, so it holds attention harder.</div>
+    <div class="states">
+      <div class="st"><b>live</b><button class="b" style="color:#1E45FB" data-set="lime">VIEW WORK</button></div>
+      <div class="st"><b>hover</b><button class="b" style="color:#1E45FB" data-static="lime-hover" tabindex="-1">VIEW WORK</button></div>
+      <div class="st"><b>pressed</b><button class="b" style="color:#1E45FB" data-static="lime-sunk" tabindex="-1">VIEW WORK</button></div>
+      <div class="st"><b>disabled</b><button class="b" data-static="dead" disabled>VIEW WORK</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- CLASH -->
+<div class="sec">
+  <div class="sec-h"><span>03 — LIME OUTLINE ON BLUE</span><i>the moodboard pairing, literally</i></div>
+  <div class="sec-b">
+    <div class="desc">Both colours at full strength, lime taking over the outline ring. Maximum energy, and the version most likely to look dated in a year. Worth seeing before you rule it out.</div>
+    <div class="states">
+      <div class="st"><b>live</b><button class="b on-blue-w" data-set="clash">VIEW WORK</button></div>
+      <div class="st"><b>hover</b><button class="b on-blue-w" data-static="clash-hover" tabindex="-1">VIEW WORK</button></div>
+      <div class="st"><b>pressed</b><button class="b on-blue-w" data-static="clash-sunk" tabindex="-1">VIEW WORK</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- SIZES -->
+<div class="sec">
+  <div class="sec-h"><span>04 — SCALING</span><i>same sprite, three sizes</i></div>
+  <div class="sec-b">
+    <div class="desc">The pixel grid gets coarser as the button grows, because the sprite scales with it. That's correct behaviour for pixel art — the unit is relative, not absolute.</div>
+    <div class="states" style="align-items:center">
+      <div class="st"><b>small</b><button class="b sm" style="color:#1E45FB" data-set="lime">MORE</button></div>
+      <div class="st"><b>default</b><button class="b" style="color:#1E45FB" data-set="lime">VIEW WORK</button></div>
+      <div class="st"><b>large</b><button class="b lg" style="color:#1E45FB" data-set="lime-lg">VIEW WORK</button></div>
+    </div>
+  </div>
+  <div class="note"><b>Note</b> — the large size uses a sprite drawn at 6× rather than 4×, so the pixels stay proportional instead of ballooning.</div>
+</div>
+
+<!-- DARK -->
+<div class="sec">
+  <div class="sec-h"><span>05 — ON DARK</span><i>both, against #0B0B0C</i></div>
+  <div class="sec-b">
+    <div class="dark">
+      <div class="desc">On a dark base the outline ring has to lighten or the button loses its edge entirely. These use a grey outline instead of near-black.</div>
+      <div class="states">
+        <div class="st"><b>lime</b><button class="b" style="color:#0B0B0C" data-set="lime-dk">VIEW WORK</button></div>
+        <div class="st"><b>blue</b><button class="b on-blue" data-set="blue-dk">VIEW WORK</button></div>
+        <div class="st"><b>ghost</b><button class="b" style="color:#CDF22B" data-set="ghost-dk">GET IN TOUCH</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- IN CONTEXT -->
+<div class="sec ctx">
+  <div class="sec-h"><span>06 — IN CONTEXT</span><i>primary + secondary pair</i></div>
+  <div class="ctx-in">
+    <h2>SIX YEARS ON<br>COMPLEX B2B SYSTEMS</h2>
+    <p>Marketplaces, healthcare operations, fintech onboarding. I design the flow, then I build the front end.</p>
+    <div class="ctx-row">
+      <button class="b lg" style="color:#1E45FB" data-set="lime-lg">VIEW WORK</button>
+      <button class="b lg" style="color:#1E45FB" data-set="ghost-lg">GET IN TOUCH</button>
+    </div>
+  </div>
+  <div class="note"><b>Note</b> — one filled, one ghost. Two saturated buttons side by side cancel each other out; the pair only works if one clearly loses.</div>
+</div>
+
+</div>
+
+<script>
+/* ── colour helpers ── */
+function mix(hex,target,amt){
+  const h=x=>parseInt(hex.slice(x,x+2),16), t=x=>parseInt(target.slice(x,x+2),16);
+  const c=(a,b)=>Math.round(a+(b-a)*amt).toString(16).padStart(2,'0');
+  return '#'+c(h(1),t(1))+c(h(3),t(3))+c(h(5),t(5));
+}
+const light=(c,a)=>mix(c,'#ffffff',a);
+const dark =(c,a)=>mix(c,'#000000',a);
+
+/* ── sprite renderer ── */
+function build(p,scale,state){
+  const D=p.outline, F=state==='sunk'?dark(p.face,.12):(state==='hover'?light(p.face,.14):p.face);
+  const H=state==='sunk'?p.shade:p.hi, S=state==='sunk'?p.hi:p.shade;
+  const M={'.':null,D,H,S,F};
+  const map=['.DDDD.','DHHHSD','DHFFSD','DHFFSD','DSSSSD','.DDDD.'];
+  const c=document.createElement('canvas');
+  c.width=6*scale;c.height=6*scale;
+  const x=c.getContext('2d');
+  for(let r=0;r<6;r++)for(let q=0;q<6;q++){
+    const col=M[map[r][q]];
+    if(col){x.fillStyle=col;x.fillRect(q*scale,r*scale,scale,scale);}
+  }
+  return c;
+}
+
+/* ── palettes ── */
+const L='#CDF22B', B='#1E45FB';
+const SETS={
+  lime:{face:L,hi:light(L,.55),shade:dark(L,.42),outline:'#14140F'},
+  blue:{face:B,hi:light(B,.38),shade:dark(B,.45),outline:'#0A0E2E'},
+  clash:{face:B,hi:light(B,.38),shade:dark(B,.45),outline:L},
+  'lime-dk':{face:L,hi:light(L,.55),shade:dark(L,.42),outline:'#5A6B1E'},
+  'blue-dk':{face:B,hi:light(B,.38),shade:dark(B,.45),outline:'#4A5BAE'},
+  'ghost-dk':{face:'#141416',hi:'#3A3A3E',shade:'#08080A',outline:'#4A4A4E'},
+  ghost:{face:'#FAFAF8',hi:'#FFFFFF',shade:'#C8C8C0',outline:B},
+  dead:{face:'#DCDCD6',hi:'#EDEDE8',shade:'#B4B4AC',outline:'#A0A099'}
+};
+
+function url(name,scale,state){
+  const base=name.replace(/-lg$/,'');
+  return 'url('+build(SETS[base],scale,state).toDataURL()+')';
+}
+
+/* ── apply ── */
+document.querySelectorAll('[data-set]').forEach(el=>{
+  const name=el.dataset.set, sc=name.endsWith('-lg')?6:(el.classList.contains('lg')?6:4);
+  el.style.borderImageSource=url(name,sc,'base');
+  el.addEventListener('pointerenter',()=>el.style.borderImageSource=url(name,sc,'hover'));
+  el.addEventListener('pointerleave',()=>el.style.borderImageSource=url(name,sc,'base'));
+  el.addEventListener('pointerdown', ()=>el.style.borderImageSource=url(name,sc,'sunk'));
+  el.addEventListener('pointerup',   ()=>el.style.borderImageSource=url(name,sc,'hover'));
+});
+document.querySelectorAll('[data-static]').forEach(el=>{
+  const v=el.dataset.static;
+  const name=v.replace(/-(hover|sunk)$/,'');
+  const state=v.endsWith('-hover')?'hover':v.endsWith('-sunk')?'sunk':'base';
+  el.style.borderImageSource=url(name,4,state);
+});
+
+/* ── anatomy previews ── */
+const anat=document.getElementById('anat');
+[['lime','LIME · RAISED','base'],['lime','LIME · PRESSED','sunk'],
+ ['blue','BLUE · RAISED','base'],['clash','LIME OUTLINE','base']].forEach(([n,label,st])=>{
+  const fig=document.createElement('figure');
+  const c=build(SETS[n],20,st);
+  fig.appendChild(c);
+  const cap=document.createElement('figcaption');cap.textContent=label;fig.appendChild(cap);
+  anat.appendChild(fig);
+});
+
+const lg=document.getElementById('legend');
+[['Outline','#14140F'],['Highlight',light(L,.55)],['Face',L],['Shade',dark(L,.42)]].forEach(([n,c])=>{
+  const d=document.createElement('div');
+  d.innerHTML='<span style="background:'+c+'"></span>'+n+' '+c.toUpperCase();
+  lg.appendChild(d);
+});
+</script>
+</body>
+</html>
