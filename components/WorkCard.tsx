@@ -20,9 +20,11 @@ type Props = {
   relevant?: boolean;
   /** Larger screenshot well for the featured grid. */
   featured?: boolean;
+  /** Tier 2 on the work index: no description, so the tier reads as a tier. */
+  compact?: boolean;
 };
 
-const WorkCard = ({ study, relevant = false, featured = false }: Props) => {
+const WorkCard = ({ study, relevant = false, featured = false, compact = false }: Props) => {
   const { card, slug, domain } = study;
 
   return (
@@ -62,9 +64,11 @@ const WorkCard = ({ study, relevant = false, featured = false }: Props) => {
         <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.07em] text-mute">
           {card.title}
         </p>
-        <p className="mb-4 font-sans text-[14.5px] leading-[1.6] text-ink">
-          {card.description}
-        </p>
+        {!compact && (
+          <p className="mb-4 font-sans text-[14.5px] leading-[1.6] text-ink">
+            {card.description}
+          </p>
+        )}
         <span className="mt-auto inline-flex items-center gap-2 font-pix text-[10px] leading-none text-blue">
           READ CASE STUDY
           <PixelIcon name="arrowR" size={8} />

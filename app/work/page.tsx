@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
 import WorkCard from "@/components/WorkCard";
-import { allStudies } from "@/lib/work";
+import WorkFilter from "@/components/px/WorkFilter";
+import PixelIcon from "@/components/px/PixelIcon";
+import Button from "@/components/px/Button";
+import Reveal from "@/components/px/Reveal";
+import { allStudies, type Domain } from "@/lib/work";
 
 export const metadata: Metadata = {
   title: "Work | Shareef Padar — Senior Product Designer",
@@ -10,33 +14,89 @@ export const metadata: Metadata = {
     "Case studies and live products: UX audits, B2B SaaS concepts, and shipped side projects by Shareef Padar, Senior Product Designer based in Dubai.",
 };
 
-export default function WorkIndex() {
+const DOMAINS = [...new Set(allStudies.map((s) => s.domain))] as Domain[];
+
+const Marker = ({ n, title }: { n: string; title: string }) => (
+  <div className="mb-6 flex items-baseline gap-3">
+    <span className="font-pix text-[20px] font-bold leading-none text-blue">{n}</span>
+    <h2 className="font-pix text-[14px] leading-[1.8] tracking-[0.02em] text-ink">{title}</h2>
+  </div>
+);
+
+export default async function WorkIndex({
+  searchParams,
+}: {
+  searchParams: Promise<{ filter?: string }>;
+}) {
+  const { filter } = await searchParams;
+  const active = filter?.toUpperCase() ?? null;
+
+  const visible = active ? allStudies.filter((s) => s.domain === active) : allStudies;
+  const tier1 = visible.filter((s) => s.tier === 1);
+  const tier2 = visible.filter((s) => s.tier === 2);
+
   return (
-    <div className="container-wide py-8 md:py-12 w-full">
-      <nav className="mb-10 md:mb-14">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 text-neutral-900/60 hover:text-neutral-900 font-bold uppercase tracking-widest text-xs transition-all group"
-        >
-          <ArrowLeft className="w-4 h-4 transform group-hover:-translate-x-1 transition-transform" /> Back to home
-        </Link>
-      </nav>
+    <div className="mx-auto w-full max-w-wide px-4 py-12 md:py-16">
+      <Link
+        href="/"
+        className="mb-10 inline-flex min-h-[44px] items-center gap-2 font-mono text-[11px] uppercase tracking-[0.08em] text-mute hover:text-ink"
+      >
+        <PixelIcon name="arrowL" size={8} />
+        Home
+      </Link>
 
-      <div className="mb-10 md:mb-16 max-w-2xl">
-        <h1 className="mb-4 font-serif text-4xl font-bold tracking-tight text-neutral-950 md:text-5xl">
-          All Work
-        </h1>
-        <p className="font-sans text-base leading-relaxed text-neutral-600 md:text-lg">
-          Case studies, concepts, and live products. Client work in logistics, healthcare,
-          and travel is under NDA — detailed walkthroughs available on request.
-        </p>
+      <h1 className="mb-4 font-pix text-[20px] leading-[1.8] text-ink">ALL WORK</h1>
+      <p className="mb-8 max-w-lead font-sans text-[17px] leading-[1.65] text-ink md:text-[19px]">
+        Case studies, concepts, and live products. Six years of client work in logistics,
+        healthcare, and travel sits under NDA. Ask me about it on a call.
+      </p>
+
+      {/* useSearchParams opts out of static rendering, so the island is
+          isolated behind Suspense and the page around it stays static. */}
+      <div className="mb-12">
+        <Suspense fallback={<div className="h-11" />}>
+          <WorkFilter domains={DOMAINS} />
+        </Suspense>
       </div>
 
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
-        {allStudies.map((project) => (
-          <WorkCard key={project.slug} study={project} />
-        ))}
-      </div>
+      {/* Empty state (§7.2) */}
+      {visible.length === 0 && (
+        <div className="border-[3px] border-ink bg-panel p-12 text-center">
+          <PixelIcon name="search" size={32} className="mx-auto mb-4 text-mute" />
+          <p className="mb-6 font-sans text-[16px] leading-[1.7] text-ink">
+            Nothing in that domain yet.
+          </p>
+          <Button level="secondary" href="/work">
+            RESET FILTER
+          </Button>
+        </div>
+      )}
+
+      {tier1.length > 0 && (
+        <section className="mb-16">
+          <Marker n="01" title="START HERE" />
+          <div className="grid gap-8 md:grid-cols-2 md:gap-12">
+            {tier1.map((s) => (
+              <Reveal key={s.slug}>
+                <WorkCard study={s} featured relevant={s.domain === "FINTECH"} />
+              </Reveal>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {tier2.length > 0 && (
+        <section className="mb-16">
+          <Marker n="02" title="EVERYTHING ELSE" />
+          <div className="grid gap-8 md:grid-cols-2 md:gap-12">
+            {tier2.map((s) => (
+              <Reveal key={s.slug}>
+                <WorkCard study={s} compact />
+              </Reveal>
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   );
 }

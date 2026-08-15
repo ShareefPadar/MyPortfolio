@@ -1,28 +1,34 @@
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import Button from "@/components/px/Button";
 
+/**
+ * 404 (spec §2.2, display-l).
+ *
+ * The one place a page title genuinely IS a statement rather than a sentence,
+ * so Silkscreen is correct here where it would be wrong on a case study.
+ */
 export default function NotFound() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-200px)] px-6 text-center">
-      <div className="space-y-6 max-w-lg">
-        <span className="text-accent text-xs font-bold uppercase tracking-widest block font-sans">
-          404 ERROR
-        </span>
-        <h1 className="text-5xl md:text-7xl font-bold font-serif leading-tight text-neutral-950">
-          Oops! You&apos;ve drifted off the grid.
-        </h1>
-        <p className="text-lg md:text-xl text-neutral-600 font-sans leading-relaxed">
-          The page you are looking for doesn&apos;t exist or has been moved. Let&apos;s get you back to familiar territory.
-        </p>
-        <div className="pt-8">
-          <Link 
-            href="/" 
-            className="inline-flex justify-center items-center gap-3 bg-neutral-950 text-white px-8 py-4 rounded-full font-bold text-sm md:text-base hover:bg-accent transition-colors shadow-lg group"
-          >
-            <ArrowLeft className="w-5 h-5 transform group-hover:-translate-x-1 transition-transform" /> 
-            Back to Home
-          </Link>
-        </div>
+    <div className="mx-auto w-full max-w-wide px-4 py-24 md:py-32">
+      <p className="mb-6 font-mono text-[11px] uppercase tracking-[0.08em] text-mute">
+        Error 404
+      </p>
+
+      <h1 className="mb-6 max-w-[16ch] font-pix text-[20px] font-bold leading-[1.8] text-ink">
+        PAGE NOT FOUND
+      </h1>
+
+      <p className="mb-10 max-w-lead font-sans text-[17px] leading-[1.65] text-ink md:text-[19px]">
+        That link points at something which isn&apos;t here. It may have moved, or it may never
+        have existed.
+      </p>
+
+      <div className="flex flex-wrap gap-4">
+        <Button level="primary" href="/" icon="arrowL">
+          BACK HOME
+        </Button>
+        <Button level="secondary" href="/work" icon="grid">
+          ALL WORK
+        </Button>
       </div>
     </div>
   );
