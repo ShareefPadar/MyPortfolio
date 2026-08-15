@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { X, ZoomIn } from "lucide-react";
+import PixelIcon from "@/components/px/PixelIcon";
 
 interface ShotProps {
   src: string;
@@ -35,7 +35,7 @@ const Shot = ({ src, alt, caption }: ShotProps) => {
         <img src={src} alt={alt} loading="lazy" className="block h-auto w-full" />
         <span className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/5" />
         <span className="absolute bottom-2 right-2 flex items-center gap-1 bg-ink px-2 py-1 font-mono text-[9px] uppercase tracking-[0.11em] text-lime opacity-0 group-hover:opacity-100">
-          <ZoomIn className="h-3 w-3" /> View full size
+          <PixelIcon name="search" size={8} /> View full size
         </span>
       </button>
       {caption && (
@@ -58,7 +58,7 @@ const Shot = ({ src, alt, caption }: ShotProps) => {
             aria-label="Close"
             className="absolute right-4 top-4 bg-ink p-3 text-lime md:right-8 md:top-8"
           >
-            <X className="h-6 w-6" />
+            <PixelIcon name="close" size={16} />
           </button>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { X, ZoomIn } from "lucide-react";
+import PixelIcon from "@/components/px/PixelIcon";
 
 interface Pane {
   src: string;
@@ -67,7 +67,7 @@ const BeforeAfter = ({
               />
               <span className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/10" />
               <span className="absolute bottom-2 right-2 flex items-center gap-1  bg-black/70 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                <ZoomIn className="h-3 w-3" /> View full size
+                <PixelIcon name="search" size={8} /> View full size
               </span>
             </button>
             <span className={`mt-3 block text-center text-xs font-bold uppercase tracking-widest ${pane.labelColor}`}>
@@ -94,7 +94,7 @@ const BeforeAfter = ({
             aria-label="Close"
             className="absolute right-4 top-4  bg-white/10 p-2 text-white transition-colors hover:bg-white/20 md:right-8 md:top-8"
           >
-            <X className="h-6 w-6" />
+            <PixelIcon name="close" size={16} />
           </button>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img

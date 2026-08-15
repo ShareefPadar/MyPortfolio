@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { X, ZoomIn } from "lucide-react";
+import PixelIcon from "@/components/px/PixelIcon";
 
 interface Step {
   src: string;
@@ -58,7 +58,7 @@ const Flow = ({ steps, caption, aspect = "aspect-[9/19.5]" }: FlowProps) => {
                 {step.number}
               </span>
               <span className="absolute bottom-2 right-2 flex items-center gap-1  bg-black/70 px-2 py-1 text-[9px] font-bold uppercase tracking-wide text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 md:px-2.5">
-                <ZoomIn className="h-3 w-3" />
+                <PixelIcon name="search" size={8} />
               </span>
             </button>
             <span className="mt-3 block text-center text-xs font-bold uppercase tracking-widest text-mute">
@@ -85,7 +85,7 @@ const Flow = ({ steps, caption, aspect = "aspect-[9/19.5]" }: FlowProps) => {
             aria-label="Close"
             className="absolute right-4 top-4  bg-white/10 p-2 text-white transition-colors hover:bg-white/20 md:right-8 md:top-8"
           >
-            <X className="h-6 w-6" />
+            <PixelIcon name="close" size={16} />
           </button>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img

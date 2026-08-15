@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Script from 'next/script';
-import { Inter, Playfair_Display, Geist, Geist_Mono, Silkscreen } from "next/font/google";
+import { Geist, Geist_Mono, Silkscreen } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -8,16 +8,6 @@ import Footer from "@/components/Footer";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
-
-const inter = Inter({ 
-  subsets: ["latin"],
-  variable: "--font-inter",
-});
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-serif",
-});
 
 /* ── 8-bit design system faces (spec §2) ──────────────────────────
    Three faces, gated by what a string IS, not by heading level:
@@ -110,7 +100,7 @@ export default function RootLayout({
          mismatch for this element's attributes only — it does not extend to
          the tree beneath it. */
       suppressHydrationWarning
-      className={`${inter.variable} ${playfair.variable} ${geist.variable} ${geistMono.variable} ${silkscreen.variable}`}
+      className={`${geist.variable} ${geistMono.variable} ${silkscreen.variable}`}
     >
       <head>
         {/* Gates the scroll-reveal hidden state on JS being available, and runs
