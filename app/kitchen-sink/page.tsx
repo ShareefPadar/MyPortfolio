@@ -3,6 +3,7 @@ import Button from "@/components/px/Button";
 import PixelIcon, { ICONS, type IconName } from "@/components/px/PixelIcon";
 import Reveal from "@/components/px/Reveal";
 import Typewriter from "@/components/px/Typewriter";
+import AsciiPortrait from "@/components/px/AsciiPortrait";
 import { PALETTE_NAMES, SCALES } from "@/lib/sprite";
 import type { IconSize } from "@/lib/tokens";
 
@@ -244,8 +245,20 @@ export default function KitchenSink() {
         </div>
       </Section>
 
+      {/* ── portrait ────────────────────────────────────────────── */}
+      <Section n="06" title="PORTRAIT">
+        <p className="mb-8 max-w-prose font-sans text-[16px] leading-[1.7] text-ink">
+          A 46×38 grid quantised to four discrete levels, drawn as rectangles rather than
+          block glyphs so it can never shear on a font fallback. Lime lands only on the
+          top level. Hover it: proximity boosts brightness, and the boost steps too.
+        </p>
+        <div className="bg-night p-8">
+          <AsciiPortrait />
+        </div>
+      </Section>
+
       {/* ── well + focus ────────────────────────────────────────── */}
-      <Section n="06" title="WELL & FOCUS">
+      <Section n="07" title="WELL & FOCUS">
         <div className="grid gap-10 md:grid-cols-2">
           <div>
             <Label>well — recessed, for screenshots</Label>

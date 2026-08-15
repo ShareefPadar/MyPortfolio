@@ -281,6 +281,46 @@
     height: 3px;
     background: var(--ink);
   }
+
+  /* ── Card (spec §4.4) ────────────────────────────────────────── */
+  .card {
+    position: relative;
+    display: block;
+    background: var(--plate);
+    border: 3px solid var(--ink);
+    box-shadow: inset 3px 3px 0 var(--hi), inset -3px -3px 0 var(--sh);
+  }
+  /* The tab carries DOMAIN only — never a year, never a discipline (§4.4). */
+  .card-tab {
+    position: absolute;
+    top: -17px;
+    left: 14px;
+    min-width: 104px; /* stops short labels ragging the grid */
+    text-align: center;
+    padding: 4px 10px 5px;
+    border: 3px solid var(--ink);
+    border-bottom: 0;
+    background: var(--plate);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--ink);
+    clip-path: polygon(
+      4px 0, calc(100% - 4px) 0,
+      calc(100% - 4px) 4px, 100% 4px,
+      100% 100%, 0 100%, 0 4px, 4px 4px
+    );
+  }
+  /* Lime tab = matches the role being applied for. Plate = everything else. */
+  .card-tab.relevant { background: var(--lime); }
+  .card:hover .card-tab { background: var(--lime); }
+
+  .card-body {
+    background: var(--paper);
+    border: 3px solid var(--ink);
+  }
+  .card:hover .card-body { background: #ffffff; }
 }
 
 /* Under reduced motion the observer still runs, but content must never be

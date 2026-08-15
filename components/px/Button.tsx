@@ -50,6 +50,15 @@ const TEXT: Record<Level, string> = {
   disabled: "text-[#9A9A92] cursor-not-allowed",
 };
 
+/* On night, the neutral face is #1E1E22 — ink text on it is invisible. The
+   dark palettes need light text for the same reason their outlines lighten. */
+const TEXT_DARK: Record<Level, string> = {
+  primary: "text-lime font-bold",
+  secondary: "text-white",
+  tertiary: "text-lime hover:underline",
+  disabled: "text-[#5A5A55] cursor-not-allowed",
+};
+
 const Button = ({
   children,
   level = "secondary",
@@ -71,7 +80,7 @@ const Button = ({
     "min-h-[44px]",
     large ? "px-4 py-[10px] text-[13px]" : "px-[13px] py-[9px] text-[11px]",
     framed,
-    TEXT[level],
+    (onDark ? TEXT_DARK : TEXT)[level],
     className,
   ]
     .filter(Boolean)

@@ -34,17 +34,7 @@ export default function WorkIndex() {
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
         {allStudies.map((project) => (
-          <WorkCard
-            key={project.slug}
-            headline={project.card.headline}
-            title={project.card.title}
-            category={project.card.category}
-            badge={project.card.badge}
-            description={project.card.description}
-            href={`/work/${project.slug}`}
-            thumbnail={project.card.thumbnail}
-            bgColor={project.bgColor}
-          />
+          <WorkCard key={project.slug} study={project} />
         ))}
       </div>
     </div>
