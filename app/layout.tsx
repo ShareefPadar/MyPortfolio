@@ -59,13 +59,6 @@ export const metadata: Metadata = {
     description: '6 years of B2B product design. Research to shipped interfaces, end to end.',
     url: 'https://www.shareefpadar.com', 
     siteName: 'Shareef Padar Portfolio',
-    images: [
-      {
-        url: '/og-image.png', 
-        width: 1200,
-        height: 630,
-      },
-    ],
     locale: 'en_US',
     type: 'website',
   },
@@ -73,7 +66,6 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Shareef Padar | Senior Product Designer',
     description: '6 years of B2B product design. Research to shipped interfaces, end to end.',
-    images: ['/og-image.png'],
   },
 };
 
