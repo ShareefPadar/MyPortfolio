@@ -7,14 +7,8 @@ import ScrollReveal from "@/components/ScrollReveal";
 import Marquee from "@/components/Marquee";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-import { workEntries, featuredSlugs, sideProjectSlugs } from "@/app/work/workList";
+import { featured, sideProjects } from "@/lib/work";
 
-const featured = featuredSlugs
-  .map((slug) => workEntries.find((w) => w.slug === slug)!)
-  .filter(Boolean);
-const sideProjects = sideProjectSlugs
-  .map((slug) => workEntries.find((w) => w.slug === slug)!)
-  .filter(Boolean);
 
 export default function Home() {
   return (
@@ -44,13 +38,13 @@ export default function Home() {
           {featured.map((project, index) => (
             <ParallaxSection key={project.slug} delay={index * 0.1} className="h-full">
               <WorkCard
-                headline={project.headline}
-                title={project.title}
-                category={project.category}
-                badge={project.badge}
-                description={project.description}
+                headline={project.card.headline}
+                title={project.card.title}
+                category={project.card.category}
+                badge={project.card.badge}
+                description={project.card.description}
                 href={`/work/${project.slug}`}
-                thumbnail={project.thumbnail}
+                thumbnail={project.card.thumbnail}
                 bgColor={project.bgColor}
                 featured
               />
@@ -97,13 +91,13 @@ export default function Home() {
                   </span>
                 </div>
                 <h3 className="mb-1 font-serif text-2xl font-bold leading-tight tracking-tight text-neutral-950">
-                  {project.headline}
+                  {project.card.headline}
                 </h3>
                 <p className="mb-3 font-sans text-sm font-medium text-neutral-400">
-                  {project.title}
+                  {project.card.title}
                 </p>
                 <p className="mb-6 font-sans text-sm leading-relaxed text-neutral-600 md:text-base">
-                  {project.description}
+                  {project.card.description}
                 </p>
                 <div className="mt-auto flex flex-wrap items-center gap-x-6 gap-y-2 font-sans text-sm font-bold">
                   <Link href={`/work/${project.slug}`} className="group/link inline-flex items-center gap-1.5 text-neutral-900">

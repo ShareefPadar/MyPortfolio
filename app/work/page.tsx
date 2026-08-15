@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import WorkCard from "@/components/WorkCard";
-import { workEntries } from "./workList";
+import { allStudies } from "@/lib/work";
 
 export const metadata: Metadata = {
   title: "Work | Shareef Padar — Senior Product Designer",
@@ -33,16 +33,16 @@ export default function WorkIndex() {
       </div>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
-        {workEntries.map((project) => (
+        {allStudies.map((project) => (
           <WorkCard
             key={project.slug}
-            headline={project.headline}
-            title={project.title}
-            category={project.category}
-            badge={project.badge}
-            description={project.description}
+            headline={project.card.headline}
+            title={project.card.title}
+            category={project.card.category}
+            badge={project.card.badge}
+            description={project.card.description}
             href={`/work/${project.slug}`}
-            thumbnail={project.thumbnail}
+            thumbnail={project.card.thumbnail}
             bgColor={project.bgColor}
           />
         ))}

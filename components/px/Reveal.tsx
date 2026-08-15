@@ -55,6 +55,13 @@ const Reveal = ({ children, variant = "scan", as: Tag = "div", className = "" }:
       return;
     }
 
+    /* The spec's threshold of 0.15 assumes an element smaller than the
+       viewport. A case-study body is ~10,000px tall, so 15% of it can never
+       be visible at once and the observer would never fire, leaving the whole
+       article permanently hidden. Anything taller than the viewport reveals
+       as soon as it enters at all. */
+    const tall = el.getBoundingClientRect().height > window.innerHeight;
+
     const io = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
@@ -63,7 +70,7 @@ const Reveal = ({ children, variant = "scan", as: Tag = "div", className = "" }:
           io.unobserve(entry.target); // fire once, never again
         }
       },
-      { threshold: 0.15 },
+      { threshold: tall ? 0 : 0.15 },
     );
 
     io.observe(el);
