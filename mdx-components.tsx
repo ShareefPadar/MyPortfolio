@@ -79,7 +79,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
     img: (props: React.ImgHTMLAttributes<HTMLImageElement>) => (
       <img
-        className="w-full rounded-lg my-10 lg:-mx-12 lg:w-[calc(100%+6rem)] xl:-mx-20 xl:w-[calc(100%+10rem)] max-w-none"
+        className="wide my-10 w-full max-w-none"
         {...props}
       />
     ),

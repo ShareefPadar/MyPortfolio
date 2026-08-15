@@ -321,6 +321,44 @@
     border: 3px solid var(--ink);
   }
   .card:hover .card-body { background: #ffffff; }
+
+  /* ── Case-study content column (spec §6.3) ───────────────────────
+     ONE mechanism for every width. Replaces three competing idioms that
+     had to be kept in sync by hand: Shot's -mx-12, the markdown img's
+     w-[calc(100%+6rem)], and DeviceFrame's `width:100vw; margin-left:
+     calc(50% - 50vw)`.
+
+     That last one was also a latent bug: 100vw includes the scrollbar, so
+     it overflowed by ~15px on any browser with persistent scrollbars. It
+     was only invisible because body had overflow-x:hidden masking it.
+
+     Top-level MDX elements are direct children of .study, so a <Shot> or an
+     <img> lands in the right column just by carrying a class. */
+  .study {
+    display: grid;
+    grid-template-columns:
+      [full-start] minmax(16px, 1fr)
+      [wide-start] minmax(0, 190px)
+      [col-start] min(720px, 100% - 32px) [col-end]
+      minmax(0, 190px) [wide-end]
+      minmax(16px, 1fr) [full-end];
+  }
+  .study > * { grid-column: col; }
+  .study > .wide { grid-column: wide; }
+  .study > .full { grid-column: full; }
+
+  /* ── Segmented scroll progress (spec §8) ─────────────────────────
+     Ten blocks filling one at a time. Never a smooth bar. */
+  .prog-seg {
+    width: 8px;
+    height: 8px;
+    background: var(--line);
+  }
+  .prog-seg.on { background: var(--blue); }
+
+  /* A page carrying its own minimal footer suppresses the root one, so the
+     two never stack (spec §7.4). */
+  body:has([data-footer="minimal"]) > footer { display: none; }
 }
 
 /* Under reduced motion the observer still runs, but content must never be

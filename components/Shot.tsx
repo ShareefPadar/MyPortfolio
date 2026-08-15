@@ -24,7 +24,7 @@ const Shot = ({ src, alt, caption }: ShotProps) => {
     // Breaks wider than the reading column so the page has more than one
     // measure. No border, fill, or shadow: the screenshot carries its own
     // edge, and one less framed box per screenful.
-    <figure className="not-prose my-10 lg:-mx-12 xl:-mx-20">
+    <figure className="not-prose wide my-10">
       <button
         type="button"
         onClick={() => setOpen(true)}
@@ -39,7 +39,7 @@ const Shot = ({ src, alt, caption }: ShotProps) => {
         </span>
       </button>
       {caption && (
-        <figcaption className="mt-3 border-t border-neutral-200/70 pt-3 font-sans text-sm leading-relaxed text-neutral-500 lg:mx-12 xl:mx-20">
+        <figcaption className="mt-3 border-t border-line pt-3 font-sans text-[13px] leading-[1.55] text-mute">
           {caption}
         </figcaption>
       )}
