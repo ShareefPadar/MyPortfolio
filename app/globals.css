@@ -359,6 +359,58 @@
   /* A page carrying its own minimal footer suppresses the root one, so the
      two never stack (spec §7.4). */
   body:has([data-footer="minimal"]) > footer { display: none; }
+
+  /* ── Prose kit (spec §8) ─────────────────────────────────────────
+     An inline link is ink text with a blue rule, NOT blue text: blue is
+     already carrying section numerals and the primary button, and a page of
+     blue words competes with both. */
+  .prose-link {
+    color: var(--ink);
+    text-decoration: none;
+    background-image: linear-gradient(var(--blue), var(--blue));
+    background-size: 100% 2px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    padding-bottom: 1px;
+  }
+  .prose-link:hover {
+    background-image: linear-gradient(var(--lime), var(--lime));
+    background-size: 100% 40%;
+  }
+  /* External only — an arrow on every link is noise. */
+  .prose-link[target="_blank"]::after { content: " ↗"; }
+
+  /* Ordered lists use leading zeros, matching the section markers. */
+  .prose-ol { counter-reset: n; }
+  .prose-ol > li { counter-increment: n; }
+  .prose-ol > li::before {
+    content: counter(n, decimal-leading-zero);
+    background: none;
+    top: 0;
+    left: 0;
+    width: auto;
+    height: auto;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--blue);
+  }
+
+  /* ── Prototype isolation ─────────────────────────────────────────
+     SanadPrototype and MizanPrototype are mocks of OTHER companies' products
+     and ship their own scoped design systems. They set their own fonts on
+     their roots but inherit everything else, so any inherited property from
+     this site leaks straight into two 1000-line files nobody re-reads. Reset
+     the inheritable ones at the boundary. */
+  .iso {
+    font-family: initial;
+    font-size: initial;
+    line-height: initial;
+    letter-spacing: initial;
+    color: initial;
+    text-transform: none;
+    image-rendering: auto;
+  }
 }
 
 /* Under reduced motion the observer still runs, but content must never be
