@@ -1,41 +1,96 @@
 import { FaLinkedin, FaMedium, FaBehance } from "react-icons/fa6";
-import ParallaxSection from "./ParallaxSection";
+import PixelIcon from "@/components/px/PixelIcon";
+import Reveal from "@/components/px/Reveal";
+import CopyEmail from "@/components/px/CopyEmail";
 
-export default function Footer() {
-  const socialLinks = [
-    { name: "LinkedIn", url: "https://www.linkedin.com/in/shareef-padar/", icon: FaLinkedin },
-    { name: "Behance", url: "https://www.behance.net/shareefpadar", icon: FaBehance },
-    { name: "Medium", url: "https://medium.com/@shareefpadar167", icon: FaMedium },
-  ];
+/**
+ * Footer (spec §7.4). Dark, centred.
+ *
+ * Status strip carries location and response time — never availability, which
+ * dates the moment it is wrong.
+ *
+ * Case studies get variant="minimal": a next-story link plus a full sitemap is
+ * two navigation systems arguing with each other.
+ *
+ * The social marks stay official SVGs, monochrome, always with a text label.
+ * §4.7 is explicit that LinkedIn/Behance/Medium must never be pixelated.
+ */
 
+const EMAIL = "shareefpadar@gmail.com";
+
+const SOCIAL = [
+  { name: "LinkedIn", url: "https://www.linkedin.com/in/shareef-padar/", Icon: FaLinkedin },
+  { name: "Behance", url: "https://www.behance.net/shareefpadar", Icon: FaBehance },
+  { name: "Medium", url: "https://medium.com/@shareefpadar167", Icon: FaMedium },
+];
+
+export default function Footer({ variant = "full" }: { variant?: "full" | "minimal" }) {
   return (
-    <footer className="w-full bg-neutral-50 pb-24 md:pb-32 pt-20 flex flex-col items-center overflow-hidden">
-      <ParallaxSection delay={0.1} className="w-full flex flex-col items-center">
-        <div className="text-center mb-16 px-4">
-          <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4 text-neutral-950">Let&apos;s Connect</h2>
-          <p className="text-base md:text-xl font-sans text-neutral-500 leading-relaxed mb-4 max-w-lg mx-auto">
-            Feel free to reach out for collaborations or just a friendly hello.
+    <footer className="w-full bg-night text-ntext">
+      <div className="mx-auto max-w-wide px-4 py-16">
+        {/* status strip */}
+        <div className="mb-12 flex flex-wrap items-center gap-x-3 gap-y-2 border-b border-nline pb-4">
+          <span className="led inline-block h-2 w-2 bg-lime" aria-hidden="true" />
+          <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-ntext">
+            Dubai · GMT+4 · usually replies within a day
+          </span>
+        </div>
+
+        {variant === "full" && (
+          <>
+            <Reveal variant="head" className="mb-6">
+              <h2 className="font-pix text-[14px] leading-[1.8] tracking-[0.02em] text-lime">
+                LET&apos;S CONNECT
+              </h2>
+            </Reveal>
+
+            <p className="mb-8 max-w-lead font-sans text-[19px] leading-[1.65] text-white">
+              Open to senior product design roles, and happy to walk through the work that
+              sits under NDA on a call.
+            </p>
+
+            {/* Email is visible text, not a mailto-only link, so it can be copied. */}
+            <div className="mb-12 flex flex-wrap items-center gap-3">
+              <a
+                href={`mailto:${EMAIL}`}
+                className="font-mono text-[16px] text-white underline decoration-lime decoration-2 underline-offset-4"
+              >
+                {EMAIL}
+              </a>
+              <CopyEmail email={EMAIL} />
+            </div>
+
+            <div className="mb-12 flex flex-wrap gap-x-8 gap-y-3">
+              {SOCIAL.map(({ name, url, Icon }) => (
+                <a
+                  key={name}
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-[44px] items-center gap-2 font-mono text-[11px] uppercase tracking-[0.08em] text-ntext hover:text-lime"
+                >
+                  <Icon size={16} aria-hidden="true" />
+                  {name}
+                  <PixelIcon name="external" size={8} />
+                </a>
+              ))}
+            </div>
+          </>
+        )}
+
+        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-nline pt-6">
+          <p className="font-mono text-[9px] uppercase tracking-[0.11em] text-ntext">
+            Designed &amp; built by Shareef Padar
           </p>
-          <a href="mailto:shareefpadar@gmail.com" className="text-lg md:text-2xl font-sans font-bold text-accent hover:opacity-80 transition-opacity">
-            shareefpadar@gmail.com
+          <a
+            href="#top"
+            className="inline-flex min-h-[44px] items-center gap-2 font-mono text-[11px] uppercase tracking-[0.08em] text-ntext hover:text-lime"
+          >
+            <PixelIcon name="arrowU" size={8} />
+            Back to top
           </a>
         </div>
-
-        <div className="flex justify-center items-center gap-8 md:gap-12 flex-wrap px-4">
-          {socialLinks.map((link) => (
-            <a 
-              key={link.name} 
-              href={link.url} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="text-neutral-900/40 hover:text-neutral-900 transition-colors"
-              aria-label={link.name}
-            >
-              <link.icon size={28} />
-            </a>
-          ))}
-        </div>
-      </ParallaxSection>
+      </div>
     </footer>
   );
 }

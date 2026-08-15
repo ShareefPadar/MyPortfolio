@@ -5,10 +5,8 @@ import { Inter, Playfair_Display, Geist, Geist_Mono, Silkscreen } from "next/fon
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import PageTransition from "@/components/PageTransition";
 
 const FigmaCursors = dynamic(() => import("@/components/FigmaCursors"));
-const Noise = dynamic(() => import("@/components/Noise"));
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
@@ -117,6 +115,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      /* The has-js script below adds a class to <html> before React hydrates,
+         so server and client markup differ by design. This suppresses the
+         mismatch for this element's attributes only — it does not extend to
+         the tree beneath it. */
+      suppressHydrationWarning
       className={`${inter.variable} ${playfair.variable} ${geist.variable} ${geistMono.variable} ${silkscreen.variable}`}
     >
       <head>
@@ -133,12 +136,19 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
         />
       </head>
-      <body className="flex flex-col min-h-screen font-sans">
+      <body id="top" className="flex min-h-screen flex-col bg-paper font-sans text-ink">
+        {/* Skip link must be the first focusable element on every page (§11). */}
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:bg-blue focus:px-4 focus:py-3 focus:font-pix focus:text-[11px] focus:text-lime"
+        >
+          SKIP TO CONTENT
+        </a>
         <FigmaCursors />
-        <Noise />
         <Navbar />
-        <main className="flex-grow pt-28 md:pt-32 pb-12 relative z-10">
-          <PageTransition>{children}</PageTransition>
+        {/* Offset clears the nav plate. Both values are on the 4px ramp. */}
+        <main id="main" className="relative z-10 flex-grow pt-24 md:pt-28">
+          {children}
         </main>
         <Footer />
         {/* Google Analytics (Manually Deferred) */}

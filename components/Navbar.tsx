@@ -2,76 +2,157 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { useEffect, useState } from "react";
+import PixelIcon from "@/components/px/PixelIcon";
+
+/**
+ * Nav (spec §4.6).
+ *
+ * The only client component in the shell: it needs the pathname and a scroll
+ * listener. The flatten is a class toggle with no transition — instant, per
+ * §5.1. Active items are sunk (inverted bevel), which is the same language the
+ * sprites use everywhere else: raised means you can act on it, sunk means you
+ * are already there.
+ *
+ * Résumé is a blue sprite button, never a nav link. It is a download rather
+ * than a place, so it can never be "current", and it doubles as the only
+ * always-visible CTA.
+ */
+
+const LINKS = [
+  { href: "/", label: "HOME" },
+  { href: "/work", label: "WORK" },
+  { href: "/about", label: "ABOUT" },
+] as const;
+
+const RESUME = "/assets/Shareef_Padar_Resume.pdf";
 
 const Navbar = () => {
   const pathname = usePathname();
-  const { scrollY } = useScroll();
-  const py = useSpring(useTransform(scrollY, [0, 200], [20, 10]), { stiffness: 120, damping: 20 });
-  const px = useSpring(useTransform(scrollY, [0, 200], [28, 20]), { stiffness: 120, damping: 20 });
-  const maxW = useTransform(scrollY, [0, 200], ["80rem", "60rem"]);
-  const bgOpacity = useTransform(scrollY, [0, 200], [0.6, 0.85]);
-  const bg = useTransform(bgOpacity, (o) => `rgba(255, 255, 255, ${o})`);
+  const [stuck, setStuck] = useState(false);
+  const [open, setOpen] = useState(false);
 
-  const isWorkActive = pathname.startsWith("/work");
-  const isAboutActive = pathname === "/about";
-  const isHomeActive = pathname === "/";
+  useEffect(() => {
+    const onScroll = () => setStuck(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
-  const linkClass = (active: boolean) =>
-    `relative py-1 text-[11px] sm:text-xs font-bold tracking-wider sm:tracking-widest uppercase transition-all duration-300 ${
-      active ? "text-accent" : "text-neutral-500 hover:text-neutral-950"
-    }`;
+  // Close the mobile menu on navigation.
+  useEffect(() => setOpen(false), [pathname]);
+
+  /* A case study keeps WORK sunk: the study's own back link handles going up,
+     so the nav should still read as "you are in the work section". */
+  const isCurrent = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
-    <div className="fixed top-4 sm:top-6 left-0 right-0 z-50 flex justify-center px-4 sm:px-8 md:px-12 lg:px-20 w-full pointer-events-none">
-      <motion.nav
-        initial={{ y: -50, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        style={{ paddingTop: py, paddingBottom: py, paddingLeft: px, paddingRight: px, maxWidth: maxW, backgroundColor: bg }}
-        className="pointer-events-auto w-full backdrop-blur-3xl border border-white/40 shadow-xl rounded-2xl sm:rounded-3xl flex justify-between items-center"
-      >
-        <Link href="/" className="hover:opacity-80 transition-opacity flex items-center shrink-0">
-          <img src="/assets/logo.svg" alt="Logo" className="w-7 h-7 sm:w-8 sm:h-8" />
-        </Link>
-
-        <div className="flex gap-4 sm:gap-8 items-center">
-          {/* Home — hidden on mobile, logo handles it */}
-          <Link href="/" className={`${linkClass(isHomeActive)} hidden sm:block`}>
-            Home
-            {isHomeActive && <motion.div layoutId="nav-indicator" className="absolute -bottom-1 left-0 right-0 h-0.5 bg-accent rounded-full" transition={{ type: "spring", bounce: 0.25, duration: 0.5 }} />}
-          </Link>
-
-          <Link href="/work" className={linkClass(isWorkActive)}>
-            Work
-            {isWorkActive && <motion.div layoutId="nav-indicator" className="absolute -bottom-1 left-0 right-0 h-0.5 bg-accent rounded-full" transition={{ type: "spring", bounce: 0.25, duration: 0.5 }} />}
-          </Link>
-
-          <Link href="/about" className={linkClass(isAboutActive)}>
-            About
-            {isAboutActive && <motion.div layoutId="nav-indicator" className="absolute -bottom-1 left-0 right-0 h-0.5 bg-accent rounded-full" transition={{ type: "spring", bounce: 0.25, duration: 0.5 }} />}
-          </Link>
-
-          <a
-            href="/assets/Shareef_Padar_Resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={linkClass(false)}
+    <header className="fixed inset-x-0 top-0 z-50">
+      <div className={stuck ? "" : "mx-auto max-w-wide px-4 pt-4"}>
+        <nav className={stuck ? "nav-plate stuck" : "nav-plate"} aria-label="Main">
+          <div
+            className={`mx-auto flex items-center justify-between gap-4 px-4 ${
+              stuck ? "max-w-wide py-2" : "py-3"
+            }`}
           >
-            Résumé
-          </a>
+            {/* Wordmark. Silkscreen per §2.2 (display-m: "nav wordmark"). */}
+            <Link
+              href="/"
+              className="font-pix text-[14px] leading-[1.8] tracking-[0.02em] text-ink"
+            >
+              SHAREEF PADAR
+            </Link>
 
-          <div className="w-px h-4 bg-neutral-200 hidden sm:block" />
+            {/* desktop */}
+            <div className="hidden items-center gap-2 md:flex">
+              {LINKS.map((l) => {
+                const current = isCurrent(l.href);
+                return (
+                  <span key={l.href} className="focusable">
+                    <Link
+                      href={l.href}
+                      aria-current={current ? "page" : undefined}
+                      className={`sp sp-neutral-3 sp-s3 ${current ? "sp-sunk" : ""} inline-flex min-h-[44px] items-center px-3 font-mono text-[11px] uppercase leading-none tracking-[0.08em] ${
+                        current ? "text-ink" : "text-mute"
+                      }`}
+                    >
+                      {l.label}
+                    </Link>
+                  </span>
+                );
+              })}
 
-          <a
-            href="mailto:shareefpadar@gmail.com"
-            className="text-[11px] sm:text-xs font-bold tracking-wider sm:tracking-widest uppercase text-neutral-950 hover:text-accent transition-colors duration-300"
-          >
-            Contact
-          </a>
+              <span className="focusable ml-2">
+                <a
+                  href={RESUME}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="sp sp-blue-4 sp-s4 inline-flex min-h-[44px] items-center gap-2 px-[13px] font-pix text-[11px] font-bold leading-none text-lime"
+                >
+                  RÉSUMÉ
+                  <PixelIcon name="download" size={8} />
+                </a>
+              </span>
+            </div>
+
+            {/* mobile */}
+            <span className="focusable md:hidden">
+              <button
+                type="button"
+                onClick={() => setOpen((v) => !v)}
+                aria-expanded={open}
+                aria-controls="mobile-menu"
+                aria-label={open ? "Close menu" : "Open menu"}
+                className="inline-flex h-11 w-11 flex-col items-center justify-center gap-[3px]"
+              >
+                <span className="burger-bar" />
+                <span className="burger-bar" />
+                <span className="burger-bar" />
+              </button>
+            </span>
+          </div>
+        </nav>
+      </div>
+
+      {/* Full-width drop menu, items numbered like the section markers. */}
+      {open && (
+        <div
+          id="mobile-menu"
+          className="border-b-[3px] border-ink bg-panel md:hidden"
+        >
+          <ul className="mx-auto max-w-wide px-4 py-2">
+            {[...LINKS, { href: RESUME, label: "RÉSUMÉ" }].map((l, i) => {
+              const current = l.href !== RESUME && isCurrent(l.href);
+              const n = String(i + 1).padStart(2, "0");
+              const cls = `flex min-h-[44px] items-center gap-3 font-mono text-[11px] uppercase tracking-[0.08em] ${
+                current ? "text-ink" : "text-mute"
+              }`;
+              return (
+                <li key={l.href} className={current ? "bg-lime px-2" : "px-2"}>
+                  {l.href === RESUME ? (
+                    <a href={l.href} target="_blank" rel="noopener noreferrer" className={cls}>
+                      <span className="font-pix text-blue">{n}</span>
+                      {l.label}
+                      <PixelIcon name="download" size={8} />
+                    </a>
+                  ) : (
+                    <Link
+                      href={l.href}
+                      aria-current={current ? "page" : undefined}
+                      className={cls}
+                    >
+                      <span className="font-pix text-blue">{n}</span>
+                      {l.label}
+                    </Link>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
         </div>
-      </motion.nav>
-    </div>
+      )}
+    </header>
   );
 };
 

@@ -112,34 +112,41 @@
 
 ::selection { background: var(--lime); color: var(--ink); }
 
-/* ── Focus ring (spec §4.2) ────────────────────────────────────────
-   A square outline around a notched sprite reads as a rendering bug, so the
-   ring is a notched plate behind the element instead. Focus is INSTANT and
-   never animated — the one place in the system where motion is banned. */
-.focusable { position: relative; display: inline-block; }
-.focusable::before {
-  content: "";
-  position: absolute;
-  inset: -7px;
-  background: var(--blue);
-  clip-path: var(--notch);
-  z-index: -1;
-  opacity: 0;
-}
-.focusable:focus-within::before { opacity: 1; }
-/* Safe only because the plate replaces it. Never remove focus indication. */
-.focusable :is(button, a, input, select, textarea):focus { outline: none; }
+/* These live in @layer components so Tailwind utilities still win over them.
+   Unlayered CSS beats every layer, which meant `.focusable`'s display rule
+   silently overrode `md:hidden` and left the mobile burger visible on
+   desktop. Anything here that sets a property a utility might also set
+   belongs in a layer. */
+@layer components {
+  /* ── Focus ring (spec §4.2) ──────────────────────────────────────
+     A square outline around a notched sprite reads as a rendering bug, so the
+     ring is a notched plate behind the element instead. Focus is INSTANT and
+     never animated — the one place in the system where motion is banned. */
+  .focusable { position: relative; display: inline-block; }
+  .focusable::before {
+    content: "";
+    position: absolute;
+    inset: -7px;
+    background: var(--blue);
+    clip-path: var(--notch);
+    z-index: -1;
+    opacity: 0;
+  }
+  .focusable:focus-within::before { opacity: 1; }
+  /* Safe only because the plate replaces it. Never remove focus indication. */
+  .focusable :is(button, a, input, select, textarea):focus { outline: none; }
 
-/* ── The well (spec §4.4) ──────────────────────────────────────────
-   A recessed screenshot. Sunk, so it reads as contained rather than
-   interactive. */
-.well {
-  box-shadow: 0 0 0 3px var(--ink), inset 4px 4px 0 rgb(0 0 0 / 0.4);
-}
+  /* ── The well (spec §4.4) ────────────────────────────────────────
+     A recessed screenshot. Sunk, so it reads as contained rather than
+     interactive. */
+  .well {
+    box-shadow: 0 0 0 3px var(--ink), inset 4px 4px 0 rgb(0 0 0 / 0.4);
+  }
 
-/* ── Pixel rendering ───────────────────────────────────────────────
-   Any raster in the pixel layer must not be smoothed when scaled. */
-.pixelated { image-rendering: pixelated; }
+  /* ── Pixel rendering ─────────────────────────────────────────────
+     Any raster in the pixel layer must not be smoothed when scaled. */
+  .pixelated { image-rendering: pixelated; }
+}
 
 /* ══════════════════════════════════════════════════════════════════
    MOTION (spec §5)
@@ -248,6 +255,33 @@
 }
 
 .led { animation: led 2.6s steps(1, end) infinite; }
+
+/* ── Nav plate (spec §4.6) ─────────────────────────────────────────
+   At rest: 3px border all round, full bevel, contained to the column.
+   Scrolled past 24px: border-bottom only, no bevel, plate → panel, 8px
+   shorter, spanning full width while the contents stay on the column.
+   The change is INSTANT — a class toggle with no transition (§5.1). */
+@layer components {
+  .nav-plate {
+    background: var(--plate);
+    border: 3px solid var(--ink);
+    box-shadow: inset 3px 3px 0 var(--hi), inset -3px -3px 0 var(--sh);
+  }
+  .nav-plate.stuck {
+    background: var(--panel);
+    border: 0;
+    border-bottom: 3px solid var(--ink);
+    box-shadow: none;
+  }
+
+  /* Burger: three solid 14×3px blocks, never thin lines. */
+  .burger-bar {
+    display: block;
+    width: 14px;
+    height: 3px;
+    background: var(--ink);
+  }
+}
 
 /* Under reduced motion the observer still runs, but content must never be
    left hidden and nothing may animate. */
