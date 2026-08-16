@@ -120,13 +120,13 @@ export default function RootLayout({
         {/* Skip link must be the first focusable element on every page (§11). */}
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:bg-blue focus:px-4 focus:py-3 focus:font-pix focus:text-[11px] focus:text-lime"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-16 focus:top-16 focus:z-[100] focus:bg-blue focus:px-16 focus:py-12 focus:font-pix focus:text-[11px] focus:text-lime"
         >
           SKIP TO CONTENT
         </a>
         <Navbar />
         {/* Offset clears the nav plate. Both values are on the 4px ramp. */}
-        <main id="main" className="relative z-10 flex-grow pt-24 md:pt-28">
+        <main id="main" className="relative z-10 flex-grow pt-96 md:pt-128">
           {children}
         </main>
         <Footer />

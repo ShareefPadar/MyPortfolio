@@ -25,13 +25,13 @@ const WorkFilter = ({ domains }: { domains: Domain[] }) => {
   };
 
   return (
-    <div className="flex flex-wrap items-center gap-2" role="group" aria-label="Filter by domain">
+    <div className="flex flex-wrap items-center gap-8" role="group" aria-label="Filter by domain">
       <span className="focusable">
         <button
           type="button"
           onClick={() => set(null)}
           aria-pressed={!active}
-          className={`sp sp-neutral-3 sp-s3 ${!active ? "sp-sunk" : ""} inline-flex min-h-[44px] items-center px-3 font-mono text-[9px] uppercase tracking-[0.11em] ${
+          className={`sp sp-neutral-3 sp-s3 ${!active ? "sp-sunk" : ""} inline-flex min-h-[44px] items-center px-12 font-mono text-[9px] uppercase tracking-[0.11em] ${
             !active ? "text-ink" : "text-mute"
           }`}
         >
@@ -47,7 +47,7 @@ const WorkFilter = ({ domains }: { domains: Domain[] }) => {
               type="button"
               onClick={() => set(on ? null : d)}
               aria-pressed={on}
-              className={`sp sp-neutral-3 sp-s3 ${on ? "sp-sunk" : ""} inline-flex min-h-[44px] items-center gap-2 px-3 font-mono text-[9px] uppercase tracking-[0.11em] ${
+              className={`sp sp-neutral-3 sp-s3 ${on ? "sp-sunk" : ""} inline-flex min-h-[44px] items-center gap-8 px-12 font-mono text-[9px] uppercase tracking-[0.11em] ${
                 on ? "text-ink" : "text-mute"
               }`}
             >

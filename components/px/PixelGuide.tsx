@@ -145,7 +145,7 @@ export default function PixelGuide() {
       style={{ transform: `translate3d(${pos.x}px, ${pos.y}px, 0)` }}
       aria-hidden="true"
     >
-      <div className="flex items-start gap-2">
+      <div className="flex items-start gap-8">
         {/* cursor sprite */}
         <svg width={16} height={16} viewBox="0 0 8 8" shapeRendering="crispEdges" className="shrink-0">
           {CURSOR.flatMap((row, y) =>
@@ -170,13 +170,13 @@ export default function PixelGuide() {
               Shareef
             </p>
             {dots ? (
-              <div className="mt-2 flex gap-1">
+              <div className="mt-8 flex gap-4">
                 <span className="guide-dot" />
                 <span className="guide-dot" />
                 <span className="guide-dot" />
               </div>
             ) : (
-              <p className="mt-1 font-sans text-[13px] leading-[1.5] text-ink">{typed}</p>
+              <p className="mt-4 font-sans text-[13px] leading-[1.5] text-ink">{typed}</p>
             )}
           </div>
           <div className="guide-tail" />

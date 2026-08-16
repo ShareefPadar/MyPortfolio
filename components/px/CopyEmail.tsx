@@ -28,7 +28,7 @@ const CopyEmail = ({ email }: { email: string }) => {
       <button
         type="button"
         onClick={copy}
-        className="sp sp-neutralDk-3 sp-s3 inline-flex min-h-[44px] items-center gap-2 px-3 font-mono text-[11px] uppercase tracking-[0.08em] text-ntext"
+        className="sp sp-neutralDk-3 sp-s3 inline-flex min-h-[44px] items-center gap-8 px-12 font-mono text-[11px] uppercase tracking-[0.08em] text-ntext"
       >
         <PixelIcon name={copied ? "check" : "copy"} size={8} />
         {copied ? "Copied" : "Copy"}

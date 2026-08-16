@@ -12,14 +12,14 @@ import Typewriter from "@/components/px/Typewriter";
  */
 const Hero = () => (
   <section className="bg-night">
-    <div className="mx-auto max-w-wide px-4 py-16 md:py-24">
-      <div className="grid items-center gap-12 md:grid-cols-[1.1fr_0.9fr]">
+    <div className="mx-auto max-w-wide px-16 py-64 md:py-96">
+      <div className="grid items-center gap-48 md:grid-cols-[1.1fr_0.9fr]">
         <div>
-          <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.08em] text-ntext">
+          <p className="mb-16 font-mono text-[11px] uppercase tracking-[0.08em] text-ntext">
             Shareef Padar · Dubai
           </p>
 
-          <h1 className="mb-6">
+          <h1 className="mb-24">
             <Typewriter
               text="SENIOR PRODUCT DESIGNER WHO SHIPS."
               as="span"
@@ -27,13 +27,13 @@ const Hero = () => (
             />
           </h1>
 
-          <p className="mb-8 max-w-lead font-sans text-[17px] leading-[1.65] text-white md:text-[19px]">
+          <p className="mb-32 max-w-lead font-sans text-[17px] leading-[1.65] text-white md:text-[19px]">
             Six years in B2B UX, from research to shipped interface. I build and ship my own
             products in React and Tailwind too, which is why the prototypes on this site are
             real software rather than screenshots.
           </p>
 
-          <div className="flex flex-wrap items-center gap-4">
+          <div className="flex flex-wrap items-center gap-16">
             <Button level="primary" large href="/#work" icon="arrowD" onDark>
               VIEW WORK
             </Button>

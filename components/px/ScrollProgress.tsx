@@ -29,7 +29,7 @@ const ScrollProgress = () => {
 
   return (
     <div
-      className="flex gap-1"
+      className="flex gap-4"
       role="progressbar"
       aria-label="Reading progress"
       aria-valuenow={filled * 10}

@@ -75,10 +75,10 @@ const Button = ({
   const framed = frame ? `${frame}-${scale} sp-s${scale}` : "";
 
   const cls = [
-    "font-pix leading-none inline-flex items-center gap-2",
+    "font-pix leading-none inline-flex items-center gap-8",
     // 44px is the accessibility floor, always (§4.1, §11).
     "min-h-[44px]",
-    large ? "px-4 py-[10px] text-[13px]" : "px-[13px] py-[9px] text-[11px]",
+    large ? "px-16 py-[10px] text-[13px]" : "px-[13px] py-[9px] text-[11px]",
     framed,
     (onDark ? TEXT_DARK : TEXT)[level],
     className,

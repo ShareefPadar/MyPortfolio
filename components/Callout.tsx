@@ -15,20 +15,20 @@ const Callout = ({ children, label, tone = "note" }: CalloutProps) => {
   const isFlag = tone === "flag";
   return (
     <aside
-      className={`not-prose my-8 max-w-prose border-l-[6px] p-5 md:p-6 ${
+      className={`not-prose my-32 max-w-prose border-l-[6px] p-16 md:p-24 ${
         isFlag ? "border-blue bg-panel" : "border-lime bg-panel"
       }`}
     >
       {label && (
         <p
-          className={`mb-2 font-mono text-[9px] uppercase tracking-[0.11em] ${
+          className={`mb-8 font-mono text-[9px] uppercase tracking-[0.11em] ${
             isFlag ? "text-blue" : "text-mute"
           }`}
         >
           {label}
         </p>
       )}
-      <div className="font-sans text-[16px] leading-[1.7] text-ink [&>p]:mb-3 [&>p:last-child]:mb-0">
+      <div className="font-sans text-[16px] leading-[1.7] text-ink [&>p]:mb-12 [&>p:last-child]:mb-0">
         {children}
       </div>
     </aside>

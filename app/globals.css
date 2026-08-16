@@ -29,27 +29,32 @@
   --color-nline:  #26262A;
   --color-ntext:  #9A9A94;
 
-  /* ── Spacing ramp: convention, not yet enforced ───────────────────
-     Hard constraint #6 says spacing comes from the ramp
-     4·8·12·16·24·32·48·64·96·128. That IS enforceable: setting
-     `--spacing: initial` plus ten named px values makes any off-ramp
-     utility generate no CSS at all.
+  /* ── Spacing ramp, ENFORCED (hard constraint #6) ──────────────────
+     `--spacing: initial` disables Tailwind's generated numeric scale, so only
+     the values below resolve. Any off-ramp utility — p-5, gap-7, mt-19 — now
+     produces NO CSS at all, which turns "spacing comes from the ramp" from a
+     convention into something the build actually checks.
 
-     It is deliberately NOT enabled. Every utility in this codebase was
-     written against Tailwind's default numeric scale, where p-4 means 16px.
-     Under named values p-4 means 4px, so switching rescales the entire site
-     by 4x: card padding collapsed 16px to 4px and the hero lost its vertical
-     padding entirely when this was trialled.
+     Named by pixel value: gap-24 is 24px and reads the same in the markup as
+     it does in the spec. Every spacing utility in the codebase was migrated
+     to match, since Tailwind's default scale means p-4 = 16px while a named
+     ramp means p-4 = 4px.
 
-     Adopting it is a mechanical rewrite of every spacing utility in the
-     codebase plus its own verification pass, not a one-line flip. Doing it
-     here, unverified, at the end of a long build is how you ship a broken
-     site to satisfy a lint rule.
-
-     The ten values are already available as --s4 … --s128 below for
-     hand-written CSS, and the spec's ramp maps exactly onto Tailwind's
-     default 1·2·3·4·6·8·12·16·24·32, so current usage is on-ramp in
-     practice. */
+     44px is deliberately absent. It is the accessibility floor from §4.1/§11,
+     a minimum size rather than a spacing step, so it stays an explicit
+     min-h-[44px] where it is self-documenting. */
+  --spacing: initial;
+  --spacing-0: 0px;
+  --spacing-4: 4px;
+  --spacing-8: 8px;
+  --spacing-12: 12px;
+  --spacing-16: 16px;
+  --spacing-24: 24px;
+  --spacing-32: 32px;
+  --spacing-48: 48px;
+  --spacing-64: 64px;
+  --spacing-96: 96px;
+  --spacing-128: 128px;
 
   /* containers — v4 reads --container-* for max-w-*, not --max-width-* */
   --container-prose: 60ch;

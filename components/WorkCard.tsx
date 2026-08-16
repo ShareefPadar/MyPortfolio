@@ -46,7 +46,7 @@ const WorkCard = ({ study, relevant = false, featured = false, compact = false }
             className="object-cover object-top"
           />
         ) : (
-          <div className="grid h-full w-full place-items-center px-4">
+          <div className="grid h-full w-full place-items-center px-16">
             <span className="text-center font-pix text-[14px] leading-[1.8] text-mute">
               {card.title}
             </span>
@@ -54,22 +54,22 @@ const WorkCard = ({ study, relevant = false, featured = false, compact = false }
         )}
       </div>
 
-      <div className="card-body m-[10px] flex flex-col p-4">
-        <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.07em] text-mute">
+      <div className="card-body m-[10px] flex flex-col p-16">
+        <p className="mb-8 font-mono text-[10px] uppercase tracking-[0.07em] text-mute">
           {card.category} · {card.badge}
         </p>
-        <h3 className="mb-1 font-sans text-[19px] font-medium leading-[1.4] text-ink">
+        <h3 className="mb-4 font-sans text-[19px] font-medium leading-[1.4] text-ink">
           {card.headline}
         </h3>
-        <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.07em] text-mute">
+        <p className="mb-12 font-mono text-[10px] uppercase tracking-[0.07em] text-mute">
           {card.title}
         </p>
         {!compact && (
-          <p className="mb-4 font-sans text-[14.5px] leading-[1.6] text-ink">
+          <p className="mb-16 font-sans text-[14.5px] leading-[1.6] text-ink">
             {card.description}
           </p>
         )}
-        <span className="mt-auto inline-flex items-center gap-2 font-pix text-[10px] leading-none text-blue">
+        <span className="mt-auto inline-flex items-center gap-8 font-pix text-[10px] leading-none text-blue">
           READ CASE STUDY
           <PixelIcon name="arrowR" size={8} />
         </span>

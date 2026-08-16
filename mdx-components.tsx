@@ -21,30 +21,30 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
        blocks (§6.2). */
     h2: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
       <h2
-        className="mt-16 mb-4 font-sans text-[21px] font-medium leading-[1.3] tracking-[-0.016em] text-ink md:text-[26px]"
+        className="mt-64 mb-16 font-sans text-[21px] font-medium leading-[1.3] tracking-[-0.016em] text-ink md:text-[26px]"
         {...props}
       />
     ),
     h3: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
       <h3
-        className="mt-12 mb-3 font-sans text-[17px] font-semibold leading-[1.4] text-ink md:text-[19px]"
+        className="mt-48 mb-12 font-sans text-[17px] font-semibold leading-[1.4] text-ink md:text-[19px]"
         {...props}
       />
     ),
     p: (props: React.HTMLAttributes<HTMLParagraphElement>) => (
-      <p className="mb-4 max-w-prose font-sans text-[16px] leading-[1.7] text-ink" {...props} />
+      <p className="mb-16 max-w-prose font-sans text-[16px] leading-[1.7] text-ink" {...props} />
     ),
     /* Bullets are squares, never discs (§8). */
     ul: (props: React.HTMLAttributes<HTMLUListElement>) => (
-      <ul className="mb-8 max-w-prose list-none space-y-3 pl-0" {...props} />
+      <ul className="mb-32 max-w-prose list-none space-y-12 pl-0" {...props} />
     ),
     /* Ordered lists use leading zeros, matching the section markers (§8). */
     ol: (props: React.HTMLAttributes<HTMLOListElement>) => (
-      <ol className="prose-ol mb-8 max-w-prose list-none space-y-3 pl-0" {...props} />
+      <ol className="prose-ol mb-32 max-w-prose list-none space-y-12 pl-0" {...props} />
     ),
     li: (props: React.HTMLAttributes<HTMLLIElement>) => (
       <li
-        className="relative pl-6 font-sans text-[16px] leading-[1.7] text-ink before:absolute before:left-1 before:top-[0.62em] before:h-2 before:w-2 before:bg-blue before:content-['']"
+        className="relative pl-24 font-sans text-[16px] leading-[1.7] text-ink before:absolute before:left-4 before:top-[0.62em] before:h-8 before:w-8 before:bg-blue before:content-['']"
         {...props}
       />
     ),
@@ -68,8 +68,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
      */
     blockquote: (props: React.HTMLAttributes<HTMLQuoteElement>) => (
       <blockquote
-        className="my-10 max-w-prose border-l-[6px] border-lime pl-6
-                   [&_p]:mb-3 [&_p]:font-sans [&_p]:text-[19px] [&_p]:font-medium
+        className="my-32 max-w-prose border-l-[6px] border-lime pl-24
+                   [&_p]:mb-12 [&_p]:font-sans [&_p]:text-[19px] [&_p]:font-medium
                    [&_p]:leading-[1.4] [&_p]:text-ink md:[&_p]:text-[23px]
                    [&_p:last-child]:mb-0
                    [&_p:last-child:not(:first-child)]:font-mono
@@ -81,11 +81,11 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         {...props}
       />
     ),
-    hr: () => <hr className="my-16 border-none border-t border-line" />,
+    hr: () => <hr className="my-64 border-none border-t border-line" />,
     /* Breaks to the wide grid column. One mechanism, shared with <Shot>. */
     // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
     img: (props: React.ImgHTMLAttributes<HTMLImageElement>) => (
-      <img className="wide my-10 w-full max-w-none" {...props} />
+      <img className="wide my-32 w-full max-w-none" {...props} />
     ),
     /* A UI string quoted from a product (§8). */
     code: (props: React.HTMLAttributes<HTMLElement>) => (

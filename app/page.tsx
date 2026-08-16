@@ -21,7 +21,7 @@ import { featured, sideProjects } from "@/lib/work";
  */
 
 const SectionMarker = ({ n, title }: { n: string; title: string }) => (
-  <div className="mb-6 flex items-baseline gap-3 md:mb-8">
+  <div className="mb-24 flex items-baseline gap-12 md:mb-32">
     <Reveal variant="pop" as="span" className="font-pix text-[20px] font-bold leading-none text-blue">
       {n}
     </Reveal>
@@ -39,10 +39,10 @@ export default function Home() {
       </div>
 
       {/* 01 SELECTED WORK */}
-      <section id="work" data-guide-id="work" className="mx-auto w-full max-w-wide px-4 pt-16 md:pt-24">
+      <section id="work" data-guide-id="work" className="mx-auto w-full max-w-wide px-16 pt-64 md:pt-96">
         <SectionMarker n="01" title="SELECTED WORK" />
 
-        <div className="grid gap-8 md:grid-cols-2 md:gap-12">
+        <div className="grid gap-32 md:grid-cols-2 md:gap-48">
           {featured.map((study) => (
             <Reveal key={study.slug}>
               <WorkCard study={study} featured relevant={study.domain === "FINTECH"} />
@@ -51,8 +51,8 @@ export default function Home() {
         </div>
 
         {/* NDA strip — full-width rules top and bottom (§7.1) */}
-        <div data-guide-id="nda" className="mt-12 border-y-[3px] border-ink py-6 md:mt-16">
-          <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div data-guide-id="nda" className="mt-48 border-y-[3px] border-ink py-24 md:mt-64">
+          <div className="flex flex-col items-start gap-16 sm:flex-row sm:items-center sm:justify-between">
             <p className="max-w-prose font-sans text-[16px] leading-[1.7] text-ink">
               This is the work I can show publicly. Six years of production B2B design, across
               logistics, healthcare, and travel, sits under NDA. Ask me about it on a call.
@@ -67,37 +67,37 @@ export default function Home() {
       {/* 02 DESIGNED, BUILT & LIVE */}
       <section
         data-guide-id="live"
-        className="mx-auto w-full max-w-wide px-4 pt-16 pb-24 md:pt-24 md:pb-32"
+        className="mx-auto w-full max-w-wide px-16 pt-64 pb-96 md:pt-96 md:pb-128"
       >
         <SectionMarker n="02" title="DESIGNED, BUILT & LIVE" />
 
-        <div className="grid gap-8 md:grid-cols-2 md:gap-12">
+        <div className="grid gap-32 md:grid-cols-2 md:gap-48">
           {sideProjects.map((study) => (
             <Reveal key={study.slug}>
               <div className="card mt-[17px] flex h-full flex-col">
                 <span className="card-tab">{study.domain}</span>
 
-                <div className="card-body m-[10px] flex flex-1 flex-col p-4">
-                  <p className="mb-2 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.07em] text-mute">
-                    <span className="led inline-block h-2 w-2 bg-lime" aria-hidden="true" />
+                <div className="card-body m-[10px] flex flex-1 flex-col p-16">
+                  <p className="mb-8 flex items-center gap-8 font-mono text-[10px] uppercase tracking-[0.07em] text-mute">
+                    <span className="led inline-block h-8 w-8 bg-lime" aria-hidden="true" />
                     Live · side project
                   </p>
-                  <h3 className="mb-1 font-sans text-[19px] font-medium leading-[1.4] text-ink">
+                  <h3 className="mb-4 font-sans text-[19px] font-medium leading-[1.4] text-ink">
                     {study.card.headline}
                   </h3>
-                  <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.07em] text-mute">
+                  <p className="mb-12 font-mono text-[10px] uppercase tracking-[0.07em] text-mute">
                     {study.card.title}
                   </p>
-                  <p className="mb-4 font-sans text-[14.5px] leading-[1.6] text-ink">
+                  <p className="mb-16 font-sans text-[14.5px] leading-[1.6] text-ink">
                     {study.card.description}
                   </p>
 
                   {/* Two saturated buttons never sit side by side, so inside a
                       card the secondary drops to tertiary (§4.1). */}
-                  <div className="mt-auto flex flex-wrap items-center gap-x-6 gap-y-2">
+                  <div className="mt-auto flex flex-wrap items-center gap-x-24 gap-y-8">
                     <Link
                       href={`/work/${study.slug}`}
-                      className="inline-flex min-h-[44px] items-center gap-2 font-pix text-[10px] leading-none text-blue"
+                      className="inline-flex min-h-[44px] items-center gap-8 font-pix text-[10px] leading-none text-blue"
                     >
                       CASE STUDY
                       <PixelIcon name="arrowR" size={8} />
@@ -107,7 +107,7 @@ export default function Home() {
                         href={study.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex min-h-[44px] items-center gap-2 font-pix text-[10px] leading-none text-blue"
+                        className="inline-flex min-h-[44px] items-center gap-8 font-pix text-[10px] leading-none text-blue"
                       >
                         LAUNCH APP
                         <PixelIcon name="external" size={8} />

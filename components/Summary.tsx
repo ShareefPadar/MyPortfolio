@@ -23,18 +23,18 @@ const Summary = ({ problem, approach, constraint, readTime }: SummaryProps) => {
   return (
     // A ruled table, not a filled card: rules carry the structure so this
     // reads as a spec block in an article rather than one more UI container.
-    <aside aria-label="Case study summary" className="card not-prose my-12 mt-[17px]">
+    <aside aria-label="Case study summary" className="card not-prose my-48 mt-[17px]">
       <span className="card-tab">THE SHORT VERSION</span>
-      <div className="card-body m-[10px] p-4 md:p-6">
+      <div className="card-body m-[10px] p-16 md:p-24">
         {readTime && (
-          <p className="mb-4 font-mono text-[9px] uppercase tracking-[0.11em] text-mute">
+          <p className="mb-16 font-mono text-[9px] uppercase tracking-[0.11em] text-mute">
             {readTime} read
           </p>
         )}
         <dl className="divide-y divide-line">
           {rows.map(([label, value]) => (
-            <div key={label} className="grid gap-1 py-4 first:pt-0 last:pb-0 md:grid-cols-[8rem_1fr] md:gap-8">
-              <dt className="font-mono text-[9px] uppercase tracking-[0.11em] text-mute md:pt-1">
+            <div key={label} className="grid gap-4 py-16 first:pt-0 last:pb-0 md:grid-cols-[8rem_1fr] md:gap-32">
+              <dt className="font-mono text-[9px] uppercase tracking-[0.11em] text-mute md:pt-4">
                 {label}
               </dt>
               <dd className="font-sans text-[16px] leading-[1.7] text-ink">{value}</dd>

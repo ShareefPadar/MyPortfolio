@@ -25,10 +25,10 @@ interface DeviceFrameProps {
  */
 const DeviceFrame = ({ children, url = "prototype", label, caption }: DeviceFrameProps) => {
   return (
-    <figure className="not-prose wide my-12">
+    <figure className="not-prose wide my-48">
       {label && (
-        <div className="mb-3 flex items-center gap-2">
-          <span className="led inline-block h-2 w-2 bg-lime" aria-hidden="true" />
+        <div className="mb-12 flex items-center gap-8">
+          <span className="led inline-block h-8 w-8 bg-lime" aria-hidden="true" />
           <span className="font-mono text-[9px] uppercase tracking-[0.11em] text-mute">
             {label}
           </span>
@@ -37,11 +37,11 @@ const DeviceFrame = ({ children, url = "prototype", label, caption }: DeviceFram
 
       <div className="card mt-0">
         {/* URL strip: mono, because it is a label rather than a sentence. */}
-        <div className="flex items-center gap-2 px-3 py-2">
-          <span className="flex gap-1" aria-hidden="true">
-            <span className="h-2 w-2 bg-mute" />
-            <span className="h-2 w-2 bg-mute" />
-            <span className="h-2 w-2 bg-mute" />
+        <div className="flex items-center gap-8 px-12 py-8">
+          <span className="flex gap-4" aria-hidden="true">
+            <span className="h-8 w-8 bg-mute" />
+            <span className="h-8 w-8 bg-mute" />
+            <span className="h-8 w-8 bg-mute" />
           </span>
           <span className="mx-auto font-mono text-[9px] tracking-[0.08em] text-mute">
             {url}
@@ -60,7 +60,7 @@ const DeviceFrame = ({ children, url = "prototype", label, caption }: DeviceFram
       </div>
 
       {caption && (
-        <figcaption className="mt-3 border-t border-line pt-3 font-sans text-[13px] leading-[1.55] text-mute">
+        <figcaption className="mt-12 border-t border-line pt-12 font-sans text-[13px] leading-[1.55] text-mute">
           {caption}
         </figcaption>
       )}
