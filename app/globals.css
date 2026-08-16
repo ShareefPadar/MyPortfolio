@@ -266,17 +266,27 @@
 .has-js .reveal { visibility: hidden; }
 .has-js .reveal.is-in { visibility: visible; }
 
-/* Containers, cards, screenshots: the whole object animates as one (§12 #10). */
+/* Containers, cards, screenshots: the whole object animates as one (§12 #10).
+
+   scanClip is `backwards`, NOT `both`. `both` keeps the last keyframe applied
+   forever, and that last keyframe is `clip-path: inset(0 0 0%)` — visually a
+   no-op, but a clip-path still clips, so anything a child hangs outside the
+   box gets silently cut once the wipe ends. That ate the bottom border off
+   every work card. `backwards` holds the pre-roll state (fully clipped) and
+   then lets the clip go when the animation finishes.
+
+   scanBands stays `both`: its final keyframe is `mask-image: none`, which is
+   genuinely inert to leave applied. */
 .has-js .reveal.is-in {
   animation:
-    scanClip  calc(var(--f) * 6) steps(6, end) both,
+    scanClip  calc(var(--f) * 6) steps(6, end) backwards,
     scanBands calc(var(--f) * 8) steps(1, end) both;
 }
 
 /* Geist headings scan faster than containers. */
 .has-js .reveal-head.is-in {
   animation:
-    scanClip  calc(var(--f) * 4) steps(4, end) both,
+    scanClip  calc(var(--f) * 4) steps(4, end) backwards,
     scanBands calc(var(--f) * 6) steps(1, end) both;
 }
 

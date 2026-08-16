@@ -74,7 +74,9 @@ export default function Home() {
         <div className="grid gap-32 md:grid-cols-2 md:gap-48">
           {sideProjects.map((study) => (
             <Reveal key={study.slug}>
-              <div className="card mt-[17px] flex h-full flex-col">
+              {/* h-[calc(100%-17px)], not h-full: mt-17 clears the tab, and the
+                  height has to give that back or the card overhangs its slot. */}
+              <div className="card mt-[17px] flex h-[calc(100%-17px)] flex-col">
                 <span className="card-tab">{study.domain}</span>
 
                 <div className="card-body m-[10px] flex flex-1 flex-col p-16">

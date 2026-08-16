@@ -31,7 +31,10 @@ const WorkCard = ({ study, relevant = false, featured = false, compact = false }
     <Link
       href={`/work/${slug}`}
       aria-label={`Read the ${card.title} case study`}
-      className="card group mt-[17px] block h-full"
+      /* mt-17 makes room for the tab, which sits at top:-17px. The height has
+         to give that 17px back, or the card is a full row-height TALL and then
+         pushed down 17px, so its bottom border hangs outside the grid slot. */
+      className="card group mt-[17px] block h-[calc(100%-17px)]"
     >
       <span className={`card-tab ${relevant ? "relevant" : ""}`}>{domain}</span>
 
