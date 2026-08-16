@@ -69,11 +69,15 @@ export function tones(face: string, outline: string): Palette {
 export const PALETTES = {
   blue: { face: BLUE, hi: lighten(BLUE, 0.38), shade: darken(BLUE, 0.45), outline: "#0A0E2E" },
   lime: { face: LIME, hi: lighten(LIME, 0.55), shade: darken(LIME, 0.42), outline: INK },
-  neutral: { face: "#E2E2DC", hi: "#FFFFFF", shade: "#A6A69E", outline: INK, hover: "#EDEDE7" },
-  disabled: { face: "#DCDCD6", hi: "#EDEDE8", shade: "#B4B4AC", outline: "#A0A099" },
+  // These faces are cool greys, matching the surface family in globals.css.
+  // A warm face on the cool page reads as a yellow stain, and a button is
+  // exactly where two surfaces meet, so it is the most visible place to get
+  // this wrong. `hi` stays pure white — it is a lit edge, not a surface.
+  neutral: { face: "#E1E0E8", hi: "#FFFFFF", shade: "#A5A4AE", outline: INK, hover: "#ECEBF2" },
+  disabled: { face: "#DBDAE2", hi: "#ECEBF2", shade: "#B3B2BC", outline: "#9F9EA8" },
   // Inputs invert highlight and shade so the field reads as recessed.
-  field: { face: "#FAFAF8", hi: "#8A8A80", shade: "#FFFFFF", outline: INK },
-  fieldErr: { face: "#FDF2EF", hi: "#C4482E", shade: "#FFFFFF", outline: "#C4482E" },
+  field: { face: "#F9F9FC", hi: "#8A8992", shade: "#FFFFFF", outline: INK },
+  fieldErr: { face: "#FBF1F2", hi: "#C4482E", shade: "#FFFFFF", outline: "#C4482E" },
   // Dark-surface variants: the outline LIGHTENS or the component dissolves.
   blueDk: { face: BLUE, hi: lighten(BLUE, 0.38), shade: darken(BLUE, 0.45), outline: "#4A5BAE" },
   limeDk: { face: LIME, hi: lighten(LIME, 0.55), shade: darken(LIME, 0.42), outline: "#5A6B1E" },

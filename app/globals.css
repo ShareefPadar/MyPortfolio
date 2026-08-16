@@ -15,13 +15,33 @@
   --color-blue:  #1E45FB;   /* primary button, section numerals, links, focus */
   --color-ink:   #14140F;   /* outlines, body text, rules */
   --color-error: #C4482E;   /* form errors only */
-  --color-paper: #FAFAF8;
-  --color-plate: #D8D8D0;
-  --color-panel: #F0F0EA;
-  --color-line:  #DEDED8;
-  /* --color-mute is #6E6E62 on purpose. #87877A measured 4.0:1 and FAILED
-     on 9–11px meta labels. Do not lighten it — spec §11 and §12 mistake 11. */
-  --color-mute:  #6E6E62;
+  /* The light surfaces are a COOL family: blue channel highest, so
+     B - R is positive and grows as the surface darkens. They used to be warm
+     (#FAFAF8, #F0F0EA, #DEDED8, #D8D8D0 — blue channel lowest). The whole
+     family has to move together: a warm grey sitting on a cool page reads as
+     a dirty yellow stain, and it is most visible exactly where two surfaces
+     meet, which on this site is every card and every nav plate.
+
+     Each step is also a real luminance step, not just a hue shift — the
+     smallest gap here is panel-on-paper at 1.11:1, which is what keeps a
+     callout visible as its own surface. */
+  --color-paper: #F0EFF4;
+  --color-plate: #D6D5DE;
+  --color-panel: #E4E3EA;
+  --color-line:  #DCDBE4;
+  /* Do not lighten --color-mute. #87877A measured 4.0:1 and FAILED on 9–11px
+     meta labels — spec §11 and §12 mistake 11.
+
+     It was #6E6E62 while the page was #FAFAF8. Darkening the page eats the
+     margin on every muted label, so this darkened to compensate, and cooled
+     to join the family above. Verified at 9–11px against every light surface
+     it can land on; the tightest is 4.54:1 on the nav plate.
+
+     That plate pair was 3.60:1 before this change and had been failing since
+     the plate was introduced — nav links are text-mute on --plate. Fixed
+     here by darkening mute AND lightening the plate; neither alone clears
+     4.5:1 without flattening the plate into the page. */
+  --color-mute:  #5C5C67;
 
   /* dark surfaces — hero and footer bookend the light page (spec §6.5) */
   --color-night:  #0B0B0C;
@@ -81,8 +101,11 @@
   --f: 60ms;       /* one animation frame */
   --type: 45ms;    /* one typed character */
 
+  /* --hi stays pure white: it is a specular highlight on a bevel edge, not a
+     surface. Tinting it to match the cool family makes every bevel look
+     dusty, because the highlight is what sells the edge as lit. */
   --hi: #FFFFFF;   /* bevel highlight (top-left) */
-  --sh: #8A8A80;   /* bevel shade (bottom-right) */
+  --sh: #8A8992;   /* bevel shade (bottom-right) — cooled with the surfaces */
 
   /* Aliases so the spec's hand-written CSS works verbatim against one
      source of truth. Do not restate the hex values here. */
@@ -350,7 +373,11 @@
     background: var(--paper);
     border: 3px solid var(--ink);
   }
-  .card:hover .card-body { background: #ffffff; }
+  /* Hover lifts the body a step ABOVE the page. Pure white did that when the
+     page was #FAFAF8, but against #F0EFF4 it is both too big a jump and the
+     only pure white left on the site, so it flashes. This is a tint of the
+     surface family instead — 1.07:1, enough to read as a lift, not a flash. */
+  .card:hover .card-body { background: #F7F7FB; }
 
   /* ── Case-study content column (spec §6.3) ───────────────────────
      ONE mechanism for every width. Replaces three competing idioms that

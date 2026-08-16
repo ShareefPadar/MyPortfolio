@@ -13,14 +13,14 @@ export const INK = "#14140F";
 export const LIME = "#CDF22B";
 export const BLUE = "#1E45FB";
 export const ERROR = "#C4482E";
-export const PAPER = "#FAFAF8";
-export const PLATE = "#D8D8D0";
-export const PANEL = "#F0F0EA";
-export const LINE = "#DEDED8";
-export const MUTE = "#6E6E62";
+export const PAPER = "#F0EFF4";
+export const PLATE = "#D6D5DE";
+export const PANEL = "#E4E3EA";
+export const LINE = "#DCDBE4";
+export const MUTE = "#5C5C67";
 
 export const HI = "#FFFFFF";
-export const SH = "#8A8A80";
+export const SH = "#8A8992";
 
 export const NIGHT = "#0B0B0C";
 export const NIGHT2 = "#16161A";

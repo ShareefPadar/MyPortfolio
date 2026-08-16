@@ -30,7 +30,7 @@ import data from "./portrait.data.json";
  * highlights. On paper the same logic inverts: the levels darken.
  *
  * Lime carries the top of the ramp on night, where it picks out the lit edge.
- * It is NOT used on paper: #CDF22B against #FAFAF8 has almost no contrast, so
+ * It is NOT used on paper: #CDF22B against #F0EFF4 has almost no contrast, so
  * the densest cells — the ones doing the most work — would be the hardest to
  * see. Ink takes the top of the ramp there instead, and lime stays on the
  * elements around the portrait where it still reads.
