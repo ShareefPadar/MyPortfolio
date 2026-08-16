@@ -4,6 +4,7 @@ import WorkCard from "@/components/WorkCard";
 import Reveal from "@/components/px/Reveal";
 import Button from "@/components/px/Button";
 import PixelIcon from "@/components/px/PixelIcon";
+import PixelGuide from "@/components/px/PixelGuide";
 import { featured, sideProjects } from "@/lib/work";
 
 /**
@@ -12,9 +13,11 @@ import { featured, sideProjects } from "@/lib/work";
  * A server component: the only client code on this page is the portrait canvas,
  * the typewriter, and the reveals, each of which is its own small island.
  *
- * data-guide attributes drive the guide cursor. They are a silent contract —
- * querySelectorAll returns nothing if they go missing and the feature simply
- * never appears — so the copy lives in lib/guide.ts and these carry ids.
+ * Sections carry data-guide-id, and the tour copy lives in lib/guide.ts.
+ * The old version put the strings in the markup and read them with
+ * querySelectorAll, which meant rewriting a section silently killed the
+ * feature. PixelGuide now warns in development when an id resolves to
+ * nothing.
  */
 
 const SectionMarker = ({ n, title }: { n: string; title: string }) => (
@@ -29,6 +32,8 @@ const SectionMarker = ({ n, title }: { n: string; title: string }) => (
 export default function Home() {
   return (
     <div className="flex w-full flex-col">
+      {/* Homepage only: the tour explains the page it is standing on. */}
+      <PixelGuide />
       <div data-guide-id="hero">
         <Hero />
       </div>

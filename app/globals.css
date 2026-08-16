@@ -269,6 +269,18 @@
 
 .led { animation: led 2.6s steps(1, end) infinite; }
 
+/* Bubble entrance: 4 frames with one overshoot, origin bottom-left so it
+   grows out of the tail rather than the middle (§4.5). */
+@keyframes guideIn {
+  0%   { transform: scale(0.6); opacity: 0; }
+  50%  { transform: scale(1.08); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes guideDot {
+  0%, 49%   { opacity: 1; }
+  50%, 100% { opacity: 0.25; }
+}
+
 /* ── Nav plate (spec §4.6) ─────────────────────────────────────────
    At rest: 3px border all round, full bevel, contained to the column.
    Scrolled past 24px: border-bottom only, no bevel, plate → panel, 8px
@@ -408,6 +420,56 @@
     letter-spacing: 0.08em;
     color: var(--blue);
   }
+
+  /* ── Pixel guide (spec §4.5) ─────────────────────────────────────
+     A cursor and a chat bubble. Movement is stepped, never interpolated,
+     and every position snaps to the 4px grid — both axes quantise (§5.4).
+
+     The tail is a separate shape overlapping the bubble's bottom edge by one
+     unit, so the outline opens into the bubble rather than sitting beside it. */
+  .guide-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 60;
+    pointer-events: none;
+    /* steps(1) on a 60ms frame: the cursor lands on grid positions rather
+       than sliding between them. */
+    transition: transform var(--f) steps(1, end);
+    will-change: transform;
+  }
+
+  .guide-bubble {
+    position: relative;
+    max-width: 264px;
+    background: var(--lime);
+    border: 3px solid var(--ink);
+    padding: 10px 12px;
+    clip-path: var(--notch);
+  }
+  /* Tail: taper, symmetric, overlapping the bubble edge by one unit. */
+  .guide-tail {
+    width: 12px;
+    height: 8px;
+    margin-top: -4px;
+    margin-left: 16px;
+    background: var(--lime);
+    border-left: 3px solid var(--ink);
+    border-right: 3px solid var(--ink);
+    border-bottom: 3px solid var(--ink);
+    clip-path: polygon(0 0, 100% 0, 40% 100%);
+  }
+
+  /* Typing indicator: three 9px INK squares. Never lime — lime on lime
+     disappears (§4.5). */
+  .guide-dot {
+    width: 9px;
+    height: 9px;
+    background: var(--ink);
+    animation: guideDot 1.05s steps(1, end) infinite;
+  }
+  .guide-dot:nth-child(2) { animation-delay: 0.35s; }
+  .guide-dot:nth-child(3) { animation-delay: 0.7s; }
 
   /* ── Prototype isolation ─────────────────────────────────────────
      SanadPrototype and MizanPrototype are mocks of OTHER companies' products
