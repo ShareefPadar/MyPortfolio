@@ -16,35 +16,58 @@ import data from "./portrait.data.json";
  * shear. Rectangles are also more honestly on-grid: every cell is 8×12px, both
  * multiples of the 4px unit.
  *
- * Lime lands only on the top two levels, so the accent picks out the lit edge
- * of the face rather than washing the whole figure.
+ * Tones are surface-aware: see TONES below.
  *
  * Decorative: alt="" equivalent, aria-hidden.
  */
 
 /**
- * Tone per level, for the night hero.
+ * Tone per level, per surface.
  *
- * The mid levels must be LIGHTER than the surface, not darker: ink on night is
- * ink-on-ink and the whole mid-tone structure of the face disappears, leaving
- * an abstract blob of highlights. Lime is reserved for the top of the ramp so
- * it picks out the lit edge rather than washing the figure.
+ * The ramp has to run AWAY from the surface or the face disappears. On night
+ * the mid levels must be lighter than the background — ink on night is
+ * ink-on-ink and the whole mid-tone structure collapses into a blob of
+ * highlights. On paper the same logic inverts: the levels darken.
+ *
+ * Lime carries the top of the ramp on night, where it picks out the lit edge.
+ * It is NOT used on paper: #CDF22B against #FAFAF8 has almost no contrast, so
+ * the densest cells — the ones doing the most work — would be the hardest to
+ * see. Ink takes the top of the ramp there instead, and lime stays on the
+ * elements around the portrait where it still reads.
  */
 const LIME = "#CDF22B";
-const TONE: Record<number, { fill: string; alpha: number }> = {
-  1: { fill: "#9A9A94", alpha: 0.28 },
-  2: { fill: "#E6E6E0", alpha: 0.55 },
-  3: { fill: LIME, alpha: 1 },
+
+type Tone = { fill: string; alpha: number };
+
+const TONES: Record<"night" | "paper", Record<number, Tone>> = {
+  night: {
+    1: { fill: "#9A9A94", alpha: 0.28 },
+    2: { fill: "#E6E6E0", alpha: 0.55 },
+    3: { fill: LIME, alpha: 1 },
+  },
+  paper: {
+    1: { fill: "#14140F", alpha: 0.18 },
+    2: { fill: "#14140F", alpha: 0.45 },
+    3: { fill: "#14140F", alpha: 1 },
+  },
 };
 
 /** Pointer proximity, in cells (spec §9). */
 const RADIUS = 9;
 const BOOST = 0.55;
 
-const AsciiPortrait = ({ className = "" }: { className?: string }) => {
+const AsciiPortrait = ({
+  className = "",
+  surface = "paper",
+}: {
+  className?: string;
+  /** Which background it sits on. The ramp runs away from the surface. */
+  surface?: "night" | "paper";
+}) => {
   const ref = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
+    const TONE = TONES[surface];
     const canvas = ref.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
@@ -132,7 +155,7 @@ const AsciiPortrait = ({ className = "" }: { className?: string }) => {
       canvas.removeEventListener("pointermove", onMove);
       canvas.removeEventListener("pointerleave", onLeave);
     };
-  }, []);
+  }, [surface]);
 
   return (
     <canvas
