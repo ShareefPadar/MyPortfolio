@@ -78,7 +78,7 @@ export default async function WorkIndex({
           <div className="grid gap-32 md:grid-cols-2 md:gap-48">
             {tier1.map((s) => (
               <Reveal key={s.slug}>
-                <WorkCard study={s} featured relevant={s.domain === "FINTECH"} />
+                <WorkCard study={s} featured />
               </Reveal>
             ))}
           </div>

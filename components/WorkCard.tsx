@@ -16,15 +16,13 @@ import type { CaseStudy } from "@/lib/work";
 
 type Props = {
   study: CaseStudy;
-  /** Lime tab: this one matches the role being applied for. */
-  relevant?: boolean;
   /** Larger screenshot well for the featured grid. */
   featured?: boolean;
   /** Tier 2 on the work index: no description, so the tier reads as a tier. */
   compact?: boolean;
 };
 
-const WorkCard = ({ study, relevant = false, featured = false, compact = false }: Props) => {
+const WorkCard = ({ study, featured = false, compact = false }: Props) => {
   const { card, slug, domain } = study;
 
   return (
@@ -36,7 +34,7 @@ const WorkCard = ({ study, relevant = false, featured = false, compact = false }
          pushed down 17px, so its bottom border hangs outside the grid slot. */
       className="card group mt-[17px] block h-[calc(100%-17px)]"
     >
-      <span className={`card-tab ${relevant ? "relevant" : ""}`}>{domain}</span>
+      <span className="card-tab">{domain}</span>
 
       {/* The well is sunk: it contains rather than invites. */}
       <div className={`well relative m-[10px] mt-[14px] overflow-hidden bg-panel ${featured ? "aspect-[16/10]" : "aspect-[16/9]"}`}>

@@ -375,8 +375,7 @@
       100% 100%, 0 100%, 0 4px, 4px 4px
     );
   }
-  /* Lime tab = matches the role being applied for. Plate = everything else. */
-  .card-tab.relevant { background: var(--lime); }
+  /* Every tab is plate at rest and lime on hover. No card is singled out. */
   .card:hover .card-tab { background: var(--lime); }
 
   .card-body {

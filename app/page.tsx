@@ -45,7 +45,7 @@ export default function Home() {
         <div className="grid gap-32 md:grid-cols-2 md:gap-48">
           {featured.map((study) => (
             <Reveal key={study.slug}>
-              <WorkCard study={study} featured relevant={study.domain === "FINTECH"} />
+              <WorkCard study={study} featured />
             </Reveal>
           ))}
         </div>
