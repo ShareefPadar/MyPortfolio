@@ -45,8 +45,7 @@ export default function Footer({ variant = "full" }: { variant?: "full" | "minim
             </Reveal>
 
             <p className="mb-32 max-w-lead font-sans text-[19px] leading-[1.65] text-white">
-              Open to senior product design roles, and happy to walk through the work that
-              sits under NDA on a call.
+              Feel free to reach out for collaborations or just a friendly hello.
             </p>
 
             {/* Email is visible text, not a mailto-only link, so it can be copied. */}
