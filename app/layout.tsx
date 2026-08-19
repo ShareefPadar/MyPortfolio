@@ -4,6 +4,7 @@ import { Geist, Geist_Mono, Silkscreen } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import PixelCursor from "@/components/px/PixelCursor";
 
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -125,6 +126,9 @@ export default function RootLayout({
           SKIP TO CONTENT
         </a>
         <Navbar />
+        {/* Site-wide, so the guide's cursor on the homepage has a peer that is
+            drawn the same way. Self-suppresses on touch and reduced motion. */}
+        <PixelCursor />
         {/* Offset clears the nav plate. Both values are on the 4px ramp. */}
         <main id="main" className="relative z-10 flex-grow pt-96 md:pt-128">
           {children}

@@ -474,10 +474,53 @@
     left: 0;
     z-index: 60;
     pointer-events: none;
-    /* steps(1) on a 60ms frame: the cursor lands on grid positions rather
-       than sliding between them. */
-    transition: transform var(--f) steps(1, end);
     will-change: transform;
+    /* Only the fade in/out is a transition. The MOVEMENT is stepped in JS,
+       one 4px hop per 60ms frame — a CSS transition here would interpolate
+       between those hops and undo the whole point. */
+    transition: opacity calc(var(--f) * 4) steps(4, end);
+  }
+
+  /* The reader's own cursor. No transition at all: it mirrors the pointer, and
+     any smoothing on your own cursor reads as input lag. */
+  .px-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 70;
+    pointer-events: none;
+    will-change: transform;
+  }
+
+  /* Only while PixelCursor is mounted and painting (it sets the class itself),
+     so a JS failure cannot leave the reader with no cursor at all. Fields keep
+     a real caret — a text cursor carries information a pixel arrow does not. */
+  .has-px-cursor,
+  .has-px-cursor *,
+  .has-px-cursor *::before,
+  .has-px-cursor *::after {
+    cursor: none;
+  }
+  .has-px-cursor input,
+  .has-px-cursor textarea,
+  .has-px-cursor select,
+  .has-px-cursor [contenteditable="true"] {
+    cursor: text;
+  }
+
+  /* Name tag, shown while the guide is quiet. Same lime plate as the bubble so
+     the two read as one object in two states. */
+  .guide-name {
+    display: inline-block;
+    background: var(--lime);
+    border: 3px solid var(--ink);
+    padding: 3px 7px 4px;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.11em;
+    line-height: 1;
+    color: var(--ink);
+    white-space: nowrap;
   }
 
   .guide-bubble {
