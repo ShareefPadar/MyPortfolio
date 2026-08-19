@@ -2,7 +2,6 @@ import Link from "next/link";
 import Hero from "@/components/Hero";
 import WorkCard from "@/components/WorkCard";
 import Reveal from "@/components/px/Reveal";
-import Button from "@/components/px/Button";
 import PixelIcon from "@/components/px/PixelIcon";
 import PixelGuide from "@/components/px/PixelGuide";
 import { featured, sideProjects } from "@/lib/work";
@@ -50,17 +49,48 @@ export default function Home() {
           ))}
         </div>
 
-        {/* NDA strip — full-width rules top and bottom (§7.1) */}
-        <div data-guide-id="nda" className="mt-48 border-y-[3px] border-ink py-24 md:mt-64">
-          <div className="flex flex-col items-start gap-16 sm:flex-row sm:items-center sm:justify-between">
-            <p className="max-w-prose font-sans text-[16px] leading-[1.7] text-ink">
-              This is the work I can show publicly. Six years of production B2B design, across
-              logistics, healthcare, and travel, sits under NDA. Ask me about it on a call.
-            </p>
-            <Button level="secondary" href="/work" icon="arrowR">
-              VIEW ALL WORK
-            </Button>
-          </div>
+        {/* NDA notice.
+            §7.1 specifies a bare strip with a full-width rule top and bottom.
+            That reads as stray prose next to the cards: it is the only block
+            on the page with no frame and no label, so it looks dropped in
+            rather than built.
+
+            It is a SUNK sprite frame, not the raised one the cards use. Sunk
+            means recessed and contained (constraint #7), which is exactly what
+            this content is — work that is held back. Raised would also imply
+            the box is pressable, and unlike the cards above it, it is not. */}
+        <div data-guide-id="nda" className="mt-48 md:mt-64">
+          <Reveal>
+            <div className="sp sp-neutral-4 sp-s4 sp-sunk p-24 md:p-32">
+              <p className="mb-12 flex items-center gap-8 font-mono text-[10px] uppercase tracking-[0.11em] text-mute">
+                <PixelIcon name="info" size={8} />
+                UNDER NDA
+              </p>
+
+              <div className="flex flex-col items-start gap-16 sm:flex-row sm:items-end sm:justify-between sm:gap-32">
+                <p className="max-w-prose font-sans text-[16px] leading-[1.7] text-ink">
+                  This is the work I can show publicly. Six years of production B2B design,
+                  across logistics, healthcare, and travel, sits under NDA. Ask me about it
+                  on a call.
+                </p>
+
+                {/* A text link, not a sprite button: a second raised button
+                    inside an already-framed box stacks bevel on bevel, and the
+                    reference draws this as an underlined Silkscreen link. The
+                    44px tap floor lives on the anchor so the rule can still
+                    hug the text. */}
+                <Link
+                  href="/work"
+                  className="group inline-flex min-h-[44px] shrink-0 items-center"
+                >
+                  <span className="inline-flex items-center gap-8 border-b-[3px] border-ink pb-4 font-pix text-[10px] leading-none text-ink group-hover:border-blue">
+                    VIEW ALL WORK
+                    <PixelIcon name="arrowR" size={8} />
+                  </span>
+                </Link>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 

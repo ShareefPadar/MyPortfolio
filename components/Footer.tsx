@@ -32,7 +32,7 @@ export default function Footer({ variant = "full" }: { variant?: "full" | "minim
         <div className="mb-48 flex flex-wrap items-center gap-x-12 gap-y-8 border-b border-nline pb-16">
           <span className="led inline-block h-8 w-8 bg-lime" aria-hidden="true" />
           <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-ntext">
-            Dubai · GMT+4 · usually replies within a day
+            Dubai · GMT+4
           </span>
         </div>
 
