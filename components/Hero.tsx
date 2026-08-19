@@ -1,4 +1,4 @@
-import AsciiPortrait from "@/components/px/AsciiPortrait";
+import PixelPortrait from "@/components/px/PixelPortrait";
 import Button from "@/components/px/Button";
 import Typewriter from "@/components/px/Typewriter";
 
@@ -56,9 +56,15 @@ const Hero = () => (
         </div>
 
         {/* Portrait sits right on desktop; below 900px it would crowd the
-            statement, so it drops out rather than shrinking to mush. */}
+            statement, so it drops out rather than shrinking to mush.
+
+            `transparent` knocks the white field out of the source art by
+            flood-filling from the border, so the portrait sits on the page
+            surface rather than in a white box. Capped at 320px: the art is
+            96x144, so an uncapped column would make it taller than the copy
+            beside it and push the fold down. */}
         <div className="hidden justify-self-center md:block">
-          <AsciiPortrait surface="paper" />
+          <PixelPortrait transparent className="w-[320px]" />
         </div>
       </div>
     </div>
