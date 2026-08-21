@@ -25,11 +25,17 @@ const Shot = ({ src, alt, caption }: ShotProps) => {
     // measure. No border, fill, or shadow: the screenshot carries its own
     // edge, and one less framed box per screenful.
     <figure className="not-prose wide my-32">
+      {/* No cursor-zoom-in: the site draws its own cursor and hides the
+          native one, so a Tailwind cursor-* utility here does nothing except
+          leak through — it lives in the utilities layer, which sits after
+          the components layer that hides the native cursor, so it wins by
+          layer order alone. A plain <button> already gets the drawn hand
+          cursor from PixelCursor's generic interactive selector. */}
       <button
         type="button"
         onClick={() => setOpen(true)}
         aria-label={`View ${alt} full size`}
-        className="well group relative block w-full cursor-zoom-in overflow-hidden bg-panel"
+        className="well group relative block w-full overflow-hidden bg-panel"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={src} alt={alt} loading="lazy" className="block h-auto w-full" />

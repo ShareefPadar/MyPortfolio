@@ -507,6 +507,23 @@
   .has-px-cursor [contenteditable="true"] {
     cursor: text;
   }
+  /* Disabled controls keep the native not-allowed cursor — spec requires it
+     (§ disabled row). Deliberate, not an oversight: Tailwind's utilities
+     layer comes after this components layer, so a plain `cursor-not-allowed`
+     class already wins over `cursor: none` above by LAYER order alone, with
+     nothing here enforcing it. That accident is exactly the bug this rule
+     exists to not repeat — the near-identical `cursor-zoom-in` on three
+     lightbox triggers was relying on that same accident, and PixelCursor.tsx
+     had no way to know about it, so the native zoom icon and the drawn arrow
+     showed at once. This selector is explicit and, being more specific than
+     `.has-px-cursor *`, wins on its own regardless of layer order — so it
+     keeps working even if Tailwind's layer registration ever changes.
+     PixelCursor.tsx hides the drawn cursor over these same elements, so only
+     this native one shows — never both. */
+  .has-px-cursor button:disabled,
+  .has-px-cursor [aria-disabled="true"] {
+    cursor: not-allowed;
+  }
 
   /* Name tag, shown while the guide is quiet. Same lime plate as the bubble so
      the two read as one object in two states. */

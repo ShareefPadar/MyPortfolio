@@ -25,7 +25,7 @@ import { DOTS_MS, GUIDE_STOPS, HOLD_MS, TYPE_MS } from "@/lib/guide";
  * cursor for it to be a metaphor for and the bubble would just cover content.
  */
 
-/** 8x8 cursor map. X = ink outline, O = fill. */
+/** 8x8 cursor map. X = ink outline, O = fill. The default pointer glyph. */
 const CURSOR = [
   "X.......",
   "XX......",
@@ -37,23 +37,53 @@ const CURSOR = [
   "XXX.XOX.",
 ];
 
+/**
+ * 10x12. A raised index finger over a fist, hotspot at the fingertip (0,0) —
+ * same convention as CURSOR, so swapping glyphs never shifts what the
+ * cursor is actually pointing at.
+ */
+export const HAND_CURSOR = [
+  ".....XX...",
+  "....XOOX..",
+  "....XOOX..",
+  "....XOOX..",
+  "....XOOXXX",
+  ".XX.XOOOOX",
+  "XOOXOOOOOX",
+  "XOOOOOOOOX",
+  ".XOOOOOOOX",
+  ".XOOOOOOX.",
+  "..XOOOOX..",
+  "...XXXX...",
+];
+
 const GRID = 4; // every landing position snaps to this
 const FRAME = 60; // ms per movement step — one --f frame
 const ROAM_STEP = 12; // max px per frame while wandering
 const CHASE_STEP = 44; // max px per frame while going to talk
 const BUBBLE_W = 300;
 
-export function CursorSprite({ fill, size = 16 }: { fill: string; size?: number }) {
+export function CursorSprite({
+  fill,
+  size = 16,
+  glyph = CURSOR,
+}: {
+  fill: string;
+  size?: number;
+  glyph?: string[];
+}) {
+  const w = glyph[0].length;
+  const h = glyph.length;
   return (
     <svg
       width={size}
-      height={size}
-      viewBox="0 0 8 8"
+      height={(size * h) / w}
+      viewBox={`0 0 ${w} ${h}`}
       shapeRendering="crispEdges"
       className="shrink-0"
       aria-hidden="true"
     >
-      {CURSOR.flatMap((row, y) =>
+      {glyph.flatMap((row, y) =>
         [...row].map((ch, x) =>
           ch === "." ? null : (
             <rect

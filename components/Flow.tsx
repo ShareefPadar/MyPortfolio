@@ -44,7 +44,9 @@ const Flow = ({ steps, caption, aspect = "aspect-[9/19.5]" }: FlowProps) => {
               type="button"
               onClick={() => setLightbox({ src: step.full || step.src, label: step.label })}
               aria-label={`View ${step.label} screen at full size`}
-              className={`group relative block w-full ${aspect} cursor-zoom-in overflow-hidden  border border-line shadow-lg`}
+              // No cursor-zoom-in — see the comment in Shot.tsx. The button
+              // element already gets the drawn hand cursor.
+              className={`group relative block w-full ${aspect} overflow-hidden  border border-line shadow-lg`}
             >
               <Image
                 src={step.src}

@@ -56,7 +56,9 @@ const BeforeAfter = ({
               type="button"
               onClick={() => setLightbox({ src: pane.full!, label: pane.label })}
               aria-label={`View ${pane.label} screenshot at full size`}
-              className={`group relative block w-full ${aspect} cursor-zoom-in overflow-hidden  border ${pane.ring} shadow-lg`}
+              // No cursor-zoom-in — see the comment in Shot.tsx. The button
+              // element already gets the drawn hand cursor.
+              className={`group relative block w-full ${aspect} overflow-hidden  border ${pane.ring} shadow-lg`}
             >
               <Image
                 src={pane.src}
