@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spacing scale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+@font-face{
+  font-family:'Departure Mono';
+  src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2409-1@1.0/DepartureMono-Regular.woff2') format('woff2');
+  font-weight:400;font-display:swap;
+}
+:root{
+  --u:4px;
+  /* ── the ramp ── */
+  --s4:4px; --s8:8px; --s12:12px; --s16:16px; --s24:24px;
+  --s32:32px; --s48:48px; --s64:64px; --s96:96px; --s128:128px;
+
+  --lime:#CDF22B; --blue:#1E45FB; --ink:#14140F;
+  --paper:#FAFAF8; --panel:#F0F0EA; --line:#DEDED8; --mute:#87877A;
+  --plate:#D8D8D0; --hi:#FFFFFF; --sh:#8A8A80;
+  --mono:'Departure Mono',ui-monospace,monospace;
+  --pix:'Silkscreen',monospace;
+  --sans:'Geist',-apple-system,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:#E6E6E2;font-family:var(--sans);color:var(--ink);padding:20px 14px 60px;line-height:1.55}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.wrap{max-width:700px;margin:0 auto}
+
+.head{margin-bottom:var(--s24)}
+.head h1{font-family:var(--pix);font-weight:700;font-size:clamp(14px,3.8vw,18px);line-height:1.7;margin-bottom:var(--s12)}
+.head p{font-size:14px;color:#4A4A46;max-width:56ch}
+
+.sec{border:2px solid var(--ink);margin-bottom:var(--s16);background:var(--paper)}
+.sec-h{display:flex;justify-content:space-between;gap:10px;padding:8px 14px;background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:11px;letter-spacing:.05em}
+.sec-h i{font-style:normal;opacity:.55;font-size:10px;text-align:right}
+.sec-b{padding:var(--s24) 18px}
+.desc{font-size:13.5px;color:#5C5C52;margin-bottom:var(--s16);max-width:54ch}
+.sub{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin:var(--s32) 0 var(--s12);padding-bottom:6px;border-bottom:1px dashed var(--line)}
+.sub:first-child{margin-top:0}
+
+/* ── ramp viz ── */
+.ramp{display:flex;flex-direction:column;gap:var(--s8)}
+.ramp .r{display:flex;align-items:center;gap:var(--s12)}
+.ramp .r code{font-family:var(--mono);font-size:11px;color:var(--blue);width:60px;flex:none}
+.ramp .r .bar{height:18px;background:var(--blue);flex:none;border:2px solid var(--ink)}
+.ramp .r .use{font-size:12.5px;color:#5C5C52;padding-left:var(--s8)}
+
+/* ── rhythm demo ── */
+.rhythm{background:var(--paper);border:1px solid var(--line);padding:var(--s24) var(--s16)}
+.rhythm .gap{background:rgba(30,69,251,.10);border-top:1px dashed rgba(30,69,251,.4);border-bottom:1px dashed rgba(30,69,251,.4);
+  font-family:var(--mono);font-size:8px;color:var(--blue);text-align:center;letter-spacing:.08em;display:flex;align-items:center;justify-content:center}
+.rhythm h2{font-weight:500;font-size:24px;line-height:1.3;letter-spacing:-.016em}
+.rhythm h3{font-weight:600;font-size:18px;line-height:1.4}
+.rhythm p{font-size:15.5px;line-height:1.7;color:#3E3E36;max-width:56ch}
+.rhythm .mk{display:flex;align-items:baseline;gap:10px}
+.rhythm .mk b{font-family:var(--pix);font-weight:700;font-size:18px;color:var(--blue)}
+.rhythm .mk span{font-family:var(--mono);font-size:9px;letter-spacing:.11em;color:var(--mute)}
+.rhythm .mk i{flex:1;height:3px;background:var(--ink)}
+
+/* ── compare ── */
+.cmp{display:grid;gap:var(--s16)}
+@media(min-width:620px){.cmp{grid-template-columns:1fr 1fr}}
+.cmp .col{border:2px solid var(--ink);background:var(--paper);overflow:hidden}
+.cmp .col .lbl{font-family:var(--mono);font-size:9px;letter-spacing:.08em;padding:6px 10px;color:var(--paper)}
+.cmp .good .lbl{background:var(--ink)}
+.cmp .bad .lbl{background:#A03A28}
+.cmp .in{padding:var(--s16)}
+.cmp h4{font-weight:600;font-size:15px;line-height:1.4}
+.cmp p{font-size:13px;line-height:1.65;color:#4A4A42}
+.cmp .tag{font-family:var(--mono);font-size:9px;letter-spacing:.08em;padding:3px 6px;border:1px solid var(--ink);display:inline-block}
+/* good spacing */
+.good .tag{margin-bottom:var(--s12)}
+.good h4{margin-bottom:var(--s8)}
+.good p{margin-bottom:var(--s16)}
+.good .btn{margin-top:0}
+/* improvised */
+.bad .tag{margin-bottom:11px}
+.bad h4{margin-bottom:13px}
+.bad p{margin-bottom:9px}
+.bad .in{padding:15px 17px 19px}
+
+.btn{font-family:var(--pix);font-size:10px;line-height:1;border:8px solid transparent;border-image-slice:8 fill;
+  border-image-repeat:stretch;padding:6px 10px;cursor:pointer;background:none;color:var(--ink);display:inline-block}
+
+/* ── tables ── */
+.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl th{font-family:var(--mono);font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);text-align:left;padding:0 8px 8px 0;font-weight:400;border-bottom:2px solid var(--ink)}
+.tbl td{padding:9px 8px 9px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl code{font-family:var(--mono);font-size:11.5px;color:var(--blue);white-space:nowrap}
+.tbl .r{color:#5C5C52;font-size:12.5px}
+
+/* container viz */
+.cont{background:repeating-linear-gradient(45deg,#EFEFE9 0 8px,#E9E9E3 8px 16px);padding:var(--s16) var(--s8);border:1px solid var(--line)}
+.cont .box{background:var(--paper);border:2px solid var(--ink);margin:0 auto var(--s8);padding:var(--s12);
+  font-family:var(--mono);font-size:9px;letter-spacing:.07em;text-align:center;color:var(--mute)}
+
+.rules{list-style:none;font-size:13.5px}
+.rules li{padding:9px 0 9px 26px;border-bottom:1px solid var(--line);position:relative;color:#3E3E36}
+.rules li:last-child{border-bottom:0}
+.rules li::before{content:"▸";position:absolute;left:4px;color:var(--blue)}
+.rules.no li::before{content:"✕";color:#C4482E}
+.rules code{font-family:var(--mono);font-size:12px;color:var(--blue)}
+
+.note{border-top:1px solid var(--line);background:var(--panel);padding:12px 18px;font-size:13px;color:#5C5C52;line-height:1.6}
+.note b{font-family:var(--mono);font-size:11px;color:var(--ink);font-weight:400}
+
+@media (max-width:520px){.sec-b{padding:var(--s16) 12px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="head">
+  <h1>SPACING</h1>
+  <p>Ten values, all multiples of the 4px unit. Roughly geometric so adjacent steps are visibly different — a linear ramp gives you values too close to tell apart, which is how spacing drifts.</p>
+</div>
+
+<!-- RAMP -->
+<div class="sec">
+  <div class="sec-h"><span>01 — THE RAMP</span><i>4 → 128</i></div>
+  <div class="sec-b">
+    <div class="ramp">
+      <div class="r"><code>--s4</code><span class="bar" style="width:4px"></span><span class="use">Icon to label, inside a tag</span></div>
+      <div class="r"><code>--s8</code><span class="bar" style="width:8px"></span><span class="use">Label to value, tight stacks, button gaps</span></div>
+      <div class="r"><code>--s12</code><span class="bar" style="width:12px"></span><span class="use">Tag row to heading, card internals</span></div>
+      <div class="r"><code>--s16</code><span class="bar" style="width:16px"></span><span class="use">Heading to body, card padding, paragraph gaps</span></div>
+      <div class="r"><code>--s24</code><span class="bar" style="width:24px"></span><span class="use">Component padding, between related blocks</span></div>
+      <div class="r"><code>--s32</code><span class="bar" style="width:32px"></span><span class="use">Between components in a stack</span></div>
+      <div class="r"><code>--s48</code><span class="bar" style="width:48px"></span><span class="use">Above a section heading, between cards</span></div>
+      <div class="r"><code>--s64</code><span class="bar" style="width:64px"></span><span class="use">Between case study sections</span></div>
+      <div class="r"><code>--s96</code><span class="bar" style="width:96px"></span><span class="use">Hero padding, page top and bottom</span></div>
+      <div class="r"><code>--s128</code><span class="bar" style="width:128px"></span><span class="use">Between major page regions</span></div>
+    </div>
+  </div>
+  <div class="note"><b>Rule</b> — if a value isn't on this list, it's wrong. No 11px, no 15px, no 19px.</div>
+</div>
+
+<!-- RHYTHM -->
+<div class="sec">
+  <div class="sec-h"><span>02 — VERTICAL RHYTHM</span><i>asymmetric on purpose</i></div>
+  <div class="sec-b">
+    <div class="desc">Space above a heading is roughly double the space below it. That's what makes a heading attach to the content it introduces rather than float between two blocks. Blue bands show the gaps.</div>
+
+    <div class="rhythm">
+      <p>The previous section ends here, with a normal paragraph.</p>
+      <div class="gap" style="height:64px">--s64 · SECTION</div>
+      <div class="mk"><b>03</b><span>THE TENSION</span><i></i></div>
+      <div class="gap" style="height:16px">--s16</div>
+      <h2>The verification couldn't change. The experience of it clearly could.</h2>
+      <div class="gap" style="height:16px">--s16</div>
+      <p>Going through Companies House verification, I didn't know how many steps were coming. I was missing one document.</p>
+      <div class="gap" style="height:16px">--s16 · PARAGRAPH</div>
+      <p>There was no way to save and come back, so stopping halfway meant starting over.</p>
+      <div class="gap" style="height:48px">--s48 · ABOVE H3</div>
+      <h3>Never hard-block a willing user</h3>
+      <div class="gap" style="height:12px">--s12</div>
+      <p>The most common real-world reason people drop off is not having the document to hand.</p>
+    </div>
+  </div>
+  <div class="note"><b>Read</b> — 64 above the marker, 16 below the heading. 48 above H3, 12 below. Always about 3–4× more above than below.</div>
+</div>
+
+<!-- COMPARE -->
+<div class="sec">
+  <div class="sec-h"><span>03 — WHY IT MATTERS</span><i>same card, two spacings</i></div>
+  <div class="sec-b">
+    <div class="desc">Left uses the ramp. Right uses plausible improvised values — 11px, 13px, 9px, 15/17/19 padding. Nothing is obviously broken, and that's the problem: it reads as slightly careless without anyone being able to say why.</div>
+    <div class="cmp">
+      <div class="col good">
+        <div class="lbl">ON THE RAMP</div>
+        <div class="in">
+          <span class="tag">FINTECH</span>
+          <h4>Onboarding that feels fast without cutting corners</h4>
+          <p>A full six-screen KYB flow for a fictional business bank, designed and built as a working prototype.</p>
+          <button class="btn" data-set="blue" style="color:#CDF22B">READ</button>
+        </div>
+      </div>
+      <div class="col bad">
+        <div class="lbl">IMPROVISED</div>
+        <div class="in">
+          <span class="tag">FINTECH</span>
+          <h4>Onboarding that feels fast without cutting corners</h4>
+          <p>A full six-screen KYB flow for a fictional business bank, designed and built as a working prototype.</p>
+          <button class="btn" data-set="blue" style="color:#CDF22B">READ</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="note"><b>Note</b> — on a pixel-grid site this matters more than usual. Everything else lands on 4px; spacing that doesn't is the one thing quietly out of register.</div>
+</div>
+
+<!-- COMPONENT PADDING -->
+<div class="sec">
+  <div class="sec-h"><span>04 — COMPONENT PADDING</span><i>fixed per component</i></div>
+  <div class="sec-b">
+    <table class="tbl">
+      <tr><th>Component</th><th>Padding</th><th>Internal gaps</th></tr>
+      <tr><td class="r">Button</td><td><code>7px 12px</code></td><td class="r">8 icon to label</td></tr>
+      <tr><td class="r">Button large</td><td><code>10px 16px</code></td><td class="r">8</td></tr>
+      <tr><td class="r">Tag / tab</td><td><code>4px 8px</code></td><td class="r">—</td></tr>
+      <tr><td class="r">Card body</td><td><code>16px</code></td><td class="r">12 tag→title, 8 title→meta</td></tr>
+      <tr><td class="r">Plate margin (well)</td><td><code>12px</code></td><td class="r">—</td></tr>
+      <tr><td class="r">Chat bubble</td><td><code>12px 16px</code></td><td class="r">—</td></tr>
+      <tr><td class="r">Callout</td><td><code>24px 20px</code></td><td class="r">12 label→quote</td></tr>
+      <tr><td class="r">Audit block</td><td><code>24px 20px</code></td><td class="r">16 between failures</td></tr>
+      <tr><td class="r">Bezel</td><td><code>20px 18px 16px</code></td><td class="r">12 screen→LED</td></tr>
+      <tr><td class="r">Nav bar</td><td><code>8px</code> → <code>4px 12px</code> flat</td><td class="r">8 between links</td></tr>
+      <tr><td class="r">Footer</td><td><code>48px 0 64px</code></td><td class="r">12</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- CONTAINER -->
+<div class="sec">
+  <div class="sec-h"><span>05 — CONTAINERS</span><i>widths and breakpoints</i></div>
+  <div class="sec-b">
+    <div class="cont">
+      <div class="box" style="max-width:100%">FULL BLEED — HERO BLOCK, NAV WHEN FLAT</div>
+      <div class="box" style="max-width:1100px">1100 — CARD GRID, WORK INDEX</div>
+      <div class="box" style="max-width:720px">720 — CASE STUDY PAGE, DEFAULT COLUMN</div>
+      <div class="box" style="max-width:600px">600 — PROSE · 60ch CAP</div>
+    </div>
+
+    <div class="sub">Breakpoints</div>
+    <table class="tbl">
+      <tr><th>Width</th><th>What changes</th></tr>
+      <tr><td><code>&lt; 560px</code></td><td class="r">Single column. Gutter 16. Section gap 64→48, hero padding 96→48. Display type drops hardest; body barely moves.</td></tr>
+      <tr><td><code>560 – 900px</code></td><td class="r">Card grid goes two-up. Gutter 24.</td></tr>
+      <tr><td><code>&gt; 900px</code></td><td class="r">Full scale. Gutter 32. Hero splits to two columns with the portrait on the right.</td></tr>
+    </table>
+
+    <div class="sub">Gutters</div>
+    <table class="tbl">
+      <tr><td class="r" style="width:120px">Mobile</td><td><code>--s16</code></td></tr>
+      <tr><td class="r">Tablet</td><td><code>--s24</code></td></tr>
+      <tr><td class="r">Desktop</td><td><code>--s32</code></td></tr>
+    </table>
+  </div>
+  <div class="note"><b>Rule</b> — prose caps at 60ch regardless of container. A 720px column with 16px text lands close to that naturally; don't let it stretch on wide screens.</div>
+</div>
+
+<!-- RULES -->
+<div class="sec">
+  <div class="sec-h"><span>06 — RULES</span><i>short</i></div>
+  <div class="sec-b">
+    <ul class="rules">
+      <li>Every value comes from the ramp — <code>4 8 12 16 24 32 48 64 96 128</code></li>
+      <li>Space above a heading is 3–4× the space below it</li>
+      <li>Component padding is fixed per component, not adjusted per instance</li>
+      <li>Mobile compresses the large steps only — <code>--s16</code> and below never change</li>
+      <li>Prose caps at <code>60ch</code>, lead at <code>52ch</code></li>
+    </ul>
+    <div class="sub">Never</div>
+    <ul class="rules no">
+      <li>Off-ramp values — no 11px, 15px, 19px</li>
+      <li>Equal space above and below a heading</li>
+      <li>Margin on both sides of a gap — pick one direction and stay with it</li>
+      <li>Padding that varies between two instances of the same component</li>
+    </ul>
+  </div>
+</div>
+
+</div>
+
+<script>
+function mix(h,t,a){const g=x=>parseInt(h.slice(x,x+2),16),k=x=>parseInt(t.slice(x,x+2),16);
+  const c=(p,q)=>Math.round(p+(q-p)*a).toString(16).padStart(2,'0');
+  return '#'+c(g(1),k(1))+c(g(3),k(3))+c(g(5),k(5));}
+const lt=(c,a)=>mix(c,'#ffffff',a), dkn=(c,a)=>mix(c,'#000000',a);
+const B='#1E45FB';
+const P={face:B,hi:lt(B,.38),shade:dkn(B,.45),outline:'#0A0E2E'};
+const BODY=['.DDDD.','DHHHSD','DHFFSD','DHFFSD','DSSSSD','.DDDD.'];
+const M={'.':null,D:P.outline,H:P.hi,S:P.shade,F:P.face};
+const c=document.createElement('canvas');c.width=24;c.height=24;
+const x=c.getContext('2d');
+for(let r=0;r<6;r++)for(let q=0;q<6;q++){const col=M[BODY[r][q]];
+  if(col){x.fillStyle=col;x.fillRect(q*4,r*4,4,4);}}
+const url='url('+c.toDataURL()+')';
+document.querySelectorAll('[data-set]').forEach(el=>el.style.borderImageSource=url);
+</script>
+</body>
+</html>

@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shareef Padar — Senior Product Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+@font-face{
+  font-family:'Departure Mono';
+  src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2409-1@1.0/DepartureMono-Regular.woff2') format('woff2');
+  font-weight:400;font-display:swap;
+}
+:root{
+  --u:4px;
+  --s4:4px;--s8:8px;--s12:12px;--s16:16px;--s24:24px;--s32:32px;--s48:48px;--s64:64px;--s96:96px;
+  --lime:#CDF22B; --blue:#1E45FB; --ink:#14140F; --error:#C4482E;
+  --paper:#FAFAF8; --panel:#F0F0EA; --line:#DEDED8; --mute:#6E6E62;
+  --plate:#D8D8D0; --hi:#FFFFFF; --sh:#8A8A80;
+  --night:#0B0B0C; --night2:#16161A; --nline:#26262A; --ntext:#9A9A94;
+  --mono:'Departure Mono',ui-monospace,monospace;
+  --pix:'Silkscreen',monospace;
+  --sans:'Geist',-apple-system,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{background:var(--paper);font-family:var(--sans);color:var(--ink);line-height:1.6}
+:focus-visible{outline:3px solid var(--blue);outline-offset:4px}
+.wrap{max-width:1100px;margin:0 auto;padding:0 var(--s24)}
+@media(max-width:560px){.wrap{padding:0 var(--s16)}}
+
+/* ══ NAV ══ */
+.nav{position:sticky;top:0;z-index:40;background:var(--paper);padding-top:var(--s12)}
+.nav.stuck{padding-top:0}
+.navbar{background:var(--plate);border:3px solid var(--ink);display:flex;align-items:stretch;gap:10px;padding:6px 8px;
+  box-shadow:inset var(--u) var(--u) 0 var(--hi), inset calc(var(--u)*-1) calc(var(--u)*-1) 0 var(--sh)}
+.nav.stuck .navbar{border-width:0 0 3px 0;box-shadow:none;background:var(--panel);padding:3px 8px}
+.navbar .brand{display:flex;align-items:center;gap:7px;font-family:var(--pix);font-size:11px;padding:0 4px;text-decoration:none;color:var(--ink)}
+.navbar .lk{margin-left:auto;display:flex;gap:2px;align-items:stretch}
+.navbar .lk a{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-decoration:none;padding:9px 10px;display:flex;align-items:center;color:var(--ink)}
+.navbar .lk a.on{background:var(--paper);box-shadow:inset 3px 3px 0 var(--sh), inset -3px -3px 0 var(--hi)}
+.navbar .dl{display:flex;align-items:center;gap:5px;align-self:center;font-family:var(--pix);font-size:8px;
+  border:8px solid transparent;border-image-slice:8 fill;border-image-repeat:stretch;padding:6px 9px;color:var(--lime);text-decoration:none}
+.navbar .dl canvas{image-rendering:pixelated;flex:none}
+.logo{width:18px;height:18px;image-rendering:pixelated;flex:none}
+@media(max-width:620px){.navbar .lk a{padding:8px 6px;font-size:10px}.navbar .brand{font-size:10px}}
+
+/* ══ HERO — the one dark block ══ */
+.hero{background:var(--night);color:#E8E8E2;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);
+  margin-top:var(--s12)}
+.hero .in{max-width:1100px;margin:0 auto;padding:var(--s64) var(--s24) var(--s48);
+  display:grid;gap:var(--s48);align-items:center}
+@media(min-width:860px){.hero .in{grid-template-columns:1.1fr .9fr;padding:var(--s96) var(--s24)}}
+@media(max-width:560px){.hero .in{padding:var(--s48) var(--s16) var(--s32)}}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.11em;color:var(--ntext);margin-bottom:var(--s16)}
+.hero h1{font-family:var(--pix);font-weight:700;font-size:clamp(18px,4.4vw,32px);line-height:1.7;
+  margin-bottom:var(--s24);min-height:3.4em}
+.hero h1 em{font-style:normal;color:var(--lime)}
+.hero .lead{font-size:17px;color:var(--ntext);max-width:40ch;margin-bottom:var(--s32);line-height:1.65}
+.hbtns{display:flex;flex-wrap:wrap;gap:var(--s12)}
+.btn{font-family:var(--pix);font-size:11px;line-height:1;border:8px solid transparent;border-image-slice:8 fill;
+  border-image-repeat:stretch;padding:10px 14px;cursor:pointer;background:none;color:var(--ink);
+  display:inline-flex;align-items:center;gap:8px;min-height:44px;text-decoration:none}
+.btn canvas{image-rendering:pixelated;flex:none}
+
+/* portrait */
+.art{font-family:var(--mono);font-size:6.5px;line-height:1;letter-spacing:.5px;white-space:pre;
+  user-select:none;cursor:crosshair;display:block;margin:0 auto;width:fit-content;color:#4A4A46;touch-action:none}
+@media(max-width:560px){.art{font-size:5px}}
+
+/* greeting bubble */
+.greet{position:relative;max-width:320px;margin-top:var(--s32)}
+.bub{position:relative;display:inline-block;border:8px solid transparent;border-image-slice:8 fill;
+  border-image-repeat:stretch;padding:12px 14px;font-size:14px;line-height:1.5;color:var(--ink)}
+.tail{position:absolute;left:16px;top:100%;margin-top:-4px;image-rendering:pixelated}
+
+/* ══ SECTIONS ══ */
+.slab{display:flex;align-items:baseline;gap:10px;margin-bottom:var(--s32)}
+.slab b{font-family:var(--pix);font-weight:700;font-size:16px;color:var(--blue);line-height:1}
+.slab span{font-family:var(--mono);font-size:10px;letter-spacing:.13em;color:var(--mute)}
+.slab i{flex:1;height:3px;background:var(--ink)}
+.block{padding:var(--s64) 0}
+@media(max-width:560px){.block{padding:var(--s48) 0}}
+
+/* cards */
+.grid{display:grid;gap:var(--s48) var(--s24)}
+@media(min-width:700px){.grid.two{grid-template-columns:1fr 1fr}}
+.card{position:relative;margin-top:18px;text-decoration:none;color:var(--ink);display:block;
+  background:var(--plate);border:3px solid var(--ink);
+  box-shadow:inset var(--u) var(--u) 0 var(--hi), inset calc(var(--u)*-1) calc(var(--u)*-1) 0 var(--sh)}
+.card .tab{position:absolute;top:-17px;left:14px;border:3px solid var(--ink);border-bottom:0;padding:4px 10px 5px;
+  font-family:var(--mono);font-size:10px;letter-spacing:.07em;background:var(--plate);min-width:104px;text-align:center;
+  clip-path:polygon(4px 0,calc(100% - 4px) 0,calc(100% - 4px) 4px,100% 4px,100% 100%,0 100%,0 4px,4px 4px)}
+.card .tab.on{background:var(--lime)}
+.card .well{margin:10px;box-shadow:0 0 0 3px var(--ink), inset var(--u) var(--u) 0 rgba(0,0,0,.4)}
+.card .shot{aspect-ratio:16/10;display:grid;place-items:center;font-family:var(--mono);font-size:10px;color:#8A8AA0}
+.card .body{background:var(--paper);margin:10px;margin-top:0;padding:var(--s16);border:3px solid var(--ink)}
+.card .meta{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--mute);margin-bottom:var(--s8)}
+.card h3{font-size:19px;font-weight:500;line-height:1.38;margin-bottom:var(--s8)}
+.card p{font-size:14.5px;color:#4A4A42;line-height:1.6;margin-bottom:var(--s12)}
+.card .go{display:inline-flex;align-items:center;gap:7px;font-family:var(--pix);font-size:10px}
+.card .go canvas{image-rendering:pixelated}
+.card:hover .body{background:#fff}
+.card:hover .tab{background:var(--lime)}
+
+/* live products */
+.live .tab{background:var(--lime)}
+.live .status{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10px;
+  letter-spacing:.08em;color:var(--mute);margin-bottom:var(--s8)}
+.live .status b{width:7px;height:7px;background:#3E9B4F;display:block;flex:none;animation:led 2.6s steps(1,end) infinite}
+@keyframes led{0%,86%{opacity:1}86.01%,100%{opacity:.3}}
+.actions{display:flex;flex-wrap:wrap;gap:var(--s16);align-items:center}
+.actions a{display:inline-flex;align-items:center;gap:7px;font-family:var(--pix);font-size:10px;text-decoration:none;color:var(--ink)}
+.actions a canvas{image-rendering:pixelated}
+.actions a.ext{color:var(--blue)}
+
+/* nda strip */
+.nda{border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);padding:var(--s24) 0;
+  display:flex;flex-wrap:wrap;gap:var(--s16) var(--s32);align-items:center}
+.nda p{font-size:15px;color:#4A4A42;max-width:52ch;flex:1;min-width:260px}
+.nda a{display:inline-flex;align-items:center;gap:8px;font-family:var(--pix);font-size:10px;
+  text-decoration:none;color:var(--ink);border-bottom:3px solid var(--ink);padding-bottom:3px}
+.nda a canvas{image-rendering:pixelated}
+
+/* ══ FOOTER ══ */
+.ft{background:var(--night);color:#E8E8E2;border-top:3px solid var(--ink);position:relative;overflow:hidden}
+.ft .in{max-width:1100px;margin:0 auto;padding:var(--s64) var(--s24) var(--s32);text-align:center}
+@media(max-width:560px){.ft .in{padding:var(--s48) var(--s16) var(--s24)}}
+.fstatus{display:inline-flex;align-items:center;gap:var(--s8);font-family:var(--mono);font-size:10px;
+  letter-spacing:.1em;color:var(--ntext);margin-bottom:var(--s24);border:2px solid var(--nline);padding:7px 11px}
+.fstatus b{width:8px;height:8px;background:var(--lime);display:block;flex:none;animation:led 2.6s steps(1,end) infinite}
+.ft h2{font-family:var(--pix);font-weight:700;font-size:clamp(20px,5.2vw,32px);line-height:1.7;margin-bottom:var(--s16);min-height:1.7em}
+.ft h2 em{font-style:normal;color:var(--lime)}
+.ft .intro{font-size:16px;color:var(--ntext);max-width:38ch;margin:0 auto var(--s32);line-height:1.6}
+.mailrow{display:flex;flex-wrap:wrap;gap:var(--s12);align-items:center;justify-content:center;margin-bottom:var(--s32)}
+.mail{font-family:var(--mono);font-size:clamp(15px,4vw,24px);color:var(--lime);text-decoration:none;
+  border-bottom:3px solid currentColor;padding-bottom:3px}
+.mail:hover{color:#fff}
+.copy{border:6px solid transparent;border-image-slice:6 fill;border-image-repeat:stretch;background:none;
+  cursor:pointer;padding:8px 10px;display:inline-flex;align-items:center;gap:6px;color:#E8E8E2;
+  font-family:var(--mono);font-size:9px;letter-spacing:.07em;min-height:40px}
+.copy canvas{image-rendering:pixelated;flex:none}
+.social{display:flex;flex-wrap:wrap;gap:var(--s8);justify-content:center;margin-bottom:var(--s48)}
+.social a{display:inline-flex;align-items:center;gap:7px;text-decoration:none;color:#E8E8E2;
+  font-family:var(--mono);font-size:10px;letter-spacing:.08em;border:2px solid var(--nline);
+  padding:10px 13px;min-height:44px;background:var(--night2)}
+.social a:hover{border-color:var(--lime);color:var(--lime)}
+.social a svg{width:14px;height:14px;fill:currentColor;flex:none}
+.ft .base{border-top:2px solid var(--nline);padding-top:var(--s24);display:flex;flex-wrap:wrap;
+  gap:var(--s12) var(--s24);align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.07em;color:#6A6A62}
+.totop{display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:var(--ntext);
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.07em;min-height:44px}
+.totop canvas{image-rendering:pixelated;flex:none}
+.totop:hover{color:var(--lime)}
+
+/* scanline reveal */
+@keyframes scanClip{0%{clip-path:inset(0 0 100% 0)}100%{clip-path:inset(0 0 0% 0)}}
+@keyframes scanBands{
+  0%{-webkit-mask-image:repeating-linear-gradient(#000 0 1px,transparent 1px 6px);mask-image:repeating-linear-gradient(#000 0 1px,transparent 1px 6px)}
+  30%{-webkit-mask-image:repeating-linear-gradient(#000 0 3px,transparent 3px 6px);mask-image:repeating-linear-gradient(#000 0 3px,transparent 3px 6px)}
+  60%{-webkit-mask-image:repeating-linear-gradient(#000 0 5px,transparent 5px 6px);mask-image:repeating-linear-gradient(#000 0 5px,transparent 5px 6px)}
+  100%{-webkit-mask-image:none;mask-image:none}
+}
+.reveal{opacity:0}
+.reveal.go{opacity:1;animation:scanClip 360ms steps(6,end) both, scanBands 480ms steps(1,end) both}
+
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:60;background:var(--lime);
+  border:3px solid var(--ink);padding:11px 15px;font-family:var(--mono);font-size:10px;letter-spacing:.08em;
+  display:none;align-items:center;gap:8px;box-shadow:5px 5px 0 var(--ink)}
+.toast.show{display:flex}
+.toast canvas{image-rendering:pixelated}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1}}
+</style>
+</head>
+<body id="top">
+
+<div class="nav" id="nav">
+  <div class="wrap">
+    <div class="navbar">
+      <a href="#top" class="brand"><canvas class="logo" data-logo></canvas>SHAREEF</a>
+      <div class="lk"><a href="#work" class="on">WORK</a><a href="#0">ABOUT</a><a href="#connect">CONTACT</a></div>
+      <a href="#0" class="dl" data-set="blue">RÉSUMÉ<canvas data-i="download" data-sz="9" data-c="#CDF22B"></canvas></a>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="in">
+    <div>
+      <div class="eyebrow">I'M SHAREEF PADAR</div>
+      <h1 id="h1"></h1>
+      <p class="lead">Six years in B2B UX, from research to shipped interface. Based in Dubai. I build and ship my own products in React and Tailwind too.</p>
+      <div class="hbtns">
+        <a href="#work" class="btn" data-set="lime">VIEW WORK <canvas data-i="arrowD" data-sz="14" data-c="#14140F"></canvas></a>
+        <a href="#0" class="btn" data-set="dk" style="color:#E8E8E2"><canvas data-i="download" data-sz="14" data-c="#E8E8E2"></canvas> RÉSUMÉ</a>
+      </div>
+      <div class="greet">
+        <div class="bub" data-set="lime">There's real production work behind this too. Six years of it sits under NDA, and I'll walk you through it live.<span class="tail" data-set="lime"></span></div>
+      </div>
+    </div>
+    <div><pre class="art" id="art"></pre></div>
+  </div>
+</section>
+
+<!-- WORK -->
+<div class="wrap">
+  <section class="block" id="work">
+    <div class="slab reveal"><b>01</b><span>SELECTED WORK</span><i></i></div>
+    <div class="grid two">
+
+      <a href="#0" class="card reveal">
+        <span class="tab on">FINTECH</span>
+        <div class="well"><div class="shot" style="background:#EEEDF8">[ SANAD ]</div></div>
+        <div class="body">
+          <div class="meta">SELF-INITIATED · 2026</div>
+          <h3>Onboarding that feels fast without cutting corners</h3>
+          <p>A six-screen KYB flow for a fictional business bank, designed and built as a working prototype — then audited against itself.</p>
+          <span class="go">READ CASE STUDY <canvas data-i="arrowR" data-sz="12" data-c="#14140F"></canvas></span>
+        </div>
+      </a>
+
+      <a href="#0" class="card reveal">
+        <span class="tab on">FINTECH</span>
+        <div class="well"><div class="shot" style="background:#EDEEF2">[ MIZAN ]</div></div>
+        <div class="body">
+          <div class="meta">SELF-INITIATED · 2026</div>
+          <h3>Telling a frozen business what's actually happening</h3>
+          <p>Account-hold communication for business banking, grounded in real published complaints.</p>
+          <span class="go">READ CASE STUDY <canvas data-i="arrowR" data-sz="12" data-c="#14140F"></canvas></span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- NDA -->
+  <div class="nda reveal">
+    <p>This is the work I can show publicly. Six years of production B2B design — logistics, healthcare, travel — sits under NDA. Ask me about it on a call.</p>
+    <a href="#0">VIEW ALL WORK <canvas data-i="arrowR" data-sz="12" data-c="#14140F"></canvas></a>
+  </div>
+
+  <!-- LIVE -->
+  <section class="block live">
+    <div class="slab reveal"><b>02</b><span>DESIGNED, BUILT &amp; LIVE</span><i></i></div>
+    <div class="grid two">
+
+      <a href="#0" class="card reveal">
+        <span class="tab">SIDE PROJECT</span>
+        <div class="well"><div class="shot" style="background:#EAF0EE">[ ROOMY ]</div></div>
+        <div class="body">
+          <div class="status"><b></b>LIVE · IN DAILY USE</div>
+          <h3>Ending spreadsheet chaos for a 21-person flat</h3>
+          <p>A bedspace management app I designed and built end to end.</p>
+          <div class="actions">
+            <span class="go">CASE STUDY <canvas data-i="arrowR" data-sz="12" data-c="#14140F"></canvas></span>
+            <span class="ext" style="display:inline-flex;align-items:center;gap:7px;font-family:var(--pix);font-size:10px;color:#1E45FB">LAUNCH APP <canvas data-i="external" data-sz="12" data-c="#1E45FB"></canvas></span>
+          </div>
+        </div>
+      </a>
+
+      <a href="#0" class="card reveal">
+        <span class="tab">SIDE PROJECT</span>
+        <div class="well"><div class="shot" style="background:#F1EEEA">[ FORM ]</div></div>
+        <div class="body">
+          <div class="status"><b></b>LIVE · PRIVACY-FIRST</div>
+          <h3>Health tracking with zero sign-up friction</h3>
+          <p>A privacy-first, offline-first health tracker I designed and built end to end.</p>
+          <div class="actions">
+            <span class="go">CASE STUDY <canvas data-i="arrowR" data-sz="12" data-c="#14140F"></canvas></span>
+            <span class="ext" style="display:inline-flex;align-items:center;gap:7px;font-family:var(--pix);font-size:10px;color:#1E45FB">LAUNCH APP <canvas data-i="external" data-sz="12" data-c="#1E45FB"></canvas></span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+</div>
+
+<!-- FOOTER -->
+<footer class="ft" id="connect">
+  <div class="in">
+    <div class="fstatus"><b></b>DUBAI · GMT+4 · USUALLY REPLIES WITHIN A DAY</div>
+    <h2 id="cta"></h2>
+    <p class="intro">Feel free to reach out for collaborations, or just a friendly hello.</p>
+    <div class="mailrow">
+      <a href="mailto:shareefpadar@gmail.com" class="mail">shareefpadar@gmail.com</a>
+      <button class="copy" data-set="dk" data-copy="shareefpadar@gmail.com"><canvas data-i="copy" data-sz="12" data-c="#E8E8E2"></canvas>COPY</button>
+    </div>
+    <div class="social">
+      <a href="#0" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>LINKEDIN</a>
+      <a href="#0" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>MEDIUM</a>
+    </div>
+    <div class="base">
+      <span>DESIGNED &amp; BUILT BY SHAREEF PADAR · NEXT.JS · 2026</span>
+      <a href="#top" class="totop"><canvas data-i="arrowU" data-sz="12" data-c="#9A9A94"></canvas>BACK TO TOP</a>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"><canvas data-i="check" data-sz="12" data-c="#14140F"></canvas>EMAIL COPIED</div>
+
+<script>
+/* ── icons ── */
+const I={
+arrowR:['........','...XX...','....XX..','XXXXXXX.','XXXXXXX.','....XX..','...XX...','........'],
+arrowU:['........','...XX...','..XXXX..','.XX..XX.','...XX...','...XX...','...XX...','........'],
+arrowD:['........','...XX...','...XX...','...XX...','.XX..XX.','..XXXX..','...XX...','........'],
+download:['...XX...','...XX...','...XX...','XXXXXXXX','.XXXXXX.','..XXXX..','...XX...','........'],
+external:['..XXXXX.','..XXXXX.','.....XX.','....XX..','...XX...','..XX....','.XX.....','........'],
+copy:['..XXXXX.','..X...X.','XXXXX.X.','X...X.X.','X...XXX.','X...X...','X...X...','XXXXX...'],
+check:['........','......XX','.....XX.','XX..XX..','XXX.XX..','.XXXX...','..XX....','........']
+};
+function icon(c,name,size,colour){
+  const m=I[name],s=size/8;
+  c.width=size;c.height=size;
+  const x=c.getContext('2d');x.fillStyle=colour;
+  for(let r=0;r<8;r++)for(let q=0;q<8;q++) if(m[r][q]==='X') x.fillRect(q*s,r*s,s,s);
+  c.style.width=size+'px';c.style.height=size+'px';
+}
+document.querySelectorAll('[data-i]').forEach(c=>icon(c,c.dataset.i,+c.dataset.sz,c.dataset.c));
+
+const LOGO=['..XXXX..','.XX..XX.','XX......','XX..XXX.','.XXXXXX.','.....XX.','.XX..XX.','..XXXX..'];
+document.querySelectorAll('[data-logo]').forEach(c=>{
+  c.width=18;c.height=18;const x=c.getContext('2d');x.fillStyle='#1E45FB';
+  for(let r=0;r<8;r++)for(let q=0;q<8;q++) if(LOGO[r][q]==='X') x.fillRect(q*2.25,r*2.25,2.25,2.25);
+});
+
+/* ── sprites ── */
+function mix(h,t,a){const g=x=>parseInt(h.slice(x,x+2),16),k=x=>parseInt(t.slice(x,x+2),16);
+  const c=(p,q)=>Math.round(p+(q-p)*a).toString(16).padStart(2,'0');
+  return '#'+c(g(1),k(1))+c(g(3),k(3))+c(g(5),k(5));}
+const lt=(c,a)=>mix(c,'#ffffff',a), dkn=(c,a)=>mix(c,'#000000',a);
+const L='#CDF22B', B='#1E45FB';
+const SETS={
+  lime:{face:L,hi:lt(L,.55),shade:dkn(L,.42),outline:'#5A6B1E'},
+  blue:{face:B,hi:lt(B,.38),shade:dkn(B,.45),outline:'#4A5BAE'},
+  dk  :{face:'#1E1E22',hi:'#3A3A40',shade:'#0A0A0C',outline:'#4A4A50',hover:'#2A2A30'}
+};
+const BODY=['.DDDD.','DHHHSD','DHFFSD','DHFFSD','DSSSSD','.DDDD.'];
+const TAIL=['FFFFFF','DFFFFS','.DFFSD','..DFSD','...DD.'];
+function px(map,p,s,st){
+  const F=st==='hover'?(p.hover||lt(p.face,.14)):p.face;
+  const M={'.':null,D:p.outline,H:p.hi,S:p.shade,F};
+  const w=map[0].length,h=map.length;
+  const c=document.createElement('canvas');c.width=w*s;c.height=h*s;
+  const x=c.getContext('2d');
+  for(let r=0;r<h;r++)for(let q=0;q<w;q++){const col=M[map[r][q]];
+    if(col){x.fillStyle=col;x.fillRect(q*s,r*s,s,s);}}
+  return c;
+}
+document.querySelectorAll('[data-set]').forEach(el=>{
+  if(el.classList.contains('tail'))return;
+  const p=SETS[el.dataset.set];
+  const set=st=>el.style.borderImageSource='url('+px(BODY,p,4,st).toDataURL()+')';
+  set('base');
+  el.addEventListener('pointerenter',()=>set('hover'));
+  el.addEventListener('pointerleave',()=>set('base'));
+});
+document.querySelectorAll('.tail').forEach(el=>{
+  const c=px(TAIL,SETS[el.dataset.set],4,'base');
+  const img=document.createElement('img');
+  img.src=c.toDataURL();
+  img.style.cssText='display:block;width:'+c.width+'px;height:'+c.height+'px;image-rendering:pixelated';
+  el.appendChild(img);
+});
+
+/* ── nav flatten ── */
+const nav=document.getElementById('nav');
+let t1=false;
+addEventListener('scroll',()=>{
+  if(!t1){requestAnimationFrame(()=>{nav.classList.toggle('stuck',scrollY>20);t1=false;});t1=true;}
+},{passive:true});
+
+/* ── ascii portrait ── */
+const RAMP=[' ','·','░','░','▒','▒','▓','▓','█','█','█'];
+const COLS=46,ROWS=38;
+const src=document.createElement('canvas');src.width=COLS;src.height=ROWS;
+(function(){
+  const x=src.getContext('2d');
+  x.fillStyle='#000';x.fillRect(0,0,COLS,ROWS);
+  const g=x.createRadialGradient(COLS*.44,ROWS*.30,2,COLS*.5,ROWS*.34,14);
+  g.addColorStop(0,'#fff');g.addColorStop(1,'#4a4a4a');
+  x.fillStyle=g;x.beginPath();x.ellipse(COLS*.5,ROWS*.32,COLS*.17,ROWS*.22,0,0,7);x.fill();
+  x.fillStyle='#6a6a6a';x.beginPath();x.ellipse(COLS*.5,ROWS*.20,COLS*.19,ROWS*.13,0,0,7);x.fill();
+  x.fillStyle='#8a8a8a';x.fillRect(COLS*.44,ROWS*.48,COLS*.12,ROWS*.09);
+  const s=x.createLinearGradient(0,ROWS*.55,0,ROWS);
+  s.addColorStop(0,'#d8d8d8');s.addColorStop(1,'#2a2a2a');
+  x.fillStyle=s;x.beginPath();x.moveTo(COLS*.14,ROWS);
+  x.quadraticCurveTo(COLS*.20,ROWS*.60,COLS*.42,ROWS*.55);
+  x.lineTo(COLS*.58,ROWS*.55);
+  x.quadraticCurveTo(COLS*.80,ROWS*.60,COLS*.86,ROWS);
+  x.closePath();x.fill();
+})();
+const D=src.getContext('2d').getImageData(0,0,COLS,ROWS).data,BASE=[];
+for(let r=0;r<ROWS;r++){BASE[r]=[];for(let c=0;c<COLS;c++){
+  const i=(r*COLS+c)*4;BASE[r][c]=(D[i]*.3+D[i+1]*.59+D[i+2]*.11)/255;}}
+const art=document.getElementById('art');
+function renderArt(pxp,pyp,radius){
+  let out='';
+  for(let r=0;r<ROWS;r++){
+    for(let c=0;c<COLS;c++){
+      let v=BASE[r][c];
+      if(pxp!==null){const d=Math.hypot(c-pxp,(r-pyp)*1.6);const R=radius||9;if(d<R)v+=(1-d/R)*.55;}
+      const q=Math.min(3,Math.floor(v*4))/3;
+      const idx=Math.min(RAMP.length-1,Math.round(q*(RAMP.length-1)));
+      const ch=RAMP[idx];
+      out+=(idx>=RAMP.length-2&&ch!==' ')?'<span style="color:#CDF22B">'+ch+'</span>':ch;
+    }
+    out+='\n';
+  }
+  art.innerHTML=out;
+}
+let raf=false,ax=null,ay=null,hovering=false;
+art.addEventListener('pointerenter',()=>hovering=true);
+art.addEventListener('pointermove',e=>{
+  const b=art.getBoundingClientRect();
+  ax=Math.round(((e.clientX-b.left)/b.width)*COLS);
+  ay=Math.round(((e.clientY-b.top)/b.height)*ROWS);
+  if(!raf){requestAnimationFrame(()=>{renderArt(ax,ay);raf=false});raf=true;}
+});
+art.addEventListener('pointerleave',()=>{hovering=false;renderArt(null,null)});
+renderArt(null,null);
+/* touch fallback: slow sweep */
+let sweep=0;
+if(matchMedia('(hover: none)').matches){
+  setInterval(()=>{
+    sweep++;
+    renderArt((sweep*2)%(COLS+24)-12,ROWS*.42,11);
+  },130);
+}
+
+/* ── typed headings ── */
+function typeInto(el,text,after){
+  let i=0;
+  const id=setInterval(()=>{
+    i++;
+    el.innerHTML=text.slice(0,i).replace(/ /g,'&nbsp;').replace(/\n/g,'<br>');
+    if(i>=text.length){clearInterval(id);if(after)after();}
+  },45);
+}
+const HERO="SENIOR PRODUCT\nDESIGNER WHO\nSHIPS.";
+const h1=document.getElementById('h1');
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(reduce){h1.innerHTML="SENIOR&nbsp;PRODUCT<br>DESIGNER&nbsp;WHO<br><em>SHIPS.</em>";}
+else typeInto(h1,HERO,()=>{h1.innerHTML=h1.innerHTML.replace('SHIPS.','<em>SHIPS.</em>')});
+
+const cta=document.getElementById('cta');
+if(reduce){cta.innerHTML="LET'S&nbsp;<em>CONNECT</em>";}
+else{
+  new IntersectionObserver((e,o)=>{
+    if(e[0].isIntersecting){
+      typeInto(cta,"LET'S CONNECT",()=>{cta.innerHTML=cta.innerHTML.replace('CONNECT','<em>CONNECT</em>')});
+      o.disconnect();
+    }
+  },{threshold:.4}).observe(cta);
+}
+
+/* ── scanline reveals ── */
+const io=new IntersectionObserver((entries,obs)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add('go');obs.unobserve(e.target);}
+  });
+},{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* ── copy ── */
+const toast=document.getElementById('toast');let tid;
+document.querySelectorAll('[data-copy]').forEach(b=>{
+  b.addEventListener('click',async e=>{
+    e.preventDefault();
+    try{await navigator.clipboard.writeText(b.dataset.copy)}catch(err){}
+    toast.classList.add('show');clearTimeout(tid);
+    tid=setTimeout(()=>toast.classList.remove('show'),1600);
+  });
+});
+</script>
+</body>
+</html>

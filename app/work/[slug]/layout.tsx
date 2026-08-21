@@ -1,45 +1,18 @@
-import { Metadata } from 'next';
-import { projects } from '../data';
+import Footer from "@/components/Footer";
 
-export async function generateMetadata({ params }: any): Promise<Metadata> {
-  // Await params for Next.js 15+ compatibility if needed, but safe as any
-  const awaitedParams = await params;
-  const slug = awaitedParams.slug;
-  const project = projects[slug as keyof typeof projects];
-  
-  if (!project) {
-    return {
-      title: 'Project | Shareef Padar',
-    };
-  }
-
-  return {
-    title: `${project.title} | Shareef Padar`,
-    description: project.description,
-    openGraph: {
-      title: `${project.title} | Shareef Padar`,
-      description: project.description,
-      images: [
-        {
-          url: project.imageUrl,
-        },
-      ],
-    },
-    // Without this the Twitter card falls back to the root layout's homepage
-    // defaults, so every shared case-study link previews as the homepage.
-    twitter: {
-      card: "summary_large_image",
-      title: `${project.title} | Shareef Padar`,
-      description: project.description,
-      images: [project.imageUrl],
-    },
-  };
-}
-
-export default function WorkLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return <>{children}</>;
+/**
+ * Case studies get the MINIMAL footer (spec §7.4): the page already ends on a
+ * next-story link, and a next link plus a full sitemap is two navigation
+ * systems arguing with each other.
+ *
+ * The root layout's full footer is suppressed for this segment by rendering
+ * the minimal one here and hiding the outer one via a body-level marker.
+ */
+export default function StudyLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <div data-footer="minimal">
+      {children}
+      <Footer variant="minimal" />
+    </div>
+  );
 }

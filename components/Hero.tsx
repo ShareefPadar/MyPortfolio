@@ -1,128 +1,74 @@
-"use client";
+import PixelPortrait from "@/components/px/PixelPortrait";
+import Button from "@/components/px/Button";
+import Typewriter from "@/components/px/Typewriter";
 
-import { motion, useScroll, useTransform, useSpring, type Variants } from "framer-motion";
-import Link from "next/link";
-import { ArrowDown, Download } from "lucide-react";
-import Magnetic from "./Magnetic";
-import ScrambleText from "./ScrambleText";
-import AsciiPortrait from "./AsciiPortrait";
-import { useEffect, useState } from "react";
+/**
+ * Hero (spec §7.1), on paper.
+ *
+ * The spec's §6.5 puts the hero and footer on night as two dark blocks
+ * bookending the work. This deliberately departs from that: the hero shares
+ * the page surface, so only the footer is dark.
+ *
+ * That change cascades, which is why it is not just a background swap:
+ *   - the H1 is ink, not lime. Lime on paper has almost no contrast, and §1.3
+ *     scopes lime to accents rather than large text anyway
+ *   - buttons drop `onDark`, so their outlines darken again
+ *   - the portrait switches to its paper ramp, where levels darken away from
+ *     the surface instead of lightening
+ */
+const Hero = () => (
+  <section className="bg-paper">
+    <div className="mx-auto max-w-wide px-16 py-64 md:py-96">
+      <div className="grid items-center gap-48 md:grid-cols-[1.1fr_0.9fr]">
+        <div>
+          <p className="mb-16 font-mono text-[11px] uppercase tracking-[0.08em] text-mute">
+            Shareef Padar · Dubai
+          </p>
 
-const Hero = () => {
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => { setMounted(true); }, []);
+          <h1 className="mb-24">
+            <Typewriter
+              text="SENIOR PRODUCT DESIGNER WHO SHIPS."
+              as="span"
+              className="block font-pix text-[20px] font-bold leading-[1.75] tracking-[0.01em] text-ink md:text-[32px]"
+            />
+          </h1>
 
-  const { scrollY } = useScroll();
-  const yImage = useSpring(useTransform(scrollY, [0, 800], [0, -60]), { damping: 20, stiffness: 45 });
+          <p className="mb-32 max-w-lead font-sans text-[17px] leading-[1.65] text-ink md:text-[19px]">
+            Six years in B2B UX, from research to shipped interface. I build and ship my own
+            products in React and Tailwind too, which is why the prototypes on this site are
+            real software rather than screenshots.
+          </p>
 
-  const headWords = ["Senior", "Product", "Designer", "who"];
-
-  const wordVariants: Variants = {
-    hidden: { y: "110%", opacity: 0 },
-    show: (i: number) => ({
-      y: 0,
-      opacity: 1,
-      transition: { delay: 0.15 + i * 0.07, duration: 0.7, ease: [0.22, 1, 0.36, 1] as const },
-    }),
-  };
-
-  return (
-    <section className="container-wide pt-4 pb-8 md:pt-6 md:pb-12 grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr] items-center gap-8 md:gap-12">
-      <div>
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="text-lg md:text-xl text-neutral-900 font-sans font-medium mb-2 fm-anim"
-        >
-          I&apos;m <ScrambleText text="Shareef Padar" duration={800} delay={200} />
-        </motion.p>
-        <h1
-          aria-label="Senior Product Designer who ships."
-          className="text-4xl md:text-6xl font-bold leading-tight md:leading-snug mb-3 font-sans tracking-tight text-neutral-900"
-        >
-          {/* Real spaces between words, not a flex gap: a gap renders correctly
-              but leaves textContent as "SeniorProductDesignerwhoships." for
-              copy, search engines, and AI summarisers. */}
-          <span aria-hidden="true" className="overflow-hidden">
-            {headWords.map((w, i) => (
-              <span key={i}>
-                {i > 0 && " "}
-                <span className="inline-block overflow-hidden align-bottom">
-                  <motion.span
-                    custom={i}
-                    initial="hidden"
-                    animate={mounted ? "show" : "hidden"}
-                    variants={wordVariants}
-                    className="inline-block fm-anim"
-                  >
-                    {w}
-                  </motion.span>
-                </span>
-              </span>
-            ))}{" "}
-            <span className="inline-block overflow-hidden align-bottom">
-              <motion.span
-                custom={headWords.length}
-                initial="hidden"
-                animate={mounted ? "show" : "hidden"}
-                variants={wordVariants}
-                className="inline-block text-gradient fm-anim"
-              >
-                ships.
-              </motion.span>
-            </span>
-          </span>
-        </h1>
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={mounted ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-          transition={{ delay: 0.9, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="text-base md:text-lg text-neutral-500 font-sans leading-relaxed max-w-lg mb-6 fm-anim"
-        >
-          Six years in B2B UX, from research to shipped interface. Based in Dubai. I build and ship my own products in React and Tailwind too.
-        </motion.p>
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={mounted ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-          transition={{ delay: 1.05, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="fm-anim flex flex-wrap items-center gap-3 md:gap-4"
-        >
-          <Magnetic strength={0.3}>
-            <Link
-              href="/#work"
-              className="inline-flex items-center gap-3 bg-neutral-950 text-white px-8 py-4 rounded-full font-bold text-sm hover:bg-neutral-800 transition-all shadow-lg group"
+          <div className="flex flex-wrap items-center gap-16">
+            <Button level="primary" large href="/#work" icon="arrowD">
+              VIEW WORK
+            </Button>
+            <Button
+              level="secondary"
+              large
+              href="/assets/Shareef_Padar_Resume.pdf"
+              external
+              icon="download"
             >
-              View work
-              <ArrowDown className="w-4 h-4 group-hover:translate-y-1 transition-transform" />
-            </Link>
-          </Magnetic>
-          <a
-            href="/assets/Shareef_Padar_Resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 border border-neutral-200 text-neutral-950 px-8 py-4 rounded-full font-bold text-sm hover:border-neutral-950 transition-all group"
-          >
-            Download résumé
-            <Download className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
-          </a>
-        </motion.div>
+              RÉSUMÉ
+            </Button>
+          </div>
+        </div>
+
+        {/* Portrait sits right on desktop; below 900px it would crowd the
+            statement, so it drops out rather than shrinking to mush.
+
+            `transparent` knocks the white field out of the source art by
+            flood-filling from the border, so the portrait sits on the page
+            surface rather than in a white box. Capped at 320px: the art is
+            96x144, so an uncapped column would make it taller than the copy
+            beside it and push the fold down. */}
+        <div className="hidden justify-self-center md:block">
+          <PixelPortrait transparent className="w-[320px]" />
+        </div>
       </div>
-      <motion.div
-        className="relative hidden md:flex justify-center w-full max-w-lg mx-auto"
-      >
-        <motion.div
-          style={{ y: yImage }}
-          className="relative w-full aspect-[3/4]"
-          initial={{ opacity: 0, scale: 0.96 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.3, duration: 1, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <AsciiPortrait />
-        </motion.div>
-      </motion.div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 export default Hero;

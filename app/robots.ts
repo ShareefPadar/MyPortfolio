@@ -6,6 +6,8 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
+        // Internal design-system reference, not part of the portfolio.
+        disallow: '/kitchen-sink',
       },
     ],
     sitemap: 'https://www.shareefpadar.com/sitemap.xml',

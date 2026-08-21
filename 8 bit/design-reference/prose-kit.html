@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prose kit — case study body</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+@font-face{
+  font-family:'Departure Mono';
+  src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2409-1@1.0/DepartureMono-Regular.woff2') format('woff2');
+  font-weight:400;font-display:swap;
+}
+:root{
+  --u:4px;
+  --s4:4px;--s8:8px;--s12:12px;--s16:16px;--s24:24px;--s32:32px;--s48:48px;--s64:64px;
+  --lime:#CDF22B; --blue:#1E45FB; --ink:#14140F;
+  --paper:#FAFAF8; --panel:#F0F0EA; --line:#DEDED8; --mute:#87877A;
+  --plate:#D8D8D0; --hi:#FFFFFF; --sh:#8A8A80;
+  --mono:'Departure Mono',ui-monospace,monospace;
+  --pix:'Silkscreen',monospace;
+  --sans:'Geist',-apple-system,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{background:#E6E6E2;font-family:var(--sans);color:var(--ink);padding:0 14px 60px;line-height:1.55}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.wrap{max-width:700px;margin:0 auto}
+
+/* ══ SELECTION ══ */
+::selection{background:var(--lime);color:var(--ink)}
+::-moz-selection{background:var(--lime);color:var(--ink)}
+
+/* ══ SCROLL PROGRESS ══ */
+.prog{position:sticky;top:0;z-index:50;display:flex;gap:2px;padding:6px 0;background:#E6E6E2}
+.prog b{flex:1;height:8px;background:var(--line);display:block;border:1px solid rgba(0,0,0,.12)}
+.prog b.f{background:var(--lime);border-color:var(--ink)}
+
+.head{margin:14px 0 24px}
+.head h1{font-family:var(--pix);font-weight:700;font-size:clamp(14px,3.8vw,18px);line-height:1.7;margin-bottom:12px}
+.head p{font-size:14px;color:#4A4A46;max-width:56ch}
+
+.sec{border:2px solid var(--ink);margin-bottom:16px;background:var(--paper)}
+.sec-h{display:flex;justify-content:space-between;gap:10px;padding:8px 14px;background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:11px;letter-spacing:.05em}
+.sec-h i{font-style:normal;opacity:.55;font-size:10px;text-align:right}
+.sec-b{padding:var(--s24) 18px}
+.desc{font-size:13.5px;color:#5C5C52;margin-bottom:var(--s16);max-width:54ch}
+.sub{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin:var(--s32) 0 var(--s12);padding-bottom:6px;border-bottom:1px dashed var(--line)}
+.sub:first-child{margin-top:0}
+
+/* ══ PROSE ══ */
+.prose{font-size:16px;line-height:1.7;color:#3E3E36;max-width:60ch}
+.prose p{margin-bottom:var(--s16)}
+.prose p:last-child{margin-bottom:0}
+.prose strong{font-weight:600;color:var(--ink)}
+.prose em{font-style:italic}
+
+/* inline link */
+.prose a{color:var(--ink);text-decoration:none;background-image:linear-gradient(var(--blue),var(--blue));
+  background-size:100% 2px;background-repeat:no-repeat;background-position:0 100%;padding-bottom:1px}
+.prose a:hover{background-image:linear-gradient(var(--lime),var(--lime));background-size:100% 40%;color:var(--ink)}
+.prose a[target="_blank"]::after{content:"↗";font-family:var(--mono);font-size:.78em;margin-left:.18em;color:var(--blue);vertical-align:.08em}
+
+/* ui string */
+.ui{font-family:var(--mono);font-size:.88em;background:var(--panel);border:1px solid var(--line);
+  padding:1px 5px;color:var(--ink);white-space:nowrap}
+
+/* lists */
+.prose ul,.prose ol{margin:0 0 var(--s16);padding:0;list-style:none}
+.prose li{position:relative;padding-left:24px;margin-bottom:var(--s8)}
+.prose ul li::before{content:"";position:absolute;left:4px;top:.62em;width:8px;height:8px;background:var(--blue)}
+.prose ol{counter-reset:n}
+.prose ol li{counter-increment:n;padding-left:32px}
+.prose ol li::before{content:counter(n,decimal-leading-zero);position:absolute;left:0;top:.06em;
+  font-family:var(--mono);font-size:.8em;color:var(--blue);letter-spacing:.04em}
+
+/* pull quote */
+.pull{margin:var(--s32) 0;padding-left:var(--s24);border-left:6px solid var(--lime);max-width:52ch}
+.pull q{quotes:none;display:block;font-size:23px;font-weight:500;line-height:1.35;letter-spacing:-.014em;color:var(--ink)}
+.pull cite{display:block;font-style:normal;font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--mute);margin-top:var(--s12)}
+
+/* research quote — a person said this */
+.said{margin:var(--s24) 0;background:var(--panel);border:3px solid var(--ink);padding:var(--s16);max-width:56ch}
+.said p{font-size:15.5px;line-height:1.6;color:#2A2A24;margin-bottom:var(--s12)}
+.said .by{display:flex;align-items:center;gap:var(--s8);font-family:var(--mono);font-size:10px;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.said .by b{width:8px;height:8px;background:var(--lime);border:1px solid var(--ink);display:block;flex:none}
+
+/* aside / footnote */
+.aside{margin:var(--s24) 0;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);
+  padding:var(--s12) 0;max-width:56ch}
+.aside .k{font-family:var(--mono);font-size:9px;letter-spacing:.11em;text-transform:uppercase;color:var(--blue);margin-bottom:var(--s8)}
+.aside p{font-size:14px;line-height:1.6;color:#4A4A42;margin:0}
+
+/* definition pairs */
+.defs{display:grid;gap:2px;background:var(--ink);border:3px solid var(--ink);margin:var(--s24) 0}
+@media(min-width:520px){.defs{grid-template-columns:repeat(2,1fr)}}
+.defs div{background:var(--paper);padding:var(--s12) var(--s16)}
+.defs dt{font-family:var(--mono);font-size:9px;letter-spacing:.11em;text-transform:uppercase;color:var(--mute);margin-bottom:var(--s4)}
+.defs dd{font-size:14.5px;font-weight:500}
+
+/* table */
+.ptbl{width:100%;border-collapse:collapse;font-size:14px;margin:var(--s24) 0;border:3px solid var(--ink)}
+.ptbl th{font-family:var(--mono);font-size:9px;letter-spacing:.09em;text-transform:uppercase;text-align:left;
+  padding:var(--s8) var(--s12);background:var(--ink);color:var(--paper);font-weight:400}
+.ptbl td{padding:var(--s12);border-bottom:1px solid var(--line);vertical-align:top;color:#3E3E36}
+.ptbl tr:last-child td{border-bottom:0}
+.ptbl tr:nth-child(even) td{background:var(--panel)}
+
+/* divider */
+.div{display:flex;gap:6px;justify-content:center;margin:var(--s32) 0}
+.div b{width:8px;height:8px;background:var(--ink);display:block}
+.div b:nth-child(2){background:var(--lime);border:1px solid var(--ink)}
+
+/* section rail */
+.raildemo{display:grid;gap:var(--s16)}
+@media(min-width:620px){.raildemo{grid-template-columns:190px 1fr}}
+.rail{border:3px solid var(--ink);background:var(--plate);padding:var(--s8);align-self:start;
+  box-shadow:inset var(--u) var(--u) 0 var(--hi), inset calc(var(--u)*-1) calc(var(--u)*-1) 0 var(--sh)}
+.rail a{display:flex;gap:var(--s8);align-items:baseline;padding:7px 9px;text-decoration:none;
+  font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--ink)}
+.rail a b{color:var(--blue);font-family:var(--pix);font-size:9px;font-weight:700;flex:none}
+.rail a:hover{background:rgba(0,0,0,.06)}
+.rail a.on{background:var(--paper);box-shadow:inset 3px 3px 0 var(--sh), inset -3px -3px 0 var(--hi)}
+.rail a.on b{color:var(--ink)}
+
+.swatchrow{display:flex;flex-wrap:wrap;gap:var(--s12);align-items:center;font-size:14px}
+
+.rules{list-style:none;font-size:13.5px}
+.rules li{padding:9px 0 9px 26px;border-bottom:1px solid var(--line);position:relative;color:#3E3E36}
+.rules li:last-child{border-bottom:0}
+.rules li::before{content:"▸";position:absolute;left:4px;color:var(--blue)}
+.rules.no li::before{content:"✕";color:#C4482E}
+.rules code{font-family:var(--mono);font-size:12px;color:var(--blue)}
+
+.note{border-top:1px solid var(--line);background:var(--panel);padding:12px 18px;font-size:13px;color:#5C5C52;line-height:1.6}
+.note b{font-family:var(--mono);font-size:11px;color:var(--ink);font-weight:400}
+
+@media (max-width:520px){.sec-b{padding:var(--s16) 12px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="prog" id="prog"></div>
+
+  <div class="head">
+    <h1>PROSE KIT</h1>
+    <p>Everything that appears inside case study body copy. This is where a hiring manager actually spends their time, and until now none of it was specified.</p>
+  </div>
+
+<!-- LINKS -->
+<div class="sec">
+  <div class="sec-h"><span>01 — INLINE LINKS</span><i>hover them</i></div>
+  <div class="sec-b">
+    <div class="desc">A 2px blue rule under ink text, not blue text. On hover the rule grows into a lime highlight — the same marker used on the reframe callout, so the language is already familiar.</div>
+    <div class="prose">
+      <p>Focused desk research on how <a href="#0">Stripe</a>, <a href="#0">Mercury</a> and <a href="#0">Airwallex</a> handle business onboarding, including an annotated teardown of <a href="#0" target="_blank">Mercury's live flow</a>.</p>
+      <p>When a document was rejected, the copy read <span class="ui">Verification failed</span> — an accusation and a dead end. The rewritten version names the document and offers <span class="ui">Upload a new proof of address</span> instead.</p>
+    </div>
+  </div>
+  <div class="note"><b>Note</b> — the arrow marks external links only. Internal links stay bare, so the mark keeps meaning something.</div>
+</div>
+
+<!-- LISTS -->
+<div class="sec">
+  <div class="sec-h"><span>02 — LISTS</span><i>square bullets, mono numerals</i></div>
+  <div class="sec-b">
+    <div class="prose">
+      <p><strong>Unordered</strong> — a solid blue square on the 4px grid, never a disc.</p>
+      <ul>
+        <li>Business details — legal name, registration, address</li>
+        <li>Owners — anyone who owns or controls 25% or more</li>
+        <li>Documents — proof of the above</li>
+      </ul>
+      <p><strong>Ordered</strong> — mono numerals with a leading zero, matching the section markers.</p>
+      <ol>
+        <li>Whether the "add later" hatch recovers droppers or just defers them</li>
+        <li>Whether the per-field explanation cuts abandonment on the owners step</li>
+        <li>Whether an honest waiting screen lowers support tickets during review</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<!-- QUOTES -->
+<div class="sec">
+  <div class="sec-h"><span>03 — QUOTES</span><i>two kinds, different jobs</i></div>
+  <div class="sec-b">
+    <div class="sub">Pull quote — your own line, amplified</div>
+    <div class="pull">
+      <q>Regulators decide what the steps are. Design decides how they feel.</q>
+      <cite>Sanad · closing</cite>
+    </div>
+
+    <div class="sub">Said quote — someone else's words</div>
+    <div class="said">
+      <p>"I didn't know if it had even gone through. I just kept refreshing and hoping."</p>
+      <div class="by"><b></b>FOUNDER · 12 DAYS INTO REVIEW</div>
+    </div>
+  </div>
+  <div class="note"><b>Rule</b> — pull quotes are unquoted and large; said quotes keep their quotation marks and get a plate, because attribution matters more than emphasis.</div>
+</div>
+
+<!-- ASIDE + DEFS -->
+<div class="sec">
+  <div class="sec-h"><span>04 — ASIDES &amp; PAIRS</span><i>supporting blocks</i></div>
+  <div class="sec-b">
+    <div class="sub">Aside</div>
+    <div class="aside">
+      <div class="k">A NOTE ON SCOPE</div>
+      <p>Deliberately out: the banking product itself, back-office review tooling, and pricing. Depth on the journey, not breadth across a product.</p>
+    </div>
+
+    <div class="sub">Definition pairs</div>
+    <dl class="defs">
+      <div><dt>MY ROLE</dt><dd>Product Designer &amp; Builder</dd></div>
+      <div><dt>TYPE</dt><dd>Product concept</dd></div>
+      <div><dt>PERIOD</dt><dd>2026</dd></div>
+      <div><dt>STACK</dt><dd>React · Custom CSS</dd></div>
+    </dl>
+  </div>
+</div>
+
+<!-- TABLE -->
+<div class="sec">
+  <div class="sec-h"><span>05 — TABLE</span><i>competitor teardowns</i></div>
+  <div class="sec-b">
+    <div class="desc">You compared three products in the research section — that's a table, not three paragraphs.</div>
+    <table class="ptbl">
+      <tr><th>Product</th><th>Split onboarding</th><th>Waiting state</th></tr>
+      <tr><td>Mercury</td><td>Yes — light signup, heavy KYB</td><td>Vague, no timeline</td></tr>
+      <tr><td>Stripe</td><td>Partial</td><td>Days quoted, no status</td></tr>
+      <tr><td>Airwallex</td><td>No</td><td>"We'll be in touch"</td></tr>
+    </table>
+    <div class="div"><b></b><b></b><b></b></div>
+    <div class="desc" style="margin:0">A three-block divider for breaks inside a long section, where a heading would be too heavy.</div>
+  </div>
+</div>
+
+<!-- RAIL -->
+<div class="sec">
+  <div class="sec-h"><span>06 — SECTION RAIL</span><i>ten-minute read</i></div>
+  <div class="sec-b">
+    <div class="desc">Sanad is eight sections and a ten-minute read. Without a rail, a hiring manager scanning for the decisions has to scroll blind. Active item is sunk — same language as the nav.</div>
+    <div class="raildemo">
+      <nav class="rail">
+        <a href="#0"><b>01</b>OVERVIEW</a>
+        <a href="#0"><b>02</b>SHORT VERSION</a>
+        <a href="#0" class="on"><b>03</b>THE TENSION</a>
+        <a href="#0"><b>04</b>RESEARCH</a>
+        <a href="#0"><b>05</b>DECISIONS</a>
+        <a href="#0"><b>06</b>SELF-AUDIT</a>
+        <a href="#0"><b>07</b>TRY IT</a>
+        <a href="#0"><b>08</b>WHAT'S NEXT</a>
+      </nav>
+      <div class="prose">
+        <p>Sticky on desktop, collapsed behind the progress bar on mobile. It doubles as a table of contents in the share preview and gives the reader a sense of how much is left.</p>
+        <p>The numerals match the section markers exactly, so someone who jumps to 05 lands somewhere that looks like where they clicked.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROGRESS + SELECTION -->
+<div class="sec">
+  <div class="sec-h"><span>07 — PROGRESS &amp; SELECTION</span><i>two cheap details</i></div>
+  <div class="sec-b">
+    <div class="sub">Scroll progress</div>
+    <div class="desc">The segmented bar at the top of this page. Ten blocks filling one at a time, never a smooth bar — same component as the loader. Scroll and watch it.</div>
+
+    <div class="sub">Text selection</div>
+    <div class="swatchrow">
+      <span class="prose" style="max-width:none">Try selecting this sentence.</span>
+    </div>
+    <div class="desc" style="margin-top:var(--s12);margin-bottom:0">Lime selection, ink text. One line of CSS, and it's the kind of detail a design lead notices without being able to say why the site felt considered.</div>
+  </div>
+</div>
+
+<!-- RULES -->
+<div class="sec">
+  <div class="sec-h"><span>08 — RULES</span><i>short</i></div>
+  <div class="sec-b">
+    <ul class="rules">
+      <li>Links are ink text with a blue rule, never blue text</li>
+      <li>External arrow on external links only</li>
+      <li>UI strings quoted from a product go in <span class="ui">mono</span>, so the reader knows it's real copy</li>
+      <li>Bullets are squares on the grid — never discs</li>
+      <li>Ordered lists use leading zeros to match section markers</li>
+      <li>Prose caps at <code>60ch</code>, quotes at <code>52ch</code></li>
+    </ul>
+    <div class="sub">Never</div>
+    <ul class="rules no">
+      <li>More than one pull quote per section</li>
+      <li>A smooth progress bar</li>
+      <li>Underline anything that isn't a link</li>
+      <li>Nest lists more than one level</li>
+    </ul>
+  </div>
+</div>
+
+</div>
+
+<script>
+const prog=document.getElementById('prog');
+for(let i=0;i<10;i++)prog.appendChild(document.createElement('b'));
+const blocks=prog.querySelectorAll('b');
+let tick=false;
+function upd(){
+  const max=document.documentElement.scrollHeight-innerHeight;
+  const p=max>0?scrollY/max:0;
+  const n=Math.round(p*blocks.length);
+  blocks.forEach((b,i)=>b.classList.toggle('f',i<n));
+  tick=false;
+}
+addEventListener('scroll',()=>{if(!tick){requestAnimationFrame(upd);tick=true;}},{passive:true});
+upd();
+</script>
+</body>
+</html>

@@ -1,95 +1,591 @@
 
 @import "tailwindcss";
+/* Sprite classes, generated alongside the PNGs by scripts/build-sprites.ts. */
+@import "./sprites.generated.css";
 
+/* ══════════════════════════════════════════════════════════════════
+   8-BIT DESIGN SYSTEM — see "8 bit/CLAUDE.md" (the authority).
+   Tailwind v4 is CSS-first, so the spec's §1.2 tailwind.config.ts is
+   translated into @theme here. tailwind.config.ts in this repo is INERT
+   (no @config directive) — never add tokens to it.
+   ══════════════════════════════════════════════════════════════════ */
 @theme {
-  --color-accent: #E21D70;
-  --color-accent-hover: #C21861;
-  
-  --color-accent-gradient: linear-gradient(to right, #E21D70, #FF3D81);
-  
-  --color-surface-peach: #F7E1D7;
-  --color-surface-lavender: #E0DBE7;
-  --color-surface-mint: #E1F2ED;
-  --color-surface-sky: #D9E4F5;
-  --color-surface-amber: #F9F1D1;
-  
-  --color-neutral-950: #1A1A1A;
-  
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-serif-custom: var(--font-serif), serif;
+  /* colour — spec §1.3 governs what each is allowed to be used for */
+  --color-lime:  #CDF22B;   /* accents, callouts, LEDs. NEVER a button fill */
+  --color-blue:  #1E45FB;   /* primary button, section numerals, links, focus */
+  --color-ink:   #14140F;   /* outlines, body text, rules */
+  --color-error: #C4482E;   /* form errors only */
+  /* The light surfaces are a COOL family: blue channel highest, so
+     B - R is positive and grows as the surface darkens. They used to be warm
+     (#FAFAF8, #F0F0EA, #DEDED8, #D8D8D0 — blue channel lowest). The whole
+     family has to move together: a warm grey sitting on a cool page reads as
+     a dirty yellow stain, and it is most visible exactly where two surfaces
+     meet, which on this site is every card and every nav plate.
 
+     Each step is also a real luminance step, not just a hue shift — the
+     smallest gap here is panel-on-paper at 1.11:1, which is what keeps a
+     callout visible as its own surface. */
+  --color-paper: #F0EFF4;
+  --color-plate: #D6D5DE;
+  --color-panel: #E4E3EA;
+  --color-line:  #DCDBE4;
+  /* Do not lighten --color-mute. #87877A measured 4.0:1 and FAILED on 9–11px
+     meta labels — spec §11 and §12 mistake 11.
+
+     It was #6E6E62 while the page was #FAFAF8. Darkening the page eats the
+     margin on every muted label, so this darkened to compensate, and cooled
+     to join the family above. Verified at 9–11px against every light surface
+     it can land on; the tightest is 4.54:1 on the nav plate.
+
+     That plate pair was 3.60:1 before this change and had been failing since
+     the plate was introduced — nav links are text-mute on --plate. Fixed
+     here by darkening mute AND lightening the plate; neither alone clears
+     4.5:1 without flattening the plate into the page. */
+  --color-mute:  #5C5C67;
+
+  /* dark surfaces — hero and footer bookend the light page (spec §6.5) */
+  --color-night:  #0B0B0C;
+  --color-night2: #16161A;
+  --color-nline:  #26262A;
+  --color-ntext:  #9A9A94;
+
+  /* ── Spacing ramp, ENFORCED (hard constraint #6) ──────────────────
+     `--spacing: initial` disables Tailwind's generated numeric scale, so only
+     the values below resolve. Any off-ramp utility — p-5, gap-7, mt-19 — now
+     produces NO CSS at all, which turns "spacing comes from the ramp" from a
+     convention into something the build actually checks.
+
+     Named by pixel value: gap-24 is 24px and reads the same in the markup as
+     it does in the spec. Every spacing utility in the codebase was migrated
+     to match, since Tailwind's default scale means p-4 = 16px while a named
+     ramp means p-4 = 4px.
+
+     44px is deliberately absent. It is the accessibility floor from §4.1/§11,
+     a minimum size rather than a spacing step, so it stays an explicit
+     min-h-[44px] where it is self-documenting. */
+  --spacing: initial;
+  --spacing-0: 0px;
+  --spacing-4: 4px;
+  --spacing-8: 8px;
+  --spacing-12: 12px;
+  --spacing-16: 16px;
+  --spacing-24: 24px;
+  --spacing-32: 32px;
+  --spacing-48: 48px;
+  --spacing-64: 64px;
+  --spacing-96: 96px;
+  --spacing-128: 128px;
+
+  /* containers — v4 reads --container-* for max-w-*, not --max-width-* */
+  --container-prose: 60ch;
+  --container-lead:  52ch;
+  --container-col:   720px;
+  --container-wide:  1100px;
 }
+
+/* Font families reference other custom properties, so they need @theme inline
+   or the utilities snapshot the value instead of resolving the reference. */
+@theme inline {
+  --font-pix:  var(--font-silkscreen), monospace;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  /* font-sans is the site's body face. Removing the legacy Inter token
+     without redefining this silently drops every `font-sans` back to
+     Tailwind's default stack. */
+  --font-sans: var(--font-geist), system-ui, sans-serif;
+}
+
+/* Primitives with no Tailwind utility namespace: units, frame timing, the
+   notch polygon, and the two bevel tones the sprite generator consumes. */
+:root {
+  --u: 4px;        /* one pixel unit — every dimension is a multiple */
+  --f: 60ms;       /* one animation frame */
+  --type: 45ms;    /* one typed character */
+
+  /* --hi stays pure white: it is a specular highlight on a bevel edge, not a
+     surface. Tinting it to match the cool family makes every bevel look
+     dusty, because the highlight is what sells the edge as lit. */
+  --hi: #FFFFFF;   /* bevel highlight (top-left) */
+  --sh: #8A8992;   /* bevel shade (bottom-right) — cooled with the surfaces */
+
+  /* Aliases so the spec's hand-written CSS works verbatim against one
+     source of truth. Do not restate the hex values here. */
+  --lime:  var(--color-lime);
+  --blue:  var(--color-blue);
+  --ink:   var(--color-ink);
+  --error: var(--color-error);
+  --paper: var(--color-paper);
+  --plate: var(--color-plate);
+  --panel: var(--color-panel);
+  --line:  var(--color-line);
+  --mute:  var(--color-mute);
+  --night:  var(--color-night);
+  --night2: var(--color-night2);
+  --nline:  var(--color-nline);
+  --ntext:  var(--color-ntext);
+
+  /* spacing ramp for hand-written CSS blocks (the prose kit).
+     Tailwind utilities cover the same values; see Phase 11 for enforcement. */
+  --s4: 4px;   --s8: 8px;    --s12: 12px;  --s16: 16px;  --s24: 24px;
+  --s32: 32px; --s48: 48px;  --s64: 64px;  --s96: 96px;  --s128: 128px;
+
+  /* the notch — reused by buttons, tabs, and the focus plate */
+  --notch: polygon(
+    4px 0, calc(100% - 4px) 0,
+    calc(100% - 4px) 4px, 100% 4px,
+    100% calc(100% - 4px),
+    calc(100% - 4px) calc(100% - 4px),
+    calc(100% - 4px) 100%, 4px 100%,
+    4px calc(100% - 4px), 0 calc(100% - 4px),
+    0 4px, 4px 4px
+  );
+}
+
+::selection { background: var(--lime); color: var(--ink); }
 
 @layer base {
+  /* Only html and body. Any other bare element selector inherits into the
+     Sanad and Mizan prototypes, which ship their own scoped design systems. */
   body {
-    @apply text-neutral-950 antialiased;
-    background-color: #FFFFFF;
-    font-family: var(--font-sans);
-    letter-spacing: -0.01em;
-    overflow-x: hidden;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-serif-custom);
-    @apply font-bold text-neutral-950;
+    background: var(--paper);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
   }
 }
 
-.font-serif {
-  font-family: var(--font-serif-custom);
+
+/* These live in @layer components so Tailwind utilities still win over them.
+   Unlayered CSS beats every layer, which meant `.focusable`'s display rule
+   silently overrode `md:hidden` and left the mobile burger visible on
+   desktop. Anything here that sets a property a utility might also set
+   belongs in a layer. */
+@layer components {
+  /* ── Focus ring (spec §4.2) ──────────────────────────────────────
+     A square outline around a notched sprite reads as a rendering bug, so the
+     ring is a notched plate behind the element instead. Focus is INSTANT and
+     never animated — the one place in the system where motion is banned. */
+  .focusable { position: relative; display: inline-block; }
+  .focusable::before {
+    content: "";
+    position: absolute;
+    inset: -7px;
+    background: var(--blue);
+    clip-path: var(--notch);
+    z-index: -1;
+    opacity: 0;
+  }
+  .focusable:focus-within::before { opacity: 1; }
+  /* Safe only because the plate replaces it. Never remove focus indication. */
+  .focusable :is(button, a, input, select, textarea):focus { outline: none; }
+
+  /* ── The well (spec §4.4) ────────────────────────────────────────
+     A recessed screenshot. Sunk, so it reads as contained rather than
+     interactive. */
+  .well {
+    box-shadow: 0 0 0 3px var(--ink), inset 4px 4px 0 rgb(0 0 0 / 0.4);
+  }
+
+  /* ── Pixel rendering ─────────────────────────────────────────────
+     Any raster in the pixel layer must not be smoothed when scaled. */
+  .pixelated { image-rendering: pixelated; }
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-::-webkit-scrollbar-thumb {
-  background: #ccc;
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #007991;
+/* ══════════════════════════════════════════════════════════════════
+   MOTION (spec §5)
+
+   Everything uses steps(). Nothing eases, nothing interpolates. Both axes
+   quantise: time steps into frames AND space snaps to 4px, because stepping
+   the timing while an element lands on 37.5px still reads wrong (§5.4).
+
+   One motion per face (§5.1):
+     Silkscreen  → typewriter        (Typewriter.tsx, 45ms/char, max 1.5s)
+     Geist head  → scanline, 4 frames
+     containers  → scanline, 6 frames, whole object
+     Geist body  → binary opacity, staggered one frame apart
+     mono        → binary, instant
+     numerals    → pop with overshoot, 4 frames
+     nav flatten → instant, no transition at all
+     LED         → blink, 2.6s — the only looping animation
+
+   Nothing runs past 12 frames (§5.5).
+   ══════════════════════════════════════════════════════════════════ */
+
+@keyframes scanClip {
+  0%   { clip-path: inset(0 0 100% 0); }
+  100% { clip-path: inset(0 0 0% 0); }
 }
 
+/* Scanline bands widen as the wipe completes, so the reveal reads as a CRT
+   drawing itself rather than a bar sliding down. */
+@keyframes scanBands {
+  0% {
+    -webkit-mask-image: repeating-linear-gradient(#000 0 1px, transparent 1px 6px);
+            mask-image: repeating-linear-gradient(#000 0 1px, transparent 1px 6px);
+  }
+  30% {
+    -webkit-mask-image: repeating-linear-gradient(#000 0 3px, transparent 3px 6px);
+            mask-image: repeating-linear-gradient(#000 0 3px, transparent 3px 6px);
+  }
+  60% {
+    -webkit-mask-image: repeating-linear-gradient(#000 0 5px, transparent 5px 6px);
+            mask-image: repeating-linear-gradient(#000 0 5px, transparent 5px 6px);
+  }
+  100% {
+    -webkit-mask-image: none;
+            mask-image: none;
+  }
+}
+
+/* Binary appearance. No fade — one step, on or off. */
+@keyframes on {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Numerals land with a single overshoot frame, snapped to the 4px grid. */
+@keyframes pop {
+  0%   { transform: scale(0.75); }
+  50%  { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+
+@keyframes caret {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0; }
+}
+
+/* The only looping animation in the system. */
+@keyframes led {
+  0%, 45%   { opacity: 1; }
+  50%, 95%  { opacity: 0.25; }
+  100%      { opacity: 1; }
+}
+
+/* Reveals are opt-in and JS-gated: without JS, or before the observer fires,
+   content must still be readable. `.has-js` is set by a blocking inline
+   script in the document head, so there is no flash of visible-then-hidden. */
+.has-js .reveal { visibility: hidden; }
+.has-js .reveal.is-in { visibility: visible; }
+
+/* Containers, cards, screenshots: the whole object animates as one (§12 #10).
+
+   scanClip is `backwards`, NOT `both`. `both` keeps the last keyframe applied
+   forever, and that last keyframe is `clip-path: inset(0 0 0%)` — visually a
+   no-op, but a clip-path still clips, so anything a child hangs outside the
+   box gets silently cut once the wipe ends. That ate the bottom border off
+   every work card. `backwards` holds the pre-roll state (fully clipped) and
+   then lets the clip go when the animation finishes.
+
+   scanBands stays `both`: its final keyframe is `mask-image: none`, which is
+   genuinely inert to leave applied. */
+.has-js .reveal.is-in {
+  animation:
+    scanClip  calc(var(--f) * 6) steps(6, end) backwards,
+    scanBands calc(var(--f) * 8) steps(1, end) both;
+}
+
+/* Geist headings scan faster than containers. */
+.has-js .reveal-head.is-in {
+  animation:
+    scanClip  calc(var(--f) * 4) steps(4, end) backwards,
+    scanBands calc(var(--f) * 6) steps(1, end) both;
+}
+
+/* Body copy and mono labels appear binary, never wiped. */
+.has-js .reveal-on.is-in {
+  animation: on 1ms steps(1, end) both;
+}
+
+/* Stagger: one frame apart, capped so a long list never runs past 12 frames. */
+.has-js .reveal-on.is-in:nth-child(2) { animation-delay: calc(var(--f) * 1); }
+.has-js .reveal-on.is-in:nth-child(3) { animation-delay: calc(var(--f) * 2); }
+.has-js .reveal-on.is-in:nth-child(4) { animation-delay: calc(var(--f) * 3); }
+.has-js .reveal-on.is-in:nth-child(n + 5) { animation-delay: calc(var(--f) * 4); }
+
+.has-js .reveal-pop.is-in {
+  animation: pop calc(var(--f) * 4) steps(4, end) both;
+}
+
+.led { animation: led 2.6s steps(1, end) infinite; }
+
+/* Bubble entrance: 4 frames with one overshoot, origin bottom-left so it
+   grows out of the tail rather than the middle (§4.5). */
+@keyframes guideIn {
+  0%   { transform: scale(0.6); opacity: 0; }
+  50%  { transform: scale(1.08); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes guideDot {
+  0%, 49%   { opacity: 1; }
+  50%, 100% { opacity: 0.25; }
+}
+
+/* ── Nav plate (spec §4.6) ─────────────────────────────────────────
+   At rest: 3px border all round, full bevel, contained to the column.
+   Scrolled past 24px: border-bottom only, no bevel, plate → panel, 8px
+   shorter, spanning full width while the contents stay on the column.
+   The change is INSTANT — a class toggle with no transition (§5.1). */
+@layer components {
+  .nav-plate {
+    background: var(--plate);
+    border: 3px solid var(--ink);
+    box-shadow: inset 3px 3px 0 var(--hi), inset -3px -3px 0 var(--sh);
+  }
+  .nav-plate.stuck {
+    background: var(--panel);
+    border: 0;
+    border-bottom: 3px solid var(--ink);
+    box-shadow: none;
+  }
+
+  /* Burger: three solid 14×3px blocks, never thin lines. */
+  .burger-bar {
+    display: block;
+    width: 14px;
+    height: 3px;
+    background: var(--ink);
+  }
+
+  /* ── Card (spec §4.4) ────────────────────────────────────────── */
+  .card {
+    position: relative;
+    display: block;
+    background: var(--plate);
+    border: 3px solid var(--ink);
+    box-shadow: inset 3px 3px 0 var(--hi), inset -3px -3px 0 var(--sh);
+  }
+  /* The tab carries DOMAIN only — never a year, never a discipline (§4.4). */
+  .card-tab {
+    position: absolute;
+    top: -17px;
+    left: 14px;
+    min-width: 104px; /* stops short labels ragging the grid */
+    text-align: center;
+    padding: 4px 10px 5px;
+    border: 3px solid var(--ink);
+    border-bottom: 0;
+    background: var(--plate);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--ink);
+    clip-path: polygon(
+      4px 0, calc(100% - 4px) 0,
+      calc(100% - 4px) 4px, 100% 4px,
+      100% 100%, 0 100%, 0 4px, 4px 4px
+    );
+  }
+  /* Every tab is plate at rest and lime on hover. No card is singled out. */
+  .card:hover .card-tab { background: var(--lime); }
+
+  .card-body {
+    background: var(--paper);
+    border: 3px solid var(--ink);
+  }
+  /* Hover lifts the body a step ABOVE the page. Pure white did that when the
+     page was #FAFAF8, but against #F0EFF4 it is both too big a jump and the
+     only pure white left on the site, so it flashes. This is a tint of the
+     surface family instead — 1.07:1, enough to read as a lift, not a flash. */
+  .card:hover .card-body { background: #F7F7FB; }
+
+  /* ── Case-study content column (spec §6.3) ───────────────────────
+     ONE mechanism for every width. Replaces three competing idioms that
+     had to be kept in sync by hand: Shot's -mx-12, the markdown img's
+     w-[calc(100%+6rem)], and DeviceFrame's `width:100vw; margin-left:
+     calc(50% - 50vw)`.
+
+     That last one was also a latent bug: 100vw includes the scrollbar, so
+     it overflowed by ~15px on any browser with persistent scrollbars. It
+     was only invisible because body had overflow-x:hidden masking it.
+
+     Top-level MDX elements are direct children of .study, so a <Shot> or an
+     <img> lands in the right column just by carrying a class. */
+  .study {
+    display: grid;
+    grid-template-columns:
+      [full-start] minmax(16px, 1fr)
+      [wide-start] minmax(0, 190px)
+      [col-start] min(720px, 100% - 32px) [col-end]
+      minmax(0, 190px) [wide-end]
+      minmax(16px, 1fr) [full-end];
+  }
+  .study > * { grid-column: col; }
+  .study > .wide { grid-column: wide; }
+  .study > .full { grid-column: full; }
+
+  /* ── Segmented scroll progress (spec §8) ─────────────────────────
+     Ten blocks filling one at a time. Never a smooth bar. */
+  .prog-seg {
+    width: 8px;
+    height: 8px;
+    background: var(--line);
+  }
+  .prog-seg.on { background: var(--blue); }
+
+  /* A page carrying its own minimal footer suppresses the root one, so the
+     two never stack (spec §7.4). */
+  body:has([data-footer="minimal"]) > footer { display: none; }
+
+  /* ── Prose kit (spec §8) ─────────────────────────────────────────
+     An inline link is ink text with a blue rule, NOT blue text: blue is
+     already carrying section numerals and the primary button, and a page of
+     blue words competes with both. */
+  .prose-link {
+    color: var(--ink);
+    text-decoration: none;
+    background-image: linear-gradient(var(--blue), var(--blue));
+    background-size: 100% 2px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    padding-bottom: 1px;
+  }
+  .prose-link:hover {
+    background-image: linear-gradient(var(--lime), var(--lime));
+    background-size: 100% 40%;
+  }
+  /* External only — an arrow on every link is noise. */
+  .prose-link[target="_blank"]::after { content: " ↗"; }
+
+  /* Ordered lists use leading zeros, matching the section markers. */
+  .prose-ol { counter-reset: n; }
+  .prose-ol > li { counter-increment: n; }
+  .prose-ol > li::before {
+    content: counter(n, decimal-leading-zero);
+    background: none;
+    top: 0;
+    left: 0;
+    width: auto;
+    height: auto;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--blue);
+  }
+
+  /* ── Pixel guide (spec §4.5) ─────────────────────────────────────
+     A cursor and a chat bubble. Movement is stepped, never interpolated,
+     and every position snaps to the 4px grid — both axes quantise (§5.4).
+
+     The tail is a separate shape overlapping the bubble's bottom edge by one
+     unit, so the outline opens into the bubble rather than sitting beside it. */
+  .guide-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 60;
+    pointer-events: none;
+    will-change: transform;
+    /* Only the fade in/out is a transition. The MOVEMENT is stepped in JS,
+       one 4px hop per 60ms frame — a CSS transition here would interpolate
+       between those hops and undo the whole point. */
+    transition: opacity calc(var(--f) * 4) steps(4, end);
+  }
+
+  /* The reader's own cursor. No transition at all: it mirrors the pointer, and
+     any smoothing on your own cursor reads as input lag. */
+  .px-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 70;
+    pointer-events: none;
+    will-change: transform;
+  }
+
+  /* Only while PixelCursor is mounted and painting (it sets the class itself),
+     so a JS failure cannot leave the reader with no cursor at all. Fields keep
+     a real caret — a text cursor carries information a pixel arrow does not. */
+  .has-px-cursor,
+  .has-px-cursor *,
+  .has-px-cursor *::before,
+  .has-px-cursor *::after {
+    cursor: none;
+  }
+  .has-px-cursor input,
+  .has-px-cursor textarea,
+  .has-px-cursor select,
+  .has-px-cursor [contenteditable="true"] {
+    cursor: text;
+  }
+
+  /* Name tag, shown while the guide is quiet. Same lime plate as the bubble so
+     the two read as one object in two states. */
+  .guide-name {
+    display: inline-block;
+    background: var(--lime);
+    border: 3px solid var(--ink);
+    padding: 3px 7px 4px;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.11em;
+    line-height: 1;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+
+  .guide-bubble {
+    position: relative;
+    max-width: 264px;
+    background: var(--lime);
+    border: 3px solid var(--ink);
+    padding: 10px 12px;
+    clip-path: var(--notch);
+  }
+  /* Tail: taper, symmetric, overlapping the bubble edge by one unit. */
+  .guide-tail {
+    width: 12px;
+    height: 8px;
+    margin-top: -4px;
+    margin-left: 16px;
+    background: var(--lime);
+    border-left: 3px solid var(--ink);
+    border-right: 3px solid var(--ink);
+    border-bottom: 3px solid var(--ink);
+    clip-path: polygon(0 0, 100% 0, 40% 100%);
+  }
+
+  /* Typing indicator: three 9px INK squares. Never lime — lime on lime
+     disappears (§4.5). */
+  .guide-dot {
+    width: 9px;
+    height: 9px;
+    background: var(--ink);
+    animation: guideDot 1.05s steps(1, end) infinite;
+  }
+  .guide-dot:nth-child(2) { animation-delay: 0.35s; }
+  .guide-dot:nth-child(3) { animation-delay: 0.7s; }
+
+  /* ── Prototype isolation ─────────────────────────────────────────
+     SanadPrototype and MizanPrototype are mocks of OTHER companies' products
+     and ship their own scoped design systems. They set their own fonts on
+     their roots but inherit everything else, so any inherited property from
+     this site leaks straight into two 1000-line files nobody re-reads. Reset
+     the inheritable ones at the boundary. */
+  .iso {
+    font-family: initial;
+    font-size: initial;
+    line-height: initial;
+    letter-spacing: initial;
+    color: initial;
+    text-transform: none;
+    image-rendering: auto;
+  }
+}
+
+/* Under reduced motion the observer still runs, but content must never be
+   left hidden and nothing may animate. */
+@media (prefers-reduced-motion: reduce) {
+  .has-js .reveal { visibility: visible; }
+}
+
+/* Spec §1.1 / §5.5: content renders at its final state, not at 0.01ms.
+   Focus indication is never suppressed — it's the one thing that must
+   always be visible (§4.2). */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    animation: none !important;
+    transition: none !important;
     scroll-behavior: auto !important;
   }
-}
-
-/* Mobile-only: neutralize Framer Motion initial-hidden states so content is
-   visible in SSR (fixes LCP) and entrance animations don't cost CPU on throttled
-   devices. Desktop (min-width: 768px) is entirely untouched. */
-@media (max-width: 767px) {
-  .fm-anim {
-    opacity: 1 !important;
-    transform: none !important;
-    filter: none !important;
-  }
-}
-
-/* Skip off-screen rendering work for below-fold sections. No visual change. */
-.cv-auto {
-  content-visibility: auto;
-  contain-intrinsic-size: 1px 1200px;
-}
-
-.text-gradient {
-  background: var(--color-accent-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  display: inline-block;
-}
-
-/* Horizontal spacing */
-.container-wide {
-  @apply max-w-7xl mx-auto px-6 md:px-12 lg:px-20;
 }
 

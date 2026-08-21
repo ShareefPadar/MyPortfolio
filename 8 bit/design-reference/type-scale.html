@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Type scale — headings</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+@font-face{
+  font-family:'Departure Mono';
+  src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2409-1@1.0/DepartureMono-Regular.woff2') format('woff2');
+  font-weight:400;font-display:swap;
+}
+:root{
+  --u:4px;
+  --lime:#CDF22B; --blue:#1E45FB; --ink:#14140F;
+  --paper:#FAFAF8; --panel:#F0F0EA; --line:#DEDED8; --mute:#87877A;
+  --plate:#D8D8D0; --hi:#FFFFFF; --sh:#8A8A80;
+  --mono:'Departure Mono',ui-monospace,monospace;
+  --pix:'Silkscreen',monospace;
+  --sans:'Geist',-apple-system,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:#E6E6E2;font-family:var(--sans);color:var(--ink);padding:20px 14px 60px;line-height:1.55}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.wrap{max-width:680px;margin:0 auto}
+
+.head{margin-bottom:22px}
+.head h1{font-family:var(--pix);font-weight:700;font-size:clamp(14px,3.8vw,18px);line-height:1.7;margin-bottom:12px}
+.head p{font-size:14px;color:#4A4A46;max-width:56ch}
+
+.sec{border:2px solid var(--ink);margin-bottom:16px;background:var(--paper)}
+.sec-h{display:flex;justify-content:space-between;gap:10px;padding:8px 14px;background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:11px;letter-spacing:.05em}
+.sec-h i{font-style:normal;opacity:.55;font-size:10px;text-align:right}
+.sec-b{padding:20px 18px 24px}
+.desc{font-size:13.5px;color:#5C5C52;margin-bottom:18px;max-width:52ch}
+.sub{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin:26px 0 12px;padding-bottom:6px;border-bottom:1px dashed var(--line)}
+.sub:first-child{margin-top:0}
+
+/* the rule */
+.gate{border:3px solid var(--ink);background:var(--panel);padding:18px 16px;margin-bottom:8px}
+.gate .q{font-family:var(--pix);font-size:12px;line-height:1.8;margin-bottom:14px}
+.gate .branch{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-top:2px solid var(--line);font-size:14px}
+.gate .branch b{font-family:var(--mono);font-size:10px;letter-spacing:.06em;flex:none;width:52px;color:var(--blue)}
+.gate .branch span{color:#3E3E36}
+.gate .branch em{font-style:normal;font-family:var(--mono);font-size:12px;color:var(--ink)}
+
+/* specimen rows */
+.row{border-bottom:1px solid var(--line);padding:18px 0}
+.row:last-child{border-bottom:0;padding-bottom:0}
+.row .k{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:baseline;margin-bottom:11px}
+.row .k b{font-family:var(--mono);font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink);font-weight:400}
+.row .k span{font-family:var(--mono);font-size:9px;letter-spacing:.05em;color:var(--mute)}
+.row .k u{text-decoration:none;font-family:var(--mono);font-size:9px;color:var(--blue);letter-spacing:.05em}
+.row .use{font-size:12.5px;color:#6A6A60;margin-top:9px;max-width:48ch}
+
+/* actual type tokens */
+.t-dxl{font-family:var(--pix);font-weight:700;font-size:32px;line-height:1.75;letter-spacing:.01em}
+.t-dl {font-family:var(--pix);font-weight:700;font-size:20px;line-height:1.8;letter-spacing:.01em}
+.t-dm {font-family:var(--pix);font-weight:400;font-size:14px;line-height:1.8;letter-spacing:.02em}
+.t-num{font-family:var(--pix);font-weight:700;font-size:40px;line-height:.9;color:var(--lime);-webkit-text-stroke:2px var(--ink);paint-order:stroke fill}
+.t-secnum{font-family:var(--pix);font-weight:700;font-size:20px;line-height:1;color:var(--blue)}
+.t-h1{font-family:var(--sans);font-weight:500;font-size:40px;line-height:1.15;letter-spacing:-.022em}
+.t-h2{font-family:var(--sans);font-weight:500;font-size:26px;line-height:1.3;letter-spacing:-.016em}
+.t-h3{font-family:var(--sans);font-weight:600;font-size:19px;line-height:1.4}
+.t-h4{font-family:var(--sans);font-weight:600;font-size:16px;line-height:1.5}
+.t-lead{font-family:var(--sans);font-weight:400;font-size:19px;line-height:1.65;color:#2A2A24}
+.t-body{font-family:var(--sans);font-weight:400;font-size:16px;line-height:1.7;color:#3E3E36}
+.t-small{font-family:var(--sans);font-weight:400;font-size:14px;line-height:1.6;color:#4A4A42}
+.t-cap{font-family:var(--sans);font-weight:400;font-size:13px;line-height:1.55;color:#5C5C52}
+.t-meta{font-family:var(--mono);font-size:11px;line-height:1.5;letter-spacing:.08em;color:var(--mute)}
+.t-micro{font-family:var(--mono);font-size:9px;line-height:1.4;letter-spacing:.11em;text-transform:uppercase;color:var(--mute)}
+
+@media(max-width:560px){
+  .t-dxl{font-size:20px}
+  .t-dl{font-size:15px}
+  .t-h1{font-size:28px}
+  .t-h2{font-size:21px}
+  .t-h3{font-size:17px}
+  .t-num{font-size:30px}
+  .t-lead{font-size:17px}
+}
+
+/* composition */
+.comp{border:2px solid var(--ink);background:var(--paper);padding:26px 20px 30px}
+.comp .marker{display:flex;align-items:baseline;gap:10px;margin:34px 0 16px}
+.comp .marker i{flex:1;height:3px;background:var(--ink)}
+.comp .marker:first-child{margin-top:0}
+.comp .stack>*{margin-bottom:14px}
+.comp .stack>*:last-child{margin-bottom:0}
+.callout{background:var(--lime);border:3px solid var(--ink);padding:18px 16px;box-shadow:6px 6px 0 var(--ink);margin:24px 0}
+.callout .k{font-family:var(--mono);font-size:10px;letter-spacing:.13em;margin-bottom:9px}
+.dec{display:flex;gap:14px;align-items:flex-start;margin:26px 0 12px}
+
+.rules{list-style:none;font-size:14px}
+.rules li{padding:10px 0 10px 26px;border-bottom:1px solid var(--line);position:relative;color:#3E3E36}
+.rules li:last-child{border-bottom:0}
+.rules li::before{content:"▸";position:absolute;left:4px;color:var(--blue)}
+.rules.no li::before{content:"✕";color:#C4482E}
+.rules code{font-family:var(--mono);font-size:12px;color:var(--blue)}
+
+.note{border-top:1px solid var(--line);background:var(--panel);padding:12px 18px;font-size:13px;color:#5C5C52;line-height:1.6}
+.note b{font-family:var(--mono);font-size:11px;color:var(--ink);font-weight:400}
+
+@media (max-width:520px){.sec-b{padding:16px 12px 20px}.comp{padding:20px 14px 24px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="head">
+  <h1>TYPE SCALE</h1>
+  <p>The face is chosen by what the string <em>is</em>, not by heading level. An H1 can be Silkscreen or Geist depending on whether it's a label or a sentence.</p>
+</div>
+
+<!-- THE RULE -->
+<div class="sec">
+  <div class="sec-h"><span>00 — THE GATE</span><i>ask this before every heading</i></div>
+  <div class="sec-b">
+    <div class="gate">
+      <div class="q">IS THIS READ AS<br>A SENTENCE?</div>
+      <div class="branch"><b>YES →</b><span><em>Geist.</em> Always. Case study titles, section headings, decision titles, captions, body. No exceptions, at any size.</span></div>
+      <div class="branch"><b>NO →</b><span>Is it a <em>label or a number?</em></span></div>
+      <div class="branch"><b>&nbsp;&nbsp;LABEL →</b><span><em>Departure Mono.</em> Tags, meta, eyebrows, nav links, timestamps.</span></div>
+      <div class="branch"><b>&nbsp;&nbsp;STATEMENT →</b><span><em>Silkscreen.</em> Hero, page titles, numerals, buttons. Five words maximum.</span></div>
+    </div>
+  </div>
+  <div class="note"><b>Why</b> — heading level describes document structure; the face describes reading behaviour. Tying them together is what produces bitmap paragraphs.</div>
+</div>
+
+<!-- DISPLAY -->
+<div class="sec">
+  <div class="sec-h"><span>01 — DISPLAY</span><i>Silkscreen · short strings only</i></div>
+  <div class="sec-b">
+
+    <div class="row">
+      <div class="k"><b>DISPLAY XL</b><span>Silkscreen Bold</span><u>32 / 20 mobile · lh 1.75</u></div>
+      <div class="t-dxl">SENIOR PRODUCT<br>DESIGNER WHO SHIPS.</div>
+      <div class="use">Homepage hero only. One per site. Line height must stay loose — bitmap faces jam together below 1.7.</div>
+    </div>
+
+    <div class="row">
+      <div class="k"><b>DISPLAY L</b><span>Silkscreen Bold</span><u>20 / 15 mobile · lh 1.8</u></div>
+      <div class="t-dl">SELECTED WORK</div>
+      <div class="use">Page titles — Work, About, 404. Never a sentence.</div>
+    </div>
+
+    <div class="row">
+      <div class="k"><b>DISPLAY M</b><span>Silkscreen Regular</span><u>14 · lh 1.8</u></div>
+      <div class="t-dm">LET'S CONNECT</div>
+      <div class="use">Footer headings, nav wordmark, button labels. Regular weight — Bold is reserved for the two sizes above and numerals.</div>
+    </div>
+
+    <div class="row">
+      <div class="k"><b>SECTION NUMERAL</b><span>Silkscreen Bold</span><u>20 · blue</u></div>
+      <div style="display:flex;align-items:baseline;gap:10px">
+        <span class="t-secnum">03</span><span class="t-micro">THE TENSION</span>
+        <i style="flex:1;height:3px;background:var(--ink)"></i>
+      </div>
+      <div class="use">Always paired with a mono label and a rule to the edge.</div>
+    </div>
+
+    <div class="row">
+      <div class="k"><b>DECISION NUMERAL</b><span>Silkscreen Bold</span><u>40 / 30 mobile · lime + ink stroke</u></div>
+      <span class="t-num">04</span>
+      <div class="use">The one place type gets loud. Only inside case study decision blocks.</div>
+    </div>
+  </div>
+</div>
+
+<!-- HEADINGS -->
+<div class="sec">
+  <div class="sec-h"><span>02 — HEADINGS</span><i>Geist · everything that's a sentence</i></div>
+  <div class="sec-b">
+
+    <div class="row">
+      <div class="k"><b>H1</b><span>Geist Medium 500</span><u>40 / 28 mobile · lh 1.15 · ls -.022em</u></div>
+      <div class="t-h1">Making business verification feel fast without making it less rigorous.</div>
+      <div class="use">Case study title. A full sentence, so Geist regardless of it being the largest text on the page.</div>
+    </div>
+
+    <div class="row">
+      <div class="k"><b>H2</b><span>Geist Medium 500</span><u>26 / 21 mobile · lh 1.3 · ls -.016em</u></div>
+      <div class="t-h2">The verification couldn't change. The experience of it clearly could.</div>
+      <div class="use">Section headings that carry the finding. This is the level your notes say the whole case study can be read from.</div>
+    </div>
+
+    <div class="row">
+      <div class="k"><b>H3</b><span>Geist Semibold 600</span><u>19 / 17 mobile · lh 1.4</u></div>
+      <div class="t-h3">Never hard-block a willing user</div>
+      <div class="use">Decision titles, card titles, subsection headings.</div>
+    </div>
+
+    <div class="row">
+      <div class="k"><b>H4</b><span>Geist Semibold 600</span><u>16 · lh 1.5</u></div>
+      <div class="t-h4">What I'd test next</div>
+      <div class="use">Rare. Inside plates and cards where H3 would be too heavy.</div>
+    </div>
+  </div>
+  <div class="note"><b>Rule</b> — negative letter-spacing on H1 and H2 only. Below 20px it makes Geist muddy.</div>
+</div>
+
+<!-- BODY -->
+<div class="sec">
+  <div class="sec-h"><span>03 — BODY</span><i>Geist</i></div>
+  <div class="sec-b">
+
+    <div class="row">
+      <div class="k"><b>LEAD</b><span>Geist Regular</span><u>19 / 17 mobile · lh 1.65</u></div>
+      <div class="t-lead">New businesses have to prove they're legitimate before they can move money. I hit this wall myself going through Companies House verification.</div>
+      <div class="use">First paragraph of a case study or section. One per section, maximum.</div>
+    </div>
+
+    <div class="row">
+      <div class="k"><b>BODY</b><span>Geist Regular</span><u>16 · lh 1.7 · max 60ch</u></div>
+      <div class="t-body">You cannot delete steps. Regulators require this verification, so reducing friction in the usual sense is off the table. The real problem is narrower and harder than that.</div>
+      <div class="use">Everything else. Line length capped at 60 characters.</div>
+    </div>
+
+    <div class="row">
+      <div class="k"><b>SMALL</b><span>Geist Regular</span><u>14 · lh 1.6</u></div>
+      <div class="t-small">Inside plates, notes, and the audit block where 16px would crowd the frame.</div>
+    </div>
+
+    <div class="row">
+      <div class="k"><b>CAPTION</b><span>Geist Regular</span><u>13 · lh 1.55 · lime left rule</u></div>
+      <div class="t-cap" style="border-left:3px solid var(--lime);padding-left:12px">The full step map with per-step time estimates, set before the user starts.</div>
+      <div class="use">Under every screenshot. Geist, not mono — a caption is a sentence.</div>
+    </div>
+  </div>
+</div>
+
+<!-- UTILITY -->
+<div class="sec">
+  <div class="sec-h"><span>04 — UTILITY</span><i>Departure Mono · labels only</i></div>
+  <div class="sec-b">
+    <div class="row">
+      <div class="k"><b>META</b><span>Departure Mono</span><u>11 · ls .08em</u></div>
+      <div class="t-meta">SANAD · KYB ONBOARDING · 2026</div>
+      <div class="use">Card meta, nav links, timestamps, the LED strip.</div>
+    </div>
+    <div class="row">
+      <div class="k"><b>MICRO</b><span>Departure Mono</span><u>9 · ls .11em · uppercase</u></div>
+      <div class="t-micro">SELF-INITIATED · CONCEPT</div>
+      <div class="use">Tags, tab labels, section marker labels, field labels.</div>
+    </div>
+  </div>
+</div>
+
+<!-- IN CONTEXT -->
+<div class="sec">
+  <div class="sec-h"><span>05 — IN CONTEXT</span><i>all of it, composed</i></div>
+  <div class="sec-b">
+    <div class="comp">
+      <div class="marker"><span class="t-secnum">03</span><span class="t-micro">THE TENSION</span><i></i></div>
+      <div class="stack">
+        <div class="t-h2">The verification couldn't change. The experience of it clearly could.</div>
+        <div class="t-lead">Going through Companies House verification, I didn't know how many steps were coming.</div>
+        <div class="t-body">There was no way to save and come back, so stopping halfway meant starting over. And when a document got rejected, I was back at the beginning.</div>
+      </div>
+
+      <div class="callout">
+        <div class="k">THE REFRAME</div>
+        <div class="t-h3" style="font-weight:500;font-size:19px">How do you make a legally rigid process feel fast without weakening what it must do?</div>
+      </div>
+
+      <div class="dec">
+        <span class="t-num">04</span>
+        <div class="t-h3" style="padding-top:3px">Never hard-block a willing user</div>
+      </div>
+      <div class="t-body">The most common real-world reason people drop off is that they don't have that document right now.</div>
+      <div class="t-cap" style="border-left:3px solid var(--lime);padding-left:12px;margin-top:16px">One file uploaded, one marked "add later" with a reminder set.</div>
+    </div>
+  </div>
+  <div class="note"><b>Note</b> — three faces on one screen and it still reads as one voice, because each has a job nothing else does.</div>
+</div>
+
+<!-- RULES -->
+<div class="sec">
+  <div class="sec-h"><span>06 — RULES</span><i>short list</i></div>
+  <div class="sec-b">
+    <ul class="rules">
+      <li>Silkscreen never exceeds <b>five words</b> or drops below <code>1.7</code> line height</li>
+      <li>Silkscreen <b>Bold</b> for hero, page titles and numerals; <b>Regular</b> for everything else</li>
+      <li>Negative tracking on H1 and H2 only</li>
+      <li>Body capped at <code>60ch</code>, lead at <code>52ch</code></li>
+      <li>Captions are Geist — they're sentences, not labels</li>
+      <li>Mobile drops display sizes hardest; body barely moves</li>
+    </ul>
+    <div class="sub" style="margin-top:22px">Never</div>
+    <ul class="rules no">
+      <li>Silkscreen for an H1 that happens to be a sentence</li>
+      <li>Mono for anything longer than about six words</li>
+      <li>All-caps Geist — that's what the mono layer is for</li>
+      <li>More than two type sizes inside a single card</li>
+    </ul>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

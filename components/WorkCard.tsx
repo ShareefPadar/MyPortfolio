@@ -1,77 +1,79 @@
-"use client";
-
 import Link from "next/link";
 import Image from "next/image";
+import PixelIcon from "@/components/px/PixelIcon";
+import type { CaseStudy } from "@/lib/work";
 
-export interface WorkCardProps {
-  headline?: string;
-  title: string;
-  category: string;
-  description: string;
-  href: string;
-  thumbnail?: string | null;
-  bgColor?: string;
-  badge?: string;
+/**
+ * Work card (spec §4.4).
+ *
+ * Plate with a raised bevel, a domain tab breaking the top edge, a sunk well
+ * holding the screenshot, and a paper body. Server component: no state, and
+ * hover lives entirely in CSS.
+ *
+ * The tab carries the DOMAIN and nothing else — never a year, never a
+ * discipline, never a role.
+ */
+
+type Props = {
+  study: CaseStudy;
+  /** Larger screenshot well for the featured grid. */
   featured?: boolean;
-}
+  /** Tier 2 on the work index: no description, so the tier reads as a tier. */
+  compact?: boolean;
+};
 
-const WorkCard = ({ headline, title, category, description, href, thumbnail, bgColor = "#F5F5F7", badge, featured = false }: WorkCardProps) => {
-  const heading = headline ?? title;
+const WorkCard = ({ study, featured = false, compact = false }: Props) => {
+  const { card, slug, domain } = study;
+
   return (
     <Link
-      href={href}
-      aria-label={`Read case study for ${title}`}
-      className="group flex h-full flex-col overflow-hidden rounded-3xl border border-neutral-200 bg-white shadow-sm transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-xl"
+      href={`/work/${slug}`}
+      aria-label={`Read the ${card.title} case study`}
+      /* mt-17 makes room for the tab, which sits at top:-17px. The height has
+         to give that 17px back, or the card is a full row-height TALL and then
+         pushed down 17px, so its bottom border hangs outside the grid slot. */
+      className="card group mt-[17px] block h-[calc(100%-17px)]"
     >
-      {/* Thumbnail — real asset, or a solid-colour placeholder when none exists */}
-      <div
-        className={`relative w-full overflow-hidden ${featured ? "h-[220px] md:h-[320px]" : "h-[180px]"}`}
-        style={{ backgroundColor: bgColor }}
-      >
-        {thumbnail ? (
+      <span className="card-tab">{domain}</span>
+
+      {/* The well is sunk: it contains rather than invites. */}
+      <div className={`well relative m-[10px] mt-[14px] overflow-hidden bg-panel ${featured ? "aspect-[16/10]" : "aspect-[16/9]"}`}>
+        {card.thumbnail ? (
           <Image
-            src={thumbnail}
-            alt={title}
+            src={card.thumbnail}
+            alt=""
             fill
-            sizes="(max-width: 768px) 100vw, 50vw"
-            className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+            sizes="(max-width: 900px) 100vw, 50vw"
+            className="object-cover object-top"
           />
         ) : (
-          <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-neutral-100 to-neutral-200 px-6">
-            <span className="text-center font-serif text-2xl font-bold leading-tight text-neutral-400">
-              {title}
+          <div className="grid h-full w-full place-items-center px-16">
+            <span className="text-center font-pix text-[14px] leading-[1.8] text-mute">
+              {card.title}
             </span>
           </div>
         )}
       </div>
 
-      {/* Body */}
-      <div className="flex flex-1 flex-col p-6 md:p-8">
-        <div className="mb-3 flex flex-wrap items-center gap-2">
-          <span className="text-[11px] font-bold uppercase tracking-widest text-accent">
-            {category}
-          </span>
-          {badge && (
-            <span className="rounded-full border border-neutral-200 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-widest text-neutral-500">
-              {badge}
-            </span>
-          )}
-        </div>
-        <h3 className={`mb-1 font-serif font-bold leading-tight tracking-tight text-neutral-950 ${featured ? "text-2xl md:text-3xl" : "text-2xl"}`}>
-          {heading}
+      <div className="card-body m-[10px] flex flex-col p-16">
+        <p className="mb-8 font-mono text-[10px] uppercase tracking-[0.07em] text-mute">
+          {card.category} · {card.badge}
+        </p>
+        <h3 className="mb-4 font-sans text-[19px] font-medium leading-[1.4] text-ink">
+          {card.headline}
         </h3>
-        {headline && (
-          <p className="mb-3 font-sans text-sm font-medium text-neutral-400">
-            {title}
+        <p className="mb-12 font-mono text-[10px] uppercase tracking-[0.07em] text-mute">
+          {card.title}
+        </p>
+        {!compact && (
+          <p className="mb-16 font-sans text-[14.5px] leading-[1.6] text-ink">
+            {card.description}
           </p>
         )}
-        <p className="mb-6 font-sans text-sm leading-relaxed text-neutral-600 md:text-base">
-          {description}
-        </p>
-        <div className="mt-auto flex items-center gap-2 font-sans text-sm font-bold text-neutral-900">
-          Read case study
-          <span className="text-lg transition-transform duration-300 group-hover:translate-x-1">→</span>
-        </div>
+        <span className="mt-auto inline-flex items-center gap-8 font-pix text-[10px] leading-none text-blue">
+          READ CASE STUDY
+          <PixelIcon name="arrowR" size={8} />
+        </span>
       </div>
     </Link>
   );

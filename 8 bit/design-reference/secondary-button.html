@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Secondary button — pairing with blue primary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Geist:wght@400;500&display=swap" rel="stylesheet">
+<style>
+@font-face{
+  font-family:'Departure Mono';
+  src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2409-1@1.0/DepartureMono-Regular.woff2') format('woff2');
+  font-weight:400;font-display:swap;
+}
+:root{
+  --lime:#CDF22B;
+  --blue:#1E45FB;
+  --ink:#14140F;
+  --paper:#FAFAF8;
+  --panel:#F0F0EA;
+  --line:#dedeD8;
+  --mute:#87877a;
+  --mono:'Departure Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:#e6e6e2;font-family:'Geist',-apple-system,system-ui,sans-serif;color:var(--ink);padding:20px 14px 60px;line-height:1.5}
+:focus-visible{outline:3px solid var(--blue);outline-offset:4px}
+.wrap{max-width:660px;margin:0 auto}
+
+.head{margin-bottom:24px}
+.head h1{font-family:'Silkscreen',monospace;font-size:clamp(14px,4vw,18px);font-weight:400;line-height:1.7;margin-bottom:12px}
+.head p{font-size:14px;color:#4a4a46;max-width:54ch}
+.head code{font-family:var(--mono);font-size:12px;background:#d6d6d0;padding:1px 5px}
+
+.sec{border:2px solid var(--ink);margin-bottom:16px;background:var(--paper)}
+.sec-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:8px 14px;background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:11px;letter-spacing:.05em}
+.sec-h i{font-style:normal;opacity:.55;font-size:10px;text-align:right}
+.sec-b{padding:20px 18px 22px}
+.desc{font-size:13px;color:#5c5c52;margin-bottom:16px;max-width:48ch}
+
+.opt{padding:16px 0;border-bottom:1px dashed var(--line)}
+.opt:last-child{border-bottom:0;padding-bottom:0}
+.opt-h{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;margin-bottom:5px}
+.opt-d{font-size:13px;color:#5c5c52;margin-bottom:13px;max-width:46ch}
+.pair{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+
+.states{display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start}
+.st{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.st b{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);font-weight:400}
+
+.b{
+  font-family:'Silkscreen',monospace;font-size:11px;letter-spacing:.03em;line-height:1;
+  border:8px solid transparent;border-image-slice:8 fill;border-image-repeat:stretch;
+  padding:7px 12px;cursor:pointer;background:none;display:inline-block;text-decoration:none;
+}
+.b.lg{font-size:14px;border-width:12px;border-image-slice:12 fill;padding:10px 16px}
+.b:disabled{cursor:not-allowed;color:#9A9A92}
+
+/* tertiary — no sprite at all */
+.b-txt{
+  font-family:'Silkscreen',monospace;font-size:11px;letter-spacing:.03em;line-height:1;
+  border:0;background:none;cursor:pointer;color:var(--blue);padding:15px 4px;
+  text-decoration:none;display:inline-block;position:relative;
+}
+.b-txt::after{content:"";position:absolute;left:4px;right:4px;bottom:11px;height:2px;background:var(--blue);opacity:0}
+.b-txt:hover::after,.b-txt.h::after{opacity:1}
+.b-txt:active{color:#0B2AA8}
+.b-txt.lg{font-size:14px}
+
+.dark{background:#0B0B0C;margin:-20px -18px -22px;padding:22px 18px 24px}
+.dark .st b{color:#6a6a62}
+.dark .desc{color:#9a9a94}
+.dark .b-txt{color:var(--lime)}
+.dark .b-txt::after{background:var(--lime)}
+
+.ctx{padding:0}
+.ctx-in{background:var(--paper);padding:26px 20px 28px}
+.ctx-in h2{font-family:'Silkscreen',monospace;font-weight:400;font-size:clamp(15px,4.1vw,20px);line-height:1.7;margin-bottom:16px}
+.ctx-in p{font-size:15px;color:#54544a;max-width:40ch;margin-bottom:22px}
+.ctx-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.card{border:2px solid var(--ink);margin-top:26px}
+.card-med{aspect-ratio:16/9;background:var(--panel);border-bottom:2px solid var(--ink);display:flex;align-items:flex-end;padding:14px}
+.card-med em{font-family:var(--mono);font-style:normal;font-size:10px;color:#a5a59a}
+.card-bd{padding:16px}
+.card-bd .meta{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin-bottom:8px}
+.card-bd h3{font-size:16px;font-weight:500;line-height:1.45;margin-bottom:16px}
+
+.note{border-top:1px solid var(--line);background:var(--panel);padding:13px 18px;font-size:13px;color:#5c5c52;line-height:1.6}
+.note b{font-family:var(--mono);font-size:11px;color:var(--ink);font-weight:400}
+.warn{border-left:4px solid #C4482E}
+
+@media (max-width:520px){
+  .sec-b{padding:18px 14px 20px}
+  .dark{margin:-18px -14px -20px;padding:20px 14px 22px}
+  .states{gap:16px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="head">
+  <h1>SECONDARY<br>BUTTON</h1>
+  <p>Four candidates against the blue primary. A secondary has one job — to be clearly available and clearly not the point.</p>
+</div>
+
+<!-- CANDIDATES -->
+<div class="sec">
+  <div class="sec-h"><span>CANDIDATES</span><i>each shown beside the primary</i></div>
+  <div class="sec-b">
+
+    <div class="opt">
+      <div class="opt-h">A — Blue tint</div>
+      <div class="opt-d">Pale blue face, blue outline and label. Stays inside the primary's colour family, so the pair reads as one system rather than two decisions.</div>
+      <div class="pair">
+        <button class="b" style="color:#CDF22B" data-set="blue">VIEW WORK</button>
+        <button class="b" style="color:#1E45FB" data-set="tint">GET IN TOUCH</button>
+      </div>
+    </div>
+
+    <div class="opt">
+      <div class="opt-h">B — Paper ghost</div>
+      <div class="opt-d">Near-white face with a blue outline. Quietest of the four, and the most forgiving next to screenshots.</div>
+      <div class="pair">
+        <button class="b" style="color:#CDF22B" data-set="blue">VIEW WORK</button>
+        <button class="b" style="color:#1E45FB" data-set="ghost">GET IN TOUCH</button>
+      </div>
+    </div>
+
+    <div class="opt">
+      <div class="opt-h">C — Neutral plate</div>
+      <div class="opt-d">Grey face, black outline. Reads as a genuine system control rather than a styled link — the most 95 of the three, and the most neutral.</div>
+      <div class="pair">
+        <button class="b" style="color:#CDF22B" data-set="blue">VIEW WORK</button>
+        <button class="b" style="color:#14140F" data-set="neutral">GET IN TOUCH</button>
+      </div>
+    </div>
+
+    <div class="opt">
+      <div class="opt-h">D — Lime</div>
+      <div class="opt-d">Included so you can rule it out. Lime is lighter and higher-chroma than the blue, so it wins the pair — the secondary ends up louder than the primary.</div>
+      <div class="pair">
+        <button class="b" style="color:#CDF22B" data-set="blue">VIEW WORK</button>
+        <button class="b" style="color:#1E45FB" data-set="lime">GET IN TOUCH</button>
+      </div>
+    </div>
+
+  </div>
+  <div class="note"><b>Read</b> — A holds the system together best. C is the safer choice if your case study pages are screenshot-heavy, because grey competes with nothing.</div>
+</div>
+
+<!-- STATES -->
+<div class="sec">
+  <div class="sec-h"><span>STATES — A</span><i>blue tint, full set</i></div>
+  <div class="sec-b">
+    <div class="desc">Hover deepens the tint rather than lightening it, so the button moves toward the primary on interaction instead of away from it.</div>
+    <div class="states">
+      <div class="st"><b>live</b><button class="b" style="color:#1E45FB" data-set="tint">GET IN TOUCH</button></div>
+      <div class="st"><b>hover</b><button class="b" style="color:#1E45FB" data-static="tint-hover" tabindex="-1">GET IN TOUCH</button></div>
+      <div class="st"><b>pressed</b><button class="b" style="color:#1E45FB" data-static="tint-sunk" tabindex="-1">GET IN TOUCH</button></div>
+      <div class="st"><b>disabled</b><button class="b" data-static="dead" disabled>GET IN TOUCH</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- HIERARCHY -->
+<div class="sec">
+  <div class="sec-h"><span>FULL HIERARCHY</span><i>four levels</i></div>
+  <div class="sec-b">
+    <div class="desc">Tertiary drops the sprite entirely — an underline that appears on hover. Without a level like this, every link on the page has to be a chunky button, which gets exhausting inside a long case study.</div>
+    <div class="states">
+      <div class="st"><b>primary</b><button class="b" style="color:#CDF22B" data-set="blue">VIEW WORK</button></div>
+      <div class="st"><b>secondary</b><button class="b" style="color:#1E45FB" data-set="tint">GET IN TOUCH</button></div>
+      <div class="st"><b>tertiary</b><a href="#0" class="b-txt">READ MORE</a></div>
+      <div class="st"><b>disabled</b><button class="b" data-static="dead" disabled>UNAVAILABLE</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- DARK -->
+<div class="sec">
+  <div class="sec-h"><span>ON DARK</span><i>same hierarchy, #0B0B0C</i></div>
+  <div class="sec-b">
+    <div class="dark">
+      <div class="desc">The tint inverts to a deep blue-black face — a pale tint would glow against the dark base and outrank the primary.</div>
+      <div class="states">
+        <div class="st"><b>primary</b><button class="b" style="color:#CDF22B" data-set="blue-dk">VIEW WORK</button></div>
+        <div class="st"><b>secondary</b><button class="b" style="color:#8FA6FF" data-set="tint-dk">GET IN TOUCH</button></div>
+        <div class="st"><b>tertiary</b><a href="#0" class="b-txt">READ MORE</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTEXT -->
+<div class="sec ctx">
+  <div class="sec-h"><span>IN CONTEXT</span><i>hero pair + card action</i></div>
+  <div class="ctx-in">
+    <h2>SIX YEARS ON<br>COMPLEX B2B SYSTEMS</h2>
+    <p>Marketplaces, healthcare operations, fintech onboarding. I design the flow, then I build the front end.</p>
+    <div class="ctx-row">
+      <button class="b lg" style="color:#CDF22B" data-set="blue-lg">VIEW WORK</button>
+      <button class="b lg" style="color:#1E45FB" data-set="tint-lg">GET IN TOUCH</button>
+    </div>
+
+    <div class="card">
+      <div class="card-med"><em>[ case study image ]</em></div>
+      <div class="card-bd">
+        <div class="meta">Self-initiated · 2025</div>
+        <h3>Sanad — rebuilding KYB onboarding so founders stop abandoning at document upload</h3>
+        <div class="ctx-row">
+          <button class="b" style="color:#CDF22B" data-set="blue">OPEN</button>
+          <a href="#0" class="b-txt">LIVE PROTOTYPE</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="note warn"><b>Watch</b> — inside a card the secondary should usually drop to tertiary. Two sprite buttons in a card compete with the case study title above them.</div>
+</div>
+
+</div>
+
+<script>
+function mix(hex,target,amt){
+  const h=x=>parseInt(hex.slice(x,x+2),16), t=x=>parseInt(target.slice(x,x+2),16);
+  const c=(a,b)=>Math.round(a+(b-a)*amt).toString(16).padStart(2,'0');
+  return '#'+c(h(1),t(1))+c(h(3),t(3))+c(h(5),t(5));
+}
+const light=(c,a)=>mix(c,'#ffffff',a);
+const dark =(c,a)=>mix(c,'#000000',a);
+
+const L='#CDF22B', B='#1E45FB';
+const SETS={
+  blue   :{face:B,hi:light(B,.38),shade:dark(B,.45),outline:'#0A0E2E'},
+  tint   :{face:'#DDE3FF',hi:'#FFFFFF',shade:'#9FB0EE',outline:B,hover:'#C6D1FF'},
+  ghost  :{face:'#FAFAF8',hi:'#FFFFFF',shade:'#CACAC2',outline:B,hover:'#ECEFFF'},
+  neutral:{face:'#E2E2DC',hi:'#FFFFFF',shade:'#A6A69E',outline:'#14140F',hover:'#EDEDE7'},
+  lime   :{face:L,hi:light(L,.55),shade:dark(L,.42),outline:'#14140F'},
+  'blue-dk':{face:B,hi:light(B,.38),shade:dark(B,.45),outline:'#4A5BAE'},
+  'tint-dk':{face:'#161A38',hi:'#2E3868',shade:'#0A0C1E',outline:'#4A5BAE',hover:'#1E2450'},
+  dead   :{face:'#DCDCD6',hi:'#EDEDE8',shade:'#B4B4AC',outline:'#A0A099'}
+};
+
+function build(p,scale,state){
+  const F = state==='sunk'  ? dark(p.face,.10)
+          : state==='hover' ? (p.hover||light(p.face,.14))
+          : p.face;
+  const H = state==='sunk' ? p.shade : p.hi;
+  const S = state==='sunk' ? p.hi    : p.shade;
+  const M={'.':null,D:p.outline,H,S,F};
+  const map=['.DDDD.','DHHHSD','DHFFSD','DHFFSD','DSSSSD','.DDDD.'];
+  const c=document.createElement('canvas');
+  c.width=6*scale;c.height=6*scale;
+  const x=c.getContext('2d');
+  for(let r=0;r<6;r++)for(let q=0;q<6;q++){
+    const col=M[map[r][q]];
+    if(col){x.fillStyle=col;x.fillRect(q*scale,r*scale,scale,scale);}
+  }
+  return 'url('+c.toDataURL()+')';
+}
+
+document.querySelectorAll('[data-set]').forEach(el=>{
+  const raw=el.dataset.set, lg=raw.endsWith('-lg');
+  const name=lg?raw.slice(0,-3):raw, sc=lg?6:4, p=SETS[name];
+  const set=s=>el.style.borderImageSource=build(p,sc,s);
+  set('base');
+  el.addEventListener('pointerenter',()=>set('hover'));
+  el.addEventListener('pointerleave',()=>set('base'));
+  el.addEventListener('pointerdown', ()=>set('sunk'));
+  el.addEventListener('pointerup',   ()=>set('hover'));
+});
+
+document.querySelectorAll('[data-static]').forEach(el=>{
+  const v=el.dataset.static;
+  const state=v.endsWith('-hover')?'hover':v.endsWith('-sunk')?'sunk':'base';
+  const name=v.replace(/-(hover|sunk)$/,'');
+  el.style.borderImageSource=build(SETS[name],4,state);
+});
+</script>
+</body>
+</html>

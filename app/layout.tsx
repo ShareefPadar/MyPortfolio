@@ -1,26 +1,41 @@
 import type { Metadata } from "next";
 import Script from 'next/script';
-import dynamic from "next/dynamic";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Geist, Geist_Mono, Silkscreen } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import PageTransition from "@/components/PageTransition";
+import PixelCursor from "@/components/px/PixelCursor";
 
-const FigmaCursors = dynamic(() => import("@/components/FigmaCursors"));
-const Noise = dynamic(() => import("@/components/Noise"));
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 
-const inter = Inter({ 
+/* ── 8-bit design system faces (spec §2) ──────────────────────────
+   Three faces, gated by what a string IS, not by heading level:
+     sentence  → Geist        (even a 40px H1)
+     label     → Geist Mono   (tags, meta, eyebrows, nav, timestamps)
+     statement → Silkscreen   (max 5 words: hero, page titles, buttons)
+
+   Geist Mono stands in for Departure Mono, which the spec names but which
+   is not on Google Fonts. Swapping it later is one @font-face change.
+
+   Silkscreen uses display:'block', not 'swap': its metrics are unlike any
+   fallback, so swapping mid-load throws the hero around violently. */
+const geist = Geist({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-geist",
 });
 
-const playfair = Playfair_Display({ 
+const geistMono = Geist_Mono({
   subsets: ["latin"],
-  variable: "--font-serif",
+  variable: "--font-geist-mono",
+});
+
+const silkscreen = Silkscreen({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  display: "block",
+  variable: "--font-silkscreen",
 });
 
 export const metadata: Metadata = {
@@ -35,13 +50,6 @@ export const metadata: Metadata = {
     description: '6 years of B2B product design. Research to shipped interfaces, end to end.',
     url: 'https://www.shareefpadar.com', 
     siteName: 'Shareef Padar Portfolio',
-    images: [
-      {
-        url: '/og-image.png', 
-        width: 1200,
-        height: 630,
-      },
-    ],
     locale: 'en_US',
     type: 'website',
   },
@@ -49,7 +57,6 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Shareef Padar | Senior Product Designer',
     description: '6 years of B2B product design. Research to shipped interfaces, end to end.',
-    images: ['/og-image.png'],
   },
 };
 
@@ -87,19 +94,44 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
+    <html
+      lang="en"
+      /* The has-js script below adds a class to <html> before React hydrates,
+         so server and client markup differ by design. This suppresses the
+         mismatch for this element's attributes only — it does not extend to
+         the tree beneath it. */
+      suppressHydrationWarning
+      className={`${geist.variable} ${geistMono.variable} ${silkscreen.variable}`}
+    >
       <head>
+        {/* Gates the scroll-reveal hidden state on JS being available, and runs
+            before paint so there is no flash of visible-then-hidden content.
+            Without JS every .reveal stays visible and readable. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "document.documentElement.classList.add('has-js')",
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
         />
       </head>
-      <body className="flex flex-col min-h-screen font-sans">
-        <FigmaCursors />
-        <Noise />
+      <body id="top" className="flex min-h-screen flex-col bg-paper font-sans text-ink">
+        {/* Skip link must be the first focusable element on every page (§11). */}
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-16 focus:top-16 focus:z-[100] focus:bg-blue focus:px-16 focus:py-12 focus:font-pix focus:text-[11px] focus:text-lime"
+        >
+          SKIP TO CONTENT
+        </a>
         <Navbar />
-        <main className="flex-grow pt-28 md:pt-32 pb-12 relative z-10">
-          <PageTransition>{children}</PageTransition>
+        {/* Site-wide, so the guide's cursor on the homepage has a peer that is
+            drawn the same way. Self-suppresses on touch and reduced motion. */}
+        <PixelCursor />
+        {/* Offset clears the nav plate. Both values are on the 4px ramp. */}
+        <main id="main" className="relative z-10 flex-grow pt-96 md:pt-128">
+          {children}
         </main>
         <Footer />
         {/* Google Analytics (Manually Deferred) */}

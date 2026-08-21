@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chat bubble — lime</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+@font-face{
+  font-family:'Departure Mono';
+  src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2409-1@1.0/DepartureMono-Regular.woff2') format('woff2');
+  font-weight:400;font-display:swap;
+}
+:root{
+  --lime:#CDF22B; --blue:#1E45FB; --ink:#14140F;
+  --paper:#FAFAF8; --panel:#F0F0EA; --line:#dedeD8; --mute:#87877a;
+  --mono:'Departure Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:#e6e6e2;font-family:'Geist',-apple-system,system-ui,sans-serif;color:var(--ink);padding:20px 14px 60px;line-height:1.5}
+:focus-visible{outline:3px solid var(--blue);outline-offset:4px}
+.wrap{max-width:660px;margin:0 auto}
+
+.head{margin-bottom:24px}
+.head h1{font-family:'Silkscreen',monospace;font-size:clamp(14px,4vw,18px);font-weight:400;line-height:1.7;margin-bottom:12px}
+.head p{font-size:14px;color:#4a4a46;max-width:54ch}
+.head code{font-family:var(--mono);font-size:12px;background:#d6d6d0;padding:1px 5px}
+
+.sec{border:2px solid var(--ink);margin-bottom:16px;background:var(--paper)}
+.sec-h{display:flex;justify-content:space-between;gap:10px;padding:8px 14px;background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:11px;letter-spacing:.05em}
+.sec-h i{font-style:normal;opacity:.55;font-size:10px;text-align:right}
+.sec-b{padding:22px 18px 26px}
+.desc{font-size:13px;color:#5c5c52;margin-bottom:18px;max-width:48ch}
+.lbl{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin-bottom:9px}
+
+.bub{
+  position:relative;display:inline-block;max-width:300px;
+  border:8px solid transparent;border-image-slice:8 fill;border-image-repeat:stretch;
+  padding:12px 14px;font-size:14px;line-height:1.55;color:var(--ink);
+}
+.bub.mono{font-family:var(--mono);font-size:13px}
+.tail{position:absolute;image-rendering:pixelated;pointer-events:none}
+.tail.bl{left:16px;top:100%;margin-top:-4px}
+.tail.br{right:16px;top:100%;margin-top:-4px}
+.thread{display:flex;flex-direction:column;gap:26px;align-items:flex-start}
+.thread .me{align-self:flex-end}
+.thread .bub{max-width:82%}
+.who{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin-bottom:26px;display:block}
+
+.anat{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:14px}
+.anat figure{text-align:center}
+.anat canvas{image-rendering:pixelated;width:100%;max-width:110px;height:auto;border:1px solid var(--line);background:#fff}
+.anat figcaption{font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--mute);margin-top:7px}
+
+.dots{display:flex;gap:5px;align-items:center;padding:3px 0}
+.dots span{width:9px;height:9px;background:var(--ink);display:block;animation:pop 1.05s steps(1,end) infinite}
+.dots span:nth-child(2){animation-delay:.35s}
+.dots span:nth-child(3){animation-delay:.7s}
+@keyframes pop{0%,33%{opacity:1;transform:translateY(-4px)}33.01%,100%{opacity:.28;transform:translateY(0)}}
+
+@keyframes stepin{
+  0%{opacity:0;transform:scale(.25)}
+  25%{opacity:1;transform:scale(.55)}
+  50%{transform:scale(.8)}
+  75%{transform:scale(1.06)}
+  100%{transform:scale(1)}
+}
+.pop-in{animation:stepin .32s steps(4,end) both;transform-origin:bottom left}
+
+.ctx{padding:0}
+.ctx-in{background:var(--paper);padding:28px 20px 30px;position:relative;overflow:hidden}
+.ctx-in.night{background:#0B0B0C}
+.ctx-in .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--mute);margin-bottom:10px}
+.ctx-in h2{font-family:'Silkscreen',monospace;font-weight:400;font-size:clamp(15px,4.2vw,21px);line-height:1.7;margin-bottom:16px}
+.ctx-in h2 span{color:var(--blue)}
+.ctx-in p{font-size:15px;color:#54544a;max-width:38ch;margin-bottom:22px}
+.night h2{color:#F2F2EE}.night h2 span{color:var(--lime)}
+.night p{color:#9a9a94}.night .eyebrow{color:#6a6a62}
+.ctx-btns{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:52px}
+.b{font-family:'Silkscreen',monospace;font-size:11px;letter-spacing:.03em;line-height:1;
+  border:8px solid transparent;border-image-slice:8 fill;border-image-repeat:stretch;
+  padding:7px 12px;cursor:pointer;background:none;display:inline-block}
+.greet{position:relative;display:inline-block}
+.dismiss{
+  position:absolute;top:-10px;right:-10px;width:26px;height:26px;
+  font-family:var(--mono);font-size:12px;line-height:1;cursor:pointer;
+  border:6px solid transparent;border-image-slice:6 fill;border-image-repeat:stretch;
+  background:none;color:var(--ink);padding:0;z-index:3;
+}
+
+.note{border-top:1px solid var(--line);background:var(--panel);padding:13px 18px;font-size:13px;color:#5c5c52;line-height:1.6}
+.note b{font-family:var(--mono);font-size:11px;color:var(--ink);font-weight:400}
+.row{display:flex;flex-wrap:wrap;gap:34px;align-items:flex-start}
+
+@media (max-width:520px){
+  .sec-b{padding:20px 14px 24px}
+  .bub{max-width:100%}
+  .row{gap:26px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="head">
+  <h1>CHAT BUBBLE<br>LIME</h1>
+  <p>Lime speaker, blue reserved for system lines. Buttons stay blue — so the bubble no longer reads as an oversized button, which is the practical argument for the swap.</p>
+</div>
+
+<!-- ANATOMY -->
+<div class="sec">
+  <div class="sec-h"><span>ANATOMY</span><i>shown at 14×</i></div>
+  <div class="sec-b">
+    <div class="desc">Same 6×6 frame as the controls. Lime expands into four tones — the face can't be flat or the bevel disappears.</div>
+    <div class="anat" id="anat"></div>
+  </div>
+</div>
+
+<!-- TAILS -->
+<div class="sec">
+  <div class="sec-h"><span>TAIL STYLES</span><i>two shapes</i></div>
+  <div class="sec-b">
+    <div class="row">
+      <div>
+        <div class="lbl">Flag — vertical edge</div>
+        <div class="bub" data-set="lime">Continues the bubble's own outline straight down. Reads tighter.<span class="tail bl" data-tail="flag" data-set="lime"></span></div>
+      </div>
+    </div>
+    <div class="row" style="margin-top:34px">
+      <div>
+        <div class="lbl">Taper — symmetric</div>
+        <div class="bub" data-set="lime">Narrows from both sides to a two-pixel point. Softer, more classic.<span class="tail bl" data-tail="taper" data-set="lime"></span></div>
+      </div>
+    </div>
+  </div>
+  <div class="note"><b>Note</b> — flag suits a bubble pinned to a corner. Taper suits a thread where bubbles alternate sides.</div>
+</div>
+
+<!-- SPEAKERS -->
+<div class="sec">
+  <div class="sec-h"><span>SPEAKERS</span><i>lime · neutral · blue</i></div>
+  <div class="sec-b">
+    <div class="desc">Lime is you, neutral plate is the visitor, blue now carries system lines. Ink text on lime measures about 13:1 — the highest contrast pairing anywhere in the system.</div>
+    <div class="thread">
+      <span>
+        <span class="who">SHAREEF</span>
+        <div class="bub" data-set="lime">Hey — I'm Shareef. Senior product designer, and I ship the code too. Want a tour?<span class="tail bl" data-tail="taper" data-set="lime"></span></div>
+      </span>
+      <span class="me">
+        <div class="bub" data-set="neutral">Show me the fintech work.<span class="tail br" data-tail="taper" data-set="neutral"></span></div>
+      </span>
+      <span>
+        <div class="bub mono" data-set="blue" style="color:#CDF22B">SYSTEM · 2 case studies matched<span class="tail bl" data-tail="taper" data-set="blue"></span></div>
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- TYPING -->
+<div class="sec">
+  <div class="sec-h"><span>TYPING</span><i>three blocks, stepped</i></div>
+  <div class="sec-b">
+    <div class="desc">Blocks are ink rather than lime now — on a lime face a lime dot would vanish. They jump one unit using <code style="font-family:var(--mono)">steps(1)</code>, so nothing interpolates.</div>
+    <div class="bub" data-set="lime">
+      <div class="dots"><span></span><span></span><span></span></div>
+      <span class="tail bl" data-tail="taper" data-set="lime"></span>
+    </div>
+  </div>
+</div>
+
+<!-- ENTRANCE -->
+<div class="sec">
+  <div class="sec-h"><span>ENTRANCE</span><i>4 frames, no easing</i></div>
+  <div class="sec-b">
+    <div class="desc">Scales up in four discrete frames with a slight overshoot. Tap to replay.</div>
+    <button id="replay" class="b" data-set="neutral" style="margin-bottom:26px">REPLAY</button>
+    <div>
+      <div class="bub pop-in" id="popper" data-set="lime">Let me show you around.<span class="tail bl" data-tail="taper" data-set="lime"></span></div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTEXT LIGHT -->
+<div class="sec ctx">
+  <div class="sec-h"><span>IN CONTEXT — LIGHT</span><i>your hero</i></div>
+  <div class="ctx-in">
+    <div class="eyebrow">I'M SHAREEF PADAR</div>
+    <h2>SENIOR PRODUCT<br>DESIGNER WHO <span>SHIPS.</span></h2>
+    <p>Six years in B2B UX, from research to shipped interface. Based in Dubai. I build and ship my own products in React and Tailwind too.</p>
+    <div class="ctx-btns">
+      <button class="b" data-set="blue" style="color:#CDF22B">VIEW WORK</button>
+      <button class="b" data-set="neutral">RÉSUMÉ</button>
+    </div>
+    <span class="greet">
+      <div class="bub" data-set="lime">Hey, I'm Shareef 👋 Senior product designer, and I ship the code too. Let me show you around.<span class="tail bl" data-tail="taper" data-set="lime"></span></div>
+      <button class="dismiss" data-set="neutral" aria-label="Dismiss">×</button>
+    </span>
+  </div>
+  <div class="note"><b>Watch</b> — lime is the lightest colour in the palette, so on a near-white hero the bubble reads as a large bright block. The dark text keeps it legible, but it does pull the eye below the headline.</div>
+</div>
+
+<!-- CONTEXT DARK -->
+<div class="sec ctx">
+  <div class="sec-h"><span>IN CONTEXT — DARK</span><i>same bubble, dark hero</i></div>
+  <div class="ctx-in night">
+    <div class="eyebrow">I'M SHAREEF PADAR</div>
+    <h2>SENIOR PRODUCT<br>DESIGNER WHO <span>SHIPS.</span></h2>
+    <p>Six years in B2B UX, from research to shipped interface. Based in Dubai. I build and ship my own products in React and Tailwind too.</p>
+    <div class="ctx-btns">
+      <button class="b" data-set="blue-dk" style="color:#CDF22B">VIEW WORK</button>
+      <button class="b" data-set="neutral-dk" style="color:#F2F2EE">RÉSUMÉ</button>
+    </div>
+    <span class="greet">
+      <div class="bub" data-set="lime-dk">Hey, I'm Shareef 👋 Senior product designer, and I ship the code too. Let me show you around.<span class="tail bl" data-tail="taper" data-set="lime-dk"></span></div>
+      <button class="dismiss" data-set="neutral-dk" style="color:#F2F2EE" aria-label="Dismiss">×</button>
+    </span>
+  </div>
+  <div class="note"><b>Note</b> — lime earns its brightness against a dark base. If you were leaning light, this is the argument for making the hero the one dark block on the site.</div>
+</div>
+
+</div>
+
+<script>
+function mix(hex,t,a){
+  const h=x=>parseInt(hex.slice(x,x+2),16), g=x=>parseInt(t.slice(x,x+2),16);
+  const c=(p,q)=>Math.round(p+(q-p)*a).toString(16).padStart(2,'0');
+  return '#'+c(h(1),g(1))+c(h(3),g(3))+c(h(5),g(5));
+}
+const lt=(c,a)=>mix(c,'#ffffff',a), dk=(c,a)=>mix(c,'#000000',a);
+const L='#CDF22B', B='#1E45FB';
+
+const SETS={
+  lime      :{face:L,hi:lt(L,.55),shade:dk(L,.42),outline:'#14140F'},
+  neutral   :{face:'#E2E2DC',hi:'#FFFFFF',shade:'#A6A69E',outline:'#14140F',hover:'#EDEDE7'},
+  blue      :{face:B,hi:lt(B,.38),shade:dk(B,.45),outline:'#0A0E2E'},
+  'lime-dk' :{face:L,hi:lt(L,.55),shade:dk(L,.42),outline:'#5A6B1E'},
+  'blue-dk' :{face:B,hi:lt(B,.38),shade:dk(B,.45),outline:'#4A5BAE'},
+  'neutral-dk':{face:'#1E1E20',hi:'#3A3A3E',shade:'#0A0A0C',outline:'#4A4A4E',hover:'#28282C'}
+};
+
+function px(map,cols,scale){
+  const w=map[0].length,h=map.length;
+  const c=document.createElement('canvas');
+  c.width=w*scale;c.height=h*scale;
+  const x=c.getContext('2d');
+  for(let r=0;r<h;r++)for(let q=0;q<w;q++){
+    const col=cols[map[r][q]];
+    if(col){x.fillStyle=col;x.fillRect(q*scale,r*scale,scale,scale);}
+  }
+  return c;
+}
+const BODY=['.DDDD.','DHHHSD','DHFFSD','DHFFSD','DSSSSD','.DDDD.'];
+const cols=(p,F)=>({'.':null,D:p.outline,H:p.hi,S:p.shade,F:F||p.face});
+
+const TAILS={
+  flag:['DFFFFS','DFFFSD','DFFSD.','DFSD..','DDD...'],
+  taper:['FFFFFF','DFFFFS','.DFFSD','..DFSD','...DD.']
+};
+const TAILS_MIRROR={
+  flag:['SFFFFD','DSFFFD','.DSFFD','..DSFD','...DDD'],
+  taper:['FFFFFF','DFFFFS','.DFFSD','..DFSD','...DD.']
+};
+
+document.querySelectorAll('[data-set]').forEach(el=>{
+  if(el.classList.contains('tail'))return;
+  const p=SETS[el.dataset.set]; if(!p)return;
+  const sc=el.classList.contains('dismiss')?3:4;
+  const set=s=>el.style.borderImageSource='url('+px(BODY,cols(p,s==='hover'?(p.hover||lt(p.face,.14)):null),sc).toDataURL()+')';
+  set('base');
+  if(el.tagName==='BUTTON'){
+    el.addEventListener('pointerenter',()=>set('hover'));
+    el.addEventListener('pointerleave',()=>set('base'));
+  }
+});
+
+document.querySelectorAll('.tail').forEach(el=>{
+  const p=SETS[el.dataset.set];
+  const right=el.classList.contains('br');
+  const map=(right?TAILS_MIRROR:TAILS)[el.dataset.tail];
+  const c=px(map,cols(p),4);
+  const img=document.createElement('img');
+  img.src=c.toDataURL();
+  img.style.cssText='display:block;width:'+c.width+'px;height:'+c.height+'px;image-rendering:pixelated';
+  el.appendChild(img);
+});
+
+const anat=document.getElementById('anat');
+[[BODY,'lime','BODY · LIME'],[BODY,'neutral','BODY · NEUTRAL'],
+ [TAILS.flag,'lime','TAIL · FLAG'],[TAILS.taper,'lime','TAIL · TAPER']]
+.forEach(([map,setName,label])=>{
+  const fig=document.createElement('figure');
+  fig.appendChild(px(map,cols(SETS[setName]),14));
+  const cap=document.createElement('figcaption');cap.textContent=label;fig.appendChild(cap);
+  anat.appendChild(fig);
+});
+
+const pop=document.getElementById('popper');
+document.getElementById('replay').addEventListener('click',()=>{
+  pop.classList.remove('pop-in');void pop.offsetWidth;pop.classList.add('pop-in');
+});
+document.querySelectorAll('.dismiss').forEach(b=>{
+  b.addEventListener('click',()=>{b.closest('.greet').style.display='none'});
+});
+</script>
+</body>
+</html>

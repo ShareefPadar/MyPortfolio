@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { X, ZoomIn } from "lucide-react";
+import PixelIcon from "@/components/px/PixelIcon";
 
 interface Step {
   src: string;
@@ -30,9 +30,9 @@ const Flow = ({ steps, caption, aspect = "aspect-[9/19.5]" }: FlowProps) => {
   }, [lightbox]);
 
   return (
-    <figure className="my-10 not-prose">
+    <figure className="my-32 not-prose">
       <div
-        className="mx-auto grid gap-3 md:gap-5"
+        className="mx-auto grid gap-12 md:gap-16"
         style={{
           gridTemplateColumns: `repeat(${steps.length}, minmax(0, 1fr))`,
           maxWidth: steps.length <= 2 ? `${steps.length * 260}px` : undefined,
@@ -44,7 +44,7 @@ const Flow = ({ steps, caption, aspect = "aspect-[9/19.5]" }: FlowProps) => {
               type="button"
               onClick={() => setLightbox({ src: step.full || step.src, label: step.label })}
               aria-label={`View ${step.label} screen at full size`}
-              className={`group relative block w-full ${aspect} cursor-zoom-in overflow-hidden rounded-2xl border border-neutral-100 shadow-lg`}
+              className={`group relative block w-full ${aspect} cursor-zoom-in overflow-hidden  border border-line shadow-lg`}
             >
               <Image
                 src={step.src}
@@ -54,26 +54,26 @@ const Flow = ({ steps, caption, aspect = "aspect-[9/19.5]" }: FlowProps) => {
                 className="object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]"
               />
               <span className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/10" />
-              <span className="absolute left-2 top-2 flex h-6 w-6 items-center justify-center rounded-full bg-neutral-950/80 text-[11px] font-bold text-white">
+              <span className="absolute left-8 top-8 flex h-24 w-24 items-center justify-center  bg-night/80 text-[11px] font-bold text-white">
                 {step.number}
               </span>
-              <span className="absolute bottom-2 right-2 flex items-center gap-1 rounded-full bg-black/70 px-2 py-1 text-[9px] font-bold uppercase tracking-wide text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 md:px-2.5">
-                <ZoomIn className="h-3 w-3" />
+              <span className="absolute bottom-8 right-8 flex items-center gap-4  bg-black/70 px-8 py-4 text-[9px] font-bold uppercase tracking-wide text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 md:px-8">
+                <PixelIcon name="search" size={8} />
               </span>
             </button>
-            <span className="mt-3 block text-center text-xs font-bold uppercase tracking-widest text-neutral-500">
+            <span className="mt-12 block text-center text-xs font-bold uppercase tracking-widest text-mute">
               {step.label}
             </span>
           </div>
         ))}
       </div>
       {caption && (
-        <figcaption className="mt-4 text-center text-sm text-neutral-500 font-sans">{caption}</figcaption>
+        <figcaption className="mt-16 text-center text-sm text-mute font-sans">{caption}</figcaption>
       )}
 
       {lightbox && (
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-neutral-950/90 p-4 backdrop-blur-sm md:p-10"
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-night/90 p-16 backdrop-blur-sm md:p-32"
           role="dialog"
           aria-modal="true"
           aria-label={`${lightbox.label} screen, full size`}
@@ -83,16 +83,16 @@ const Flow = ({ steps, caption, aspect = "aspect-[9/19.5]" }: FlowProps) => {
             type="button"
             onClick={() => setLightbox(null)}
             aria-label="Close"
-            className="absolute right-4 top-4 rounded-full bg-white/10 p-2 text-white transition-colors hover:bg-white/20 md:right-8 md:top-8"
+            className="absolute right-16 top-16  bg-white/10 p-8 text-white transition-colors hover:bg-white/20 md:right-32 md:top-32"
           >
-            <X className="h-6 w-6" />
+            <PixelIcon name="close" size={16} />
           </button>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={lightbox.src}
             alt={lightbox.label}
             onClick={(e) => e.stopPropagation()}
-            className="max-h-[88vh] max-w-[92vw] rounded-lg object-contain shadow-2xl"
+            className="max-h-[88vh] max-w-[92vw]  object-contain shadow-2xl"
           />
         </div>
       )}

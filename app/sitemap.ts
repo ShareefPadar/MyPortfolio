@@ -1,20 +1,11 @@
 import { MetadataRoute } from 'next';
+import { slugs } from '@/lib/work';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://www.shareefpadar.com';
 
   // Add your project slugs here as you grow
-  const projects = [
-    '/work',
-    '/work/almosafer-audit',
-    '/work/omni-cast-ai',
-    '/work/google-maps-route-pass',
-    '/work/sanad',
-    '/work/mizan',
-    '/work/instagram-local',
-    '/work/roomy',
-    '/work/form',
-  ].map((route) => ({
+  const projects = ['/work', ...slugs.map((s) => `/work/${s}`)].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: 'monthly' as const,

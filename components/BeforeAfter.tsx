@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { X, ZoomIn } from "lucide-react";
+import PixelIcon from "@/components/px/PixelIcon";
 
 interface Pane {
   src: string;
@@ -43,20 +43,20 @@ const BeforeAfter = ({
   }, [lightbox]);
 
   const panes: Array<Pane & { ring: string; labelColor: string }> = [
-    { src: before, full: beforeFull || before, label: beforeLabel, ring: "border-neutral-100", labelColor: "text-neutral-400" },
-    { src: after, full: afterFull || after, label: afterLabel, ring: "border-accent/20", labelColor: "text-accent" },
+    { src: before, full: beforeFull || before, label: beforeLabel, ring: "border-line", labelColor: "text-mute" },
+    { src: after, full: afterFull || after, label: afterLabel, ring: "border-accent/20", labelColor: "text-blue" },
   ];
 
   return (
-    <figure className="my-10 not-prose">
-      <div className="grid grid-cols-2 gap-3 md:gap-4">
+    <figure className="my-32 not-prose">
+      <div className="grid grid-cols-2 gap-12 md:gap-16">
         {panes.map((pane) => (
           <div key={pane.label}>
             <button
               type="button"
               onClick={() => setLightbox({ src: pane.full!, label: pane.label })}
               aria-label={`View ${pane.label} screenshot at full size`}
-              className={`group relative block w-full ${aspect} cursor-zoom-in overflow-hidden rounded-2xl border ${pane.ring} shadow-lg`}
+              className={`group relative block w-full ${aspect} cursor-zoom-in overflow-hidden  border ${pane.ring} shadow-lg`}
             >
               <Image
                 src={pane.src}
@@ -66,23 +66,23 @@ const BeforeAfter = ({
                 className="object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]"
               />
               <span className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/10" />
-              <span className="absolute bottom-2 right-2 flex items-center gap-1 rounded-full bg-black/70 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                <ZoomIn className="h-3 w-3" /> View full size
+              <span className="absolute bottom-8 right-8 flex items-center gap-4  bg-black/70 px-8 py-4 text-[10px] font-bold uppercase tracking-wide text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                <PixelIcon name="search" size={8} /> View full size
               </span>
             </button>
-            <span className={`mt-3 block text-center text-xs font-bold uppercase tracking-widest ${pane.labelColor}`}>
+            <span className={`mt-12 block text-center text-xs font-bold uppercase tracking-widest ${pane.labelColor}`}>
               {pane.label}
             </span>
           </div>
         ))}
       </div>
       {caption && (
-        <figcaption className="mt-4 text-center text-sm text-neutral-500 font-sans">{caption}</figcaption>
+        <figcaption className="mt-16 text-center text-sm text-mute font-sans">{caption}</figcaption>
       )}
 
       {lightbox && (
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-neutral-950/90 p-4 backdrop-blur-sm md:p-10"
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-night/90 p-16 backdrop-blur-sm md:p-32"
           role="dialog"
           aria-modal="true"
           aria-label={`${lightbox.label} screenshot, full size`}
@@ -92,16 +92,16 @@ const BeforeAfter = ({
             type="button"
             onClick={() => setLightbox(null)}
             aria-label="Close"
-            className="absolute right-4 top-4 rounded-full bg-white/10 p-2 text-white transition-colors hover:bg-white/20 md:right-8 md:top-8"
+            className="absolute right-16 top-16  bg-white/10 p-8 text-white transition-colors hover:bg-white/20 md:right-32 md:top-32"
           >
-            <X className="h-6 w-6" />
+            <PixelIcon name="close" size={16} />
           </button>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={lightbox.src}
             alt={lightbox.label}
             onClick={(e) => e.stopPropagation()}
-            className="max-h-[88vh] max-w-[92vw] rounded-lg object-contain shadow-2xl"
+            className="max-h-[88vh] max-w-[92vw]  object-contain shadow-2xl"
           />
         </div>
       )}

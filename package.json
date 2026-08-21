@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "sprites": "tsx scripts/build-sprites.ts",
+    "prebuild": "npm run sprites"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.1",
@@ -17,8 +19,6 @@
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "critters": "^0.0.25",
-    "framer-motion": "latest",
-    "lucide-react": "latest",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
@@ -33,6 +33,7 @@
     "autoprefixer": "latest",
     "postcss": "latest",
     "tailwindcss": "latest",
+    "tsx": "^4.23.12",
     "typescript": "latest"
   },
   "browserslist": [

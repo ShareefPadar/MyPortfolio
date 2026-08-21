@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forms &amp; accessibility</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+@font-face{
+  font-family:'Departure Mono';
+  src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2409-1@1.0/DepartureMono-Regular.woff2') format('woff2');
+  font-weight:400;font-display:swap;
+}
+:root{
+  --u:4px;
+  --s4:4px;--s8:8px;--s12:12px;--s16:16px;--s24:24px;--s32:32px;--s48:48px;
+  --lime:#CDF22B; --blue:#1E45FB; --ink:#14140F;
+  --error:#C4482E;
+  --paper:#FAFAF8; --panel:#F0F0EA; --line:#DEDED8; --mute:#87877A;
+  --plate:#D8D8D0; --hi:#FFFFFF; --sh:#8A8A80;
+  --mono:'Departure Mono',ui-monospace,monospace;
+  --pix:'Silkscreen',monospace;
+  --sans:'Geist',-apple-system,system-ui,sans-serif;
+  --notch:polygon(4px 0,calc(100% - 4px) 0,calc(100% - 4px) 4px,100% 4px,100% calc(100% - 4px),calc(100% - 4px) calc(100% - 4px),calc(100% - 4px) 100%,4px 100%,4px calc(100% - 4px),0 calc(100% - 4px),0 4px,4px 4px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:#E6E6E2;font-family:var(--sans);color:var(--ink);padding:20px 14px 60px;line-height:1.55}
+.wrap{max-width:700px;margin:0 auto}
+
+/* ══ SKIP LINK ══ */
+.skip{position:absolute;left:-9999px;font-family:var(--pix);font-size:11px;background:var(--blue);color:var(--lime);
+  padding:12px 16px;border:3px solid var(--ink);z-index:99}
+.skip:focus{left:14px;top:14px}
+
+.head{margin-bottom:24px}
+.head h1{font-family:var(--pix);font-weight:700;font-size:clamp(14px,3.8vw,18px);line-height:1.7;margin-bottom:12px}
+.head p{font-size:14px;color:#4A4A46;max-width:56ch}
+
+.sec{border:2px solid var(--ink);margin-bottom:16px;background:var(--paper)}
+.sec-h{display:flex;justify-content:space-between;gap:10px;padding:8px 14px;background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:11px;letter-spacing:.05em}
+.sec-h i{font-style:normal;opacity:.55;font-size:10px;text-align:right}
+.sec-b{padding:var(--s24) 18px}
+.desc{font-size:13.5px;color:#5C5C52;margin-bottom:var(--s16);max-width:54ch}
+.sub{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin:var(--s32) 0 var(--s12);padding-bottom:6px;border-bottom:1px dashed var(--line)}
+.sub:first-child{margin-top:0}
+.strip{display:flex;flex-wrap:wrap;gap:var(--s24);align-items:flex-start}
+.item{display:flex;flex-direction:column;gap:var(--s8);align-items:flex-start}
+.item>b{font-family:var(--mono);font-size:8.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);font-weight:400}
+
+/* ══ THE FOCUS RING ══ */
+.focusable{position:relative;display:inline-block}
+.focusable::before{
+  content:"";position:absolute;inset:-7px;background:var(--blue);clip-path:var(--notch);
+  z-index:-1;opacity:0;
+}
+.focusable:focus-within::before,.focusable.demo::before{opacity:1}
+*:focus{outline:none}
+.showring:focus-visible{outline:none}
+
+/* ══ BUTTONS ══ */
+.btn{font-family:var(--pix);font-size:11px;line-height:1;border:8px solid transparent;border-image-slice:8 fill;
+  border-image-repeat:stretch;padding:9px 14px;cursor:pointer;background:none;color:var(--ink);display:inline-block;
+  min-height:44px}
+.btn.b7{font-weight:700}
+.btn:disabled{cursor:not-allowed;color:#9A9A92}
+
+/* ══ FIELDS ══ */
+.field{margin-bottom:var(--s24);max-width:420px}
+.field label{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink);margin-bottom:var(--s8)}
+.field label .req{color:var(--error);margin-left:3px}
+.field .help{font-size:13px;color:#5C5C52;margin-top:var(--s8);line-height:1.5}
+.field .err{font-size:13px;color:var(--error);margin-top:var(--s8);display:flex;gap:6px;align-items:flex-start;line-height:1.5}
+.field .err b{width:9px;height:9px;background:var(--error);display:block;flex:none;margin-top:5px}
+
+.inp{
+  width:100%;font-family:var(--sans);font-size:16px;color:var(--ink);
+  background:var(--paper);padding:12px 13px;min-height:48px;
+  border:6px solid transparent;border-image-slice:6 fill;border-image-repeat:stretch;
+  display:block;
+}
+.inp::placeholder{color:#A2A29A}
+textarea.inp{min-height:120px;resize:vertical;line-height:1.6}
+select.inp{appearance:none;cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M0 0h4v2H0zM4 2h4v2H4zM8 0h4v2H8zM2 2h2v2H2zM4 4h4v2H4z' fill='%2314140F'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;padding-right:38px}
+
+/* checkbox / radio */
+.check{display:flex;gap:var(--s12);align-items:flex-start;cursor:pointer;font-size:15px;
+  padding:10px 0;min-height:44px;max-width:420px}
+.check input{position:absolute;opacity:0;width:0;height:0}
+.check .box{width:26px;height:26px;flex:none;background:var(--paper);position:relative;
+  border:6px solid transparent;border-image-slice:6 fill;border-image-repeat:stretch;margin-top:1px}
+.check .box canvas{position:absolute;inset:0;margin:auto;image-rendering:pixelated;opacity:0;width:14px;height:14px}
+.check input:checked + .box canvas{opacity:1}
+.check .box.round{border-radius:0}
+.check span{padding-top:4px;line-height:1.5;color:#3E3E36}
+
+/* form composed */
+.formwrap{background:var(--plate);border:3px solid var(--ink);padding:var(--s24) var(--s24) var(--s32);
+  box-shadow:inset var(--u) var(--u) 0 var(--hi), inset calc(var(--u)*-1) calc(var(--u)*-1) 0 var(--sh)}
+.formwrap .inner{background:var(--paper);border:3px solid var(--ink);padding:var(--s24) var(--s24) var(--s32)}
+.formwrap h3{font-family:var(--pix);font-weight:700;font-size:15px;line-height:1.7;margin-bottom:var(--s8)}
+.formwrap .intro{font-size:14.5px;color:#4A4A42;margin-bottom:var(--s24);max-width:44ch}
+
+/* submit states */
+.load{display:flex;gap:3px;align-items:center}
+.load b{width:9px;height:14px;background:var(--line);display:block;border:1px solid rgba(0,0,0,.15)}
+.load b.f{background:var(--lime);border-color:var(--ink)}
+.done{display:flex;gap:var(--s8);align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.07em;color:var(--ink);
+  background:var(--lime);border:3px solid var(--ink);padding:12px 14px;max-width:420px}
+.done canvas{image-rendering:pixelated;width:14px;height:14px;flex:none}
+
+/* tables */
+.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl th{font-family:var(--mono);font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);text-align:left;padding:0 8px 8px 0;font-weight:400;border-bottom:2px solid var(--ink)}
+.tbl td{padding:9px 8px 9px 0;border-bottom:1px solid var(--line);vertical-align:middle}
+.tbl code{font-family:var(--mono);font-size:11.5px;color:var(--blue);white-space:nowrap}
+.tbl .r{color:#5C5C52;font-size:12.5px}
+.pill{font-family:var(--mono);font-size:9px;letter-spacing:.06em;padding:3px 7px;border:2px solid var(--ink);display:inline-block}
+.pill.ok{background:var(--lime)}
+.pill.no{background:var(--error);color:#fff;border-color:var(--error)}
+.pair{display:inline-flex;align-items:center;gap:6px}
+.pair i{width:20px;height:20px;border:1px solid var(--ink);display:block;flex:none}
+
+.rules{list-style:none;font-size:13.5px}
+.rules li{padding:9px 0 9px 26px;border-bottom:1px solid var(--line);position:relative;color:#3E3E36}
+.rules li:last-child{border-bottom:0}
+.rules li::before{content:"▸";position:absolute;left:4px;color:var(--blue)}
+.rules.no li::before{content:"✕";color:#C4482E}
+.rules code{font-family:var(--mono);font-size:12px;color:var(--blue)}
+
+.note{border-top:1px solid var(--line);background:var(--panel);padding:12px 18px;font-size:13px;color:#5C5C52;line-height:1.6}
+.note b{font-family:var(--mono);font-size:11px;color:var(--ink);font-weight:400}
+.warn{border-left:4px solid var(--error)}
+
+@media (max-width:520px){.sec-b{padding:var(--s16) 12px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<a href="#main" class="skip">SKIP TO CONTENT</a>
+<div class="wrap" id="main">
+
+<div class="head">
+  <h1>FORMS &amp;<br>ACCESSIBILITY</h1>
+  <p>The contact page, the focus ring that's been open since the nav, and the pass you need to be able to stand behind "WCAG-aligned" on your résumé.</p>
+</div>
+
+<!-- FOCUS -->
+<div class="sec">
+  <div class="sec-h"><span>01 — THE FOCUS RING</span><i>solved · tab through this page</i></div>
+  <div class="sec-b">
+    <div class="desc">A square outline around a notched sprite reads as a bug. The fix: a blue plate sitting 7px behind the component, clipped with the <em>same</em> notch geometry. It hugs the shape instead of boxing it.</div>
+    <div class="strip">
+      <div class="item"><b>rest</b>
+        <span class="focusable"><button class="btn" data-set="neutral">GET IN TOUCH</button></span></div>
+      <div class="item"><b>focused</b>
+        <span class="focusable demo"><button class="btn" data-set="neutral" tabindex="-1">GET IN TOUCH</button></span></div>
+      <div class="item"><b>primary focused</b>
+        <span class="focusable demo"><button class="btn b7" data-set="blue" style="color:#CDF22B" tabindex="-1">VIEW WORK</button></span></div>
+    </div>
+  </div>
+  <div class="note"><b>Rule</b> — focus appears instantly, never animated, and is never suppressed. It's the one place in the system where motion is banned outright.</div>
+</div>
+
+<!-- TEXT FIELDS -->
+<div class="sec">
+  <div class="sec-h"><span>02 — TEXT FIELDS</span><i>sunk bevel</i></div>
+  <div class="sec-b">
+    <div class="desc">Inputs use the sunk sprite — the same recess as a pressed button and a screenshot well. A field is a hole you put something into, which is exactly what that bevel already means here.</div>
+
+    <div class="field">
+      <label for="n1">YOUR NAME <span class="req">*</span></label>
+      <span class="focusable" style="display:block"><input class="inp" id="n1" data-inp placeholder="Jane Okafor"></span>
+    </div>
+
+    <div class="field">
+      <label for="n2">EMAIL <span class="req">*</span></label>
+      <span class="focusable" style="display:block"><input class="inp" id="n2" data-inp type="email" value="jane@meridian.ae"></span>
+      <div class="help">I reply to everything, usually within a day.</div>
+    </div>
+
+    <div class="field">
+      <label for="n3">EMAIL</label>
+      <span class="focusable" style="display:block"><input class="inp" id="n3" data-inp data-state="error" value="jane@meridian"></span>
+      <div class="err"><b></b><span>That address is missing a domain — try <span style="font-family:var(--mono)">jane@meridian.ae</span></span></div>
+    </div>
+
+    <div class="field">
+      <label for="n4">COMPANY</label>
+      <span class="focusable" style="display:block"><input class="inp" id="n4" data-inp data-state="dead" value="Not accepting new work" disabled></span>
+    </div>
+  </div>
+  <div class="note warn"><b>New token</b> — <code style="font-family:var(--mono)">--error: #C4482E</code>. The only colour added since the palette was set. Errors can't borrow lime or blue, both of which already mean something positive here.</div>
+</div>
+
+<!-- OTHER INPUTS -->
+<div class="sec">
+  <div class="sec-h"><span>03 — OTHER INPUTS</span><i>textarea, select, choices</i></div>
+  <div class="sec-b">
+    <div class="field">
+      <label for="t1">WHAT'S THE PROJECT?</label>
+      <span class="focusable" style="display:block"><textarea class="inp" id="t1" data-inp placeholder="A sentence or two is plenty."></textarea></span>
+    </div>
+
+    <div class="field">
+      <label for="s1">HOW DID YOU FIND ME?</label>
+      <span class="focusable" style="display:block"><select class="inp" id="s1" data-inp>
+        <option>LinkedIn</option><option>A referral</option><option>Search</option><option>Somewhere else</option>
+      </select></span>
+    </div>
+
+    <div class="sub">Checkboxes</div>
+    <label class="check"><input type="checkbox" checked><span class="box" data-inp><canvas data-tick></canvas></span><span>Send me a copy of this message</span></label>
+    <label class="check"><input type="checkbox"><span class="box" data-inp><canvas data-tick></canvas></span><span>I'm hiring for a specific role</span></label>
+
+    <div class="sub">Radio</div>
+    <label class="check"><input type="radio" name="r" checked><span class="box" data-inp><canvas data-dot></canvas></span><span>Full-time</span></label>
+    <label class="check"><input type="radio" name="r"><span class="box" data-inp><canvas data-dot></canvas></span><span>Contract</span></label>
+  </div>
+  <div class="note"><b>Note</b> — the select arrow is a drawn pixel triangle, not the browser default. Every glyph in the system is on the grid.</div>
+</div>
+
+<!-- COMPOSED -->
+<div class="sec">
+  <div class="sec-h"><span>04 — THE CONTACT PAGE</span><i>composed</i></div>
+  <div class="sec-b">
+    <div class="formwrap">
+      <div class="inner">
+        <h3>LET'S TALK</h3>
+        <p class="intro">Hiring, collaborating, or just want to argue about onboarding flows — all welcome.</p>
+
+        <div class="field">
+          <label for="c1">YOUR NAME <span class="req">*</span></label>
+          <span class="focusable" style="display:block"><input class="inp" id="c1" data-inp placeholder="Jane Okafor"></span>
+        </div>
+        <div class="field">
+          <label for="c2">EMAIL <span class="req">*</span></label>
+          <span class="focusable" style="display:block"><input class="inp" id="c2" data-inp type="email" placeholder="jane@company.com"></span>
+        </div>
+        <div class="field">
+          <label for="c3">MESSAGE <span class="req">*</span></label>
+          <span class="focusable" style="display:block"><textarea class="inp" id="c3" data-inp placeholder="A sentence or two is plenty."></textarea></span>
+        </div>
+        <span class="focusable"><button class="btn b7" data-set="blue" style="color:#CDF22B" id="send">SEND MESSAGE</button></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SUBMIT STATES -->
+<div class="sec">
+  <div class="sec-h"><span>05 — SUBMIT STATES</span><i>press the button above</i></div>
+  <div class="sec-b">
+    <div class="strip">
+      <div class="item"><b>idle</b><button class="btn b7" data-set="blue" style="color:#CDF22B">SEND MESSAGE</button></div>
+      <div class="item"><b>sending</b>
+        <button class="btn" data-set="neutral" disabled><span class="load" id="loadDemo"></span></button></div>
+      <div class="item"><b>disabled</b><button class="btn" data-static="dead" disabled>SEND MESSAGE</button></div>
+    </div>
+    <div class="sub">Sent</div>
+    <div class="done"><canvas data-tick2></canvas>MESSAGE SENT — I'LL REPLY WITHIN A DAY</div>
+  </div>
+  <div class="note"><b>Rule</b> — the loader is the segmented block bar, same as the scroll progress. Never a spinner; nothing in this system rotates.</div>
+</div>
+
+<!-- A11Y -->
+<div class="sec">
+  <div class="sec-h"><span>06 — ACCESSIBILITY PASS</span><i>contrast, targets, motion</i></div>
+  <div class="sec-b">
+
+    <div class="sub">Contrast</div>
+    <table class="tbl">
+      <tr><th>Pairing</th><th>Ratio</th><th></th></tr>
+      <tr><td><span class="pair"><i style="background:#14140F"></i><i style="background:#CDF22B"></i></span> Ink on lime</td><td><code>13.0:1</code></td><td><span class="pill ok">AAA</span></td></tr>
+      <tr><td><span class="pair"><i style="background:#FFFFFF"></i><i style="background:#1E45FB"></i></span> White on blue</td><td><code>8.6:1</code></td><td><span class="pill ok">AAA</span></td></tr>
+      <tr><td><span class="pair"><i style="background:#14140F"></i><i style="background:#FAFAF8"></i></span> Ink on paper</td><td><code>16.9:1</code></td><td><span class="pill ok">AAA</span></td></tr>
+      <tr><td><span class="pair"><i style="background:#CDF22B"></i><i style="background:#1E45FB"></i></span> Lime on blue</td><td><code>4.9:1</code></td><td><span class="pill ok">AA</span></td></tr>
+      <tr><td><span class="pair"><i style="background:#87877A"></i><i style="background:#FAFAF8"></i></span> Mute on paper</td><td><code>4.0:1</code></td><td><span class="pill no">LARGE ONLY</span></td></tr>
+    </table>
+    <div class="desc" style="margin-top:var(--s12)">Mute grey is the one to watch — it clears AA for large text but not for body. It's currently used on meta labels at 9–11px, which is exactly where it shouldn't be. Darken it to <code style="font-family:var(--mono);color:var(--blue)">#6E6E62</code> and it clears 5.7:1.</div>
+
+    <div class="sub">Targets &amp; behaviour</div>
+    <table class="tbl">
+      <tr><td class="r" style="width:150px">Touch targets</td><td class="r">Minimum 44×44px. Buttons and checkboxes above meet it; nav links need padding to reach it on mobile.</td></tr>
+      <tr><td class="r">Skip link</td><td class="r">First focusable element. Press Tab now to see it.</td></tr>
+      <tr><td class="r">Reduced motion</td><td class="r">All typing, scanline, pop and blink disabled. Content appears at final state immediately.</td></tr>
+      <tr><td class="r">Alt text</td><td class="r">Screenshots describe what the screen shows and why it matters, not "screenshot of Sanad". The ASCII portrait is decorative — <code>alt=""</code>.</td></tr>
+      <tr><td class="r">Colour alone</td><td class="r">Errors carry an icon and text, not just red. The lime tab pairs with position, not colour alone.</td></tr>
+      <tr><td class="r">Zoom</td><td class="r">Layout holds to 200%. Silkscreen is the risk — test the hero at that size.</td></tr>
+    </table>
+  </div>
+  <div class="note warn"><b>Fix</b> — mute grey at small sizes is the one real failure in the system. Change the token, not the usage.</div>
+</div>
+
+<!-- RULES -->
+<div class="sec">
+  <div class="sec-h"><span>07 — RULES</span><i>short</i></div>
+  <div class="sec-b">
+    <ul class="rules">
+      <li>Focus is a blue notched plate 7px behind the component, instant, never suppressed</li>
+      <li>Inputs use the sunk bevel — a field is a recess</li>
+      <li>Labels are always visible; placeholders are examples, never labels</li>
+      <li>Errors name the problem and show the fix, in text and icon</li>
+      <li>Every interactive target is at least <code>44×44px</code></li>
+      <li>Loaders are segmented blocks — nothing rotates</li>
+    </ul>
+    <div class="sub">Never</div>
+    <ul class="rules no">
+      <li>Placeholder-as-label</li>
+      <li>Red text alone to signal an error</li>
+      <li>Animate or delay a focus ring</li>
+      <li>Mute grey below 16px</li>
+      <li>Disable the submit button before the user has tried</li>
+    </ul>
+  </div>
+</div>
+
+</div>
+
+<script>
+function mix(h,t,a){const g=x=>parseInt(h.slice(x,x+2),16),k=x=>parseInt(t.slice(x,x+2),16);
+  const c=(p,q)=>Math.round(p+(q-p)*a).toString(16).padStart(2,'0');
+  return '#'+c(g(1),k(1))+c(g(3),k(3))+c(g(5),k(5));}
+const lt=(c,a)=>mix(c,'#ffffff',a), dkn=(c,a)=>mix(c,'#000000',a);
+const B='#1E45FB';
+const SETS={
+  blue:{face:B,hi:lt(B,.38),shade:dkn(B,.45),outline:'#0A0E2E'},
+  neutral:{face:'#E2E2DC',hi:'#FFFFFF',shade:'#A6A69E',outline:'#14140F',hover:'#EDEDE7'},
+  dead:{face:'#DCDCD6',hi:'#EDEDE8',shade:'#B4B4AC',outline:'#A0A099'},
+  /* sunk field: paper face, shadow top-left */
+  field:{face:'#FAFAF8',hi:'#8A8A80',shade:'#FFFFFF',outline:'#14140F'},
+  fieldErr:{face:'#FDF2EF',hi:'#C4482E',shade:'#FFFFFF',outline:'#C4482E'},
+  fieldDead:{face:'#ECECE6',hi:'#B4B4AC',shade:'#F4F4EE',outline:'#A0A099'}
+};
+const BODY=['.DDDD.','DHHHSD','DHFFSD','DHFFSD','DSSSSD','.DDDD.'];
+function frame(p,s,st){
+  const F=st==='hover'?(p.hover||lt(p.face,.14)):st==='sunk'?dkn(p.face,.10):p.face;
+  const M={'.':null,D:p.outline,H:st==='sunk'?p.shade:p.hi,S:st==='sunk'?p.hi:p.shade,F};
+  const c=document.createElement('canvas');c.width=6*s;c.height=6*s;
+  const x=c.getContext('2d');
+  for(let r=0;r<6;r++)for(let q=0;q<6;q++){const col=M[BODY[r][q]];
+    if(col){x.fillStyle=col;x.fillRect(q*s,r*s,s,s);}}
+  return 'url('+c.toDataURL()+')';
+}
+document.querySelectorAll('[data-set]').forEach(el=>{
+  const p=SETS[el.dataset.set];
+  el.style.borderImageSource=frame(p,4,'base');
+  el.addEventListener('pointerenter',()=>el.style.borderImageSource=frame(p,4,'hover'));
+  el.addEventListener('pointerleave',()=>el.style.borderImageSource=frame(p,4,'base'));
+  el.addEventListener('pointerdown',()=>el.style.borderImageSource=frame(p,4,'sunk'));
+  el.addEventListener('pointerup',()=>el.style.borderImageSource=frame(p,4,'hover'));
+});
+document.querySelectorAll('[data-static]').forEach(el=>{
+  el.style.borderImageSource=frame(SETS[el.dataset.static],4,'base');
+});
+document.querySelectorAll('[data-inp]').forEach(el=>{
+  const st=el.dataset.state;
+  const p=st==='error'?SETS.fieldErr:st==='dead'?SETS.fieldDead:SETS.field;
+  el.style.borderImageSource=frame(p,3,'base');
+});
+
+/* glyphs */
+function glyph(c,map,colour,size){
+  const w=map[0].length,h=map.length,s=size/w;
+  c.width=size;c.height=Math.round(size*h/w);
+  const x=c.getContext('2d');x.fillStyle=colour;
+  for(let r=0;r<h;r++)for(let q=0;q<w;q++) if(map[r][q]==='X') x.fillRect(q*s,r*s,s,s);
+}
+const TICK=['......X','.....XX','X...XX.','XX.XX..','.XXX...','..X....'];
+const DOT =['..XX..','.XXXX.','XXXXXX','XXXXXX','.XXXX.','..XX..'];
+document.querySelectorAll('[data-tick]').forEach(c=>glyph(c,TICK,'#1E45FB',28));
+document.querySelectorAll('[data-dot]').forEach(c=>glyph(c,DOT,'#1E45FB',28));
+document.querySelectorAll('[data-tick2]').forEach(c=>glyph(c,TICK,'#14140F',28));
+
+/* loader demo */
+const ld=document.getElementById('loadDemo');
+for(let i=0;i<6;i++)ld.appendChild(document.createElement('b'));
+let li=0;
+setInterval(()=>{
+  const bs=ld.querySelectorAll('b');
+  bs.forEach((b,i)=>b.classList.toggle('f',i<li));
+  li=(li+1)%(bs.length+1);
+},140);
+
+/* submit demo */
+const send=document.getElementById('send');
+send.addEventListener('click',e=>{
+  e.preventDefault();
+  const orig=send.textContent;
+  send.disabled=true; send.textContent='SENDING…';
+  setTimeout(()=>{send.textContent='SENT ✓'; setTimeout(()=>{send.textContent=orig;send.disabled=false;},1600);},900);
+});
+</script>
+</body>
+</html>

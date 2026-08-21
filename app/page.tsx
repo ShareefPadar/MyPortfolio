@@ -1,131 +1,182 @@
-"use client";
-
+import Link from "next/link";
 import Hero from "@/components/Hero";
 import WorkCard from "@/components/WorkCard";
-import ParallaxSection from "@/components/ParallaxSection";
-import ScrollReveal from "@/components/ScrollReveal";
-import Marquee from "@/components/Marquee";
-import Link from "next/link";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
-import { workEntries, featuredSlugs, sideProjectSlugs } from "@/app/work/workList";
+import Reveal from "@/components/px/Reveal";
+import PixelIcon from "@/components/px/PixelIcon";
+import PixelGuide from "@/components/px/PixelGuide";
+import DinoRunner from "@/components/px/DinoRunner";
+import { featured, sideProjects } from "@/lib/work";
 
-const featured = featuredSlugs
-  .map((slug) => workEntries.find((w) => w.slug === slug)!)
-  .filter(Boolean);
-const sideProjects = sideProjectSlugs
-  .map((slug) => workEntries.find((w) => w.slug === slug)!)
-  .filter(Boolean);
+/**
+ * Homepage (spec §7.1).
+ *
+ * A server component: the only client code on this page is the portrait canvas,
+ * the typewriter, and the reveals, each of which is its own small island.
+ *
+ * Sections carry data-guide-id, and the tour copy lives in lib/guide.ts.
+ * The old version put the strings in the markup and read them with
+ * querySelectorAll, which meant rewriting a section silently killed the
+ * feature. PixelGuide now warns in development when an id resolves to
+ * nothing.
+ */
+
+const SectionMarker = ({ n, title }: { n: string; title: string }) => (
+  <div className="mb-24 flex items-baseline gap-12 md:mb-32">
+    <Reveal variant="pop" as="span" className="font-pix text-[20px] font-bold leading-none text-blue">
+      {n}
+    </Reveal>
+    <h2 className="font-pix text-[14px] leading-[1.8] tracking-[0.02em] text-ink">{title}</h2>
+  </div>
+);
 
 export default function Home() {
   return (
-    <div className="flex flex-col w-full overflow-hidden">
-      <div data-guide="Hey, I'm Shareef 👋 Senior product designer, and I ship the code too. Let me show you around.">
-        <ParallaxSection priority={true}>
-          <Hero />
-        </ParallaxSection>
+    <div className="flex w-full flex-col">
+      {/* Homepage only: the tour explains the page it is standing on. */}
+      <PixelGuide />
+      <div data-guide-id="hero">
+        <Hero />
       </div>
 
-      {/* Skills strip — visual break between hero and work */}
-      <Marquee
-        items={["UX Research", "Product Design", "Design Systems", "Prototyping", "Usability Testing", "B2B SaaS"]}
-        speed={50}
-        className="border-y border-neutral-100"
-      />
+      {/* 01 SELECTED WORK */}
+      <section id="work" data-guide-id="work" className="mx-auto w-full max-w-wide px-16 pt-64 md:pt-96">
+        <SectionMarker n="01" title="SELECTED WORK" />
 
-      {/* SELECTED WORK — the two strongest case studies */}
-      <section id="work" data-guide="My favourite case studies live here. Click any card to dig in." className="container-wide mt-16 md:mt-28 w-full">
-        <ScrollReveal className="mb-10 md:mb-16">
-          <div className="flex items-center gap-4">
-            <span className="text-sm md:text-base font-bold text-neutral-900 uppercase tracking-widest">Selected Work</span>
-            <div className="h-px flex-1 bg-neutral-100" />
-          </div>
-        </ScrollReveal>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 w-full">
-          {featured.map((project, index) => (
-            <ParallaxSection key={project.slug} delay={index * 0.1} className="h-full">
-              <WorkCard
-                headline={project.headline}
-                title={project.title}
-                category={project.category}
-                badge={project.badge}
-                description={project.description}
-                href={`/work/${project.slug}`}
-                thumbnail={project.thumbnail}
-                bgColor={project.bgColor}
-                featured
-              />
-            </ParallaxSection>
+        <div className="grid gap-32 md:grid-cols-2 md:gap-48">
+          {featured.map((study) => (
+            <Reveal key={study.slug}>
+              <WorkCard study={study} featured />
+            </Reveal>
           ))}
         </div>
 
-        {/* NDA note — right under the work a recruiter just scanned, not
-            several scrolls down where it reads as an afterthought */}
-        <div data-guide="There's real production work behind this too. Six years of it sits under NDA, and I'll walk you through it live.">
-          <ScrollReveal className="mt-8 md:mt-10">
-            <div className="flex flex-col items-start gap-3 border-t border-neutral-100 pt-6 sm:flex-row sm:items-center sm:justify-between">
-              <p className="font-sans text-sm leading-relaxed text-neutral-500 md:text-base">
-                This is the work I can show publicly. Six years of production B2B design, across logistics, healthcare, and travel, sits under NDA. Ask me about it on a call.
+        {/* NDA notice.
+            §7.1 specifies a bare strip with a full-width rule top and bottom.
+            That reads as stray prose next to the cards: it is the only block
+            on the page with no frame and no label, so it looks dropped in
+            rather than built.
+
+            It is a SUNK sprite frame, not the raised one the cards use. Sunk
+            means recessed and contained (constraint #7), which is exactly what
+            this content is — work that is held back. Raised would also imply
+            the box is pressable, and unlike the cards above it, it is not. */}
+        <div data-guide-id="nda" className="mt-48 md:mt-64">
+          <Reveal>
+            <div className="sp sp-neutral-4 sp-s4 sp-sunk p-24 md:p-32">
+              <p className="mb-12 flex items-center gap-8 font-mono text-[10px] uppercase tracking-[0.11em] text-mute">
+                <PixelIcon name="info" size={8} />
+                UNDER NDA
               </p>
-              <Link
-                href="/work"
-                className="inline-flex shrink-0 items-center gap-2 font-sans text-sm font-bold text-neutral-900 transition-colors hover:text-accent"
-              >
-                View all work
-                <ArrowRight className="h-4 w-4" />
-              </Link>
+
+              <div className="flex flex-col items-start gap-16 sm:flex-row sm:items-end sm:justify-between sm:gap-32">
+                <p className="max-w-prose font-sans text-[16px] leading-[1.7] text-ink">
+                  This is the work I can show publicly. Six years of production B2B design,
+                  across logistics, healthcare, and travel, sits under NDA. Ask me about it
+                  on a call.
+                </p>
+
+                {/* A text link, not a sprite button: a second raised button
+                    inside an already-framed box stacks bevel on bevel, and the
+                    reference draws this as an underlined Silkscreen link. The
+                    44px tap floor lives on the anchor so the rule can still
+                    hug the text. */}
+                <Link
+                  href="/work"
+                  className="group inline-flex min-h-[44px] shrink-0 items-center"
+                >
+                  <span className="inline-flex items-center gap-8 border-b-[3px] border-ink pb-4 font-pix text-[10px] leading-none text-ink group-hover:border-blue">
+                    VIEW ALL WORK
+                    <PixelIcon name="arrowR" size={8} />
+                  </span>
+                </Link>
+              </div>
             </div>
-          </ScrollReveal>
+          </Reveal>
         </div>
       </section>
 
-      {/* SIDE PROJECTS — live products that back up "who ships" */}
-      <section data-guide="I designed and built these two myself. They're live, so go press some buttons." className="container-wide mt-12 md:mt-16 mb-16 md:mb-32 w-full">
-        <ScrollReveal className="mb-8 md:mb-10">
-          <div className="flex items-center gap-4">
-            <span className="text-sm md:text-base font-bold text-neutral-900 uppercase tracking-widest">Designed, Built &amp; Live</span>
-            <div className="h-px flex-1 bg-neutral-100" />
-          </div>
-        </ScrollReveal>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 w-full">
-          {sideProjects.map((project, index) => (
-            <ParallaxSection key={project.slug} delay={index * 0.1} className="h-full">
-              <div className="flex h-full flex-col rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-xl md:p-8">
-                <div className="mb-3 flex items-center gap-2">
-                  <span className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-neutral-500">
-                    <span className="h-2 w-2 animate-pulse rounded-full bg-green-500" />
-                    Live · Side project
-                  </span>
-                </div>
-                <h3 className="mb-1 font-serif text-2xl font-bold leading-tight tracking-tight text-neutral-950">
-                  {project.headline}
-                </h3>
-                <p className="mb-3 font-sans text-sm font-medium text-neutral-400">
-                  {project.title}
-                </p>
-                <p className="mb-6 font-sans text-sm leading-relaxed text-neutral-600 md:text-base">
-                  {project.description}
-                </p>
-                <div className="mt-auto flex flex-wrap items-center gap-x-6 gap-y-2 font-sans text-sm font-bold">
-                  <Link href={`/work/${project.slug}`} className="group/link inline-flex items-center gap-1.5 text-neutral-900">
-                    Case study
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover/link:translate-x-1" />
-                  </Link>
-                  {project.liveUrl && (
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group/link inline-flex items-center gap-1.5 text-accent"
+      {/* 02 DESIGNED, BUILT & LIVE */}
+      <section
+        data-guide-id="live"
+        className="mx-auto w-full max-w-wide px-16 pt-64 pb-96 md:pt-96 md:pb-128"
+      >
+        <SectionMarker n="02" title="DESIGNED, BUILT & LIVE" />
+
+        <div className="grid gap-32 md:grid-cols-2 md:gap-48">
+          {sideProjects.map((study) => (
+            <Reveal key={study.slug}>
+              {/* h-[calc(100%-17px)], not h-full: mt-17 clears the tab, and the
+                  height has to give that back or the card overhangs its slot. */}
+              <div className="card mt-[17px] flex h-[calc(100%-17px)] flex-col">
+                <span className="card-tab">{study.domain}</span>
+
+                <div className="card-body m-[10px] flex flex-1 flex-col p-16">
+                  <p className="mb-8 flex items-center gap-8 font-mono text-[10px] uppercase tracking-[0.07em] text-mute">
+                    <span className="led inline-block h-8 w-8 bg-lime" aria-hidden="true" />
+                    Live · side project
+                  </p>
+                  <h3 className="mb-4 font-sans text-[19px] font-medium leading-[1.4] text-ink">
+                    {study.card.headline}
+                  </h3>
+                  <p className="mb-12 font-mono text-[10px] uppercase tracking-[0.07em] text-mute">
+                    {study.card.title}
+                  </p>
+                  <p className="mb-16 font-sans text-[14.5px] leading-[1.6] text-ink">
+                    {study.card.description}
+                  </p>
+
+                  {/* Two saturated buttons never sit side by side, so inside a
+                      card the secondary drops to tertiary (§4.1). */}
+                  <div className="mt-auto flex flex-wrap items-center gap-x-24 gap-y-8">
+                    <Link
+                      href={`/work/${study.slug}`}
+                      className="inline-flex min-h-[44px] items-center gap-8 font-pix text-[10px] leading-none text-blue"
                     >
-                      Launch app
-                      <ArrowUpRight className="h-4 w-4 transition-transform group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5" />
-                    </a>
-                  )}
+                      CASE STUDY
+                      <PixelIcon name="arrowR" size={8} />
+                    </Link>
+                    {study.liveUrl && (
+                      <a
+                        href={study.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex min-h-[44px] items-center gap-8 font-pix text-[10px] leading-none text-blue"
+                      >
+                        LAUNCH APP
+                        <PixelIcon name="external" size={8} />
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
-            </ParallaxSection>
+            </Reveal>
           ))}
         </div>
+      </section>
+
+      {/* Dino Runner, running along the top of the footer.
+          Homepage only, not the layout: <Footer /> renders on every route, so
+          putting the game "above the footer" there would drop it at the end of
+          all eight case studies too.
+
+          NO bottom padding, deliberately. The canvas ends on its ground line
+          and the footer starts immediately underneath, so the paper-to-night
+          edge reads as the ground the dino is running on. Any gap here breaks
+          the whole effect and leaves it floating. */}
+      {/* Full-bleed: no max-width and no side padding, so the ground line runs
+          the entire width of the viewport and meets the footer edge to edge.
+          The hint inside keeps the page container for itself.
+
+          overflow-x-clip because the focus plate sits at inset:-7px, which on
+          a full-width element hangs 7px past the viewport and adds a
+          horizontal scrollbar to the whole page. Clipping loses nothing: the
+          part that hangs off is off-screen anyway, and the top edge a
+          keyboard user actually sees is unaffected. `clip` rather than
+          `hidden` so this never becomes a scroll container. */}
+      <section aria-label="Dino Runner game" className="w-full overflow-x-clip">
+        <Reveal>
+          <DinoRunner />
+        </Reveal>
       </section>
     </div>
   );

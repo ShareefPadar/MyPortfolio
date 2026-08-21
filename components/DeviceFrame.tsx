@@ -9,58 +9,61 @@ interface DeviceFrameProps {
   caption?: string;
 }
 
-// A framed "browser" shell for live, clickable prototypes embedded in case
-// studies. Full-bleed to the viewport, then re-centered on a capped inner
-// width (max-w-860) so the frame hugs the prototype's own content instead of
-// leaving wide empty canvas gutters on either side.
+/**
+ * The bezel (spec §7.3, section 07 "TRY IT").
+ *
+ * A plate frame with a sunk well holding a live prototype, an LED strip to
+ * mark it as running, and a mono URL label. Breaks to the `wide` grid column
+ * — the previous `width:100vw; margin-left:calc(50% - 50vw)` also overflowed
+ * by the scrollbar's width on browsers that reserve space for one.
+ *
+ * The `.iso` wrapper is load-bearing. SanadPrototype and MizanPrototype are
+ * mocks of OTHER companies' products with their own scoped design systems.
+ * They set fonts on their own roots but inherit everything else, so without
+ * this boundary any inherited property from the 8-bit system leaks into two
+ * 1000-line files nobody re-reads.
+ */
 const DeviceFrame = ({ children, url = "prototype", label, caption }: DeviceFrameProps) => {
   return (
-    <figure
-      className="not-prose my-10 md:my-14"
-      style={{ width: "100vw", maxWidth: "100vw", marginLeft: "calc(50% - 50vw)" }}
-    >
-      <div className="mx-auto w-full max-w-[860px] px-4 sm:px-6 lg:px-8">
+    <figure className="not-prose wide my-48">
       {label && (
-        <div className="mb-3 flex items-center justify-center gap-2">
-          <span className="h-2 w-2 animate-pulse rounded-full bg-green-500" />
-          <span className="text-[11px] font-bold uppercase tracking-widest text-neutral-500">
+        <div className="mb-12 flex items-center gap-8">
+          <span className="led inline-block h-8 w-8 bg-lime" aria-hidden="true" />
+          <span className="font-mono text-[9px] uppercase tracking-[0.11em] text-mute">
             {label}
           </span>
         </div>
       )}
-      <div className="overflow-hidden rounded-3xl border border-neutral-200 bg-white shadow-xl">
-        {/* browser chrome */}
-        <div className="flex items-center gap-3 border-b border-neutral-200 bg-neutral-50 px-4 py-3">
-          <div className="flex gap-1.5" aria-hidden="true">
-            <span className="h-3 w-3 rounded-full bg-neutral-200" />
-            <span className="h-3 w-3 rounded-full bg-neutral-200" />
-            <span className="h-3 w-3 rounded-full bg-neutral-200" />
-          </div>
-          <div className="mx-auto flex min-w-0 items-center gap-1.5 rounded-full bg-white px-4 py-1.5 text-xs font-medium text-neutral-500 border border-neutral-200">
-            <svg viewBox="0 0 16 16" width="11" height="11" fill="none" aria-hidden="true">
-              <path d="M4.5 7V5.5a3.5 3.5 0 1 1 7 0V7" stroke="currentColor" strokeWidth="1.4" />
-              <rect x="3.5" y="7" width="9" height="6" rx="1.5" stroke="currentColor" strokeWidth="1.4" />
-            </svg>
-            <span className="truncate">{url}</span>
-          </div>
-          {/* spacer to balance the dots */}
-          <div className="w-[52px]" aria-hidden="true" />
+
+      <div className="card mt-0">
+        {/* URL strip: mono, because it is a label rather than a sentence. */}
+        <div className="flex items-center gap-8 px-12 py-8">
+          <span className="flex gap-4" aria-hidden="true">
+            <span className="h-8 w-8 bg-mute" />
+            <span className="h-8 w-8 bg-mute" />
+            <span className="h-8 w-8 bg-mute" />
+          </span>
+          <span className="mx-auto font-mono text-[9px] tracking-[0.08em] text-mute">
+            {url}
+          </span>
+          <span className="w-[26px]" aria-hidden="true" />
         </div>
-        {/* prototype viewport */}
+
+        {/* Sunk well: it contains the prototype rather than inviting a click. */}
         <div
-          className="h-[600px] overflow-y-auto overflow-x-auto overscroll-contain md:h-[680px]"
+          className="well iso m-[10px] mt-0 h-[600px] overflow-auto overscroll-contain bg-paper md:h-[680px]"
           role="region"
           aria-label={label || "Interactive prototype"}
         >
           {children}
         </div>
       </div>
+
       {caption && (
-        <figcaption className="mt-4 text-center font-sans text-sm text-neutral-500">
+        <figcaption className="mt-12 border-t border-line pt-12 font-sans text-[13px] leading-[1.55] text-mute">
           {caption}
         </figcaption>
       )}
-      </div>
     </figure>
   );
 };
