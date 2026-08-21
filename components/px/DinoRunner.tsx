@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { INK, PAPER, PLATE } from "@/lib/tokens";
-import { loadRuns, saveRun, standing, type Runs, type Standing } from "@/lib/dino-scores";
 
 /**
  * Dino Runner — an endless runner with no image assets. Every sprite is an
@@ -201,13 +200,6 @@ type Game = {
 
 type Status = "idle" | "running" | "over";
 
-/** 1st, 2nd, 3rd, 4th … 11th/12th/13th are the exceptions that catch people. */
-function ordinal(n: number): string {
-  const rem100 = n % 100;
-  if (rem100 >= 11 && rem100 <= 13) return `${n}th`;
-  return `${n}${["th", "st", "nd", "rd"][n % 10] ?? "th"}`;
-}
-
 /** Square-wave blip. Cheap, and it sounds like the thing it is. */
 function blip(ac: AudioContext | null, freq: number, dur: number, vol = 0.04) {
   if (!ac) return;
@@ -235,21 +227,10 @@ export default function DinoRunner() {
   const [focused, setFocused] = useState(false);
   const [sound, setSound] = useState(true);
 
-  /* Both start empty and are filled from localStorage in an effect, never in
-     the initial state. Reading storage during render makes the server emit 0
-     and the client emit the stored value, which is a hydration mismatch. */
-  const [runs, setRuns] = useState<Runs>([]);
-  const [result, setResult] = useState<Standing | null>(null);
-
   const soundRef = useRef(sound);
   soundRef.current = sound;
   const statusRef = useRef(status);
   statusRef.current = status;
-
-  const hi = runs.length ? Math.max(...runs) : 0;
-  // The loop closes over this, so it must be a ref, not the derived value.
-  const runsRef = useRef<Runs>([]);
-  runsRef.current = runs;
 
   const newGame = useCallback(() => {
     gameRef.current = {
@@ -331,7 +312,6 @@ export default function DinoRunner() {
 
   useEffect(() => {
     assetsRef.current = buildAssets(INK);
-    setRuns(loadRuns());
     newGame();
     draw();
   }, [newGame, draw]);
@@ -527,9 +507,6 @@ export default function DinoRunner() {
           blip(audioRef.current, 200, 0.16, 0.05);
           setTimeout(() => soundRef.current && blip(audioRef.current, 120, 0.22, 0.05), 90);
         }
-        const next = saveRun(g.score);
-        setRuns(next);
-        setResult(standing(g.score, next));
         draw();
         setStatus("over");
         return;
@@ -576,9 +553,8 @@ export default function DinoRunner() {
             className="pixelated block h-auto w-full"
           />
 
-          <div className="pointer-events-none absolute right-12 top-12 flex gap-16 font-pix text-[11px] leading-none tracking-[0.08em]">
-            <span className="text-mute">HI {pad(hi)}</span>
-            <span className="text-ink">{pad(score)}</span>
+          <div className="pointer-events-none absolute right-12 top-12 font-pix text-[11px] leading-none tracking-[0.08em] text-ink">
+            {pad(score)}
           </div>
 
           {status !== "running" && (
@@ -590,22 +566,6 @@ export default function DinoRunner() {
                 {status === "over" ? "GAME OVER" : "DINO RUNNER"}
               </p>
 
-              {/* The standing only means something once there is history to
-                  rank against, so a first-ever run says nothing rather than
-                  claiming a meaningless 1st of 1. */}
-              {status === "over" && result && (
-                <p className="font-mono text-[11px] uppercase tracking-[0.1em]">
-                  {result.isBest ? (
-                    <span className="bg-lime px-8 py-4 text-ink">New best</span>
-                  ) : result.beatPct !== null ? (
-                    <span className="text-ink">
-                      {ordinal(result.place)} of {result.total} runs
-                      <span className="text-mute"> · beat {result.beatPct}%</span>
-                    </span>
-                  ) : null}
-                </p>
-              )}
-
               <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-mute">
                 {focused ? "Press space to run" : "Click to focus, then space"}
               </p>
@@ -613,21 +573,6 @@ export default function DinoRunner() {
           )}
         </div>
       </div>
-
-      {/* Only appears once there is something to show, so a first-time visitor
-          sees a game rather than an empty stats panel. */}
-      {runs.length > 1 && (
-        <p className="mt-12 font-mono text-[10px] uppercase tracking-[0.1em] text-mute">
-          Recent{" "}
-          {runs.slice(0, 5).map((r, i) => (
-            <span key={i} className={r === hi ? "text-ink" : undefined}>
-              {i > 0 && " · "}
-              {pad(r)}
-            </span>
-          ))}
-          <span className="text-mute"> · {runs.length} runs on this device</span>
-        </p>
-      )}
 
       <div className="mt-12 flex flex-wrap items-center justify-between gap-12">
         <p className="font-mono text-[10px] uppercase tracking-[0.1em] text-mute">
