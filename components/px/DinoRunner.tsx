@@ -23,11 +23,16 @@ import { INK, PAPER, PLATE } from "@/lib/tokens";
  * only while the frame has focus, so Space never stops scrolling the page.
  */
 
-/* World is drawn in logical pixels and scaled by PX, so edges stay hard. */
+/* World is drawn in logical pixels and scaled by PX, so edges stay hard.
+   H ends one row below GROUND_Y so the ground line is the LAST row of the
+   canvas. The canvas then butts straight onto the footer, and because the
+   footer is bg-night with no top border, the paper-to-night edge continues
+   the ground line across the full width of the page — the dino runs along
+   the top of the footer rather than inside a box above it. */
 const W = 400;
-const H = 120;
-const PX = 3;
 const GROUND_Y = 98;
+const H = GROUND_Y + 2; // ground line at GROUND_Y + 1, nothing below it
+const PX = 3;
 
 const DINO_BODY = [
   "...........XXXXXXX..",
@@ -190,7 +195,9 @@ type Game = {
   obstacles: Obstacle[];
   spawnIn: number;
   clouds: { x: number; y: number; w: number }[];
-  pebbles: { x: number; y: number; w: number }[];
+  /* Road marks, not pebbles: they live ON the ground line rather than below
+     it, since there is no below any more. No y — the row is fixed. */
+  marks: { x: number; w: number }[];
   legTimer: number;
   legFrame: 0 | 1;
   wingTimer: number;
@@ -247,10 +254,9 @@ export default function DinoRunner() {
         y: 10 + Math.random() * 34,
         w: 10 + Math.floor(Math.random() * 14),
       })),
-      pebbles: Array.from({ length: 26 }, () => ({
+      marks: Array.from({ length: 26 }, () => ({
         x: Math.random() * W,
-        y: GROUND_Y + 3 + Math.random() * 12,
-        w: 1 + Math.floor(Math.random() * 3),
+        w: 2 + Math.floor(Math.random() * 4),
       })),
       legTimer: 0,
       legFrame: 0,
@@ -287,10 +293,13 @@ export default function DinoRunner() {
       ctx.fillRect(x + 3, y + 3, c.w - 6, 1);
     }
 
+    /* Ground line, then light gaps scrolling through it. The gaps are the only
+       speed cue left now that there is no ground below the line to scatter
+       debris across, and they read as road surface rushing past. */
     ctx.fillStyle = INK;
     ctx.fillRect(0, GROUND_Y + 1, W, 1);
     ctx.fillStyle = PLATE;
-    for (const p of g.pebbles) ctx.fillRect(Math.round(p.x), Math.round(p.y), p.w, 1);
+    for (const m of g.marks) ctx.fillRect(Math.round(m.x), GROUND_Y + 1, m.w, 1);
 
     for (const o of g.obstacles) {
       if (o.kind === "bird") {
@@ -433,11 +442,11 @@ export default function DinoRunner() {
           c.y = 10 + Math.random() * 34;
         }
       }
-      for (const p of g.pebbles) {
-        p.x -= move;
-        if (p.x < -4) {
-          p.x = W + Math.random() * 60;
-          p.y = GROUND_Y + 3 + Math.random() * 12;
+      for (const m of g.marks) {
+        m.x -= move;
+        if (m.x < -8) {
+          m.x = W + Math.random() * 60;
+          m.w = 2 + Math.floor(Math.random() * 4);
         }
       }
 
@@ -529,10 +538,37 @@ export default function DinoRunner() {
   const pad = (n: number) => String(n).padStart(5, "0");
 
   return (
-    <div className="mx-auto w-full max-w-[760px]">
-      {/* .focusable gives the notched blue focus plate (§4.2). It ships as
-          inline-block; the utility overrides that so the frame still fills
-          the column. */}
+    <div className="w-full">
+      {/* Controls read above the game, since there is nothing below it any
+          more — the canvas runs straight into the footer. */}
+      <div className="mb-12 flex flex-wrap items-center justify-between gap-12">
+        <p className="font-mono text-[10px] uppercase tracking-[0.1em] text-mute">
+          {/* Branch in CSS, not JS: picking the wording from a media query at
+              render time would differ between server and client. */}
+          <span className="md:hidden">Tap to jump</span>
+          <span className="hidden md:inline">Space to jump · hold for height</span>
+        </p>
+        <span className="focusable">
+          <button
+            type="button"
+            onClick={() => {
+              setSound((s) => !s);
+              frameRef.current?.focus();
+            }}
+            aria-pressed={sound}
+            className={`sp sp-neutral-3 sp-s3 ${sound ? "" : "sp-sunk"} inline-flex min-h-[44px] items-center px-12 font-mono text-[9px] uppercase tracking-[0.11em] ${
+              sound ? "text-ink" : "text-mute"
+            }`}
+          >
+            Sound {sound ? "on" : "off"}
+          </button>
+        </span>
+      </div>
+
+      {/* No frame. A bordered box cannot merge into the footer, and the whole
+          point is that the footer is the ground. .focusable still supplies the
+          notched blue plate on keyboard focus (§4.2), which is the only
+          outline this ever needs. */}
       <div className="focusable block w-full">
         <div
           ref={frameRef}
@@ -544,7 +580,7 @@ export default function DinoRunner() {
           onPointerDown={onPointerDown}
           onPointerUp={release}
           onPointerLeave={release}
-          className="well relative block touch-none select-none bg-paper outline-none"
+          className="relative block touch-none select-none outline-none"
         >
           <canvas
             ref={canvasRef}
@@ -567,32 +603,14 @@ export default function DinoRunner() {
               </p>
 
               <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-mute">
-                {focused ? "Press space to run" : "Click to focus, then space"}
+                <span className="md:hidden">Tap to start</span>
+                <span className="hidden md:inline">
+                  {focused ? "Press space to run" : "Click to focus, then space"}
+                </span>
               </p>
             </div>
           )}
         </div>
-      </div>
-
-      <div className="mt-12 flex flex-wrap items-center justify-between gap-12">
-        <p className="font-mono text-[10px] uppercase tracking-[0.1em] text-mute">
-          Space or tap to jump · hold for height
-        </p>
-        <span className="focusable">
-          <button
-            type="button"
-            onClick={() => {
-              setSound((s) => !s);
-              frameRef.current?.focus();
-            }}
-            aria-pressed={sound}
-            className={`sp sp-neutral-3 sp-s3 ${sound ? "" : "sp-sunk"} inline-flex min-h-[44px] items-center px-12 font-mono text-[9px] uppercase tracking-[0.11em] ${
-              sound ? "text-ink" : "text-mute"
-            }`}
-          >
-            Sound {sound ? "on" : "off"}
-          </button>
-        </span>
       </div>
     </div>
   );

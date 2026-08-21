@@ -154,14 +154,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Dino Runner, last thing before the footer.
+      {/* Dino Runner, running along the top of the footer.
           Homepage only, not the layout: <Footer /> renders on every route, so
           putting the game "above the footer" there would drop it at the end of
-          all eight case studies too. */}
-      <section
-        aria-label="Dino Runner game"
-        className="mx-auto w-full max-w-wide px-16 pb-96 md:pb-128"
-      >
+          all eight case studies too.
+
+          NO bottom padding, deliberately. The canvas ends on its ground line
+          and the footer starts immediately underneath, so the paper-to-night
+          edge reads as the ground the dino is running on. Any gap here breaks
+          the whole effect and leaves it floating. */}
+      <section aria-label="Dino Runner game" className="mx-auto w-full max-w-wide px-16">
         <Reveal>
           <DinoRunner />
         </Reveal>
