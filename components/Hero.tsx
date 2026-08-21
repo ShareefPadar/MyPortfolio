@@ -60,11 +60,20 @@ const Hero = () => (
 
             `transparent` knocks the white field out of the source art by
             flood-filling from the border, so the portrait sits on the page
-            surface rather than in a white box. Capped at 320px: the art is
-            96x144, so an uncapped column would make it taller than the copy
-            beside it and push the fold down. */}
-        <div className="hidden justify-self-center md:block">
-          <PixelPortrait transparent className="w-[320px]" />
+            surface rather than in a white box.
+
+            Fluid, not a fixed width. The grid track it sits in is ~459px at
+            1280px wide but only ~310px at the md breakpoint where the
+            portrait first appears, so any fixed size large enough to look
+            right on a laptop overflows the column on a small tablet. w-full
+            fills whatever the track actually is; max-w caps it.
+
+            The cap is 420px because the art is 96x144 — a 1.5 ratio — so
+            420px wide is 630px tall, which still fits inside the hero's
+            existing 672px height. Going much past this starts pushing the
+            fold down rather than making the portrait read bigger. */}
+        <div className="hidden w-full justify-self-center md:block">
+          <PixelPortrait transparent className="mx-auto w-full max-w-[420px]" />
         </div>
       </div>
     </div>
