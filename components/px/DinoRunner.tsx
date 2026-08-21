@@ -247,6 +247,15 @@ export default function DinoRunner() {
   const [status, setStatus] = useState<Status>("idle");
   const [score, setScore] = useState(0);
   const [focused, setFocused] = useState(false);
+  /* Separate from `focused`: whether to actually DRAW the ring. `onFocus`
+     alone cannot tell a Tab from a click, and the frame calls .focus()
+     itself on pointerdown so the browser's own :focus-visible heuristic
+     cannot either — a scripted call is focus-visible-eligible in Chromium
+     no matter what triggered it. `viaPointer` is set right before that
+     scripted call and read once, in the very next onFocus, so the ring only
+     ever shows for a focus that arrived some other way — Tab. */
+  const [ringVisible, setRingVisible] = useState(false);
+  const viaPointer = useRef(false);
 
   const statusRef = useRef(status);
   statusRef.current = status;
@@ -505,12 +514,15 @@ export default function DinoRunner() {
         g.spawnIn = 120 + g.speed * 22 + Math.random() * 90;
         const roll = Math.random();
         if (g.score > 260 && roll < 0.24) {
-          // Both lanes sit low enough to clear with a jump.
-          const lanes = [GROUND_Y - 17, GROUND_Y - 28];
+          /* One height only, and a low one. There is no duck — jump is the
+             only move — so a bird that flies any higher reads as a "duck
+             under this" obstacle it is impossible to actually duck under.
+             GROUND_Y - 17 clears with margin to spare even on the shortest
+             possible tap (needs g.y >= 14; a bare tap reaches ~38). */
           g.obstacles.push({
             kind: "bird",
             x: wRef.current + 10,
-            y: lanes[Math.floor(Math.random() * lanes.length)],
+            y: GROUND_Y - 17,
           });
         } else if (roll < 0.62) {
           g.obstacles.push({
@@ -578,6 +590,7 @@ export default function DinoRunner() {
   }, [status, draw]);
 
   const onPointerDown = () => {
+    viaPointer.current = true;
     frameRef.current?.focus();
     ensureAudio();
     press();
@@ -598,57 +611,77 @@ export default function DinoRunner() {
         <span className="hidden md:inline">Space to jump · hold for height</span>
       </p>
 
-      {/* No frame. A bordered box cannot merge into the footer, and the whole
-          point is that the footer is the ground. .focusable still supplies the
-          notched blue plate on keyboard focus (§4.2), which is the only
-          outline this ever needs. */}
-      <div className="focusable block w-full">
-        <div
-          ref={frameRef}
-          tabIndex={0}
-          role="application"
-          aria-label="Dino Runner. Press space or tap to jump."
-          onFocus={() => setFocused(true)}
-          onBlur={() => setFocused(false)}
-          onPointerDown={onPointerDown}
-          onPointerUp={release}
-          onPointerLeave={release}
-          className="relative block touch-none select-none outline-none"
-        >
-          <canvas
-            ref={canvasRef}
-            width={worldW * PX}
-            height={H * PX}
-            className="pixelated block h-auto w-full"
-          />
+      {/* No frame, and no .focusable plate. A filled bar across a full-bleed
+          element read as a stray blue stripe rather than a focus ring, and it
+          fired on a plain click as well as on Tab, which is not what "focus
+          indicator" is for.
 
-          <div className="pointer-events-none absolute right-12 top-12 font-pix text-[11px] leading-none tracking-[0.08em] text-ink">
-            {pad(score)}
-          </div>
+          Still not unconditionally invisible, though — §11 and the rule in
+          globals.css both say never remove focus indication, and this
+          element captures Space, so a keyboard user who tabs onto it needs
+          SOME signal that the key now drives the dino instead of scrolling
+          the page. `ringVisible` is driven in JS rather than CSS
+          :focus-visible: the frame calls .focus() itself below, and a
+          scripted call is focus-visible-eligible in Chromium no matter what
+          triggered it, which made the CSS-only version show the ring on a
+          plain click too. Explicit state means it shows for keyboard focus
+          only, ever — and it is a thin inset ink ring, not a filled bar. */}
+      <div
+        ref={frameRef}
+        tabIndex={0}
+        role="application"
+        aria-label="Dino Runner. Press space or tap to jump."
+        onFocus={() => {
+          setFocused(true);
+          setRingVisible(!viaPointer.current);
+          viaPointer.current = false;
+        }}
+        onBlur={() => {
+          setFocused(false);
+          setRingVisible(false);
+        }}
+        onPointerDown={onPointerDown}
+        onPointerUp={release}
+        onPointerLeave={release}
+        className={`relative block w-full touch-none select-none ${
+          ringVisible
+            ? "outline outline-2 -outline-offset-2 outline-ink"
+            : "outline-none"
+        }`}
+      >
+        <canvas
+          ref={canvasRef}
+          width={worldW * PX}
+          height={H * PX}
+          className="pixelated block h-auto w-full"
+        />
 
-          {status !== "running" && (
-            <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-8 px-16 text-center">
-              <p
-                className="font-pix tracking-[0.14em] text-ink"
-                style={{ fontSize: status === "over" ? 20 : 16 }}
-              >
-                {status === "over" ? "GAME OVER" : "DINO RUNNER"}
-              </p>
-
-              {/* Never "click to focus". Space is bound only while the frame
-                  has focus, so before the first click the honest instruction
-                  is to click — and clicking both focuses AND starts the run.
-                  Once they have played, the frame is focused and space is
-                  real, so the restart prompt can offer it. */}
-              <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-mute">
-                <span className="md:hidden">Tap to {status === "over" ? "run again" : "start"}</span>
-                <span className="hidden md:inline">
-                  {status === "over" && focused ? "Press space to run again" : "Click to start"}
-                </span>
-              </p>
-            </div>
-          )}
+        <div className="pointer-events-none absolute right-12 top-12 font-pix text-[11px] leading-none tracking-[0.08em] text-ink">
+          {pad(score)}
         </div>
+
+        {status !== "running" && (
+          <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-8 px-16 text-center">
+            <p
+              className="font-pix tracking-[0.14em] text-ink"
+              style={{ fontSize: status === "over" ? 20 : 16 }}
+            >
+              {status === "over" ? "GAME OVER" : "DINO RUNNER"}
+            </p>
+
+            {/* Never "click to focus". Space is bound only while the frame
+                has focus, so before the first click the honest instruction
+                is to click — and clicking both focuses AND starts the run.
+                Once they have played, the frame is focused and space is
+                real, so the restart prompt can offer it. */}
+            <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-mute">
+              <span className="md:hidden">Tap to {status === "over" ? "run again" : "start"}</span>
+              <span className="hidden md:inline">
+                {status === "over" && focused ? "Press space to run again" : "Click to start"}
+              </span>
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );
