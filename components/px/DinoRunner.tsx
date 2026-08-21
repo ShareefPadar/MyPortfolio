@@ -232,10 +232,7 @@ export default function DinoRunner() {
   const [status, setStatus] = useState<Status>("idle");
   const [score, setScore] = useState(0);
   const [focused, setFocused] = useState(false);
-  const [sound, setSound] = useState(true);
 
-  const soundRef = useRef(sound);
-  soundRef.current = sound;
   const statusRef = useRef(status);
   statusRef.current = status;
 
@@ -326,7 +323,6 @@ export default function DinoRunner() {
   }, [newGame, draw]);
 
   const ensureAudio = () => {
-    if (!soundRef.current) return;
     if (!audioRef.current) {
       const AC =
         window.AudioContext ??
@@ -348,7 +344,7 @@ export default function DinoRunner() {
     if (g.y > 0) return; // no double jump
     g.vy = -6.4;
     g.holding = true;
-    if (soundRef.current) blip(audioRef.current, 660, 0.07);
+    blip(audioRef.current, 660, 0.07);
   };
 
   const release = () => {
@@ -406,7 +402,7 @@ export default function DinoRunner() {
 
       const next = Math.floor(g.dist / 6);
       if (next !== g.score) {
-        if (next > 0 && next % 100 === 0 && soundRef.current) {
+        if (next > 0 && next % 100 === 0) {
           blip(audioRef.current, 880, 0.09, 0.03);
         }
         g.score = next;
@@ -512,10 +508,8 @@ export default function DinoRunner() {
 
       if (hit) {
         g.shake = 8;
-        if (soundRef.current) {
-          blip(audioRef.current, 200, 0.16, 0.05);
-          setTimeout(() => soundRef.current && blip(audioRef.current, 120, 0.22, 0.05), 90);
-        }
+        blip(audioRef.current, 200, 0.16, 0.05);
+        setTimeout(() => blip(audioRef.current, 120, 0.22, 0.05), 90);
         draw();
         setStatus("over");
         return;
@@ -539,31 +533,14 @@ export default function DinoRunner() {
 
   return (
     <div className="w-full">
-      {/* Controls read above the game, since there is nothing below it any
-          more — the canvas runs straight into the footer. */}
-      <div className="mb-12 flex flex-wrap items-center justify-between gap-12">
-        <p className="font-mono text-[10px] uppercase tracking-[0.1em] text-mute">
-          {/* Branch in CSS, not JS: picking the wording from a media query at
-              render time would differ between server and client. */}
-          <span className="md:hidden">Tap to jump</span>
-          <span className="hidden md:inline">Space to jump · hold for height</span>
-        </p>
-        <span className="focusable">
-          <button
-            type="button"
-            onClick={() => {
-              setSound((s) => !s);
-              frameRef.current?.focus();
-            }}
-            aria-pressed={sound}
-            className={`sp sp-neutral-3 sp-s3 ${sound ? "" : "sp-sunk"} inline-flex min-h-[44px] items-center px-12 font-mono text-[9px] uppercase tracking-[0.11em] ${
-              sound ? "text-ink" : "text-mute"
-            }`}
-          >
-            Sound {sound ? "on" : "off"}
-          </button>
-        </span>
-      </div>
+      {/* Control hint reads above the game, since there is nothing below it
+          any more — the canvas runs straight into the footer. */}
+      <p className="mb-12 font-mono text-[10px] uppercase tracking-[0.1em] text-mute">
+        {/* Branch in CSS, not JS: picking the wording from a media query at
+            render time would differ between server and client. */}
+        <span className="md:hidden">Tap to jump</span>
+        <span className="hidden md:inline">Space to jump · hold for height</span>
+      </p>
 
       {/* No frame. A bordered box cannot merge into the footer, and the whole
           point is that the footer is the ground. .focusable still supplies the
