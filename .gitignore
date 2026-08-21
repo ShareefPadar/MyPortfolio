@@ -36,3 +36,8 @@ next-env.d.ts
 # Local working files: source briefs, draft notes, résumé copies.
 # Not served, and not for the public repo. Leading slash keeps public/assets tracked.
 /assets/
+
+# Draft PRDs left at the repo root. These sit outside /assets/ so they were not
+# covered above, and a `git add -A` swept one into a commit twice before this
+# was added.
+/*.docx
