@@ -163,7 +163,17 @@ export default function Home() {
           and the footer starts immediately underneath, so the paper-to-night
           edge reads as the ground the dino is running on. Any gap here breaks
           the whole effect and leaves it floating. */}
-      <section aria-label="Dino Runner game" className="mx-auto w-full max-w-wide px-16">
+      {/* Full-bleed: no max-width and no side padding, so the ground line runs
+          the entire width of the viewport and meets the footer edge to edge.
+          The hint inside keeps the page container for itself.
+
+          overflow-x-clip because the focus plate sits at inset:-7px, which on
+          a full-width element hangs 7px past the viewport and adds a
+          horizontal scrollbar to the whole page. Clipping loses nothing: the
+          part that hangs off is off-screen anyway, and the top edge a
+          keyboard user actually sees is unaffected. `clip` rather than
+          `hidden` so this never becomes a scroll container. */}
+      <section aria-label="Dino Runner game" className="w-full overflow-x-clip">
         <Reveal>
           <DinoRunner />
         </Reveal>

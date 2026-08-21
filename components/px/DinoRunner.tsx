@@ -29,10 +29,25 @@ import { INK, PAPER, PLATE } from "@/lib/tokens";
    footer is bg-night with no top border, the paper-to-night edge continues
    the ground line across the full width of the page — the dino runs along
    the top of the footer rather than inside a box above it. */
-const W = 400;
 const GROUND_Y = 98;
 const H = GROUND_Y + 2; // ground line at GROUND_Y + 1, nothing below it
 const PX = 3;
+
+/* The world WIDTH is measured from the element, so going full-bleed shows
+   more world instead of magnifying the same world.
+
+   A fixed 400-wide world stretched edge to edge would be 4:1, which at 1920px
+   is a 480px-tall band of mostly empty sky with a 96px dino in it. Measuring
+   instead keeps a logical pixel at roughly CELL css px at every size, so the
+   band stays a constant height and wider screens simply see further ahead.
+
+   Clamped at both ends. Below MIN_W a phone would have so little world that
+   an obstacle would appear and reach the dino in a fraction of a second;
+   above MAX_W the pixels start growing again rather than the view. */
+const CELL = 3; // css px per logical pixel, the target
+const MIN_W = 360;
+const MAX_W = 720;
+const DEFAULT_W = 400; // used for the first paint, before measurement
 
 const DINO_BODY = [
   "...........XXXXXXX..",
@@ -236,6 +251,12 @@ export default function DinoRunner() {
   const statusRef = useRef(status);
   statusRef.current = status;
 
+  /* World width lives in BOTH a ref and state on purpose: the draw loop and
+     the physics read the ref every frame without re-subscribing, while the
+     state exists only to resize the canvas element itself on re-render. */
+  const [worldW, setWorldW] = useState(DEFAULT_W);
+  const wRef = useRef(DEFAULT_W);
+
   const newGame = useCallback(() => {
     gameRef.current = {
       speed: 3.4,
@@ -247,12 +268,12 @@ export default function DinoRunner() {
       obstacles: [],
       spawnIn: 220,
       clouds: Array.from({ length: 5 }, () => ({
-        x: Math.random() * W,
+        x: Math.random() * wRef.current,
         y: 10 + Math.random() * 34,
         w: 10 + Math.floor(Math.random() * 14),
       })),
       marks: Array.from({ length: 26 }, () => ({
-        x: Math.random() * W,
+        x: Math.random() * wRef.current,
         w: 2 + Math.floor(Math.random() * 4),
       })),
       legTimer: 0,
@@ -275,7 +296,7 @@ export default function DinoRunner() {
     ctx.imageSmoothingEnabled = false;
 
     ctx.fillStyle = PAPER;
-    ctx.fillRect(0, 0, W, H);
+    ctx.fillRect(0, 0, wRef.current, H);
 
     const sx = g.shake > 0 ? (Math.random() < 0.5 ? -1 : 1) : 0;
     ctx.save();
@@ -294,7 +315,7 @@ export default function DinoRunner() {
        speed cue left now that there is no ground below the line to scatter
        debris across, and they read as road surface rushing past. */
     ctx.fillStyle = INK;
-    ctx.fillRect(0, GROUND_Y + 1, W, 1);
+    ctx.fillRect(0, GROUND_Y + 1, wRef.current, 1);
     ctx.fillStyle = PLATE;
     for (const m of g.marks) ctx.fillRect(Math.round(m.x), GROUND_Y + 1, m.w, 1);
 
@@ -321,6 +342,39 @@ export default function DinoRunner() {
     newGame();
     draw();
   }, [newGame, draw]);
+
+  /* Measure the element rather than the viewport, so this stays correct
+     whatever the section is nested in. ResizeObserver also catches a
+     scrollbar appearing or the device rotating, which a resize listener on
+     window can miss. */
+  useEffect(() => {
+    const el = frameRef.current;
+    if (!el) return;
+    const measure = () => {
+      const next = Math.max(MIN_W, Math.min(MAX_W, Math.round(el.clientWidth / CELL)));
+      if (next === wRef.current) return;
+      wRef.current = next;
+      setWorldW(next);
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  /* Separate from the effect above on purpose. Setting worldW changes the
+     canvas's `width` attribute, and changing that attribute CLEARS the
+     canvas bitmap per spec — immediately, not on next paint. Drawing inside
+     the same tick that calls setWorldW draws onto the canvas as it exists
+     BEFORE React applies the new attribute, so the clear happens after and
+     wins, leaving a blank, fully transparent canvas until something else
+     happens to call draw() again. This effect runs once React has actually
+     committed the new width, so it repaints the canvas it is really looking
+     at. Caught by focusing the game with no game loop running: the canvas
+     went blank and the blue focus plate showed straight through it. */
+  useEffect(() => {
+    draw();
+  }, [worldW, draw]);
 
   const ensureAudio = () => {
     if (!audioRef.current) {
@@ -434,14 +488,14 @@ export default function DinoRunner() {
       for (const c of g.clouds) {
         c.x -= move * 0.22;
         if (c.x < -30) {
-          c.x = W + Math.random() * 40;
+          c.x = wRef.current + Math.random() * 40;
           c.y = 10 + Math.random() * 34;
         }
       }
       for (const m of g.marks) {
         m.x -= move;
         if (m.x < -8) {
-          m.x = W + Math.random() * 60;
+          m.x = wRef.current + Math.random() * 60;
           m.w = 2 + Math.floor(Math.random() * 4);
         }
       }
@@ -455,13 +509,13 @@ export default function DinoRunner() {
           const lanes = [GROUND_Y - 17, GROUND_Y - 28];
           g.obstacles.push({
             kind: "bird",
-            x: W + 10,
+            x: wRef.current + 10,
             y: lanes[Math.floor(Math.random() * lanes.length)],
           });
         } else if (roll < 0.62) {
           g.obstacles.push({
             kind: "small",
-            x: W + 10,
+            x: wRef.current + 10,
             count: 1 + Math.floor(Math.random() * 3),
             w: 11,
             h: 16,
@@ -469,7 +523,7 @@ export default function DinoRunner() {
         } else {
           g.obstacles.push({
             kind: "large",
-            x: W + 10,
+            x: wRef.current + 10,
             count: 1 + Math.floor(Math.random() * 2),
             w: 13,
             h: 22,
@@ -533,9 +587,11 @@ export default function DinoRunner() {
 
   return (
     <div className="w-full">
-      {/* Control hint reads above the game, since there is nothing below it
-          any more — the canvas runs straight into the footer. */}
-      <p className="mb-12 font-mono text-[10px] uppercase tracking-[0.1em] text-mute">
+      {/* The canvas goes full-bleed but the hint does not — text running to
+          the very edge of the viewport reads as a bug. It keeps the same
+          container as the rest of the page so it lines up with the sections
+          above it. */}
+      <p className="mx-auto mb-12 w-full max-w-wide px-16 font-mono text-[10px] uppercase tracking-[0.1em] text-mute">
         {/* Branch in CSS, not JS: picking the wording from a media query at
             render time would differ between server and client. */}
         <span className="md:hidden">Tap to jump</span>
@@ -561,7 +617,7 @@ export default function DinoRunner() {
         >
           <canvas
             ref={canvasRef}
-            width={W * PX}
+            width={worldW * PX}
             height={H * PX}
             className="pixelated block h-auto w-full"
           />
@@ -579,10 +635,15 @@ export default function DinoRunner() {
                 {status === "over" ? "GAME OVER" : "DINO RUNNER"}
               </p>
 
+              {/* Never "click to focus". Space is bound only while the frame
+                  has focus, so before the first click the honest instruction
+                  is to click — and clicking both focuses AND starts the run.
+                  Once they have played, the frame is focused and space is
+                  real, so the restart prompt can offer it. */}
               <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-mute">
-                <span className="md:hidden">Tap to start</span>
+                <span className="md:hidden">Tap to {status === "over" ? "run again" : "start"}</span>
                 <span className="hidden md:inline">
-                  {focused ? "Press space to run" : "Click to focus, then space"}
+                  {status === "over" && focused ? "Press space to run again" : "Click to start"}
                 </span>
               </p>
             </div>
