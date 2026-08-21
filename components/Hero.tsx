@@ -18,7 +18,13 @@ import Typewriter from "@/components/px/Typewriter";
  */
 const Hero = () => (
   <section className="bg-paper">
-    <div className="mx-auto max-w-wide px-16 py-64 md:py-96">
+    {/* Top padding is smaller than bottom on purpose. <main> already carries
+        pt-96/128 (app/layout.tsx) just to clear the fixed nav plate — the nav
+        itself is only 90px tall, so that alone already overshoots by ~38px.
+        The old py-64/96 stacked a second full gap on top of that clearance,
+        pushing the heading almost 300px below the nav for no reason. Bottom
+        keeps its size since nothing below the hero clears anything. */}
+    <div className="mx-auto max-w-wide px-16 pb-64 pt-16 md:pb-96 md:pt-32">
       <div className="grid items-center gap-48 md:grid-cols-[1.1fr_0.9fr]">
         <div>
           <p className="mb-16 font-mono text-[11px] uppercase tracking-[0.08em] text-mute">
