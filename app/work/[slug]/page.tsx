@@ -16,7 +16,7 @@ const mdxMap: Record<string, React.ComponentType> = {
   "omni-cast-ai": dynamic(() => import("@/content/work/omni-cast-ai.mdx")),
   "almosafer-audit": dynamic(() => import("@/content/work/almosafer-audit.mdx")),
   "sanad": dynamic(() => import("@/content/work/sanad.mdx")),
-  "mizan": dynamic(() => import("@/content/work/mizan.mdx")),
+  "wio": dynamic(() => import("@/content/work/wio.mdx")),
   "instagram-local": dynamic(() => import("@/content/work/instagram-local.mdx")),
   "roomy": dynamic(() => import("@/content/work/roomy.mdx")),
   "form": dynamic(() => import("@/content/work/form.mdx")),
@@ -35,18 +35,23 @@ export async function generateMetadata({
   const project = getStudy(slug);
   if (!project) return { title: "Project | Shareef Padar" };
 
+  const title = project.metaTitle
+    ? `${project.metaTitle} | Shareef Padar`
+    : `${project.title} | Shareef Padar`;
+  const description = project.metaDescription ?? project.description;
+
   return {
-    title: `${project.title} | Shareef Padar`,
-    description: project.description,
+    title,
+    description,
     openGraph: {
-      title: `${project.title} | Shareef Padar`,
-      description: project.description,
+      title,
+      description,
       images: [{ url: project.imageUrl }],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${project.title} | Shareef Padar`,
-      description: project.description,
+      title,
+      description,
       images: [project.imageUrl],
     },
   };

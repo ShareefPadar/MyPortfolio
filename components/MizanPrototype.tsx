@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-// ── Mizan Business · account hold communication · prototype ──────
+// ── Wio Business · account hold communication · prototype ──────
 // Case study #2 by Shareef Padar. Grounded in dated, public complaints
 // about UAE business banking freezes (ownership/director changes).
 //
@@ -112,12 +112,15 @@ function Rail({ current, onGo, resolved, outstanding }: any) {
   return (
     <aside className="rail">
       <div className="rail-brand">
-        <span className="rail-mark">M</span>
-        <span className="rail-name">Mizan<span className="rail-biz">Business</span></span>
+        <span className="rail-mark">W</span>
+        <span className="rail-name">Wio<span className="rail-biz">Business</span></span>
       </div>
 
+      {/* Same hardened framing as the page's disclaimer callouts, condensed
+          to fit a one-line rail strapline: designed by me, not Wio's actual
+          product. */}
       <p className="rail-disclaimer">
-        Concept UI · fictional product · not any real bank's interface
+        Concept UI by Shareef Padar · not Wio's product
       </p>
 
       <div className="rail-acct">
@@ -153,7 +156,7 @@ function Rail({ current, onGo, resolved, outstanding }: any) {
 
       <div className="rail-foot">
         <span className="rail-foot-k">Case reference</span>
-        <span className="rail-foot-v">MZ-4418-06</span>
+        <span className="rail-foot-v">WIO-4418-06</span>
         <span className="rail-foot-note">Quote this on any call. Updates appear here first.</span>
       </div>
     </aside>

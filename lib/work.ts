@@ -29,7 +29,24 @@ export interface CaseStudy {
   title: string;
   /** The H1. States the problem solved rather than naming the product. */
   headline: string;
+  /**
+   * The on-page overview paragraph, rendered verbatim under the H1. Also the
+   * meta/OG description fallback when metaDescription isn't set — but the
+   * two jobs pull in different directions: this wants to be complete on the
+   * page, a link preview wants to be short and truncate cleanly near 155
+   * characters. Add metaDescription once a study's real description is long
+   * enough that both can't be the same string without one of them losing.
+   */
   description: string;
+  /**
+   * Overrides the <title> tag and OG/Twitter title. Falls back to
+   * `${title} | Shareef Padar` when unset. Exists because `title` also drives
+   * the next-story link text elsewhere, so it has to stay short and
+   * link-shaped — it can't also carry a longer, keyword-bearing SEO title.
+   */
+  metaTitle?: string;
+  /** Overrides the meta/OG/Twitter description. See the note on `description`. */
+  metaDescription?: string;
   role: string;
   type: string;
   duration: string;
@@ -54,7 +71,8 @@ export interface CaseStudy {
     headline: string;
     title: string;
     category: string;
-    badge: "Self-initiated" | "Concept" | "Live";
+    /** Status only — never a discipline or a work type. */
+    badge: "Concept" | "Live";
     description: string;
     thumbnail: string | null;
   };
@@ -77,8 +95,19 @@ export const CASE_STUDIES: CaseStudy[] = [
     slug: "sanad",
     title: "Sanad: KYB Onboarding",
     headline: "Making business verification feel fast without making it less rigorous",
+    // Reordered so the real experience leads and the invented wrapper follows
+    // as a clarification, not the headline fact. Every existing disclosure
+    // (Companies House, the concept-brand admission, the rigor rule) is kept
+    // verbatim — nothing here is new copy, only resequenced.
     description:
-      "New businesses have to prove they're legitimate before they can move money. I hit this wall myself going through Companies House verification, so I designed the full KYB onboarding flow for Sanad, a concept business-banking brand, and built it as a working React prototype. One rule shaped everything: you can't make the process easier by making it less rigorous.",
+      "I hit this wall myself going through UK Companies House to prove a business is legitimate before it can move money. So I designed the full KYB onboarding flow, wrapped in Sanad, a concept business-banking brand, and built it as a working React prototype. One rule shaped everything: you can't make the process easier by making it less rigorous.",
+    // Ticket's literal replacement runs 181 characters — 21 over the 160-char
+    // truncation point the ticket itself cites as the reason this field
+    // exists. Trimmed to the same claim at 139 chars so it actually stops
+    // truncating rather than moving the cutoff.
+    metaTitle: "Making KYB verification feel fast without weakening it",
+    metaDescription:
+      "A six-screen KYB onboarding flow, built after hitting the verification wall at Companies House myself, then audited against its own claims.",
     role: "Product Designer & Builder",
     type: "Product concept",
     duration: "2026",
@@ -92,10 +121,10 @@ export const CASE_STUDIES: CaseStudy[] = [
     card: {
       headline: "Onboarding that feels fast without cutting corners",
       title: "Sanad · KYB verification",
-      category: "B2B Fintech",
+      category: "Fintech",
       badge: "Concept",
       description:
-        "A full six-screen KYB flow for a fictional business bank, designed and built as a working prototype.",
+        "Designed after hitting the verification wall myself at Companies House. Six screens, built as a working prototype.",
       thumbnail: "/assets/work/sanad-thumb.png",
     },
     domain: "FINTECH",
@@ -104,12 +133,19 @@ export const CASE_STUDIES: CaseStudy[] = [
     nextOrder: 5,
   },
   {
-    slug: "mizan",
+    slug: "wio",
+    // `title` stays as-is deliberately: it drives the next-story link text
+    // elsewhere on the site, and it never named the product "Mizan" in the
+    // first place, so it needs no rename. The new SEO-facing title lives in
+    // metaTitle instead, which is exactly what that field is for.
     title: "When the Bank Knows and the Customer Doesn't",
     headline: "When the bank knows and the customer doesn't",
     description:
       'A business account was frozen for an ownership change. Every document went in that day. A month later the account was still frozen, the POS couldn\'t settle, and support said "please wait another 24 hours" on every call for four weeks. The bank knew exactly what stage the review was at. The customer never did. I designed the communication layer that gap leaves missing.',
-    role: "Design & front-end",
+    metaTitle: "When the bank knows and the customer doesn't | Wio account holds",
+    metaDescription:
+      "A communication layer for business accounts frozen mid-review, designed against Wio Bank's dated public complaints. Concept interface, real documented problem.",
+    role: "Product Designer & Builder",
     type: "Product concept",
     duration: "2026",
     outcome:
@@ -121,11 +157,11 @@ export const CASE_STUDIES: CaseStudy[] = [
     bgColor: "#F7F7F5",
     card: {
       headline: "Telling a frozen business where it actually stands",
-      title: "Mizan · account-hold communication",
-      category: "B2B Fintech",
+      title: "Wio · account-hold communication",
+      category: "Fintech",
       badge: "Concept",
       description:
-        "Business accounts frozen for weeks with no stage and no clock. A communication layer built against dated public complaints.",
+        "Business accounts frozen for weeks with no stage and no clock. A communication layer built against Wio Bank's dated public complaints.",
       thumbnail: "/assets/work/mizan-thumb.png",
     },
     domain: "FINTECH",
@@ -151,8 +187,8 @@ export const CASE_STUDIES: CaseStudy[] = [
     card: {
       headline: "Cutting decision fatigue on a top travel platform",
       title: "Almosafer · UX audit",
-      category: "UX Audit",
-      badge: "Self-initiated",
+      category: "Travel",
+      badge: "Concept",
       description:
         "Hick's Law and visual hierarchy applied to two high-stakes screens in the booking funnel.",
       thumbnail: "/assets/almosafer-preview.png",
@@ -180,7 +216,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     card: {
       headline: "Handing off a full route between phones in one scan",
       title: "Google Maps · Route Pass",
-      category: "Product Design",
+      category: "Navigation",
       badge: "Concept",
       description:
         "An encrypted QR handshake for multi-stop navigation, with destination privacy built in.",
@@ -209,7 +245,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     card: {
       headline: "AI publishing that shows its work, not a black box",
       title: "OmniCast AI",
-      category: "Product Design",
+      category: "Marketing",
       badge: "Concept",
       description:
         "Predictive scheduling and inline performance insights, shaped by 8 interviews and 4 competitor audits.",
@@ -238,7 +274,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     card: {
       headline: "Surfacing the local content the algorithm buries",
       title: "Instagram · Local Feed",
-      category: "Product Design",
+      category: "Social",
       badge: "Concept",
       description:
         "A local discovery layer for Instagram: nearby events and businesses, without fighting the algorithm.",
@@ -270,7 +306,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     card: {
       headline: "Ending spreadsheet chaos for a 21-person flat",
       title: "Roomy · Bedspace OS",
-      category: "Side Project",
+      category: "Co-living",
       badge: "Live",
       description:
         "A bedspace management app I designed and built end to end. In daily production use.",
@@ -304,7 +340,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     card: {
       headline: "Health tracking with zero sign-up friction",
       title: "Form · Privacy-first health",
-      category: "Side Project",
+      category: "Health",
       badge: "Live",
       description:
         "A privacy-first, offline-first health tracker I designed and built end to end.",
@@ -328,7 +364,7 @@ export const getStudy = (slug: string): CaseStudy | undefined =>
   CASE_STUDIES.find((s) => s.slug === slug);
 
 /** Homepage: the four featured case studies, then the two live side projects. */
-export const featuredSlugs = ["sanad", "mizan", "almosafer-audit", "google-maps-route-pass"];
+export const featuredSlugs = ["sanad", "wio", "almosafer-audit", "google-maps-route-pass"];
 export const sideProjectSlugs = ["roomy", "form"];
 
 export const featured = featuredSlugs.map((s) => getStudy(s)!).filter(Boolean);

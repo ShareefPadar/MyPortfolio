@@ -28,6 +28,19 @@ const nextConfig = {
     optimizeCss: true,
     optimizePackageImports: ['react-icons'],
   },
+  // /work/mizan renamed to /work/wio when the concept product on that page
+  // was rebranded to match the real bank it studies. permanent: true emits a
+  // 308, so search engines transfer the old URL's standing to the new one
+  // instead of indexing both.
+  async redirects() {
+    return [
+      {
+        source: '/work/mizan',
+        destination: '/work/wio',
+        permanent: true,
+      },
+    ]
+  },
 }
 
 export default withMDX(nextConfig)

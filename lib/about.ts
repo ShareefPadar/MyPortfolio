@@ -67,7 +67,7 @@ export const PRINCIPLES: Principle[] = [
 export const BIO = [
   "I'm a Senior Product Designer with six years in B2B SaaS, based in Dubai. Logistics, healthcare, gym management, travel. In most of those rooms I was the only designer, which meant doing the research, making the call, drawing the screens, and then sitting with the engineers while it got built. Most of that work sits under NDA, so ask me about it on a call.",
   "At Cargoz I designed Cargoz Connect, a product that gets a business into warehouse space inside 24 hours, from the first wireframe to the live UI, and built the design system six developers now work from. Before that I ran UX for a gym and healthcare ERP, reporting straight to the CEO, which mostly taught me how to defend a design decision to someone who owns the P&L.",
-  "My degree is in computer science, and I treat that as a design advantage rather than a second job. I know what is expensive to build, so I stop proposing it. I can read the codebase to check whether a pattern already exists before inventing another one. And when an idea needs proving, I would rather build it than describe it, which is why the prototypes in the Sanad and Mizan case studies are real working software instead of screenshots.",
+  "My degree is in computer science, and I treat that as a design advantage rather than a second job. I know what is expensive to build, so I stop proposing it. I can read the codebase to check whether a pattern already exists before inventing another one. And when an idea needs proving, I would rather build it than describe it, which is why the prototypes in the Sanad and Wio case studies are real working software instead of screenshots.",
 ];
 
 export const PHILOSOPHY =
