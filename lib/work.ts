@@ -92,6 +92,44 @@ export interface CaseStudy {
 
 export const CASE_STUDIES: CaseStudy[] = [
   {
+    slug: "freelax",
+    title: "Freelax: Tax That Stops Being a Surprise",
+    headline: "Tax that stops being a surprise",
+    description:
+      "From April 2026, HMRC requires every UK sole trader over £50,000 to file quarterly through approved software. The tools waiting for them are built for businesses with payroll and an accountant on retainer, not for one person doing the work and the books at eleven at night. I co-founded Freelax to be the different shape that gap needs, and I own everything you can see.",
+    metaTitle: "Building tax software for one person, not a small business",
+    metaDescription:
+      "Co-founded a live UK tax product for freelancers against an April 2026 legal deadline. On saying no to payroll, and clearing 182 contrast failures in one line.",
+    role: "Co-founder, Product & Design",
+    type: "Live product",
+    duration: "2026",
+    outcome:
+      "Live and taking sign-ups. Invoicing, expenses, the tax engine, IR35 and the Self Assessment pack all work. MTD submission is built against HMRC's sandbox and waiting on recognition.",
+    quote:
+      "Freelax tells you what you owe. Sometimes it will be wrong, and when it is wrong, the letter from HMRC arrives at the user's house, not ours. That fact sat with me the whole build.",
+    stack: "Next.js · Supabase · Tailwind · Stripe · Claude API",
+    // No screenshots exported yet. imageUrl still has to resolve for the OG
+    // card, so it points at an existing asset; the card thumbnail is null,
+    // which WorkCard already handles by rendering the title as text instead.
+    imageUrl: "/assets/work/sanad-thumb.png",
+    bgColor: "#EDF2EE",
+    liveUrl: "https://app.freelax.co.uk",
+    repoUrl: "https://github.com/Freelax1/Freelax",
+    card: {
+      headline: "Tax that stops being a surprise",
+      title: "Freelax · UK tax for freelancers",
+      category: "Fintech",
+      badge: "Live",
+      description:
+        "A legal deadline, three million people, and accounting tools built for someone bigger. Co-founded, designed end to end, live.",
+      thumbnail: null,
+    },
+    domain: "FINTECH",
+    tier: 1,
+    order: 1,
+    nextOrder: 9,
+  },
+  {
     slug: "sanad",
     title: "Sanad: KYB Onboarding",
     headline: "Making business verification feel fast without making it less rigorous",
@@ -129,7 +167,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     },
     domain: "FINTECH",
     tier: 1,
-    order: 1,
+    order: 2,
     nextOrder: 5,
   },
   {
@@ -166,7 +204,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     },
     domain: "FINTECH",
     tier: 1,
-    order: 2,
+    order: 3,
     nextOrder: 6,
   },
   {
@@ -195,7 +233,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     },
     domain: "TRAVEL",
     tier: 2,
-    order: 3,
+    order: 4,
     nextOrder: 3,
   },
   {
@@ -224,7 +262,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     },
     domain: "NAVIGATION",
     tier: 2,
-    order: 4,
+    order: 5,
     nextOrder: 1,
   },
   {
@@ -253,7 +291,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     },
     domain: "MARKETING",
     tier: 2,
-    order: 5,
+    order: 6,
     nextOrder: 2,
   },
   {
@@ -282,7 +320,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     },
     domain: "SOCIAL",
     tier: 2,
-    order: 6,
+    order: 7,
     nextOrder: 4,
   },
   {
@@ -314,7 +352,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     },
     domain: "CO-LIVING",
     tier: 2,
-    order: 7,
+    order: 8,
     nextOrder: 8,
   },
   {
@@ -348,7 +386,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     },
     domain: "HEALTH",
     tier: 2,
-    order: 8,
+    order: 9,
     nextOrder: 7,
   },
 ];
@@ -364,7 +402,7 @@ export const getStudy = (slug: string): CaseStudy | undefined =>
   CASE_STUDIES.find((s) => s.slug === slug);
 
 /** Homepage: the four featured case studies, then the two live side projects. */
-export const featuredSlugs = ["sanad", "wio", "almosafer-audit", "google-maps-route-pass"];
+export const featuredSlugs = ["freelax", "sanad", "wio", "almosafer-audit"];
 export const sideProjectSlugs = ["roomy", "form"];
 
 export const featured = featuredSlugs.map((s) => getStudy(s)!).filter(Boolean);

@@ -15,6 +15,7 @@ const mdxMap: Record<string, React.ComponentType> = {
   "google-maps-route-pass": dynamic(() => import("@/content/work/google-maps-route-pass.mdx")),
   "omni-cast-ai": dynamic(() => import("@/content/work/omni-cast-ai.mdx")),
   "almosafer-audit": dynamic(() => import("@/content/work/almosafer-audit.mdx")),
+  "freelax": dynamic(() => import("@/content/work/freelax.mdx")),
   "sanad": dynamic(() => import("@/content/work/sanad.mdx")),
   "wio": dynamic(() => import("@/content/work/wio.mdx")),
   "instagram-local": dynamic(() => import("@/content/work/instagram-local.mdx")),
