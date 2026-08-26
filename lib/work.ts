@@ -108,10 +108,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     quote:
       "Freelax tells you what you owe. Sometimes it will be wrong, and when it is wrong, the letter from HMRC arrives at the user's house, not ours. That fact sat with me the whole build.",
     stack: "Next.js · Supabase · Tailwind · Stripe · Claude API",
-    // No screenshots exported yet. imageUrl still has to resolve for the OG
-    // card, so it points at an existing asset; the card thumbnail is null,
-    // which WorkCard already handles by rendering the title as text instead.
-    imageUrl: "/assets/work/sanad-thumb.png",
+    imageUrl: "/assets/work/freelax-thumb.webp",
     bgColor: "#EDF2EE",
     liveUrl: "https://app.freelax.co.uk",
     repoUrl: "https://github.com/Freelax1/Freelax",
@@ -122,7 +119,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       badge: "Live",
       description:
         "A legal deadline, three million people, and accounting tools built for someone bigger. Co-founded, designed end to end, live.",
-      thumbnail: null,
+      thumbnail: "/assets/work/freelax-thumb.webp",
     },
     domain: "FINTECH",
     tier: 1,
