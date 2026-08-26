@@ -60,7 +60,7 @@ const DeviceFrame = ({ children, url = "prototype", label, caption }: DeviceFram
       </div>
 
       {caption && (
-        <figcaption className="mt-12 border-t border-line pt-12 font-sans text-[13px] leading-[1.55] text-mute">
+        <figcaption className="mt-12 border-t border-line pt-12 font-sans text-[14px] leading-[1.55] text-mute">
           {caption}
         </figcaption>
       )}

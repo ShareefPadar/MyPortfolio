@@ -68,7 +68,7 @@ export default function About() {
                   {job.period}
                 </span>
               </div>
-              <p className="mb-8 font-mono text-[10px] uppercase tracking-[0.07em] text-blue">
+              <p className="mb-8 font-mono text-[9px] uppercase tracking-[0.11em] text-blue">
                 {job.company}
               </p>
               <p className="font-sans text-[16px] leading-[1.7] text-ink">{job.desc}</p>

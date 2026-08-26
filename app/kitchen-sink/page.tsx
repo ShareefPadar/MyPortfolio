@@ -141,22 +141,68 @@ export default function KitchenSink() {
         <p className="mb-32 max-w-prose font-sans text-[16px] leading-[1.7] text-ink">
           The face is chosen by what a string <em>is</em>, not by its heading level. A statement
           is Silkscreen, a label is mono, and anything read as a sentence is Geist — even at 40px.
+          Eleven sizes total, three per face plus responsive pairs. Same rule as the icons: closed
+          set, and a twelfth size is a type error, not a judgment call.
         </p>
-        <div className="space-y-24">
+
+        <Label>Silkscreen — statements only, never a full sentence</Label>
+        <div className="mt-12 space-y-24">
           <div>
-            <Label>display-xl · Silkscreen 700 · statement</Label>
-            <p className="mt-8 font-pix text-[32px] font-bold leading-[1.75] tracking-[0.01em] text-ink">
-              SENIOR PRODUCT DESIGNER
+            <Label>display-xl · 38px / 24px mobile · 700 · 1.75 / 0.01em</Label>
+            <p className="mt-8 font-pix text-[24px] font-bold leading-[1.75] tracking-[0.01em] text-ink md:text-[38px]">
+              SENIOR PRODUCT DESIGNER WHO SHIPS.
             </p>
           </div>
           <div>
-            <Label>h1 · Geist 500 · sentence, even at 40px</Label>
+            <Label>h1 / section-number · 20px · 1.8, leading-none for numerals</Label>
+            <p className="mt-8 font-pix text-[20px] font-bold leading-[1.8] text-ink">
+              CASE STUDY
+            </p>
+          </div>
+          <div>
+            <Label>h2 · 14px · 1.8 / 0.02em</Label>
+            <p className="mt-8 font-pix text-[14px] leading-[1.8] tracking-[0.02em] text-ink">
+              KEY DECISIONS
+            </p>
+          </div>
+          <div>
+            <Label>cta · 11px, 13px large · the button scale, never a lone 10px</Label>
+            <p className="mt-8 font-pix text-[11px] leading-none text-blue">
+              VIEW CASE STUDY →
+            </p>
+          </div>
+        </div>
+
+        <Label>
+          <span className="mt-64 block">Geist Sans — anything read as a sentence, even at 40px</span>
+        </Label>
+        <div className="mt-12 space-y-24">
+          <div>
+            <Label>h1 · 40px / 28px mobile · 500 · 1.15 / −0.022em</Label>
             <p className="mt-8 max-w-prose font-sans text-[40px] font-medium leading-[1.15] tracking-[-0.022em] text-ink">
               Making business verification feel fast without making it less rigorous.
             </p>
           </div>
           <div>
-            <Label>body · Geist 400 · max 60ch</Label>
+            <Label>h2 · 26px / 21px mobile · 500 · 1.3 / −0.016em</Label>
+            <p className="mt-8 max-w-prose font-sans text-[26px] font-medium leading-[1.3] tracking-[-0.016em] text-ink">
+              The problem, in customers&apos; own words
+            </p>
+          </div>
+          <div>
+            <Label>quote · 23px / 19px mobile · 500 · 1.4</Label>
+            <p className="mt-8 max-w-prose font-sans text-[23px] font-medium leading-[1.4] text-ink">
+              The bank knew the stage the whole time. That gap is the design problem.
+            </p>
+          </div>
+          <div>
+            <Label>lead · 19px / 17px mobile · 400–600 · 1.4–1.65</Label>
+            <p className="mt-8 max-w-lead font-sans text-[17px] leading-[1.65] text-ink md:text-[19px]">
+              The opening paragraph on every page — hero, page intro, case-study overview.
+            </p>
+          </div>
+          <div>
+            <Label>body · 16px · 400 · 1.7 · max 60ch</Label>
             <p className="mt-8 max-w-prose font-sans text-[16px] leading-[1.7] text-ink">
               Anything read as a sentence is Geist. Silkscreen is capped at five words because a
               72-character heading typed at 45ms per character is three seconds before the visitor
@@ -164,11 +210,27 @@ export default function KitchenSink() {
             </p>
           </div>
           <div>
-            <Label>meta 11px / micro 9px · the legibility floor</Label>
+            <Label>small · 14px · 400 · 1.5–1.6 · card copy, meta values, captions</Label>
+            <p className="mt-8 max-w-prose font-sans text-[14px] leading-[1.6] text-ink">
+              One size for everything that used to split 14.5px from 13px — the eye never saw
+              the difference, only the codebase did.
+            </p>
+          </div>
+        </div>
+
+        <Label>
+          <span className="mt-64 block">Geist Mono — labels, never a sentence</span>
+        </Label>
+        <div className="mt-12 space-y-24">
+          <div>
+            <Label>meta · 11px · 1.5 / 0.08em · the interactive floor</Label>
             <p className="mt-8 font-mono text-[11px] leading-[1.5] tracking-[0.08em] text-mute">
               DUBAI · REPLIES WITHIN A DAY
             </p>
-            <p className="mt-4 font-mono text-[9px] uppercase leading-[1.4] tracking-[0.11em] text-mute">
+          </div>
+          <div>
+            <Label>micro · 9px · uppercase · 1.4 / 0.11em · the legibility floor</Label>
+            <p className="mt-8 font-mono text-[9px] uppercase leading-[1.4] tracking-[0.11em] text-mute">
               FINTECH · MARKETPLACE · MOBILE
             </p>
           </div>
@@ -225,10 +287,10 @@ export default function KitchenSink() {
           </div>
 
           <div>
-            <Label>pop with overshoot · numerals</Label>
+            <Label>pop with overshoot · numerals, at the real section-number size</Label>
             <div className="mt-8 flex gap-24">
               {["01", "02", "03"].map((n) => (
-                <Reveal key={n} variant="pop" as="span" className="font-pix text-[40px] font-bold leading-[0.9] text-blue">
+                <Reveal key={n} variant="pop" as="span" className="font-pix text-[20px] font-bold leading-none text-blue">
                   {n}
                 </Reveal>
               ))}

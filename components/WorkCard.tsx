@@ -56,21 +56,21 @@ const WorkCard = ({ study, featured = false, compact = false }: Props) => {
       </div>
 
       <div className="card-body m-[10px] flex flex-col p-16">
-        <p className="mb-8 font-mono text-[10px] uppercase tracking-[0.07em] text-mute">
+        <p className="mb-8 font-mono text-[9px] uppercase tracking-[0.11em] text-mute">
           {card.category} · {card.badge}
         </p>
         <h3 className="mb-4 font-sans text-[19px] font-medium leading-[1.4] text-ink">
           {card.headline}
         </h3>
-        <p className="mb-12 font-mono text-[10px] uppercase tracking-[0.07em] text-mute">
+        <p className="mb-12 font-mono text-[9px] uppercase tracking-[0.11em] text-mute">
           {card.title}
         </p>
         {!compact && (
-          <p className="mb-16 font-sans text-[14.5px] leading-[1.6] text-ink">
+          <p className="mb-16 font-sans text-[14px] leading-[1.6] text-ink">
             {card.description}
           </p>
         )}
-        <span className="mt-auto inline-flex items-center gap-8 font-pix text-[10px] leading-none text-blue">
+        <span className="mt-auto inline-flex items-center gap-8 font-pix text-[11px] leading-none text-blue">
           READ CASE STUDY
           <PixelIcon name="arrowR" size={8} />
         </span>

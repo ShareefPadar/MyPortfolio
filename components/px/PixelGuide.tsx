@@ -320,7 +320,7 @@ export default function PixelGuide() {
                     <span className="guide-dot" />
                   </div>
                 ) : (
-                  <p className="mt-4 font-sans text-[13px] leading-[1.5] text-ink">{typed}</p>
+                  <p className="mt-4 font-sans text-[14px] leading-[1.5] text-ink">{typed}</p>
                 )}
               </div>
               <div className="guide-tail" />

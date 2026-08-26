@@ -68,7 +68,7 @@ const BeforeAfter = ({
                 className="object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]"
               />
               <span className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/10" />
-              <span className="absolute bottom-8 right-8 flex items-center gap-4  bg-black/70 px-8 py-4 text-[10px] font-bold uppercase tracking-wide text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+              <span className="absolute bottom-8 right-8 flex items-center gap-4  bg-black/70 px-8 py-4 text-[9px] font-bold uppercase tracking-wide text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                 <PixelIcon name="search" size={8} /> View full size
               </span>
             </button>

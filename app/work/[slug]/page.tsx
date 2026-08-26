@@ -61,7 +61,7 @@ export async function generateMetadata({
 const Meta = ({ label, value }: { label: string; value: string }) => (
   <div>
     <dt className="font-mono text-[9px] uppercase tracking-[0.11em] text-mute">{label}</dt>
-    <dd className="mt-4 font-sans text-[14.5px] leading-[1.5] text-ink">{value}</dd>
+    <dd className="mt-4 font-sans text-[14px] leading-[1.5] text-ink">{value}</dd>
   </div>
 );
 

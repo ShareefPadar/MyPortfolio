@@ -63,7 +63,7 @@ export default function Home() {
         <div data-guide-id="nda" className="mt-48 md:mt-64">
           <Reveal>
             <div className="sp sp-neutral-4 sp-s4 sp-sunk p-24 md:p-32">
-              <p className="mb-12 flex items-center gap-8 font-mono text-[10px] uppercase tracking-[0.11em] text-mute">
+              <p className="mb-12 flex items-center gap-8 font-mono text-[9px] uppercase tracking-[0.11em] text-mute">
                 <PixelIcon name="info" size={8} />
                 UNDER NDA
               </p>
@@ -84,7 +84,7 @@ export default function Home() {
                   href="/work"
                   className="group inline-flex min-h-[44px] shrink-0 items-center"
                 >
-                  <span className="inline-flex items-center gap-8 border-b-[3px] border-ink pb-4 font-pix text-[10px] leading-none text-ink group-hover:border-blue">
+                  <span className="inline-flex items-center gap-8 border-b-[3px] border-ink pb-4 font-pix text-[11px] leading-none text-ink group-hover:border-blue">
                     VIEW ALL WORK
                     <PixelIcon name="arrowR" size={8} />
                   </span>
@@ -111,17 +111,17 @@ export default function Home() {
                 <span className="card-tab">{study.domain}</span>
 
                 <div className="card-body m-[10px] flex flex-1 flex-col p-16">
-                  <p className="mb-8 flex items-center gap-8 font-mono text-[10px] uppercase tracking-[0.07em] text-mute">
+                  <p className="mb-8 flex items-center gap-8 font-mono text-[9px] uppercase tracking-[0.11em] text-mute">
                     <span className="led inline-block h-8 w-8 bg-lime" aria-hidden="true" />
                     Live · side project
                   </p>
                   <h3 className="mb-4 font-sans text-[19px] font-medium leading-[1.4] text-ink">
                     {study.card.headline}
                   </h3>
-                  <p className="mb-12 font-mono text-[10px] uppercase tracking-[0.07em] text-mute">
+                  <p className="mb-12 font-mono text-[9px] uppercase tracking-[0.11em] text-mute">
                     {study.card.title}
                   </p>
-                  <p className="mb-16 font-sans text-[14.5px] leading-[1.6] text-ink">
+                  <p className="mb-16 font-sans text-[14px] leading-[1.6] text-ink">
                     {study.card.description}
                   </p>
 
@@ -130,7 +130,7 @@ export default function Home() {
                   <div className="mt-auto flex flex-wrap items-center gap-x-24 gap-y-8">
                     <Link
                       href={`/work/${study.slug}`}
-                      className="inline-flex min-h-[44px] items-center gap-8 font-pix text-[10px] leading-none text-blue"
+                      className="inline-flex min-h-[44px] items-center gap-8 font-pix text-[11px] leading-none text-blue"
                     >
                       CASE STUDY
                       <PixelIcon name="arrowR" size={8} />
@@ -140,7 +140,7 @@ export default function Home() {
                         href={study.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex min-h-[44px] items-center gap-8 font-pix text-[10px] leading-none text-blue"
+                        className="inline-flex min-h-[44px] items-center gap-8 font-pix text-[11px] leading-none text-blue"
                       >
                         LAUNCH APP
                         <PixelIcon name="external" size={8} />
