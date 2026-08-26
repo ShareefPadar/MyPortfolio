@@ -404,9 +404,9 @@
     display: grid;
     grid-template-columns:
       [full-start] minmax(16px, 1fr)
-      [wide-start] minmax(0, 190px)
+      [wide-start] 0px
       [col-start] min(720px, 100% - 32px) [col-end]
-      minmax(0, 190px) [wide-end]
+      0px [wide-end]
       minmax(16px, 1fr) [full-end];
   }
   .study > * { grid-column: col; }

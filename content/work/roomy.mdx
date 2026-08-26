@@ -1,4 +1,5 @@
 import Summary from "@/components/Summary";
+import Shot from "@/components/Shot";
 
 <Summary
   readTime="3 min"
@@ -24,7 +25,7 @@ One product, two very different users, so I built two interfaces on a single cod
 
 Members see only their own balance. The admin sees everyone's. That scoping was the core design decision, and it wasn't a technical one. Most trust problems in shared living are really **visibility problems**.
 
-![Roomy admin dashboard: rent ledger with per-tenant payment status](/assets/work/roomy-admin-ledger.png)
+<Shot src="/assets/work/roomy-admin-ledger.png" alt="Roomy admin dashboard: rent ledger with per-tenant payment status" caption="Every balance resolved automatically. The admin sees all 21 tenants; each member sees only their own line." />
 
 ## Key Features
 
@@ -34,7 +35,7 @@ The ledger works out each tenant's balance from their room type, their share of 
 ### Live-Status Laundry Scheduler
 Real-time machine status with a hard cap of two bookings per tenant per day. Conflicts get prevented in the data layer instead of argued about in the corridor.
 
-![Roomy live-status laundry scheduler](/assets/work/roomy-laundry.png)
+<Shot src="/assets/work/roomy-laundry.png" alt="Roomy live-status laundry scheduler" caption="Machine status live, booking cap enforced in the data layer — not a rule anyone has to remember." />
 
 ## The Architecture, Briefly
 

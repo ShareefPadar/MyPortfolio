@@ -1,4 +1,5 @@
 import Summary from "@/components/Summary";
+import Shot from "@/components/Shot";
 
 <Summary
   readTime="3 min"
@@ -32,7 +33,7 @@ Sync Mode   →  IndexedDB + Supabase  →  Multi-device access
 
 Switching from Guest to Sync **migrates your local data to the cloud**, so nothing is lost. You get to try the whole product before committing to anything.
 
-![Form dashboard: weight, BMI, and trend with goal and average reference lines](/assets/work/form-dashboard.png)
+<Shot src="/assets/work/form-dashboard.png" alt="Form dashboard: weight, BMI, and trend with goal and average reference lines" caption="Weight, BMI, and a trend line reading from local IndexedDB — before a single account exists." />
 
 ## Key Features
 
@@ -52,7 +53,7 @@ The forecast earns trust precisely because it admits when it shouldn't be truste
 ### On-Device Macro Targets
 Macro targets are calculated on the device with the **Mifflin-St Jeor BMR formula**. No third-party nutrition API, no cloud round-trip, all in keeping with the privacy-first architecture. Inputs: weight, height, age, gender, activity level, goal. Output: daily calories, protein, carbs, and fat in grams.
 
-![Form daily targets: on-device calorie and macro calculation](/assets/work/form-daily-targets.png)
+<Shot src="/assets/work/form-daily-targets.png" alt="Form daily targets: on-device calorie and macro calculation" caption="Calories and macros calculated on-device with Mifflin-St Jeor — no API round-trip, no cloud dependency." />
 
 ### Body Measurements
 Waist, chest, hips, and arms tracked over time, since scale weight alone is a poor read on body composition.
