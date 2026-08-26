@@ -25,7 +25,7 @@ const Hero = () => (
         pushing the heading almost 300px below the nav for no reason. Bottom
         keeps its size since nothing below the hero clears anything. */}
     <div className="mx-auto max-w-wide px-16 pb-64 pt-16 md:pb-96 md:pt-32">
-      <div className="grid items-center gap-48 md:grid-cols-[1.1fr_0.9fr]">
+      <div className="grid items-center gap-32 md:grid-cols-[1.1fr_0.9fr]">
         <div>
           <p className="mb-16 font-mono text-[11px] uppercase tracking-[0.08em] text-mute">
             Shareef Padar · Dubai
@@ -35,7 +35,7 @@ const Hero = () => (
             <Typewriter
               text="SENIOR PRODUCT DESIGNER WHO SHIPS."
               as="span"
-              className="block font-pix text-[20px] font-bold leading-[1.75] tracking-[0.01em] text-ink md:text-[32px]"
+              className="block font-pix text-[24px] font-bold leading-[1.75] tracking-[0.01em] text-ink md:text-[38px]"
             />
           </h1>
 
