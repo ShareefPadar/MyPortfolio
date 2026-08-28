@@ -5,6 +5,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PixelCursor from "@/components/px/PixelCursor";
+import PixelGuide from "@/components/px/PixelGuide";
 
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -129,6 +130,11 @@ export default function RootLayout({
         {/* Site-wide, so the guide's cursor on the homepage has a peer that is
             drawn the same way. Self-suppresses on touch and reduced motion. */}
         <PixelCursor />
+        {/* Clippy, site-wide. He followed you between Word documents; he
+            follows you between routes. On pages with no data-guide-id anchors
+            he still roams and still interrupts — only the contextual lines
+            need a section to point at. */}
+        <PixelGuide />
         {/* Offset clears the nav plate. Both values are on the 4px ramp. */}
         <main id="main" className="relative z-10 flex-grow pt-96 md:pt-128">
           {children}

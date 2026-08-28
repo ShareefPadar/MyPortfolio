@@ -3,7 +3,6 @@ import Hero from "@/components/Hero";
 import WorkCard from "@/components/WorkCard";
 import Reveal from "@/components/px/Reveal";
 import PixelIcon from "@/components/px/PixelIcon";
-import PixelGuide from "@/components/px/PixelGuide";
 import DinoRunner from "@/components/px/DinoRunner";
 import { featured, sideProjects } from "@/lib/work";
 
@@ -32,8 +31,6 @@ const SectionMarker = ({ n, title }: { n: string; title: string }) => (
 export default function Home() {
   return (
     <div className="flex w-full flex-col">
-      {/* Homepage only: the tour explains the page it is standing on. */}
-      <PixelGuide />
       <div data-guide-id="hero">
         <Hero />
       </div>
