@@ -4,7 +4,7 @@
  * Mirrors the live site, where every page carries Clippy and the cursor.
  */
 import { headMeta } from '../_shared/head.mjs';
-import { eraSwitchJS, arriveHeadJS } from '../_shared/client.mjs';
+import { eraSwitchJS, eraRailJS, arriveHeadJS } from '../_shared/client.mjs';
 import { eraItems } from '../_shared/eras.mjs';
 export const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 export const STYLES = ['styles/core.css', 'styles/eras/1995.css', 'styles/eras/1995.sprites.css'];
@@ -49,6 +49,11 @@ ${css}
       ${c.nav.map(n => `<span class="focusable"><a class="btn frame-control navbtn" data-fill="surface"${n.href === current ? ' data-state="pressed" aria-current="page"' : ''} href="${esc(n.href)}">${esc(n.label)}</a></span>`).join('\n      ')}
       <span class="focusable"><a class="btn frame-control" data-fill="action" href="${esc(c.ctas.resume.href)}">${esc(c.ctas.resume.label)} ${ic('download')}</a></span>
     </div>
+  </nav>
+  <nav class="yearrail frame-raised" aria-label="${esc(c.eras.label)}" data-era-rail>
+    <ul>
+      ${eraItems(c, pageUrl, '1995').map(e => `<li><span class="focusable"><a class="btn frame-control" data-fill="surface" data-era="${e.id}" href="${esc(e.href)}"${e.current ? ' data-state="pressed" aria-current="true"' : ''}><b>${esc(e.year)}</b></a></span></li>`).join('\n      ')}
+    </ul>
   </nav>
 </div></div>
 
@@ -95,6 +100,8 @@ ${compactFooter ? `<footer class="foot foot-compact bookend"><div class="wrap">
   // ── era switcher ──
   ${eraSwitchJS}
   eraSwitch(document.querySelector('[data-era-switch]'));
+  ${eraRailJS}
+  eraRail(document.querySelector('[data-era-rail]'));
 
   // ── reveals, nav, burger ──
   const io = new IntersectionObserver((es, o) => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-in'); o.unobserve(e.target); } }), { threshold: .15 });

@@ -478,3 +478,24 @@ html.era-arrive .arrive { display: block; position: fixed; inset: 0; z-index: 99
 .item.app { grid-template-columns: minmax(0, 1fr); }
 .js .reveal, .js .reveal.in { opacity: 1; animation: none; }
 .eyebrow, .yearmenu-h { text-transform: none; letter-spacing: 0; }
+
+
+/* ══ THE YEAR RAIL ══════════════════════════════════════════════════
+   All five years standing on the right edge, vertically centred: the same
+   place in every era, drawn this era's way. From 1280px up only. Below that
+   the page has no margin for it to stand in, so the year button beside the
+   name takes over. The two never show together. */
+.yearrail { display: none; }
+.yearrail ul { list-style: none; margin: 0; padding: 0; display: grid; }
+.yearrail { z-index: 65; padding: 6px; border: 1px solid #A9B6C8; border-radius: 16px; background: linear-gradient(180deg, #FFFFFF, #EEF2F8);
+  box-shadow: 0 12px 28px rgba(18,50,100,.35), 0 1px 0 #fff inset; }
+.yearrail ul { gap: 2px; }
+.yearrail a { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; width: 76px; min-height: 48px; border-radius: 10px;
+  color: var(--text); text-decoration: none; font: 700 15px var(--era-round); }
+.yearrail a:hover, .yearrail a:focus-visible, .yearrail a[aria-current] { outline: none; color: #fff; text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+  background: linear-gradient(180deg, rgba(255,255,255,.22) 0 7px, rgba(255,255,255,0) 7px), linear-gradient(180deg, #3D7BDB, #1A5DBF 60%, #154FA6); }
+@media (min-width: 1280px) {
+  .yearrail { display: block; position: fixed; right: 16px; top: 50%; transform: translateY(-50%); }
+  .eraswitch { display: none; }
+  .mast-row .logo { margin-right: auto; }
+}

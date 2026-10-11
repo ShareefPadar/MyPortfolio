@@ -9,7 +9,7 @@
  *   Copy → Copied        → label swaps and the snackbar confirms
  * Pages supply <main> and any page-only script.
  */
-import { portraitJS, guideJS, eraSwitchJS, arriveHeadJS } from '../_shared/client.mjs';
+import { portraitJS, guideJS, eraSwitchJS, eraRailJS, arriveHeadJS } from '../_shared/client.mjs';
 import { eraItems } from '../_shared/eras.mjs';
 import { headMeta } from '../_shared/head.mjs';
 export const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -58,6 +58,11 @@ ${headCss}
   <a class="btn btn-white resume" href="${esc(c.ctas.resume.href)}"><span class="lbl">${esc(c.ctas.resume.label)}</span> ${ic('download')}</a>
   <div class="scrim" aria-hidden="true"></div>   <!-- inside the app bar: the drawer's z-index only competes within the bar's stacking context -->
 </div></header>
+  <nav class="yearrail" aria-label="${esc(c.eras.label)}" data-era-rail>
+    <ul>
+      ${eraItems(c, pageUrl, '2014').map(e => `<li><a data-era="${e.id}" href="${esc(e.href)}"${e.current ? ' aria-current="true"' : ''}><b>${esc(e.year)}</b></a></li>`).join('\n      ')}
+    </ul>
+  </nav>
 
 ${main}
 
@@ -98,6 +103,8 @@ ${compactFooter ? `<footer class="foot dark compact"><div class="wrap">
   // ── era switcher ──
   ${eraSwitchJS}
   eraSwitch(document.querySelector('[data-era-switch]'));
+  ${eraRailJS}
+  eraRail(document.querySelector('[data-era-rail]'));
 
   // ── nav drawer: focus moves in on open, Escape and the scrim close it, focus returns to the button ──
   const burger = document.querySelector('.burger'), drawer = document.getElementById('drawer');
@@ -141,10 +148,13 @@ ${compactFooter ? `<footer class="foot dark compact"><div class="wrap">
     x.putImageData(im, 0, 0); })();
   const small = touch || innerWidth < 700, S = 56;
   let settle, pos = { x: 0, y: 0 };
+  // the right-hand resting place: the screen edge, or just inside the year rail when the rail is showing (1280px up),
+  // so the chat head never parks on top of it
+  const rightEdge = () => { const r = document.querySelector('[data-era-rail]')?.getBoundingClientRect(); return (r && r.width ? r.left : innerWidth) - S - 10; };
   const put = (x, y, snap) => { pos = { x, y }; ch.classList.toggle('snap', !!snap); ch.style.setProperty('--hx', x + 'px'); ch.style.setProperty('--hy', y + 'px'); };
   const toSide = () => { const right = pos.x + S / 2 > innerWidth / 2; ch.dataset.side = right ? 'right' : 'left';
-    put(right ? innerWidth - S - 10 : 10, Math.max(76, Math.min(pos.y, innerHeight - S - 96)), true); };
-  put(innerWidth - S - 10, Math.round(innerHeight * .52), false);
+    put(right ? rightEdge() : 10, Math.max(76, Math.min(pos.y, innerHeight - S - 96)), true); };
+  put(rightEdge(), Math.round(innerHeight * .52), false);
   const open = () => { ch.dataset.state = 'talk'; ch.classList.remove('unread'); clearTimeout(settle); settle = setTimeout(() => { ch.dataset.state = 'idle'; }, 6500); };
   const ui = {
     say(text) { ctext.textContent = text; open(); return 6500; },

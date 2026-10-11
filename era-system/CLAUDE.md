@@ -50,7 +50,7 @@ eras/
   _shared/client.mjs        BEHAVIOUR only, no look: decodePortrait() + guideBrain() (section lines, idle chatter, dismiss → comeback)
   _shared/head.mjs          <title>, description, share tags, icon, JSON-LD — from content/site.json `meta` (studies: their own)
   _shared/study.mjs         renderBlocks(): walks a study's blocks through the era's renderers — the build fails if an era misses one of the 13 types · studyJS (progress + lightbox)
-  _shared/eras.mjs          eraItems(): the five years + ?era= links for a switcher. Behaviour: eraSwitchJS / arriveHeadJS in client.mjs
+  _shared/eras.mjs          eraItems(): the five years + ?era= links for a switcher. Behaviour: eraSwitchJS (year chip, under 1280px) / eraRailJS (year rail, 1280px up) / arriveHeadJS in client.mjs
                             client.mjs also has filterJS (work-index filter: single select, empty groups hide)
                             and gameJS (gameField: the home game's focus, keys, state, loop, tones — no look)
   1995/                     the BASE — matches live

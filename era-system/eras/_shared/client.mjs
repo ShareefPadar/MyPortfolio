@@ -91,6 +91,16 @@ function eraSwitch(root) {
   try { localStorage.setItem('era', document.documentElement.dataset.era); } catch (_) {}
 }`;
 
+/**
+ * Year rail: behaviour only. root = nav[data-era-rail] holding a[data-era] links (every era draws its own rail).
+ * A click leaves the same trail as a pick from the menu, so the next era plays its arrival effect.
+ */
+export const eraRailJS = `
+function eraRail(root) {
+  if (!root) return;
+  root.querySelectorAll('a[data-era]').forEach(a => a.addEventListener('click', () => { try { localStorage.setItem('era', a.dataset.era); sessionStorage.setItem('era-arrive', a.dataset.era); } catch (_) {} }));
+}`;
+
 /** Inline in <head>: flags the arrival effect before first paint (each era styles html.era-arrive .arrive). */
 export const arriveHeadJS = `<script>try{if(sessionStorage.getItem('era-arrive')){sessionStorage.removeItem('era-arrive');if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('era-arrive');setTimeout(function(){document.documentElement.classList.remove('era-arrive')},1600)}}catch(e){}</script>`;
 

@@ -8,7 +8,7 @@
  *   home's easter egg       → SHIP THE BACKLOG, a brick breaker whose paddle rides the CONTINUE? box (game.mjs, passed as beforeFooter)
  * Pages supply <main>, optional beforeFooter (the game) and any page-only script.
  */
-import { portraitJS, guideJS, eraSwitchJS, arriveHeadJS } from '../_shared/client.mjs';
+import { portraitJS, guideJS, eraSwitchJS, eraRailJS, arriveHeadJS } from '../_shared/client.mjs';
 import { eraItems } from '../_shared/eras.mjs';
 import { headMeta } from '../_shared/head.mjs';
 export const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -60,6 +60,11 @@ ${css}
       <a class="btn primary resume" href="${esc(c.ctas.resume.href)}">${esc(c.ctas.resume.label)} ${ic('download')}</a>
     </div>
   </nav>
+  <nav class="yearrail" aria-label="${esc(c.eras.label)}" data-era-rail>
+    <ul>
+      ${eraItems(c, pageUrl, '1986').map(e => `<li><a data-era="${e.id}" href="${esc(e.href)}"${e.current ? ' aria-current="true"' : ''}><b>${esc(e.year)}</b></a></li>`).join('\n      ')}
+    </ul>
+  </nav>
 
 ${main}
 ${beforeFooter}
@@ -105,6 +110,8 @@ ${compactFooter ? `  <footer class="box continue compact">
   // ── era switcher ──
   ${eraSwitchJS}
   eraSwitch(document.querySelector('[data-era-switch]'));
+  ${eraRailJS}
+  eraRail(document.querySelector('[data-era-rail]'));
 
   // ── reveals: palette fade, once ──
   const io = new IntersectionObserver((es, o) => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); o.unobserve(e.target); } }), { threshold: .12 });

@@ -462,3 +462,25 @@ html.era-arrive .arrive { display: block; position: fixed; inset: 0; z-index: 99
 .js .reveal, .js .reveal.in { opacity: 1; animation: none; }
 .eyebrow, .chip, .card-body .meta, .credit, .when, .where, .slabel, .shead .stats dt, .slab, .squote .scite, .sshort dt, .sgal-label,
 .snext-l, .fly-hint, .foot .status, .pagehead .back, .shead .back, .sshort-head, .browser-bar, .yearmenu-h, .mact { text-transform: none; letter-spacing: .02em; }
+
+
+/* ══ THE YEAR RAIL ══════════════════════════════════════════════════
+   All five years standing on the right edge, vertically centred: the same
+   place in every era, drawn this era's way. From 1280px up only. Below that
+   the page has no margin for it to stand in, so the year button beside the
+   name takes over. The two never show together. */
+.yearrail { display: none; }
+.yearrail ul { list-style: none; margin: 0; padding: 0; display: grid; }
+.yearrail { z-index: 90; padding: 8px 0; background: #fff; border-radius: 2px;
+  box-shadow: 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12), 0 5px 5px -3px rgba(0,0,0,.2); }
+.yearrail a { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; width: 84px; min-height: 56px;
+  color: var(--text); text-decoration: none; font: 600 16px var(--era-body, 'Open Sans', sans-serif); }
+.yearrail a:hover, .yearrail a:focus-visible { outline: none; background: #EEEEEE; }
+.yearrail a[aria-current] { color: var(--action); box-shadow: inset -3px 0 0 var(--action); }
+@media (min-width: 1280px) {
+  .yearrail { display: block; position: fixed; right: 16px; top: 50%; transform: translateY(-50%); }
+  .eraswitch { display: none; }
+  .appbar .brand { margin-right: auto; }
+  /* the arrival circle opens from the rail now, not the hidden year button */
+  html.era-arrive .arrive { -webkit-mask-image: radial-gradient(circle at calc(100% - 58px) 50%, transparent var(--r), #000 calc(var(--r) + 1px)); mask-image: radial-gradient(circle at calc(100% - 58px) 50%, transparent var(--r), #000 calc(var(--r) + 1px)); }
+}

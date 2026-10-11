@@ -354,3 +354,22 @@ html.era-arrive .arrive { display: block; position: fixed; inset: 0; z-index: 99
 .foot:not(.foot-compact) .credit { align-items: center; }
 .foot:not(.foot-compact) .credit span { font-size: 9px; letter-spacing: .11em; }
 .foot:not(.foot-compact) .credit a { font-size: 11px; }
+
+
+/* ══ THE YEAR RAIL ══════════════════════════════════════════════════
+   All five years standing on the right edge, vertically centred: the same
+   place in every era, drawn this era's way. From 1280px up only. Below that
+   the page has no margin for it to stand in, so the year button beside the
+   name takes over. The two never show together. */
+.yearrail { display: none; }
+.yearrail ul { list-style: none; margin: 0; padding: 0; display: grid; }
+.yearrail { z-index: 65; padding: var(--s8); }
+.yearrail ul { gap: var(--s8); }
+.yearrail .focusable { display: block; }
+.yearrail a { flex-direction: column; justify-content: center; gap: 6px; width: 76px; min-height: 48px; padding: 0; }
+.yearrail a b { font-family: var(--font-statement); font-weight: 400; font-size: 12px; line-height: 1; }
+@media (min-width: 1280px) {
+  .yearrail { display: block; position: fixed; right: 16px; top: 50%; transform: translateY(-50%); }
+  .eraswitch { display: none; }
+  .navbar .brand { margin-right: auto; }
+}

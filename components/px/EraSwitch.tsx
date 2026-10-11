@@ -19,6 +19,12 @@ import PixelIcon from "@/components/px/PixelIcon";
 
 export type EraItem = { id: string; year: string; name: string };
 
+/** Remember the pick and flag the arrival wipe. Shared with EraRail, so both
+    switchers leave the same trail for whichever era loads next. */
+export const rememberEra = (id: string) => {
+  try { localStorage.setItem("era", id); sessionStorage.setItem("era-arrive", id); } catch {}
+};
+
 export default function EraSwitch({ label, items }: { label: string; items: EraItem[] }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -55,14 +61,12 @@ export default function EraSwitch({ label, items }: { label: string; items: EraI
     links[(to + links.length) % links.length].focus();
   };
 
-  const pick = (id: string) => {
-    try { localStorage.setItem("era", id); sessionStorage.setItem("era-arrive", id); } catch {}
-  };
+  const pick = rememberEra;
 
   return (
     <div
       ref={root}
-      className="eraswitch relative mr-auto"
+      className="eraswitch relative mr-auto xl:hidden"
       data-open={open}
       onKeyDown={onKey}
       onBlur={(e) => { if (open && !root.current?.contains(e.relatedTarget as Node)) setOpen(false); }}

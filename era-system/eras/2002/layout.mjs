@@ -10,7 +10,7 @@
  * Pages supply <main>, optional `side` content (sits top-right on desktop, first on phones — e.g. the portrait), and any page-only script.
  * The IM window opens when Clippy talks and settles back into its buddy pill when he's quiet (unless you minimised it yourself).
  */
-import { portraitJS, guideJS, eraSwitchJS, arriveHeadJS } from '../_shared/client.mjs';
+import { portraitJS, guideJS, eraSwitchJS, eraRailJS, arriveHeadJS } from '../_shared/client.mjs';
 import { eraItems } from '../_shared/eras.mjs';
 import { headMeta } from '../_shared/head.mjs';
 export const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -74,6 +74,11 @@ ${css}
       ${c.nav.map(n => `<a href="${esc(n.href)}"${n.href === current ? ' aria-current="page"' : ''}>${esc(n.label)}</a>`).join('\n      ')}
     </nav>
   </header>
+  <nav class="yearrail" aria-label="${esc(c.eras.label)}" data-era-rail>
+    <ul>
+      ${eraItems(c, pageUrl, '2002').map(e => `<li><a data-era="${e.id}" href="${esc(e.href)}"${e.current ? ' aria-current="true"' : ''}><b>${esc(e.year)}</b></a></li>`).join('\n      ')}
+    </ul>
+  </nav>
   <div class="under-tabs" aria-hidden="true"></div>
 
   <div class="layout${compactFooter ? ' solo' : ''}${side && !compactFooter ? ' has-lead' : ''}">
@@ -115,6 +120,8 @@ ${beforeFooter}
   // ── era switcher ──
   ${eraSwitchJS}
   eraSwitch(document.querySelector('[data-era-switch]'));
+  ${eraRailJS}
+  eraRail(document.querySelector('[data-era-rail]'));
 
   // ── panels blind down once on scroll-in ──
   const io = new IntersectionObserver((es, o) => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); o.unobserve(e.target); } }), { threshold: .1 });

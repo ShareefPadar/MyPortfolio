@@ -622,6 +622,11 @@
 /* the open menu sits above Clippy */
 header:has(.eraswitch[data-open="true"]) { z-index: 80; }
 
+/* The year rail: the same plate as the menu, standing on the right edge.
+   Above Clippy (60) so his bubble never covers it, below the drawn cursor (70). */
+.erarail { position: fixed; z-index: 65; right: 16px; top: 50%; transform: translateY(-50%); padding: 8px;
+  background: var(--plate); border: 3px solid var(--ink); box-shadow: inset 3px 3px 0 var(--hi), inset -3px -3px 0 var(--sh); }
+
 .arrive { display: none; }
 html.era-arrive .arrive { display: block; position: fixed; inset: 0; z-index: 9999; pointer-events: none; background: var(--paper);
   background-image: repeating-linear-gradient(0deg, rgba(20, 20, 15, .06) 0 2px, transparent 2px 4px);

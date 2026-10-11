@@ -13,7 +13,7 @@
  * Light by default, dark when the device is. System font (SF Pro on Apple devices).
  * Pages supply <main> content (inside .page) and any page-only script.
  */
-import { portraitJS, guideJS, eraSwitchJS, arriveHeadJS } from '../_shared/client.mjs';
+import { portraitJS, guideJS, eraSwitchJS, eraRailJS, arriveHeadJS } from '../_shared/client.mjs';
 import { eraItems } from '../_shared/eras.mjs';
 import { headMeta } from '../_shared/head.mjs';
 export const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -69,6 +69,11 @@ ${css}
   </div>
   <a class="cap glass" href="${esc(c.ctas.resume.href)}">${esc(c.ctas.resume.label)} ${ic('download')}</a>
 </header>
+  <nav class="yearrail glass" aria-label="${esc(c.eras.label)}" data-era-rail>
+    <ul>
+      ${eraItems(c, pageUrl, 'now').map(e => `<li><a data-era="${e.id}" href="${esc(e.href)}"${e.current ? ' aria-current="true"' : ''}><b>${esc(e.year)}</b></a></li>`).join('\n      ')}
+    </ul>
+  </nav>
 
 <main id="main" class="page">
 ${main}
@@ -118,6 +123,8 @@ ${compactFooter ? `  <footer class="footer compact">
   // ── era switcher ──
   ${eraSwitchJS}
   eraSwitch(document.querySelector('[data-era-switch]'));
+  ${eraRailJS}
+  eraRail(document.querySelector('[data-era-rail]'));
 
   // ── the tab bar shrinks to the current tab while you scroll down, comes back when you scroll up ──
   const bar = document.getElementById('tabbar'); let lastY = scrollY;
