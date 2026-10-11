@@ -64,7 +64,7 @@ A scroll edge effect blurs content as it slides under the top controls.
 | Era switcher | glass capsule top left, opening a glass popover |
 | Clippy | a collaborator's cursor named Shareef, as in a shared Figma file. It glides to what it's talking about (the section heading, Résumé, the email) and says it in cursor chat, then drifts a little while quiet. × closes it; a glass capsule brings it back. On phones it parks as that capsule and the bubble opens above it |
 | Portrait | the real pixels, crisp, in a solid well |
-| Work cards | big screenshot, plain text under it, "Read case study" in link blue |
+| Work cards | big screenshot, plain text under it. The whole card is the link, so "Read case study" is kept for screen readers only |
 | Live products, principles, timeline | Settings-style grouped panels with hairline rows |
 | Under NDA | grouped panel |
 | Copy → Copied | the bordered button fills with the tint |

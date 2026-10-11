@@ -46,7 +46,6 @@ a { color: var(--action); }
 .gel-blue { color: #fff; background: var(--gloss), var(--gel-blue); border-color: #0F3F86; text-shadow: 0 -1px 0 rgba(0,0,0,.25); }
 .gel-blue:hover { background: var(--gloss), var(--gel-blue-hover); }
 .gel-blue:active { background: linear-gradient(180deg, #154FA6, #1A5DBF); }
-.gel-lime { color: var(--on-accent); background: var(--gloss), var(--gel-lime); border-color: #8FAE12; }
 .gel-silver:hover { background: var(--gloss), linear-gradient(180deg, #FFFFFF, #F1F5FA 60%, #DFE6F0); }
 .gel.block { width: 100%; }
 
@@ -118,7 +117,7 @@ a { color: var(--action); }
 .item h3 a { text-decoration: none; }
 .item h3 a:hover { text-decoration: underline; }
 .domain { display: inline-block; margin-bottom: 8px; padding: 2px 10px; border-radius: 999px; font: 700 12px var(--era-text);
-  letter-spacing: .04em; color: var(--on-accent); background: var(--gloss), var(--gel-lime); border: 1px solid #8FAE12; }
+  letter-spacing: .04em; color: var(--action); background: linear-gradient(180deg, #F3F8FF, #E3EEFB); border: 1px solid #A9C2E4; }
 .meta { margin: 0 0 8px; font-size: 13.5px; color: var(--text-muted); }
 .summary { margin: 0 0 6px; font-size: 15px; color: var(--text); }
 .more { display: inline-flex; align-items: center; min-height: 44px; font-weight: 700; text-decoration: none; }
@@ -175,9 +174,9 @@ a { color: var(--action); }
 .note-i { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; flex: none; color: #fff; font: 800 15px/1 Georgia, serif;
   background: radial-gradient(circle at 35% 30%, #6FA6F0, #1A5DBF 70%); box-shadow: 0 1px 2px rgba(0,0,0,.3); }
 
-/* copy → copied: the gel turns green, a tick replaces the icon, then a yellow fade */
+/* copy → copied: the gel turns lime (the one place lime leads in this era), a tick replaces the icon, then a yellow fade */
 .copy .i-done { display: none; }
-.copy.got { color: #fff; background: var(--gloss), linear-gradient(180deg, #5BC73A, #2E9A16 60%, #237A10); border-color: #1E6A0D; text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+.copy.got { color: var(--on-accent); background: var(--gloss), var(--gel-lime); border-color: #8FAE12; text-shadow: none;
   animation: yfade 1.6s var(--era-ease); }
 .copy.got .i-copy { display: none; } .copy.got .i-done { display: inline; }
 @keyframes yfade { 0% { box-shadow: 0 0 0 8px #FFF3A0; } 100% { box-shadow: 0 0 0 0 rgba(255,243,160,0); } }
@@ -255,7 +254,7 @@ a { color: var(--action); }
 @media (max-width: 560px) {
   .mast-row { gap: 10px; }
   .yeargel { padding: 6px 10px; font-size: 14px; }
-  .mast-row > .gel-lime { padding: 10px 14px; }
+  .mast-row > a.gel { padding: 10px 14px; }
 }
 
 /* ── arrival: the Flash-intro fade from white ── */
@@ -330,9 +329,9 @@ html.era-arrive .arrive { display: block; position: fixed; inset: 0; z-index: 99
 .cv .meta { margin: 0 0 6px; }
 @media (max-width: 560px) { .cv li { grid-template-columns: minmax(0, 1fr); gap: 8px; } }
 .edu p { font-size: 14px; }
-.pull { margin: 0; position: relative; padding: 26px 26px 26px 64px; border-radius: 12px; border: 1px solid #B6D81C;
-  background: linear-gradient(180deg, #FBFFE8, #F1FAC6); box-shadow: 0 4px 12px rgba(18,50,100,.1); }
-.pull::before { content: "“"; position: absolute; left: 14px; top: 6px; font: 800 64px/1 Georgia, serif; color: #8FAE12; }
+.pull { margin: 0; position: relative; padding: 26px 26px 26px 64px; border-radius: 12px; border: 1px solid #A9C2E4;
+  background: linear-gradient(180deg, #F3F8FF, #E3EEFB); box-shadow: 0 4px 12px rgba(18,50,100,.1); }
+.pull::before { content: "“"; position: absolute; left: 14px; top: 6px; font: 800 64px/1 Georgia, serif; color: #1A5DBF; }
 .pull blockquote { margin: 0; }
 .pull p { margin: 0; font: 700 clamp(18px, 2.2vw, 22px)/1.45 var(--era-round); color: var(--text); }
 
@@ -369,8 +368,8 @@ html.era-arrive .arrive { display: block; position: fixed; inset: 0; z-index: 99
 .shr { border: 0; border-top: 1px dashed var(--line); margin: 36px 0; }
 .squote { position: relative; margin: 28px 0; padding: 18px 20px 18px 56px; border-radius: 12px; border: 1px solid #A9C2E4; background: linear-gradient(180deg, #F3F8FF, #E3EEFB); }
 .squote::before { content: "“"; position: absolute; left: 14px; top: 4px; font: 800 52px/1 Georgia, serif; color: #1A5DBF; }
-.squote.lime { border-color: #B6D81C; background: linear-gradient(180deg, #FBFFE8, #F1FAC6); }
-.squote.lime::before { color: #8FAE12; }
+/* my own line (rule "lime" in the content) vs a quoted customer: silver vs blue. Lime is kept for the Copied state and small details only */
+.squote.lime { border-color: #C5CEDB; background: linear-gradient(180deg, #FFFFFF, #EEF2F8); }
 .squote p { margin: 0; font: 700 17.5px/1.5 var(--era-round); }
 .squote .scite { margin-top: 10px; font: 400 13.5px var(--era-text); color: var(--text-muted); }
 .scallout { display: flex; gap: 14px; align-items: flex-start; margin: 28px 0; padding: 16px 18px; border-radius: 10px; border: 1px solid #A9C2E4; background: #F3F8FF; }

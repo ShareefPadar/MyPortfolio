@@ -14,7 +14,7 @@ import Summary from "@/components/Summary";
 
 <Callout label="On fairness">
 
-Wio is one of the UAE's fastest-growing digital banks and has genuine advocates. Its onboarding and app are widely praised, and it publishes strong satisfaction scores. This study isn't a verdict on the bank. It looks at one specific flow that its own public reviews show repeatedly failing, and asks what design could do about it inside constraints that no interface can remove — mandatory compliance holds, external registry timelines, review reasons the bank legally cannot disclose. The rest of this case study is what's left once you accept that.
+Wio is one of the UAE's fastest-growing digital banks and has genuine advocates. Its onboarding and app are widely praised, and it publishes strong satisfaction scores. This study isn't a verdict on the bank. It looks at one specific flow that its own public reviews show repeatedly failing, and asks what design could do about it inside constraints that no interface can remove: mandatory compliance holds, external registry timelines, review reasons the bank legally cannot disclose. The rest of this case study is what's left once you accept that.
 
 </Callout>
 
@@ -71,7 +71,7 @@ That constraint is the whole project. It rules out the obvious answer and forces
 
 ---
 
-## The design decisions
+## Seven decisions for the wait
 
 Each decision is problem, constraint, the options I weighed, and the choice, with the rejected option kept visible.
 
@@ -89,7 +89,7 @@ I exposed stage and owner. "We can't discuss it" gets heard as "nobody is workin
 
 I chose the running clock. A promise that breaks daily is worse than an honest number that's merely uncomfortable. "Working day 6 of up to 10" can't be contradicted by tomorrow.
 
-<Shot src="/assets/work/mizan-clock.png" alt="Concept UI designed by me. Not Wio's product and not a replica of their interface. A persistent strip showing elapsed working days against the stated maximum" caption="The day counter is persistent, appearing on every screen rather than buried in a status page." />
+<Shot src="/assets/work/mizan-clock.png" alt="Concept UI designed by me. Not Wio's product and not a replica of their interface. A persistent strip showing elapsed working days against the stated maximum" caption="The day counter is persistent and appears on every screen." />
 
 ### 3. Admit the estimate slipped, before the customer notices
 
@@ -105,7 +105,7 @@ A tracker that says "in progress with our compliance team" while the bank is act
 
 I chose the explicit pause. A status that always looks fine is worthless. The paused state also tells the customer their clock isn't ticking down while they're the holdup, which removes the panic without hiding the fact.
 
-<Shot src="/assets/work/mizan-paused.png" alt="Concept UI designed by me. Not Wio's product and not a replica of their interface. A paused state reading 'waiting on documents from you, not from us', with the estimate showing as paused" caption="The paused state names the customer as the blocker and stops the clock rather than pretending progress." />
+<Shot src="/assets/work/mizan-paused.png" alt="Concept UI designed by me. Not Wio's product and not a replica of their interface. A paused state reading 'waiting on documents from you, not from us', with the estimate showing as paused" caption="The paused state names the customer as the blocker and stops the clock." />
 
 ### 5. Answer "has anything changed?" without a phone call
 
@@ -119,7 +119,7 @@ I chose the log. An unchanged status page is ambiguous, because the customer can
 
 By the time a customer is a month in, the damage isn't just the delay. They were told "another 24 hours" repeatedly and once promised same-day activation that never came, so every future statement is now discounted. Agents genuinely couldn't see the external stage, so they guessed, and you can't un-say it. The options were to move on and give a better estimate from now, or to list the previous promises, say plainly they were wrong, and explain why they were made.
 
-I chose to list them. A new estimate from a source that has been wrong repeatedly carries no weight. Naming the broken promises is the only way to make the next number credible, and explaining why, that agents couldn't see the stage and now can, shows the cause was fixed rather than just apologised for.
+I chose to list them. A new estimate from a source that has been wrong repeatedly carries no weight. Naming the broken promises is the only way to make the next number credible, and explaining why, that agents couldn't see the stage and now can, shows the cause was actually fixed.
 
 <Shot src="/assets/work/mizan-promises.png" alt="Concept UI designed by me. Not Wio's product and not a replica of their interface. A block listing what the customer was previously told, stating plainly that it was wrong, and explaining why" caption="What we told you before, and why it was wrong. The hardest block to write, and the one that makes the next estimate credible." />
 
@@ -127,9 +127,9 @@ I chose to list them. A new estimate from a source that has been wrong repeatedl
 
 Customers report POS systems linked to the frozen account, so a compliance review stops them physically taking payment. That's what converts a delay into an existential event. The account itself must stay restricted, but total lockouts are often more restrictive than the regulation requires.
 
-I chose scoped restriction, published. The compliance requirement is about this account, not about the customer's ability to operate. So the concept keeps collecting card takings and holds them rather than rejecting them, which also means the customer's own customers never see a failed payment, and lets the business nominate an alternative settlement account for the duration. It keeps viewing balances, exporting statements for their accountant, and receiving funds available, then publishes the exact scope of what's restricted rather than leaving them to discover each blocked action by hitting it.
+I chose scoped restriction, published. The compliance requirement is about this account, not about the customer's ability to operate. So the concept keeps collecting card takings and holds them rather than rejecting them, which also means the customer's own customers never see a failed payment, and lets the business nominate an alternative settlement account for the duration. It keeps viewing balances, exporting statements for their accountant, and receiving funds available, then publishes the exact scope of what's restricted, so they never discover a blocked action by hitting it.
 
-<Shot src="/assets/work/wio-access.png" alt="Concept UI designed by me. Not Wio's product and not a replica of their interface. A published checklist of what stays available during a hold — balances, statements, incoming transfers, team access — against what's restricted: outgoing transfers, card spending, POS settlement, closing the account" caption="The access scope, published rather than discovered by hitting each blocked action one at a time." />
+<Shot src="/assets/work/wio-access.png" alt="Concept UI designed by me. Not Wio's product and not a replica of their interface. A published checklist of what stays available during a hold (balances, statements, incoming transfers, team access) against what's restricted: outgoing transfers, card spending, POS settlement, closing the account" caption="The access scope, published up front, so nobody discovers it one blocked action at a time." />
 
 ---
 
@@ -151,7 +151,7 @@ This is a concept, so I have design intent, not proof. If I took it further I'd 
 
 <Callout label="What's real, what's mine" tone="flag">
 
-Reminder: the problem is real, drawn from Wio Bank's dated public reviews. The interface below, including the Wio name and marks on it, is my own concept — not Wio's product, not a replica of their UI, and not affiliated with or endorsed by Wio. Use the simulate bar at the bottom to move between working day 6, the slipped state, waiting on you, and resolution.
+Reminder: the problem is real, drawn from Wio Bank's dated public reviews. The interface below, including the Wio name and marks on it, is my own concept. It is not Wio's product, not a replica of their UI, and not affiliated with or endorsed by Wio. Use the simulate bar at the bottom to move between working day 6, the slipped state, waiting on you, and resolution.
 
 </Callout>
 

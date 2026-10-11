@@ -21,7 +21,7 @@ export default function render(args) {
         <h3>${esc(w.title)}</h3>
         <p class="meta">${esc(w.meta)}</p>
         <p class="sum">${esc(w.summary)}</p>
-        <span class="more">${esc(c.ui.readCaseStudy)}</span>
+        <span class="sr">${esc(c.ui.readCaseStudy)}</span>
       </a>`).join('');
 
   const live = c.live.items.map(l => `

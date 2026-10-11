@@ -141,7 +141,8 @@ export default function KitchenSink() {
         <p className="mb-32 max-w-prose font-sans text-[16px] leading-[1.7] text-ink">
           The face is chosen by what a string <em>is</em>, not by its heading level. A statement
           is Silkscreen, a label is mono, and anything read as a sentence is Geist — even at 40px.
-          Eleven sizes total, three per face plus responsive pairs. Same rule as the icons: closed
+          Eleven sizes total, three per face plus responsive pairs. Mono is uppercase only on
+          the nav, buttons and text links; tags, meta lines and eyebrows are set in normal case. Same rule as the icons: closed
           set, and a twelfth size is a type error, not a judgment call.
         </p>
 
@@ -223,15 +224,18 @@ export default function KitchenSink() {
         </Label>
         <div className="mt-12 space-y-24">
           <div>
-            <Label>meta · 11px · 1.5 / 0.08em · the interactive floor</Label>
-            <p className="mt-8 font-mono text-[11px] leading-[1.5] tracking-[0.08em] text-mute">
-              DUBAI · REPLIES WITHIN A DAY
+            <Label>meta · 11px · uppercase 0.08em · nav and text links only</Label>
+            <p className="mt-8 font-mono text-[11px] uppercase leading-[1.5] tracking-[0.08em] text-mute">
+              Back to top
             </p>
           </div>
           <div>
-            <Label>micro · 9px · uppercase · 1.4 / 0.11em · the legibility floor</Label>
-            <p className="mt-8 font-mono text-[9px] uppercase leading-[1.4] tracking-[0.11em] text-mute">
-              FINTECH · MARKETPLACE · MOBILE
+            <Label>label · 9px or 11px · normal case · 0.02em · tags, meta lines, eyebrows</Label>
+            <p className="mt-8 font-mono text-[11px] leading-[1.5] tracking-[0.02em] text-mute">
+              Shareef Padar · Dubai
+            </p>
+            <p className="mt-4 font-mono text-[9px] leading-[1.4] tracking-[0.02em] text-mute">
+              Fintech · Live
             </p>
           </div>
         </div>

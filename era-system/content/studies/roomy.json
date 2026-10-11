@@ -56,7 +56,7 @@
   },
   {
    "type": "h2",
-   "text": "The Problem — Research by Living It"
+   "text": "The Problem: Research by Living It"
   },
   {
    "type": "p",
@@ -102,7 +102,7 @@
   },
   {
    "type": "h2",
-   "text": "Key Features"
+   "text": "The rent ledger and the laundry scheduler"
   },
   {
    "type": "h3",
@@ -128,7 +128,7 @@
      "alt": "Roomy live-status laundry scheduler"
     }
    ],
-   "caption": "Machine status live, booking cap enforced in the data layer — not a rule anyone has to remember.",
+   "caption": "Machine status live, booking cap enforced in the data layer, so it is not a rule anyone has to remember.",
    "zoom": true
   },
   {

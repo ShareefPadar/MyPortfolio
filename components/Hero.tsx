@@ -27,7 +27,7 @@ const Hero = () => (
     <div className="mx-auto max-w-wide px-16 pb-64 pt-16 md:pb-96 md:pt-32">
       <div className="grid items-center gap-32 md:grid-cols-[1.1fr_0.9fr]">
         <div>
-          <p className="mb-16 font-mono text-[11px] uppercase tracking-[0.08em] text-mute">
+          <p className="mb-16 font-mono text-[11px] tracking-[0.02em] text-mute">
             Shareef Padar · Dubai
           </p>
 
@@ -46,7 +46,7 @@ const Hero = () => (
           </p>
 
           <div className="flex flex-wrap items-center gap-16">
-            <Button level="primary" large href="/#work" icon="arrowD">
+            <Button level="primary" large href="/#work">
               VIEW WORK
             </Button>
             <Button

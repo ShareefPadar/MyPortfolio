@@ -33,7 +33,7 @@
    "label": "Outcome",
    "text": "A working six-screen prototype, embedded in the case study. Every decision earns its place against a constraint that can't move: regulators decide the steps, design decides how they feel."
   },
-  "statement": "A real problem, a concept product. The frustration, the research, and the working prototype are all real. Sanad, the business-banking brand they're wrapped in, is the part I invented so I could solve the problem end to end."
+  "statement": "A real problem, a concept product. The frustration, the research, and the working prototype are all real. Sanad, the business-banking brand they're wrapped in, is the part I invented so I could solve the whole problem."
  },
  "blocks": [
   {
@@ -127,7 +127,7 @@
   },
   {
    "type": "h2",
-   "text": "The design decisions"
+   "text": "Six decisions for a process that can't be shortened"
   },
   {
    "type": "p",
@@ -189,7 +189,7 @@
   },
   {
    "type": "p",
-   "html": "I sequenced it, with pre-filled fields the user confirms rather than types. That last bit is borrowed straight from Mercury. Front-loading effort before any sense of progress is the fastest way to lose someone at step one."
+   "html": "I sequenced it, with pre-filled fields the user only has to confirm. That last bit is borrowed straight from Mercury. Front-loading effort before any sense of progress is the fastest way to lose someone at step one."
   },
   {
    "type": "figure",
@@ -199,7 +199,7 @@
      "alt": "Owners screen with the applicant already added as primary owner"
     }
    ],
-   "caption": "The applicant is pre-added from sign-up, so the user confirms rather than starting from a blank form.",
+   "caption": "The applicant is pre-added from sign-up, so the user confirms what is already there.",
    "zoom": true
   },
   {
@@ -268,7 +268,7 @@
      "alt": "Rejection screen naming the exact document and reason, with everything else marked verified and saved"
     }
    ],
-   "caption": "Names the exact document and reason, reassures that everything else is saved, and offers one clear action that lands on the flagged item rather than a restart.",
+   "caption": "Names the exact document and reason, reassures that everything else is saved, and offers one clear action that lands on the flagged item.",
    "zoom": true
   },
   {
@@ -333,7 +333,7 @@
   },
   {
    "type": "p",
-   "html": "<strong>A note on the visual language:</strong> the prototype is built in a Mercury-inspired system on purpose. Lavender canvas, white cards, indigo accents, geometric sans, all pulled from my desk research. Working inside an established fintech design language, rather than inventing a novel one, is closer to the actual job of joining a fintech design team."
+   "html": "<strong>A note on the visual language:</strong> the prototype is built in a Mercury-inspired system on purpose. Lavender canvas, white cards, indigo accents, geometric sans, all pulled from my desk research. Working inside an established fintech design language is closer to the actual job of joining a fintech design team than inventing a new one."
   },
   {
    "type": "prototype",

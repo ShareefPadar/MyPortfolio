@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 import { Card, LIME, NTEXT, SIZE, ogFonts } from "@/lib/og";
 
-export const alt = "Shareef Padar — Senior Product Designer, Dubai";
+export const alt = "Shareef Padar, Senior Product Designer in Dubai";
 export const size = SIZE;
 export const contentType = "image/png";
 

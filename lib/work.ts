@@ -149,7 +149,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     outcome:
       "A working six-screen prototype, embedded in the case study. Every decision earns its place against a constraint that can't move: regulators decide the steps, design decides how they feel.",
     quote:
-      "A real problem, a concept product. The frustration, the research, and the working prototype are all real. Sanad, the business-banking brand they're wrapped in, is the part I invented so I could solve the problem end to end.",
+      "A real problem, a concept product. The frustration, the research, and the working prototype are all real. Sanad, the business-banking brand they're wrapped in, is the part I invented so I could solve the whole problem.",
     stack: "React · Custom CSS · AI-assisted build",
     imageUrl: "/assets/work/sanad-thumb.png",
     bgColor: "#EEF0FD",
@@ -184,7 +184,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     type: "Product concept",
     duration: "2026",
     outcome:
-      "A working prototype for the wait itself, not the decision. Built against dated public complaints rather than an invented brief, and constrained by what compliance genuinely cannot disclose.",
+      "A working prototype for the wait itself, not the decision. Built against dated public complaints, and constrained by what compliance genuinely cannot disclose.",
     quote:
       "Several of the causes here cannot be designed away: mandatory holds, external registry timelines, reasons the bank is not allowed to give. What can be designed is what the customer is told while they wait.",
     stack: "React · Custom CSS · AI-assisted build",
@@ -344,7 +344,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       category: "Co-living",
       badge: "Live",
       description:
-        "A bedspace management app I designed and built end to end. In daily production use.",
+        "A bedspace management app I designed and built myself. In daily production use.",
       thumbnail: "/assets/roomy-preview.png",
     },
     domain: "CO-LIVING",
@@ -378,7 +378,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       category: "Health",
       badge: "Live",
       description:
-        "A privacy-first, offline-first health tracker I designed and built end to end.",
+        "A privacy-first, offline-first health tracker I designed and built myself.",
       thumbnail: null,
     },
     domain: "HEALTH",

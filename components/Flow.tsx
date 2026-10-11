@@ -59,11 +59,11 @@ const Flow = ({ steps, caption, aspect = "aspect-[9/19.5]" }: FlowProps) => {
               <span className="absolute left-8 top-8 flex h-24 w-24 items-center justify-center  bg-night/80 text-[11px] font-bold text-white">
                 {step.number}
               </span>
-              <span className="absolute bottom-8 right-8 flex items-center gap-4  bg-black/70 px-8 py-4 text-[9px] font-bold uppercase tracking-wide text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 md:px-8">
+              <span className="absolute bottom-8 right-8 flex items-center gap-4  bg-black/70 px-8 py-4 text-[9px] font-bold tracking-wide text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 md:px-8">
                 <PixelIcon name="search" size={8} />
               </span>
             </button>
-            <span className="mt-12 block text-center text-xs font-bold uppercase tracking-widest text-mute">
+            <span className="mt-12 block text-center text-xs font-bold tracking-wide text-mute">
               {step.label}
             </span>
           </div>

@@ -9,7 +9,7 @@ import Reveal from "@/components/px/Reveal";
 import { allStudies, type Domain } from "@/lib/work";
 
 export const metadata: Metadata = {
-  title: "Work | Shareef Padar — Senior Product Designer",
+  title: "Work | Shareef Padar, Senior Product Designer",
   description:
     "Case studies and live products: UX audits, B2B SaaS concepts, and shipped side projects by Shareef Padar, Senior Product Designer based in Dubai.",
 };
@@ -41,14 +41,12 @@ export default async function WorkIndex({
         href="/"
         className="mb-32 inline-flex min-h-[44px] items-center gap-8 font-mono text-[11px] uppercase tracking-[0.08em] text-mute hover:text-ink"
       >
-        <PixelIcon name="arrowL" size={8} />
         Home
       </Link>
 
       <h1 className="mb-16 font-pix text-[20px] leading-[1.8] text-ink">ALL WORK</h1>
       <p className="mb-32 max-w-lead font-sans text-[17px] leading-[1.65] text-ink md:text-[19px]">
-        Case studies, concepts, and live products. Six years of client work in logistics,
-        healthcare, and travel sits under NDA. Ask me about it on a call.
+        Case studies, concepts, and live products. Six years of client work stays under NDA.
       </p>
 
       {/* useSearchParams opts out of static rendering, so the island is

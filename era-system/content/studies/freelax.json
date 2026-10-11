@@ -47,11 +47,11 @@
     },
     {
      "k": "What I did",
-     "v": "Co-founded and designed the product end to end: positioning, design system, content design for AI uncertainty, and the interface itself. Live and taking sign-ups."
+     "v": "Co-founded and designed the whole product: positioning, design system, content design for AI uncertainty, and the interface itself. Live and taking sign-ups."
     },
     {
      "k": "Why it was hard",
-     "v": "The deadline is written into law, not chosen. And the product tells people what they owe HMRC — when it is wrong, the letter arrives at their house, not ours."
+     "v": "The deadline is written into law, not chosen. And the product tells people what they owe HMRC. When it is wrong, the letter arrives at their house, not ours."
     }
    ]
   },
@@ -76,7 +76,7 @@
   },
   {
    "type": "p",
-   "html": "That is the gap. And it is not filled by building a smaller Xero. It is filled by building something a different shape — designed around one person doing the work and the books at the same time, usually at eleven at night."
+   "html": "That is the gap. And it is not filled by building a smaller Xero. It is filled by building something a different shape, designed around one person doing the work and the books at the same time, usually at eleven at night."
   },
   {
    "type": "figure",
@@ -86,7 +86,7 @@
      "alt": "Freelax sign-up: a cream form panel beside a dark green product panel showing a dashboard preview and three feature chips"
     }
    ],
-   "caption": "Sign-up. Form on cream, proof on Deep Forest — the trust stack sits under the button rather than in a footer.",
+   "caption": "Sign-up. Form on cream, proof on Deep Forest. The trust stack sits directly under the button.",
    "zoom": true
   },
   {
@@ -102,7 +102,7 @@
   },
   {
    "type": "p",
-   "html": "It is a reasonable question. A freelancer hires their first contractor, then their first employee, and now they need payroll. If we do not build it, they leave. Every accounting product on the market has answered that question the same way — follow the user, add the feature, keep them."
+   "html": "It is a reasonable question. A freelancer hires their first contractor, then their first employee, and now they need payroll. If we do not build it, they leave. Every accounting product on the market has answered that question the same way: follow the user, add the feature, keep them."
   },
   {
    "type": "p",
@@ -113,13 +113,13 @@
    "rule": "lime",
    "label": "The reasoning",
    "paras": [
-    "We are designing for who someone is on a Tuesday, not who they might be in three years. And a feature that a small fraction of people use is not free for everyone else — it is one more item in the sidebar, one more idea to step around, one more set of words that do not apply to you.",
+    "We are designing for who someone is on a Tuesday, not who they might be in three years. And a feature that a small fraction of people use is not free for everyone else. It is one more item in the sidebar, one more idea to step around, one more set of words that do not apply to you.",
     "When the entire promise is that tax should feel calm instead of frightening, every feature you add is working against you. That is an uncomfortable thing to accept, because adding things feels like progress and removing them feels like losing."
    ]
   },
   {
    "type": "p",
-   "html": "We did not throw payroll away. It is a separate product, if we ever build it — because the moment someone has employees, they are no longer the person this interface was drawn for."
+   "html": "We did not throw payroll away. It is a separate product, if we ever build it, because the moment someone has employees, they are no longer the person this interface was drawn for."
   },
   {
    "type": "p",
@@ -130,10 +130,10 @@
    "images": [
     {
      "src": "/assets/work/freelax-dashboard.webp",
-     "alt": "Freelax dashboard showing three figures — earned this year, tax set aside, safe to spend — above a list of overdue invoices needing attention"
+     "alt": "Freelax dashboard showing three figures (earned this year, tax set aside, safe to spend) above a list of overdue invoices needing attention"
     }
    ],
-   "caption": "Three numbers, in the order a freelancer actually asks them: what came in, what's owed, what's genuinely mine. The sidebar is the argument too — seven items, and no Employees tab.",
+   "caption": "Three numbers, in the order a freelancer actually asks them: what came in, what's owed, what's genuinely mine. The sidebar is the argument too: seven items, and no Employees tab.",
    "zoom": true
   },
   {
@@ -149,7 +149,7 @@
   },
   {
    "type": "p",
-   "html": "So I started fixing them, and that is when the real problem showed up. The palette is Deep Forest and Cream. Soft, quiet, deliberately low contrast, because the whole point is that this product should not feel like a tax form. The obvious way to pass a contrast check is to darken everything — and every time I darkened something, Freelax stopped looking like Freelax."
+   "html": "So I started fixing them, and that is when the real problem showed up. The palette is Deep Forest and Cream. Soft, quiet, deliberately low contrast, because the whole point is that this product should not feel like a tax form. The obvious way to pass a contrast check is to darken everything, and every time I darkened something, Freelax stopped looking like Freelax."
   },
   {
    "type": "p",
@@ -186,7 +186,7 @@
   },
   {
    "type": "p",
-   "html": "That fact sat with me the whole build. The question was never whether to add disclaimers — it was how to be honest about uncertainty without the product sounding like it does not believe itself."
+   "html": "That fact sat with me the whole build. The question was never whether to add disclaimers. It was how to be honest about uncertainty without the product sounding like it does not believe itself."
   },
   {
    "type": "p",
@@ -201,10 +201,10 @@
    "images": [
     {
      "src": "/assets/work/freelax-ai-insight.webp",
-     "alt": "An AI insight card explaining a quiet month, with the tax-advice disclaimer nested in a box inside the card rather than at the page foot"
+     "alt": "An AI insight card explaining a quiet month, with the tax-advice disclaimer nested in a box inside the card"
     }
    ],
-   "caption": "The disclaimer sits inside the card, not at the foot of the page — attached to the claim, at the moment it is read.",
+   "caption": "The disclaimer sits inside the card, not at the foot of the page. It is attached to the claim at the moment it is read.",
    "zoom": true
   },
   {
@@ -231,7 +231,7 @@
      "alt": "The tax copilot slide-over, headed by an AI-generated please review flag, structured into snapshot, based on, what's going well, where to improve, and tax reduction opportunities"
     }
    ],
-   "caption": "Tax copilot. Structured into snapshot, what's working, where to improve — and, above all of it, what it is basing any of this on.",
+   "caption": "Tax copilot. Structured into snapshot, what's working, where to improve and, above all of it, what it is basing any of this on.",
    "zoom": true
   },
   {
@@ -255,7 +255,7 @@
   },
   {
    "type": "p",
-   "html": "Then I opened it as a user would, and it was a wall. Numbers everywhere, all shouting at the same volume. The single most important figure on the page — what you owe — sat there with exactly as much weight as a VAT box nobody looks at. I had built the opposite of calm and called it thorough."
+   "html": "Then I opened it as a user would, and it was a wall. Numbers everywhere, all shouting at the same volume. The single most important figure on the page, what you owe, sat there with exactly as much weight as a VAT box nobody looks at. I had built the opposite of calm and called it thorough."
   },
   {
    "type": "callout",
@@ -263,7 +263,7 @@
    "label": "What I changed",
    "paras": [
     "So I broke it apart. The tax page now carries four figures and the one thing you should do next. VAT returns, MTD submissions and period detail each got their own page.",
-    "It stopped trying to show everything and started answering one question — <em>what do I owe, and what do I do about it</em> — with the rest one deliberate click away."
+    "It stopped trying to show everything and started answering one question: <em>what do I owe, and what do I do about it</em>. The rest is one deliberate click away."
    ]
   },
   {
@@ -275,10 +275,10 @@
    "images": [
     {
      "src": "/assets/work/freelax-tax.webp",
-     "alt": "The tax page after the split: four headline figures — tax owed, set aside, take-home, deadline — one suggested next step, and MTD quarters and VAT returns as their own destinations"
+     "alt": "The tax page after the split: four headline figures (tax owed, set aside, take-home, deadline), one suggested next step, and MTD quarters and VAT returns as their own destinations"
     }
    ],
-   "caption": "After the split. Four figures, one suggested action, and VAT returns and MTD submissions demoted to links rather than competing for the same screen.",
+   "caption": "After the split. Four figures, one suggested action, and VAT returns and MTD submissions demoted to links.",
    "zoom": true
   },
   {
@@ -290,7 +290,7 @@
   },
   {
    "type": "p",
-   "html": "IR35 decides whether a contractor is genuinely self-employed or an employee wearing a different hat. Getting it wrong is expensive, and it is decided per engagement — not once, for a person."
+   "html": "IR35 decides whether a contractor is genuinely self-employed or an employee wearing a different hat. Getting it wrong is expensive, and it is decided per engagement, not once for a person."
   },
   {
    "type": "p",
@@ -298,14 +298,14 @@
   },
   {
    "type": "p",
-   "html": "Each question also shows what it is worth — HIGH or MED. The weighting was always in the scoring; I just stopped hiding it. Now you can see which of your answers is actually deciding the outcome instead of treating fifteen questions as if they matter equally."
+   "html": "Each question also shows what it is worth: HIGH or MED. The weighting was always in the scoring; I just stopped hiding it. Now you can see which of your answers is actually deciding the outcome instead of treating fifteen questions as if they matter equally."
   },
   {
    "type": "figure",
    "images": [
     {
      "src": "/assets/work/freelax-ir35.webp",
-     "alt": "IR35 assessment questions each tagged HIGH or MED — personal service, substitution, mutuality and control weighted HIGH, equipment, exclusivity, financial risk and part-and-parcel weighted MED — sitting on a project page above that project's invoices"
+     "alt": "IR35 assessment questions each tagged HIGH or MED (personal service, substitution, mutuality and control weighted HIGH; equipment, exclusivity, financial risk and part-and-parcel weighted MED), sitting on a project page above that project's invoices"
     }
    ],
    "caption": "Weighted questions, with the weighting made visible. It sits on the project, above that project's own invoices, because IR35 is decided per engagement.",
@@ -324,7 +324,7 @@
   },
   {
    "type": "p",
-   "html": "It means I design against numbers I did not calculate, and it means our disagreements arrive as pull requests rather than as opinions in a call."
+   "html": "It means I design against numbers I did not calculate, and it means our disagreements arrive as pull requests."
   },
   {
    "type": "p",
@@ -369,12 +369,12 @@
      "alt": "The invoices list: nine invoices with draft, overdue and paid status pills, filter tabs across the top, and unpaid and paid totals"
     }
    ],
-   "caption": "Invoicing, with the state of every invoice readable at a glance rather than by opening each one.",
+   "caption": "Invoicing, with the state of every invoice readable at a glance.",
    "zoom": true
   },
   {
    "type": "p",
-   "html": "MTD submission is built against HMRC's sandbox and waiting. It unlocks when we are recognised, and recognition needs the company formed first — which makes it the longest thread we are pulling."
+   "html": "MTD submission is built against HMRC's sandbox and waiting. It unlocks when we are recognised, and recognition needs the company formed first, which makes it the longest thread we are pulling."
   },
   {
    "type": "callout",

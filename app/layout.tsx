@@ -43,14 +43,14 @@ const silkscreen = Silkscreen({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.shareefpadar.com'),
-  title: 'Shareef Padar | Senior Product Designer — Dubai',
-  description: 'Senior Product Designer with 6 years of B2B UX experience. Research, design systems, and production-ready code — based in Dubai.',
+  title: 'Shareef Padar | Senior Product Designer, Dubai',
+  description: 'Senior Product Designer with 6 years of B2B UX experience. Research, design systems, and production-ready code, based in Dubai.',
   icons: {
     icon: "/assets/logo.svg",
   },
   openGraph: {
     title: 'Shareef Padar | Senior Product Designer',
-    description: '6 years of B2B product design. Research to shipped interfaces, end to end.',
+    description: '6 years of B2B product design, from research to shipped interfaces.',
     url: 'https://www.shareefpadar.com', 
     siteName: 'Shareef Padar Portfolio',
     locale: 'en_US',
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Shareef Padar | Senior Product Designer',
-    description: '6 years of B2B product design. Research to shipped interfaces, end to end.',
+    description: '6 years of B2B product design, from research to shipped interfaces.',
   },
 };
 

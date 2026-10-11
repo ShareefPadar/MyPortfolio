@@ -29,7 +29,7 @@ const DeviceFrame = ({ children, url = "prototype", label, caption }: DeviceFram
       {label && (
         <div className="mb-12 flex items-center gap-8">
           <span className="led inline-block h-8 w-8 bg-lime" aria-hidden="true" />
-          <span className="font-mono text-[9px] uppercase tracking-[0.11em] text-mute">
+          <span className="font-mono text-[9px] tracking-[0.02em] text-mute">
             {label}
           </span>
         </div>

@@ -366,8 +366,7 @@
     background: var(--plate);
     font-family: var(--font-mono);
     font-size: 10px;
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
+    letter-spacing: 0.02em;
     color: var(--ink);
     clip-path: polygon(
       4px 0, calc(100% - 4px) 0,
@@ -443,8 +442,6 @@
     background-image: linear-gradient(var(--lime), var(--lime));
     background-size: 100% 40%;
   }
-  /* External only — an arrow on every link is noise. */
-  .prose-link[target="_blank"]::after { content: " ↗"; }
 
   /* Ordered lists use leading zeros, matching the section markers. */
   .prose-ol { counter-reset: n; }
@@ -534,7 +531,7 @@
     padding: 3px 7px 4px;
     font-family: var(--font-mono);
     font-size: 9px;
-    letter-spacing: 0.11em;
+    letter-spacing: 0.02em;
     line-height: 1;
     color: var(--ink);
     white-space: nowrap;

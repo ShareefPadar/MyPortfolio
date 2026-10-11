@@ -51,7 +51,7 @@
     },
     {
      "k": "Why it was hard",
-     "v": "Making offline-first feel premium rather than stripped back, and deciding what a forecast should say when it genuinely does not know."
+     "v": "Making offline-first feel premium, and deciding what a forecast should say when it genuinely does not know."
     }
    ]
   },
@@ -107,12 +107,12 @@
      "alt": "Form dashboard: weight, BMI, and trend with goal and average reference lines"
     }
    ],
-   "caption": "Weight, BMI, and a trend line reading from local IndexedDB — before a single account exists.",
+   "caption": "Weight, BMI, and a trend line reading from local IndexedDB, before a single account exists.",
    "zoom": true
   },
   {
    "type": "h2",
-   "text": "Key Features"
+   "text": "What Form tracks"
   },
   {
    "type": "h3",
@@ -128,7 +128,7 @@
   },
   {
    "type": "p",
-   "html": "A naive forecast engine will happily tell a plateauing user \"goal in 4,000 days.\" Forecasts fail in predictable ways, so rather than let those failures surface as nonsense numbers, I turned each one into a designed state:"
+   "html": "A naive forecast engine will happily tell a plateauing user \"goal in 4,000 days.\" Forecasts fail in predictable ways, so I turned each failure into a designed state:"
   },
   {
    "type": "ul",
@@ -159,7 +159,7 @@
      "alt": "Form daily targets: on-device calorie and macro calculation"
     }
    ],
-   "caption": "Calories and macros calculated on-device with Mifflin-St Jeor — no API round-trip, no cloud dependency.",
+   "caption": "Calories and macros calculated on-device with Mifflin-St Jeor. No API round-trip, no cloud dependency.",
    "zoom": true
   },
   {

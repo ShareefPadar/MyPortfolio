@@ -5,7 +5,7 @@
  *   Clippy               → an instant-messenger conversation window: title bar, "is typing…" status, minimise to a buddy pill
  *   pixel cursor         → an Aqua-style arrow (CSS cursor, so it costs nothing)
  *   footer               → a sidebar "Let's connect" widget + a gel footer bar
- *   Copy → Copied        → the gel turns green with a tick, the button "yellow-fades"
+ *   Copy → Copied        → the gel turns lime with a tick, the button "yellow-fades"
  *   home's easter egg    → BUBBLE POP over the pinstripes, its launcher sitting on the gel footer bar (game.mjs, passed as beforeFooter)
  * Pages supply <main>, optional `side` content (sits top-right on desktop, first on phones — e.g. the portrait), and any page-only script.
  * The IM window opens when Clippy talks and settles back into its buddy pill when he's quiet (unless you minimised it yourself).
@@ -68,7 +68,7 @@ ${css}
           </ul>
         </div>
       </div>
-      <a class="gel gel-lime" href="${esc(c.ctas.resume.href)}">${esc(c.ctas.resume.label)} ${ic('download')}</a>
+      <a class="gel gel-silver" href="${esc(c.ctas.resume.href)}">${esc(c.ctas.resume.label)} ${ic('download')}</a>
     </div>
     <nav class="tabs" aria-label="Main">
       ${c.nav.map(n => `<a href="${esc(n.href)}"${n.href === current ? ' aria-current="page"' : ''}>${esc(n.label)}</a>`).join('\n      ')}
@@ -127,7 +127,7 @@ ${beforeFooter}
   const io = new IntersectionObserver((es, o) => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); o.unobserve(e.target); } }), { threshold: .1 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-  // ── copy → copied: green gel with a tick, then a yellow fade ──
+  // ── copy → copied: lime gel with a tick, then a yellow fade ──
   const live = document.getElementById('copied');
   document.querySelectorAll('[data-copy]').forEach(b => b.addEventListener('click', async () => {
     try { await navigator.clipboard.writeText(b.dataset.copy); } catch { return; }

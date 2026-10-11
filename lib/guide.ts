@@ -41,7 +41,7 @@ export const GUIDE_STOPS: GuideStop[] = [
   },
   {
     id: "live",
-    message: "It looks like you want proof. These two are live — go press some buttons.",
+    message: "It looks like you want proof. These two are live. Go press some buttons.",
   },
 ];
 

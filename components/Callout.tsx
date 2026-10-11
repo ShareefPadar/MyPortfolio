@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 interface CalloutProps {
   children: ReactNode;
-  /** Short uppercase label shown above the body, e.g. "On fairness". */
+  /** Short label shown above the body, e.g. "On fairness". */
   label?: string;
   /** "note" is neutral grey; "flag" is the accent-bordered attribution notice. */
   tone?: "note" | "flag";
@@ -21,7 +21,7 @@ const Callout = ({ children, label, tone = "note" }: CalloutProps) => {
     >
       {label && (
         <p
-          className={`mb-8 font-mono text-[9px] uppercase tracking-[0.11em] ${
+          className={`mb-8 font-mono text-[9px] tracking-[0.02em] ${
             isFlag ? "text-blue" : "text-mute"
           }`}
         >

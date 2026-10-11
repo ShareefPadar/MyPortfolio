@@ -65,8 +65,9 @@
   },
   {
    "type": "quote",
-   "html": "\"I usually just take the driver's phone and type the location myself. It feels invasive, but it's the only way to be sure he gets the right pin.\" — Commuter, London",
-   "rule": "lime"
+   "html": "\"I usually just take the driver's phone and type the location myself. It feels invasive, but it's the only way to be sure he gets the right pin.\"",
+   "rule": "lime",
+   "cite": "Commuter, London"
   },
   {
    "type": "hr"

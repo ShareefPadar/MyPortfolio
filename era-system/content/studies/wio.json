@@ -31,7 +31,7 @@
   "lead": "A business account was frozen for an ownership change. Every document went in that day. A month later the account was still frozen, the POS couldn't settle, and support said \"please wait another 24 hours\" on every call for four weeks. The bank knew exactly what stage the review was at. The customer never did. I designed the communication layer that gap leaves missing.",
   "outcome": {
    "label": "Outcome",
-   "text": "A working prototype for the wait itself, not the decision. Built against dated public complaints rather than an invented brief, and constrained by what compliance genuinely cannot disclose."
+   "text": "A working prototype for the wait itself, not the decision. Built against dated public complaints, and constrained by what compliance genuinely cannot disclose."
   },
   "statement": "Several of the causes here cannot be designed away: mandatory holds, external registry timelines, reasons the bank is not allowed to give. What can be designed is what the customer is told while they wait."
  },
@@ -60,7 +60,7 @@
    "rule": "lime",
    "label": "On fairness",
    "paras": [
-    "Wio is one of the UAE's fastest-growing digital banks and has genuine advocates. Its onboarding and app are widely praised, and it publishes strong satisfaction scores. This study isn't a verdict on the bank. It looks at one specific flow that its own public reviews show repeatedly failing, and asks what design could do about it inside constraints that no interface can remove — mandatory compliance holds, external registry timelines, review reasons the bank legally cannot disclose. The rest of this case study is what's left once you accept that."
+    "Wio is one of the UAE's fastest-growing digital banks and has genuine advocates. Its onboarding and app are widely praised, and it publishes strong satisfaction scores. This study isn't a verdict on the bank. It looks at one specific flow that its own public reviews show repeatedly failing, and asks what design could do about it inside constraints that no interface can remove: mandatory compliance holds, external registry timelines, review reasons the bank legally cannot disclose. The rest of this case study is what's left once you accept that."
    ]
   },
   {
@@ -158,7 +158,7 @@
   },
   {
    "type": "h2",
-   "text": "The design decisions"
+   "text": "Seven decisions for the wait"
   },
   {
    "type": "p",
@@ -207,7 +207,7 @@
      "alt": "Concept UI designed by me. Not Wio's product and not a replica of their interface. A persistent strip showing elapsed working days against the stated maximum"
     }
    ],
-   "caption": "The day counter is persistent, appearing on every screen rather than buried in a status page.",
+   "caption": "The day counter is persistent and appears on every screen.",
    "zoom": true
   },
   {
@@ -253,7 +253,7 @@
      "alt": "Concept UI designed by me. Not Wio's product and not a replica of their interface. A paused state reading 'waiting on documents from you, not from us', with the estimate showing as paused"
     }
    ],
-   "caption": "The paused state names the customer as the blocker and stops the clock rather than pretending progress.",
+   "caption": "The paused state names the customer as the blocker and stops the clock.",
    "zoom": true
   },
   {
@@ -289,7 +289,7 @@
   },
   {
    "type": "p",
-   "html": "I chose to list them. A new estimate from a source that has been wrong repeatedly carries no weight. Naming the broken promises is the only way to make the next number credible, and explaining why, that agents couldn't see the stage and now can, shows the cause was fixed rather than just apologised for."
+   "html": "I chose to list them. A new estimate from a source that has been wrong repeatedly carries no weight. Naming the broken promises is the only way to make the next number credible, and explaining why, that agents couldn't see the stage and now can, shows the cause was actually fixed."
   },
   {
    "type": "figure",
@@ -312,17 +312,17 @@
   },
   {
    "type": "p",
-   "html": "I chose scoped restriction, published. The compliance requirement is about this account, not about the customer's ability to operate. So the concept keeps collecting card takings and holds them rather than rejecting them, which also means the customer's own customers never see a failed payment, and lets the business nominate an alternative settlement account for the duration. It keeps viewing balances, exporting statements for their accountant, and receiving funds available, then publishes the exact scope of what's restricted rather than leaving them to discover each blocked action by hitting it."
+   "html": "I chose scoped restriction, published. The compliance requirement is about this account, not about the customer's ability to operate. So the concept keeps collecting card takings and holds them rather than rejecting them, which also means the customer's own customers never see a failed payment, and lets the business nominate an alternative settlement account for the duration. It keeps viewing balances, exporting statements for their accountant, and receiving funds available, then publishes the exact scope of what's restricted, so they never discover a blocked action by hitting it."
   },
   {
    "type": "figure",
    "images": [
     {
      "src": "/assets/work/wio-access.png",
-     "alt": "Concept UI designed by me. Not Wio's product and not a replica of their interface. A published checklist of what stays available during a hold — balances, statements, incoming transfers, team access — against what's restricted: outgoing transfers, card spending, POS settlement, closing the account"
+     "alt": "Concept UI designed by me. Not Wio's product and not a replica of their interface. A published checklist of what stays available during a hold (balances, statements, incoming transfers, team access) against what's restricted: outgoing transfers, card spending, POS settlement, closing the account"
     }
    ],
-   "caption": "The access scope, published rather than discovered by hitting each blocked action one at a time.",
+   "caption": "The access scope, published up front, so nobody discovers it one blocked action at a time.",
    "zoom": true
   },
   {
@@ -363,7 +363,7 @@
    "rule": "blue",
    "label": "What's real, what's mine",
    "paras": [
-    "Reminder: the problem is real, drawn from Wio Bank's dated public reviews. The interface below, including the Wio name and marks on it, is my own concept — not Wio's product, not a replica of their UI, and not affiliated with or endorsed by Wio. Use the simulate bar at the bottom to move between working day 6, the slipped state, waiting on you, and resolution."
+    "Reminder: the problem is real, drawn from Wio Bank's dated public reviews. The interface below, including the Wio name and marks on it, is my own concept. It is not Wio's product, not a replica of their UI, and not affiliated with or endorsed by Wio. Use the simulate bar at the bottom to move between working day 6, the slipped state, waiting on you, and resolution."
    ]
   },
   {

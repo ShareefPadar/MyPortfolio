@@ -31,7 +31,7 @@ export default async function Image() {
               maxWidth: 900,
             }}
           >
-            Six years in B2B SaaS. Research to shipped interface, usually end to end.
+            Six years in B2B SaaS. From research to shipped interface, usually as the only designer.
           </span>
         </div>
       </Card>

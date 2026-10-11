@@ -19,7 +19,7 @@ export default function render(args) {
           <h3>${esc(p.title)}</h3>
           <p class="meta">${esc(p.meta)}</p>
           ${p.summary ? `<p class="sum">${esc(p.summary)}</p>` : ''}
-          <span class="more">${esc(c.ui.readCaseStudy)}</span>
+          <span class="sr">${esc(c.ui.readCaseStudy)}</span>
         </a>`;
 
   const row = p => `
