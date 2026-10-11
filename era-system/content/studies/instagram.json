@@ -1,0 +1,210 @@
+{
+ "_source": "https://www.shareefpadar.com/work/instagram-local — extracted from the live DOM by scripts/sync-studies.py",
+ "id": "instagram",
+ "slug": "instagram-local",
+ "url": "/work/instagram-local",
+ "pageTitle": "Instagram Local Feed | Shareef Padar",
+ "description": "Instagram connects you to the whole world but falls short two streets away. This concept adds a local layer for finding nearby events and businesses.",
+ "ogImage": "https://www.shareefpadar.com/assets/instagram-local.png",
+ "head": {
+  "number": "01",
+  "label": "Overview",
+  "title": "Giving Instagram a local layer people can actually find.",
+  "meta": [
+   {
+    "k": "My role",
+    "v": "Product Designer"
+   },
+   {
+    "k": "Type",
+    "v": "Product concept"
+   },
+   {
+    "k": "Period",
+    "v": "2-4 weeks"
+   }
+  ],
+  "lead": "Instagram connects you to the whole world but falls short two streets away. This concept adds a local layer for finding nearby events and businesses.",
+  "outcome": {
+   "label": "Outcome",
+   "text": "A 20-user survey found 86% value local content but fewer than half can find it, so I designed two discovery patterns for passive and active browsing."
+  },
+  "statement": "Uncovered a critical gap: 86% of users value local content, but fewer than half can find it. Surveyed 20 users, designed 2 discovery solutions for passive and active browsing modes."
+ },
+ "blocks": [
+  {
+   "type": "short",
+   "tab": "The short version",
+   "note": "4 min read",
+   "rows": [
+    {
+     "k": "Problem",
+     "v": "Instagram connects you to the whole world but buries what is happening two streets away under global hashtags. 86% of surveyed users valued local content, fewer than half could find it."
+    },
+    {
+     "k": "What I did",
+     "v": "Designed two discovery entry points for two intents: a Near You feed tab for passive scrolling, and a Near You grid in Explore for people arriving with a plan."
+    },
+    {
+     "k": "Why it was hard",
+     "v": "Adding a local layer without fracturing an app that billions of people already know how to use."
+    }
+   ]
+  },
+  {
+   "type": "h2",
+   "text": "Instagram falls short two streets away"
+  },
+  {
+   "type": "p",
+   "html": "Instagram connects billions of people to the world, but it falls short two streets away. Finding a local art show, a food truck, or a boutique sale means scrolling hashtags and hoping the algorithm surfaces something nearby."
+  },
+  {
+   "type": "p",
+   "html": "A survey of 20 active Instagram users made the gap concrete:"
+  },
+  {
+   "type": "ul",
+   "items": [
+    "<strong>100%</strong> use Instagram multiple times a day",
+    "<strong>86%</strong> said local content is important or very important to them",
+    "<strong>43%</strong> found it genuinely hard to surface local content on the platform",
+    "<strong>90%</strong> wanted local events, <strong>57%</strong> local businesses, <strong>47%</strong> local creators"
+   ]
+  },
+  {
+   "type": "p",
+   "html": "The demand is clearly there. Instagram has the infrastructure but no dedicated local layer."
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "A local layer that doesn't fracture the app"
+  },
+  {
+   "type": "p",
+   "html": "The Local Feed turns Instagram into more than a global hub. It gives space to what's happening nearby (events, small businesses, hidden gems) while keeping the app people already know intact."
+  },
+  {
+   "type": "p",
+   "html": "The design challenge was to add local discovery without fracturing the experience users trust."
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "Passive and active discovery need different doors"
+  },
+  {
+   "type": "p",
+   "html": "Instead of forcing one mental model, I designed two entry points for two different behaviours."
+  },
+  {
+   "type": "h3",
+   "text": "A \"Near You\" tab for the casual scroller"
+  },
+  {
+   "type": "p",
+   "html": "A \"Near You\" tab sits alongside the existing feed tabs (\"For You,\" \"Latest\"). You can flip to a curated stream of local posts as part of your normal scroll."
+  },
+  {
+   "type": "p",
+   "html": "This is for <strong>passive discovery</strong>: people who aren't searching but are open to seeing what's around them."
+  },
+  {
+   "type": "h3",
+   "text": "A \"Near You\" grid for people with a plan"
+  },
+  {
+   "type": "p",
+   "html": "A dedicated \"Near You\" section in Explore, with a grid layout for local events, businesses, and creators."
+  },
+  {
+   "type": "p",
+   "html": "This is for <strong>active discovery</strong>: people who open Instagram already looking for something to do."
+  },
+  {
+   "type": "h3",
+   "text": "Why Both?"
+  },
+  {
+   "type": "p",
+   "html": "They serve different intents. Home catches the casual scroller inside an existing habit. Explore catches the person who came in with a plan. Together they cover the full range without forcing one interaction model on everyone."
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "I started with research, not wireframes"
+  },
+  {
+   "type": "p",
+   "html": "I started with research, not wireframes. Only after mapping the gaps did I sketch, roughing out how local content could sit inside Instagram's existing navigation without adding new weight."
+  },
+  {
+   "type": "p",
+   "html": "The hi-fi work followed Instagram's clean visual language, so local elements read as a natural extension rather than an add-on. I tested every decision against one question: does this feel like Instagram, or does it feel like a different app?"
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "The payoff: community, visibility, return visits"
+  },
+  {
+   "type": "ul",
+   "items": [
+    "<strong>Stronger community.</strong> People find and engage with their neighbourhood without fighting the algorithm.",
+    "<strong>Visibility for small businesses.</strong> Local creators and shops reach an audience that's physically nearby and actually interested.",
+    "<strong>A reason to return.</strong> A local layer gives people a reason to open the app beyond their existing follows."
+   ]
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "What's Next"
+  },
+  {
+   "type": "p",
+   "html": "<strong>Personalisation.</strong> A local feed tuned not just by proximity but by preference: your usual coffee shop, upcoming concerts, businesses that match what you already engage with."
+  },
+  {
+   "type": "p",
+   "html": "<strong>Real-time updates.</strong> Trending events and time-sensitive promotions, to add urgency and pull people back."
+  },
+  {
+   "type": "p",
+   "html": "<strong>Business analytics.</strong> Showing local businesses how their posts perform in the Local Feed specifically, apart from their global reach."
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "People rarely ask for the feature"
+  },
+  {
+   "type": "p",
+   "html": "The lesson from this project: people rarely ask for the feature. The research showed they were frustrated, but nobody said \"I want a local feed.\" They asked why they couldn't find local content. The feature was my read of that underlying need, which is why it had to feel obvious once it existed."
+  },
+  {
+   "type": "quote",
+   "html": "86% of users valued local content, but fewer than half could actually find it. The gap wasn't a missing feature. It was a missing layer, sitting inside an app they already open every day.",
+   "rule": "lime"
+  }
+ ],
+ "ending": null,
+ "next": {
+  "label": "Next story",
+  "title": "Sanad: KYB Onboarding",
+  "href": "/work/sanad"
+ },
+ "progressSegments": 10
+}

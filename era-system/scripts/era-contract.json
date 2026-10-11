@@ -1,0 +1,111 @@
+{
+  "version": 4,
+  "frozen": false,
+  "tokens": {
+    "colour": [
+      "bg",
+      "bg-inverse",
+      "surface",
+      "surface-sunk",
+      "line",
+      "outline",
+      "text",
+      "text-muted",
+      "text-inverse",
+      "text-inverse-muted",
+      "accent",
+      "on-accent",
+      "action",
+      "on-action",
+      "error",
+      "error-surface",
+      "focus",
+      "selection",
+      "on-selection"
+    ],
+    "type": [
+      "font-statement",
+      "font-label",
+      "font-sentence",
+      "statement-case",
+      "statement-weight",
+      "statement-weight-strong",
+      "statement-lh",
+      "size-statement-xl",
+      "size-statement-l",
+      "size-statement-m",
+      "size-label",
+      "size-micro",
+      "label-tracking"
+    ],
+    "shape": [
+      "corner",
+      "corner-tab",
+      "radius",
+      "border-w",
+      "focus-width"
+    ],
+    "depth": [
+      "shadow-raised",
+      "shadow-sunk",
+      "shadow-offset"
+    ],
+    "motion": [
+      "reveal-anim",
+      "reveal-duration",
+      "reveal-timing",
+      "statement-reveal",
+      "type-speed",
+      "hover-timing"
+    ],
+    "assets": [
+      "icon-set",
+      "frame-kind",
+      "portrait"
+    ]
+  },
+  "enums": {
+    "statement-reveal": [
+      "type",
+      "words",
+      "fade",
+      "none"
+    ],
+    "icon-set": [
+      "pixel",
+      "line"
+    ],
+    "frame-kind": [
+      "sprite",
+      "css"
+    ],
+    "portrait": [
+      "dither",
+      "blocks",
+      "halftone",
+      "photo",
+      "illustration"
+    ]
+  },
+  "requiredSelectors": [
+    ".frame-raised",
+    ".frame-sunk",
+    ".frame-tail"
+  ],
+  "privatePrefix": "era-",
+  "fills": [
+    "action",
+    "surface",
+    "accent",
+    "disabled",
+    "field",
+    "error"
+  ],
+  "eraIds": [
+    "1986",
+    "1995",
+    "2002",
+    "2014",
+    "now"
+  ]
+}

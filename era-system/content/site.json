@@ -1,0 +1,569 @@
+{
+ "_note": "The ONLY thing all eras share. Synced to the live site (shareefpadar.com), which is the 1995 era. Write text in normal case; eras capitalise with CSS. Image paths are site-relative; build-eras prefixes the live origin for previews.",
+ "person": {
+  "name": "Shareef Padar",
+  "brand": "Shareef Padar",
+  "shortName": "Shareef",
+  "eyebrow": "Shareef Padar · Dubai",
+  "statement": {
+   "before": "Senior product designer who",
+   "accent": "ships."
+  },
+  "lead": "Six years in B2B UX, from research to shipped interface. I build and ship my own products in React and Tailwind too, which is why the prototypes on this site are real software rather than screenshots."
+ },
+ "nav": [
+  {
+   "label": "Home",
+   "href": "/"
+  },
+  {
+   "label": "Work",
+   "href": "/work"
+  },
+  {
+   "label": "About",
+   "href": "/about"
+  }
+ ],
+ "ctas": {
+  "primary": {
+   "label": "View work",
+   "href": "/#work"
+  },
+  "resume": {
+   "label": "Résumé",
+   "href": "/assets/Shareef_Padar_Resume.pdf"
+  }
+ },
+ "guide": {
+  "name": "Clippy",
+  "sections": {
+   "hero": "It looks like you're viewing a portfolio. Shareef designs it and ships the code too.",
+   "work": "It looks like you're browsing case studies. Click any card to dig in.",
+   "nda": "It looks like you're wondering what's missing. Six years of it sits under NDA.",
+   "live": "It looks like you want proof. These two are live. Go press some buttons."
+  },
+  "idle": [
+   "It looks like you're reading. Would you like help reading?",
+   "It looks like you're scrolling. That's going well.",
+   "Did you know? You can click things. Try it.",
+   "It looks like you haven't hired Shareef yet. Would you like to?",
+   "Still here. Just checking in.",
+   "It looks like you're evaluating a candidate. I can vouch for him.",
+   "Tip: the case studies have working prototypes in them.",
+   "It looks like you're busy. I'll wait."
+  ],
+  "replies": [
+   "It looks like you're trying to hide me. Would you like help?",
+   "I'm back. Did you miss me?",
+   "You can't actually get rid of me. That's the whole joke.",
+   "It looks like you clicked me. I've chosen to interpret that as affection."
+  ]
+ },
+ "guides": {
+  "_note": "Each era's own helper, in its own voice. 1995 and 2002 use live's Clippy (the 'guide' above). Same slots as guide: sections (said when that part of the home page is in view), idle (said now and then), replies [on close, back, back again, when clicked]. No em-dashes, no job-seeking lines.",
+  "1986": {
+   "name": "Narrator",
+   "sections": {
+    "hero": "You are standing in a portfolio. A designer is here. He ships the code too.",
+    "work": "Four case studies lie ahead. Each one opens onto the full story.",
+    "nda": "A locked door. Six years of client work sit behind it, under NDA.",
+    "live": "Two working apps rest here. They are live. Try them."
+   },
+   "idle": [
+    "Time passes.",
+    "Nothing happens.",
+    "You hear a keyboard somewhere in the distance.",
+    "A cursor blinks, patiently.",
+    "Hint: the case studies hide working prototypes.",
+    "Type HELP if you are lost."
+   ],
+   "replies": [
+    "The narrator falls silent.",
+    "The narrator returns.",
+    "You cannot get rid of the narrator. It is that kind of game.",
+    "You poke the narrator. It does not react. Well, a little."
+   ],
+   "commands": {
+    "label": "Type a command",
+    "help": "Try LOOK, WORK, ABOUT, RESUME or INVENTORY.",
+    "inventory": "You carry six years of B2B design, React, Tailwind and a stack of Figma files.",
+    "unknown": "I don't know that word.",
+    "going": "You walk on."
+   }
+  },
+  "2014": {
+   "name": "Shareef",
+   "sections": {
+    "hero": "Hey! Glad you stopped by. I design products and build them too.",
+    "work": "These are my case studies. Tap one for the full story.",
+    "nda": "Most of my client work is under NDA. Happy to talk it through on a call.",
+    "live": "These two are live. Go try them."
+   },
+   "idle": [
+    "Still there?",
+    "The prototypes in the case studies actually work.",
+    "Take your time, I'll be here.",
+    "There's a little game at the bottom of the page.",
+    "You can drag me around, by the way."
+   ],
+   "replies": [
+    "Okay, I'll stop popping up.",
+    "Me again!",
+    "Chat heads always come back.",
+    "Hi! What's up?"
+   ]
+  },
+  "now": {
+   "name": "Shareef",
+   "sections": {
+    "hero": "Hey, I'm in here too. Have a look around.",
+    "work": "Start with these four. Each one has the full story.",
+    "nda": "Most of my client work is under NDA. Happy to walk you through it on a call.",
+    "live": "These two are live. I built them, go try them."
+   },
+   "idle": [
+    "Just tidying a few things up.",
+    "Take your time.",
+    "The prototypes in the case studies are real, by the way.",
+    {
+     "text": "My résumé is up here if you want the short version.",
+     "at": "resume"
+    },
+    {
+     "text": "Easiest way to reach me is right here.",
+     "at": "contact"
+    },
+    "Still here."
+   ],
+   "replies": [
+    "Okay, I'll get out of your way.",
+    "Back again.",
+    "I keep wandering back in. Habit.",
+    "Hi. That's me."
+   ]
+  }
+ },
+ "projects": {
+  "freelax": {
+   "id": "freelax",
+   "domain": "Fintech",
+   "relevant": true,
+   "status": "Fintech · Live",
+   "title": "Tax that stops being a surprise",
+   "meta": "Freelax · UK tax for freelancers",
+   "href": "/work/freelax",
+   "image": "/assets/work/freelax-thumb.webp",
+   "summary": "A legal deadline, three million people, and accounting tools built for someone bigger. Co-founded, designed end to end, live."
+  },
+  "sanad": {
+   "id": "sanad",
+   "domain": "Fintech",
+   "relevant": true,
+   "status": "Fintech · Concept",
+   "title": "Onboarding that feels fast without cutting corners",
+   "meta": "Sanad · KYB verification",
+   "href": "/work/sanad",
+   "image": "/assets/work/sanad-thumb.png",
+   "summary": "Designed after hitting the verification wall myself at Companies House. Six screens, built as a working prototype."
+  },
+  "wio": {
+   "id": "wio",
+   "domain": "Fintech",
+   "relevant": true,
+   "status": "Fintech · Concept",
+   "title": "Telling a frozen business where it actually stands",
+   "meta": "Wio · account-hold communication",
+   "href": "/work/wio",
+   "image": "/assets/work/mizan-thumb.png",
+   "summary": "Business accounts frozen for weeks with no stage and no clock. A communication layer built against Wio Bank's dated public complaints."
+  },
+  "almosafer": {
+   "id": "almosafer",
+   "domain": "Travel",
+   "relevant": false,
+   "status": "Travel · Concept",
+   "title": "Cutting decision fatigue on a top travel platform",
+   "meta": "Almosafer · UX audit",
+   "href": "/work/almosafer-audit",
+   "image": "/assets/almosafer-preview.png",
+   "summary": "Hick's Law and visual hierarchy applied to two high-stakes screens in the booking funnel."
+  },
+  "google-maps": {
+   "id": "google-maps",
+   "domain": "Navigation",
+   "relevant": false,
+   "status": "Navigation · Concept",
+   "title": "Handing off a full route between phones in one scan",
+   "meta": "Google Maps · Route Pass",
+   "href": "/work/google-maps-route-pass",
+   "image": "/assets/google-maps-preview.png"
+  },
+  "omnicast": {
+   "id": "omnicast",
+   "domain": "Marketing",
+   "relevant": false,
+   "status": "Marketing · Concept",
+   "title": "AI publishing that shows its work, not a black box",
+   "meta": "OmniCast AI",
+   "href": "/work/omni-cast-ai",
+   "image": "/assets/omnicast-preview.png"
+  },
+  "instagram": {
+   "id": "instagram",
+   "domain": "Social",
+   "relevant": false,
+   "status": "Social · Concept",
+   "title": "Surfacing the local content the algorithm buries",
+   "meta": "Instagram · Local Feed",
+   "href": "/work/instagram-local"
+  },
+  "roomy": {
+   "id": "roomy",
+   "domain": "Co-living",
+   "relevant": false,
+   "status": "Co-living · Live",
+   "title": "Ending spreadsheet chaos for a 21-person flat",
+   "meta": "Roomy · Bedspace OS",
+   "href": "/work/roomy",
+   "image": "/assets/roomy-preview.png"
+  },
+  "form": {
+   "id": "form",
+   "domain": "Health",
+   "relevant": false,
+   "status": "Health · Live",
+   "title": "Health tracking with zero sign-up friction",
+   "meta": "Form · Privacy-first health",
+   "href": "/work/form"
+  }
+ },
+ "selectedWork": {
+  "heading": "Selected work",
+  "ids": [
+   "freelax",
+   "sanad",
+   "wio",
+   "almosafer"
+  ]
+ },
+ "nda": {
+  "label": "Under NDA",
+  "text": "This is the work I can show publicly. Six years of production B2B design, across logistics, healthcare, and travel, sits under NDA. Ask me about it on a call.",
+  "link": {
+   "label": "View all work",
+   "href": "/work"
+  }
+ },
+ "live": {
+  "heading": "Designed, built & live",
+  "items": [
+   {
+    "id": "roomy",
+    "tag": "Co-living",
+    "status": "Live · side project",
+    "title": "Ending spreadsheet chaos for a 21-person flat",
+    "meta": "Roomy · Bedspace OS",
+    "summary": "A bedspace management app I designed and built end to end. In daily production use.",
+    "caseStudy": "/work/roomy",
+    "launch": "https://roomy-delta.vercel.app/"
+   },
+   {
+    "id": "form",
+    "tag": "Health",
+    "status": "Live · side project",
+    "title": "Health tracking with zero sign-up friction",
+    "meta": "Form · Privacy-first health",
+    "summary": "A privacy-first, offline-first health tracker I designed and built end to end.",
+    "caseStudy": "/work/form",
+    "launch": "https://fitness-tracker-pi-tan.vercel.app/"
+   }
+  ]
+ },
+ "games": {
+  "_note": "One easter-egg game per era at the end of the home page. It has no box: the page background is its sky and the footer's top edge is its floor, like live's Dino Runner. 1995 is live's own game.",
+  "1995": {
+   "title": "Dino Runner",
+   "label": "Dino Runner. Press space or tap to jump.",
+   "start": {
+    "pointer": "Click to start",
+    "touch": "Tap to start"
+   },
+   "hint": {
+    "keys": "Space to jump · hold for height",
+    "touch": "Tap to jump"
+   },
+   "over": "Game over",
+   "again": {
+    "keys": "Press space to run again",
+    "touch": "Tap to run again"
+   }
+  },
+  "1986": {
+   "title": "Ship the backlog",
+   "label": "Ship the backlog, a brick breaker. The mouse or the arrow keys move the paddle; space launches the ball.",
+   "start": {
+    "pointer": "Click to start",
+    "touch": "Tap to start"
+   },
+   "hint": {
+    "keys": "Mouse or ← → to move · space to launch",
+    "touch": "Drag to move · tap to launch"
+   },
+   "over": "Game over",
+   "again": {
+    "keys": "Press space to play again",
+    "touch": "Tap to play again"
+   }
+  },
+  "2002": {
+   "title": "Bubble pop",
+   "label": "Bubble pop, a bubble shooter. Aim with the mouse or the arrow keys; click or press space to shoot.",
+   "start": {
+    "pointer": "Click to start",
+    "touch": "Tap to start"
+   },
+   "hint": {
+    "keys": "Aim with the mouse · click or space to shoot",
+    "touch": "Drag to aim · let go to shoot"
+   },
+   "over": "Game over",
+   "again": {
+    "keys": "Press space to play again",
+    "touch": "Tap to play again"
+   }
+  },
+  "2014": {
+   "title": "Paper plane",
+   "label": "Paper plane. Press space or tap to lift the plane between the pillars.",
+   "start": {
+    "pointer": "Click to start",
+    "touch": "Tap to start"
+   },
+   "hint": {
+    "keys": "Space or click to fly",
+    "touch": "Tap to fly"
+   },
+   "over": "Game over",
+   "again": {
+    "keys": "Press space to fly again",
+    "touch": "Tap to fly again"
+   }
+  },
+  "now": {
+   "title": "Glass merge",
+   "label": "Glass merge, a merge game. Aim with the mouse or the arrow keys; click or press space to drop an orb. Two orbs of the same size merge into the next.",
+   "start": {
+    "pointer": "Click to start",
+    "touch": "Tap to start"
+   },
+   "hint": {
+    "keys": "Mouse or ← → to aim · click or space to drop",
+    "touch": "Drag to aim · let go to drop"
+   },
+   "over": "Game over",
+   "again": {
+    "keys": "Press space to play again",
+    "touch": "Tap to play again"
+   }
+  }
+ },
+ "footer": {
+  "status": "Dubai · GMT+4",
+  "heading": "Let's connect",
+  "intro": "Feel free to reach out for collaborations or just a friendly hello.",
+  "email": "shareefpadar@gmail.com",
+  "socials": [
+   {
+    "label": "LinkedIn",
+    "href": "https://www.linkedin.com/in/shareef-padar/"
+   },
+   {
+    "label": "Behance",
+    "href": "https://www.behance.net/shareefpadar"
+   },
+   {
+    "label": "Medium",
+    "href": "https://medium.com/@shareefpadar167"
+   }
+  ],
+  "credit": "Designed & built by Shareef Padar"
+ },
+ "ui": {
+  "readCaseStudy": "Read case study",
+  "caseStudy": "Case study",
+  "launchApp": "Launch app",
+  "copyEmail": "Copy",
+  "emailCopied": "Copied",
+  "copiedAnnouncement": "Email address copied to clipboard",
+  "backToTop": "Back to top",
+  "menu": "Menu",
+  "closeMenu": "Close menu",
+  "hideGuide": "Hide",
+  "minimiseGuide": "Minimise",
+  "close": "Close",
+  "viewFullSize": "View full size",
+  "readingProgress": "Reading progress",
+  "fullSizeImage": "Full-size image"
+ },
+ "_todo": [
+  "The nine case studies are not in content yet (PLAN 1.8)"
+ ],
+ "workIndex": {
+  "title": "Work",
+  "heading": "All work",
+  "intro": "Case studies, concepts, and live products. Six years of client work in logistics, healthcare, and travel sits under NDA. Ask me about it on a call.",
+  "back": {
+   "label": "Home",
+   "href": "/"
+  },
+  "allLabel": "All",
+  "groups": [
+   {
+    "heading": "Start here",
+    "ids": [
+     "freelax",
+     "sanad",
+     "wio"
+    ]
+   },
+   {
+    "heading": "Everything else",
+    "compact": true,
+    "ids": [
+     "almosafer",
+     "google-maps",
+     "omnicast",
+     "instagram",
+     "roomy",
+     "form"
+    ]
+   }
+  ]
+ },
+ "about": {
+  "title": "About Shareef Padar | 6 Years of B2B Product Design",
+  "heading": "Usually the only designer",
+  "lead": "I'm a Senior Product Designer with six years in B2B SaaS, based in Dubai. Logistics, healthcare, gym management, travel. In most of those rooms I was the only designer, which meant doing the research, making the call, drawing the screens, and then sitting with the engineers while it got built. Most of that work sits under NDA, so ask me about it on a call.",
+  "body": [
+   "At Cargoz I designed Cargoz Connect, a product that gets a business into warehouse space inside 24 hours, from the first wireframe to the live UI, and built the design system six developers now work from. Before that I ran UX for a gym and healthcare ERP, reporting straight to the CEO, which mostly taught me how to defend a design decision to someone who owns the P&L.",
+   "My degree is in computer science, and I treat that as a design advantage rather than a second job. I know what is expensive to build, so I stop proposing it. I can read the codebase to check whether a pattern already exists before inventing another one. And when an idea needs proving, I would rather build it than describe it, which is why the prototypes in the Sanad and Wio case studies are real working software instead of screenshots."
+  ],
+  "principles": {
+   "heading": "How I work",
+   "items": [
+    {
+     "title": "I show the constraint instead of hiding it",
+     "text": "In the Sanad flow the honest move was telling people the form takes ten minutes and the review takes two days, rather than pretending it was shorter. Hidden scope does not reduce drop-off, it just delays it to the moment someone feels misled."
+    },
+    {
+     "title": "Research until the decision is obvious, then stop",
+     "text": "Interviews, competitor teardowns, usability tests. All of it useful right up to the point where it stops changing what I would draw. Process theatre helps nobody."
+    },
+    {
+     "title": "I audit my own work like someone else made it",
+     "text": "After building the Sanad prototype I held it to the same standard as the writing and found four things wrong, including a consent checkbox that was a dark pattern. That audit is still published on the case study."
+    }
+   ]
+  },
+  "experience": {
+   "heading": "Where I've worked",
+   "items": [
+    {
+     "role": "Senior UI/UX Designer & UX Engineer",
+     "dates": "2025 – Present",
+     "company": "Cargoz · Dubai",
+     "text": "Shipped Cargoz Connect, a B2B product for booking warehouse space within 24 hours, from wireframes to live UI. Building the design system for a 6-developer team and shipping front-end code in React and Tailwind."
+    },
+    {
+     "role": "Senior UI/UX Designer",
+     "dates": "2023 – 2025",
+     "company": "Pixelmind IT Solutions · Dubai (Remote)",
+     "text": "Led UX and UI for a B2B Gym & Healthcare ERP/CRM across web and mobile, working directly with the CEO. Built the component library, design tokens, and developer docs, and delivered WCAG-aligned responsive interfaces."
+    },
+    {
+     "role": "UX Designer",
+     "dates": "2022",
+     "company": "Illuminz · India",
+     "text": "Sole UX lead across two mobile apps at once, grounding features in personas and journey maps and using rapid prototyping to shorten feedback loops."
+    },
+    {
+     "role": "UI/UX Designer",
+     "dates": "2021 – 2022",
+     "company": "iOSys Software · India",
+     "text": "Designed client websites across industries as part of a three-designer agency team."
+    },
+    {
+     "role": "UI & Graphic Designer",
+     "dates": "2019 – 2021",
+     "company": "Addwiser · India",
+     "text": "Client UI and brand visuals across e-commerce, tech, and services."
+    }
+   ]
+  },
+  "education": "B.E. Computer Science & Engineering, Sahyadri College of Engineering & Management (2019) · UX Design, Interaction Design Foundation.",
+  "quote": "The problems worth taking are the ones where the constraint does not move. You cannot delete the compliance step or shorten the ten-day wait, so the only thing left to design is how it feels to live through. That is the work I want.",
+  "contactLabel": "Get in touch"
+ },
+ "meta": {
+  "_note": "Head tags, copied from the live site. Every era uses the same share preview; study pages use their own (content/studies/<id>.json: pageTitle, description, ogImage).",
+  "siteUrl": "https://www.shareefpadar.com",
+  "siteName": "Shareef Padar Portfolio",
+  "locale": "en_US",
+  "icon": "/assets/logo.svg",
+  "share": {
+   "title": "Shareef Padar | Senior Product Designer",
+   "description": "6 years of B2B product design. Research to shipped interfaces, end to end.",
+   "image": "/opengraph-image",
+   "imageAlt": "Shareef Padar, Senior Product Designer in Dubai"
+  },
+  "pages": {
+   "/": {
+    "title": "Shareef Padar | Senior Product Designer, Dubai",
+    "description": "Senior Product Designer with 6 years of B2B UX experience. Research, design systems, and production-ready code, based in Dubai."
+   },
+   "/work": {
+    "title": "Work | Shareef Padar, Senior Product Designer",
+    "description": "Case studies and live products: UX audits, B2B SaaS concepts, and shipped side projects by Shareef Padar, Senior Product Designer based in Dubai."
+   },
+   "/about": {
+    "title": "About Shareef Padar | 6 Years of B2B Product Design",
+    "description": "Senior Product Designer with six years in B2B SaaS, usually the only designer in the room. Based in Dubai.",
+    "image": "/about/opengraph-image",
+    "imageAlt": "About Shareef Padar"
+   }
+  }
+ },
+ "eras": {
+  "_note": "The time machine. Every era shows these five; `default` is where a first visit lands. Each era draws the switcher its own way.",
+  "default": "1995",
+  "label": "Pick a year",
+  "items": [
+   {
+    "id": "1986",
+    "year": "1986",
+    "name": "8-bit"
+   },
+   {
+    "id": "1995",
+    "year": "1995",
+    "name": "Desktop"
+   },
+   {
+    "id": "2002",
+    "year": "2002",
+    "name": "Glossy"
+   },
+   {
+    "id": "2014",
+    "year": "2014",
+    "name": "Flat"
+   },
+   {
+    "id": "now",
+    "year": "Now",
+    "name": "Glass"
+   }
+  ]
+ }
+}

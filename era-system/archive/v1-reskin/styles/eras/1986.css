@@ -1,0 +1,108 @@
+/* ═══════════════════════════════════════════════════════════════
+   ERA · 1986 — 8-bit
+   Spec: docs/eras/1986.md
+   Every token below is required by scripts/era-contract.json.
+   Framed controls come from the generated 1986.sprites.css.
+   ═══════════════════════════════════════════════════════════════ */
+
+[data-era="1986"] {
+  /* ── colour ───────────────────────────────────────────── */
+  --bg:                 #15153A;
+  --bg-inverse:         #000000;
+  --surface:            #262660;
+  --surface-sunk:       #0C0C24;
+  --line:               #34347A;
+  --outline:            #F2F2FF;
+  --text:               #F2F2FF;
+  --text-muted:         #A6A6E0;
+  --text-inverse:       #FFFFFF;
+  --text-inverse-muted: #A0A0B8;
+  --accent:             #CDF22B;
+  --on-accent:          #0A0A1E;
+  --action:             #3CC8FF;
+  --on-action:          #0A0A1E;
+  --error:              #FF6F61;
+  --error-surface:      #3A1414;
+  --focus:              #3CC8FF;
+  --selection:          #CDF22B;
+  --on-selection:       #0A0A1E;
+
+  /* ── type ─────────────────────────────────────────────── */
+  --font-statement:          'Press Start 2P', monospace;
+  --font-label:              'VT323', ui-monospace, monospace;
+  --font-sentence:           'IBM Plex Mono', ui-monospace, monospace;
+  --statement-case:          uppercase;
+  --statement-weight:        400;   /* single-weight face: both weights equal, never synthesised */
+  --statement-weight-strong: 400;
+  --statement-lh:            1.75;
+  --size-statement-xl:       24px;  /* multiples of 8 only — Press Start 2P is drawn on an 8px grid */
+  --size-statement-l:        16px;
+  --size-statement-m:        16px;  /* 8px is the face's native size but unreadable as a phone button label */
+  --size-label:              20px;  /* VT323 has a small eye; these read like ~11px / ~9px */
+  --size-micro:              18px;
+  --label-tracking:          .02em;
+
+  /* ── shape ────────────────────────────────────────────── */
+  --corner: polygon(
+    4px 0, calc(100% - 4px) 0, calc(100% - 4px) 4px, 100% 4px,
+    100% calc(100% - 4px), calc(100% - 4px) calc(100% - 4px),
+    calc(100% - 4px) 100%, 4px 100%, 4px calc(100% - 4px),
+    0 calc(100% - 4px), 0 4px, 4px 4px
+  );
+  --corner-tab: polygon(
+    4px 0, calc(100% - 4px) 0, calc(100% - 4px) 4px, 100% 4px,
+    100% 100%, 0 100%, 0 4px, 4px 4px
+  );
+  --radius:   0px;
+  --border-w: 4px;
+  --focus-width: 8px;   /* contract v4 — the value core used to hardcode */
+
+  /* ── depth: flat. No bevel anywhere in 1986. ─────────────
+     Raised = double-line frame (outline + dark inner line).
+     Sunk   = framed well sitting in a black bezel. */
+  --shadow-raised: inset 0 0 0 4px #0A0A1E;
+  --shadow-sunk:   0 0 0 4px #F2F2FF, 0 0 0 8px #000000;
+  --shadow-offset: 8px 8px 0 #000000;
+
+  /* ── motion ───────────────────────────────────────────── */
+  --reveal-anim:      reveal-fade-1986;
+  --reveal-duration:  320ms;
+  --reveal-timing:    steps(4, end);
+  --statement-reveal: type;
+  --type-speed:       40ms;
+  --hover-timing:     steps(1, start);
+
+  /* ── assets ───────────────────────────────────────────── */
+  --icon-set:   pixel;
+  --frame-kind: sprite;
+  --portrait:   blocks;
+
+  /* ── era-private ──────────────────────────────────────── */
+  --era-inner: #0A0A1E;
+}
+
+/* Press Start 2P stays crisp only at multiples of 8 */
+@media (min-width: 900px) {
+  [data-era="1986"] {
+    --size-statement-xl: 32px;
+    --size-statement-l:  24px;
+  }
+}
+
+/* ── frames ─────────────────────────────────────────────── */
+[data-era="1986"] .frame-raised {
+  background: var(--surface);
+  border: var(--border-w) solid var(--outline);
+  box-shadow: var(--shadow-raised);
+}
+[data-era="1986"] .frame-sunk {
+  box-shadow: var(--shadow-sunk);
+}
+
+/* ── reveal: palette fade ──────────────────────────────────
+   8-bit consoles faded by stepping through palette brightness,
+   not by blending. Four hard steps, no interpolation. */
+@keyframes reveal-fade-1986 {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}

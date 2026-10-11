@@ -1,0 +1,228 @@
+{
+ "_source": "https://www.shareefpadar.com/work/form — extracted from the live DOM by scripts/sync-studies.py",
+ "id": "form",
+ "slug": "form",
+ "url": "/work/form",
+ "pageTitle": "Form: Privacy-First Health | Shareef Padar",
+ "description": "A health tracker built on one insight: removing sign-up friction beats adding features. It works fully offline with no account. Your weight, BMI, and body composition stay on your device and sync only when you choose.",
+ "ogImage": "https://www.shareefpadar.com/assets/fitness-tracker-preview.png",
+ "head": {
+  "number": "01",
+  "label": "Overview",
+  "title": "Health tracking that works offline, with no account.",
+  "meta": [
+   {
+    "k": "My role",
+    "v": "Product Designer & Builder"
+   },
+   {
+    "k": "Type",
+    "v": "Live product"
+   },
+   {
+    "k": "Period",
+    "v": "2-4 weeks"
+   },
+   {
+    "k": "Stack",
+    "v": "React + Vite • IndexedDB (Dexie.js) • Supabase • Recharts"
+   }
+  ],
+  "lead": "A health tracker built on one insight: removing sign-up friction beats adding features. It works fully offline with no account. Your weight, BMI, and body composition stay on your device and sync only when you choose.",
+  "outcome": {
+   "label": "Outcome",
+   "text": "Live and offline-first. Full tracking with no sign-up, and data stays on the device until you choose to sync."
+  },
+  "statement": "Privacy-first doesn't mean feature-poor. Guest Mode plus offline-first architecture delivers a premium UX with zero account friction."
+ },
+ "blocks": [
+  {
+   "type": "short",
+   "tab": "The short version",
+   "note": "3 min read",
+   "rows": [
+    {
+     "k": "Problem",
+     "v": "Most fitness apps demand an account before you can log anything, keep your data on their servers, and stop working the moment you lose signal."
+    },
+    {
+     "k": "What I did",
+     "v": "Built a local-first tracker on IndexedDB with opt-in cloud sync, on-device macro calculations, and forecast states that admit when the data cannot support a prediction."
+    },
+    {
+     "k": "Why it was hard",
+     "v": "Making offline-first feel premium rather than stripped back, and deciding what a forecast should say when it genuinely does not know."
+    }
+   ]
+  },
+  {
+   "type": "h2",
+   "text": "The Problem"
+  },
+  {
+   "type": "p",
+   "html": "Most fitness apps share one flaw: they want an account before you can do anything. Your data lives on their servers, behind their subscription, under their privacy policy. For anyone privacy-conscious, or just not ready to commit before trying, that's a dealbreaker."
+  },
+  {
+   "type": "p",
+   "html": "The second problem: they're cloud-dependent. No internet means no access to your own history."
+  },
+  {
+   "type": "h2",
+   "text": "Architecture: Local-First"
+  },
+  {
+   "type": "p",
+   "html": "The core decision was to make <strong>IndexedDB the primary data layer</strong> instead of a remote database. That means:"
+  },
+  {
+   "type": "ul",
+   "items": [
+    "The app loads and works instantly. No auth, no network request, no spinner.",
+    "Everything lives on the device by default.",
+    "Supabase sync is <strong>opt-in</strong>, and only kicks in when you create an account."
+   ]
+  },
+  {
+   "type": "p",
+   "html": "I used <strong>Dexie.js</strong> as the IndexedDB wrapper for its clean promise-based API and live query hooks that re-render React components when data changes. It behaves like Supabase's real-time, but fully offline."
+  },
+  {
+   "type": "h3",
+   "text": "The Dual-Mode Pattern"
+  },
+  {
+   "type": "pre",
+   "text": "Guest Mode  →  IndexedDB only  →  Zero account friction\nSync Mode   →  IndexedDB + Supabase  →  Multi-device access"
+  },
+  {
+   "type": "p",
+   "html": "Switching from Guest to Sync <strong>migrates your local data to the cloud</strong>, so nothing is lost. You get to try the whole product before committing to anything."
+  },
+  {
+   "type": "figure",
+   "images": [
+    {
+     "src": "/assets/work/form-dashboard.png",
+     "alt": "Form dashboard: weight, BMI, and trend with goal and average reference lines"
+    }
+   ],
+   "caption": "Weight, BMI, and a trend line reading from local IndexedDB — before a single account exists.",
+   "zoom": true
+  },
+  {
+   "type": "h2",
+   "text": "Key Features"
+  },
+  {
+   "type": "h3",
+   "text": "Weight & BMI Tracking"
+  },
+  {
+   "type": "p",
+   "html": "Daily weight logs stored locally, with BMI calculated automatically. The trend chart uses Recharts with a custom gradient fill and reference lines for goal weight and rolling average."
+  },
+  {
+   "type": "h3",
+   "text": "Designing the Forecast States"
+  },
+  {
+   "type": "p",
+   "html": "A naive forecast engine will happily tell a plateauing user \"goal in 4,000 days.\" Forecasts fail in predictable ways, so rather than let those failures surface as nonsense numbers, I turned each one into a designed state:"
+  },
+  {
+   "type": "ul",
+   "items": [
+    "<strong>Not enough data</strong> (under 7 days): asks you to keep logging instead of guessing",
+    "<strong>Plateau</strong> (under 0.01kg/day change): called out honestly as stagnant, not projected forward",
+    "<strong>Off track</strong> (trending away from goal): flagged plainly instead of showing a receding date",
+    "<strong>Unrealistic horizon</strong> (over 730 days): reads \"Long Term Goal\" instead of a fake-precise date"
+   ]
+  },
+  {
+   "type": "p",
+   "html": "The forecast earns trust precisely because it admits when it shouldn't be trusted."
+  },
+  {
+   "type": "h3",
+   "text": "On-Device Macro Targets"
+  },
+  {
+   "type": "p",
+   "html": "Macro targets are calculated on the device with the <strong>Mifflin-St Jeor BMR formula</strong>. No third-party nutrition API, no cloud round-trip, all in keeping with the privacy-first architecture. Inputs: weight, height, age, gender, activity level, goal. Output: daily calories, protein, carbs, and fat in grams."
+  },
+  {
+   "type": "figure",
+   "images": [
+    {
+     "src": "/assets/work/form-daily-targets.png",
+     "alt": "Form daily targets: on-device calorie and macro calculation"
+    }
+   ],
+   "caption": "Calories and macros calculated on-device with Mifflin-St Jeor — no API round-trip, no cloud dependency.",
+   "zoom": true
+  },
+  {
+   "type": "h3",
+   "text": "Body Measurements"
+  },
+  {
+   "type": "p",
+   "html": "Waist, chest, hips, and arms tracked over time, since scale weight alone is a poor read on body composition."
+  },
+  {
+   "type": "h3",
+   "text": "Google Fit Integration"
+  },
+  {
+   "type": "p",
+   "html": "Optional sync with Google Fit through its API, so Form slots into an existing health setup instead of replacing it."
+  },
+  {
+   "type": "h3",
+   "text": "CSV Import / Export"
+  },
+  {
+   "type": "p",
+   "html": "Full data portability. Import history from other apps (if they export CSV) and export your Form data whenever you like. No lock-in."
+  },
+  {
+   "type": "h2",
+   "text": "What I Learned"
+  },
+  {
+   "type": "p",
+   "html": "Building local-first made me treat data ownership as a design constraint, not just a technical one. Every schema decision had to answer two questions: what happens when this data needs to sync, and what happens when local and remote disagree?"
+  },
+  {
+   "type": "p",
+   "html": "The Guest/Sync split also taught me that <strong>cutting friction at the top of the funnel beats adding features</strong>. In early testing, the biggest driver of retention was letting people start tracking without an account."
+  },
+  {
+   "type": "quote",
+   "html": "Privacy-first doesn't mean feature-poor. Guest Mode plus offline-first gives you a premium experience with zero account friction.",
+   "rule": "lime"
+  }
+ ],
+ "ending": {
+  "number": "02",
+  "heading": "See it live",
+  "text": "Don't take the case study's word for it. Go and use the product.",
+  "links": [
+   {
+    "label": "Launch app",
+    "href": "https://fitness-tracker-pi-tan.vercel.app/"
+   },
+   {
+    "label": "View repository",
+    "href": "https://github.com/ShareefPadar/fitness-tracker"
+   }
+  ]
+ },
+ "next": {
+  "label": "Next story",
+  "title": "Roomy: The Bedspace OS",
+  "href": "/work/roomy"
+ },
+ "progressSegments": 10
+}

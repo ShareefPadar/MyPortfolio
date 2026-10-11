@@ -1,0 +1,115 @@
+{
+  "era": "1995",
+  "note": "Era-owned sprite data. Build with: node scripts/build-sprites.mjs 1995 \u2192 public/sprites/1995/*.svg + styles/eras/1995.sprites.css. Components never read these values. '+0.38' lightens the face, '-0.45' darkens it, '#HEX' is literal.",
+  "map": [
+    ".DDDD.",
+    "DHHHSD",
+    "DHFFSD",
+    "DHFFSD",
+    "DSSSSD",
+    ".DDDD."
+  ],
+  "tail": [
+    "FFFFFF",
+    "DFFFFS",
+    ".DFFSD",
+    "..DFSD",
+    "...DD."
+  ],
+  "states": {
+    "hover": {
+      "face": "+0.14"
+    },
+    "sunk": {
+      "face": "-0.10",
+      "swap": true
+    }
+  },
+  "fills": {
+    "action": {
+      "face": "#1E45FB",
+      "hi": "#748CFD",
+      "shade": "#11268A",
+      "outline": "#0A0E2E",
+      "scales": [
+        4,
+        6
+      ],
+      "hover": "#3E5FFC"
+    },
+    "surface": {
+      "face": "#E1E0E8",
+      "hi": "#FFFFFF",
+      "shade": "#A5A4AE",
+      "outline": "#14140F",
+      "hover": "#ECEBF2",
+      "scales": [
+        4,
+        6
+      ]
+    },
+    "accent": {
+      "face": "#CDF22B",
+      "hi": "#E9F9A0",
+      "shade": "#778C19",
+      "outline": "#14140F",
+      "scales": [
+        4,
+        6
+      ],
+      "hover": "#D4F449"
+    },
+    "disabled": {
+      "face": "#DBDAE2",
+      "hi": "#ECEBF2",
+      "shade": "#B3B2BC",
+      "outline": "#9F9EA8",
+      "scales": [
+        4,
+        6
+      ],
+      "hover": "#E0DFE6"
+    },
+    "field": {
+      "face": "#F9F9FC",
+      "hi": "#8A8992",
+      "shade": "#FFFFFF",
+      "outline": "#14140F",
+      "hover": "#FAFAFC",
+      "scales": [
+        3
+      ]
+    },
+    "error": {
+      "face": "#FBF1F2",
+      "hi": "#C4482E",
+      "shade": "#FFFFFF",
+      "outline": "#C4482E",
+      "hover": "#FCF3F4",
+      "scales": [
+        3
+      ]
+    }
+  },
+  "inverse": {
+    "action": {
+      "outline": "#4A5BAE"
+    },
+    "accent": {
+      "outline": "#5A6B1E"
+    },
+    "surface": {
+      "face": "#1E1E22",
+      "hi": "#3A3A40",
+      "shade": "#0A0A0C",
+      "outline": "#4A4A50",
+      "hover": "#2A2A30"
+    }
+  },
+  "tails": [
+    "accent",
+    "surface",
+    "action"
+  ],
+  "_source": "Pixel values read from the live sprite PNGs (shareefpadar.com/sprites/*-4.png)"
+}

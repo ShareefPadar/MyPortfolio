@@ -1,0 +1,388 @@
+{
+ "_source": "https://www.shareefpadar.com/work/wio — extracted from the live DOM by scripts/sync-studies.py",
+ "id": "wio",
+ "slug": "wio",
+ "url": "/work/wio",
+ "pageTitle": "When the bank knows and the customer doesn't | Wio account holds | Shareef Padar",
+ "description": "A communication layer for business accounts frozen mid-review, designed against Wio Bank's dated public complaints. Concept interface, real documented problem.",
+ "ogImage": "https://www.shareefpadar.com/assets/work/mizan-thumb.png",
+ "head": {
+  "number": "01",
+  "label": "Overview",
+  "title": "When the bank knows and the customer doesn't.",
+  "meta": [
+   {
+    "k": "My role",
+    "v": "Product Designer & Builder"
+   },
+   {
+    "k": "Type",
+    "v": "Product concept"
+   },
+   {
+    "k": "Period",
+    "v": "2026"
+   },
+   {
+    "k": "Stack",
+    "v": "React · Custom CSS · AI-assisted build"
+   }
+  ],
+  "lead": "A business account was frozen for an ownership change. Every document went in that day. A month later the account was still frozen, the POS couldn't settle, and support said \"please wait another 24 hours\" on every call for four weeks. The bank knew exactly what stage the review was at. The customer never did. I designed the communication layer that gap leaves missing.",
+  "outcome": {
+   "label": "Outcome",
+   "text": "A working prototype for the wait itself, not the decision. Built against dated public complaints rather than an invented brief, and constrained by what compliance genuinely cannot disclose."
+  },
+  "statement": "Several of the causes here cannot be designed away: mandatory holds, external registry timelines, reasons the bank is not allowed to give. What can be designed is what the customer is told while they wait."
+ },
+ "blocks": [
+  {
+   "type": "short",
+   "tab": "The short version",
+   "note": "9 min read",
+   "rows": [
+    {
+     "k": "Problem",
+     "v": "Business accounts get frozen for compliance reviews with no stage, no clock, and a rolling promise of another 24 hours, while the linked POS stops settling."
+    },
+    {
+     "k": "What I did",
+     "v": "Designed and built six screens for the wait itself: a stage tracker, a running clock, a proactive admission when the estimate slips, and a scoped restriction that keeps the business trading."
+    },
+    {
+     "k": "Why it was hard",
+     "v": "The freeze is often mandatory and the reason legally cannot be disclosed. Only the communication layer was ever mine to change."
+    }
+   ]
+  },
+  {
+   "type": "callout",
+   "rule": "lime",
+   "label": "On fairness",
+   "paras": [
+    "Wio is one of the UAE's fastest-growing digital banks and has genuine advocates. Its onboarding and app are widely praised, and it publishes strong satisfaction scores. This study isn't a verdict on the bank. It looks at one specific flow that its own public reviews show repeatedly failing, and asks what design could do about it inside constraints that no interface can remove — mandatory compliance holds, external registry timelines, review reasons the bank legally cannot disclose. The rest of this case study is what's left once you accept that."
+   ]
+  },
+  {
+   "type": "callout",
+   "rule": "blue",
+   "label": "What's real, what's mine",
+   "paras": [
+    "The problem documented here is real and drawn from Wio Bank's public customer reviews, dated through mid-2026. The interface shown throughout, including the Wio name and marks on it, is my own concept for how this could work. It is not Wio's product, does not replicate their UI, and is not affiliated with or endorsed by Wio. The Wio name and any marks appearing on these screens are used only to identify and discuss the real bank this study is about."
+   ]
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "The problem, in customers' own words"
+  },
+  {
+   "type": "p",
+   "html": "Unlike my previous case study, I didn't invent this problem. I found it in Wio Bank's own public reviews, then designed against what customers actually reported."
+  },
+  {
+   "type": "p",
+   "html": "The clearest account, from Trustpilot:"
+  },
+  {
+   "type": "quote",
+   "html": "\"Our business account has been frozen since 17 February 2026 due to an ownership change request. We submitted all required documents on the same day... We were clearly told the process would take a maximum of 10 working days... Today is 16 March 2026... we have called customer support every 2–3 days, and each time we receive the same response: 'Please wait another 24 hours.'... Our business operations are being seriously affected because this account is linked with our POS system.\"",
+   "rule": "lime",
+   "cite": "Trustpilot review of wio.io, March 2026"
+  },
+  {
+   "type": "p",
+   "html": "It isn't isolated. A second review, from a company whose director change went in at the beginning of March, reports the same shape independently:"
+  },
+  {
+   "type": "quote",
+   "html": "\"Till this day the director change was not finalised and our account frozen. No explanation. Every time we call support they say it's in process and will be done within 24h. Also cant move the money out of the account or do transactions.\"",
+   "rule": "lime",
+   "cite": "<a href=\"https://www.trustpilot.com/reviews/6a1fe84ee66ef03fda054b1f\">Trustpilot review of wio.io</a>, posted 3 June 2026, experience dated 12 March 2026"
+  },
+  {
+   "type": "p",
+   "html": "That last line is the one that shaped the final decision below. The freeze didn't just delay a verdict, it stopped the business from moving its own money. An independent 2026 review roundup describes the pattern as going beyond occasional bad luck: business accounts frozen for weeks despite submitted documentation, incoming transfers rejected without clear explanation, and agents giving contradictory information."
+  },
+  {
+   "type": "p",
+   "html": "The details customers report most often:"
+  },
+  {
+   "type": "ul",
+   "items": [
+    "Documents submitted on day one, confirmed complete by the call centre, then weeks of silence",
+    "A stated maximum of 10 working days that passes with no acknowledgement that it passed",
+    "\"Please wait another 24 hours,\" repeated on every call, every 2–3 days, for a month",
+    "A phone call promising same-day activation that didn't happen",
+    "Repeat requests for documents already sent, and contradictory answers between agents",
+    "POS systems linked to the frozen account, so the business physically cannot take payment"
+   ]
+  },
+  {
+   "type": "p",
+   "html": "Sources: <a href=\"https://www.trustpilot.com/review/wio.io\">Trustpilot, wio.io</a> · <a href=\"https://masarif.ae/banks/wio-bank/reviews\">aggregated reviews</a> · <a href=\"https://moneysaverworld.com/wio-review/\">independent roundup</a>. These reviews are dated, so this study is a snapshot of what they documented through mid-2026, not a claim about the bank's service today."
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "The tension: you can't remove the freeze, and sometimes can't explain it"
+  },
+  {
+   "type": "p",
+   "html": "The freeze itself is frequently mandatory. Compliance rules can also prohibit the bank from explaining why a review is happening. So this is not a \"make it faster\" problem, and pretending it is would be dishonest."
+  },
+  {
+   "type": "quote",
+   "html": "How do you keep a business informed, oriented, and able to act when you cannot remove the freeze and sometimes cannot even explain it?",
+   "rule": "lime"
+  },
+  {
+   "type": "p",
+   "html": "That constraint is the whole project. It rules out the obvious answer and forces every decision into the communication layer, which is precisely where the failure actually lives."
+  },
+  {
+   "type": "p",
+   "html": "<strong>Who I designed for:</strong> an SME owner or finance lead whose business is operationally down. Payroll, suppliers, and POS are all affected. This is not inconvenience, it's existential. They call every two days because there is nothing else they can do. I designed for someone in crisis, not someone browsing."
+  },
+  {
+   "type": "p",
+   "html": "<strong>Scope:</strong> the hold communication experience only, six screens. Out of scope: the compliance decision itself, back-office review tooling, and account opening, which my previous case study covers."
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "The design decisions"
+  },
+  {
+   "type": "p",
+   "html": "Each decision is problem, constraint, the options I weighed, and the choice, with the rejected option kept visible."
+  },
+  {
+   "type": "h3",
+   "text": "1. Show the stage even when you can't show the reason"
+  },
+  {
+   "type": "p",
+   "html": "Customers have no idea whether their case is moving or forgotten, and compliance rules often prohibit disclosing why a review is running. The options were to say nothing until there's a decision, or to expose the stage and owner of the review without the reason."
+  },
+  {
+   "type": "p",
+   "html": "I exposed stage and owner. \"We can't discuss it\" gets heard as \"nobody is working on it.\" Knowing a case sits with external registry verification is meaningful even when the reason stays confidential, and unlike the reason, it's disclosable."
+  },
+  {
+   "type": "figure",
+   "images": [
+    {
+     "src": "/assets/work/mizan-tracker.png",
+     "alt": "Concept UI designed by me. Not Wio's product and not a replica of their interface. A four-stage review tracker showing the current stage, who owns it, and when it last moved"
+    }
+   ],
+   "caption": "The four-stage tracker: current stage, who holds it, and when it last moved.",
+   "zoom": true
+  },
+  {
+   "type": "h3",
+   "text": "2. Replace reassurance with a running clock"
+  },
+  {
+   "type": "p",
+   "html": "\"Wait another 24 hours,\" repeated indefinitely, destroys trust faster than bad news. But the bank genuinely can't always predict the end date. So: keep giving a rolling 24-hour promise, or show elapsed working days against the stated maximum, updated daily."
+  },
+  {
+   "type": "p",
+   "html": "I chose the running clock. A promise that breaks daily is worse than an honest number that's merely uncomfortable. \"Working day 6 of up to 10\" can't be contradicted by tomorrow."
+  },
+  {
+   "type": "figure",
+   "images": [
+    {
+     "src": "/assets/work/mizan-clock.png",
+     "alt": "Concept UI designed by me. Not Wio's product and not a replica of their interface. A persistent strip showing elapsed working days against the stated maximum"
+    }
+   ],
+   "caption": "The day counter is persistent, appearing on every screen rather than buried in a status page.",
+   "zoom": true
+  },
+  {
+   "type": "h3",
+   "text": "3. Admit the estimate slipped, before the customer notices"
+  },
+  {
+   "type": "p",
+   "html": "The promised maximum passes and nobody acknowledges it, so the customer discovers it themselves and escalates angry. External verification delays are outside the bank's control, but the silence isn't. The options were to stay quiet and hope it resolves, or to proactively flag the breach with a revised estimate and a named accountable officer."
+  },
+  {
+   "type": "p",
+   "html": "I chose proactive admission. Silence converts a process delay into a trust failure. Naming the officer and the escalation date converts \"nobody cares\" into \"a specific person owns this.\""
+  },
+  {
+   "type": "figure",
+   "images": [
+    {
+     "src": "/assets/work/mizan-slipped.png",
+     "alt": "Concept UI designed by me. Not Wio's product and not a replica of their interface. An alert showing the passed estimate, a revised range, a named accountable officer, and an escalation date"
+    }
+   ],
+   "caption": "The slipped state: passed estimate acknowledged, revised range, named officer, escalation date.",
+   "zoom": true
+  },
+  {
+   "type": "h3",
+   "text": "4. Never let the status flatter itself"
+  },
+  {
+   "type": "p",
+   "html": "A tracker that says \"in progress with our compliance team\" while the bank is actually waiting on the customer is a lie, and it's the same dishonesty this case study exists to criticise. The blocked state is less comfortable to display than a neutral \"in progress,\" which is exactly why the first build defaulted to the comfortable one."
+  },
+  {
+   "type": "p",
+   "html": "I chose the explicit pause. A status that always looks fine is worthless. The paused state also tells the customer their clock isn't ticking down while they're the holdup, which removes the panic without hiding the fact."
+  },
+  {
+   "type": "figure",
+   "images": [
+    {
+     "src": "/assets/work/mizan-paused.png",
+     "alt": "Concept UI designed by me. Not Wio's product and not a replica of their interface. A paused state reading 'waiting on documents from you, not from us', with the estimate showing as paused"
+    }
+   ],
+   "caption": "The paused state names the customer as the blocker and stops the clock rather than pretending progress.",
+   "zoom": true
+  },
+  {
+   "type": "h3",
+   "text": "5. Answer \"has anything changed?\" without a phone call"
+  },
+  {
+   "type": "p",
+   "html": "The real question behind every support call is not \"what's the status\" but \"is it different from yesterday?\" A static stage can't answer that, and most days genuinely have no news. The options were a current-status page only, or a dated activity log that includes an explicit statement when nothing has changed."
+  },
+  {
+   "type": "p",
+   "html": "I chose the log. An unchanged status page is ambiguous, because the customer can't tell whether it's stale or accurate. The log ends with the line that does the real work: if nothing new is listed, nothing has changed, and calling won't reveal more than this page shows."
+  },
+  {
+   "type": "figure",
+   "images": [
+    {
+     "src": "/assets/work/mizan-log.png",
+     "alt": "Concept UI designed by me. Not Wio's product and not a replica of their interface. A dated activity log with entries and a closing line explaining that calling will not reveal more than the page shows"
+    }
+   ],
+   "caption": "A dated log, including the days where the honest entry is that nothing moved.",
+   "zoom": true
+  },
+  {
+   "type": "h3",
+   "text": "6. Own the promises you already broke"
+  },
+  {
+   "type": "p",
+   "html": "By the time a customer is a month in, the damage isn't just the delay. They were told \"another 24 hours\" repeatedly and once promised same-day activation that never came, so every future statement is now discounted. Agents genuinely couldn't see the external stage, so they guessed, and you can't un-say it. The options were to move on and give a better estimate from now, or to list the previous promises, say plainly they were wrong, and explain why they were made."
+  },
+  {
+   "type": "p",
+   "html": "I chose to list them. A new estimate from a source that has been wrong repeatedly carries no weight. Naming the broken promises is the only way to make the next number credible, and explaining why, that agents couldn't see the stage and now can, shows the cause was fixed rather than just apologised for."
+  },
+  {
+   "type": "figure",
+   "images": [
+    {
+     "src": "/assets/work/mizan-promises.png",
+     "alt": "Concept UI designed by me. Not Wio's product and not a replica of their interface. A block listing what the customer was previously told, stating plainly that it was wrong, and explaining why"
+    }
+   ],
+   "caption": "What we told you before, and why it was wrong. The hardest block to write, and the one that makes the next estimate credible.",
+   "zoom": true
+  },
+  {
+   "type": "h3",
+   "text": "7. Don't stop the business from trading"
+  },
+  {
+   "type": "p",
+   "html": "Customers report POS systems linked to the frozen account, so a compliance review stops them physically taking payment. That's what converts a delay into an existential event. The account itself must stay restricted, but total lockouts are often more restrictive than the regulation requires."
+  },
+  {
+   "type": "p",
+   "html": "I chose scoped restriction, published. The compliance requirement is about this account, not about the customer's ability to operate. So the concept keeps collecting card takings and holds them rather than rejecting them, which also means the customer's own customers never see a failed payment, and lets the business nominate an alternative settlement account for the duration. It keeps viewing balances, exporting statements for their accountant, and receiving funds available, then publishes the exact scope of what's restricted rather than leaving them to discover each blocked action by hitting it."
+  },
+  {
+   "type": "figure",
+   "images": [
+    {
+     "src": "/assets/work/wio-access.png",
+     "alt": "Concept UI designed by me. Not Wio's product and not a replica of their interface. A published checklist of what stays available during a hold — balances, statements, incoming transfers, team access — against what's restricted: outgoing transfers, card spending, POS settlement, closing the account"
+    }
+   ],
+   "caption": "The access scope, published rather than discovered by hitting each blocked action one at a time.",
+   "zoom": true
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "Two principles"
+  },
+  {
+   "type": "p",
+   "html": "<strong>Honest beats comfortable.</strong> Every screen prefers an uncomfortable fact over a comfortable ambiguity: a running clock over a rolling promise, an admitted breach over silence, a named blocker over a neutral \"in progress.\""
+  },
+  {
+   "type": "p",
+   "html": "<strong>Design the wait, not just the outcome.</strong> The decision was never the broken part. The weeks before it were."
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "What I'd test next"
+  },
+  {
+   "type": "p",
+   "html": "This is a concept, so I have design intent, not proof. If I took it further I'd test three things: whether the activity log measurably reduces inbound support calls during a hold, whether the paused state reduces perceived unfairness when the customer is the blocker, and whether publishing the access scope reduces account closures during long reviews. Those are the hypotheses the design is built to test."
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "Try the whole flow yourself"
+  },
+  {
+   "type": "callout",
+   "rule": "blue",
+   "label": "What's real, what's mine",
+   "paras": [
+    "Reminder: the problem is real, drawn from Wio Bank's dated public reviews. The interface below, including the Wio name and marks on it, is my own concept — not Wio's product, not a replica of their UI, and not affiliated with or endorsed by Wio. Use the simulate bar at the bottom to move between working day 6, the slipped state, waiting on you, and resolution."
+   ]
+  },
+  {
+   "type": "prototype",
+   "label": "Live prototype · click through the real flow",
+   "url": "wio.com/business/hold",
+   "caption": "The actual working prototype, not a video. The simulate bar at the bottom moves the case between states: on track, slipped past the estimate, paused waiting on you, and resolved."
+  },
+  {
+   "type": "quote",
+   "html": "The bank knew the stage the whole time. Everything the customer needed already existed internally and never reached the screen. That gap is the design problem.",
+   "rule": "lime"
+  }
+ ],
+ "ending": null,
+ "next": {
+  "label": "Next story",
+  "title": "Form: Privacy-First Health",
+  "href": "/work/form"
+ },
+ "progressSegments": 10
+}

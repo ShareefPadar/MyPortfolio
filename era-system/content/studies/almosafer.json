@@ -1,0 +1,207 @@
+{
+ "_source": "https://www.shareefpadar.com/work/almosafer-audit — extracted from the live DOM by scripts/sync-studies.py",
+ "id": "almosafer",
+ "slug": "almosafer-audit",
+ "url": "/work/almosafer-audit",
+ "pageTitle": "Almosafer UX Audit | Shareef Padar",
+ "description": "Refining the interface of the Middle East's leading travel platform by applying core UX principles to eliminate decision fatigue.",
+ "ogImage": "https://www.shareefpadar.com/assets/almosafer-preview.png",
+ "head": {
+  "number": "01",
+  "label": "Overview",
+  "title": "Cutting decision fatigue in Almosafer's booking funnel.",
+  "meta": [
+   {
+    "k": "My role",
+    "v": "Product Designer"
+   },
+   {
+    "k": "Type",
+    "v": "Self-initiated UX audit"
+   },
+   {
+    "k": "Period",
+    "v": "2-4 weeks"
+   }
+  ],
+  "lead": "Refining the interface of the Middle East's leading travel platform by applying core UX principles to eliminate decision fatigue.",
+  "outcome": {
+   "label": "Outcome",
+   "text": "Two high-stakes friction points in the booking funnel, both fixed inside the existing design system with no brand changes."
+  },
+  "statement": "Audited the Middle East's leading travel platform and found two high-stakes friction points in the booking funnel, both fixable without touching a single brand token."
+ },
+ "blocks": [
+  {
+   "type": "short",
+   "tab": "The short version",
+   "note": "3 min read",
+   "rows": [
+    {
+     "k": "Problem",
+     "v": "Almosafer repeated its primary services three times in the top 40% of the homepage, and two competing buttons in room selection shared the same saturated red."
+    },
+    {
+     "k": "What I did",
+     "v": "Consolidated the duplicate funnels, grouped niche services under Travel Essentials, and split the room CTAs into clear primary and secondary signifiers."
+    },
+    {
+     "k": "Why it was hard",
+     "v": "A time-boxed audit with no brand changes allowed, so every fix had to work inside the existing design system and ship quickly."
+    }
+   ]
+  },
+  {
+   "type": "h2",
+   "text": "The Philosophy: Evolution, Not Revolution"
+  },
+  {
+   "type": "p",
+   "html": "Almosafer has done the hard work of localising a complex global industry for the Middle East. But in travel tech, even small friction drops conversion."
+  },
+  {
+   "type": "p",
+   "html": "This was a time-boxed UX audit, not a rebrand. Two constraints shaped every decision:"
+  },
+  {
+   "type": "p",
+   "html": "<strong>Brand integrity.</strong> No changes to the brand guidelines, colour palette, or type. I wanted to show what layout logic alone can do."
+  },
+  {
+   "type": "p",
+   "html": "<strong>Rapid iteration.</strong> Focus on the high-impact, low-effort fixes: things a dev could ship quickly that still move the booking funnel."
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "Issue 1 — The Homepage: The Paradox of Choice"
+  },
+  {
+   "type": "p",
+   "html": "On the homepage, the primary services (Flights, Stays, Activities) show up <strong>three times</strong> in the top 40% of the screen: in the nav, the hero tabs, and the icon row below. Underneath, secondary services like \"VIP Meet &amp; Greet\" and \"Lounge Passes\" sit at the same visual weight as the main actions."
+  },
+  {
+   "type": "p",
+   "html": "Hick's Law says decision time goes up with the number and complexity of choices. When everything carries equal weight, people stall before they even start searching."
+  },
+  {
+   "type": "h3",
+   "text": "The Fix"
+  },
+  {
+   "type": "p",
+   "html": "<strong>Consolidate the funnels.</strong> I removed the redundant service icons that just duplicated the hero tabs."
+  },
+  {
+   "type": "p",
+   "html": "<strong>Categorise the rest.</strong> Niche services moved under a \"Travel Essentials\" group, still discoverable, no longer fighting the primary search above the fold."
+  },
+  {
+   "type": "p",
+   "html": "The user's first job is to search. Everything else can wait."
+  },
+  {
+   "type": "gallery",
+   "cols": 2,
+   "maxWidth": null,
+   "items": [
+    {
+     "src": "/assets/work/almosafer-homepage-before.png",
+     "alt": "Before",
+     "label": "Before",
+     "badge": null
+    },
+    {
+     "src": "/assets/work/almosafer-homepage-after.png",
+     "alt": "After",
+     "label": "After",
+     "badge": null
+    }
+   ],
+   "caption": "Before: primary services repeated across the nav, hero tabs, and icon row. After: consolidated into a single search widget, niche services grouped under Travel Essentials. Click either screen to view full size."
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "Issue 2 — Room Selection: Competing Calls to Action"
+  },
+  {
+   "type": "p",
+   "html": "In the room selection flow, two buttons used the exact same high-saturation red: the floating \"Show rooms\" button and the \"Select\" button on each room card."
+  },
+  {
+   "type": "p",
+   "html": "When two different actions look equally important, the hierarchy breaks. People have to stop and read both to tell them apart instead of just reacting to the visual cue. That pause lands at the most critical moment in the funnel."
+  },
+  {
+   "type": "h3",
+   "text": "The Fix"
+  },
+  {
+   "type": "p",
+   "html": "I applied the idea of primary versus secondary signifiers:"
+  },
+  {
+   "type": "ul",
+   "items": [
+    "<strong>Primary action.</strong> \"Select\" stays solid red. This is the happy path, the tap that leads to revenue.",
+    "<strong>Secondary action.</strong> \"Show rooms\" becomes a ghost button."
+   ]
+  },
+  {
+   "type": "p",
+   "html": "Now the eye goes straight to \"Select.\" \"Show rooms\" still works as navigation without competing for attention at the wrong time."
+  },
+  {
+   "type": "gallery",
+   "cols": 2,
+   "maxWidth": null,
+   "items": [
+    {
+     "src": "/assets/work/almosafer-room-before-detail.png",
+     "alt": "Before",
+     "label": "Before",
+     "badge": null
+    },
+    {
+     "src": "/assets/work/almosafer-room-after-detail.png",
+     "alt": "After",
+     "label": "After",
+     "badge": null
+    }
+   ],
+   "caption": "Before: 'Show rooms' and 'Select' compete as the same solid red. After: 'Select' stays solid red as the primary CTA, 'Show rooms' becomes a ghost button. Cropped to the CTA row; click either screen for the full booking flow."
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "What This Audit Taught Me"
+  },
+  {
+   "type": "p",
+   "html": "UX isn't always a full overhaul. A lot of the real business impact comes from refining what's already there, making the journey clearer without disturbing the brand people already trust."
+  },
+  {
+   "type": "p",
+   "html": "Both fixes lived entirely inside Almosafer's existing design system. No new components, no brand risk. Just cleaner information architecture and a sharper hierarchy at two high-stakes moments in the flow."
+  },
+  {
+   "type": "quote",
+   "html": "Working inside an existing design system isn't a constraint. It's the brief. Layout logic alone can move conversion without touching a single brand token.",
+   "rule": "lime"
+  }
+ ],
+ "ending": null,
+ "next": {
+  "label": "Next story",
+  "title": "Instagram Local Feed",
+  "href": "/work/instagram-local"
+ },
+ "progressSegments": 10
+}

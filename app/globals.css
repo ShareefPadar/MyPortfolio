@@ -606,3 +606,25 @@
   }
 }
 
+
+/* ══════════════════════════════════════════════════════════════════
+   THE TIME MACHINE (era-system/eras/1995)
+   The year switcher sits beside the wordmark: a sprite button that opens a
+   raised plate of sprite buttons, drawn in 4 frames like every 1995 motion.
+   Arriving from another era, a stepped scanline wipes the page in. */
+.eramenu { position: absolute; z-index: 60; top: calc(100% + 8px); left: 0; width: 216px; padding: 12px;
+  background: var(--plate); border: 3px solid var(--ink); box-shadow: inset 3px 3px 0 var(--hi), inset -3px -3px 0 var(--sh); }
+.eramenu[hidden] { display: none; }
+.eramenu:not([hidden]) { animation: menu-scan 240ms steps(4, end) both; }
+@keyframes menu-scan { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0); } }
+.erabtn[aria-expanded="true"] svg { transform: scaleY(-1); }
+@media (max-width: 760px) { .eramenu { position: fixed; top: 76px; left: 16px; } }
+/* the open menu sits above Clippy */
+header:has(.eraswitch[data-open="true"]) { z-index: 80; }
+
+.arrive { display: none; }
+html.era-arrive .arrive { display: block; position: fixed; inset: 0; z-index: 9999; pointer-events: none; background: var(--paper);
+  background-image: repeating-linear-gradient(0deg, rgba(20, 20, 15, .06) 0 2px, transparent 2px 4px);
+  animation: arrive-scan 520ms steps(8, end) .12s both; }
+@keyframes arrive-scan { from { clip-path: inset(0 0 0 0); } to { clip-path: inset(100% 0 0 0); } }
+@media (prefers-reduced-motion: reduce) { .eramenu:not([hidden]) { animation: none; } }

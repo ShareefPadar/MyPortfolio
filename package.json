@@ -4,11 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "predev": "npm run eras",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "sprites": "tsx scripts/build-sprites.ts",
-    "prebuild": "npm run sprites"
+    "eras": "node era-system/scripts/build-site.mjs",
+    "prebuild": "npm run sprites && npm run eras"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.1",

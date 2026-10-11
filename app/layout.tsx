@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PixelCursor from "@/components/px/PixelCursor";
 import PixelGuide from "@/components/px/PixelGuide";
+import site from "@/era-system/content/site.json";
 
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -89,6 +90,14 @@ const personSchema = {
   ],
 };
 
+/* The time machine's years and label, from the era system's shared content.
+   Read here on the server so only these few strings reach the client. */
+const eras = { label: site.eras.label, items: site.eras.items.map(({ id, year, name }) => ({ id, year, name })) };
+
+/* Arriving from another era: a one-shot scanline wipe (the class is set before
+   paint, removed after the wipe). Same flag every era uses. */
+const arriveScript = "try{if(sessionStorage.getItem('era-arrive')){sessionStorage.removeItem('era-arrive');if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('era-arrive');setTimeout(function(){document.documentElement.classList.remove('era-arrive')},1600)}}catch(e){}";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -113,6 +122,7 @@ export default function RootLayout({
             __html: "document.documentElement.classList.add('has-js')",
           }}
         />
+        <script dangerouslySetInnerHTML={{ __html: arriveScript }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
@@ -126,7 +136,8 @@ export default function RootLayout({
         >
           SKIP TO CONTENT
         </a>
-        <Navbar />
+        <div className="arrive" aria-hidden="true" />
+        <Navbar eras={eras} />
         {/* Site-wide, so the guide's cursor on the homepage has a peer that is
             drawn the same way. Self-suppresses on touch and reduced motion. */}
         <PixelCursor />

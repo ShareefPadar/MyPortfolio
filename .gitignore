@@ -41,3 +41,8 @@ next-env.d.ts
 # covered above, and a `git add -A` swept one into a commit twice before this
 # was added.
 /*.docx
+
+# Era pages generated from era-system/ by `npm run eras` (runs before dev and build).
+/public/_eras/
+# Era-system previews (node era-system/scripts/build-eras.mjs) — local only.
+/era-system/design-reference/

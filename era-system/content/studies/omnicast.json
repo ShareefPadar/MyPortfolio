@@ -1,0 +1,245 @@
+{
+ "_source": "https://www.shareefpadar.com/work/omni-cast-ai — extracted from the live DOM by scripts/sync-studies.py",
+ "id": "omnicast",
+ "slug": "omni-cast-ai",
+ "url": "/work/omni-cast-ai",
+ "pageTitle": "OmniCast AI | Shareef Padar",
+ "description": "AI-powered publishing assistant that predicts performance and optimizes multi-channel campaigns in real-time.",
+ "ogImage": "https://www.shareefpadar.com/assets/omnicast-preview.png",
+ "head": {
+  "number": "01",
+  "label": "Overview",
+  "title": "AI publishing that shows its reasoning instead of hiding it.",
+  "meta": [
+   {
+    "k": "My role",
+    "v": "Senior Product Designer"
+   },
+   {
+    "k": "Type",
+    "v": "Product concept"
+   },
+   {
+    "k": "Period",
+    "v": "2-4 weeks"
+   }
+  ],
+  "lead": "AI-powered publishing assistant that predicts performance and optimizes multi-channel campaigns in real-time.",
+  "outcome": {
+   "label": "Outcome",
+   "text": "Projected +15–20% engagement uplift and 30–40% time saved in test scenarios, grounded in interviews with 8 practitioners."
+  },
+  "statement": "AI-powered publishing assistant built on 8 interviews and 4 competitor audits. Projected 30–40% time savings and 15–20% engagement uplift across 6 platforms."
+ },
+ "blocks": [
+  {
+   "type": "short",
+   "tab": "The short version",
+   "note": "4 min read",
+   "rows": [
+    {
+     "k": "Problem",
+     "v": "Marketers switch between four tools to run one campaign, guess at posting times, and only find out what worked after publishing."
+    },
+    {
+     "k": "What I did",
+     "v": "Designed a publishing assistant with a prediction behind every step: inline AI suggestions, predictive scheduling, and a calendar that re-scores as campaigns run."
+    },
+    {
+     "k": "Why it was hard",
+     "v": "People wanted AI help but not a black box. Every suggestion had to show its reasoning and stay overridable, or trust collapsed."
+    }
+   ]
+  },
+  {
+   "type": "h2",
+   "text": "Four tools, and a guess at what works"
+  },
+  {
+   "type": "p",
+   "html": "Agencies, marketers, and creators juggle a stack of social platforms with no shared workflow. Every campaign means switching tools, guessing at the best time to post, writing captions by hand, and waiting until after publishing to find out what worked."
+  },
+  {
+   "type": "p",
+   "html": "That gap costs engagement, ad spend, and turnaround time."
+  },
+  {
+   "type": "p",
+   "html": "The real opportunity wasn't a faster publishing tool. It was an assistant that could predict the best way to publish before content goes live, keep tuning campaigns as they run, and cut the repetitive work without taking control away from the person doing it."
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "People wanted AI's help, not a black box"
+  },
+  {
+   "type": "p",
+   "html": "I interviewed 5 marketers and 3 agency owners, ran a competitor teardown of Meta Business Suite, Hootsuite, Later, and Buffer, and mapped how a typical campaign actually gets planned."
+  },
+  {
+   "type": "p",
+   "html": "<strong>What I found:</strong>"
+  },
+  {
+   "type": "ul",
+   "items": [
+    "People wanted AI help, but not a black box. They needed to see the reasoning.",
+    "Predictions mattered far more than after-the-fact reports.",
+    "Power users leaned on list view and calendar view about equally.",
+    "In most tools, AI is bolted on the side rather than built into the workflow."
+   ]
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "Show the reasoning, always leave an exit"
+  },
+  {
+   "type": "p",
+   "html": "<strong>Transparency.</strong> Always show why the AI is suggesting something."
+  },
+  {
+   "type": "p",
+   "html": "<strong>Actionability.</strong> Every suggestion leads to a clear next step."
+  },
+  {
+   "type": "p",
+   "html": "<strong>Built in, not bolted on.</strong> AI lives in every step, never behind a separate tab."
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "Inline suggestions beat a dedicated AI tab"
+  },
+  {
+   "type": "p",
+   "html": "<strong>A dedicated AI tab for all recommendations.</strong> Rejected. It pulled people out of the work they were already doing."
+  },
+  {
+   "type": "p",
+   "html": "<strong>Fully automated publishing with no review.</strong> Rejected. Taking the human out of the loop killed trust and control."
+  },
+  {
+   "type": "p",
+   "html": "<strong>Inline AI suggestions inside the dashboard, post creation, and calendar.</strong> Chosen. It fit how people already worked and earned trust a little at a time instead of demanding it up front."
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "A prediction behind every major step"
+  },
+  {
+   "type": "p",
+   "html": "OmniCast AI is a publishing workflow with a prediction behind every major step."
+  },
+  {
+   "type": "h3",
+   "text": "AI Insights Panel"
+  },
+  {
+   "type": "p",
+   "html": "Surfaces three priority actions the moment you log in, so the useful stuff isn't buried in a dashboard."
+  },
+  {
+   "type": "h3",
+   "text": "AI Content Creation"
+  },
+  {
+   "type": "p",
+   "html": "Writes tone-specific captions and hashtags on demand. No more blank page for high-volume publishers."
+  },
+  {
+   "type": "h3",
+   "text": "Predictive Scheduling"
+  },
+  {
+   "type": "p",
+   "html": "Suggests the best posting windows with an estimated engagement lift, so you know when to post and why that window works."
+  },
+  {
+   "type": "h3",
+   "text": "AI Content Calendar"
+  },
+  {
+   "type": "p",
+   "html": "Month and list views that re-score as campaigns run. A plan doesn't go stale the moment it's set."
+  },
+  {
+   "type": "h3",
+   "text": "Continuous Optimisation"
+  },
+  {
+   "type": "p",
+   "html": "Watches live posts and flags the underperformers before the window closes, before spend leaks into content that needs pulling or boosting."
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "Confidence scores earned their place on screen"
+  },
+  {
+   "type": "p",
+   "html": "Two UI modes for two contexts: <strong>Liquid Glass</strong>, an Apple-inspired look for showcase and presentation, and <strong>Clean Professional</strong> for everyday operational use."
+  },
+  {
+   "type": "p",
+   "html": "I chose a few deep AI features over many shallow ones to keep the interface calm. Working with a marketing lead reshaped how confidence scores appear. They started hidden, then went visible once feedback showed that seeing the score was the single biggest trust driver."
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "Projected 15–20% engagement lift, 30–40% less busywork"
+  },
+  {
+   "type": "ul",
+   "items": [
+    "A projected 15–20% engagement lift from the AI recommendations in test scenarios",
+    "30–40% less time spent on repetitive publishing work",
+    "Clearer performance tracking, which made it easier to prioritise campaigns across teams"
+   ]
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "Explainability is what makes AI stick"
+  },
+  {
+   "type": "p",
+   "html": "AI adoption comes down to explainability. People trust it more when they can override it without a fight. Being able to ignore a suggestion matters as much as the suggestion."
+  },
+  {
+   "type": "p",
+   "html": "In fast content cycles, knowing what will perform beat knowing what already flopped."
+  },
+  {
+   "type": "p",
+   "html": "The framework has room to grow. Ad targeting, creative testing, and competitor tracking all sit on the same foundation."
+  },
+  {
+   "type": "quote",
+   "html": "AI built into every step, not hidden in a separate tab. That's the difference between a tool people trust and one they route around.",
+   "rule": "lime"
+  }
+ ],
+ "ending": null,
+ "next": {
+  "label": "Next story",
+  "title": "Almosafer UX Audit",
+  "href": "/work/almosafer-audit"
+ },
+ "progressSegments": 10
+}
