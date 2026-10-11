@@ -6,7 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        // Internal design-system reference, not part of the portfolio.
         // Internal design-system reference, not part of the portfolio; and the
         // generated era pages, which are the same pages in other years.
         disallow: ['/kitchen-sink', '/_eras/'],
