@@ -13,10 +13,11 @@
 
 | Layer | What's in it | Material |
 |---|---|---|
-| Content | headline, portrait, screenshots, lists, footer | solid: `--bg` page, `--surface` panels |
+| Sky | the page background (§5a) | a CSS gradient with stars or clouds drawn on it |
+| Content | headline, portrait, screenshots, lists, footer | solid `--surface` panels; text straight on the sky |
 | Controls | year switcher, Résumé, bottom tab bar, notification, lightbox close | glass |
 
-Light by default, dark when the device is (`prefers-color-scheme`). No mesh, no blobs, no bento.
+Light by day, dark by night: the colours follow the sky, which follows the visitor's clock, not the device's dark mode. No mesh, no blobs, no bento.
 
 ## 2. Type
 
@@ -31,9 +32,10 @@ The system font: `system-ui, -apple-system, "SF Pro Text"/"SF Pro Display"`. SF 
 
 ## 3. Colour
 
-| Token | Light | Dark |
+| Token | Day | Night |
 |---|---|---|
-| `--bg` | `#F2F2F7` | `#000000` |
+| `--sky` | `#CFE3F8` → `#E4EFFA` → `#F7F2EA` | `#04060D` → `#0A1022` → `#161C38` |
+| `--bg` (overscroll, arrival sheet) | `#E4EFFA` | `#080C1A` |
 | `--surface` | `#FFFFFF` | `#1C1C1E` |
 | `--text` | `#1D1D1F` | `#F5F5F7` |
 | `--text-muted` | `rgba(60,60,67,.64)` | `rgba(235,235,245,.64)` |
@@ -54,6 +56,22 @@ box-shadow       bright top rim, faint bottom rim, .5px edge, soft drop
 ```
 
 A scroll edge effect blurs content as it slides under the top controls.
+
+## 5a. The sky
+
+`sky.mjs`. A fixed layer behind the page (Shareef's call, after gauravi.design). The gradient is CSS, so it paints before any script; two canvases draw what's in it.
+
+| | Night, 19:00 to 06:00 | Day |
+|---|---|---|
+| Stays put | 240 dim stars, a Milky Way band of tiny stars from lower left to upper right | a warm glow top right where the sun is |
+| Moves | 80 stars twinkle, 3 thin wisps of cloud drift, a shooting star every 10 to 20 seconds | 6 clouds drift at three depths |
+
+- A script in `<head>` sets `data-sky="night"` or `"day"` on `<html>` from the visitor's clock before first paint, and the colour tokens key off it. It's decided once per page load. Without JavaScript the device's dark setting decides, and the sky is the plain gradient
+- `?sky=day` or `?sky=night` previews either at any hour
+- Case studies: one still frame at half strength, so the article stays easy to read
+- Reduced motion: one still frame everywhere
+- About 30 frames a second; pixel ratio capped at 2 (1.5 on phones); phones get fewer stars, a thinner band and 4 clouds
+- Keep it weather and stars. The de-slop rule against blurred colour blobs still applies: the band has barely a glow, and nothing is a coloured haze
 
 ## 6. Components (1995 → Now)
 
@@ -81,6 +99,7 @@ A scroll edge effect blurs content as it slides under the top controls.
 
 - Tab bar shrink and grow, notification drop-in, popover scale-in, segmented thumb slide, button press scale
 - Page arrives through a fading sheet
+- The sky: clouds drift, stars twinkle, a shooting star now and then (§5a)
 - No fade-in on sections, no word reveal
 - Reduced motion turns all of it off; reduced transparency makes glass solid
 

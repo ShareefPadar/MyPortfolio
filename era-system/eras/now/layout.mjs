@@ -10,12 +10,14 @@
  *   pixel cursor         → the system cursor
  *   Copy → Copied        → the button fills with the lime tint and says Copied
  *   footer               → a solid panel (content, so not glass) — on home it's the floor of the Glass Merge jar
- * Light by default, dark when the device is. System font (SF Pro on Apple devices).
+ *   page background      → a sky behind everything (sky.mjs): night or morning by the visitor's clock
+ * Light by day, dark by night: the colours follow the sky. System font (SF Pro on Apple devices).
  * Pages supply <main> content (inside .page) and any page-only script.
  */
 import { portraitJS, guideJS, eraSwitchJS, eraRailJS, arriveHeadJS } from '../_shared/client.mjs';
 import { eraItems } from '../_shared/eras.mjs';
 import { headMeta } from '../_shared/head.mjs';
+import { skyHeadJS, skyMarkup, skyScript } from './sky.mjs';
 export const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 // SF Symbols-style filled glyphs for the tab bar and the notification
@@ -27,7 +29,7 @@ const TAB = {
 // iOS back button: a chevron and the previous page's name
 export const BACK = '<svg viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.5 2.5 2.5 10l7 7.5"/></svg>';
 
-export function shell({ content: c, pageUrl = '/', study = null, assetBase = '', icons, css, portrait, title, current = '/', main, pageScript = '', guideOpening = null, compactFooter = false }) {
+export function shell({ content: c, pageUrl = '/', study = null, assetBase = '', icons, css, portrait, title, current = '/', main, pageScript = '', guideOpening = null, compactFooter = false, quietSky = false }) {
   const ic = n => icons.line[n];
   const opening = guideOpening ?? '';
   const now = eraItems(c, pageUrl, 'now').find(e => e.current);
@@ -40,6 +42,7 @@ export function shell({ content: c, pageUrl = '/', study = null, assetBase = '',
 ${headMeta({ content: c, pageUrl, study, assetBase })}
 <script>document.documentElement.classList.add('js')</script>
 ${arriveHeadJS}
+${skyHeadJS}
 <style>
 ${css}
 </style>
@@ -47,6 +50,7 @@ ${css}
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <div class="arrive" aria-hidden="true"></div>
+${skyMarkup(quietSky)}
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <filter id="lens" x="0" y="0" width="100%" height="100%">
@@ -116,6 +120,7 @@ ${compactFooter ? `  <footer class="footer compact">
   const P = ${JSON.stringify(portrait)}, G = ${JSON.stringify(c.guide)};
   ${portraitJS}
   ${guideJS}
+  ${skyScript}
 
   // ── page-only script ──
   ${pageScript}

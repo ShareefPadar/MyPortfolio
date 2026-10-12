@@ -70,5 +70,5 @@ export default function render(args) {
   ${studyJS}
   studyBehaviour(document.querySelector('.study'), document.querySelector('.gprogress'));
 `;
-  return shell({ ...args, current: '/work', main, pageScript, compactFooter: true });
+  return shell({ ...args, current: '/work', main, pageScript, compactFooter: true, quietSky: true });
 }

@@ -59,6 +59,7 @@ eras/
     style.css
   1986/ 2002/ 2014/ now/    phase 2: layout.mjs (shell, guide, cursor, switcher) · portrait.mjs · page.mjs (home) · work.mjs · about.mjs · study.mjs
                             game.mjs: the home's easter-egg game (text from content.games[era]) — no box; page = sky, footer top = floor
+                            now/sky.mjs: Now's page background, a night or morning sky by the visitor's clock; it also decides Now's light / dark colours
 assets/icons/               pixel.json (8×8) · line.json (stroked) — same 20 names · brands.json (LinkedIn, Behance, Medium)
 assets/sprites-1995.json    Clippy frames + cursor sprites, from the live site
 scripts/
