@@ -33,7 +33,7 @@ Each era gets its own version of each 1995 component. Starting map (to be refine
 | Clippy guide (sections, idle chatter, typing, dismiss) | Narrator in a text box, takes typed commands | Clippy as the 2002 Office assistant: yellow balloon, options, Hide | Chat head: round avatar on the edge, red 1, drag to × | Collaborator's cursor with cursor chat |
 | Pixel cursor (arrow / hand, 4px snap) | Chunkier 8px cursor | Aqua-style cursor | System cursor (flat era) | System cursor |
 | Pixel portrait, grey → colour on hover | Same pixels, 4-colour block palette | Same pixels, glossy frame + reflection | Same pixels, flat circle crop | Same pixels, crisp, in a solid well |
-| Dino Runner (no box: page = sky, footer top = ground) | Ship the backlog — brick breaker, paddle rides the CONTINUE? box | Bubble pop — launcher sits on the gel footer bar | Paper plane — pillars grow out of the navy footer | Glass merge — the footer is the jar's floor |
+| Dino Runner (no box: page = sky, footer top = ground) | Ship the backlog — brick breaker, paddle rides the CONTINUE? box | Bubble pop — launcher sits on the gel footer bar | Paper plane — pillars grow out of the navy footer | none (Glass merge was dropped) |
 | Sprite nav buttons, current = pressed | ▶ menu cursor | Glossy tabs | App bar + drawer | iOS 26 tab bar (glass), shrinks on scroll |
 | Plate / tab / well cards | Level-select stages | Panels with reflections | Image-top paper cards | Big screenshots, text under them; Settings-style grouped lists |
 | Under NDA box | Secret area | Yellow info box | Lime colour band | Grouped panel |
@@ -49,7 +49,7 @@ Order: home for all four eras → work index → about → case study.
 | 2.2 Work index | ✅ stage select | ✅ portfolio directory | ✅ Material tabs + list | ✅ glass segmented control |
 | 2.3 About | ✅ character profile | ✅ profile page | ✅ hero + stepper | ✅ large title, prose, grouped panels |
 | 2.4 Case study (all 13 block types, 9 studies) | ✅ a level | ✅ Web 2.0 article | ✅ Material article | ✅ article on the page, solid panels |
-| 2.5 Home easter-egg game (`game.mjs`, picked by Shareef in the Era Arcade) | ✅ Ship the backlog | ✅ Bubble pop | ✅ Paper plane | ✅ Glass merge (replaced Five) |
+| 2.5 Home easter-egg game (`game.mjs`, picked by Shareef in the Era Arcade) | ✅ Ship the backlog | ✅ Bubble pop | ✅ Paper plane | none: Glass merge was built, then dropped (Shareef's call) |
 
 **What 2.1 shipped, per era**
 | 1995 component | 1986 | 2002 | 2014 | Now |
@@ -74,7 +74,7 @@ Checked: content 57/57 on every home, no overflow at 1280/390, fonts load, no JS
 **What 2.5 shipped — each game sits the way live's Dino Runner does: no box, the page background is its sky, the footer's top edge is its floor**
 | | 1986 | 2002 | 2014 | Now |
 |---|---|---|---|---|
-| Game | Ship the backlog (brick breaker; bricks are tickets with punched ends) | Bubble pop (bubble shooter; rows push down every 8 shots) | Paper plane (one-tap flyer) | Glass merge (drop orbs; two of a size merge into the next) |
+| Game | Ship the backlog (brick breaker; bricks are tickets with punched ends) | Bubble pop (bubble shooter; rows push down every 8 shots) | Paper plane (one-tap flyer) | none |
 | Sky | the navy screen; the field is exactly the CONTINUE? box's width | the pinstripes; same width as the page and the footer bar | the grey band carries on; full width | the mesh — orbs with no panel behind them |
 | Floor | the paddle rides the box's top border; a dropped ball flashes it red | the silver cradle sits on the gel bar; loose bubbles fall into it | bottom pillars are the footer's navy, growing out of it; a crash lands on it | the footer glass is the jar's floor, and the jar's two glass walls rise out of it |
 | Text | all from `content.games[era]`: title, start, hint, game over, play again | | | |

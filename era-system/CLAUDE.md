@@ -35,7 +35,7 @@ The eras share exactly one thing: **the content** in `content/site.json`.
 4. **Contrast and accessibility are not gates** (Shareef's call). Match the design; don't block, redesign or "fix" colours because a ratio is low. `check-contrast.mjs` and `measure-contrast.py` still exist as optional tools — they report, they never fail a build. Don't add accessibility work or warnings unless asked
 5. **Match live exactly where an era is the live site.** 1995 mirrors shareefpadar.com down to hover colours and the error red. Don't "improve" it
 6. **Verify fonts actually load** (`document.fonts`). Fallback fonts look plausible in screenshots and are wrong
-7. **Motion never blocks reading.** Headlines may reveal, but the full text is in the DOM from first paint; body text never moves; no reveal re-triggers
+7. **Motion never blocks reading.** Headlines may reveal, but the full text is in the DOM from first paint; body text never moves; no reveal re-triggers. One exception, Shareef's call: in Now, panels and cards rise in once as you scroll to them (`docs/eras/now.md` §8). Article paragraphs still never move
 8. **One agent edits the repo at a time**
 
 ## Folder map
@@ -58,7 +58,7 @@ eras/
     page.mjs · work.mjs · about.mjs · study.mjs   home · work index · about · case study (one page per study)
     style.css
   1986/ 2002/ 2014/ now/    phase 2: layout.mjs (shell, guide, cursor, switcher) · portrait.mjs · page.mjs (home) · work.mjs · about.mjs · study.mjs
-                            game.mjs: the home's easter-egg game (text from content.games[era]) — no box; page = sky, footer top = floor
+                            game.mjs: the home's easter-egg game (text from content.games[era]) — no box; page = sky, footer top = floor. Now has none
                             now/sky.mjs: Now's page background, a night or morning sky by the visitor's clock; it also decides Now's light / dark colours
 assets/icons/               pixel.json (8×8) · line.json (stroked) — same 20 names · brands.json (LinkedIn, Behance, Medium)
 assets/sprites-1995.json    Clippy frames + cursor sprites, from the live site

@@ -1,10 +1,10 @@
 /* ═══════════════════════════════════════════════════════════════
-   ERA · now — Liquid Glass the way Apple ships it (iOS 26 / macOS 26)
-   Two layers. The content layer is solid: words, portrait, screenshots, panels.
-   The glass layer is only the controls floating above it: year switcher, Résumé,
-   the bottom tab bar, the notification, the lightbox's close button.
-   Behind both sits the sky (sky.mjs): a morning sky by day, stars by night, by the visitor's own clock.
-   The colours follow it: light by day, dark by night. System font (SF Pro on Apple devices).
+   ERA · now — Liquid Glass over a sky (iOS 26 / macOS 26, with gauravi.design's glass cards)
+   Three layers. The sky (sky.mjs): a morning sky by day, stars by night, by the visitor's own clock.
+   The content: words straight on the sky; panels, cards and the portrait well on a plain glass it shows through.
+   The controls, floating over both on a stronger glass that refracts: year switcher, Résumé, the bottom tab bar,
+   the notification, the lightbox's close button.
+   The colours follow the sky: light by day, dark by night. System font (SF Pro on Apple devices).
    Corners are concentric: panel 32 → padding 12 → inner 20; controls are capsules.
    Shares only content (content/site.json) with the other eras.
    ═══════════════════════════════════════════════════════════════ */
@@ -27,9 +27,10 @@
   --glass-rim: rgba(255, 255, 255, .95);
   --glass-edge: rgba(0, 0, 0, .07);
   --glass-shadow: 0 10px 30px rgba(0, 0, 0, .12), 0 1px 3px rgba(0, 0, 0, .08);
-  --cursor: #CDF22B; --on-cursor: #10110A; --cursor-edge: #10110A; --cursor-ring: rgba(16, 17, 10, .14);
-  --merge-wall: rgba(60, 60, 67, .2); --merge-top: #3A3A3C;   /* the biggest orb: graphite in light, pearl in dark */
+  --cursor: rgba(255, 255, 255, .62); --cursor-arrow: rgba(255, 255, 255, .85); --cursor-edge: #1D1D1F;   /* the guide: glass like the cards, a little denser so its words read over anything */
   --sky: linear-gradient(#CFE3F8, #E4EFFA 46%, #F7F2EA);   /* morning: pale blue down to a warm white */
+  --pane: rgba(255, 255, 255, .44); --pane-rim: rgba(255, 255, 255, .8);   /* glass panels: the content sits on these */
+  --pane-shadow: 0 16px 40px -22px rgba(30, 60, 110, .45); --pane-shadow-up: 0 30px 60px -26px rgba(30, 60, 110, .55);
   --r-panel: 32px; --r-inner: 20px; --r-small: 14px;
   --era-ease: cubic-bezier(.2, .8, .2, 1);
   --era-text: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
@@ -42,8 +43,10 @@
   --text: #F5F5F7; --text-muted: rgba(235, 235, 245, .64); --action: #2997FF; --focus: #2997FF; --selection: #1F4A7A; --on-selection: #FFFFFF;
   --error: #FF453A; --error-surface: #3A1414; --fill: rgba(118, 118, 128, .28); --thumb: #636366;
   --glass: rgba(44, 44, 48, .5); --glass-rim: rgba(255, 255, 255, .26); --glass-edge: rgba(255, 255, 255, .06);
-  --glass-shadow: 0 10px 30px rgba(0, 0, 0, .55); --cursor-edge: #FFFFFF; --cursor-ring: rgba(255, 255, 255, .0); --merge-wall: rgba(235, 235, 245, .2); --merge-top: #F5F6FF;
+  --glass-shadow: 0 10px 30px rgba(0, 0, 0, .55); --cursor: rgba(34, 37, 54, .62); --cursor-arrow: rgba(255, 255, 255, .3); --cursor-edge: #FFFFFF;
   --sky: linear-gradient(#04060D, #0A1022 58%, #161C38);   /* near black overhead, a little blue toward the horizon */
+  --pane: rgba(30, 33, 48, .42); --pane-rim: rgba(255, 255, 255, .13);
+  --pane-shadow: 0 16px 40px -22px rgba(0, 0, 0, .8); --pane-shadow-up: 0 30px 60px -26px rgba(0, 0, 0, .9);
   color-scheme: dark;
 }
 /* Without JavaScript there is no clock, so the device setting decides, as it used to. Keep this block the same as the one above. */
@@ -53,8 +56,10 @@
     --text: #F5F5F7; --text-muted: rgba(235, 235, 245, .64); --action: #2997FF; --focus: #2997FF; --selection: #1F4A7A; --on-selection: #FFFFFF;
     --error: #FF453A; --error-surface: #3A1414; --fill: rgba(118, 118, 128, .28); --thumb: #636366;
     --glass: rgba(44, 44, 48, .5); --glass-rim: rgba(255, 255, 255, .26); --glass-edge: rgba(255, 255, 255, .06);
-    --glass-shadow: 0 10px 30px rgba(0, 0, 0, .55); --cursor-edge: #FFFFFF; --cursor-ring: rgba(255, 255, 255, .0); --merge-wall: rgba(235, 235, 245, .2); --merge-top: #F5F6FF;
+    --glass-shadow: 0 10px 30px rgba(0, 0, 0, .55); --cursor: rgba(34, 37, 54, .62); --cursor-arrow: rgba(255, 255, 255, .3); --cursor-edge: #FFFFFF;
     --sky: linear-gradient(#04060D, #0A1022 58%, #161C38);
+    --pane: rgba(30, 33, 48, .42); --pane-rim: rgba(255, 255, 255, .13);
+    --pane-shadow: 0 16px 40px -22px rgba(0, 0, 0, .8); --pane-shadow-up: 0 30px 60px -26px rgba(0, 0, 0, .9);
     color-scheme: dark;
   }
 }
@@ -74,9 +79,16 @@ button { font: inherit; color: inherit; }
 
 /* ── the sky: the page's background. The gradient is here so it paints before any script; sky.mjs draws what's in it.
    Sized to the large viewport so a phone's toolbar sliding away never opens a gap under it. ── */
-.sky { position: fixed; z-index: -1; left: 0; top: 0; width: 100%; height: 100vh; height: 100lvh; pointer-events: none; background: var(--sky); }
-.sky canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.sky { position: fixed; z-index: -1; left: 0; top: 0; width: 100%; height: 100vh; height: 100lvh; overflow: hidden; pointer-events: none; background: var(--sky); }
+/* the canvases reach 32px past every edge, so sky.mjs can lean them away from the pointer without showing one */
+.sky canvas { position: absolute; left: -32px; top: -32px; width: calc(100% + 64px); height: calc(100% + 64px); display: block; will-change: transform; }
+/* at night the first canvas (the stars that stay put, the Milky Way) is 200px taller: it slides up that far as the page scrolls */
+[data-sky="night"] .sky:not([data-quiet]) canvas:first-child { height: calc(100% + 264px); }
 .sky[data-quiet] canvas { opacity: .5; }   /* case studies: half strength, and sky.mjs draws it still */
+/* by day the first canvas holds only the sun's glow, so it can breathe without a redraw */
+@keyframes sun { 50% { opacity: .68; } }
+[data-sky="day"] .sky:not([data-quiet]) canvas:first-child { animation: sun 9s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .sky canvas { animation: none !important; } }
 
 /* ── the glass layer ───────────────────────────────────────── */
 .glass { position: relative; background: var(--glass);
@@ -122,20 +134,22 @@ button { font: inherit; color: inherit; }
 .tabbar.min .tab[aria-current] { min-width: 64px; }
 
 /* the guide: a collaborator's cursor, as in a shared Figma file. It glides to what it's talking about and says it in
-   cursor chat (the name tag opens into a bubble). Phones park it as a glass capsule above the tab bar. */
+   cursor chat (the name tag opens into a bubble). The arrow and the bubble are glass, like the cards, not a team colour.
+   Phones park it as a glass capsule above the tab bar. */
 .cur { position: absolute; z-index: 55; left: 0; top: 0; pointer-events: none; transform: translate3d(var(--x, -200px), var(--y, -200px), 0);
   transition: transform .95s cubic-bezier(.3, .75, .2, 1), opacity .3s; }
 .cur .arrow { display: block; width: 22px; height: 22px; margin: -3px 0 0 -3px; filter: drop-shadow(0 1px 2px rgba(0, 0, 0, .3)); }
-.cur .arrow path { fill: var(--cursor); stroke: var(--cursor-edge); stroke-width: 1.4; stroke-linejoin: round; }
+.cur .arrow path { fill: var(--cursor-arrow); stroke: var(--cursor-edge); stroke-width: 1.4; stroke-linejoin: round; }
 .tag { position: absolute; left: 15px; top: 17px; width: max-content; max-width: min(270px, 70vw); pointer-events: auto;
-  padding: 3px 10px 4px; border-radius: 3px 12px 12px 12px; background: var(--cursor); color: var(--on-cursor);
-  box-shadow: 0 0 0 1px var(--cursor-ring), 0 4px 14px rgba(0, 0, 0, .18); transform-origin: top left; }
+  padding: 3px 10px 4px; border-radius: 3px 12px 12px 12px; background: var(--cursor); color: var(--text);
+  -webkit-backdrop-filter: blur(16px) saturate(1.6); backdrop-filter: blur(16px) saturate(1.6);
+  box-shadow: inset 0 0 0 1px var(--pane-rim), inset 0 1px 0 var(--pane-rim), 0 10px 26px -12px rgba(0, 0, 0, .4); transform-origin: top left; }
 .cur.flip .tag { left: auto; right: 2px; border-radius: 12px 3px 12px 12px; transform-origin: top right; }
 .who { all: unset; display: block; cursor: pointer; font-size: 13px; font-weight: 600; line-height: 1.4; }
-.who:focus-visible { outline: 2px solid var(--on-cursor); outline-offset: 2px; border-radius: 4px; }
+.who:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 4px; }
 .said { display: none; margin: 2px 0 0; font-size: 15px; line-height: 1.35; }
 .cclose { display: none; position: absolute; top: 7px; right: 7px; width: 22px; height: 22px; padding: 0; border: 0; border-radius: 50%; place-items: center;
-  cursor: pointer; background: rgba(0, 0, 0, .12); color: var(--on-cursor); }
+  cursor: pointer; background: var(--fill); color: var(--text); }
 .cclose svg { width: 11px; height: 11px; }
 .collab[data-state="talk"] .tag { padding: 8px 36px 10px 12px; animation: chat-in .28s var(--era-ease); }
 .collab[data-state="talk"] .who { font-size: 12px; opacity: .7; }
@@ -146,7 +160,7 @@ button { font: inherit; color: inherit; }
 /* the capsule: brings the cursor back after you close it; on phones it's how you call it at all */
 .cpill { position: fixed; z-index: 55; right: 16px; bottom: calc(22px + env(safe-area-inset-bottom, 0px)); display: none; align-items: center; gap: 8px;
   min-height: 44px; padding: 4px 16px 4px 4px; border: 0; border-radius: 999px; cursor: pointer; font-size: 15px; font-weight: 600; }
-.cpill .av { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--cursor); color: var(--on-cursor); font-size: 15px; font-weight: 700; }
+.cpill .av { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--fill); color: var(--text); font-size: 15px; font-weight: 700; }
 .collab[data-state="away"] .cpill, .collab.parked .cpill { display: inline-flex; animation: pop .4s cubic-bezier(.2, 1.2, .3, 1); }
 @keyframes pop { from { transform: scale(.7); opacity: 0; } }
 .collab.parked .cur { position: fixed; left: auto; top: auto; right: 16px; bottom: calc(146px + env(safe-area-inset-bottom, 0px)); transform: none; transition: none; }
@@ -185,7 +199,7 @@ button { font: inherit; color: inherit; }
 .portrait canvas { position: absolute; left: 50%; bottom: 0; width: 92%; height: auto; transform: translateX(-50%); image-rendering: pixelated; }
 @media (max-width: 899px) { .portrait { justify-self: start; max-width: 300px; } }
 
-/* work: big screenshots with plain text under them — content, so no card chrome */
+/* work: a big screenshot with plain text under it. The glass card around each one is under "glass panels" below */
 .works { display: grid; gap: 44px 28px; }
 @media (min-width: 760px) { .works { grid-template-columns: 1fr 1fr; } }
 .work { display: grid; gap: 12px; align-content: start; color: var(--text); }
@@ -211,7 +225,7 @@ button { font: inherit; color: inherit; }
 .note h2 { margin: 0 0 6px; font: 600 20px/1.3 var(--era-display); }
 .note p { margin: 0 0 12px; color: var(--text-muted); max-width: 60ch; }
 
-/* footer: a solid panel — the floor the Glass Merge orbs rest on */
+/* footer */
 .footer { background: var(--surface); border-radius: var(--r-panel); padding: 44px 32px 28px; display: grid; gap: 10px; }
 .footer .where { margin: 0; font-size: 15px; color: var(--text-muted); }
 .footer h2 { margin: 0; font: 700 clamp(40px, 5.5vw, 64px)/1.05 var(--era-display); letter-spacing: -.015em; }
@@ -335,32 +349,38 @@ button { font: inherit; color: inherit; }
 .lightbox img { display: block; max-width: 100%; max-height: 84vh; margin: 56px auto 0; border-radius: var(--r-small); }
 .lb-close { position: absolute; top: 0; right: 0; }
 
-/* ── home easter egg: GLASS MERGE ────────────────────────────────────────────────────
-   Live's Dino Runner has no box: the page is its sky, the footer's top edge its ground.
-   Here the orbs fall over the page background and the footer panel is the bottom of the jar;
-   its two walls rise out of it. Same width as the footer; flush on it (the negative margin cancels the page gap). */
-.merge + .footer { margin-top: -88px; }
-@media (max-width: 600px) { .merge + .footer { margin-top: -64px; } }
-.merge-hint { margin: 0 4px 10px; font-size: 15px; color: var(--text-muted); }
-.merge-field { position: relative; height: 460px; outline: none; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent; }
-@media (max-width: 600px) { .merge-field { height: 420px; } }
-.merge-field[data-kbd="true"]:focus { outline: 3px solid var(--focus); outline-offset: -3px; border-radius: 24px; }
-.merge-field canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-.merge-score { position: absolute; top: 2px; right: 6px; font: 700 32px/1 var(--era-display); font-variant-numeric: tabular-nums; pointer-events: none; }
-.merge-say { position: absolute; inset: 0 0 28%; display: grid; place-content: center; gap: 8px; text-align: center; pointer-events: none; }
-.merge-field[data-state="running"] .merge-say { display: none; }
-.merge .say-title { margin: 0; font: 700 clamp(40px, 6vw, 56px)/1 var(--era-display); letter-spacing: -.015em; }
-.merge .say-sub { margin: 0; font-size: 17px; color: var(--text-muted); }
-.merge [data-say], .merge [data-input="touch"] { display: none; }
-.merge-field[data-state="idle"] [data-say~="idle"], .merge-field[data-state="over"] [data-say~="over"] { display: inline; }
+/* ── glass panels (Shareef's call, after gauravi.design): the content panels are glass too, so the sky shows through.
+   A plainer glass than the controls': a softer blur and no refraction, because these are big and there are many of them.
+   The rim is an inset shadow, not a border, so no panel changes size. Kept after the panels' own rules so it wins. ── */
+.group, .footer, .stats, .soutcome, .scallout, .sshort, .sending, .snext, .spre, .mwin, .work, .portrait {
+  background: var(--pane);
+  -webkit-backdrop-filter: blur(12px) saturate(1.4); backdrop-filter: blur(12px) saturate(1.4);
+  box-shadow: inset 0 0 0 1px var(--pane-rim), inset 0 1px 0 var(--pane-rim), var(--pane-shadow); }
+/* a work card is a glass card now: the screenshot sits inside it, corners concentric (32 − 10 = 22) */
+.work { padding: 10px 10px 20px; border-radius: var(--r-panel); }
+.work .shotwell { border-radius: 22px; outline: .5px solid var(--line); outline-offset: -.5px; }   /* a hairline, or a white screenshot melts into the day glass */
+.work > p, .work > h3 { padding: 0 12px; }
+/* cards that are links lift a little under the pointer */
+.work, .snext { transition: transform .5s var(--era-ease), box-shadow .5s var(--era-ease); }
 @media (hover: hover) {
-  .merge-field[data-state="idle"] [data-say~="idle-pointer"],
-  .merge-field[data-state="over"][data-focus="false"] [data-say~="over-pointer"],
-  .merge-field[data-state="over"][data-focus="true"] [data-say~="over-keys"] { display: inline; }
+  .work:hover, .snext:hover { transform: translateY(-4px); box-shadow: inset 0 0 0 1px var(--pane-rim), inset 0 1px 0 var(--pane-rim), var(--pane-shadow-up); }
 }
-@media (hover: none) {
-  .merge [data-input="keys"] { display: none; } .merge [data-input="touch"] { display: inline; }
-  .merge-field[data-state="idle"] [data-say~="idle-touch"], .merge-field[data-state="over"] [data-say~="over-touch"] { display: inline; }
+
+/* ── scroll (after gauravi.design) ──
+   Panels, cards and section headings rise into place the first time you reach them. layout.mjs adds .rv only to what
+   starts below the fold, so nothing waits at first paint, and takes it off again once the thing has arrived.
+   Once only, never re-triggered; article paragraphs are never touched. */
+.rv { opacity: 0; transform: translateY(24px); transition: opacity .8s var(--era-ease), transform .8s var(--era-ease); }
+.rv.in { opacity: 1; transform: none; }
+/* The hero falls a little behind the scroll and thins out as the page moves on. Scroll-driven, so it costs no script;
+   browsers without it just scroll. Two columns only: stacked on a phone the text would slide over the portrait. */
+@keyframes hero-text { to { transform: translateY(56px); opacity: .45; } }
+@keyframes hero-portrait { to { transform: translateY(28px) scale(.97); } }
+@supports (animation-timeline: scroll()) {
+  @media (min-width: 900px) and (prefers-reduced-motion: no-preference) {
+    .hero > div { animation: hero-text linear both; animation-timeline: scroll(root); animation-range: 0px 90vh; }
+    .hero .portrait { animation: hero-portrait linear both; animation-timeline: scroll(root); animation-range: 0px 90vh; }
+  }
 }
 
 /* ── arrival: the page comes up through a frosted sheet ── */
@@ -371,11 +391,14 @@ html.era-arrive .arrive { display: block; position: fixed; inset: 0; z-index: 20
 
 /* ── accessibility settings ── */
 @media (prefers-reduced-transparency: reduce) {
-  .glass { background: var(--surface); -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .glass, .group, .footer, .stats, .soutcome, .scallout, .sshort, .sending, .snext, .spre, .mwin, .work { background: var(--surface); -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .portrait { background: var(--surface-sunk); -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .tag { background: var(--surface); -webkit-backdrop-filter: none; backdrop-filter: none; }
   .edge { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .tab, .btn, .lens, .shotwell img, .cur, .tag, .cpill, .yearmenu { transition: none !important; animation: none !important; }
+  .tab, .btn, .lens, .shotwell img, .cur, .tag, .cpill, .yearmenu, .work, .snext { transition: none !important; animation: none !important; }
+  .rv { opacity: 1; transform: none; transition: none; }
   html.era-arrive .arrive { display: none; }
 }
 

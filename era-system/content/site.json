@@ -281,7 +281,7 @@
   ]
  },
  "games": {
-  "_note": "One easter-egg game per era at the end of the home page. It has no box: the page background is its sky and the footer's top edge is its floor, like live's Dino Runner. 1995 is live's own game.",
+  "_note": "One easter-egg game per era at the end of the home page, except Now, which has none. It has no box: the page background is its sky and the footer's top edge is its floor, like live's Dino Runner. 1995 is live's own game.",
   "1995": {
    "title": "Dino Runner",
    "label": "Dino Runner. Press space or tap to jump.",
@@ -348,23 +348,6 @@
    "again": {
     "keys": "Press space to fly again",
     "touch": "Tap to fly again"
-   }
-  },
-  "now": {
-   "title": "Glass merge",
-   "label": "Glass merge, a merge game. Aim with the mouse or the arrow keys; click or press space to drop an orb. Two orbs of the same size merge into the next.",
-   "start": {
-    "pointer": "Click to start",
-    "touch": "Tap to start"
-   },
-   "hint": {
-    "keys": "Mouse or ← → to aim · click or space to drop",
-    "touch": "Drag to aim · let go to drop"
-   },
-   "over": "Game over",
-   "again": {
-    "keys": "Press space to play again",
-    "touch": "Tap to play again"
    }
   }
  },

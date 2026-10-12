@@ -1,5 +1,5 @@
 /**
- * Now portrait: the real pixels, crisp, standing in a solid well (content layer, so no glass).
+ * Now portrait: the real pixels, crisp, standing in a glass well like the other content panels.
  * Shared by every now page that shows the portrait (home, about).
  *   portraitMarkup(portrait) → the element; portraitScript → draws it (runs inside the layout's script, where P and decodePortrait exist)
  */

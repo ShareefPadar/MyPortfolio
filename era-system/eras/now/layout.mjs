@@ -1,6 +1,6 @@
 /**
- * ERA · now — shared shell for every Now page: Liquid Glass the way Apple ships it.
- * Two layers: the content layer is solid (the page); the glass layer is only the controls floating over it.
+ * ERA · now — shared shell for every Now page: Liquid Glass over a sky.
+ * Three layers: the sky; the content, on glass panels the sky shows through; the controls, on a stronger glass, floating over both.
  * 1995 → Now translations:
  *   sprite nav buttons   → an iOS 26 tab bar floating at the bottom (Home · Work · About); it shrinks to the current tab
  *                          while you scroll down and comes back when you scroll up
@@ -9,7 +9,8 @@
  *                          says it in cursor chat; on phones it parks as a glass capsule
  *   pixel cursor         → the system cursor
  *   Copy → Copied        → the button fills with the lime tint and says Copied
- *   footer               → a solid panel (content, so not glass) — on home it's the floor of the Glass Merge jar
+ *   footer               → a glass panel like the rest of the content
+ *   Dino Runner          → nothing: Now is the one era with no game (Shareef's call)
  *   page background      → a sky behind everything (sky.mjs): night or morning by the visitor's clock
  * Light by day, dark by night: the colours follow the sky. System font (SF Pro on Apple devices).
  * Pages supply <main> content (inside .page) and any page-only script.
@@ -142,6 +143,20 @@ ${compactFooter ? `  <footer class="footer compact">
     b.classList.add('got'); b.querySelector('.label').textContent = ${JSON.stringify(c.ui.emailCopied)}; live.textContent = ${JSON.stringify(c.ui.copiedAnnouncement)};
     setTimeout(() => { b.classList.remove('got'); b.querySelector('.label').textContent = ${JSON.stringify(c.ui.copyEmail)}; live.textContent = ''; }, 2000);
   }));
+
+  // ── scroll: panels, cards and section headings rise into place the first time you reach them (after gauravi.design).
+  //    Only what starts below the fold is hidden, so nothing waits at first paint, and the classes come off again once
+  //    the thing has arrived. Things that enter together follow each other by 70ms. Article paragraphs are never touched ──
+  if (!reduce && 'IntersectionObserver' in window) {
+    const arrive = new IntersectionObserver(seen => { let i = 0; for (const s of seen) { if (!s.isIntersecting) continue; const el = s.target; arrive.unobserve(el);
+      el.style.transitionDelay = (i++ * 70) + 'ms'; el.classList.add('in');
+      el.addEventListener('transitionend', function done(e) { if (e.target !== el || e.propertyName !== 'transform') return;
+        el.removeEventListener('transitionend', done); el.classList.remove('rv', 'in'); el.style.transitionDelay = ''; }); } }, { rootMargin: '0px 0px -8% 0px' });
+    for (const el of document.querySelectorAll('.title2, .work, .group, .pull, .footer, .stats, .soutcome, .sstatement, .sfig, .sgal, .sproto, .scallout, .sshort, .sending, .snext')) {
+      if (el.parentElement.closest('.group, .footer')) continue;
+      if (el.getBoundingClientRect().top > innerHeight) { el.classList.add('rv'); arrive.observe(el); }
+    }
+  }
 
   // ── the guide as a collaborator's cursor, like a teammate in the same Figma file:
   //    it glides to whatever it's talking about and says it in cursor chat; phones park it as a capsule ──

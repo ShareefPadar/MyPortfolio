@@ -80,7 +80,7 @@
 | Card status line ("Fintech · Live") | ❌ | ❌ | ❌ | ❌ | ❌ | |
 | NDA box with "Under NDA" label | ◐ | ◐ | ◐ | ◐ | ◐ | text only, no label |
 | Live-product cards (text only, tag + LED) | ✅ | ✅ | ✅ | ✅ | ✅ | |
-| **Dino Runner** game (canvas, space/tap) | ✅ | ✅ | ✅ | ✅ | ✅ | 1995 is live's Dino, ported as-is. The others have their own game (Ship the backlog, Bubble pop, Paper plane, Glass merge), placed like the Dino (no box, footer top = floor) |
+| **Dino Runner** game (canvas, space/tap) | ✅ | ✅ | ✅ | ✅ | none | 1995 is live's Dino, ported as-is. 1986, 2002 and 2014 have their own game (Ship the backlog, Bubble pop, Paper plane), placed like the Dino (no box, footer top = floor). Now has no game: Shareef dropped Glass merge |
 
 ### Work index
 | Live component | Status |

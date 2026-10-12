@@ -1,8 +1,8 @@
 /**
- * ERA · now — case study, Liquid Glass the way Apple ships it.
- * An article set on the page (content layer, solid): a thin progress line along the very top, a large title,
- * the meta as a grouped panel, solid panels for outcome / callouts / short version, screenshots in rounded wells,
- * the prototype in a plain macOS window. Glass only on the controls: the tab bar, and the lightbox's close button.
+ * ERA · now — case study, Liquid Glass over a still sky.
+ * An article set on the page: a thin progress line along the very top, a large title, the meta as a grouped panel,
+ * glass panels for outcome / callouts / short version, screenshots in rounded wells, the prototype in a macOS window.
+ * The article's paragraphs sit straight on the sky and never move; figures and panels rise in once as you reach them.
  */
 import { shell, esc, BACK } from './layout.mjs';
 import { renderBlocks, imgSrc, studyJS } from '../_shared/study.mjs';

@@ -1,13 +1,11 @@
 /**
- * ERA · now — home, Liquid Glass the way Apple ships it.
- * The page itself is solid content: a large title, the portrait in a well, big screenshots with plain text under them,
- * Settings-style grouped panels for the NDA note and the live products. Glass is only the controls (layout.mjs).
- * Easter egg: GLASS MERGE (game.mjs), sitting flush on the footer panel, which is the jar's floor.
+ * ERA · now — home, Liquid Glass over a sky.
+ * A large title straight on the sky, the portrait in a glass well, each project a glass card with its screenshot inside,
+ * Settings-style grouped panels (glass too) for the NDA note and the live products. The controls are in layout.mjs.
+ * No easter-egg game here: Now is the one era without one (Shareef's call).
  */
 import { shell, esc } from './layout.mjs';
 import { portraitMarkup, portraitScript } from './portrait.mjs';
-import { gameMarkup, gameScript } from './game.mjs';
-import { gameJS } from '../_shared/client.mjs';
 export const meta = { id: 'now', title: 'Now · Liquid Glass' };
 
 export default function render(args) {
@@ -62,13 +60,7 @@ export default function render(args) {
     <h2 class="title2" id="live-h">${esc(c.live.heading)}</h2>
     <div class="group">${live}
     </div>
-  </section>
-${gameMarkup(c)}`;
+  </section>`;
 
-  const pageScript = `
-  ${portraitScript}
-  ${gameJS}
-  ${gameScript}
-`;
-  return shell({ ...args, title: `${p.name}, Senior Product Designer`, current: '/', main, pageScript, guideOpening: c.guide.sections.hero });
+  return shell({ ...args, title: `${p.name}, Senior Product Designer`, current: '/', main, pageScript: portraitScript, guideOpening: c.guide.sections.hero });
 }
