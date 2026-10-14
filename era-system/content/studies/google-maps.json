@@ -1,0 +1,276 @@
+{
+ "_source": "https://www.shareefpadar.com/work/google-maps-route-pass — extracted from the live DOM by scripts/sync-studies.py",
+ "id": "google-maps",
+ "slug": "google-maps-route-pass",
+ "url": "/work/google-maps-route-pass",
+ "pageTitle": "Google Maps Route Pass | Shareef Padar",
+ "description": "A privacy-first, encrypted handshake for instant multi-stop navigation transfers between passengers and drivers.",
+ "ogImage": "https://www.shareefpadar.com/assets/google-maps-preview.png",
+ "head": {
+  "number": "01",
+  "label": "Overview",
+  "title": "Passing a full multi-stop route between phones in one scan.",
+  "meta": [
+   {
+    "k": "My role",
+    "v": "Lead Product Designer"
+   },
+   {
+    "k": "Type",
+    "v": "Product concept"
+   },
+   {
+    "k": "Period",
+    "v": "4 weeks"
+   }
+  ],
+  "lead": "A privacy-first, encrypted handshake for instant multi-stop navigation transfers between passengers and drivers.",
+  "outcome": {
+   "label": "Outcome",
+   "text": "19 commuters tested the concept and every one said they'd use it. The QR handshake is designed to complete in under five seconds."
+  },
+  "statement": "Treating privacy as a core feature instead of an afterthought is what makes this work for commuters anywhere."
+ },
+ "blocks": [
+  {
+   "type": "short",
+   "tab": "The short version",
+   "note": "5 min read",
+   "rows": [
+    {
+     "k": "Problem",
+     "v": "A multi-stop route planned in Google Maps stays trapped on the passenger phone, so people either shout directions across a language barrier or hand over their number."
+    },
+    {
+     "k": "What I did",
+     "v": "Designed an encrypted QR handshake that transfers the whole itinerary in one scan, with destination masking, one-time links, and offline Plus Codes."
+    },
+    {
+     "k": "Why it was hard",
+     "v": "Privacy was the real blocker, not speed. The handshake had to exchange zero personal data and still beat simply saying an address out loud."
+    }
+   ]
+  },
+  {
+   "type": "h2",
+   "text": "The Friction Gap Nobody Talks About"
+  },
+  {
+   "type": "p",
+   "html": "Google Maps lets you plan a perfect multi-stop route in under a minute. Then you get in a taxi and that plan stays trapped on your phone, invisible to the person actually driving."
+  },
+  {
+   "type": "p",
+   "html": "So you're left with two bad options: shouting directions across a language barrier, or handing over your number on WhatsApp. Neither is fine. And for billions of daily taxi trips, those are the only choices."
+  },
+  {
+   "type": "quote",
+   "html": "\"I usually just take the driver's phone and type the location myself. It feels invasive, but it's the only way to be sure he gets the right pin.\"",
+   "rule": "lime",
+   "cite": "Commuter, London"
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "The Research"
+  },
+  {
+   "type": "p",
+   "html": "I ran a two-phase study: a survey of 19 Dubai commuters (Google Forms, January 2026), then guerrilla interviews with both passengers and drivers about what actually goes wrong."
+  },
+  {
+   "type": "ul",
+   "items": [
+    "<strong>74%</strong> rated their comfort sharing a number with a driver at 1 or 2 out of 5",
+    "<strong>63%</strong> rely only on verbal directions to share where they're going",
+    "<strong>53%</strong> have avoided a multi-stop route because it was too hard to explain",
+    "<strong>42%</strong> worried most that the driver wouldn't know how to scan",
+    "<strong>100%</strong> said they'd use Route Pass (\"definitely\" or \"if it's fast\")"
+   ]
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "What the Data Told Me"
+  },
+  {
+   "type": "p",
+   "html": "<strong>Privacy is the real blocker.</strong> People weren't using risky workarounds because they wanted to. They did it because nothing safer existed. So the design starts from zero data exchange: no account syncing, no contact sharing, nothing personal crossing between devices."
+  },
+  {
+   "type": "p",
+   "html": "<strong>The friction changes behaviour.</strong> When half your users avoid multi-stop routes because they're too hard to explain, that isn't just annoying, it's reshaping trips. Passengers become human GPS units, tense and watching every turn. The fix: load the whole itinerary at once so the driver never has to ask \"where to next?\""
+  },
+  {
+   "type": "p",
+   "html": "<strong>Speed decides adoption.</strong> If it's slower than saying an address out loud, nobody uses it. The QR screen jumps to full brightness on its own and has to scan in under two seconds. Plus Codes cover the dead-signal areas."
+  },
+  {
+   "type": "p",
+   "html": "I built the flow around two people. Maya is a privacy-conscious commuter who doesn't want to hand over her phone or her number. Samuel is a driver who'll adopt anything faster than typing in traffic, as long as it works the first time, every time."
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "Why QR Won"
+  },
+  {
+   "type": "p",
+   "html": "The handshake could have used NFC or Bluetooth. I ruled both out:"
+  },
+  {
+   "type": "ul",
+   "items": [
+    "<strong>QR code</strong> works with any camera, broadcasts one way, and reads from the back seat. ✓",
+    "<strong>NFC</strong> isn't on every device, needs physical contact, and exposes data both ways. ✗",
+    "<strong>Bluetooth</strong> is widely supported, but it's a two-way link that can leak device IDs. ✗"
+   ]
+  },
+  {
+   "type": "p",
+   "html": "A QR code only sends the route the passenger chooses to share. It can't expose a device ID or anything personal. The one catch: long URLs make dense codes that fail in low light, so Route Pass compresses each route into a short link that scans cleanly even in a dark cab."
+  },
+  {
+   "type": "p",
+   "html": "The tools people already reach for all fall short. AirDrop is Apple-only. WhatsApp means sharing your number. Uber and Careem only work inside their own apps. Google Maps is the one that runs everywhere and can put privacy first by default."
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "The Solution: Route Pass"
+  },
+  {
+   "type": "h3",
+   "text": "How It Works in 4 Steps"
+  },
+  {
+   "type": "p",
+   "html": "<strong>1. Plan.</strong> The passenger builds their multi-stop route in Google Maps as usual."
+  },
+  {
+   "type": "p",
+   "html": "<strong>2. Generate.</strong> They tap \"Route Pass\" in the share menu, and Maps packs the whole itinerary into a temporary, encrypted QR code."
+  },
+  {
+   "type": "p",
+   "html": "<strong>3. Handshake.</strong> The passenger holds up their screen and the driver scans it from the dashboard mount. Nothing to install, nothing to pair, no personal data shared."
+  },
+  {
+   "type": "p",
+   "html": "<strong>4. Navigate.</strong> The driver's phone reads <em>\"3 stops detected. 45 mins. Start?\"</em> and navigation begins with every stop preloaded."
+  },
+  {
+   "type": "p",
+   "html": "The whole thing takes under five seconds."
+  },
+  {
+   "type": "gallery",
+   "cols": 3,
+   "maxWidth": null,
+   "items": [
+    {
+     "src": "/assets/work/routepass-plan.png",
+     "alt": "Plan → Share",
+     "label": "Plan → Share",
+     "badge": "1"
+    },
+    {
+     "src": "/assets/work/routepass-qr.png",
+     "alt": "Generate",
+     "label": "Generate",
+     "badge": "2"
+    },
+    {
+     "src": "/assets/work/routepass-driver.png",
+     "alt": "Handshake",
+     "label": "Handshake",
+     "badge": "3"
+    }
+   ],
+   "caption": "High-fidelity mockups of the passenger and driver flow, built to Material Design 3. Google never shipped this concept, so these are my own screens, not product screenshots. Click any screen to view full size."
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "Privacy Controls"
+  },
+  {
+   "type": "ul",
+   "items": [
+    "<strong>Mask home address.</strong> Hides the exact final stop until the driver is within 500m.",
+    "<strong>One-time use.</strong> The link expires the moment the trip is marked complete.",
+    "<strong>Session expiry.</strong> Route data is wiped from the driver's device 30 minutes after arrival."
+   ]
+  },
+  {
+   "type": "gallery",
+   "cols": 1,
+   "maxWidth": 260,
+   "items": [
+    {
+     "src": "/assets/work/routepass-privacy.png",
+     "alt": "Privacy Controls",
+     "label": "Privacy Controls",
+     "badge": "4"
+    }
+   ],
+   "caption": "Every control defaults on. Nothing here asks the passenger to configure anything before their first Route Pass."
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "Key Design Decisions"
+  },
+  {
+   "type": "p",
+   "html": "<strong>Luminance override.</strong> Opening the screen forces the phone to 100% brightness, so the driver's camera can read it through tinted glass or direct sun."
+  },
+  {
+   "type": "p",
+   "html": "<strong>A driver screen with one job.</strong> One big confirmation, one button, large high-contrast text, no decisions to make in traffic."
+  },
+  {
+   "type": "p",
+   "html": "<strong>Offline by default.</strong> The QR carries Plus Codes for every waypoint, so turn-by-turn still works with no signal. If the driver has Google Maps it opens right in it; a partner app or built-in meter gets the coordinates through an API."
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "Reflection"
+  },
+  {
+   "type": "p",
+   "html": "The biggest surprise wasn't the navigation frustration. It was the emotional weight of handing over a phone. People didn't call it inconvenient. They called it invasive, and anxious. That one insight moved my whole priority from speed to trust. Privacy wasn't a feature to bolt on at the end. It was the product."
+  },
+  {
+   "type": "p",
+   "html": "<strong>Honest limitations.</strong> 19 respondents gives direction, not statistical confidence. A study of 100+ across several cities would put this on firmer ground. And the scan flow and driver screen stay hypotheses until they're tested with real drivers, in moving cars, in different light, on different phones."
+  },
+  {
+   "type": "quote",
+   "html": "Treat privacy as the core feature instead of an afterthought, and Route Pass works for commuters everywhere. Any device, any city, any language.",
+   "rule": "lime"
+  }
+ ],
+ "ending": null,
+ "next": {
+  "label": "Next story",
+  "title": "OmniCast AI",
+  "href": "/work/omni-cast-ai"
+ },
+ "progressSegments": 10
+}

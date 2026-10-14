@@ -1,0 +1,27 @@
+{
+  "grid": 8,
+  "sizes": [8, 16, 24, 32, 48],
+  "note": "8×8 maps. X = filled. Rendered to public/icons/pixel/<name>.svg by scripts/build-pixel-assets.mjs. Every era's icon set must provide all 20 names.",
+  "icons": {
+    "arrowR":   ["........","...XX...","....XX..","XXXXXXX.","XXXXXXX.","....XX..","...XX...","........"],
+    "arrowL":   ["........","...XX...","..XX....",".XXXXXXX",".XXXXXXX","..XX....","...XX...","........"],
+    "arrowU":   ["........","...XX...","..XXXX..",".XX..XX.","...XX...","...XX...","...XX...","........"],
+    "arrowD":   ["........","...XX...","...XX...","...XX...",".XX..XX.","..XXXX..","...XX...","........"],
+    "external": ["..XXXXX.","..XXXXX.",".....XX.","....XX..","...XX...","..XX....",".XX.....","........"],
+    "download": ["...XX...","...XX...","...XX...","XXXXXXXX",".XXXXXX.","..XXXX..","...XX...","........"],
+    "play":     [".XX.....",".XXXX...",".XXXXXX.",".XXXXXXX",".XXXXXXX",".XXXXXX.",".XXXX...",".XX....."],
+    "close":    ["........",".XX...XX","..XX.XX.","...XXX..","...XXX..","..XX.XX.",".XX...XX","........"],
+    "plus":     ["........","...XX...","...XX...","XXXXXXXX","XXXXXXXX","...XX...","...XX...","........"],
+    "minus":    ["........","........","........","XXXXXXXX","XXXXXXXX","........","........","........"],
+    "chevron":  ["........","........","XX....XX",".XX..XX.","..XXXX..","...XX...","........","........"],
+    "check":    ["........","......XX",".....XX.","XX..XX..","XXX.XX..",".XXXX...","..XX....","........"],
+    "warning":  ["...XX...","...XX...","..XXXX..","..X..X..",".XX..XX.",".XXXXXX.","XXX..XXX","XXXXXXXX"],
+    "info":     ["XXXXXXXX","X......X","X..XX..X","X......X","X..XX..X","X..XX..X","X......X","XXXXXXXX"],
+    "clock":    ["..XXXX..",".X....X.","X..X...X","X..X...X","X..XXX.X","X......X",".X....X.","..XXXX.."],
+    "search":   [".XXXX...","X....X..","X....X..","X....X..",".XXXX...","....XXX.",".....XXX","......XX"],
+    "mail":     ["........","XXXXXXXX","XXX..XXX","X.XXXX.X","X..XX..X","X......X","XXXXXXXX","........"],
+    "copy":     ["..XXXXX.","..X...X.","XXXXX.X.","X...X.X.","X...XXX.","X...X...","X...X...","XXXXX..."],
+    "grid":     ["XXX.XXX.","XXX.XXX.","XXX.XXX.","........","XXX.XXX.","XXX.XXX.","XXX.XXX.","........"],
+    "menu":     ["........","XXXXXXXX","XXXXXXXX","........","XXXXXXXX","XXXXXXXX","........","........"]
+  }
+}

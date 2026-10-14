@@ -1,0 +1,111 @@
+/* ═══════════════════════════════════════════════════════════════
+   ERA · 1995 — bevelled desktop
+   Spec: docs/eras/1995.md
+   Every token below is required by scripts/era-contract.json.
+   Era-private helpers use the --era- prefix and are never read
+   by components.
+   ═══════════════════════════════════════════════════════════════ */
+
+[data-era="1995"] {
+  /* ── colour ───────────────────────────────────────────── */
+  --bg:                 #F0EFF4;
+  --bg-inverse:         #0B0B0C;
+  --surface:            #D6D5DE;
+  --surface-sunk:       #E4E3EA;
+  --line:               #DCDBE4;
+  --outline:            #14140F;
+  --text:               #14140F;
+  --text-muted:         #5C5C67;   /* passes 4.5:1 on bg, surface AND surface-sunk */
+  --text-inverse:       #E8E8E2;
+  --text-inverse-muted: #9A9A94;
+  --accent:             #CDF22B;
+  --on-accent:          #14140F;
+  --action:             #1E45FB;
+  --on-action:          #CDF22B;
+  --error:              #C4482E;
+  --error-surface:      #FDF2EF;
+  --focus:              #1E45FB;
+  --selection:          #CDF22B;
+  --on-selection:       #14140F;
+
+  /* ── type ─────────────────────────────────────────────── */
+  --font-statement:        'Silkscreen', monospace;
+  --font-label:            'Geist Mono', ui-monospace, monospace;   /* live uses Geist Mono, not Departure Mono */
+  --font-sentence:         'Geist', system-ui, sans-serif;
+  --statement-case:        uppercase;
+  --statement-weight:      400;
+  --statement-weight-strong: 700;
+  --statement-lh:          1.75;
+  --size-statement-xl:     clamp(20px, 4.4vw, 32px);
+  --size-statement-l:      clamp(15px, 3.2vw, 20px);
+  --size-statement-m:      14px;
+  --size-label:            11px;
+  --size-micro:            9px;
+  --label-tracking:        .08em;
+
+  /* ── shape ────────────────────────────────────────────── */
+  --corner: polygon(
+    4px 0, calc(100% - 4px) 0, calc(100% - 4px) 4px, 100% 4px,
+    100% calc(100% - 4px), calc(100% - 4px) calc(100% - 4px),
+    calc(100% - 4px) 100%, 4px 100%, 4px calc(100% - 4px),
+    0 calc(100% - 4px), 0 4px, 4px 4px
+  );
+  --corner-tab: polygon(
+    4px 0, calc(100% - 4px) 0, calc(100% - 4px) 4px, 100% 4px,
+    100% 100%, 0 100%, 0 4px, 4px 4px
+  );
+  --radius:   0px;
+  --border-w: 3px;
+  --focus-width: 8px;   /* contract v4 — the value core used to hardcode */
+
+  /* ── depth ────────────────────────────────────────────── */
+  --shadow-raised: inset 4px 4px 0 var(--era-hi), inset -4px -4px 0 var(--era-sh);
+  --shadow-sunk:   0 0 0 var(--border-w) var(--outline), inset 4px 4px 0 rgba(0, 0, 0, .4);
+  --shadow-offset: 6px 6px 0 var(--outline);
+
+  /* ── motion ───────────────────────────────────────────── */
+  --reveal-anim:      reveal-clip-1995, reveal-bands-1995;
+  --reveal-duration:  360ms, 480ms;
+  --reveal-timing:    steps(6, end), steps(1, end);
+  --statement-reveal: type;
+  --type-speed:       45ms;
+  --hover-timing:     steps(1, start);   /* start = jump immediately; end would delay every hover by the full duration */
+
+  /* ── assets ───────────────────────────────────────────── */
+  --icon-set:   pixel;
+  --frame-kind: sprite;
+  --portrait:   dither;
+
+  /* ── era-private (never read by components) ───────────── */
+  --era-hi:        #FFFFFF;
+  --era-sh:        #8A8992;
+  --era-sprite-scale: 4;
+}
+
+/* ── frames ─────────────────────────────────────────────────
+   .frame-control (buttons, bubbles, inputs) and .frame-tail are
+   GENERATED into 1995.sprites.css by scripts/build-sprites.mjs
+   from 1995.sprites.json. Plates and wells use the rules below. */
+[data-era="1995"] .frame-raised {
+  background: var(--surface);
+  border: var(--border-w) solid var(--outline);
+  box-shadow: var(--shadow-raised);
+}
+[data-era="1995"] .frame-sunk {
+  box-shadow: var(--shadow-sunk);
+}
+
+/* ── reveal: scanline ─────────────────────────────────────── */
+@keyframes reveal-clip-1995 {
+  0%   { clip-path: inset(0 0 100% 0); }
+  100% { clip-path: inset(0 0 0% 0); }
+}
+@keyframes reveal-bands-1995 {
+  0%   { -webkit-mask-image: repeating-linear-gradient(#000 0 1px, transparent 1px 6px);
+                 mask-image: repeating-linear-gradient(#000 0 1px, transparent 1px 6px); }
+  30%  { -webkit-mask-image: repeating-linear-gradient(#000 0 3px, transparent 3px 6px);
+                 mask-image: repeating-linear-gradient(#000 0 3px, transparent 3px 6px); }
+  60%  { -webkit-mask-image: repeating-linear-gradient(#000 0 5px, transparent 5px 6px);
+                 mask-image: repeating-linear-gradient(#000 0 5px, transparent 5px 6px); }
+  100% { -webkit-mask-image: none; mask-image: none; }
+}

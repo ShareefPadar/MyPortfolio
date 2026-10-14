@@ -1,0 +1,153 @@
+/* ═══════════════════════════════════════════════════════════════
+   ERA · 2002 — Glossy
+   Spec: docs/eras/2002.md
+   css frames. Gel buttons, soft drop shadows, pill fields.
+   The hardest era for contrast: gloss lightens whatever sits under it.
+   ═══════════════════════════════════════════════════════════════ */
+
+[data-era="2002"] {
+  /* ── colour ───────────────────────────────────────────── */
+  --bg:                 #EDF1F6;
+  --bg-inverse:         #123D7A;   /* deep glossy blue bookends */
+  --surface:            #FFFFFF;
+  --surface-sunk:       #DDE4EE;
+  --line:               #C8D2DE;
+  --outline:            #6F7F96;
+  --text:               #1B2433;
+  --text-muted:         #505D73;
+  --text-inverse:       #FFFFFF;
+  --text-inverse-muted: #BCD0EC;
+  --accent:             #CDF22B;
+  --on-accent:          #1B2433;
+  --action:             #1A5DBF;
+  --on-action:          #FFFFFF;
+  --error:              #B3261E;
+  --error-surface:      #FCEBEA;
+  --focus:              #1A5DBF;
+  --selection:          #CDF22B;
+  --on-selection:       #1B2433;
+
+  /* ── type ─────────────────────────────────────────────── */
+  --font-statement:          'Nunito', 'Trebuchet MS', sans-serif;
+  --font-label:              'Nunito Sans', Verdana, sans-serif;
+  --font-sentence:           'Nunito Sans', Verdana, sans-serif;
+  --statement-case:          none;
+  --statement-weight:        700;
+  --statement-weight-strong: 800;
+  --statement-lh:            1.1;
+  --size-statement-xl:       clamp(36px, 5.2vw, 56px);
+  --size-statement-l:        clamp(24px, 3vw, 32px);
+  --size-statement-m:        16px;
+  --size-label:              13px;
+  --size-micro:              11px;
+  --label-tracking:          .06em;
+
+  /* ── shape ────────────────────────────────────────────── */
+  --corner:      none;
+  --corner-tab:  none;
+  --radius:      14px;   /* buttons read as capsules, fields as pills */
+  --border-w:    1px;
+  --focus-width: 3px;
+
+  /* ── depth: soft, glossy ─────────────────────────────── */
+  --shadow-raised: 0 1px 0 #FFFFFF inset, 0 8px 20px rgba(18, 50, 100, .18), 0 1px 3px rgba(18, 50, 100, .2);
+  --shadow-sunk:   0 0 0 1px #8E9BB0, 0 1px 0 #FFFFFF;
+  --shadow-offset: 0 12px 28px rgba(18, 60, 120, .28);
+
+  /* ── motion: the 2000s web's "blind down" ────────────── */
+  --reveal-anim:      reveal-blind-2002;
+  --reveal-duration:  460ms;
+  --reveal-timing:    cubic-bezier(.25, .1, .25, 1);
+  --statement-reveal: fade;
+  --type-speed:       0ms;
+  --hover-timing:     cubic-bezier(.25, .1, .25, 1);
+
+  /* ── assets ───────────────────────────────────────────── */
+  --icon-set:   line;
+  --frame-kind: css;
+  --portrait:   photo;
+
+  /* ── era-private: gel stops. The highlight band is a FIXED 7px, not a
+     percentage: text in any control starts at ≥10px (border + padding +
+     leading), so white text only ever sits on gel that passes 4.5:1.
+     38% was planned first and measured overlapping the text by 4px;
+     a % band also scales into short controls like bubbles. 2002.md §3. ── */
+  --era-gloss:        linear-gradient(180deg, rgba(255, 255, 255, .22) 0 7px, rgba(255, 255, 255, 0) 7px);
+  --era-action-gel:   linear-gradient(180deg, #2A68CB, #1A5DBF 60%, #154FA6);
+  --era-action-hover: linear-gradient(180deg, #2E6DCF, #1E62C6 60%, #1853AC);
+  --era-action-press: linear-gradient(180deg, #154FA6, #1A5DBF);
+  --era-silver-gel:   linear-gradient(180deg, #FFFFFF, #E9EEF5 60%, #D6DEEA);
+  --era-silver-press: linear-gradient(180deg, #D6DEEA, #E9EEF5);
+  --era-lime-gel:     linear-gradient(180deg, #DDF76A, #CDF22B 60%, #B6D81C);
+}
+
+/* ── containers ─────────────────────────────────────────── */
+[data-era="2002"] .frame-raised {
+  background: linear-gradient(180deg, #FFFFFF, #F4F7FB);
+  border: var(--border-w) solid var(--line);
+  border-radius: calc(var(--radius) - 4px);
+  box-shadow: var(--shadow-raised);
+}
+[data-era="2002"] .frame-sunk {
+  border-radius: calc(var(--radius) - 8px);
+  box-shadow: var(--shadow-sunk);
+  overflow: hidden;
+}
+
+/* ── controls: gel ──────────────────────────────────────── */
+[data-era="2002"] .frame-control { border: var(--border-w) solid transparent; border-radius: var(--radius); }
+[data-era="2002"] .frame-control[data-size="lg"] { padding: var(--s12) var(--s24); }
+
+[data-era="2002"] .frame-control[data-fill="action"] {
+  background: var(--era-gloss), var(--era-action-gel);
+  border-color: #0F3F86;
+  box-shadow: 0 1px 2px rgba(10, 40, 90, .35);
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, .25);
+}
+[data-era="2002"] .frame-control[data-fill="action"]:hover,
+[data-era="2002"] .frame-control[data-fill="action"][data-state="hover"]   { background: var(--era-gloss), var(--era-action-hover); }
+[data-era="2002"] .frame-control[data-fill="action"]:active,
+[data-era="2002"] .frame-control[data-fill="action"][data-state="pressed"] { background: var(--era-action-press); box-shadow: inset 0 2px 4px rgba(0, 0, 0, .3); }
+
+[data-era="2002"] .frame-control[data-fill="surface"] {
+  background: var(--era-gloss), var(--era-silver-gel);
+  border-color: var(--outline);
+  box-shadow: 0 1px 2px rgba(10, 40, 90, .2);
+}
+[data-era="2002"] .frame-control[data-fill="surface"]:active,
+[data-era="2002"] .frame-control[data-fill="surface"][data-state="pressed"] { background: var(--era-silver-press); box-shadow: inset 0 2px 3px rgba(0, 0, 0, .18); }
+
+/* on the dark bookends the silver gel stays light, so its label must stay dark —
+   overrides core's default of --text-inverse, which suits the other four eras */
+[data-era="2002"] .bookend .frame-control[data-fill="surface"] { color: var(--text); }
+
+[data-era="2002"] .frame-control[data-fill="accent"] {
+  background: var(--era-gloss), var(--era-lime-gel);
+  border-color: #8FAE12;
+}
+
+[data-era="2002"] .frame-control[data-fill="disabled"] { background: var(--surface-sunk); border-color: var(--line); }
+
+[data-era="2002"] .frame-control[data-fill="field"] {
+  background: var(--surface); border-color: var(--outline);
+  box-shadow: inset 0 2px 3px rgba(10, 30, 70, .14);
+}
+[data-era="2002"] .frame-control[data-fill="error"] {
+  background: var(--error-surface); border-color: var(--error);
+  box-shadow: inset 0 2px 3px rgba(120, 20, 20, .14);
+}
+
+/* ── bubble tail: a soft triangle matching the gel's lower stop ── */
+[data-era="2002"] .frame-tail {
+  display: block; width: 16px; height: 10px; margin-top: -1px;
+  clip-path: polygon(0 0, 100% 0, 30% 100%);
+}
+[data-era="2002"] .frame-tail[data-fill="accent"]  { background: #B6D81C; }
+[data-era="2002"] .frame-tail[data-fill="action"]  { background: #154FA6; }
+[data-era="2002"] .frame-tail[data-fill="surface"] { background: #D6DEEA; }
+
+/* ── reveal: blind down — a smooth clip, top to bottom ──── */
+@keyframes reveal-blind-2002 {
+  from { clip-path: inset(0 0 100% 0); opacity: .4; }
+  to   { clip-path: inset(0 0 0 0);    opacity: 1; }
+}

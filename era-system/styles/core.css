@@ -1,0 +1,201 @@
+/* ═══════════════════════════════════════════════════════════════
+   CORE — era-agnostic
+   Reads contract tokens only. No hex, no font names, no timing
+   functions in this file. If you need one, the contract is missing
+   a token — see CLAUDE.md rule 2.
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+  --s4: 4px;   --s8: 8px;   --s12: 12px;  --s16: 16px;  --s24: 24px;
+  --s32: 32px; --s48: 48px; --s64: 64px;  --s96: 96px;  --s128: 128px;
+}
+
+html { background: var(--bg); color: var(--text); }
+html { font-synthesis: none; }   /* never fake bold/italic — core.md §2 */
+body { font-family: var(--font-sentence); font-size: 16px; line-height: 1.7; margin: 0; }
+::selection { background: var(--selection); color: var(--on-selection); }
+
+/* ── type roles ─────────────────────────────────────────── */
+.t-statement-xl, .t-statement-l, .t-statement-m, .t-numeral {
+  font-family: var(--font-statement);
+  text-transform: var(--statement-case);
+  line-height: var(--statement-lh);
+}
+.t-statement-xl { font-size: var(--size-statement-xl); font-weight: var(--statement-weight-strong); }
+.t-statement-l  { font-size: var(--size-statement-l);  font-weight: var(--statement-weight-strong); }
+.t-statement-m  { font-size: var(--size-statement-m);  font-weight: var(--statement-weight); }
+.t-numeral      { font-size: var(--size-statement-l);  font-weight: var(--statement-weight-strong);
+                  color: var(--action); line-height: 1; }
+
+.t-label { font-family: var(--font-label); font-size: var(--size-label);
+           letter-spacing: var(--label-tracking); color: var(--text-muted);
+           text-transform: var(--statement-case); }
+.t-micro { font-family: var(--font-label); font-size: var(--size-micro);
+           letter-spacing: var(--label-tracking); text-transform: uppercase; color: var(--text-muted); }
+
+/* sentence scale is core — identical in every era */
+.t-h1 { font-size: 40px; line-height: 1.15; letter-spacing: -.022em; font-weight: 500; }
+.t-h2 { font-size: 26px; line-height: 1.3;  letter-spacing: -.016em; font-weight: 500; }
+.t-h3 { font-size: 19px; line-height: 1.4;  font-weight: 600; }
+.t-h4 { font-size: 16px; line-height: 1.5;  font-weight: 600; }
+.t-lead { font-size: 19px; line-height: 1.65; max-width: 52ch; }
+.t-body { font-size: 16px; line-height: 1.7;  max-width: 60ch; }
+.t-cap  { font-size: 13px; line-height: 1.55; color: var(--text-muted);
+          border-left: var(--border-w) solid var(--accent); padding-left: var(--s12); }
+@media (max-width: 559px) {
+  .t-h1 { font-size: 28px; } .t-h2 { font-size: 21px; }
+  .t-h3 { font-size: 17px; } .t-lead { font-size: 17px; }
+}
+
+/* ── focus — shape follows the era's corner ─────────────── */
+.focusable { position: relative; display: inline-block; isolation: isolate; }
+/* isolation creates a stacking context so the z-index:-1 ring paints above
+   ancestor backgrounds but below the control. Without it the ring is invisible. */
+.focusable::before {
+  content: ""; position: absolute; inset: calc(var(--focus-width) * -1); z-index: -1;
+  background: var(--focus); clip-path: var(--corner);
+  border-radius: calc(var(--radius) + var(--focus-width));
+  opacity: 0;
+}
+.focusable:focus-within::before { opacity: 1; }      /* instant, never transitioned */
+
+/* ── typing — visual only (core.md §5 rule 10) ───────────────
+   Full text is in the DOM from first render. Unrevealed characters
+   are transparent, so the line never changes width. */
+.js .is-typing .ch { color: transparent; }
+.js .is-typing .ch.on { color: inherit; }
+.is-typing .ch.is-caret { position: relative; }
+.is-typing .ch.is-caret::after {          /* absolutely placed: the caret takes no width */
+  content: ""; position: absolute; left: calc(100% + .06em); top: .1em;
+  width: .55em; height: .95em; background: var(--action);
+}
+
+/* ── word reveal — --statement-reveal: words ───────────────
+   Same principle as typing: full text in the DOM, words only fade in.
+   Stagger comes from --type-speed, curve from --hover-timing. */
+.js .is-wording .w { opacity: 0; filter: blur(6px);
+  transition: opacity 480ms var(--hover-timing), filter 480ms var(--hover-timing); }
+.js .is-wording .w.on { opacity: 1; filter: none; }
+
+/* ── statement fade — --statement-reveal: fade ───────────── */
+.js .is-fading { animation: statement-fade 640ms var(--hover-timing) backwards; }
+@keyframes statement-fade { from { opacity: 0; } }
+
+/* ── hover — timing comes from the era ─────────────────────── */
+.frame-control, .tab, .card, .btn-tertiary {
+  transition-property: background-color, color, box-shadow;
+  transition-duration: 120ms;
+  transition-timing-function: var(--hover-timing);
+}
+
+/* ── reveal — curve and technique come from the era ─────────
+   Hidden only once JS has added .js to <html>. Without JS, or
+   for crawlers, content is simply visible. */
+.js .reveal { opacity: 0; }
+.js .reveal.is-in {
+  opacity: 1;
+  animation-name: var(--reveal-anim);
+  animation-duration: var(--reveal-duration);
+  animation-timing-function: var(--reveal-timing);
+  animation-fill-mode: backwards;   /* NOT both: a reveal must leave no residue. `both` keeps the final
+                                      clip-path applied forever, which cut off tabs and offset shadows */
+}
+
+/* ── framed controls ─────────────────────────────────────────
+   Components set class="frame-control" data-fill="<fill>" and
+   optionally data-size="lg" / data-state="hover|pressed".
+   The era supplies the look (sprites in 1995, CSS elsewhere). */
+.card { position: relative; }
+.frame-tail { position: absolute; top: 100%; left: var(--s16); }
+.frame-tail.is-right { left: auto; right: var(--s16); transform: scaleX(-1); }
+
+/* ── controls — layout and text colour only; the era supplies the frame ── */
+.btn {
+  display: inline-flex; align-items: center; gap: var(--s8);
+  min-height: 44px; padding: var(--s8) var(--s12);
+  font-family: var(--font-statement); font-size: var(--size-statement-m);
+  font-weight: var(--statement-weight); text-transform: var(--statement-case);
+  line-height: 1; text-decoration: none; cursor: pointer;
+}
+.btn[data-fill="action"]   { color: var(--on-action); font-weight: var(--statement-weight-strong); }
+.btn[data-fill="surface"]  { color: var(--text); }
+.btn[data-fill="accent"]   { color: var(--on-accent); }
+.btn[data-fill="disabled"] { color: var(--text-muted); cursor: not-allowed; }
+.btn-tertiary {
+  background: none; border: 0; padding: var(--s12) var(--s4); min-height: 44px;
+  font-family: var(--font-statement); font-size: var(--size-statement-m);
+  text-transform: var(--statement-case); color: var(--action); cursor: pointer;
+  text-decoration: underline transparent var(--border-w); text-underline-offset: 6px;
+}
+.btn-tertiary:hover { text-decoration-color: currentColor; }
+
+.field-label {
+  display: block; margin-bottom: var(--s8);
+  font-family: var(--font-label); font-size: var(--size-micro);
+  letter-spacing: var(--label-tracking); text-transform: uppercase; color: var(--text);
+}
+.field {
+  display: block; width: 100%; min-height: 48px; padding: var(--s8) var(--s12);
+  font-family: var(--font-sentence); font-size: 16px; color: var(--text);
+  box-sizing: border-box;
+}
+.field::placeholder { color: var(--text-muted); opacity: 1; }
+.field-error { margin-top: var(--s8); font-size: 14px; color: var(--error); }
+
+.bubble {
+  position: relative; display: inline-block; max-width: 32ch;
+  padding: var(--s8) var(--s12); font-family: var(--font-sentence); font-size: 15px; line-height: 1.5;
+}
+.bubble[data-fill="accent"]  { color: var(--on-accent); }
+.bubble[data-fill="surface"] { color: var(--text); }
+.bubble[data-fill="action"]  { color: var(--on-action); font-family: var(--font-label); font-size: var(--size-label); text-transform: var(--statement-case); }
+
+/* ── prose links — ink text on an action rule (core.md §4.14) ── */
+.prose a {
+  color: var(--text); text-decoration: none;
+  background-image: linear-gradient(var(--action), var(--action));
+  background-size: 100% 2px; background-repeat: no-repeat; background-position: 0 100%;
+  padding-bottom: 1px;
+}
+.prose a:hover { background-image: linear-gradient(var(--accent), var(--accent)); background-size: 100% 40%; color: var(--on-accent); }
+.ui { font-family: var(--font-label); font-size: .9em; background: var(--surface-sunk); padding: 1px 5px; }
+
+/* controls on the dark bookends — the era may darken the fill, so the label follows */
+.bookend .btn[data-fill="surface"] { color: var(--text-inverse); }
+
+/* ── section marker ─────────────────────────────────────── */
+.marker { display: flex; align-items: baseline; gap: var(--s12); }
+.marker > i { flex: 1; height: var(--border-w); background: var(--outline); }
+
+/* ── callout ────────────────────────────────────────────── */
+.callout {
+  background: var(--accent); color: var(--on-accent);
+  border: var(--border-w) solid var(--outline);
+  box-shadow: var(--shadow-offset);
+  border-radius: var(--radius);
+  padding: var(--s24) var(--s24);
+}
+
+/* ── tab ────────────────────────────────────────────────── */
+.tab {
+  /* bottom:100% puts the tab's lower edge on the card's inner border edge in every
+     era, so it covers the outline and merges — no magic offset tied to one era */
+  position: absolute; bottom: 100%; left: var(--s12); min-width: 104px; text-align: center;
+  font-family: var(--font-label); font-size: var(--size-micro); letter-spacing: var(--label-tracking);
+  text-transform: uppercase; background: var(--surface); color: var(--text);
+  border: var(--border-w) solid var(--outline); border-bottom: 0;
+  padding: var(--s4) var(--s12);
+  clip-path: var(--corner-tab);
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+.tab.is-relevant, .card:hover .tab { background: var(--accent); color: var(--on-accent); }
+
+/* ── inverse bookends ───────────────────────────────────── */
+.bookend { background: var(--bg-inverse); color: var(--text-inverse); }
+.bookend .t-label, .bookend .t-micro { color: var(--text-inverse-muted); }
+
+/* ── reduced motion — every era ─────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .js .reveal { opacity: 1; }
+}

@@ -1,0 +1,96 @@
+{
+  "era": "1986",
+  "note": "Era-owned sprite data. Build: node scripts/build-sprites.mjs 1986. Flat: hi and shade are the SAME colour, so the frame is a symmetric double line with no light source \u2014 that's what separates 1986 from 1995's bevel. Tail overlaps 2 rows so it opens through both the outline and the inner line.",
+  "map": [
+    ".DDDD.",
+    "DHHHHD",
+    "DHFFHD",
+    "DHFFHD",
+    "DHHHHD",
+    ".DDDD."
+  ],
+  "tail": [
+    "HFFFFFFH",
+    "DHFFFFHD",
+    ".DHFFHD.",
+    "..DHHD..",
+    "...DD..."
+  ],
+  "states": {
+    "hover": {
+      "face": "+0.18"
+    },
+    "sunk": {
+      "face": "-0.25",
+      "swap": false
+    }
+  },
+  "fills": {
+    "action": {
+      "face": "#3CC8FF",
+      "hi": "#0A0A1E",
+      "shade": "#0A0A1E",
+      "outline": "#F2F2FF",
+      "scales": [
+        4,
+        6
+      ]
+    },
+    "surface": {
+      "face": "#262660",
+      "hi": "#0A0A1E",
+      "shade": "#0A0A1E",
+      "outline": "#F2F2FF",
+      "scales": [
+        4,
+        6
+      ]
+    },
+    "accent": {
+      "face": "#CDF22B",
+      "hi": "#0A0A1E",
+      "shade": "#0A0A1E",
+      "outline": "#F2F2FF",
+      "scales": [
+        4,
+        6
+      ]
+    },
+    "disabled": {
+      "face": "#1C1C44",
+      "hi": "#1C1C44",
+      "shade": "#1C1C44",
+      "outline": "#5A5A8A",
+      "scales": [
+        4,
+        6
+      ]
+    },
+    "field": {
+      "face": "#0C0C24",
+      "hi": "#0C0C24",
+      "shade": "#0C0C24",
+      "outline": "#F2F2FF",
+      "hover": "#0C0C24",
+      "scales": [
+        4
+      ]
+    },
+    "error": {
+      "face": "#3A1414",
+      "hi": "#3A1414",
+      "shade": "#3A1414",
+      "outline": "#FF6F61",
+      "hover": "#3A1414",
+      "scales": [
+        4
+      ]
+    }
+  },
+  "tails": [
+    "accent",
+    "surface",
+    "action"
+  ],
+  "tailOverlap": 2
+}

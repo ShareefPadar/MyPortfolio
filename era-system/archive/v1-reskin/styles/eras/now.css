@@ -1,0 +1,150 @@
+/* ═══════════════════════════════════════════════════════════════
+   ERA · now — present day
+   Spec: docs/eras/now.md
+   First css-frame era: every fill is written here by hand, no sprites.
+   ═══════════════════════════════════════════════════════════════ */
+
+[data-era="now"] {
+  /* ── colour ───────────────────────────────────────────── */
+  --bg:                 #0E0E11;
+  --bg-inverse:         #000000;
+  --surface:            #18181D;
+  --surface-sunk:       #09090B;
+  --line:               #26262D;
+  --outline:            #6A6A76;   /* lighter than a typical dark-mode hairline: those measure ~1.35:1 and fail WCAG 1.4.11 */
+  --text:               #EDEDF0;
+  --text-muted:         #9C9CA8;
+  --text-inverse:       #FFFFFF;
+  --text-inverse-muted: #A1A1AA;
+  --accent:             #CDF22B;
+  --on-accent:          #0E0E11;
+  --action:             #8CA0FF;
+  --on-action:          #0E0E11;
+  --error:              #FF7A70;
+  --error-surface:      #2A1416;
+  --focus:              #8CA0FF;
+  --selection:          #CDF22B;
+  --on-selection:       #0E0E11;
+
+  /* ── type ─────────────────────────────────────────────── */
+  --font-statement:          'Instrument Serif', Georgia, serif;
+  --font-label:              'JetBrains Mono', ui-monospace, monospace;
+  --font-sentence:           'Inter', system-ui, sans-serif;
+  --statement-case:          none;
+  --statement-weight:        400;   /* single-weight face */
+  --statement-weight-strong: 400;
+  --statement-lh:            1.05;
+  --size-statement-xl:       clamp(44px, 6vw, 72px);
+  --size-statement-l:        clamp(28px, 3.4vw, 40px);
+  --size-statement-m:        19px;
+  --size-label:              12px;
+  --size-micro:              11px;
+  --label-tracking:          .06em;
+
+  /* ── shape ────────────────────────────────────────────── */
+  --corner:      none;
+  --corner-tab:  none;
+  --radius:      12px;
+  --border-w:    1px;
+  --focus-width: 3px;
+
+  /* ── depth: soft ──────────────────────────────────────── */
+  --shadow-raised: 0 1px 0 rgba(255, 255, 255, .05) inset, 0 12px 32px -12px rgba(0, 0, 0, .6);
+  --shadow-sunk:   0 0 0 1px #26262D;
+  --shadow-offset: 0 24px 48px -16px rgba(205, 242, 43, .28);
+
+  /* ── motion: eased, the first era that interpolates ───── */
+  --reveal-anim:      reveal-rise-now;
+  --reveal-duration:  520ms;
+  --reveal-timing:    cubic-bezier(.2, .7, .2, 1);
+  --statement-reveal: words;
+  --type-speed:       70ms;          /* per-word stagger when revealing by words */
+  --hover-timing:     cubic-bezier(.2, .7, .2, 1);
+
+  /* ── assets ───────────────────────────────────────────── */
+  --icon-set:   line;
+  --frame-kind: css;
+  --portrait:   photo;
+
+  /* ── era-private ──────────────────────────────────────── */
+  --era-action-hover:  #A5B5FF;
+  --era-action-press:  #7489F0;
+  --era-surface-hover: #212127;
+  --era-surface-press: #131317;
+  --era-accent-hover:  #D9F65C;
+  --era-accent-press:  #B8DA1E;
+}
+
+/* ── containers ─────────────────────────────────────────── */
+[data-era="now"] .frame-raised {
+  background: var(--surface);
+  border: var(--border-w) solid var(--line);
+  border-radius: calc(var(--radius) + 4px);
+  box-shadow: var(--shadow-raised);
+}
+[data-era="now"] .frame-sunk {
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sunk);
+  overflow: hidden;
+}
+
+/* ── controls — hand-written, one block per fill ─────────── */
+[data-era="now"] .frame-control {
+  border: var(--border-w) solid transparent;
+  border-radius: var(--radius);
+}
+[data-era="now"] .frame-control[data-size="lg"] { padding: var(--s12) var(--s24); }
+[data-era="now"] .frame-control:active,
+[data-era="now"] .frame-control[data-state="pressed"] { transform: translateY(1px); box-shadow: none; }
+
+[data-era="now"] .frame-control[data-fill="action"] { background: var(--action); border-color: var(--action); box-shadow: var(--shadow-raised); }
+[data-era="now"] .frame-control[data-fill="action"]:hover,
+[data-era="now"] .frame-control[data-fill="action"][data-state="hover"]   { background: var(--era-action-hover); }
+[data-era="now"] .frame-control[data-fill="action"]:active,
+[data-era="now"] .frame-control[data-fill="action"][data-state="pressed"] { background: var(--era-action-press); }
+
+[data-era="now"] .frame-control[data-fill="surface"] { background: var(--surface); border-color: var(--outline); }
+[data-era="now"] .frame-control[data-fill="surface"]:hover,
+[data-era="now"] .frame-control[data-fill="surface"][data-state="hover"]   { background: var(--era-surface-hover); }
+[data-era="now"] .frame-control[data-fill="surface"]:active,
+[data-era="now"] .frame-control[data-fill="surface"][data-state="pressed"] { background: var(--era-surface-press); }
+
+[data-era="now"] .frame-control[data-fill="accent"] { background: var(--accent); border-color: var(--accent); }
+[data-era="now"] .frame-control[data-fill="accent"]:hover,
+[data-era="now"] .frame-control[data-fill="accent"][data-state="hover"]   { background: var(--era-accent-hover); }
+[data-era="now"] .frame-control[data-fill="accent"]:active,
+[data-era="now"] .frame-control[data-fill="accent"][data-state="pressed"] { background: var(--era-accent-press); }
+
+[data-era="now"] .frame-control[data-fill="disabled"] { background: var(--surface-sunk); border-color: var(--line); }
+
+[data-era="now"] .frame-control[data-fill="field"] { background: var(--surface-sunk); border-color: var(--outline); }
+[data-era="now"] .frame-control[data-fill="field"]:hover { border-color: var(--text-muted); }
+
+[data-era="now"] .frame-control[data-fill="error"] { background: var(--error-surface); border-color: var(--error); }
+
+/* ── bubble "tail": no pointer in this era.
+   Modern chat squares off the corner on the speaker's side instead.
+   The tail becomes a small square in the bubble's fill, laid over
+   that one rounded corner. Geometry: its bottom-left corner lands
+   exactly on the bubble's outer bottom-left corner. ──────── */
+[data-era="now"] .frame-tail {
+  display: block;
+  width: var(--radius); height: var(--radius);
+  left: calc(var(--border-w) * -1);
+  margin-top: calc(var(--border-w) - var(--radius));
+  box-sizing: border-box;
+}
+[data-era="now"] .frame-tail.is-right { left: auto; right: calc(var(--border-w) * -1); }
+[data-era="now"] .frame-tail[data-fill="accent"]  { background: var(--accent); }
+[data-era="now"] .frame-tail[data-fill="action"]  { background: var(--action); }
+[data-era="now"] .frame-tail[data-fill="surface"] {
+  background: var(--surface);
+  border-left: var(--border-w) solid var(--outline);
+  border-bottom: var(--border-w) solid var(--outline);
+}
+
+/* ── reveal: rise and settle ────────────────────────────── */
+@keyframes reveal-rise-now {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}

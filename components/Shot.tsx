@@ -40,7 +40,7 @@ const Shot = ({ src, alt, caption }: ShotProps) => {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={src} alt={alt} loading="lazy" className="block h-auto w-full" />
         <span className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/5" />
-        <span className="absolute bottom-8 right-8 flex items-center gap-4 bg-ink px-8 py-4 font-mono text-[9px] uppercase tracking-[0.11em] text-lime opacity-0 group-hover:opacity-100">
+        <span className="absolute bottom-8 right-8 flex items-center gap-4 bg-ink px-8 py-4 font-mono text-[9px] tracking-[0.02em] text-lime opacity-0 group-hover:opacity-100">
           <PixelIcon name="search" size={8} /> View full size
         </span>
       </button>

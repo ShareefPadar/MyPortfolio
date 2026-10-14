@@ -1,0 +1,421 @@
+/* ═══════════════════════════════════════════════════════════════
+   ERA · now — Liquid Glass over a sky (iOS 26 / macOS 26, with gauravi.design's glass cards)
+   Three layers. The sky (sky.mjs): a morning sky by day, stars by night, by the visitor's own clock.
+   The content: words straight on the sky; panels and cards on a plain glass it shows through. No portrait (Shareef's call).
+   The controls, floating over both on a stronger glass that refracts: year switcher, Résumé, the bottom tab bar,
+   the notification, the lightbox's close button.
+   The colours follow the sky: light by day, dark by night. System font (SF Pro on Apple devices).
+   Corners are concentric: panel 32 → padding 12 → inner 20; controls are capsules.
+   Shares only content (content/site.json) with the other eras.
+   ═══════════════════════════════════════════════════════════════ */
+
+[data-era="now"] {
+  /* contract roles */
+  --bg: #E4EFFA;            --bg-inverse: #000000;     /* the sky's middle: what shows on overscroll and in the arrival sheet */
+  --surface: #FFFFFF;       --surface-sunk: #E9E9EE;
+  --line: rgba(60, 60, 67, .16); --outline: rgba(60, 60, 67, .3);
+  --text: #1D1D1F;          --text-muted: rgba(60, 60, 67, .64);
+  --text-inverse: #FFFFFF;  --text-inverse-muted: rgba(235, 235, 245, .64);
+  --accent: #CDF22B;        --on-accent: #10110A;      /* the app tint: lime, only on prominent buttons */
+  --action: #0066CC;        --on-action: #FFFFFF;      /* links, as on apple.com */
+  --error: #D70015;         --error-surface: #FDECEE;
+  --focus: #0066CC;         --selection: #B3D7FF;      --on-selection: #1D1D1F;
+  /* era-private */
+  --fill: rgba(118, 118, 128, .14);                   /* bordered buttons, segmented track */
+  --thumb: #FFFFFF;
+  --glass: rgba(255, 255, 255, .52);
+  --glass-rim: rgba(255, 255, 255, .95);
+  --glass-edge: rgba(0, 0, 0, .07);
+  --glass-shadow: 0 10px 30px rgba(0, 0, 0, .12), 0 1px 3px rgba(0, 0, 0, .08);
+  --cursor: rgba(255, 255, 255, .62); --cursor-arrow: rgba(255, 255, 255, .85); --cursor-edge: #1D1D1F;   /* the guide: glass like the cards, a little denser so its words read over anything */
+  --sky: linear-gradient(#CFE3F8, #E4EFFA 46%, #F7F2EA);   /* morning: pale blue down to a warm white */
+  --pane: rgba(255, 255, 255, .44); --pane-rim: rgba(255, 255, 255, .8);   /* glass panels: the content sits on these */
+  --pane-shadow: 0 16px 40px -22px rgba(30, 60, 110, .45); --pane-shadow-up: 0 30px 60px -26px rgba(30, 60, 110, .55);
+  --r-panel: 32px; --r-inner: 20px; --r-small: 14px;
+  --era-ease: cubic-bezier(.2, .8, .2, 1);
+  --era-text: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+  --era-display: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+  color-scheme: light;
+}
+/* Night: when the visitor's clock says so (sky.mjs sets data-sky in <head>), not when the device is in dark mode. */
+[data-era="now"][data-sky="night"] {
+  --bg: #080C1A; --surface: #1C1C1E; --surface-sunk: #2C2C2E; --line: rgba(84, 84, 88, .6); --outline: rgba(235, 235, 245, .3);
+  --text: #F5F5F7; --text-muted: rgba(235, 235, 245, .64); --action: #2997FF; --focus: #2997FF; --selection: #1F4A7A; --on-selection: #FFFFFF;
+  --error: #FF453A; --error-surface: #3A1414; --fill: rgba(118, 118, 128, .28); --thumb: #636366;
+  --glass: rgba(44, 44, 48, .5); --glass-rim: rgba(255, 255, 255, .26); --glass-edge: rgba(255, 255, 255, .06);
+  --glass-shadow: 0 10px 30px rgba(0, 0, 0, .55); --cursor: rgba(34, 37, 54, .62); --cursor-arrow: rgba(255, 255, 255, .3); --cursor-edge: #FFFFFF;
+  --sky: linear-gradient(#04060D, #0A1022 58%, #161C38);   /* near black overhead, a little blue toward the horizon */
+  --pane: rgba(30, 33, 48, .42); --pane-rim: rgba(255, 255, 255, .13);
+  --pane-shadow: 0 16px 40px -22px rgba(0, 0, 0, .8); --pane-shadow-up: 0 30px 60px -26px rgba(0, 0, 0, .9);
+  color-scheme: dark;
+}
+/* Without JavaScript there is no clock, so the device setting decides, as it used to. Keep this block the same as the one above. */
+@media (prefers-color-scheme: dark) {
+  [data-era="now"]:not([data-sky]) {
+    --bg: #080C1A; --surface: #1C1C1E; --surface-sunk: #2C2C2E; --line: rgba(84, 84, 88, .6); --outline: rgba(235, 235, 245, .3);
+    --text: #F5F5F7; --text-muted: rgba(235, 235, 245, .64); --action: #2997FF; --focus: #2997FF; --selection: #1F4A7A; --on-selection: #FFFFFF;
+    --error: #FF453A; --error-surface: #3A1414; --fill: rgba(118, 118, 128, .28); --thumb: #636366;
+    --glass: rgba(44, 44, 48, .5); --glass-rim: rgba(255, 255, 255, .26); --glass-edge: rgba(255, 255, 255, .06);
+    --glass-shadow: 0 10px 30px rgba(0, 0, 0, .55); --cursor: rgba(34, 37, 54, .62); --cursor-arrow: rgba(255, 255, 255, .3); --cursor-edge: #FFFFFF;
+    --sky: linear-gradient(#04060D, #0A1022 58%, #161C38);
+    --pane: rgba(30, 33, 48, .42); --pane-rim: rgba(255, 255, 255, .13);
+    --pane-shadow: 0 16px 40px -22px rgba(0, 0, 0, .8); --pane-shadow-up: 0 30px 60px -26px rgba(0, 0, 0, .9);
+    color-scheme: dark;
+  }
+}
+
+* { box-sizing: border-box; }
+html { background: var(--bg); color: var(--text); font-synthesis: none; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body { position: relative; margin: 0; font: 17px/1.47 var(--era-text); -webkit-font-smoothing: antialiased; }   /* positioned, so the guide's layer can be as tall as the page */
+::selection { background: var(--selection); color: var(--on-selection); }
+a { color: var(--action); text-decoration: none; }
+a:hover { text-decoration: underline; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+button { font: inherit; color: inherit; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.skip { position: absolute; left: -9999px; top: 8px; z-index: 100; padding: 10px 16px; border-radius: 999px; background: var(--surface); color: var(--text); }
+.skip:focus { left: 16px; }
+
+/* ── the sky: the page's background. The gradient is here so it paints before any script; sky.mjs draws what's in it.
+   Sized to the large viewport so a phone's toolbar sliding away never opens a gap under it. ── */
+.sky { position: fixed; z-index: -1; left: 0; top: 0; width: 100%; height: 100vh; height: 100lvh; overflow: hidden; pointer-events: none; background: var(--sky); }
+/* the canvases reach 32px past every edge, so sky.mjs can lean them away from the pointer without showing one */
+.sky canvas { position: absolute; left: -32px; top: -32px; width: calc(100% + 64px); height: calc(100% + 64px); display: block; will-change: transform; }
+/* at night the first canvas (the stars that stay put, the Milky Way) is 200px taller: it slides up that far as the page scrolls */
+[data-sky="night"] .sky:not([data-quiet]) canvas:first-child { height: calc(100% + 264px); }
+.sky[data-quiet] canvas { opacity: .5; }   /* case studies: half strength, and sky.mjs draws it still */
+/* by day the first canvas holds only the sun's glow, so it can breathe without a redraw */
+@keyframes sun { 50% { opacity: .68; } }
+[data-sky="day"] .sky:not([data-quiet]) canvas:first-child { animation: sun 9s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .sky canvas { animation: none !important; } }
+
+/* ── the glass layer ───────────────────────────────────────── */
+.glass { position: relative; background: var(--glass);
+  -webkit-backdrop-filter: blur(14px) saturate(1.8) brightness(1.04);
+          backdrop-filter: blur(14px) saturate(1.8) brightness(1.04);
+          backdrop-filter: url(#lens) blur(14px) saturate(1.8) brightness(1.04);   /* refraction where supported; the line above otherwise */
+  box-shadow: inset 0 1px 0 var(--glass-rim), inset 0 -1px 0 rgba(255, 255, 255, .18), inset 0 0 0 .5px var(--glass-edge), var(--glass-shadow); }
+.topbar { position: fixed; z-index: 50; top: calc(12px + env(safe-area-inset-top, 0px)); left: 16px; right: 16px; display: flex; justify-content: space-between; align-items: flex-start; pointer-events: none; }
+.topbar > * { pointer-events: auto; }
+.cap { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 18px; border: 0; border-radius: 999px; cursor: pointer;
+  font-size: 15px; font-weight: 600; color: var(--text); text-decoration: none; }
+.cap:hover { text-decoration: none; }
+.cap svg { width: 15px; height: 15px; }
+.cap .nm { font-weight: 500; color: var(--text-muted); }
+/* scroll edge effect: content softens as it slides under the controls */
+.edge { position: fixed; z-index: 40; left: 0; right: 0; top: 0; height: calc(72px + env(safe-area-inset-top, 0px)); pointer-events: none;
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  -webkit-mask: linear-gradient(#000 30%, transparent); mask: linear-gradient(#000 30%, transparent); }
+
+/* era switcher: a glass popover off the capsule */
+.eraswitch { position: relative; }
+.yearmenu { position: absolute; top: calc(100% + 8px); left: 0; width: 248px; padding: 6px; border-radius: 22px; transform-origin: top left; }
+.yearmenu:not([hidden]) { animation: menu-in .32s var(--era-ease); }
+@keyframes menu-in { from { opacity: 0; transform: scale(.92); } }
+.yearmenu-h { margin: 8px 12px 6px; font-size: 13px; color: var(--text-muted); }
+.yearmenu ul { list-style: none; margin: 0; padding: 0; }
+.yearmenu a { display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-radius: 16px; color: var(--text); text-decoration: none; }
+.yearmenu a:hover { background: var(--fill); text-decoration: none; }
+.yearmenu b { font-weight: 600; min-width: 44px; }
+.yearmenu .nm { color: var(--text-muted); flex: 1; }
+.yearmenu .chk { color: var(--action); display: grid; } .yearmenu .chk svg { width: 16px; height: 16px; }
+
+/* bottom tab bar (iOS 26): floats over content, shrinks to the current tab while you scroll down */
+.tabbar { position: fixed; z-index: 50; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%);
+  display: flex; gap: 2px; padding: 5px; border-radius: 999px; }
+.tab { display: grid; justify-items: center; gap: 1px; min-width: 84px; max-width: 140px; padding: 7px 16px 6px; border-radius: 999px; overflow: hidden; white-space: nowrap;
+  color: var(--text); font-size: 11px; font-weight: 600; text-decoration: none;
+  transition: min-width .35s var(--era-ease), max-width .35s var(--era-ease), padding .35s var(--era-ease), opacity .25s; }
+.tab:hover { text-decoration: none; }
+.tab svg { width: 24px; height: 24px; }
+.tab[aria-current="page"] { color: var(--action); background: var(--fill); }
+.tabbar.min .tab:not([aria-current]) { min-width: 0; max-width: 0; padding-left: 0; padding-right: 0; opacity: 0; }
+.tabbar.min .tab[aria-current] { min-width: 64px; }
+
+/* the guide: a collaborator's cursor, as in a shared Figma file. It glides to what it's talking about and says it in
+   cursor chat (the name tag opens into a bubble). The arrow and the bubble are glass, like the cards, not a team colour.
+   Phones park it as a glass capsule above the tab bar. */
+.cur { position: absolute; z-index: 55; left: 0; top: 0; pointer-events: none; transform: translate3d(var(--x, -200px), var(--y, -200px), 0);
+  transition: transform .95s cubic-bezier(.3, .75, .2, 1), opacity .3s; }
+.cur .arrow { display: block; width: 22px; height: 22px; margin: -3px 0 0 -3px; filter: drop-shadow(0 1px 2px rgba(0, 0, 0, .3)); }
+.cur .arrow path { fill: var(--cursor-arrow); stroke: var(--cursor-edge); stroke-width: 1.4; stroke-linejoin: round; }
+.tag { position: absolute; left: 15px; top: 17px; width: max-content; max-width: min(270px, 70vw); pointer-events: auto;
+  padding: 3px 10px 4px; border-radius: 3px 12px 12px 12px; background: var(--cursor); color: var(--text);
+  -webkit-backdrop-filter: blur(16px) saturate(1.6); backdrop-filter: blur(16px) saturate(1.6);
+  box-shadow: inset 0 0 0 1px var(--pane-rim), inset 0 1px 0 var(--pane-rim), 0 10px 26px -12px rgba(0, 0, 0, .4); transform-origin: top left; }
+.cur.flip .tag { left: auto; right: 2px; border-radius: 12px 3px 12px 12px; transform-origin: top right; }
+.who { all: unset; display: block; cursor: pointer; font-size: 13px; font-weight: 600; line-height: 1.4; }
+.who:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 4px; }
+.said { display: none; margin: 2px 0 0; font-size: 15px; line-height: 1.35; }
+.cclose { display: none; position: absolute; top: 7px; right: 7px; width: 22px; height: 22px; padding: 0; border: 0; border-radius: 50%; place-items: center;
+  cursor: pointer; background: var(--fill); color: var(--text); }
+.cclose svg { width: 11px; height: 11px; }
+.collab[data-state="talk"] .tag { padding: 8px 36px 10px 12px; animation: chat-in .28s var(--era-ease); }
+.collab[data-state="talk"] .who { font-size: 12px; opacity: .7; }
+.collab[data-state="talk"] .said, .collab[data-state="talk"] .cclose { display: grid; }
+.collab[data-state="talk"] .said { display: block; }
+.collab[data-state="away"] .cur { opacity: 0; visibility: hidden; }
+@keyframes chat-in { from { transform: scale(.85); opacity: 0; } }
+/* the guide's own layer: as tall as the page and clipped at its sides, so wherever the cursor wanders its tag can never
+   push the page wider than the screen (it did, by up to 257px). It takes no clicks itself; the tag and the capsule do */
+.collab { position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: hidden; pointer-events: none; }
+.cpill { pointer-events: auto; }
+/* the capsule: brings the cursor back after you close it; on phones it's how you call it at all */
+.cpill { position: fixed; z-index: 55; right: 16px; bottom: calc(22px + env(safe-area-inset-bottom, 0px)); display: none; align-items: center; gap: 8px;
+  min-height: 44px; padding: 4px 16px 4px 4px; border: 0; border-radius: 999px; cursor: pointer; font-size: 15px; font-weight: 600; }
+.cpill .av { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--fill); color: var(--text); font-size: 15px; font-weight: 700; }
+.collab[data-state="away"] .cpill, .collab.parked .cpill { display: inline-flex; animation: pop .4s cubic-bezier(.2, 1.2, .3, 1); }
+@keyframes pop { from { transform: scale(.7); opacity: 0; } }
+.collab.parked .cur { position: fixed; left: auto; top: auto; right: 16px; bottom: calc(146px + env(safe-area-inset-bottom, 0px)); transform: none; transition: none; }
+.collab.parked .cur .arrow { display: none; }
+.collab.parked .tag { position: static; border-radius: 16px 16px 4px 16px; }
+.collab.parked:not([data-state="talk"]) .cur { display: none; }
+@media (max-width: 700px) { .cpill { bottom: calc(90px + env(safe-area-inset-bottom, 0px)); } }
+
+/* ── the content layer ─────────────────────────────────────── */
+.page { max-width: 1120px; margin: 0 auto; padding: calc(100px + env(safe-area-inset-top, 0px)) 20px calc(130px + env(safe-area-inset-bottom, 0px)); display: grid; gap: 88px; }
+.page > *, .study > * { min-width: 0; }
+@media (max-width: 600px) { .page { gap: 64px; padding-top: calc(88px + env(safe-area-inset-top, 0px)); } }
+.large { margin: 0; font: 700 clamp(44px, 7vw, 80px)/1.03 var(--era-display); letter-spacing: -.015em; text-wrap: balance; }
+.lead { margin: 22px 0 0; max-width: 38ch; font-size: clamp(19px, 1.9vw, 22px); line-height: 1.42; color: var(--text-muted); }
+.title2 { margin: 0 0 22px; font: 700 clamp(28px, 3.2vw, 34px)/1.15 var(--era-display); letter-spacing: -.01em; }
+.byline { margin: 20px 0 0; font-size: 15px; color: var(--text-muted); }
+.back { display: inline-flex; align-items: center; gap: 4px; min-height: 44px; margin-bottom: 8px; font-size: 17px; }
+.back { gap: 6px; justify-self: start; }
+.back svg { width: 11px; height: 18px; }
+
+.btn { display: inline-flex; align-items: center; gap: 8px; min-height: 50px; padding: 0 24px; border-radius: 999px; border: 0; cursor: pointer;
+  font-size: 17px; font-weight: 600; color: var(--text); text-decoration: none; transition: transform .2s var(--era-ease), background-color .2s; }
+.btn:hover { text-decoration: none; }
+.btn:active { transform: scale(.97); }
+.btn svg { width: 16px; height: 16px; }
+.btn.prominent { background: var(--accent); color: var(--on-accent); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .6), inset 0 0 0 .5px rgba(0, 0, 0, .08); }
+.btn.bordered { background: var(--fill); }
+.btn.small { min-height: 40px; padding: 0 18px; font-size: 15px; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+.copy.got { background: var(--accent); color: var(--on-accent); }
+
+/* hero */
+.hero { display: grid; }
+
+/* work: a big screenshot with plain text under it. The glass card around each one is under "glass panels" below */
+.works { display: grid; gap: 44px 28px; }
+@media (min-width: 760px) { .works { grid-template-columns: 1fr 1fr; } }
+.work { display: grid; gap: 12px; align-content: start; color: var(--text); }
+.work:hover { text-decoration: none; }
+.shotwell { aspect-ratio: 16 / 10; border-radius: var(--r-panel); overflow: hidden; background: var(--surface-sunk); }
+.shotwell img { width: 100%; height: 100%; object-fit: cover; object-position: top left; display: block; transition: transform .6s var(--era-ease); }
+.work:hover .shotwell img { transform: scale(1.02); }
+.kicker { margin: 0; font-size: 14px; color: var(--text-muted); }
+.work h3 { margin: 2px 0 0; font: 600 22px/1.25 var(--era-display); text-wrap: balance; }
+.work .meta { margin: 0; font-size: 15px; color: var(--text-muted); }
+.work .sum { margin: 0; font-size: 16px; color: var(--text-muted); max-width: 52ch; }
+
+/* grouped panels (Settings-style): NDA note, live products, lists */
+.group { background: var(--surface); border-radius: var(--r-panel); padding: 6px 24px; }
+.row { display: grid; gap: 6px; padding: 18px 0; border-top: .5px solid var(--line); }
+.row:first-child { border-top: 0; }
+.row h3 { margin: 0; font: 600 20px/1.3 var(--era-display); }
+.row p { margin: 0; font-size: 16px; color: var(--text-muted); }
+.row .kicker { margin: 0; font-size: 14px; color: var(--text-muted); }
+.row .meta { font-size: 15px; margin-top: -2px; }
+.row .links { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 6px; font-size: 16px; }
+.note { padding: 26px 28px; }
+.note h2 { margin: 0 0 6px; font: 600 20px/1.3 var(--era-display); }
+.note p { margin: 0 0 12px; color: var(--text-muted); max-width: 60ch; }
+
+/* footer */
+.footer { background: var(--surface); border-radius: var(--r-panel); padding: 44px 32px 28px; display: grid; gap: 10px; }
+.footer .where { margin: 0; font-size: 15px; color: var(--text-muted); }
+.footer h2 { margin: 0; font: 700 clamp(40px, 5.5vw, 64px)/1.05 var(--era-display); letter-spacing: -.015em; }
+.footer .intro { margin: 0; color: var(--text-muted); max-width: 40ch; font-size: 19px; }
+.mailrow { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 18px; }
+.mail { font: 600 clamp(20px, 2.6vw, 26px) var(--era-display); overflow-wrap: anywhere; }
+.socials { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 12px; font-size: 16px; }
+.credit { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 20px; margin: 22px 0 0; padding-top: 16px; border-top: .5px solid var(--line); font-size: 13px; color: var(--text-muted); }
+.footer.compact { padding: 22px 28px; gap: 0; }
+.footer.compact .credit { margin: 0; padding: 0; border: 0; }
+
+/* ── work index ── */
+.workpage { display: grid; gap: 72px; }
+@media (max-width: 600px) { .workpage { gap: 56px; } }
+.pagehead { display: grid; }
+.seg { position: relative; display: inline-flex; margin-top: 28px; padding: 2px; border-radius: 10px; background: var(--fill); max-width: 100%; overflow-x: auto; scrollbar-width: none; justify-self: start; }
+.seg::-webkit-scrollbar { display: none; }
+.segbtn { position: relative; z-index: 1; flex: none; min-height: 36px; padding: 0 16px; border: 0; border-radius: 8px; cursor: pointer; background: none; font-size: 15px; font-weight: 500; white-space: nowrap; }
+.segbtn[aria-pressed="true"] { font-weight: 600; }
+.lens { position: absolute; z-index: 0; top: 2px; left: 0; height: calc(100% - 4px); width: 0; border-radius: 8px; background: var(--thumb);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, .12), 0 3px 1px rgba(0, 0, 0, .04); transition: transform .35s var(--era-ease), width .35s var(--era-ease); }
+.count { margin: 12px 0 0; font-size: 14px; color: var(--text-muted); }
+.wgroup[hidden], [data-domain][hidden] { display: none; }
+.wrows .row { grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 6px 18px; color: var(--text); }
+.wrows .row:hover { text-decoration: none; }
+.wrows .row .txt { display: grid; gap: 4px; min-width: 0; }
+.wrows .row .kicker { display: block; }
+.wrows .row .rt { font: 600 20px/1.3 var(--era-display); }
+.wrows .row .rm { font-size: 16px; color: var(--text-muted); }
+.wrows .row:hover .rt { color: var(--action); }
+.wrows .row .thumb { width: 112px; aspect-ratio: 16 / 10; border-radius: var(--r-small); overflow: hidden; background: var(--surface-sunk); }
+.wrows .row .thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top left; display: block; }
+@media (max-width: 520px) { .wrows .row .thumb { width: 84px; } }
+
+/* ── about ── */
+.prose { max-width: 62ch; display: grid; gap: 18px; font-size: 19px; line-height: 1.55; }
+.prose p { margin: 0; }
+.timeline .row { grid-template-columns: 150px minmax(0, 1fr); gap: 4px 20px; }
+.timeline .when { margin: 2px 0 0; font-size: 15px; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+.timeline .where { margin: 0; font-size: 15px; color: var(--text-muted); }
+.timeline .what { margin: 6px 0 0; }
+.timeline .edu { margin: 0; padding: 16px 0 18px; border-top: .5px solid var(--line); font-size: 15px; color: var(--text-muted); }
+@media (max-width: 600px) { .timeline .row { grid-template-columns: 1fr; } }
+.pull { margin: 0; display: grid; gap: 28px; }
+.pull blockquote { margin: 0; }
+.pull blockquote p { margin: 0; max-width: 24ch; font: 600 clamp(30px, 4.2vw, 46px)/1.15 var(--era-display); letter-spacing: -.01em; text-wrap: balance; }
+
+/* ── case study: an article on the page, the progress line at the very top ── */
+.gprogress { position: fixed; z-index: 45; left: 0; right: 0; top: 0; height: 3px; pointer-events: none; }
+.gprogress i { display: block; height: 100%; width: calc(var(--p, 0) * 100%); background: var(--action); }
+.study { display: grid; gap: 56px; }
+.shead { display: grid; }
+.shead .kicker { margin: 0 0 12px; font-size: 17px; }
+.shead .kicker .num { color: var(--text); font-weight: 600; margin-right: 6px; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); margin: 32px 0 0; background: var(--surface); border-radius: var(--r-panel); padding: 6px 12px; }
+.stats div { padding: 14px 12px; }
+.stats dt { font-size: 13px; color: var(--text-muted); }
+.stats dd { margin: 2px 0 0; font-size: 17px; font-weight: 600; }
+.slead { margin: 28px 0 0; max-width: 46ch; font-size: clamp(19px, 2vw, 23px); line-height: 1.45; color: var(--text-muted); }
+.soutcome { margin-top: 24px; padding: 22px 24px; border-radius: var(--r-panel); background: var(--surface); max-width: 760px; }
+.slab { margin: 0 0 6px; font-size: 15px; font-weight: 600; color: var(--text); }
+.soutcome p:last-child { margin: 0; color: var(--text-muted); }
+.sstatement { margin: 0; }
+.sstatement blockquote { margin: 0; }
+.sstatement p { margin: 0; max-width: 26ch; font: 600 clamp(28px, 4vw, 44px)/1.18 var(--era-display); letter-spacing: -.01em; text-wrap: balance; }
+.col { max-width: 700px; width: 100%; margin: 0 auto; }
+.sp { margin: 0 0 20px; font-size: 19px; line-height: 1.6; }
+.sp strong, .sp b { font-weight: 600; }
+.sh2 { margin: 52px 0 16px; font: 700 clamp(26px, 3vw, 32px)/1.2 var(--era-display); letter-spacing: -.005em; }
+.sh3 { margin: 34px 0 10px; font: 600 21px/1.3 var(--era-display); }
+.shr { margin: 44px 0; border: 0; border-top: .5px solid var(--line); }
+.squote { margin: 34px 0; padding: 0 0 0 20px; border-left: 3px solid var(--line); }
+.squote p { margin: 0; font: 500 22px/1.45 var(--era-display); }
+.squote .scite { margin-top: 10px; font: 15px var(--era-text); color: var(--text-muted); }
+.scallout { margin: 30px 0; padding: 22px 24px; border-radius: var(--r-panel); background: var(--surface); }
+.scallout p { margin: 0 0 10px; font-size: 17px; } .scallout p:last-child { margin: 0; }
+.slist { margin: 0 0 22px; padding-left: 22px; font-size: 19px; line-height: 1.6; }
+.slist li { margin-bottom: 8px; }
+.spre { margin: 26px 0; padding: 18px 20px; overflow-x: auto; border-radius: var(--r-inner); background: var(--surface); font: 14px/1.6 ui-monospace, "SF Mono", Menlo, monospace; }
+.sshort { margin: 32px 0; padding: 8px 24px 6px; border-radius: var(--r-panel); background: var(--surface); }
+.sshort-head { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px 12px; padding: 14px 0 10px; }
+.sshort-head .tab-l { font-weight: 600; }
+.snote { font-size: 14px; color: var(--text-muted); }
+.sshort dl { margin: 0; }
+.sshort dl div { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 4px 18px; padding: 14px 0; border-top: .5px solid var(--line); }
+.sshort dt { font-size: 15px; color: var(--text-muted); } .sshort dd { margin: 0; font-size: 16px; }
+@media (max-width: 600px) { .sshort dl div { grid-template-columns: 1fr; } }
+.sfig { margin: 36px 0; }
+.sfig figcaption, .sgal figcaption, .sproto figcaption { margin-top: 12px; font-size: 15px; color: var(--text-muted); }
+.shot { position: relative; border-radius: var(--r-inner); overflow: hidden; background: var(--surface-sunk); }
+.shot + .shot { margin-top: 16px; }
+.shot img { display: block; width: 100%; height: auto; }
+.zoom { all: unset; display: block; position: relative; cursor: zoom-in; width: 100%; }
+.zoom:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+.zoom img { display: block; width: 100%; height: auto; }
+.sgal { margin: 36px 0; }
+.sgal-grid { display: grid; grid-template-columns: repeat(var(--cols, 2), minmax(0, 1fr)); gap: 16px; margin: 0 auto; }
+@media (max-width: 600px) { .sgal-grid { grid-template-columns: 1fr !important; } }
+.sgal-item { display: grid; gap: 8px; }
+.sgal-label { font-size: 14px; color: var(--text-muted); }
+.sbadge { position: absolute; left: 10px; top: 10px; min-width: 26px; height: 26px; padding: 0 9px; display: grid; place-items: center; border-radius: 8px; font: 600 13px var(--era-text); background: var(--surface); color: var(--text); }
+.sproto { margin: 40px 0; }
+.mwin { border-radius: var(--r-inner); overflow: hidden; background: var(--surface); box-shadow: 0 0 0 .5px var(--line), 0 24px 48px -24px rgba(0, 0, 0, .35); }
+.mwin-bar { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-bottom: .5px solid var(--line); }
+.mdots { display: flex; gap: 7px; } .mdots i { width: 12px; height: 12px; border-radius: 50%; background: #FF5F57; } .mdots i:nth-child(2) { background: #FEBC2E; } .mdots i:nth-child(3) { background: #28C840; }
+.murl { flex: 1; min-width: 0; padding: 4px 12px; border-radius: 8px; background: var(--fill); font-size: 13px; color: var(--text-muted); text-align: center; overflow-wrap: anywhere; }
+.mlabel { font-size: 13px; font-weight: 600; white-space: nowrap; }
+.mwin img { display: block; width: 100%; height: auto; }
+@media (max-width: 600px) { .murl { display: none; } .mlabel { flex: 1; min-width: 0; white-space: normal; text-align: right; } }
+.sending { padding: 30px 28px; border-radius: var(--r-panel); background: var(--surface); }
+.sending h2 { margin: 0 0 8px; font: 700 26px/1.2 var(--era-display); }
+.sending h2 .num { color: var(--text-muted); font-weight: 600; margin-right: 8px; }
+.sending p { margin: 0 0 20px; color: var(--text-muted); max-width: 56ch; }
+.snext { display: grid; gap: 4px; padding: 26px 28px; border-radius: var(--r-panel); background: var(--surface); color: var(--text); }
+.snext:hover { text-decoration: none; }
+.snext-l { font-size: 15px; color: var(--text-muted); }
+.snext-t { font: 600 clamp(22px, 2.6vw, 28px)/1.25 var(--era-display); }
+.snext:hover .snext-t { color: var(--action); }
+.lightbox { width: min(1200px, 94vw); max-width: none; max-height: 92vh; padding: 0; border: 0; background: transparent; overflow: visible; }
+.lightbox::backdrop { background: rgba(0, 0, 0, .78); }
+.lightbox img { display: block; max-width: 100%; max-height: 84vh; margin: 56px auto 0; border-radius: var(--r-small); }
+.lb-close { position: absolute; top: 0; right: 0; }
+
+/* ── glass panels (Shareef's call, after gauravi.design): the content panels are glass too, so the sky shows through.
+   A plainer glass than the controls': a softer blur and no refraction, because these are big and there are many of them.
+   The rim is an inset shadow, not a border, so no panel changes size. Kept after the panels' own rules so it wins. ── */
+.group, .footer, .stats, .soutcome, .scallout, .sshort, .sending, .snext, .spre, .mwin, .work {
+  background: var(--pane);
+  -webkit-backdrop-filter: blur(12px) saturate(1.4); backdrop-filter: blur(12px) saturate(1.4);
+  box-shadow: inset 0 0 0 1px var(--pane-rim), inset 0 1px 0 var(--pane-rim), var(--pane-shadow); }
+/* a work card is a glass card now: the screenshot sits inside it, corners concentric (32 − 10 = 22) */
+.work { padding: 10px 10px 20px; border-radius: var(--r-panel); }
+.work .shotwell { border-radius: 22px; outline: .5px solid var(--line); outline-offset: -.5px; }   /* a hairline, or a white screenshot melts into the day glass */
+.work > p, .work > h3 { padding: 0 12px; }
+/* cards that are links lift a little under the pointer */
+.work, .snext { transition: transform .5s var(--era-ease), box-shadow .5s var(--era-ease); }
+@media (hover: hover) {
+  .work:hover, .snext:hover { transform: translateY(-4px); box-shadow: inset 0 0 0 1px var(--pane-rim), inset 0 1px 0 var(--pane-rim), var(--pane-shadow-up); }
+}
+
+/* ── scroll (after gauravi.design) ──
+   Panels, cards and section headings rise into place the first time you reach them. layout.mjs adds .rv only to what
+   starts below the fold, so nothing waits at first paint, and takes it off again once the thing has arrived.
+   Once only, never re-triggered; article paragraphs are never touched. */
+.rv { opacity: 0; transform: translateY(24px); transition: opacity .8s var(--era-ease), transform .8s var(--era-ease); }
+.rv.in { opacity: 1; transform: none; }
+/* The hero falls a little behind the scroll and thins out as the page moves on. Scroll-driven, so it costs no script;
+   browsers without it just scroll. Desktop only: on a phone the page is short enough as it is. */
+@keyframes hero-text { to { transform: translateY(56px); opacity: .45; } }
+@supports (animation-timeline: scroll()) {
+  @media (min-width: 900px) and (prefers-reduced-motion: no-preference) {
+    .hero > div { animation: hero-text linear both; animation-timeline: scroll(root); animation-range: 0px 90vh; }
+  }
+}
+
+/* ── arrival: the page comes up through a frosted sheet ── */
+.arrive { display: none; }
+html.era-arrive .arrive { display: block; position: fixed; inset: 0; z-index: 200; pointer-events: none; background: var(--bg);
+  animation: defrost .9s var(--era-ease) .12s both; }
+@keyframes defrost { from { opacity: 1; } to { opacity: 0; } }
+
+/* ── accessibility settings ── */
+@media (prefers-reduced-transparency: reduce) {
+  .glass, .group, .footer, .stats, .soutcome, .scallout, .sshort, .sending, .snext, .spre, .mwin, .work { background: var(--surface); -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .tag { background: var(--surface); -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .edge { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tab, .btn, .lens, .shotwell img, .cur, .tag, .cpill, .yearmenu, .work, .snext { transition: none !important; animation: none !important; }
+  .rv { opacity: 1; transform: none; transition: none; }
+  html.era-arrive .arrive { display: none; }
+}
+
+
+/* ══ THE YEAR RAIL ══════════════════════════════════════════════════
+   All five years standing on the right edge, vertically centred: the same
+   place in every era, drawn this era's way. From 1280px up only. Below that
+   the page has no margin for it to stand in, so the year button beside the
+   name takes over. The two never show together. */
+.yearrail { display: none; }
+.yearrail ul { list-style: none; margin: 0; padding: 0; display: grid; }
+.yearrail { z-index: 50; padding: 6px; border-radius: 30px; }
+.yearrail ul { gap: 2px; }
+.yearrail a { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; width: 66px; min-height: 54px; border-radius: 24px;
+  color: var(--text-muted); text-decoration: none; font-size: 15px; font-weight: 600; transition: background .2s var(--era-ease), color .2s var(--era-ease); }
+.yearrail a:hover { background: var(--fill); color: var(--text); text-decoration: none; }
+.yearrail a[aria-current] { background: var(--surface); color: var(--text); box-shadow: 0 2px 10px rgba(0, 0, 0, .12); }
+@media (prefers-reduced-motion: reduce) { .yearrail a { transition: none; } }
+@media (min-width: 1280px) {
+  .yearrail { display: block; position: fixed; right: 16px; top: 50%; transform: translateY(-50%); }
+  .eraswitch { display: none; }
+  .topbar { justify-content: flex-end; }
+}

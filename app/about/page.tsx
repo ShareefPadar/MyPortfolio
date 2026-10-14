@@ -64,11 +64,11 @@ export default function About() {
                 <h3 className="font-sans text-[17px] font-semibold leading-[1.4] text-ink">
                   {job.role}
                 </h3>
-                <span className="shrink-0 font-mono text-[9px] uppercase tracking-[0.11em] text-mute">
+                <span className="shrink-0 font-mono text-[9px] tracking-[0.02em] text-mute">
                   {job.period}
                 </span>
               </div>
-              <p className="mb-8 font-mono text-[9px] uppercase tracking-[0.11em] text-blue">
+              <p className="mb-8 font-mono text-[9px] tracking-[0.02em] text-blue">
                 {job.company}
               </p>
               <p className="font-sans text-[16px] leading-[1.7] text-ink">{job.desc}</p>

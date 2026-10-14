@@ -28,6 +28,11 @@ const nextConfig = {
     optimizeCss: true,
     optimizePackageImports: ['react-icons'],
   },
+  // The generated era pages (public/_eras, served by proxy.ts) are the same
+  // pages in other years; only the live 1995 pages should be indexed.
+  async headers() {
+    return [{ source: '/_eras/:path*', headers: [{ key: 'X-Robots-Tag', value: 'noindex' }] }]
+  },
   // /work/mizan renamed to /work/wio when the concept product on that page
   // was rebranded to match the real bank it studies. permanent: true emits a
   // 308, so search engines transfer the old URL's standing to the new one

@@ -6,6 +6,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PixelCursor from "@/components/px/PixelCursor";
 import PixelGuide from "@/components/px/PixelGuide";
+import EraRail from "@/components/px/EraRail";
+import site from "@/era-system/content/site.json";
 
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -41,14 +43,14 @@ const silkscreen = Silkscreen({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.shareefpadar.com'),
-  title: 'Shareef Padar | Senior Product Designer — Dubai',
-  description: 'Senior Product Designer with 6 years of B2B UX experience. Research, design systems, and production-ready code — based in Dubai.',
+  title: 'Shareef Padar | Senior Product Designer, Dubai',
+  description: 'Senior Product Designer with 6 years of B2B UX experience. Research, design systems, and production-ready code, based in Dubai.',
   icons: {
     icon: "/assets/logo.svg",
   },
   openGraph: {
     title: 'Shareef Padar | Senior Product Designer',
-    description: '6 years of B2B product design. Research to shipped interfaces, end to end.',
+    description: '6 years of B2B product design, from research to shipped interfaces.',
     url: 'https://www.shareefpadar.com', 
     siteName: 'Shareef Padar Portfolio',
     locale: 'en_US',
@@ -57,7 +59,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Shareef Padar | Senior Product Designer',
-    description: '6 years of B2B product design. Research to shipped interfaces, end to end.',
+    description: '6 years of B2B product design, from research to shipped interfaces.',
   },
 };
 
@@ -89,6 +91,14 @@ const personSchema = {
   ],
 };
 
+/* The time machine's years and label, from the era system's shared content.
+   Read here on the server so only these few strings reach the client. */
+const eras = { label: site.eras.label, items: site.eras.items.map(({ id, year, name }) => ({ id, year, name })) };
+
+/* Arriving from another era: a one-shot scanline wipe (the class is set before
+   paint, removed after the wipe). Same flag every era uses. */
+const arriveScript = "try{if(sessionStorage.getItem('era-arrive')){sessionStorage.removeItem('era-arrive');if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('era-arrive');setTimeout(function(){document.documentElement.classList.remove('era-arrive')},1600)}}catch(e){}";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -113,6 +123,7 @@ export default function RootLayout({
             __html: "document.documentElement.classList.add('has-js')",
           }}
         />
+        <script dangerouslySetInnerHTML={{ __html: arriveScript }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
@@ -126,7 +137,9 @@ export default function RootLayout({
         >
           SKIP TO CONTENT
         </a>
-        <Navbar />
+        <div className="arrive" aria-hidden="true" />
+        <Navbar eras={eras} />
+        <EraRail label={eras.label} items={eras.items} />
         {/* Site-wide, so the guide's cursor on the homepage has a peer that is
             drawn the same way. Self-suppresses on touch and reduced motion. */}
         <PixelCursor />

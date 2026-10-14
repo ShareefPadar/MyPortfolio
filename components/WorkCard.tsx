@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import PixelIcon from "@/components/px/PixelIcon";
 import type { CaseStudy } from "@/lib/work";
 
 /**
@@ -23,7 +22,7 @@ type Props = {
 };
 
 const WorkCard = ({ study, featured = false, compact = false }: Props) => {
-  const { card, slug, domain } = study;
+  const { card, slug } = study;
 
   return (
     <Link
@@ -34,7 +33,7 @@ const WorkCard = ({ study, featured = false, compact = false }: Props) => {
          pushed down 17px, so its bottom border hangs outside the grid slot. */
       className="card group mt-[17px] block h-[calc(100%-17px)]"
     >
-      <span className="card-tab">{domain}</span>
+      <span className="card-tab">{card.category}</span>
 
       {/* The well is sunk: it contains rather than invites. */}
       <div className={`well relative m-[10px] mt-[14px] overflow-hidden bg-panel ${featured ? "aspect-[16/10]" : "aspect-[16/9]"}`}>
@@ -56,13 +55,13 @@ const WorkCard = ({ study, featured = false, compact = false }: Props) => {
       </div>
 
       <div className="card-body m-[10px] flex flex-col p-16">
-        <p className="mb-8 font-mono text-[9px] uppercase tracking-[0.11em] text-mute">
+        <p className="mb-8 font-mono text-[9px] tracking-[0.02em] text-mute">
           {card.category} · {card.badge}
         </p>
         <h3 className="mb-4 font-sans text-[19px] font-medium leading-[1.4] text-ink">
           {card.headline}
         </h3>
-        <p className="mb-12 font-mono text-[9px] uppercase tracking-[0.11em] text-mute">
+        <p className="mb-12 font-mono text-[9px] tracking-[0.02em] text-mute">
           {card.title}
         </p>
         {!compact && (
@@ -72,7 +71,6 @@ const WorkCard = ({ study, featured = false, compact = false }: Props) => {
         )}
         <span className="mt-auto inline-flex items-center gap-8 font-pix text-[11px] leading-none text-blue">
           READ CASE STUDY
-          <PixelIcon name="arrowR" size={8} />
         </span>
       </div>
     </Link>

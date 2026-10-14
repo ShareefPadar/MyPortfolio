@@ -1,5 +1,4 @@
 import { FaLinkedin, FaMedium, FaBehance } from "react-icons/fa6";
-import PixelIcon from "@/components/px/PixelIcon";
 import Reveal from "@/components/px/Reveal";
 import CopyEmail from "@/components/px/CopyEmail";
 
@@ -30,8 +29,7 @@ export default function Footer({ variant = "full" }: { variant?: "full" | "minim
       <div className="mx-auto max-w-wide px-16 py-64">
         {/* status strip */}
         <div className="mb-48 flex flex-wrap items-center gap-x-12 gap-y-8 border-b border-nline pb-16">
-          <span className="led inline-block h-8 w-8 bg-lime" aria-hidden="true" />
-          <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-ntext">
+          <span className="font-mono text-[11px] tracking-[0.02em] text-ntext">
             Dubai · GMT+4
           </span>
         </div>
@@ -40,12 +38,12 @@ export default function Footer({ variant = "full" }: { variant?: "full" | "minim
           <>
             <Reveal variant="head" className="mb-24">
               <h2 className="font-pix text-[14px] leading-[1.8] tracking-[0.02em] text-lime">
-                LET&apos;S CONNECT
+                TALK TO ME
               </h2>
             </Reveal>
 
             <p className="mb-32 max-w-lead font-sans text-[19px] leading-[1.65] text-white">
-              Feel free to reach out for collaborations or just a friendly hello.
+              Tell me what you&apos;re building and where it&apos;s stuck. I&apos;ll reply by email.
             </p>
 
             {/* Email is visible text, not a mailto-only link, so it can be copied. */}
@@ -70,7 +68,6 @@ export default function Footer({ variant = "full" }: { variant?: "full" | "minim
                 >
                   <Icon size={16} aria-hidden="true" />
                   {name}
-                  <PixelIcon name="external" size={8} />
                 </a>
               ))}
             </div>
@@ -78,14 +75,13 @@ export default function Footer({ variant = "full" }: { variant?: "full" | "minim
         )}
 
         <div className="flex flex-wrap items-center justify-between gap-16 border-t border-nline pt-24">
-          <p className="font-mono text-[9px] uppercase tracking-[0.11em] text-ntext">
+          <p className="font-mono text-[9px] tracking-[0.02em] text-ntext">
             Designed &amp; built by Shareef Padar
           </p>
           <a
             href="#top"
             className="inline-flex min-h-[44px] items-center gap-8 font-mono text-[11px] uppercase tracking-[0.08em] text-ntext hover:text-lime"
           >
-            <PixelIcon name="arrowU" size={8} />
             Back to top
           </a>
         </div>

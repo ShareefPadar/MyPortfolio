@@ -9,7 +9,7 @@ import Button from "@/components/px/Button";
 export default function NotFound() {
   return (
     <div className="mx-auto w-full max-w-wide px-16 py-96 md:py-128">
-      <p className="mb-24 font-mono text-[11px] uppercase tracking-[0.08em] text-mute">
+      <p className="mb-24 font-mono text-[11px] tracking-[0.02em] text-mute">
         Error 404
       </p>
 
@@ -23,7 +23,7 @@ export default function NotFound() {
       </p>
 
       <div className="flex flex-wrap gap-16">
-        <Button level="primary" href="/" icon="arrowL">
+        <Button level="primary" href="/">
           BACK HOME
         </Button>
         <Button level="secondary" href="/work" icon="grid">

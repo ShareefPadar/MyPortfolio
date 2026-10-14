@@ -1,0 +1,143 @@
+/* ═══════════════════════════════════════════════════════════════
+   ERA · 2014 — Flat
+   Spec: docs/eras/2014.md
+   css frames. No gradients, no drop shadows — colour does the work.
+   ═══════════════════════════════════════════════════════════════ */
+
+[data-era="2014"] {
+  /* ── colour ───────────────────────────────────────────── */
+  --bg:                 #FFFFFF;
+  --bg-inverse:         #1E3A5F;   /* a bold flat colour block, not black */
+  --surface:            #EEF1F4;
+  --surface-sunk:       #E4E8ED;
+  --line:               #D5DBE1;
+  --outline:            #77828E;
+  --text:               #263238;
+  --text-muted:         #56626C;
+  --text-inverse:       #FFFFFF;
+  --text-inverse-muted: #B9C8DA;
+  --accent:             #CDF22B;
+  --on-accent:          #263238;
+  --action:             #1668C4;
+  --on-action:          #FFFFFF;
+  --error:              #C62828;
+  --error-surface:      #FDECEA;
+  --focus:              #1668C4;
+  --selection:          #CDF22B;
+  --on-selection:       #263238;
+
+  /* ── type ─────────────────────────────────────────────── */
+  --font-statement:          'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  --font-label:              'Oswald', 'Arial Narrow', sans-serif;
+  --font-sentence:           'Open Sans', Arial, sans-serif;
+  --statement-case:          uppercase;
+  --statement-weight:        600;   /* buttons: Material-style uppercase medium */
+  --statement-weight-strong: 300;   /* the hero is THIN — that's the era */
+  --statement-lh:            1.15;
+  --size-statement-xl:       clamp(34px, 5vw, 58px);
+  --size-statement-l:        clamp(22px, 2.8vw, 30px);
+  --size-statement-m:        14px;
+  --size-label:              14px;
+  --size-micro:              13px;
+  --label-tracking:          .08em;
+
+  /* ── shape ────────────────────────────────────────────── */
+  --corner:      none;
+  --corner-tab:  none;
+  --radius:      4px;
+  --border-w:    2px;
+  --focus-width: 3px;
+
+  /* ── depth: none. Flat means flat. ───────────────────────
+     The one exception is the callout's LONG SHADOW — the defining
+     flat-design flourish: a hard 45° shadow, many 1px steps deep. */
+  --shadow-raised: none;
+  --shadow-sunk:   0 0 0 2px #D5DBE1;
+  --shadow-offset: 1px 1px 0 #B3CC24, 2px 2px 0 #B3CC24, 3px 3px 0 #B3CC24, 4px 4px 0 #B3CC24,
+                   5px 5px 0 #B3CC24, 6px 6px 0 #B3CC24, 7px 7px 0 #B3CC24, 8px 8px 0 #B3CC24,
+                   9px 9px 0 #B3CC24, 10px 10px 0 #B3CC24, 11px 11px 0 #B3CC24, 12px 12px 0 #B3CC24;
+
+  /* ── motion: Material's standard curve ───────────────── */
+  --reveal-anim:      reveal-grow-2014;
+  --reveal-duration:  360ms;
+  --reveal-timing:    cubic-bezier(.4, 0, .2, 1);
+  --statement-reveal: fade;
+  --type-speed:       0ms;           /* unused by fade */
+  --hover-timing:     cubic-bezier(.4, 0, .2, 1);
+
+  /* ── assets ───────────────────────────────────────────── */
+  --icon-set:   line;
+  --frame-kind: css;
+  --portrait:   illustration;
+
+  /* ── era-private ──────────────────────────────────────── */
+  --era-action-hover:  #2A7AD6;
+  --era-action-press:  #0F58AB;
+  --era-accent-hover:  #D8F55A;
+  --era-accent-press:  #B8DA1E;
+}
+
+/* ── containers: flat ───────────────────────────────────── */
+[data-era="2014"] .frame-raised {
+  background: var(--surface);
+  border: 0;
+  border-radius: var(--radius);
+  box-shadow: none;
+}
+[data-era="2014"] .frame-sunk {
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sunk);
+  overflow: hidden;
+}
+
+/* ── controls ───────────────────────────────────────────── */
+[data-era="2014"] .frame-control { border: var(--border-w) solid transparent; border-radius: var(--radius); }
+[data-era="2014"] .frame-control[data-size="lg"] { padding: var(--s12) var(--s24); }
+
+[data-era="2014"] .frame-control[data-fill="action"] { background: var(--action); }
+[data-era="2014"] .frame-control[data-fill="action"]:hover,
+[data-era="2014"] .frame-control[data-fill="action"][data-state="hover"]   { background: var(--era-action-hover); }
+[data-era="2014"] .frame-control[data-fill="action"]:active,
+[data-era="2014"] .frame-control[data-fill="action"][data-state="pressed"] { background: var(--era-action-press); }
+
+/* secondary = the GHOST BUTTON, 2014's signature: transparent, outlined */
+[data-era="2014"] .frame-control[data-fill="surface"] { background: transparent; border-color: var(--action); }
+[data-era="2014"] .frame-control[data-fill="surface"]:hover,
+[data-era="2014"] .frame-control[data-fill="surface"][data-state="hover"]   { background: var(--surface); }
+[data-era="2014"] .frame-control[data-fill="surface"]:active,
+[data-era="2014"] .frame-control[data-fill="surface"][data-state="pressed"] { background: var(--surface-sunk); }
+[data-era="2014"] .bookend .frame-control[data-fill="surface"] { border-color: var(--text-inverse); }
+[data-era="2014"] .bookend .frame-control[data-fill="surface"]:hover { background: rgba(255, 255, 255, .12); }
+
+[data-era="2014"] .frame-control[data-fill="accent"] { background: var(--accent); }
+[data-era="2014"] .frame-control[data-fill="accent"]:hover,
+[data-era="2014"] .frame-control[data-fill="accent"][data-state="hover"]   { background: var(--era-accent-hover); }
+[data-era="2014"] .frame-control[data-fill="accent"]:active,
+[data-era="2014"] .frame-control[data-fill="accent"][data-state="pressed"] { background: var(--era-accent-press); }
+
+[data-era="2014"] .frame-control[data-fill="disabled"] { background: var(--surface-sunk); }
+
+/* fields = Material-style: an underline, no box */
+[data-era="2014"] .frame-control[data-fill="field"] {
+  background: transparent; border: 0; border-bottom: var(--border-w) solid var(--outline); border-radius: 0;
+  padding-left: 0; padding-right: 0;
+}
+[data-era="2014"] .frame-control[data-fill="field"]:hover { border-bottom-color: var(--text); }
+[data-era="2014"] .frame-control[data-fill="error"] {
+  background: var(--error-surface); border: 0; border-bottom: var(--border-w) solid var(--error); border-radius: 0;
+}
+
+/* ── bubble tail: a flat triangle ───────────────────────── */
+[data-era="2014"] .frame-tail {
+  display: block; width: 14px; height: 10px; margin-top: 0;
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+[data-era="2014"] .frame-tail[data-fill="accent"]  { background: var(--accent); }
+[data-era="2014"] .frame-tail[data-fill="action"]  { background: var(--action); }
+[data-era="2014"] .frame-tail[data-fill="surface"] { background: var(--action); }   /* ghost bubble: pointer in the border colour */
+
+/* ── reveal: grow into place ────────────────────────────── */
+@keyframes reveal-grow-2014 {
+  from { opacity: 0; transform: scale(.94); }
+  to   { opacity: 1; transform: none; }
+}

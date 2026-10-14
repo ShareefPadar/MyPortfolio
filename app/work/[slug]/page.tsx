@@ -60,7 +60,7 @@ export async function generateMetadata({
 
 const Meta = ({ label, value }: { label: string; value: string }) => (
   <div>
-    <dt className="font-mono text-[9px] uppercase tracking-[0.11em] text-mute">{label}</dt>
+    <dt className="font-mono text-[9px] tracking-[0.02em] text-mute">{label}</dt>
     <dd className="mt-4 font-sans text-[14px] leading-[1.5] text-ink">{value}</dd>
   </div>
 );
@@ -122,7 +122,7 @@ export default async function WorkItem({
 
           {project.outcome && (
             <div className="border-l-[6px] border-lime bg-panel p-16 md:p-24">
-              <p className="mb-8 font-mono text-[9px] uppercase tracking-[0.11em] text-mute">
+              <p className="mb-8 font-mono text-[9px] tracking-[0.02em] text-mute">
                 Outcome
               </p>
               <p className="font-sans text-[16px] leading-[1.7] text-ink">{project.outcome}</p>
@@ -166,12 +166,12 @@ export default async function WorkItem({
             </p>
             <div className="flex flex-wrap gap-16">
               {project.liveUrl && (
-                <Button level="primary" href={project.liveUrl} external icon="external">
+                <Button level="primary" href={project.liveUrl} external>
                   LAUNCH APP
                 </Button>
               )}
               {project.repoUrl && (
-                <Button level="tertiary" href={project.repoUrl} external icon="external">
+                <Button level="tertiary" href={project.repoUrl} external>
                   VIEW REPOSITORY
                 </Button>
               )}
@@ -185,12 +185,11 @@ export default async function WorkItem({
           systems arguing (§7.4). */}
       <div className="study border-t-[3px] border-ink py-48">
         <Link href={`/work/${next.slug}`} className="group block">
-          <span className="font-mono text-[9px] uppercase tracking-[0.11em] text-mute">
+          <span className="font-mono text-[9px] tracking-[0.02em] text-mute">
             Next story
           </span>
-          <span className="mt-8 flex items-center gap-12 font-sans text-[23px] font-medium leading-[1.3] text-ink">
+          <span className="mt-8 block font-sans text-[23px] font-medium leading-[1.3] text-ink">
             {next.title}
-            <PixelIcon name="arrowR" size={16} className="text-blue" />
           </span>
         </Link>
       </div>

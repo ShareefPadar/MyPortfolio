@@ -1,0 +1,357 @@
+{
+ "_source": "https://www.shareefpadar.com/work/sanad — extracted from the live DOM by scripts/sync-studies.py",
+ "id": "sanad",
+ "slug": "sanad",
+ "url": "/work/sanad",
+ "pageTitle": "Making KYB verification feel fast without weakening it | Shareef Padar",
+ "description": "A six-screen KYB onboarding flow, built after hitting the verification wall at Companies House myself, then audited against its own claims.",
+ "ogImage": "https://www.shareefpadar.com/assets/work/sanad-thumb.png",
+ "head": {
+  "number": "01",
+  "label": "Overview",
+  "title": "Making business verification feel fast without making it less rigorous.",
+  "meta": [
+   {
+    "k": "My role",
+    "v": "Product Designer & Builder"
+   },
+   {
+    "k": "Type",
+    "v": "Product concept"
+   },
+   {
+    "k": "Period",
+    "v": "2026"
+   },
+   {
+    "k": "Stack",
+    "v": "React · Custom CSS · AI-assisted build"
+   }
+  ],
+  "lead": "I hit this wall myself going through UK Companies House to prove a business is legitimate before it can move money. So I designed the full KYB onboarding flow, wrapped in Sanad, a concept business-banking brand, and built it as a working React prototype. One rule shaped everything: you can't make the process easier by making it less rigorous.",
+  "outcome": {
+   "label": "Outcome",
+   "text": "A working six-screen prototype, embedded in the case study. Every decision earns its place against a constraint that can't move: regulators decide the steps, design decides how they feel."
+  },
+  "statement": "A real problem, a concept product. The frustration, the research, and the working prototype are all real. Sanad, the business-banking brand they're wrapped in, is the part I invented so I could solve the whole problem."
+ },
+ "blocks": [
+  {
+   "type": "short",
+   "tab": "The short version",
+   "note": "10 min read",
+   "rows": [
+    {
+     "k": "Problem",
+     "v": "New businesses cannot move money until they pass KYB verification, so they start it, hit friction, and quit. I hit this same wall myself going through Companies House."
+    },
+    {
+     "k": "What I did",
+     "v": "Designed the full six-screen verification flow for a concept business bank, built it as a working React prototype, then audited my own build and published what it got wrong."
+    },
+    {
+     "k": "Why it was hard",
+     "v": "Regulators require every step, so removing friction was off the table. The process had to feel faster without becoming any less rigorous."
+    }
+   ]
+  },
+  {
+   "type": "p",
+   "html": "New businesses signing up for a fintech product have to prove they're real and legitimate before they can move money. The process is called KYB, Know Your Business. It's slow, document-heavy, and legally mandatory. So businesses start it, hit friction, and give up. The company loses a customer it already paid to acquire, at the worst possible moment."
+  },
+  {
+   "type": "p",
+   "html": "I know this one firsthand, because it happened to me. Going through Companies House verification in the UK, I didn't know how many steps were coming. I was missing one document. There was no way to save and come back, so stopping halfway meant starting over. And when a document got rejected, I was back at the beginning again, with no way to set aside the one thing I still needed time to track down. The verification itself couldn't change. The experience of it clearly could. That gap is what Sanad exists to close."
+  },
+  {
+   "type": "p",
+   "html": "So the problem is real. The only invented part is the product wrapper. I designed the full KYB onboarding flow for Sanad, a concept business-banking brand, and built it as a working React prototype. The interesting part isn't the screens. It's the constraint: you're not allowed to make the process easier by making it less rigorous. Every decision lives inside that."
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "The tension that shapes everything"
+  },
+  {
+   "type": "p",
+   "html": "You cannot delete steps. Regulators require this verification, so \"reduce friction\" in the usual sense is off the table. The real problem is narrower and harder than that:"
+  },
+  {
+   "type": "quote",
+   "html": "How do you make a legally rigid, unavoidable process feel fast, clear, and trustworthy, without weakening what it's legally required to do?",
+   "rule": "lime"
+  },
+  {
+   "type": "p",
+   "html": "That reframe is the whole project. It rules out the easy answer, fewer fields, and forces every decision to earn its place against a constraint I couldn't move."
+  },
+  {
+   "type": "p",
+   "html": "<strong>Who I designed for:</strong> a founder or ops lead completing verification for their company. Busy. Not a compliance expert. Often doesn't have every document on hand. And a little distrustful, because they're handing sensitive company and personal data to a product they met ten minutes ago. So I designed for someone impatient, under-informed, and slightly guarded, not a patient user who reads instructions."
+  },
+  {
+   "type": "p",
+   "html": "<strong>Scope:</strong> the verification journey only. Six screens: onboarding overview, business details, beneficial owners, document upload, verification-pending, and rejection/resubmit. Out of scope, deliberately: the banking product itself, back-office review tooling, and pricing. I wanted depth on the journey, not breadth across a product."
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "Research: the waiting screen and the rejection screen are where everyone gives up"
+  },
+  {
+   "type": "p",
+   "html": "I ran focused desk research on how three leaders handle business onboarding, Stripe, Mercury, and Airwallex, through their docs, help centers, and an annotated teardown of Mercury's live flow. Three findings shaped the design."
+  },
+  {
+   "type": "p",
+   "html": "<strong>The best pattern</strong> I saw was Mercury's. It splits onboarding into two phases: create the account with light info first, then do the heavy KYB. Commitment builds before documents get asked for, and a drop-off isn't a dead loss, because there's enough info left behind to re-engage the user."
+  },
+  {
+   "type": "p",
+   "html": "<strong>The worst pattern</strong> showed up in all three. The waiting state after submission is thin. Users get told review takes days, then handed a vague \"we'll be in touch.\" The moment that most needs reassurance gets the least design."
+  },
+  {
+   "type": "p",
+   "html": "<strong>The gap nobody fills</strong> is the emotional design of rejection. Every product documents what to resubmit. None of them make a rejected document feel non-accusatory. That gap became the screen I put the most into."
+  },
+  {
+   "type": "p",
+   "html": "Beyond the patterns, I studied screenshots of Mercury's live signup and pulled four interaction signatures into the build. The oversized step numeral (\"01 / 04\") for instant orientation. Field labels that take on the brand color on focus. Inline green validation checks as each field completes. Helper hints right at the point of typing (\"Numbers, letters, and dashes only please\"). Small things, but they're a big part of why that flow feels calm, and adapting them was cheaper than reinventing them."
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "Six decisions for a process that can't be shortened"
+  },
+  {
+   "type": "p",
+   "html": "I worked through each key decision the same way: the problem, the options I weighed, and what I chose. Where it matters I've kept the option I rejected visible, because what you decide not to do says as much as what you ship."
+  },
+  {
+   "type": "h3",
+   "text": "1. Show the whole path up front"
+  },
+  {
+   "type": "p",
+   "html": "An anxious, busy user needs to know what they're in for before they'll commit. The process genuinely is long, and I can't pretend it's two fields. So the choice was between revealing steps one at a time to make it feel shorter, or showing the entire map, every step with time estimates, before they start."
+  },
+  {
+   "type": "p",
+   "html": "I showed the full map. Revealing it piece by piece doesn't reduce drop-off, it just delays it to the moment the user feels misled. Being honest about the length up front (\"four steps, about 10 minutes, then 1 to 2 days to verify\") is what earns the first click."
+  },
+  {
+   "type": "figure",
+   "images": [
+    {
+     "src": "/assets/work/sanad-overview.png",
+     "alt": "Sanad overview screen showing the full four-step map with per-step time estimates"
+    }
+   ],
+   "caption": "The full step map with per-step time estimates and the 1 to 2 day expectation, set before the user starts.",
+   "zoom": true
+  },
+  {
+   "type": "h3",
+   "text": "2. Explain why at every sensitive request"
+  },
+  {
+   "type": "p",
+   "html": "Non-experts abandon when they're asked for something invasive with no reason given. Some of these requests really are invasive, registration numbers, owner IDs, and they can't be removed. The options were a generic \"we take privacy seriously\" line up top, or an inline \"why we ask\" tied to each specific request."
+  },
+  {
+   "type": "p",
+   "html": "I went inline and specific. Blanket reassurance is wallpaper, nobody reads it. A one-line reason sitting next to the scary field (\"this confirms your company legally exists\") turns anxiety into trust exactly where the anxiety is."
+  },
+  {
+   "type": "figure",
+   "images": [
+    {
+     "src": "/assets/work/sanad-why.png",
+     "alt": "Business details screen with the 'why we ask' reason shown beside the registration number field"
+    }
+   ],
+   "caption": "The reason sits inline, next to the field that triggers the worry, not in a privacy blurb up top.",
+   "zoom": true
+  },
+  {
+   "type": "h3",
+   "text": "3. Build momentum before the heavy lifting"
+  },
+  {
+   "type": "p",
+   "html": "Confidence early keeps people moving into the hard parts, and the hard parts, documents and multiple owners, are unavoidable. I could ask for everything in one long honest form, or sequence it easy-to-hard and pre-fill what's already known so the user just confirms it."
+  },
+  {
+   "type": "p",
+   "html": "I sequenced it, with pre-filled fields the user only has to confirm. That last bit is borrowed straight from Mercury. Front-loading effort before any sense of progress is the fastest way to lose someone at step one."
+  },
+  {
+   "type": "figure",
+   "images": [
+    {
+     "src": "/assets/work/sanad-owners.png",
+     "alt": "Owners screen with the applicant already added as primary owner"
+    }
+   ],
+   "caption": "The applicant is pre-added from sign-up, so the user confirms what is already there.",
+   "zoom": true
+  },
+  {
+   "type": "h3",
+   "text": "4. Never hard-block a willing user"
+  },
+  {
+   "type": "p",
+   "html": "The single most common real-world reason people drop off is \"I don't have that document right now.\" The document is still required, I can't waive it. So the choice was to block progress until every required file is uploaded, or let the user mark a document \"add later,\" keep moving, and save automatically."
+  },
+  {
+   "type": "p",
+   "html": "I built the escape hatch. A hard block turns a temporary problem, missing a file today, into a permanent one, never coming back. Required doesn't mean required this second. Save-and-resume is what keeps a willing user from turning into a lost one. This is the exact wall I hit at Companies House, so it wasn't a hypothetical to me."
+  },
+  {
+   "type": "figure",
+   "images": [
+    {
+     "src": "/assets/work/sanad-documents.png",
+     "alt": "Documents screen with one file uploaded and one required document marked 'add later'"
+    }
+   ],
+   "caption": "One file uploaded, one marked 'add later' with a reminder, and the path forward still open.",
+   "zoom": true
+  },
+  {
+   "type": "h3",
+   "text": "5. Make the wait honest instead of empty"
+  },
+  {
+   "type": "p",
+   "html": "Verification takes days on the backend, and a silent \"pending\" screen quietly erodes all the trust the flow just built. I can't make the review faster, that's a compliance-team reality. So the choice was a spinner and \"we'll be in touch,\" or an honest status: a real timeline, plain-language \"here's what's happening,\" what to do in the meantime, and how they'll be told."
+  },
+  {
+   "type": "p",
+   "html": "I built the honest status. This was the worst pattern from my research, turned into an opportunity. A cheerful \"almost done!\" breaks trust the second it turns out not to be true. Being transparent about a slow step beats lying about a fast one."
+  },
+  {
+   "type": "figure",
+   "images": [
+    {
+     "src": "/assets/work/sanad-pending.png",
+     "alt": "Pending screen with a real timeline, plain-language status, and a reference number"
+    }
+   ],
+   "caption": "Real timeline, plain-language status, what to do while waiting, and a reference number.",
+   "zoom": true
+  },
+  {
+   "type": "h3",
+   "text": "6. Handle rejection with dignity"
+  },
+  {
+   "type": "p",
+   "html": "A document gets rejected. Told badly, the user feels accused and quits right at the finish line. I still have to be specific about what failed, because vagueness helps no one fix it. The options were a generic \"verification failed, please resubmit,\" or naming the exact item and reason, reassuring that everything else is saved, and dropping them straight to fixing that one thing."
+  },
+  {
+   "type": "p",
+   "html": "I went specific, blameless, one tap forward. This is the gap from my research, and it's the screen I'm proudest of. \"Verification failed\" reads as an accusation and a dead end. \"Your proof of address is a little out of date, everything else is verified\" is the same fact delivered as a small fixable task instead of a verdict. It's also, again, the exact thing that sent me back to square one in real life."
+  },
+  {
+   "type": "figure",
+   "images": [
+    {
+     "src": "/assets/work/sanad-rejection.png",
+     "alt": "Rejection screen naming the exact document and reason, with everything else marked verified and saved"
+    }
+   ],
+   "caption": "Names the exact document and reason, reassures that everything else is saved, and offers one clear action that lands on the flagged item.",
+   "zoom": true
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "Auditing my own build: the running code failed in four places a screenshot would have hidden"
+  },
+  {
+   "type": "p",
+   "html": "Because the prototype is real working code, I could hold it to the same standard as the writing. So after the first build, I audited it against best practice. It failed in four places, and the failures are worth showing."
+  },
+  {
+   "type": "p",
+   "html": "<strong>The consent checkbox was a dark pattern.</strong> V1 had the \"I confirm this is accurate\" box pre-checked and non-interactive. Legal consent has to be an affirmative act, so the fix was a real checkbox with Submit disabled until it's ticked."
+  },
+  {
+   "type": "p",
+   "html": "<strong>The build contradicted my own Decision 4.</strong> \"Never hard-block a willing user,\" and yet the \"add later\" escape hatch only existed on the optional document, where it does nothing. I extended it to required documents, which was the entire point."
+  },
+  {
+   "type": "p",
+   "html": "<strong>\"Saved automatically\" was a lie.</strong> The label was right there on screen, but going back actually wiped uploads and owners. I moved state up so the promise the UI makes is one the prototype actually keeps."
+  },
+  {
+   "type": "p",
+   "html": "<strong>A date that didn't add up.</strong> The rejected address document was named as a June bill while the rejection reason said \"issued in January, older than 3 months.\" A compliance reviewer would catch that in seconds, so I should too. Fixed, along with a set of accessibility gaps: unlinked labels, a step rail you couldn't reach by keyboard, missing focus states."
+  },
+  {
+   "type": "p",
+   "html": "None of these showed up in a screenshot. They only surfaced because the thing runs. Which is the whole argument for designing in code: it makes your claims testable, including against yourself."
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "Two threads that tie it together"
+  },
+  {
+   "type": "p",
+   "html": "Every screen comes back to two ideas. <strong>Explain why at every sensitive moment</strong>, because trust gets built request by request, not with a policy page. And <strong>never hard-block a willing user</strong>, because momentum is the scarcest resource in onboarding and it needs protecting everywhere."
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "What I'd do next"
+  },
+  {
+   "type": "p",
+   "html": "This is a concept, so what I have is design intent, not proof. I'd rather say that plainly than invent a \"40% lift.\" If I took it further, there are three things I'd test. Whether the \"add later\" hatch actually recovers droppers or just defers them. Whether the per-field \"why we ask\" cuts abandonment on the owners step specifically. And whether the honest waiting screen lowers support tickets during the review window. Those are the hypotheses the design is built to test."
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "Try the whole flow yourself"
+  },
+  {
+   "type": "p",
+   "html": "<strong>A note on the visual language:</strong> the prototype is built in a Mercury-inspired system on purpose. Lavender canvas, white cards, indigo accents, geometric sans, all pulled from my desk research. Working inside an established fintech design language is closer to the actual job of joining a fintech design team than inventing a new one."
+  },
+  {
+   "type": "prototype",
+   "label": "Live prototype · click through the real flow",
+   "url": "sanad.app/verify",
+   "caption": "The actual working prototype, not a video. Reach the rejection path by simulating that outcome on the pending screen. This is the post-audit v2 build."
+  },
+  {
+   "type": "quote",
+   "html": "Regulators decide what the steps are. Design decides how they feel. That gap is the whole job.",
+   "rule": "lime"
+  }
+ ],
+ "ending": null,
+ "next": {
+  "label": "Next story",
+  "title": "When the Bank Knows and the Customer Doesn't",
+  "href": "/work/wio"
+ },
+ "progressSegments": 10
+}

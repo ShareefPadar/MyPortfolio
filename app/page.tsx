@@ -19,11 +19,8 @@ import { featured, sideProjects } from "@/lib/work";
  * nothing.
  */
 
-const SectionMarker = ({ n, title }: { n: string; title: string }) => (
-  <div className="mb-24 flex items-baseline gap-12 md:mb-32">
-    <Reveal variant="pop" as="span" className="font-pix text-[20px] font-bold leading-none text-blue">
-      {n}
-    </Reveal>
+const SectionMarker = ({ title }: { title: string }) => (
+  <div className="mb-24 md:mb-32">
     <h2 className="font-pix text-[14px] leading-[1.8] tracking-[0.02em] text-ink">{title}</h2>
   </div>
 );
@@ -35,9 +32,9 @@ export default function Home() {
         <Hero />
       </div>
 
-      {/* 01 SELECTED WORK */}
+      {/* SELECTED WORK */}
       <section id="work" data-guide-id="work" className="mx-auto w-full max-w-wide px-16 pt-64 md:pt-96">
-        <SectionMarker n="01" title="SELECTED WORK" />
+        <SectionMarker title="SELECTED WORK" />
 
         <div className="grid gap-32 md:grid-cols-2 md:gap-48">
           {featured.map((study) => (
@@ -60,9 +57,9 @@ export default function Home() {
         <div data-guide-id="nda" className="mt-48 md:mt-64">
           <Reveal>
             <div className="sp sp-neutral-4 sp-s4 sp-sunk p-24 md:p-32">
-              <p className="mb-12 flex items-center gap-8 font-mono text-[9px] uppercase tracking-[0.11em] text-mute">
+              <p className="mb-12 flex items-center gap-8 font-mono text-[9px] tracking-[0.02em] text-mute">
                 <PixelIcon name="info" size={8} />
-                UNDER NDA
+                Under NDA
               </p>
 
               <div className="flex flex-col items-start gap-16 sm:flex-row sm:items-end sm:justify-between sm:gap-32">
@@ -83,7 +80,6 @@ export default function Home() {
                 >
                   <span className="inline-flex items-center gap-8 border-b-[3px] border-ink pb-4 font-pix text-[11px] leading-none text-ink group-hover:border-blue">
                     VIEW ALL WORK
-                    <PixelIcon name="arrowR" size={8} />
                   </span>
                 </Link>
               </div>
@@ -92,12 +88,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 02 DESIGNED, BUILT & LIVE */}
+      {/* DESIGNED, BUILT & LIVE */}
       <section
         data-guide-id="live"
         className="mx-auto w-full max-w-wide px-16 pt-64 pb-96 md:pt-96 md:pb-128"
       >
-        <SectionMarker n="02" title="DESIGNED, BUILT & LIVE" />
+        <SectionMarker title="DESIGNED, BUILT & LIVE" />
 
         <div className="grid gap-32 md:grid-cols-2 md:gap-48">
           {sideProjects.map((study) => (
@@ -105,17 +101,17 @@ export default function Home() {
               {/* h-[calc(100%-17px)], not h-full: mt-17 clears the tab, and the
                   height has to give that back or the card overhangs its slot. */}
               <div className="card mt-[17px] flex h-[calc(100%-17px)] flex-col">
-                <span className="card-tab">{study.domain}</span>
+                <span className="card-tab">{study.card.category}</span>
 
                 <div className="card-body m-[10px] flex flex-1 flex-col p-16">
-                  <p className="mb-8 flex items-center gap-8 font-mono text-[9px] uppercase tracking-[0.11em] text-mute">
+                  <p className="mb-8 flex items-center gap-8 font-mono text-[9px] tracking-[0.02em] text-mute">
                     <span className="led inline-block h-8 w-8 bg-lime" aria-hidden="true" />
                     Live · side project
                   </p>
                   <h3 className="mb-4 font-sans text-[19px] font-medium leading-[1.4] text-ink">
                     {study.card.headline}
                   </h3>
-                  <p className="mb-12 font-mono text-[9px] uppercase tracking-[0.11em] text-mute">
+                  <p className="mb-12 font-mono text-[9px] tracking-[0.02em] text-mute">
                     {study.card.title}
                   </p>
                   <p className="mb-16 font-sans text-[14px] leading-[1.6] text-ink">
@@ -130,7 +126,6 @@ export default function Home() {
                       className="inline-flex min-h-[44px] items-center gap-8 font-pix text-[11px] leading-none text-blue"
                     >
                       CASE STUDY
-                      <PixelIcon name="arrowR" size={8} />
                     </Link>
                     {study.liveUrl && (
                       <a
@@ -140,7 +135,6 @@ export default function Home() {
                         className="inline-flex min-h-[44px] items-center gap-8 font-pix text-[11px] leading-none text-blue"
                       >
                         LAUNCH APP
-                        <PixelIcon name="external" size={8} />
                       </a>
                     )}
                   </div>

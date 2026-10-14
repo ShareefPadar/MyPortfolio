@@ -1,0 +1,409 @@
+{
+ "_source": "https://www.shareefpadar.com/work/freelax — extracted from the live DOM by scripts/sync-studies.py",
+ "id": "freelax",
+ "slug": "freelax",
+ "url": "/work/freelax",
+ "pageTitle": "Building tax software for one person, not a small business | Shareef Padar",
+ "description": "Co-founded a live UK tax product for freelancers against an April 2026 legal deadline. On saying no to payroll, and clearing 182 contrast failures in one line.",
+ "ogImage": "https://www.shareefpadar.com/assets/work/freelax-thumb.webp",
+ "head": {
+  "number": "01",
+  "label": "Overview",
+  "title": "Tax that stops being a surprise.",
+  "meta": [
+   {
+    "k": "My role",
+    "v": "Co-founder, Product & Design"
+   },
+   {
+    "k": "Type",
+    "v": "Live product"
+   },
+   {
+    "k": "Period",
+    "v": "2026"
+   },
+   {
+    "k": "Stack",
+    "v": "Next.js · Supabase · Tailwind · Stripe · Claude API"
+   }
+  ],
+  "lead": "From April 2026, HMRC requires every UK sole trader over £50,000 to file quarterly through approved software. The tools waiting for them are built for businesses with payroll and an accountant on retainer, not for one person doing the work and the books at eleven at night. I co-founded Freelax to be the different shape that gap needs, and I own everything you can see.",
+  "outcome": {
+   "label": "Outcome",
+   "text": "Live and taking sign-ups. Invoicing, expenses, the tax engine, IR35 and the Self Assessment pack all work. MTD submission is built against HMRC's sandbox and waiting on recognition."
+  },
+  "statement": "Freelax tells you what you owe. Sometimes it will be wrong, and when it is wrong, the letter from HMRC arrives at the user's house, not ours. That fact sat with me the whole build."
+ },
+ "blocks": [
+  {
+   "type": "short",
+   "tab": "The short version",
+   "note": "8 min read",
+   "rows": [
+    {
+     "k": "Problem",
+     "v": "From April 2026 every UK sole trader over £50,000 must file quarterly through approved software. The tools waiting for them are built for businesses with payroll and an accountant, not for one person doing the work and the books at eleven at night."
+    },
+    {
+     "k": "What I did",
+     "v": "Co-founded and designed the whole product: positioning, design system, content design for AI uncertainty, and the interface itself. Live and taking sign-ups."
+    },
+    {
+     "k": "Why it was hard",
+     "v": "The deadline is written into law, not chosen. And the product tells people what they owe HMRC. When it is wrong, the letter arrives at their house, not ours."
+    }
+   ]
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "A deadline written into law"
+  },
+  {
+   "type": "p",
+   "html": "Most products get built because someone had an idea. This one has a date."
+  },
+  {
+   "type": "p",
+   "html": "From April 2026, HMRC requires every UK sole trader earning over £50,000 to file quarterly, through approved software. Not encouraged. Required. Spreadsheets stop being legal, and a few hundred thousand freelancers who have been getting by on a folder of receipts have to go and pick a tool."
+  },
+  {
+   "type": "p",
+   "html": "So I went and looked at what they would find. Xero. QuickBooks. Good products, all of them built for a business with employees, a payroll run and an accountant on retainer. A freelance designer opens one of these and is asked to set up a chart of accounts. She does not want a chart of accounts. She wants to know if the £400 laptop counts, and what she owes in January."
+  },
+  {
+   "type": "p",
+   "html": "That is the gap. And it is not filled by building a smaller Xero. It is filled by building something a different shape, designed around one person doing the work and the books at the same time, usually at eleven at night."
+  },
+  {
+   "type": "figure",
+   "images": [
+    {
+     "src": "/assets/work/freelax-signup.webp",
+     "alt": "Freelax sign-up: a cream form panel beside a dark green product panel showing a dashboard preview and three feature chips"
+    }
+   ],
+   "caption": "Sign-up. Form on cream, proof on Deep Forest. The trust stack sits directly under the button.",
+   "zoom": true
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "Built for one"
+  },
+  {
+   "type": "p",
+   "html": "A few weeks in, we had the conversation every product team has. What happens when our user grows?"
+  },
+  {
+   "type": "p",
+   "html": "It is a reasonable question. A freelancer hires their first contractor, then their first employee, and now they need payroll. If we do not build it, they leave. Every accounting product on the market has answered that question the same way: follow the user, add the feature, keep them."
+  },
+  {
+   "type": "p",
+   "html": "We said no. Payroll stays out."
+  },
+  {
+   "type": "callout",
+   "rule": "lime",
+   "label": "The reasoning",
+   "paras": [
+    "We are designing for who someone is on a Tuesday, not who they might be in three years. And a feature that a small fraction of people use is not free for everyone else. It is one more item in the sidebar, one more idea to step around, one more set of words that do not apply to you.",
+    "When the entire promise is that tax should feel calm instead of frightening, every feature you add is working against you. That is an uncomfortable thing to accept, because adding things feels like progress and removing them feels like losing."
+   ]
+  },
+  {
+   "type": "p",
+   "html": "We did not throw payroll away. It is a separate product, if we ever build it, because the moment someone has employees, they are no longer the person this interface was drawn for."
+  },
+  {
+   "type": "p",
+   "html": "What that decision bought us is everywhere in the app. No chart of accounts. No journals. No nominal codes. No Employees tab sitting there empty, quietly telling you this software was meant for somebody bigger than you."
+  },
+  {
+   "type": "figure",
+   "images": [
+    {
+     "src": "/assets/work/freelax-dashboard.webp",
+     "alt": "Freelax dashboard showing three figures (earned this year, tax set aside, safe to spend) above a list of overdue invoices needing attention"
+    }
+   ],
+   "caption": "Three numbers, in the order a freelancer actually asks them: what came in, what's owed, what's genuinely mine. The sidebar is the argument too: seven items, and no Employees tab.",
+   "zoom": true
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "Accessible without flattening the design"
+  },
+  {
+   "type": "p",
+   "html": "I ran an accessibility audit expecting a short list. It came back with 182 contrast failures."
+  },
+  {
+   "type": "p",
+   "html": "So I started fixing them, and that is when the real problem showed up. The palette is Deep Forest and Cream. Soft, quiet, deliberately low contrast, because the whole point is that this product should not feel like a tax form. The obvious way to pass a contrast check is to darken everything, and every time I darkened something, Freelax stopped looking like Freelax."
+  },
+  {
+   "type": "p",
+   "html": "I sat with that for a while. Calm clarity is one of our four brand pillars. There is no version of this where I ship an accessible app that has quietly abandoned the thing it promised."
+  },
+  {
+   "type": "callout",
+   "rule": "lime",
+   "label": "The fix",
+   "paras": [
+    "The answer was to stop fixing components and fix the system. One token, <code>--text-muted</code>, moved from <code>#888780</code> to <code>#696863</code>. Three point five nine to one, up to five point five seven to one.",
+    "All 182 failures cleared. In one line. Because every caption, every label, every piece of helper text in the product reads its colour from that one variable.",
+    "And it still looks like Freelax. Put the two versions next to each other and most people cannot tell you which is which. It was never a redesign. It was a shade."
+   ]
+  },
+  {
+   "type": "p",
+   "html": "Then I made sure it could not quietly come undone. Twelve scripts run on every build and break it if anyone hand-rolls a button, a stat card, an alert or a font size instead of using the system. Including me, at midnight, in a hurry."
+  },
+  {
+   "type": "p",
+   "html": "Accessibility that depends on someone remembering does not survive a deadline. Accessibility that fails the build does."
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "An interface that tells the truth about its own uncertainty"
+  },
+  {
+   "type": "p",
+   "html": "Freelax tells you what you owe. Sometimes it will be wrong, and when it is wrong, the letter from HMRC arrives at the user's house, not ours."
+  },
+  {
+   "type": "p",
+   "html": "That fact sat with me the whole build. The question was never whether to add disclaimers. It was how to be honest about uncertainty without the product sounding like it does not believe itself."
+  },
+  {
+   "type": "p",
+   "html": "Three things came out of it. Disclaimers became a component with variants, not a paragraph somebody remembers to paste in. Anything the AI writes wears a visible <em>AI-generated — please review</em> flag. And every AI surface writes forward, softly: <em>worth checking</em>, <em>you may have missed</em>, <em>tends to</em>. It suggests. It never delivers a verdict."
+  },
+  {
+   "type": "p",
+   "html": "The disclaimer also sits inside the card it qualifies, not at the foot of the page. It qualifies that claim, at the moment the user reads it."
+  },
+  {
+   "type": "figure",
+   "images": [
+    {
+     "src": "/assets/work/freelax-ai-insight.webp",
+     "alt": "An AI insight card explaining a quiet month, with the tax-advice disclaimer nested in a box inside the card"
+    }
+   ],
+   "caption": "The disclaimer sits inside the card, not at the foot of the page. It is attached to the claim at the moment it is read.",
+   "zoom": true
+  },
+  {
+   "type": "h3",
+   "text": "We nearly called it an audit"
+  },
+  {
+   "type": "p",
+   "html": "I am glad we did not."
+  },
+  {
+   "type": "p",
+   "html": "Think about what that word does to a freelancer. An audit is something done <em>to</em> you. Afterwards. By someone going through your year looking for what you got wrong. That is precisely the feeling this product exists to take away."
+  },
+  {
+   "type": "p",
+   "html": "A copilot sits beside you for the whole flight. It is there in April, not only in January. It tells you what is coming instead of what went wrong. And it carries the actual promise underneath all of this: you do not have to pay someone £600 a year to keep you out of trouble, because something is already watching with you."
+  },
+  {
+   "type": "figure",
+   "images": [
+    {
+     "src": "/assets/work/freelax-copilot.webp",
+     "alt": "The tax copilot slide-over, headed by an AI-generated please review flag, structured into snapshot, based on, what's going well, where to improve, and tax reduction opportunities"
+    }
+   ],
+   "caption": "Tax copilot. Structured into snapshot, what's working, where to improve and, above all of it, what it is basing any of this on.",
+   "zoom": true
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "What I got wrong: one page holding everything"
+  },
+  {
+   "type": "p",
+   "html": "My first version of the tax page showed everything."
+  },
+  {
+   "type": "p",
+   "html": "Tax owed. Set aside. Take-home. Deadline. VAT position. Profit and loss. All four MTD quarters. The tax pot. Payments on account. One page, nothing hidden, no clicking around."
+  },
+  {
+   "type": "p",
+   "html": "I was proud of it. Nobody should have to hunt for their own money."
+  },
+  {
+   "type": "p",
+   "html": "Then I opened it as a user would, and it was a wall. Numbers everywhere, all shouting at the same volume. The single most important figure on the page, what you owe, sat there with exactly as much weight as a VAT box nobody looks at. I had built the opposite of calm and called it thorough."
+  },
+  {
+   "type": "callout",
+   "rule": "lime",
+   "label": "What I changed",
+   "paras": [
+    "So I broke it apart. The tax page now carries four figures and the one thing you should do next. VAT returns, MTD submissions and period detail each got their own page.",
+    "It stopped trying to show everything and started answering one question: <em>what do I owe, and what do I do about it</em>. The rest is one deliberate click away."
+   ]
+  },
+  {
+   "type": "p",
+   "html": "Showing more is not the same as being clearer. That is the entire product, in one mistake I had to make first."
+  },
+  {
+   "type": "figure",
+   "images": [
+    {
+     "src": "/assets/work/freelax-tax.webp",
+     "alt": "The tax page after the split: four headline figures (tax owed, set aside, take-home, deadline), one suggested next step, and MTD quarters and VAT returns as their own destinations"
+    }
+   ],
+   "caption": "After the split. Four figures, one suggested action, and VAT returns and MTD submissions demoted to links.",
+   "zoom": true
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "IR35 lives on the engagement, not in a tool"
+  },
+  {
+   "type": "p",
+   "html": "IR35 decides whether a contractor is genuinely self-employed or an employee wearing a different hat. Getting it wrong is expensive, and it is decided per engagement, not once for a person."
+  },
+  {
+   "type": "p",
+   "html": "Which is why the questionnaire is not its own page. It lives on the project, and the answer is stamped there. A contractor with six clients gets six assessments, because that is the truth of their situation. One overall verdict would be a comforting lie."
+  },
+  {
+   "type": "p",
+   "html": "Each question also shows what it is worth: HIGH or MED. The weighting was always in the scoring; I just stopped hiding it. Now you can see which of your answers is actually deciding the outcome instead of treating fifteen questions as if they matter equally."
+  },
+  {
+   "type": "figure",
+   "images": [
+    {
+     "src": "/assets/work/freelax-ir35.webp",
+     "alt": "IR35 assessment questions each tagged HIGH or MED (personal service, substitution, mutuality and control weighted HIGH; equipment, exclusivity, financial risk and part-and-parcel weighted MED), sitting on a project page above that project's invoices"
+    }
+   ],
+   "caption": "Weighted questions, with the weighting made visible. It sits on the project, above that project's own invoices, because IR35 is decided per engagement.",
+   "zoom": true
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "Two founders, one codebase"
+  },
+  {
+   "type": "p",
+   "html": "There are two of us, and neither of us is an engineer by training. So we drew a line through the repository instead of through a backlog. <code>components/</code>, <code>app/</code>, <code>styles/</code>, <code>public/</code> are mine. Tax logic, API routes, database schema are his."
+  },
+  {
+   "type": "p",
+   "html": "It means I design against numbers I did not calculate, and it means our disagreements arrive as pull requests."
+  },
+  {
+   "type": "p",
+   "html": "It is also half the reason those twelve build scripts exist. They hold the system in place so neither of us has to police the other."
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "How I'd know if this worked"
+  },
+  {
+   "type": "p",
+   "html": "Freelax is live, but it is early. I have no results to wave at you yet. What I do have is a clear idea of what would tell me I was right:"
+  },
+  {
+   "type": "ol",
+   "items": [
+    "<strong>Time to first invoice.</strong> Five minutes is the target. It is the cleanest test of whether \"built for one\" actually removed friction or just removed features.",
+    "<strong>Whether anyone touches the tax pot.</strong> Telling someone what they owe is the easy half. Getting them to put money aside in October is the product actually working.",
+    "<strong>How often the copilot gets dismissed.</strong> If people close it without reading it, my careful hedged voice has tipped over into noise.",
+    "<strong>Whether the build ever fails on contrast.</strong> A system that never catches anything is either perfect or not actually running."
+   ]
+  },
+  {
+   "type": "hr"
+  },
+  {
+   "type": "h2",
+   "text": "Live, and not finished"
+  },
+  {
+   "type": "p",
+   "html": "Freelax is in production and taking sign-ups today. Invoicing, quotes, expenses, mileage, the tax engine, IR35 and the Self Assessment pack all work."
+  },
+  {
+   "type": "figure",
+   "images": [
+    {
+     "src": "/assets/work/freelax-invoices.webp",
+     "alt": "The invoices list: nine invoices with draft, overdue and paid status pills, filter tabs across the top, and unpaid and paid totals"
+    }
+   ],
+   "caption": "Invoicing, with the state of every invoice readable at a glance.",
+   "zoom": true
+  },
+  {
+   "type": "p",
+   "html": "MTD submission is built against HMRC's sandbox and waiting. It unlocks when we are recognised, and recognition needs the company formed first, which makes it the longest thread we are pulling."
+  },
+  {
+   "type": "callout",
+   "rule": "blue",
+   "label": "What this page does not claim",
+   "paras": [
+    "Nothing here says Freelax is HMRC approved, because it is not, yet. In a product about tax, that felt like the only place to start."
+   ]
+  }
+ ],
+ "ending": {
+  "number": "02",
+  "heading": "See it live",
+  "text": "Don't take the case study's word for it. Go and use the product.",
+  "links": [
+   {
+    "label": "Launch app",
+    "href": "https://app.freelax.co.uk"
+   },
+   {
+    "label": "View repository",
+    "href": "https://github.com/Freelax1/Freelax"
+   }
+  ]
+ },
+ "next": {
+  "label": "Next story",
+  "title": "Google Maps Route Pass",
+  "href": "/work/google-maps-route-pass"
+ },
+ "progressSegments": 10
+}

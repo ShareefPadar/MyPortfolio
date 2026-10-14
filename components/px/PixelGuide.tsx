@@ -725,7 +725,7 @@ export default function PixelGuide() {
           {open ? (
             <div style={{ animation: "guideIn calc(var(--f) * 4) steps(4, end) both" }}>
               <div className="guide-bubble">
-                <p className="font-mono text-[9px] uppercase tracking-[0.11em] text-ink/60">
+                <p className="font-mono text-[9px] tracking-[0.02em] text-ink/60">
                   Clippy
                 </p>
                 {phase === "dots" ? (
@@ -741,7 +741,7 @@ export default function PixelGuide() {
               <div className="guide-tail" />
             </div>
           ) : (
-            <span className="guide-name">CLIPPY</span>
+            <span className="guide-name">Clippy</span>
           )}
         </div>
       </div>

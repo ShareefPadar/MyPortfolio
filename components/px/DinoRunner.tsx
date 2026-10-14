@@ -604,7 +604,7 @@ export default function DinoRunner() {
           the very edge of the viewport reads as a bug. It keeps the same
           container as the rest of the page so it lines up with the sections
           above it. */}
-      <p className="mx-auto mb-12 w-full max-w-wide px-16 font-mono text-[9px] uppercase tracking-[0.11em] text-mute">
+      <p className="mx-auto mb-12 w-full max-w-wide px-16 font-mono text-[9px] tracking-[0.02em] text-mute">
         {/* Branch in CSS, not JS: picking the wording from a media query at
             render time would differ between server and client. */}
         <span className="md:hidden">Tap to jump</span>
