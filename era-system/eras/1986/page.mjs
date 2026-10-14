@@ -1,7 +1,7 @@
 /**
  * ERA · 1986 — home. Title screen · level select · secret area · bonus stages.
  * Shell (menu, NPC guide, cursor, continue screen) in layout.mjs. Easter egg: SHIP THE BACKLOG (game.mjs) on top of the continue screen.
- * Portrait: the real pixels at half resolution in a 4-tone palette; hover / focus = palette swap to NES colours.
+ * Portrait: the photo at one bit a pixel, an Atkinson dither of head and hand (portrait.mjs).
  * Flavour text ("LEVEL SELECT", "PRESS START") is aria-hidden ornament only.
  */
 import { shell, esc } from './layout.mjs';

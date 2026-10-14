@@ -1,7 +1,7 @@
 /**
  * ERA · 2002 — home. Intro, Selected work panel, yellow info box, Designed & live panel;
  * sidebar: the portrait in a glossy frame with a reflection, then the contact widget (layout.mjs).
- * Portrait: the real pixels drawn smooth on a sky gel — the era's soft "photo" — with a gloss sweep on hover.
+ * Portrait: the real photo as it is, in the glossy frame, with a gloss sweep on hover (portrait.mjs).
  * Easter egg: BUBBLE POP (game.mjs) between the page and the footer bar.
  * Flavour ("New!", the » chevrons, the gel app icons) is aria-hidden ornament only.
  */

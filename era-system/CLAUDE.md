@@ -44,7 +44,7 @@ The eras share exactly one thing: **the content** in `content/site.json`.
 CLAUDE.md
 content/
   site.json                 THE shared content — synced to live. projects{} once; home + work refer by id
-  portrait.json             Shareef's real pixel portrait as data (96×144) — every era renders it
+  portrait.json             Shareef's real pixel portrait as data (96×144) — 1995 renders it; alt text for it and for the photo (photoAlt). Now has no portrait
   studies/<id>.json         the 9 case studies as blocks — NEVER hand-edit: re-run scripts/sync-studies.py after changing a study on live
 eras/
   _shared/client.mjs        BEHAVIOUR only, no look: decodePortrait() + guideBrain() (section lines, idle chatter, dismiss → comeback)
@@ -57,13 +57,15 @@ eras/
     layout.mjs              shared shell: nav (current pressed), footer, Clippy, pixel cursor
     page.mjs · work.mjs · about.mjs · study.mjs   home · work index · about · case study (one page per study)
     style.css
-  1986/ 2002/ 2014/ now/    phase 2: layout.mjs (shell, guide, cursor, switcher) · portrait.mjs · page.mjs (home) · work.mjs · about.mjs · study.mjs
+  1986/ 2002/ 2014/ now/    phase 2: layout.mjs (shell, guide, cursor, switcher) · portrait.mjs (not in now) · page.mjs (home) · work.mjs · about.mjs · study.mjs
                             game.mjs: the home's easter-egg game (text from content.games[era]) — no box; page = sky, footer top = floor. Now has none
                             now/sky.mjs: Now's page background, a night or morning sky by the visitor's clock; it also decides Now's light / dark colours
 assets/icons/               pixel.json (8×8) · line.json (stroked) — same 20 names · brands.json (LinkedIn, Behance, Medium)
 assets/sprites-1995.json    Clippy frames + cursor sprites, from the live site
+assets/portraits/           GENERATED from the photo by scripts/build-portraits.py, and committed: 1986.json (one-bit dither) · 2002.webp · 2014.webp · 2014-head.webp
 scripts/
   sync-studies.py           pulls the 9 case studies from live → content/studies (uses lib/extract-study.js)
+  build-portraits.py        the photo → assets/portraits (needs Pillow + rembg; run only when the photo or a treatment changes)
   lib/content.mjs           loads site.json and resolves project ids — used by build and check
   lib/render.mjs            loadInputs() + renderPage(): what both builds use to render an era page
   build-eras.mjs            every era page → design-reference/eras/<era>.html, <era>-work.html … (previews)

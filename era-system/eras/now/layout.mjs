@@ -15,7 +15,7 @@
  * Light by day, dark by night: the colours follow the sky. System font (SF Pro on Apple devices).
  * Pages supply <main> content (inside .page) and any page-only script.
  */
-import { portraitJS, guideJS, eraSwitchJS, eraRailJS, arriveHeadJS } from '../_shared/client.mjs';
+import { guideJS, eraSwitchJS, eraRailJS, arriveHeadJS } from '../_shared/client.mjs';
 import { eraItems } from '../_shared/eras.mjs';
 import { headMeta } from '../_shared/head.mjs';
 import { skyHeadJS, skyMarkup, skyScript } from './sky.mjs';
@@ -30,7 +30,7 @@ const TAB = {
 // iOS back button: a chevron and the previous page's name
 export const BACK = '<svg viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.5 2.5 2.5 10l7 7.5"/></svg>';
 
-export function shell({ content: c, pageUrl = '/', study = null, assetBase = '', icons, css, portrait, title, current = '/', main, pageScript = '', guideOpening = null, compactFooter = false, quietSky = false }) {
+export function shell({ content: c, pageUrl = '/', study = null, assetBase = '', icons, css, title, current = '/', main, pageScript = '', guideOpening = null, compactFooter = false, quietSky = false }) {
   const ic = n => icons.line[n];
   const opening = guideOpening ?? '';
   const now = eraItems(c, pageUrl, 'now').find(e => e.current);
@@ -118,8 +118,7 @@ ${compactFooter ? `  <footer class="footer compact">
 <script>
 (() => {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches, touch = matchMedia('(hover: none)').matches;
-  const P = ${JSON.stringify(portrait)}, G = ${JSON.stringify(c.guide)};
-  ${portraitJS}
+  const G = ${JSON.stringify(c.guide)};
   ${guideJS}
   ${skyScript}
 

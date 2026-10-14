@@ -1,14 +1,13 @@
 /**
  * ERA · now — About, Liquid Glass the way Apple ships it.
- * Large title and lead beside the portrait well; the bio as plain prose; "How I work" and "Where I've worked" as
+ * Large title and lead (no portrait in this era: Shareef's call); the bio as plain prose; "How I work" and "Where I've worked" as
  * Settings-style grouped panels; the quote large, with the two calls to action under it.
  */
 import { shell, esc } from './layout.mjs';
-import { portraitMarkup, portraitScript } from './portrait.mjs';
 export const meta = { id: 'now', title: 'Now · About' };
 
 export default function render(args) {
-  const { content: c, portrait } = args;
+  const { content: c } = args;
   const A = c.about;
 
   const main = `  <section class="hero" aria-labelledby="a-title">
@@ -16,7 +15,6 @@ export default function render(args) {
       <h1 class="large" id="a-title">${esc(A.heading)}</h1>
       <p class="lead">${esc(A.lead)}</p>
     </div>
-    ${portraitMarkup(portrait)}
   </section>
 
   <div class="prose">
@@ -49,5 +47,5 @@ export default function render(args) {
     </div>
   </figure>`;
 
-  return shell({ ...args, current: '/about', main, pageScript: portraitScript });
+  return shell({ ...args, current: '/about', main });
 }

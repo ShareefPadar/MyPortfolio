@@ -8,7 +8,7 @@
  *   home's easter egg       → SHIP THE BACKLOG, a brick breaker whose paddle rides the CONTINUE? box (game.mjs, passed as beforeFooter)
  * Pages supply <main>, optional beforeFooter (the game) and any page-only script.
  */
-import { portraitJS, guideJS, eraSwitchJS, eraRailJS, arriveHeadJS } from '../_shared/client.mjs';
+import { guideJS, eraSwitchJS, eraRailJS, arriveHeadJS } from '../_shared/client.mjs';
 import { eraItems } from '../_shared/eras.mjs';
 import { headMeta } from '../_shared/head.mjs';
 export const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -100,8 +100,7 @@ ${compactFooter ? `  <footer class="box continue compact">
 <script>
 (() => {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches, touch = matchMedia('(hover: none)').matches;
-  const P = ${JSON.stringify(portrait)}, G = ${JSON.stringify(c.guide)};
-  ${portraitJS}
+  const G = ${JSON.stringify(c.guide)};
   ${guideJS}
 
   // ── page-only script ──

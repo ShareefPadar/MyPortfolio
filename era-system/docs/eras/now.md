@@ -14,7 +14,7 @@
 | Layer | What's in it | Material |
 |---|---|---|
 | Sky | the page background (§5a) | a CSS gradient with stars or clouds drawn on it |
-| Content | panels, work cards, the portrait well, the footer | panel glass (§5); headlines and article text sit straight on the sky |
+| Content | panels, work cards, the footer | panel glass (§5); headlines and article text sit straight on the sky |
 | Controls | year switcher, Résumé, bottom tab bar, notification, lightbox close | control glass (§5), with refraction |
 
 Light by day, dark by night: the colours follow the sky, which follows the visitor's clock, not the device's dark mode. No mesh, no blobs, no bento.
@@ -57,7 +57,7 @@ backdrop-filter  url(#lens) blur(14px) saturate(1.8) brightness(1.04)   refracti
 box-shadow       bright top rim, faint bottom rim, .5px edge, soft drop
 ```
 
-Content panels (`--pane`): `.group`, `.footer`, `.stats`, `.soutcome`, `.scallout`, `.sshort`, `.sending`, `.snext`, `.spre`, `.mwin`, `.work`, `.portrait`:
+Content panels (`--pane`): `.group`, `.footer`, `.stats`, `.soutcome`, `.scallout`, `.sshort`, `.sending`, `.snext`, `.spre`, `.mwin`, `.work`:
 
 ```
 background       rgba(255,255,255,.44)  ·  night rgba(30,33,48,.42)
@@ -94,7 +94,7 @@ A work card is a glass card with the screenshot inside it, corners concentric (3
 | Résumé button | glass capsule, top right |
 | Era switcher | glass capsule top left, opening a glass popover |
 | Clippy | a collaborator's cursor named Shareef, as in a shared Figma file, in glass like the cards (it was lime; Shareef's call). It glides to what it's talking about (the section heading, Résumé, the email) and says it in cursor chat, then drifts a little while quiet. × closes it; a glass capsule brings it back. On phones it parks as that capsule and the bubble opens above it |
-| Portrait | the real pixels, crisp, in a glass well |
+| Portrait | none, on any screen (Shareef's call). The hero and About open on the large title alone |
 | Work cards | a glass card: big screenshot inside it, plain text under. The whole card is the link, so "Read case study" is kept for screen readers only. Lifts 4px under the pointer |
 | Live products, principles, timeline | Settings-style grouped glass panels with hairline rows |
 | Under NDA | grouped glass panel |

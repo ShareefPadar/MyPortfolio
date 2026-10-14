@@ -137,13 +137,15 @@ a { color: var(--action); }
   background: radial-gradient(120% 70% at 50% 18%, #E8F1FC, #9CC4F2 60%, #5F93D6);
   box-shadow: 0 0 0 1px #B8C3D2, 0 6px 14px rgba(18,50,100,.2);
   -webkit-box-reflect: below 6px linear-gradient(transparent 72%, rgba(255,255,255,.34)); }
-.photo canvas { display: block; width: 100%; height: 100%; filter: saturate(1.08) contrast(1.04); }
+.photo img { display: block; width: 100%; height: 100%; object-fit: cover; filter: saturate(1.08) contrast(1.04); }
 .photo::after { content: ""; position: absolute; inset: 0; pointer-events: none;   /* the glass over the print */
   background: linear-gradient(160deg, rgba(255,255,255,.42), rgba(255,255,255,.08) 34%, rgba(255,255,255,0) 50%); }
 .photo .shine { position: absolute; inset: -20% auto -20% -60%; width: 40%; transform: skewX(-20deg); pointer-events: none;
   background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.65), rgba(255,255,255,0)); }
 .photo:hover .shine, .photo:focus-visible .shine { animation: sweep .9s var(--era-ease); }
 @keyframes sweep { to { left: 130%; } }
+/* phones and small tablets: no portrait (Shareef's call, as on live, which drops it below 768px too) */
+@media (max-width: 767px) { .photo, .layout > .lead:has(> .b-about:only-child) { display: none; } }
 .b-contact .panel-body { display: flex; flex-direction: column; gap: 10px; }
 .b-contact .small { margin: 0; font-size: 13px; color: var(--text-muted); }
 .b-contact h2 { margin: 2px 0 0; font: 800 24px/1.2 var(--era-round); }

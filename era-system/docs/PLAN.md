@@ -32,7 +32,7 @@ Each era gets its own version of each 1995 component. Starting map (to be refine
 |---|---|---|---|---|
 | Clippy guide (sections, idle chatter, typing, dismiss) | Narrator in a text box, takes typed commands | Clippy as the 2002 Office assistant: yellow balloon, options, Hide | Chat head: round avatar on the edge, red 1, drag to × | Collaborator's cursor with cursor chat |
 | Pixel cursor (arrow / hand, 4px snap) | Chunkier 8px cursor | Aqua-style cursor | System cursor (flat era) | System cursor |
-| Pixel portrait, grey → colour on hover | Same pixels, 4-colour block palette | Same pixels, glossy frame + reflection | Same pixels, flat circle crop | Same pixels, crisp, in a solid well |
+| Pixel portrait, grey → colour on hover | The photo, one-bit dither | The photo, glossy frame + reflection | Shareef's vector illustration, in the circle | Same pixels, crisp, in a glass well |
 | Dino Runner (no box: page = sky, footer top = ground) | Ship the backlog — brick breaker, paddle rides the CONTINUE? box | Bubble pop — launcher sits on the gel footer bar | Paper plane — pillars grow out of the navy footer | none (Glass merge was dropped) |
 | Sprite nav buttons, current = pressed | ▶ menu cursor | Glossy tabs | App bar + drawer | iOS 26 tab bar (glass), shrinks on scroll |
 | Plate / tab / well cards | Level-select stages | Panels with reflections | Image-top paper cards | Big screenshots, text under them; Settings-style grouped lists |
@@ -54,7 +54,7 @@ Order: home for all four eras → work index → about → case study.
 **What 2.1 shipped, per era**
 | 1995 component | 1986 | 2002 | 2014 | Now |
 |---|---|---|---|---|
-| Portrait | half-res, 4 screen-blue tones; NES palette swap on hover | smooth colour on a sky gel, glossy frame, reflection, gloss sweep on hover | 5 flat colours, circle crop, 45° long shadow cast by the silhouette | the real pixels, crisp, in a solid well |
+| Portrait | the photo at one bit a pixel (Atkinson dither), head and hand, pale on the mid-blue silhouette | the photo as it is, glossy frame, reflection, gloss sweep on hover | Shareef's own vector illustration, in a circle, faint ring, Material paper shadow | the real pixels, crisp, in a glass well |
 | Clippy | Narrator text box: types, ▼, a > command line, tucks to a name tag | live's pixel Clippy standing bottom right, the pale yellow Office balloon with bullet options and Hide; he fidgets while idle | chat head: round avatar, bubble, red 1 unread, drags and snaps to a side, drop on × to send away; snackbar kept for "Copied" | collaborator's cursor that glides to what it talks about, cursor chat; a glass capsule on phones |
 | Cursor | chunky 3px-pixel arrow on an 8px grid, ▶ over links | Aqua-style arrow (CSS) | system | system |
 | Nav | game menu, ▶ cursor, ↑↓ keys, START menu on phones | glossy tabs | app bar + drawer | iOS 26 tab bar at the bottom: Home · Work · About; shrinks to the current tab on scroll |

@@ -1,6 +1,6 @@
 /**
  * ERA · 1986 — About as a CHARACTER PROFILE.
- * 1995 → 1986: heading + lead → a Player 1 status screen beside the sprite portrait; bio → a story box;
+ * 1995 → 1986: heading + lead → a Player 1 status screen beside the dithered portrait; bio → a story box;
  * "How I work" → ABILITIES (three numbered boxes); "Where I've worked" → a QUEST LOG timeline; quote → a dialogue box.
  * Flavour ("Player 1", "Abilities", "Quest log", "Save data") is aria-hidden ornament.
  */

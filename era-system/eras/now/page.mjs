@@ -1,15 +1,14 @@
 /**
  * ERA · now — home, Liquid Glass over a sky.
- * A large title straight on the sky, the portrait in a glass well, each project a glass card with its screenshot inside,
+ * A large title straight on the sky (no portrait in this era: Shareef's call), each project a glass card with its screenshot inside,
  * Settings-style grouped panels (glass too) for the NDA note and the live products. The controls are in layout.mjs.
  * No easter-egg game here: Now is the one era without one (Shareef's call).
  */
 import { shell, esc } from './layout.mjs';
-import { portraitMarkup, portraitScript } from './portrait.mjs';
 export const meta = { id: 'now', title: 'Now · Liquid Glass' };
 
 export default function render(args) {
-  const { content: c, assetBase = '', portrait } = args;
+  const { content: c, assetBase = '' } = args;
   const p = c.person;
 
   const work = c.selectedWork.items.map(w => `
@@ -41,7 +40,6 @@ export default function render(args) {
       </div>
       <p class="byline">${esc(p.eyebrow)}</p>
     </div>
-    ${portraitMarkup(portrait)}
   </section>
 
   <section id="work" data-guide-id="work" aria-labelledby="work-h">
@@ -62,5 +60,5 @@ export default function render(args) {
     </div>
   </section>`;
 
-  return shell({ ...args, title: `${p.name}, Senior Product Designer`, current: '/', main, pageScript: portraitScript, guideOpening: c.guide.sections.hero });
+  return shell({ ...args, title: `${p.name}, Senior Product Designer`, current: '/', main, guideOpening: c.guide.sections.hero });
 }

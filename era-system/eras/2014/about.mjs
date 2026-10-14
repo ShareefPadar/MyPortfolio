@@ -1,6 +1,6 @@
 /**
  * ERA · 2014 — About, Material style.
- * 1995 → 2014: heading + lead → the blue hero band beside the flat circle portrait; bio → a white reading band;
+ * 1995 → 2014: heading + lead → the blue hero band beside the round portrait; bio → a white reading band;
  * "How I work" → three paper cards with lime number badges; "Where I've worked" → a vertical stepper;
  * quote → the lime colour band, with the two calls to action.
  */

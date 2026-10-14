@@ -9,9 +9,12 @@
  *   Copy → Copied        → label swaps and the snackbar confirms
  * Pages supply <main> and any page-only script.
  */
-import { portraitJS, guideJS, eraSwitchJS, eraRailJS, arriveHeadJS } from '../_shared/client.mjs';
+import fs from 'node:fs';
+import { guideJS, eraSwitchJS, eraRailJS, arriveHeadJS } from '../_shared/client.mjs';
 import { eraItems } from '../_shared/eras.mjs';
 import { headMeta } from '../_shared/head.mjs';
+// the chat head's face: the photo, small (assets/portraits/2014-head.webp, from scripts/build-portraits.py). On every page, so it's 3 KB
+const HEAD = 'data:image/webp;base64,' + fs.readFileSync(new URL('../../assets/portraits/2014-head.webp', import.meta.url)).toString('base64');
 export const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 export function shell({ content: c, pageUrl = '/', study = null, assetBase = '', icons, css, portrait, title, current = '/', main, pageScript = '', headCss = '', guideOpening = null, compactFooter = false }) {
@@ -83,7 +86,7 @@ ${compactFooter ? `<footer class="foot dark compact"><div class="wrap">
 
 <button class="fab" type="button" aria-label="${esc(c.ui.backToTop)}">${ic('arrowU')}</button>
 <aside class="chead" id="chead" aria-label="${esc(c.guide.name)}" data-state="${opening ? 'talk' : 'idle'}" data-side="right">
-  <button class="chbtn" id="head" type="button" aria-label="${esc(c.guide.name)}"><canvas width="64" height="64" aria-hidden="true"></canvas><span class="chbadge" aria-hidden="true">1</span></button>
+  <button class="chbtn" id="head" type="button" aria-label="${esc(c.guide.name)}"><img src="${HEAD}" width="64" height="64" alt="" draggable="false"><span class="chbadge" aria-hidden="true">1</span></button>
   <div class="cbubble" id="cbubble"><b class="cname">${esc(c.guide.name)}</b><p class="ctext" id="ctext">${esc(opening)}</p><button class="chide" type="button" aria-label="${esc(c.ui.hideGuide)} ${esc(c.guide.name)}">${esc(c.ui.hideGuide)}</button></div>
 </aside>
 <div class="cdrop" id="cdrop" aria-hidden="true">${ic('close')}</div>
@@ -93,8 +96,7 @@ ${compactFooter ? `<footer class="foot dark compact"><div class="wrap">
 <script>
 (() => {
   const body = document.body, reduce = matchMedia('(prefers-reduced-motion: reduce)').matches, touch = matchMedia('(hover: none)').matches;
-  const P = ${JSON.stringify(portrait)}, G = ${JSON.stringify(c.guide)};
-  ${portraitJS}
+  const G = ${JSON.stringify(c.guide)};
   ${guideJS}
 
   // ── page-only script ──
@@ -142,10 +144,6 @@ ${compactFooter ? `<footer class="foot dark compact"><div class="wrap">
   //    when it has something to say, shows a red "1" when there's a message you haven't opened, can be dragged and
   //    snaps back to the nearest side, and dragging it onto the × at the bottom sends it away ──
   const ch = document.getElementById('chead'), head = document.getElementById('head'), ctext = document.getElementById('ctext'), drop = document.getElementById('cdrop');
-  (() => { const D = decodePortrait(P, true), cv = head.querySelector('canvas'), x = cv.getContext('2d'), im = x.createImageData(64, 64);
-    for (let y = 0; y < 64; y++) for (let k = 0; k < 64; k++) { const i = (y + 6) * D.W + (k + 18), o = (y * 64 + k) * 4;
-      im.data.set(D.clear[i] ? [30, 58, 95, 255] : [...D.rgb[D.px[i]], 255], o); }
-    x.putImageData(im, 0, 0); })();
   const small = touch || innerWidth < 700, S = 56;
   let settle, pos = { x: 0, y: 0 };
   // the right-hand resting place: the screen edge, or just inside the year rail when the rail is showing (1280px up),

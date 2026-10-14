@@ -10,7 +10,7 @@
  * Pages supply <main>, optional `side` content (sits top-right on desktop, first on phones — e.g. the portrait), and any page-only script.
  * The IM window opens when Clippy talks and settles back into its buddy pill when he's quiet (unless you minimised it yourself).
  */
-import { portraitJS, guideJS, eraSwitchJS, eraRailJS, arriveHeadJS } from '../_shared/client.mjs';
+import { guideJS, eraSwitchJS, eraRailJS, arriveHeadJS } from '../_shared/client.mjs';
 import { eraItems } from '../_shared/eras.mjs';
 import { headMeta } from '../_shared/head.mjs';
 export const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -110,8 +110,7 @@ ${beforeFooter}
 <script>
 (() => {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches, touch = matchMedia('(hover: none)').matches;
-  const P = ${JSON.stringify(portrait)}, G = ${JSON.stringify(c.guide)};
-  ${portraitJS}
+  const G = ${JSON.stringify(c.guide)};
   ${guideJS}
 
   // ── page-only script ──

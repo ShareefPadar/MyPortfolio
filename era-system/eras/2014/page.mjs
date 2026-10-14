@@ -1,7 +1,7 @@
 /**
  * ERA · 2014 — Flat / Material home. Blue hero band, image-top paper cards, a lime NDA band,
  * tinted live cards with long-shadow badges. Shell (app bar, drawer, snackbar guide, FAB) in layout.mjs.
- * Portrait: the real pixels posterised to five flat colours, cropped into a circle, with a 45° long shadow.
+ * Portrait: Shareef's vector illustration of himself in a circle, a faint ring and Material's paper shadow (portrait.mjs).
  * Easter egg: PAPER PLANE (game.mjs), the last band before the footer — its pillars grow out of the footer.
  */
 import { shell, esc } from './layout.mjs';

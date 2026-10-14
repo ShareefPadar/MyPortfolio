@@ -1,7 +1,7 @@
 /* ═══════════════════════════════════════════════════════════════
    ERA · now — Liquid Glass over a sky (iOS 26 / macOS 26, with gauravi.design's glass cards)
    Three layers. The sky (sky.mjs): a morning sky by day, stars by night, by the visitor's own clock.
-   The content: words straight on the sky; panels, cards and the portrait well on a plain glass it shows through.
+   The content: words straight on the sky; panels and cards on a plain glass it shows through. No portrait (Shareef's call).
    The controls, floating over both on a stronger glass that refracts: year switcher, Résumé, the bottom tab bar,
    the notification, the lightbox's close button.
    The colours follow the sky: light by day, dark by night. System font (SF Pro on Apple devices).
@@ -193,11 +193,7 @@ button { font: inherit; color: inherit; }
 .copy.got { background: var(--accent); color: var(--on-accent); }
 
 /* hero */
-.hero { display: grid; gap: 40px; align-items: end; }
-@media (min-width: 900px) { .hero { grid-template-columns: 1.25fr .75fr; } }
-.portrait { position: relative; margin: 0; aspect-ratio: 2 / 3; width: 100%; max-width: 380px; justify-self: end; border-radius: var(--r-panel); overflow: hidden; background: var(--surface-sunk); }
-.portrait canvas { position: absolute; left: 50%; bottom: 0; width: 92%; height: auto; transform: translateX(-50%); image-rendering: pixelated; }
-@media (max-width: 899px) { .portrait { justify-self: start; max-width: 300px; } }
+.hero { display: grid; }
 
 /* work: a big screenshot with plain text under it. The glass card around each one is under "glass panels" below */
 .works { display: grid; gap: 44px 28px; }
@@ -352,7 +348,7 @@ button { font: inherit; color: inherit; }
 /* ── glass panels (Shareef's call, after gauravi.design): the content panels are glass too, so the sky shows through.
    A plainer glass than the controls': a softer blur and no refraction, because these are big and there are many of them.
    The rim is an inset shadow, not a border, so no panel changes size. Kept after the panels' own rules so it wins. ── */
-.group, .footer, .stats, .soutcome, .scallout, .sshort, .sending, .snext, .spre, .mwin, .work, .portrait {
+.group, .footer, .stats, .soutcome, .scallout, .sshort, .sending, .snext, .spre, .mwin, .work {
   background: var(--pane);
   -webkit-backdrop-filter: blur(12px) saturate(1.4); backdrop-filter: blur(12px) saturate(1.4);
   box-shadow: inset 0 0 0 1px var(--pane-rim), inset 0 1px 0 var(--pane-rim), var(--pane-shadow); }
@@ -373,13 +369,11 @@ button { font: inherit; color: inherit; }
 .rv { opacity: 0; transform: translateY(24px); transition: opacity .8s var(--era-ease), transform .8s var(--era-ease); }
 .rv.in { opacity: 1; transform: none; }
 /* The hero falls a little behind the scroll and thins out as the page moves on. Scroll-driven, so it costs no script;
-   browsers without it just scroll. Two columns only: stacked on a phone the text would slide over the portrait. */
+   browsers without it just scroll. Desktop only: on a phone the page is short enough as it is. */
 @keyframes hero-text { to { transform: translateY(56px); opacity: .45; } }
-@keyframes hero-portrait { to { transform: translateY(28px) scale(.97); } }
 @supports (animation-timeline: scroll()) {
   @media (min-width: 900px) and (prefers-reduced-motion: no-preference) {
     .hero > div { animation: hero-text linear both; animation-timeline: scroll(root); animation-range: 0px 90vh; }
-    .hero .portrait { animation: hero-portrait linear both; animation-timeline: scroll(root); animation-range: 0px 90vh; }
   }
 }
 
@@ -392,7 +386,6 @@ html.era-arrive .arrive { display: block; position: fixed; inset: 0; z-index: 20
 /* ── accessibility settings ── */
 @media (prefers-reduced-transparency: reduce) {
   .glass, .group, .footer, .stats, .soutcome, .scallout, .sshort, .sending, .snext, .spre, .mwin, .work { background: var(--surface); -webkit-backdrop-filter: none; backdrop-filter: none; }
-  .portrait { background: var(--surface-sunk); -webkit-backdrop-filter: none; backdrop-filter: none; }
   .tag { background: var(--surface); -webkit-backdrop-filter: none; backdrop-filter: none; }
   .edge { display: none; }
 }

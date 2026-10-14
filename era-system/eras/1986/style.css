@@ -152,12 +152,11 @@ a { color: inherit; }
   .menu-items .resume { margin-top: 8px; justify-content: center; }
 }
 
-/* title-screen portrait: 48×72 cells at 3×, palette swap on hover / focus */
-.portrait { position: relative; width: 144px; height: 216px; margin: 0 auto 20px; outline-offset: 8px; }
+/* title-screen portrait: the photo at one bit a pixel, 96×144 at 2× */
+.portrait { position: relative; width: 192px; height: 288px; margin: 0 auto 20px; }
 .portrait canvas { position: absolute; inset: 0; width: 100%; height: 100%; image-rendering: pixelated; }
-.portrait .nes { opacity: 0; }
-.portrait:hover .nes, .portrait:focus-visible .nes { opacity: 1; animation: swap 240ms steps(1, end); }
-@keyframes swap { 0% { opacity: 0; } 33% { opacity: 1; } 66% { opacity: 0; } }
+/* phones and small tablets: no portrait (Shareef's call, as on live, which drops it below 768px too) */
+@media (max-width: 767px) { .portrait { display: none; } }
 .portrait .p1 { position: absolute; left: -36px; top: 8px; font: 8px var(--era-px); color: var(--accent); }
 .title .eyebrow { margin-top: 4px; }
 
@@ -204,7 +203,6 @@ a { color: inherit; }
 .px-cursor[data-mode="hand"] .h { display: block; }
 html:not(.has-px-cursor) .px-cursor { display: none; }
 
-@media (prefers-reduced-motion: reduce) { .portrait:hover .nes, .portrait:focus-visible .nes { animation: none; } }
 
 /* ── era switcher: an option selector (◀ 1986 ▶) that opens a SELECT-YEAR box ── */
 .eraswitch { position: relative; margin: 0 auto 0 12px; }
@@ -281,7 +279,7 @@ html.era-arrive .arrive i { position: absolute; left: 0; right: 0; top: calc(50%
 .profile { padding: 40px 20px 0; }
 .profile .press { text-align: center; margin-bottom: 20px; }
 .profile-grid { display: grid; gap: 24px; justify-items: center; text-align: center; }
-@media (min-width: 760px) { .profile-grid { grid-template-columns: 168px 1fr; justify-items: start; text-align: left; align-items: center; } }
+@media (min-width: 760px) { .profile-grid { grid-template-columns: 216px 1fr; justify-items: start; text-align: left; align-items: center; } }
 .profile .portrait { margin: 0; }
 .profile h1 { font: 24px/1.75 var(--era-px); text-transform: uppercase; margin: 0 0 12px; }
 .profile .lead { margin: 0; color: var(--text); font-size: 16px; }
