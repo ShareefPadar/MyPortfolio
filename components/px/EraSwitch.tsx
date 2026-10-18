@@ -5,9 +5,9 @@ import { useEffect, useRef, useState } from "react";
 import PixelIcon from "@/components/px/PixelIcon";
 
 /**
- * The time machine's year switcher, 1995 edition (era-system/eras/1995: a
- * sprite button beside the wordmark that opens a raised plate of sprite
- * buttons, one per year).
+ * The time machine's year switcher, 1995 edition: a sprite pill floating in
+ * the bottom-right corner below 1280px (from 1280px the EraRail takes over).
+ * It opens a raised plate of sprite buttons upward, one per year, years only.
  *
  * Each year is a plain <a href="<this page>?era=<id>">, never next/link: the
  * other eras are static pages served by proxy.ts, so switching has to be a
@@ -25,12 +25,55 @@ export const rememberEra = (id: string) => {
   try { localStorage.setItem("era", id); sessionStorage.setItem("era-arrive", id); } catch {}
 };
 
-export default function EraSwitch({ label, items }: { label: string; items: EraItem[] }) {
+type Shake = { hint: string; enable: string };
+
+/**
+ * Shake to time-travel (an add-on, phones only, off under reduced motion): a firm shake lands on a random other year.
+ * Same rules as shakeJS in era-system/eras/_shared/client.mjs. iPhones must allow motion from a tap first, so the
+ * menu shows a button there; once allowed, later pages re-ask on the first touch, which Safari answers silently.
+ */
+function useShake(menu: React.RefObject<HTMLDivElement | null>) {
+  const [mode, setMode] = useState<"off" | "ask" | "on">("off");
+  useEffect(() => {
+    const box = menu.current;
+    if (!box || !("DeviceMotionEvent" in window) || !matchMedia("(hover: none) and (pointer: coarse)").matches || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const others = [...box.querySelectorAll<HTMLAnchorElement>("a[data-era]")].filter((a) => !a.hasAttribute("aria-current"));
+    if (!others.length) return;
+    const born = performance.now();
+    let prev: { x: number; y: number; z: number } | null = null, hits: number[] = [], gone = false;
+    const onMotion = (e: DeviceMotionEvent) => {
+      const g = e.accelerationIncludingGravity; if (!g || g.x == null || g.y == null || g.z == null || gone) return;
+      const now = performance.now();
+      if (prev) {
+        const d = Math.abs(g.x - prev.x) + Math.abs(g.y - prev.y) + Math.abs(g.z - prev.z);
+        if (d > 32 && now - born > 1500 && (!hits.length || now - hits[hits.length - 1] > 120)) {
+          hits = hits.filter((t) => now - t < 1000); hits.push(now);
+          if (hits.length >= 2) { gone = true; const a = others[Math.floor(Math.random() * others.length)]; rememberEra(a.dataset.era!); location.href = a.href; }
+        }
+      }
+      prev = { x: g.x, y: g.y, z: g.z };
+    };
+    const listen = () => { window.addEventListener("devicemotion", onMotion); setMode("on"); };
+    const DME = DeviceMotionEvent as unknown as { requestPermission?: () => Promise<string> };
+    if (typeof DME.requestPermission !== "function") { listen(); return () => window.removeEventListener("devicemotion", onMotion); }
+    setMode("ask");
+    const request = () => DME.requestPermission!().then((s) => { if (s === "granted") { try { localStorage.setItem("era-shake", "on"); } catch {} listen(); } }).catch(() => {});
+    (box as HTMLDivElement & { askShake?: () => void }).askShake = request;
+    let on = false; try { on = localStorage.getItem("era-shake") === "on"; } catch {}
+    if (on) window.addEventListener("touchend", request, { once: true });
+    return () => { window.removeEventListener("devicemotion", onMotion); window.removeEventListener("touchend", request); };
+  }, [menu]);
+  return mode;
+}
+
+export default function EraSwitch({ label, items, shake }: { label: string; items: EraItem[]; shake: Shake }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const root = useRef<HTMLDivElement>(null);
   const btn = useRef<HTMLButtonElement>(null);
   const viaKeys = useRef(false);
+  const menu = useRef<HTMLDivElement>(null);
+  const shakeMode = useShake(menu);
   const current = items.find((e) => e.id === "1995") ?? items[0];
 
   // keyboard opens onto the current year
@@ -66,7 +109,7 @@ export default function EraSwitch({ label, items }: { label: string; items: EraI
   return (
     <div
       ref={root}
-      className="eraswitch relative mr-auto xl:hidden"
+      className="eraswitch xl:hidden"
       data-open={open}
       onKeyDown={onKey}
       onBlur={(e) => { if (open && !root.current?.contains(e.relatedTarget as Node)) setOpen(false); }}
@@ -85,7 +128,7 @@ export default function EraSwitch({ label, items }: { label: string; items: EraI
           <PixelIcon name="chevron" size={8} />
         </button>
       </span>
-      <div id="eramenu" className="eramenu" hidden={!open}>
+      <div id="eramenu" ref={menu} className="eramenu" hidden={!open}>
         <p className="mb-8 font-mono text-[11px] uppercase tracking-[0.08em] text-mute" aria-hidden="true">{label}</p>
         <ul className="grid gap-8">
           {items.map((e) => {
@@ -98,16 +141,30 @@ export default function EraSwitch({ label, items }: { label: string; items: EraI
                     href={`${pathname}?era=${e.id}`}
                     aria-current={here ? "true" : undefined}
                     onClick={() => pick(e.id)}
-                    className={`sp sp-neutral-3 sp-s3 ${here ? "sp-sunk" : ""} flex min-h-[40px] w-full items-center justify-between px-12 py-8 text-ink`}
+                    className={`sp sp-neutral-3 sp-s3 ${here ? "sp-sunk" : ""} flex min-h-[40px] w-full items-center justify-center px-12 py-8 text-ink`}
                   >
                     <b className="font-pix text-[13px] font-normal">{e.year}</b>
-                    <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-mute">{e.name}</span>
                   </a>
                 </span>
               </li>
             );
           })}
         </ul>
+        {shakeMode !== "off" && (
+          <div className="mt-8">
+            {shakeMode === "on" ? (
+              <p className="font-mono text-[11px] leading-[1.5] text-mute">{shake.hint}</p>
+            ) : (
+              <button
+                type="button"
+                onClick={() => (menu.current as (HTMLDivElement & { askShake?: () => void }) | null)?.askShake?.()}
+                className="min-h-[40px] w-full border-2 border-line bg-paper px-8 font-mono text-[11px] leading-[1.4] text-ink"
+              >
+                {shake.enable}
+              </button>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

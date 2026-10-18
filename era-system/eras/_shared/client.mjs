@@ -101,6 +101,46 @@ function eraRail(root) {
   root.querySelectorAll('a[data-era]').forEach(a => a.addEventListener('click', () => { try { localStorage.setItem('era', a.dataset.era); sessionStorage.setItem('era-arrive', a.dataset.era); } catch (_) {} }));
 }`;
 
+/**
+ * Shake to time-travel: behaviour only, an add-on to the year menu (Shareef's call). Phones only; off under reduced
+ * motion. A firm shake (two hard jolts within a second) lands on a random other year, same page.
+ * Inside menu: [data-shake] (hidden until it's supported) holding [data-shake-hint] and, for iPhones,
+ * [data-shake-ask], the tap Safari needs before it hands over motion. Once allowed, later pages re-ask on the first
+ * touch, which Safari answers without a prompt.
+ */
+export const shakeJS = `
+function eraShake(menu) {
+  const box = menu && menu.querySelector('[data-shake]');
+  if (!box || !('DeviceMotionEvent' in window) || !matchMedia('(hover: none) and (pointer: coarse)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const links = [...menu.querySelectorAll('a[data-era]')], others = links.filter(a => !a.hasAttribute('aria-current'));
+  if (!others.length) return;
+  const ask = box.querySelector('[data-shake-ask]'), hint = box.querySelector('[data-shake-hint]'), born = performance.now();
+  let prev = null, hits = [], gone = false;
+  const jump = () => { gone = true; const a = others[Math.floor(Math.random() * others.length)];
+    try { localStorage.setItem('era', a.dataset.era); sessionStorage.setItem('era-arrive', a.dataset.era); } catch (_) {}
+    location.href = a.href; };
+  const onMotion = e => {
+    const g = e.accelerationIncludingGravity; if (!g || g.x == null || gone) return;
+    const now = performance.now();
+    if (prev) { const d = Math.abs(g.x - prev.x) + Math.abs(g.y - prev.y) + Math.abs(g.z - prev.z);
+      if (d > 32 && now - born > 1500 && (!hits.length || now - hits[hits.length - 1] > 120)) {
+        hits = hits.filter(t => now - t < 1000); hits.push(now); if (hits.length >= 2) jump(); } }
+    prev = { x: g.x, y: g.y, z: g.z };
+  };
+  const listen = () => { addEventListener('devicemotion', onMotion);
+    // the button goes away under the finger: hand focus to the hint first, or the menu reads that as focus leaving and closes
+    if (hint) { hint.hidden = false; if (ask && document.activeElement === ask) { hint.tabIndex = -1; hint.focus(); } }
+    if (ask) ask.hidden = true; };
+  const needsAsk = typeof DeviceMotionEvent.requestPermission === 'function';
+  box.hidden = false;
+  if (!needsAsk) { listen(); return; }
+  if (hint) hint.hidden = true; if (ask) ask.hidden = false;
+  const request = () => DeviceMotionEvent.requestPermission().then(s => { if (s === 'granted') { try { localStorage.setItem('era-shake', 'on'); } catch (_) {} listen(); } }).catch(() => {});
+  if (ask) ask.addEventListener('click', request);
+  let on = false; try { on = localStorage.getItem('era-shake') === 'on'; } catch (_) {}
+  if (on) addEventListener('touchend', request, { once: true });
+}`;
+
 /** Inline in <head>: flags the arrival effect before first paint (each era styles html.era-arrive .arrive). */
 export const arriveHeadJS = `<script>try{if(sessionStorage.getItem('era-arrive')){sessionStorage.removeItem('era-arrive');if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('era-arrive');setTimeout(function(){document.documentElement.classList.remove('era-arrive')},1600)}}catch(e){}</script>`;
 

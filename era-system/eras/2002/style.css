@@ -500,3 +500,20 @@ html.era-arrive .arrive { display: block; position: fixed; inset: 0; z-index: 99
   .eraswitch { display: none; }
   .mast-row .logo { margin-right: auto; }
 }
+
+/* ══ THE YEAR PILL ══════════════════════════════════════════════════
+   Below 1280px, where the rail has no margin to stand in, the year switcher
+   floats in the bottom-right corner (Shareef's call, replacing the year chip
+   in the header). Tap it and the five years open upward; years only, no
+   era names, like the rail. Whatever already lived in that corner moves up. */
+@media (max-width: 1279px) {
+  .eraswitch { position: fixed; z-index: 75; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); margin: 0; }
+  .eraswitch .yearmenu { position: absolute; top: auto; left: auto; right: 0; bottom: calc(100% + 8px); width: auto; min-width: 140px; }
+  .eraswitch .nm { display: none; }
+  .ast { bottom: calc(70px + env(safe-area-inset-bottom, 0px)); }   /* Clippy stands above it */
+}
+/* shake to time-travel: a line under the years in the pill's menu (phones only; shakeJS reveals it) */
+.shake[hidden], .shake [hidden] { display: none; }
+.shake { margin: 4px 0 0; padding: 8px 14px 6px; border-top: 1px solid var(--line); }
+.shake p { margin: 0; font: 400 12px/1.4 var(--era-text); color: var(--text-muted); }
+.shake button { width: 100%; min-height: 36px; border: 1px solid #A9C2E4; border-radius: 999px; background: linear-gradient(180deg, #F3F8FF, #E3EEFB); color: var(--action); font: 700 12px var(--era-text); cursor: pointer; }

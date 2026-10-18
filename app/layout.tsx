@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import PixelCursor from "@/components/px/PixelCursor";
 import PixelGuide from "@/components/px/PixelGuide";
 import EraRail from "@/components/px/EraRail";
+import EraSwitch from "@/components/px/EraSwitch";
 import site from "@/era-system/content/site.json";
 
 import { Analytics } from "@vercel/analytics/next";
@@ -138,8 +139,9 @@ export default function RootLayout({
           SKIP TO CONTENT
         </a>
         <div className="arrive" aria-hidden="true" />
-        <Navbar eras={eras} />
+        <Navbar />
         <EraRail label={eras.label} items={eras.items} />
+        <EraSwitch label={eras.label} items={eras.items} shake={site.eras.shake} />
         {/* Site-wide, so the guide's cursor on the homepage has a peer that is
             drawn the same way. Self-suppresses on touch and reduced motion. */}
         <PixelCursor />

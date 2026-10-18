@@ -10,7 +10,7 @@
  * Pages supply <main>, optional `side` content (sits top-right on desktop, first on phones — e.g. the portrait), and any page-only script.
  * The IM window opens when Clippy talks and settles back into its buddy pill when he's quiet (unless you minimised it yourself).
  */
-import { guideJS, eraSwitchJS, eraRailJS, arriveHeadJS } from '../_shared/client.mjs';
+import { guideJS, eraSwitchJS, shakeJS, eraRailJS, arriveHeadJS } from '../_shared/client.mjs';
 import { eraItems } from '../_shared/eras.mjs';
 import { headMeta } from '../_shared/head.mjs';
 export const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -59,21 +59,22 @@ ${css}
   <header class="masthead dark">
     <div class="mast-row">
       <a class="logo" href="/">${esc(p.shortName)}</a>
-      <div class="eraswitch" data-era-switch>
-        <button class="gel gel-silver yeargel" type="button" data-era-toggle aria-expanded="false" aria-controls="yearmenu"><span class="sr">${esc(c.eras.label)}: </span>${esc(eraItems(c, pageUrl, '2002').find(e => e.current).year)} ${ic('chevron')}</button>
-        <div class="yearmenu" id="yearmenu" data-era-menu hidden>
-          <p class="yearmenu-h" aria-hidden="true">${esc(c.eras.label)}</p>
-          <ul>
-            ${eraItems(c, pageUrl, '2002').map(e => `<li><a data-era="${e.id}" href="${esc(e.href)}"${e.current ? ' aria-current="true"' : ''}><span class="tick" aria-hidden="true">${e.current ? '✓' : ''}</span><b>${esc(e.year)}</b><span class="nm">${esc(e.name)}</span></a></li>`).join('\n            ')}
-          </ul>
-        </div>
-      </div>
       <a class="gel gel-silver" href="${esc(c.ctas.resume.href)}">${esc(c.ctas.resume.label)} ${ic('download')}</a>
     </div>
     <nav class="tabs" aria-label="Main">
       ${c.nav.map(n => `<a href="${esc(n.href)}"${n.href === current ? ' aria-current="page"' : ''}>${esc(n.label)}</a>`).join('\n      ')}
     </nav>
   </header>
+  <div class="eraswitch" data-era-switch>
+  <button class="gel gel-silver yeargel" type="button" data-era-toggle aria-expanded="false" aria-controls="yearmenu"><span class="sr">${esc(c.eras.label)}: </span>${esc(eraItems(c, pageUrl, '2002').find(e => e.current).year)} ${ic('chevron')}</button>
+  <div class="yearmenu" id="yearmenu" data-era-menu hidden>
+    <p class="yearmenu-h" aria-hidden="true">${esc(c.eras.label)}</p>
+    <ul>
+      ${eraItems(c, pageUrl, '2002').map(e => `<li><a data-era="${e.id}" href="${esc(e.href)}"${e.current ? ' aria-current="true"' : ''}><span class="tick" aria-hidden="true">${e.current ? '✓' : ''}</span><b>${esc(e.year)}</b><span class="nm">${esc(e.name)}</span></a></li>`).join('\n            ')}
+    </ul>
+    <div class="shake" data-shake hidden><p data-shake-hint>${esc(c.eras.shake.hint)}</p><button type="button" data-shake-ask hidden>${esc(c.eras.shake.enable)}</button></div>
+  </div>
+  </div>
   <nav class="yearrail" aria-label="${esc(c.eras.label)}" data-era-rail>
     <ul>
       ${eraItems(c, pageUrl, '2002').map(e => `<li><a data-era="${e.id}" href="${esc(e.href)}"${e.current ? ' aria-current="true"' : ''}><b>${esc(e.year)}</b></a></li>`).join('\n      ')}
@@ -119,6 +120,8 @@ ${beforeFooter}
   // ── era switcher ──
   ${eraSwitchJS}
   eraSwitch(document.querySelector('[data-era-switch]'));
+  ${shakeJS}
+  eraShake(document.querySelector('[data-era-menu]'));
   ${eraRailJS}
   eraRail(document.querySelector('[data-era-rail]'));
 

@@ -4,7 +4,7 @@
  * Mirrors the live site, where every page carries Clippy and the cursor.
  */
 import { headMeta } from '../_shared/head.mjs';
-import { eraSwitchJS, eraRailJS, arriveHeadJS } from '../_shared/client.mjs';
+import { eraSwitchJS, shakeJS, eraRailJS, arriveHeadJS } from '../_shared/client.mjs';
 import { eraItems } from '../_shared/eras.mjs';
 export const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 export const STYLES = ['styles/core.css', 'styles/eras/1995.css', 'styles/eras/1995.sprites.css'];
@@ -35,21 +35,22 @@ ${css}
 <div class="nav" id="nav"><div class="wrap">
   <nav class="navbar frame-raised" aria-label="Main">
     <a class="brand t-statement-m" href="/">${esc(p.brand)}</a>
-    <div class="eraswitch" data-era-switch>
-      <span class="focusable"><button class="btn frame-control erabtn" data-fill="surface" type="button" data-era-toggle aria-expanded="false" aria-controls="eramenu"><span class="sr">${esc(c.eras.label)}: </span>${esc(eraItems(c, pageUrl, '1995').find(e => e.current).year)}${ic('chevron')}</button></span>
-      <div class="eramenu frame-raised" id="eramenu" data-era-menu hidden>
-        <p class="mono eramenu-h" aria-hidden="true">${esc(c.eras.label)}</p>
-        <ul>
-          ${eraItems(c, pageUrl, '1995').map(e => `<li><span class="focusable"><a class="btn frame-control" data-fill="surface" data-era="${e.id}" href="${esc(e.href)}"${e.current ? ' data-state="pressed" aria-current="true"' : ''}><b>${esc(e.year)}</b><span class="mono">${esc(e.name)}</span></a></span></li>`).join('\n          ')}
-        </ul>
-      </div>
-    </div>
     <button class="burger" type="button" aria-label="${esc(c.ui.menu)}" aria-expanded="false" aria-controls="navlinks"><i></i><i></i><i></i></button>
     <div class="navlinks" id="navlinks">
       ${c.nav.map(n => `<span class="focusable"><a class="btn frame-control navbtn" data-fill="surface"${n.href === current ? ' data-state="pressed" aria-current="page"' : ''} href="${esc(n.href)}">${esc(n.label)}</a></span>`).join('\n      ')}
       <span class="focusable"><a class="btn frame-control" data-fill="action" href="${esc(c.ctas.resume.href)}">${esc(c.ctas.resume.label)} ${ic('download')}</a></span>
     </div>
   </nav>
+  <div class="eraswitch" data-era-switch>
+  <span class="focusable"><button class="btn frame-control erabtn" data-fill="surface" type="button" data-era-toggle aria-expanded="false" aria-controls="eramenu"><span class="sr">${esc(c.eras.label)}: </span>${esc(eraItems(c, pageUrl, '1995').find(e => e.current).year)}${ic('chevron')}</button></span>
+  <div class="eramenu frame-raised" id="eramenu" data-era-menu hidden>
+  <p class="mono eramenu-h" aria-hidden="true">${esc(c.eras.label)}</p>
+  <ul>
+    ${eraItems(c, pageUrl, '1995').map(e => `<li><span class="focusable"><a class="btn frame-control" data-fill="surface" data-era="${e.id}" href="${esc(e.href)}"${e.current ? ' data-state="pressed" aria-current="true"' : ''}><b>${esc(e.year)}</b><span class="mono">${esc(e.name)}</span></a></span></li>`).join('\n          ')}
+  </ul>
+    <div class="shake" data-shake hidden><p data-shake-hint>${esc(c.eras.shake.hint)}</p><button type="button" data-shake-ask hidden>${esc(c.eras.shake.enable)}</button></div>
+  </div>
+  </div>
   <nav class="yearrail frame-raised" aria-label="${esc(c.eras.label)}" data-era-rail>
     <ul>
       ${eraItems(c, pageUrl, '1995').map(e => `<li><span class="focusable"><a class="btn frame-control" data-fill="surface" data-era="${e.id}" href="${esc(e.href)}"${e.current ? ' data-state="pressed" aria-current="true"' : ''}><b>${esc(e.year)}</b></a></span></li>`).join('\n      ')}
@@ -100,6 +101,8 @@ ${compactFooter ? `<footer class="foot foot-compact bookend"><div class="wrap">
   // ── era switcher ──
   ${eraSwitchJS}
   eraSwitch(document.querySelector('[data-era-switch]'));
+  ${shakeJS}
+  eraShake(document.querySelector('[data-era-menu]'));
   ${eraRailJS}
   eraRail(document.querySelector('[data-era-rail]'));
 

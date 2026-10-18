@@ -8,7 +8,7 @@
  *   home's easter egg       → SHIP THE BACKLOG, a brick breaker whose paddle rides the CONTINUE? box (game.mjs, passed as beforeFooter)
  * Pages supply <main>, optional beforeFooter (the game) and any page-only script.
  */
-import { guideJS, eraSwitchJS, eraRailJS, arriveHeadJS } from '../_shared/client.mjs';
+import { guideJS, eraSwitchJS, shakeJS, eraRailJS, arriveHeadJS } from '../_shared/client.mjs';
 import { eraItems } from '../_shared/eras.mjs';
 import { headMeta } from '../_shared/head.mjs';
 export const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -45,21 +45,22 @@ ${css}
 
   <nav class="box menu" id="menu" aria-label="Main">
     <a class="brand" href="/">${esc(p.shortName)}</a>
-    <div class="eraswitch" data-era-switch>
-      <button class="btn yearbtn" type="button" data-era-toggle aria-expanded="false" aria-controls="yearmenu"><span class="sr">${esc(c.eras.label)}: </span><span class="arr" aria-hidden="true">◀</span>${esc(eraItems(c, pageUrl, '1986').find(e => e.current).year)}<span class="arr" aria-hidden="true">▶</span></button>
-      <div class="yearmenu" id="yearmenu" data-era-menu hidden>
-        <p class="yearmenu-h" aria-hidden="true">${esc(c.eras.label)}</p>
-        <ul>
-          ${eraItems(c, pageUrl, '1986').map(e => `<li><a class="yr" data-era="${e.id}" href="${esc(e.href)}"${e.current ? ' aria-current="true"' : ''}><b>${esc(e.year)}</b><span>${esc(e.name)}</span></a></li>`).join('\n          ')}
-        </ul>
-      </div>
-    </div>
     <button class="btn start" type="button" aria-expanded="false" aria-controls="menu-items"><span aria-hidden="true">▶ </span>${esc(c.ui.menu)}</button>
     <div class="menu-items" id="menu-items">
       ${c.nav.map(n => `<a class="item" href="${esc(n.href)}"${n.href === current ? ' aria-current="page"' : ''}>${esc(n.label)}</a>`).join('\n      ')}
       <a class="btn primary resume" href="${esc(c.ctas.resume.href)}">${esc(c.ctas.resume.label)} ${ic('download')}</a>
     </div>
   </nav>
+  <div class="eraswitch" data-era-switch>
+  <button class="btn yearbtn" type="button" data-era-toggle aria-expanded="false" aria-controls="yearmenu"><span class="sr">${esc(c.eras.label)}: </span><span class="arr" aria-hidden="true">◀</span>${esc(eraItems(c, pageUrl, '1986').find(e => e.current).year)}<span class="arr" aria-hidden="true">▶</span></button>
+  <div class="yearmenu" id="yearmenu" data-era-menu hidden>
+  <p class="yearmenu-h" aria-hidden="true">${esc(c.eras.label)}</p>
+  <ul>
+    ${eraItems(c, pageUrl, '1986').map(e => `<li><a class="yr" data-era="${e.id}" href="${esc(e.href)}"${e.current ? ' aria-current="true"' : ''}><b>${esc(e.year)}</b><span>${esc(e.name)}</span></a></li>`).join('\n          ')}
+  </ul>
+    <div class="shake" data-shake hidden><p data-shake-hint>${esc(c.eras.shake.hint)}</p><button type="button" data-shake-ask hidden>${esc(c.eras.shake.enable)}</button></div>
+  </div>
+  </div>
   <nav class="yearrail" aria-label="${esc(c.eras.label)}" data-era-rail>
     <ul>
       ${eraItems(c, pageUrl, '1986').map(e => `<li><a data-era="${e.id}" href="${esc(e.href)}"${e.current ? ' aria-current="true"' : ''}><b>${esc(e.year)}</b></a></li>`).join('\n      ')}
@@ -109,6 +110,8 @@ ${compactFooter ? `  <footer class="box continue compact">
   // ── era switcher ──
   ${eraSwitchJS}
   eraSwitch(document.querySelector('[data-era-switch]'));
+  ${shakeJS}
+  eraShake(document.querySelector('[data-era-menu]'));
   ${eraRailJS}
   eraRail(document.querySelector('[data-era-rail]'));
 
