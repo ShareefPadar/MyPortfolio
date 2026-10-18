@@ -10,7 +10,7 @@
  * Pages supply <main> and any page-only script.
  */
 import fs from 'node:fs';
-import { guideJS, eraSwitchJS, eraRailJS, arriveHeadJS } from '../_shared/client.mjs';
+import { guideJS, eraSwitchJS, shakeJS, eraRailJS, arriveHeadJS } from '../_shared/client.mjs';
 import { eraItems } from '../_shared/eras.mjs';
 import { headMeta } from '../_shared/head.mjs';
 // the chat head's face: the photo, small (assets/portraits/2014-head.webp, from scripts/build-portraits.py). On every page, so it's 3 KB
@@ -44,15 +44,6 @@ ${headCss}
 <header class="appbar on-blue"><div class="wrap">
   <button class="burger" type="button" aria-label="${esc(c.ui.menu)}" aria-controls="drawer" aria-expanded="false">${ic('menu')}</button>
   <a class="brand" href="/">${esc(p.shortName)}</a>
-  <div class="eraswitch" data-era-switch>
-    <button class="btn btn-bar yearbtn" type="button" data-era-toggle aria-expanded="false" aria-controls="yearmenu"><span class="sr">${esc(c.eras.label)}: </span>${esc(eraItems(c, pageUrl, '2014').find(e => e.current).year)} ${ic('chevron')}</button>
-    <div class="yearmenu" id="yearmenu" data-era-menu hidden>
-      <p class="yearmenu-h" aria-hidden="true">${esc(c.eras.label)}</p>
-      <ul>
-        ${eraItems(c, pageUrl, '2014').map(e => `<li><a data-era="${e.id}" href="${esc(e.href)}"${e.current ? ' aria-current="true"' : ''}><b>${esc(e.year)}</b><span class="nm">${esc(e.name)}</span>${e.current ? `<span class="chk" aria-hidden="true">${ic('check')}</span>` : ''}</a></li>`).join('\n        ')}
-      </ul>
-    </div>
-  </div>
   <nav class="drawer" id="drawer" aria-label="Main">
     <div class="drawer-head" aria-hidden="true">${esc(p.shortName)}<small>${esc(p.name)}</small></div>
     ${c.nav.map(n => `<a class="link" href="${esc(n.href)}"${n.href === current ? ' aria-current="page"' : ''}>${esc(n.label)}</a>`).join('\n    ')}
@@ -61,6 +52,16 @@ ${headCss}
   <a class="btn btn-white resume" href="${esc(c.ctas.resume.href)}"><span class="lbl">${esc(c.ctas.resume.label)}</span> ${ic('download')}</a>
   <div class="scrim" aria-hidden="true"></div>   <!-- inside the app bar: the drawer's z-index only competes within the bar's stacking context -->
 </div></header>
+  <div class="eraswitch" data-era-switch>
+  <button class="btn btn-bar yearbtn" type="button" data-era-toggle aria-expanded="false" aria-controls="yearmenu"><span class="sr">${esc(c.eras.label)}: </span>${esc(eraItems(c, pageUrl, '2014').find(e => e.current).year)} ${ic('chevron')}</button>
+  <div class="yearmenu" id="yearmenu" data-era-menu hidden>
+  <p class="yearmenu-h" aria-hidden="true">${esc(c.eras.label)}</p>
+  <ul>
+  ${eraItems(c, pageUrl, '2014').map(e => `<li><a data-era="${e.id}" href="${esc(e.href)}"${e.current ? ' aria-current="true"' : ''}><b>${esc(e.year)}</b><span class="nm">${esc(e.name)}</span>${e.current ? `<span class="chk" aria-hidden="true">${ic('check')}</span>` : ''}</a></li>`).join('\n        ')}
+  </ul>
+    <div class="shake" data-shake hidden><p data-shake-hint>${esc(c.eras.shake.hint)}</p></div>
+  </div>
+  </div>
   <nav class="yearrail" aria-label="${esc(c.eras.label)}" data-era-rail>
     <ul>
       ${eraItems(c, pageUrl, '2014').map(e => `<li><a data-era="${e.id}" href="${esc(e.href)}"${e.current ? ' aria-current="true"' : ''}><b>${esc(e.year)}</b></a></li>`).join('\n      ')}
@@ -105,6 +106,8 @@ ${compactFooter ? `<footer class="foot dark compact"><div class="wrap">
   // ── era switcher ──
   ${eraSwitchJS}
   eraSwitch(document.querySelector('[data-era-switch]'));
+  ${shakeJS}
+  eraShake(document.querySelector('[data-era-menu]'));
   ${eraRailJS}
   eraRail(document.querySelector('[data-era-rail]'));
 

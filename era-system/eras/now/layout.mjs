@@ -15,7 +15,7 @@
  * Light by day, dark by night: the colours follow the sky. System font (SF Pro on Apple devices).
  * Pages supply <main> content (inside .page) and any page-only script.
  */
-import { guideJS, eraSwitchJS, eraRailJS, arriveHeadJS } from '../_shared/client.mjs';
+import { guideJS, eraSwitchJS, shakeJS, eraRailJS, arriveHeadJS } from '../_shared/client.mjs';
 import { eraItems } from '../_shared/eras.mjs';
 import { headMeta } from '../_shared/head.mjs';
 import { skyHeadJS, skyMarkup, skyScript } from './sky.mjs';
@@ -63,17 +63,18 @@ ${skyMarkup(quietSky)}
 
 <div class="edge" aria-hidden="true"></div>
 <header class="topbar">
-  <div class="eraswitch" data-era-switch>
-    <button class="cap glass" type="button" data-era-toggle aria-expanded="false" aria-controls="yearmenu"><span class="sr">${esc(c.eras.label)}: </span>${esc(now.year)} <span class="nm">${esc(now.name)}</span>${ic('chevron')}</button>
-    <div class="yearmenu glass" id="yearmenu" data-era-menu hidden>
-      <p class="yearmenu-h" aria-hidden="true">${esc(c.eras.label)}</p>
-      <ul>
-        ${eraItems(c, pageUrl, 'now').map(e => `<li><a data-era="${e.id}" href="${esc(e.href)}"${e.current ? ' aria-current="true"' : ''}><b>${esc(e.year)}</b><span class="nm">${esc(e.name)}</span>${e.current ? `<span class="chk" aria-hidden="true">${ic('check')}</span>` : ''}</a></li>`).join('\n        ')}
-      </ul>
-    </div>
-  </div>
   <a class="cap glass" href="${esc(c.ctas.resume.href)}">${esc(c.ctas.resume.label)} ${ic('download')}</a>
 </header>
+  <div class="eraswitch" data-era-switch>
+  <button class="cap glass" type="button" data-era-toggle aria-expanded="false" aria-controls="yearmenu"><span class="sr">${esc(c.eras.label)}: </span>${esc(now.year)} <span class="nm">${esc(now.name)}</span>${ic('chevron')}</button>
+  <div class="yearmenu glass" id="yearmenu" data-era-menu hidden>
+  <p class="yearmenu-h" aria-hidden="true">${esc(c.eras.label)}</p>
+  <ul>
+  ${eraItems(c, pageUrl, 'now').map(e => `<li><a data-era="${e.id}" href="${esc(e.href)}"${e.current ? ' aria-current="true"' : ''}><b>${esc(e.year)}</b><span class="nm">${esc(e.name)}</span>${e.current ? `<span class="chk" aria-hidden="true">${ic('check')}</span>` : ''}</a></li>`).join('\n        ')}
+  </ul>
+    <div class="shake" data-shake hidden><p data-shake-hint>${esc(c.eras.shake.hint)}</p></div>
+  </div>
+  </div>
   <nav class="yearrail glass" aria-label="${esc(c.eras.label)}" data-era-rail>
     <ul>
       ${eraItems(c, pageUrl, 'now').map(e => `<li><a data-era="${e.id}" href="${esc(e.href)}"${e.current ? ' aria-current="true"' : ''}><b>${esc(e.year)}</b></a></li>`).join('\n      ')}
@@ -128,6 +129,8 @@ ${compactFooter ? `  <footer class="footer compact">
   // ── era switcher ──
   ${eraSwitchJS}
   eraSwitch(document.querySelector('[data-era-switch]'));
+  ${shakeJS}
+  eraShake(document.querySelector('[data-era-menu]'));
   ${eraRailJS}
   eraRail(document.querySelector('[data-era-rail]'));
 

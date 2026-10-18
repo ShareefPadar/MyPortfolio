@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import PixelIcon from "@/components/px/PixelIcon";
-import EraSwitch, { type EraItem } from "@/components/px/EraSwitch";
 
 /**
  * Nav (spec §4.6).
@@ -28,9 +27,7 @@ const LINKS = [
 
 const RESUME = "/assets/Shareef_Padar_Resume.pdf";
 
-type Props = { eras: { label: string; items: EraItem[] } };
-
-const Navbar = ({ eras }: Props) => {
+const Navbar = () => {
   const pathname = usePathname();
   const [stuck, setStuck] = useState(false);
   const [open, setOpen] = useState(false);
@@ -66,9 +63,6 @@ const Navbar = ({ eras }: Props) => {
             >
               SHAREEF PADAR
             </Link>
-
-            {/* The time machine: pick a year, the same page in that era. */}
-            <EraSwitch label={eras.label} items={eras.items} />
 
             {/* desktop */}
             <div className="hidden items-center gap-8 md:flex">

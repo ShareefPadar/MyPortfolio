@@ -606,18 +606,18 @@
 
 /* ══════════════════════════════════════════════════════════════════
    THE TIME MACHINE (era-system/eras/1995)
-   The year switcher sits beside the wordmark: a sprite button that opens a
+   The year switcher is a sprite pill in the bottom-right corner that opens a
    raised plate of sprite buttons, drawn in 4 frames like every 1995 motion.
    Arriving from another era, a stepped scanline wipes the page in. */
-.eramenu { position: absolute; z-index: 60; top: calc(100% + 8px); left: 0; width: 216px; padding: 12px;
+/* Below 1280px the switcher is a pill floating bottom right (Shareef's call, replacing the chip beside the
+   wordmark); its plate of years opens upward. From 1280px the rail takes over. */
+.eraswitch { position: fixed; z-index: 66; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); }
+.eramenu { position: absolute; z-index: 60; bottom: calc(100% + 8px); right: 0; width: 140px; padding: 12px;
   background: var(--plate); border: 3px solid var(--ink); box-shadow: inset 3px 3px 0 var(--hi), inset -3px -3px 0 var(--sh); }
 .eramenu[hidden] { display: none; }
 .eramenu:not([hidden]) { animation: menu-scan 240ms steps(4, end) both; }
 @keyframes menu-scan { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0); } }
 .erabtn[aria-expanded="true"] svg { transform: scaleY(-1); }
-@media (max-width: 760px) { .eramenu { position: fixed; top: 76px; left: 16px; } }
-/* the open menu sits above Clippy */
-header:has(.eraswitch[data-open="true"]) { z-index: 80; }
 
 /* The year rail: the same plate as the menu, standing on the right edge.
    Above Clippy (60) so his bubble never covers it, below the drawn cursor (70). */

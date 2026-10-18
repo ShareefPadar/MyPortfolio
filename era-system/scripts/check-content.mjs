@@ -20,7 +20,7 @@ const dir = process.argv[2] ?? path.join(root, 'design-reference', 'eras');
 // what every era must show
 // every page: nav + footer basics. Full footer (connect block) everywhere except case studies, which use a compact one (as on live)
 const chromeBase = { texts: [...c.nav.map(n => n.label), c.ctas.resume.label, c.footer.status, c.footer.credit, c.ui.backToTop,
-                       c.eras.label, ...c.eras.items.flatMap(e => [e.year, e.name])],   // the era switcher is on every page
+                       c.eras.label, c.eras.shake.hint, ...c.eras.items.flatMap(e => [e.year, e.name])],   // the era switcher is on every page
                      hrefs: [...c.nav.map(n => n.href), c.ctas.resume.href] };
 const chromeFull = { texts: [c.footer.heading, c.footer.intro, c.footer.email, ...c.footer.socials.map(s => s.label), c.ui.copyEmail],
                      hrefs: [`mailto:${c.footer.email}`, ...c.footer.socials.map(s => s.href)] };

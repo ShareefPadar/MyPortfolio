@@ -521,6 +521,10 @@
   "_note": "The time machine. Every era shows these five; `default` is where a first visit lands. Each era draws the switcher its own way.",
   "default": "1995",
   "label": "Pick a year",
+  "shake": {
+   "_note": "Phones only, an add-on: shake the phone to land on a random other year. Shown inside the year pill's menu. It turns itself on; iPhone Safari asks once, on the first tap.",
+   "hint": "Or shake your phone for a random year"
+  },
   "items": [
    {
     "id": "1986",
