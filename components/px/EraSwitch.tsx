@@ -40,18 +40,14 @@ function useShake(menu: React.RefObject<HTMLDivElement | null>) {
     const others = [...box.querySelectorAll<HTMLAnchorElement>("a[data-era]")].filter((a) => !a.hasAttribute("aria-current"));
     if (!others.length) return;
     const born = performance.now();
-    let prev: { x: number; y: number; z: number } | null = null, hits: number[] = [], gone = false;
+    // g-force per reading, as in shakeJS: over 2.3g is a hit, two hits 150ms to 1s apart is a shake
+    let hits: number[] = [], gone = false;
     const onMotion = (e: DeviceMotionEvent) => {
-      const g = e.accelerationIncludingGravity; if (!g || g.x == null || g.y == null || g.z == null || gone) return;
-      const now = performance.now();
-      if (prev) {
-        const d = Math.abs(g.x - prev.x) + Math.abs(g.y - prev.y) + Math.abs(g.z - prev.z);
-        if (d > 32 && now - born > 1500 && (!hits.length || now - hits[hits.length - 1] > 120)) {
-          hits = hits.filter((t) => now - t < 1000); hits.push(now);
-          if (hits.length >= 2) { gone = true; const a = others[Math.floor(Math.random() * others.length)]; rememberEra(a.dataset.era!); location.href = a.href; }
-        }
-      }
-      prev = { x: g.x, y: g.y, z: g.z };
+      const g = e.accelerationIncludingGravity; if (!g || g.x == null || g.y == null || gone) return;
+      const now = performance.now(), force = Math.hypot(g.x, g.y, g.z ?? 0) / 9.81;
+      if (force < 2.3 || now - born < 1500 || (hits.length && now - hits[hits.length - 1] < 150)) return;
+      hits = hits.filter((t) => now - t < 1000); hits.push(now);
+      if (hits.length >= 2) { gone = true; const a = others[Math.floor(Math.random() * others.length)]; rememberEra(a.dataset.era!); location.href = a.href; }
     };
     const listen = () => { window.addEventListener("devicemotion", onMotion); setMode("on"); };
     const DME = DeviceMotionEvent as unknown as { requestPermission?: () => Promise<string> };

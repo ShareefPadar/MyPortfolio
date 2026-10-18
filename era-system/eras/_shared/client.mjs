@@ -115,17 +115,19 @@ function eraShake(menu) {
   const links = [...menu.querySelectorAll('a[data-era]')], others = links.filter(a => !a.hasAttribute('aria-current'));
   if (!others.length) return;
   const ask = box.querySelector('[data-shake-ask]'), hint = box.querySelector('[data-shake-hint]'), born = performance.now();
-  let prev = null, hits = [], gone = false;
+  // A shake is measured as g-force, the way native shake detectors do: how hard the phone is accelerating, gravity
+  // included, over 1g. Phones report ~60 times a second, so it's the size of each reading that counts, not the change
+  // between two. Walking peaks near 1.5g; a hit is over 2.3g, and it takes two hits 150ms to 1s apart, so one jolt
+  // (pulling the phone from a pocket) never jumps.
+  let hits = [], gone = false;
   const jump = () => { gone = true; const a = others[Math.floor(Math.random() * others.length)];
     try { localStorage.setItem('era', a.dataset.era); sessionStorage.setItem('era-arrive', a.dataset.era); } catch (_) {}
     location.href = a.href; };
   const onMotion = e => {
     const g = e.accelerationIncludingGravity; if (!g || g.x == null || gone) return;
-    const now = performance.now();
-    if (prev) { const d = Math.abs(g.x - prev.x) + Math.abs(g.y - prev.y) + Math.abs(g.z - prev.z);
-      if (d > 32 && now - born > 1500 && (!hits.length || now - hits[hits.length - 1] > 120)) {
-        hits = hits.filter(t => now - t < 1000); hits.push(now); if (hits.length >= 2) jump(); } }
-    prev = { x: g.x, y: g.y, z: g.z };
+    const now = performance.now(), force = Math.hypot(g.x, g.y, g.z || 0) / 9.81;
+    if (force < 2.3 || now - born < 1500 || (hits.length && now - hits[hits.length - 1] < 150)) return;
+    hits = hits.filter(t => now - t < 1000); hits.push(now); if (hits.length >= 2) jump();
   };
   const listen = () => { addEventListener('devicemotion', onMotion);
     // the button goes away under the finger: hand focus to the hint first, or the menu reads that as focus leaving and closes
