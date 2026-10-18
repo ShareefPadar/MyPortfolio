@@ -109,7 +109,9 @@ export default function EraSwitch({ label, items, shake }: { label: string; item
   return (
     <div
       ref={root}
-      className="eraswitch xl:hidden"
+      // position as utilities too, not only the .eraswitch rule in globals.css: the first preview on a real phone showed
+      // the pill unpositioned at the top left, so the placement no longer rests on that one rule
+      className="eraswitch fixed right-16 bottom-[calc(16px+env(safe-area-inset-bottom,0px))] z-[66] xl:hidden"
       data-open={open}
       onKeyDown={onKey}
       onBlur={(e) => { if (open && !root.current?.contains(e.relatedTarget as Node)) setOpen(false); }}
