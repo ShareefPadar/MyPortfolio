@@ -104,9 +104,9 @@ function eraRail(root) {
 /**
  * Shake to time-travel: behaviour only, an add-on to the year menu (Shareef's call). Phones only; off under reduced
  * motion. A firm shake (two hard jolts within a second) lands on a random other year, same page.
- * Inside menu: [data-shake] (hidden until it's supported) holding [data-shake-hint] and, for iPhones,
- * [data-shake-ask], the tap Safari needs before it hands over motion. Once allowed, later pages re-ask on the first
- * touch, which Safari answers without a prompt.
+ * Inside menu: [data-shake] (hidden until it's supported) holding [data-shake-hint]. It turns itself on (Shareef's
+ * call, no button): straight away where it can, else on the first tap anywhere, which on iPhone brings Safari's own
+ * motion prompt once.
  */
 export const shakeJS = `
 function eraShake(menu) {
@@ -114,7 +114,7 @@ function eraShake(menu) {
   if (!box || !('DeviceMotionEvent' in window) || !matchMedia('(hover: none) and (pointer: coarse)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const links = [...menu.querySelectorAll('a[data-era]')], others = links.filter(a => !a.hasAttribute('aria-current'));
   if (!others.length) return;
-  const ask = box.querySelector('[data-shake-ask]'), hint = box.querySelector('[data-shake-hint]'), born = performance.now();
+  const hint = box.querySelector('[data-shake-hint]'), born = performance.now();
   // A shake is measured as g-force, the way native shake detectors do: how hard the phone is accelerating, gravity
   // included, over 1g. Phones report ~60 times a second, so it's the size of each reading that counts, not the change
   // between two. Walking peaks near 1.5g; a hit is over 2.3g, and it takes two hits 150ms to 1s apart, so one jolt
@@ -129,18 +129,15 @@ function eraShake(menu) {
     if (force < 2.3 || now - born < 1500 || (hits.length && now - hits[hits.length - 1] < 150)) return;
     hits = hits.filter(t => now - t < 1000); hits.push(now); if (hits.length >= 2) jump();
   };
-  const listen = () => { addEventListener('devicemotion', onMotion);
-    // the button goes away under the finger: hand focus to the hint first, or the menu reads that as focus leaving and closes
-    if (hint) { hint.hidden = false; if (ask && document.activeElement === ask) { hint.tabIndex = -1; hint.focus(); } }
-    if (ask) ask.hidden = true; };
-  const needsAsk = typeof DeviceMotionEvent.requestPermission === 'function';
+  const listen = () => { addEventListener('devicemotion', onMotion); if (hint) hint.hidden = false; };
   box.hidden = false;
-  if (!needsAsk) { listen(); return; }
-  if (hint) hint.hidden = true; if (ask) ask.hidden = false;
-  const request = () => DeviceMotionEvent.requestPermission().then(s => { if (s === 'granted') { try { localStorage.setItem('era-shake', 'on'); } catch (_) {} listen(); } }).catch(() => {});
-  if (ask) ask.addEventListener('click', request);
-  let on = false; try { on = localStorage.getItem('era-shake') === 'on'; } catch (_) {}
-  if (on) addEventListener('touchend', request, { once: true });
+  if (typeof DeviceMotionEvent.requestPermission !== 'function') { listen(); return; }
+  // Some browsers gate motion behind requestPermission. Never ask with a button (Shareef's call): try straight away, and
+  // where that needs a gesture (iPhone Safari), try again on the first tap anywhere on the page
+  let asked = false;
+  const request = () => { if (asked) return; DeviceMotionEvent.requestPermission().then(s => { if (s === 'granted') { asked = true; listen(); } }).catch(() => {}); };
+  request();
+  addEventListener('touchend', () => { request(); asked = true; }, { once: true });
 }`;
 
 /** Inline in <head>: flags the arrival effect before first paint (each era styles html.era-arrive .arrive). */

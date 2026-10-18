@@ -522,9 +522,8 @@
   "default": "1995",
   "label": "Pick a year",
   "shake": {
-   "_note": "Phones only, an add-on: shake the phone to land on a random other year. Shown inside the year pill's menu. iPhones must allow motion first, so they see the button.",
-   "hint": "Or shake your phone for a random year",
-   "enable": "Turn on shake to time-travel"
+   "_note": "Phones only, an add-on: shake the phone to land on a random other year. Shown inside the year pill's menu. It turns itself on; iPhone Safari asks once, on the first tap.",
+   "hint": "Or shake your phone for a random year"
   },
   "items": [
    {

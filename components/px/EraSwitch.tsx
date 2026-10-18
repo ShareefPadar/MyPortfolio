@@ -25,15 +25,15 @@ export const rememberEra = (id: string) => {
   try { localStorage.setItem("era", id); sessionStorage.setItem("era-arrive", id); } catch {}
 };
 
-type Shake = { hint: string; enable: string };
+type Shake = { hint: string };
 
 /**
  * Shake to time-travel (an add-on, phones only, off under reduced motion): a firm shake lands on a random other year.
- * Same rules as shakeJS in era-system/eras/_shared/client.mjs. iPhones must allow motion from a tap first, so the
- * menu shows a button there; once allowed, later pages re-ask on the first touch, which Safari answers silently.
+ * Same rules as shakeJS in era-system/eras/_shared/client.mjs. It turns itself on, no button: at once where it can,
+ * else on the first tap anywhere (iPhone Safari shows its own motion prompt then, once).
  */
 function useShake(menu: React.RefObject<HTMLDivElement | null>) {
-  const [mode, setMode] = useState<"off" | "ask" | "on">("off");
+  const [mode, setMode] = useState<"off" | "on">("off");
   useEffect(() => {
     const box = menu.current;
     if (!box || !("DeviceMotionEvent" in window) || !matchMedia("(hover: none) and (pointer: coarse)").matches || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -52,12 +52,13 @@ function useShake(menu: React.RefObject<HTMLDivElement | null>) {
     const listen = () => { window.addEventListener("devicemotion", onMotion); setMode("on"); };
     const DME = DeviceMotionEvent as unknown as { requestPermission?: () => Promise<string> };
     if (typeof DME.requestPermission !== "function") { listen(); return () => window.removeEventListener("devicemotion", onMotion); }
-    setMode("ask");
-    const request = () => DME.requestPermission!().then((s) => { if (s === "granted") { try { localStorage.setItem("era-shake", "on"); } catch {} listen(); } }).catch(() => {});
-    (box as HTMLDivElement & { askShake?: () => void }).askShake = request;
-    let on = false; try { on = localStorage.getItem("era-shake") === "on"; } catch {}
-    if (on) window.addEventListener("touchend", request, { once: true });
-    return () => { window.removeEventListener("devicemotion", onMotion); window.removeEventListener("touchend", request); };
+    // no button (Shareef's call): ask straight away, and where that needs a gesture (iPhone Safari), on the first tap anywhere
+    let asked = false;
+    const request = () => { if (asked) return; DME.requestPermission!().then((s) => { if (s === "granted") { asked = true; listen(); } }).catch(() => {}); };
+    const onTap = () => { request(); asked = true; };
+    request();
+    window.addEventListener("touchend", onTap, { once: true });
+    return () => { window.removeEventListener("devicemotion", onMotion); window.removeEventListener("touchend", onTap); };
   }, [menu]);
   return mode;
 }
@@ -148,20 +149,8 @@ export default function EraSwitch({ label, items, shake }: { label: string; item
             );
           })}
         </ul>
-        {shakeMode !== "off" && (
-          <div className="mt-8">
-            {shakeMode === "on" ? (
-              <p className="font-mono text-[11px] leading-[1.5] text-mute">{shake.hint}</p>
-            ) : (
-              <button
-                type="button"
-                onClick={() => (menu.current as (HTMLDivElement & { askShake?: () => void }) | null)?.askShake?.()}
-                className="min-h-[40px] w-full border-2 border-line bg-paper px-8 font-mono text-[11px] leading-[1.4] text-ink"
-              >
-                {shake.enable}
-              </button>
-            )}
-          </div>
+        {shakeMode === "on" && (
+          <p className="mt-8 font-mono text-[11px] leading-[1.5] text-mute">{shake.hint}</p>
         )}
       </div>
     </div>

@@ -48,7 +48,7 @@ ${css}
   <ul>
     ${eraItems(c, pageUrl, '1995').map(e => `<li><span class="focusable"><a class="btn frame-control" data-fill="surface" data-era="${e.id}" href="${esc(e.href)}"${e.current ? ' data-state="pressed" aria-current="true"' : ''}><b>${esc(e.year)}</b><span class="mono">${esc(e.name)}</span></a></span></li>`).join('\n          ')}
   </ul>
-    <div class="shake" data-shake hidden><p data-shake-hint>${esc(c.eras.shake.hint)}</p><button type="button" data-shake-ask hidden>${esc(c.eras.shake.enable)}</button></div>
+    <div class="shake" data-shake hidden><p data-shake-hint>${esc(c.eras.shake.hint)}</p></div>
   </div>
   </div>
   <nav class="yearrail frame-raised" aria-label="${esc(c.eras.label)}" data-era-rail>

@@ -72,7 +72,7 @@ ${skyMarkup(quietSky)}
   <ul>
   ${eraItems(c, pageUrl, 'now').map(e => `<li><a data-era="${e.id}" href="${esc(e.href)}"${e.current ? ' aria-current="true"' : ''}><b>${esc(e.year)}</b><span class="nm">${esc(e.name)}</span>${e.current ? `<span class="chk" aria-hidden="true">${ic('check')}</span>` : ''}</a></li>`).join('\n        ')}
   </ul>
-    <div class="shake" data-shake hidden><p data-shake-hint>${esc(c.eras.shake.hint)}</p><button type="button" data-shake-ask hidden>${esc(c.eras.shake.enable)}</button></div>
+    <div class="shake" data-shake hidden><p data-shake-hint>${esc(c.eras.shake.hint)}</p></div>
   </div>
   </div>
   <nav class="yearrail glass" aria-label="${esc(c.eras.label)}" data-era-rail>
