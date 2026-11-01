@@ -6,13 +6,24 @@ import Summary from "@/components/Summary";
 
 
 <Summary
-  readTime="9 min"
-  problem="Business accounts get frozen for compliance reviews with no stage, no clock, and a rolling promise of another 24 hours, while the linked POS stops settling."
-  approach="Designed and built six screens for the wait itself: a stage tracker, a running clock, a proactive admission when the estimate slips, and a scoped restriction that keeps the business trading."
-  constraint="The freeze is often mandatory and the reason legally cannot be disclosed. Only the communication layer was ever mine to change."
+  title="The hold"
+  rows={[
+    {
+      label: "The reviews",
+      text: "Business accounts get frozen for compliance reviews with no stage, no clock, and a rolling promise of another 24 hours, while the linked POS stops settling.",
+    },
+    {
+      label: "Six screens",
+      text: "Designed and built six screens for the wait itself: a stage tracker, a running clock, a proactive admission when the estimate slips, and a scoped restriction that keeps the business trading.",
+    },
+    {
+      label: "What I couldn't touch",
+      text: "The freeze is often mandatory and the reason legally cannot be disclosed. Only the communication layer was ever mine to change.",
+    },
+  ]}
 />
 
-<Callout label="On fairness">
+<Callout>
 
 Wio is one of the UAE's fastest-growing digital banks and has genuine advocates. Its onboarding and app are widely praised, and it publishes strong satisfaction scores. This study isn't a verdict on the bank. It looks at one specific flow that its own public reviews show repeatedly failing, and asks what design could do about it inside constraints that no interface can remove: mandatory compliance holds, external registry timelines, review reasons the bank legally cannot disclose. The rest of this case study is what's left once you accept that.
 
@@ -63,7 +74,7 @@ The freeze itself is frequently mandatory. Compliance rules can also prohibit th
 
 > How do you keep a business informed, oriented, and able to act when you cannot remove the freeze and sometimes cannot even explain it?
 
-That constraint is the whole project. It rules out the obvious answer and forces every decision into the communication layer, which is precisely where the failure actually lives.
+I could not lift the freeze, and sometimes I could not publish the reason. The six screens only change what the customer is told while they wait: the stage, a running clock, an admission when the estimate slips, and what the business can still do.
 
 **Who I designed for:** an SME owner or finance lead whose business is operationally down. Payroll, suppliers, and POS are all affected. This is not inconvenience, it's existential. They call every two days because there is nothing else they can do. I designed for someone in crisis, not someone browsing.
 
@@ -139,6 +150,8 @@ I chose scoped restriction, published. The compliance requirement is about this 
 
 **Design the wait, not just the outcome.** The decision was never the broken part. The weeks before it were.
 
+The prototype is React and custom CSS. An AI assistant helped on the boilerplate. The complaints are the public reviews linked above. The screens are my concept.
+
 ---
 
 ## What I'd test next
@@ -163,4 +176,4 @@ Reminder: the problem is real, drawn from Wio Bank's dated public reviews. The i
   <MizanPrototype />
 </DeviceFrame>
 
-> The bank knew the stage the whole time. Everything the customer needed already existed internally and never reached the screen. That gap is the design problem.
+> The bank knew the stage the whole time. Everything the customer needed already existed internally and never reached the screen.

@@ -71,7 +71,7 @@ export const BIO = [
 ];
 
 export const PHILOSOPHY =
-  "The problems worth taking are the ones where the constraint does not move. You cannot delete the compliance step or shorten the ten-day wait, so the only thing left to design is how it feels to live through. That is the work I want.";
+  "The problems worth taking are the ones where the constraint does not move. You cannot delete the compliance step or shorten the ten-day wait, so the only thing left to design is how it feels to live through. The Sanad and Wio prototypes are that, running. Bring me one of yours on a call.";
 
 export const EDUCATION =
   "B.E. Computer Science & Engineering, Sahyadri College of Engineering & Management (2019) · UX Design, Interaction Design Foundation.";

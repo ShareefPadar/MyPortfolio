@@ -107,7 +107,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       "Live and taking sign-ups. Invoicing, expenses, the tax engine, IR35 and the Self Assessment pack all work. MTD submission is built against HMRC's sandbox and waiting on recognition.",
     quote:
       "Freelax tells you what you owe. Sometimes it will be wrong, and when it is wrong, the letter from HMRC arrives at the user's house, not ours. That fact sat with me the whole build.",
-    stack: "Next.js · Supabase · Tailwind · Stripe · Claude API",
+    stack: "Next.js · Supabase · Tailwind · Stripe",
     imageUrl: "/assets/work/freelax-thumb.webp",
     bgColor: "#EDF2EE",
     liveUrl: "https://app.freelax.co.uk",
@@ -150,7 +150,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       "A working six-screen prototype, embedded in the case study. Every decision earns its place against a constraint that can't move: regulators decide the steps, design decides how they feel.",
     quote:
       "A real problem, a concept product. The frustration, the research, and the working prototype are all real. Sanad, the business-banking brand they're wrapped in, is the part I invented so I could solve the whole problem.",
-    stack: "React · Custom CSS · AI-assisted build",
+    stack: "React · Custom CSS",
     imageUrl: "/assets/work/sanad-thumb.png",
     bgColor: "#EEF0FD",
     card: {
@@ -187,7 +187,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       "A working prototype for the wait itself, not the decision. Built against dated public complaints, and constrained by what compliance genuinely cannot disclose.",
     quote:
       "Several of the causes here cannot be designed away: mandatory holds, external registry timelines, reasons the bank is not allowed to give. What can be designed is what the customer is told while they wait.",
-    stack: "React · Custom CSS · AI-assisted build",
+    stack: "React · Custom CSS",
     imageUrl: "/assets/work/mizan-thumb.png",
     bgColor: "#F7F7F5",
     card: {
@@ -331,7 +331,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     duration: "2-4 weeks",
     outcome:
       "Running in production for a 21-person flat, with rent, utilities, and laundry on one shared system of record.",
-    stack: "Next.js 16 • React 19 • Tailwind CSS 4 • Cursor (AI-IDE)",
+    stack: "Next.js 16 • React 19 • Tailwind CSS 4",
     imageUrl: "/assets/roomy-preview.png",
     bgColor: "#F5F3FF",
     liveUrl: "https://roomy-delta.vercel.app/",
@@ -357,14 +357,14 @@ export const CASE_STUDIES: CaseStudy[] = [
     title: "Form: Privacy-First Health",
     headline: "Health tracking that works offline, with no account",
     description:
-      "A health tracker built on one insight: removing sign-up friction beats adding features. It works fully offline with no account. Your weight, BMI, and body composition stay on your device and sync only when you choose.",
+      "Most fitness apps want an account before you can log anything, and they stop when the signal does. Form runs fully offline with no account. Weight, BMI, and body composition stay on the device and sync only if you choose.",
+    metaDescription:
+      "A health tracker that logs weight, BMI, and macros with no account, and keeps working offline. Sync is optional.",
     role: "Product Designer & Builder",
     type: "Live product",
     duration: "2-4 weeks",
     outcome:
       "Live and offline-first. Full tracking with no sign-up, and data stays on the device until you choose to sync.",
-    quote:
-      "Privacy-first doesn't mean feature-poor. Guest Mode plus offline-first architecture delivers a premium UX with zero account friction.",
     stack: "React + Vite • IndexedDB (Dexie.js) • Supabase • Recharts",
     imageUrl: "/assets/fitness-tracker-preview.png",
     bgColor: "#0D1117",

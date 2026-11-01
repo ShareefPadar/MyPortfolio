@@ -9,7 +9,7 @@
    "before": "Senior product designer who",
    "accent": "ships."
   },
-  "lead": "Six years in B2B UX, from research to shipped interface. I build and ship my own products in React and Tailwind too, which is why the prototypes on this site are real software rather than screenshots."
+  "lead": "Six years taking B2B products from research into market. I ship working prototypes, not screenshots."
  },
  "nav": [
   {
@@ -485,7 +485,7 @@
    ]
   },
   "education": "B.E. Computer Science & Engineering, Sahyadri College of Engineering & Management (2019) · UX Design, Interaction Design Foundation.",
-  "quote": "The problems worth taking are the ones where the constraint does not move. You cannot delete the compliance step or shorten the ten-day wait, so the only thing left to design is how it feels to live through. That is the work I want.",
+  "quote": "The problems worth taking are the ones where the constraint does not move. You cannot delete the compliance step or shorten the ten-day wait, so the only thing left to design is how it feels to live through. The Sanad and Wio prototypes are that, running. Bring me one of yours on a call.",
   "contactLabel": "Get in touch"
  },
  "meta": {

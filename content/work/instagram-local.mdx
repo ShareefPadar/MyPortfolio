@@ -1,10 +1,21 @@
 import Summary from "@/components/Summary";
 
 <Summary
-  readTime="4 min"
-  problem="Instagram connects you to the whole world but buries what is happening two streets away under global hashtags. 86% of surveyed users valued local content, fewer than half could find it."
-  approach="Designed two discovery entry points for two intents: a Near You feed tab for passive scrolling, and a Near You grid in Explore for people arriving with a plan."
-  constraint="Adding a local layer without fracturing an app that billions of people already know how to use."
+  title="Nearby"
+  rows={[
+    {
+      label: "Two streets away",
+      text: "Instagram connects you to the whole world but buries what is happening two streets away under global hashtags. 86% of surveyed users valued local content, fewer than half could find it.",
+    },
+    {
+      label: "Two doors",
+      text: "Designed two discovery entry points for two intents: a Near You feed tab for passive scrolling, and a Near You grid in Explore for people arriving with a plan.",
+    },
+    {
+      label: "Left alone",
+      text: "Adding a local layer without fracturing an app that billions of people already know how to use.",
+    },
+  ]}
 />
 
 ## Instagram falls short two streets away
@@ -82,4 +93,4 @@ The hi-fi work followed Instagram's clean visual language, so local elements rea
 
 The lesson from this project: people rarely ask for the feature. The research showed they were frustrated, but nobody said "I want a local feed." They asked why they couldn't find local content. The feature was my read of that underlying need, which is why it had to feel obvious once it existed.
 
-> 86% of users valued local content, but fewer than half could actually find it. The gap wasn't a missing feature. It was a missing layer, sitting inside an app they already open every day.
+> 86% of users valued local content, but fewer than half could actually find it. The local layer sits inside an app they already open every day.

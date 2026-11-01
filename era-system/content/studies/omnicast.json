@@ -8,7 +8,7 @@
  "ogImage": "https://www.shareefpadar.com/assets/omnicast-preview.png",
  "head": {
   "number": "01",
-  "label": "Overview",
+  "label": "Campaign",
   "title": "AI publishing that shows its reasoning instead of hiding it.",
   "meta": [
    {
@@ -16,17 +16,17 @@
     "v": "Senior Product Designer"
    },
    {
-    "k": "Type",
-    "v": "Product concept"
-   },
-   {
     "k": "Period",
     "v": "2-4 weeks"
+   },
+   {
+    "k": "Type",
+    "v": "Product concept"
    }
   ],
   "lead": "AI-powered publishing assistant that predicts performance and optimizes multi-channel campaigns in real-time.",
   "outcome": {
-   "label": "Outcome",
+   "label": "In the tests",
    "text": "Projected +15–20% engagement uplift and 30–40% time saved in test scenarios, grounded in interviews with 8 practitioners."
   },
   "statement": "AI-powered publishing assistant built on 8 interviews and 4 competitor audits. Projected 30–40% time savings and 15–20% engagement uplift across 6 platforms."
@@ -34,20 +34,16 @@
  "blocks": [
   {
    "type": "short",
-   "tab": "The short version",
+   "tab": "Campaign",
    "note": "4 min read",
    "rows": [
     {
-     "k": "Problem",
+     "k": "Four tools",
      "v": "Marketers switch between four tools to run one campaign, guess at posting times, and only find out what worked after publishing."
     },
     {
-     "k": "What I did",
+     "k": "What I drew",
      "v": "Designed a publishing assistant with a prediction behind every step: inline AI suggestions, predictive scheduling, and a calendar that re-scores as campaigns run."
-    },
-    {
-     "k": "Why it was hard",
-     "v": "People wanted AI help but not a black box. Every suggestion had to show its reasoning and stay overridable, or trust collapsed."
     }
    ]
   },
@@ -65,7 +61,7 @@
   },
   {
    "type": "p",
-   "html": "The real opportunity wasn't a faster publishing tool. It was an assistant that could predict the best way to publish before content goes live, keep tuning campaigns as they run, and cut the repetitive work without taking control away from the person doing it."
+   "html": "I designed an assistant that predicts how to publish before the post goes live, keeps tuning the campaign while it runs, and cuts the repetitive work without taking the publish button away."
   },
   {
    "type": "hr"
