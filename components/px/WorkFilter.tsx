@@ -5,7 +5,7 @@ import PixelIcon from "@/components/px/PixelIcon";
 import type { Domain } from "@/lib/work";
 
 /**
- * Domain filter chips (spec §7.2). Deep-linkable via ?filter=fintech, so a
+ * Domain filter chips (spec §7.2). Deep-linkable via ?filter=billing, so a
  * filtered view can be shared or bookmarked rather than only clicked into.
  *
  * A small client island. The page around it stays static — this is wrapped in

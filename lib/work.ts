@@ -10,8 +10,10 @@
 
 /** Card tab content (spec §4.4): domain only, never a year or a discipline. */
 export type Domain =
-  | "FINTECH"
-  | "TRAVEL"
+  | "BILLING"
+  | "ONBOARDING"
+  | "PAYMENTS"
+  | "BOOKING"
   | "NAVIGATION"
   | "SOCIAL"
   | "MARKETING"
@@ -115,13 +117,13 @@ export const CASE_STUDIES: CaseStudy[] = [
     card: {
       headline: "Tax that stops being a surprise",
       title: "Freelax · UK tax for freelancers",
-      category: "Fintech",
+      category: "Billing",
       badge: "Live",
       description:
         "A legal deadline, three million people, and accounting tools built for someone bigger. Co-founded, designed end to end, live.",
       thumbnail: "/assets/work/freelax-thumb.webp",
     },
-    domain: "FINTECH",
+    domain: "BILLING",
     tier: 1,
     order: 1,
     nextOrder: 9,
@@ -156,13 +158,13 @@ export const CASE_STUDIES: CaseStudy[] = [
     card: {
       headline: "Onboarding that feels fast without cutting corners",
       title: "Sanad · KYB verification",
-      category: "Fintech",
+      category: "Onboarding",
       badge: "Concept",
       description:
         "Designed after hitting the verification wall myself at Companies House. Six screens, built as a working prototype.",
       thumbnail: "/assets/work/sanad-thumb.png",
     },
-    domain: "FINTECH",
+    domain: "ONBOARDING",
     tier: 1,
     order: 2,
     nextOrder: 5,
@@ -193,13 +195,13 @@ export const CASE_STUDIES: CaseStudy[] = [
     card: {
       headline: "Telling a frozen business where it actually stands",
       title: "Wio · account-hold communication",
-      category: "Fintech",
+      category: "Payments",
       badge: "Concept",
       description:
         "Business accounts frozen for weeks with no stage and no clock. A communication layer built against Wio Bank's dated public complaints.",
       thumbnail: "/assets/work/mizan-thumb.png",
     },
-    domain: "FINTECH",
+    domain: "PAYMENTS",
     tier: 1,
     order: 3,
     nextOrder: 6,
@@ -222,13 +224,13 @@ export const CASE_STUDIES: CaseStudy[] = [
     card: {
       headline: "Cutting decision fatigue on a top travel platform",
       title: "Almosafer · UX audit",
-      category: "Travel",
+      category: "Booking",
       badge: "Concept",
       description:
         "Hick's Law and visual hierarchy applied to two high-stakes screens in the booking funnel.",
       thumbnail: "/assets/almosafer-preview.png",
     },
-    domain: "TRAVEL",
+    domain: "BOOKING",
     tier: 2,
     order: 4,
     nextOrder: 3,

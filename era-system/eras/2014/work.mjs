@@ -7,7 +7,7 @@ import { shell, esc } from './layout.mjs';
 import { filterJS } from '../_shared/client.mjs';
 export const meta = { id: '2014', title: '2014 — Work' };
 
-const TILE = { Fintech: '#1668C4', Travel: '#00796B', Navigation: '#2E7D32', Marketing: '#EF6C00', Social: '#C2185B', 'Co-living': '#00838F', Health: '#6A4BC4' };
+const TILE = { Billing: '#1668C4', Onboarding: '#1668C4', Payments: '#1668C4', Booking: '#00796B', Fintech: '#1668C4', Travel: '#00796B', Navigation: '#2E7D32', Marketing: '#EF6C00', Social: '#C2185B', 'Co-living': '#00838F', Health: '#6A4BC4' };
 
 export default function render(args) {
   const { content: c, icons, assetBase = '' } = args;

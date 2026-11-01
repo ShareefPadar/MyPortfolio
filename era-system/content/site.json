@@ -9,7 +9,7 @@
    "before": "Senior product designer who",
    "accent": "ships."
   },
-  "lead": "Six years taking B2B products from research into market. I ship working prototypes, not screenshots."
+  "lead": "Marketplace and transactional B2B: booking, payments, billing, dashboards. I ship working prototypes, not screenshots."
  },
  "nav": [
   {
@@ -147,9 +147,9 @@
  "projects": {
   "freelax": {
    "id": "freelax",
-   "domain": "Fintech",
+   "domain": "Billing",
    "relevant": true,
-   "status": "Fintech · Live",
+   "status": "Billing · Live",
    "title": "Tax that stops being a surprise",
    "meta": "Freelax · UK tax for freelancers",
    "href": "/work/freelax",
@@ -158,9 +158,9 @@
   },
   "sanad": {
    "id": "sanad",
-   "domain": "Fintech",
+   "domain": "Onboarding",
    "relevant": true,
-   "status": "Fintech · Concept",
+   "status": "Onboarding · Concept",
    "title": "Onboarding that feels fast without cutting corners",
    "meta": "Sanad · KYB verification",
    "href": "/work/sanad",
@@ -169,9 +169,9 @@
   },
   "wio": {
    "id": "wio",
-   "domain": "Fintech",
+   "domain": "Payments",
    "relevant": true,
-   "status": "Fintech · Concept",
+   "status": "Payments · Concept",
    "title": "Telling a frozen business where it actually stands",
    "meta": "Wio · account-hold communication",
    "href": "/work/wio",
@@ -180,9 +180,9 @@
   },
   "almosafer": {
    "id": "almosafer",
-   "domain": "Travel",
+   "domain": "Booking",
    "relevant": false,
-   "status": "Travel · Concept",
+   "status": "Booking · Concept",
    "title": "Cutting decision fatigue on a top travel platform",
    "meta": "Almosafer · UX audit",
    "href": "/work/almosafer-audit",
@@ -427,9 +427,9 @@
  "about": {
   "title": "About Shareef Padar | 6 Years of B2B Product Design",
   "heading": "Usually the only designer",
-  "lead": "I'm a Senior Product Designer with six years in B2B SaaS, based in Dubai. Logistics, healthcare, gym management, travel. In most of those rooms I was the only designer, which meant doing the research, making the call, drawing the screens, and then sitting with the engineers while it got built. Most of that work sits under NDA.",
+  "lead": "I'm a Senior Product Designer who designs marketplaces, then the transactional B2B flows around them: booking, payments, billing, and dashboards. Based in Dubai. Six years, usually the only designer in the room. Logistics, healthcare, gym management, travel. Most of that work sits under NDA.",
   "body": [
-   "At Cargoz I designed Cargoz Connect, a product that gets a business into warehouse space inside 24 hours, from the first wireframe to the live UI, and built the design system six developers now work from. Before that I ran UX for a gym and healthcare ERP, reporting straight to the CEO, which mostly taught me how to defend a design decision to someone who owns the P&L.",
+   "At Cargoz I designed Cargoz Connect, a two-sided B2B warehouse marketplace that gets a business into warehouse space inside 24 hours, from the first wireframe to the live UI, and built the design system six developers now work from. Before that I ran UX for a gym and healthcare ERP, reporting straight to the CEO, which mostly taught me how to defend a design decision to someone who owns the P&L.",
    "My degree is in computer science, and I treat that as a design advantage. I know what is expensive to build, so I stop proposing it. I can read the codebase to check whether a pattern already exists before inventing another one. And when an idea needs proving, I would rather build it than describe it, which is why the prototypes in the Sanad and Wio case studies are real working software instead of screenshots."
   ],
   "principles": {
@@ -456,7 +456,7 @@
      "role": "Senior UI/UX Designer & UX Engineer",
      "dates": "2025 – Present",
      "company": "Cargoz · Dubai",
-     "text": "Shipped Cargoz Connect, a B2B product for booking warehouse space within 24 hours, from wireframes to live UI. Building the design system for a 6-developer team and shipping front-end code in React and Tailwind."
+     "text": "Shipped Cargoz Connect, a two-sided B2B warehouse marketplace for booking space within 24 hours, from wireframes to live UI. Building the design system for a 6-developer team and shipping front-end code in React and Tailwind."
     },
     {
      "role": "Senior UI/UX Designer",
