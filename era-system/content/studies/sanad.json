@@ -8,7 +8,7 @@
  "ogImage": "https://www.shareefpadar.com/assets/work/sanad-thumb.png",
  "head": {
   "number": "01",
-  "label": "Overview",
+  "label": "The wall",
   "title": "Making business verification feel fast without making it less rigorous.",
   "meta": [
    {
@@ -22,36 +22,24 @@
    {
     "k": "Period",
     "v": "2026"
-   },
-   {
-    "k": "Stack",
-    "v": "React · Custom CSS · AI-assisted build"
    }
   ],
   "lead": "I hit this wall myself going through UK Companies House to prove a business is legitimate before it can move money. So I designed the full KYB onboarding flow, wrapped in Sanad, a concept business-banking brand, and built it as a working React prototype. One rule shaped everything: you can't make the process easier by making it less rigorous.",
-  "outcome": {
-   "label": "Outcome",
-   "text": "A working six-screen prototype, embedded in the case study. Every decision earns its place against a constraint that can't move: regulators decide the steps, design decides how they feel."
-  },
   "statement": "A real problem, a concept product. The frustration, the research, and the working prototype are all real. Sanad, the business-banking brand they're wrapped in, is the part I invented so I could solve the whole problem."
  },
  "blocks": [
   {
    "type": "short",
-   "tab": "The short version",
+   "tab": "The wall",
    "note": "10 min read",
    "rows": [
     {
-     "k": "Problem",
+     "k": "Where I hit it",
      "v": "New businesses cannot move money until they pass KYB verification, so they start it, hit friction, and quit. I hit this same wall myself going through Companies House."
     },
     {
-     "k": "What I did",
+     "k": "What I built",
      "v": "Designed the full six-screen verification flow for a concept business bank, built it as a working React prototype, then audited my own build and published what it got wrong."
-    },
-    {
-     "k": "Why it was hard",
-     "v": "Regulators require every step, so removing friction was off the table. The process had to feel faster without becoming any less rigorous."
     }
    ]
   },
@@ -61,18 +49,14 @@
   },
   {
    "type": "p",
-   "html": "I know this one firsthand, because it happened to me. Going through Companies House verification in the UK, I didn't know how many steps were coming. I was missing one document. There was no way to save and come back, so stopping halfway meant starting over. And when a document got rejected, I was back at the beginning again, with no way to set aside the one thing I still needed time to track down. The verification itself couldn't change. The experience of it clearly could. That gap is what Sanad exists to close."
+   "html": "I know this one firsthand, because it happened to me. Going through Companies House verification in the UK, I didn't know how many steps were coming. I was missing one document. There was no way to save and come back, so stopping halfway meant starting over. And when a document got rejected, I was back at the beginning again, with no way to set aside the one thing I still needed time to track down. The verification itself couldn't change. The experience of it could."
   },
   {
    "type": "p",
-   "html": "So the problem is real. The only invented part is the product wrapper. I designed the full KYB onboarding flow for Sanad, a concept business-banking brand, and built it as a working React prototype. The interesting part isn't the screens. It's the constraint: you're not allowed to make the process easier by making it less rigorous. Every decision lives inside that."
+   "html": "So the problem is real. The only invented part is the product wrapper. I designed the full KYB onboarding flow for Sanad, a concept business-banking brand, and built it as a working React prototype. One rule sat on every screen: you're not allowed to make the process easier by making it less rigorous."
   },
   {
    "type": "hr"
-  },
-  {
-   "type": "h2",
-   "text": "The tension that shapes everything"
   },
   {
    "type": "p",
@@ -85,7 +69,7 @@
   },
   {
    "type": "p",
-   "html": "That reframe is the whole project. It rules out the easy answer, fewer fields, and forces every decision to earn its place against a constraint I couldn't move."
+   "html": "Fewer fields was the easy answer, and it was off the table. Every decision below had to earn its place against a constraint I couldn't move."
   },
   {
    "type": "p",
@@ -303,6 +287,10 @@
    "html": "None of these showed up in a screenshot. They only surfaced because the thing runs. Which is the whole argument for designing in code: it makes your claims testable, including against yourself."
   },
   {
+   "type": "p",
+   "html": "The prototype is React and custom CSS. An AI assistant helped me build it. The four failures above are from running it."
+  },
+  {
    "type": "hr"
   },
   {
@@ -340,11 +328,6 @@
    "label": "Live prototype · click through the real flow",
    "url": "sanad.app/verify",
    "caption": "The actual working prototype, not a video. Reach the rejection path by simulating that outcome on the pending screen. This is the post-audit v2 build."
-  },
-  {
-   "type": "quote",
-   "html": "Regulators decide what the steps are. Design decides how they feel. That gap is the whole job.",
-   "rule": "lime"
   }
  ],
  "ending": null,

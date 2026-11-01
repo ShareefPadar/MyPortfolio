@@ -1,10 +1,18 @@
 import Summary from "@/components/Summary";
 
 <Summary
+  title="Campaign"
   readTime="4 min"
-  problem="Marketers switch between four tools to run one campaign, guess at posting times, and only find out what worked after publishing."
-  approach="Designed a publishing assistant with a prediction behind every step: inline AI suggestions, predictive scheduling, and a calendar that re-scores as campaigns run."
-  constraint="People wanted AI help but not a black box. Every suggestion had to show its reasoning and stay overridable, or trust collapsed."
+  rows={[
+    {
+      label: "Four tools",
+      text: "Marketers switch between four tools to run one campaign, guess at posting times, and only find out what worked after publishing.",
+    },
+    {
+      label: "What I drew",
+      text: "Designed a publishing assistant with a prediction behind every step: inline AI suggestions, predictive scheduling, and a calendar that re-scores as campaigns run.",
+    },
+  ]}
 />
 
 ## Four tools, and a guess at what works
@@ -13,7 +21,7 @@ Agencies, marketers, and creators juggle a stack of social platforms with no sha
 
 That gap costs engagement, ad spend, and turnaround time.
 
-The real opportunity wasn't a faster publishing tool. It was an assistant that could predict the best way to publish before content goes live, keep tuning campaigns as they run, and cut the repetitive work without taking control away from the person doing it.
+I designed an assistant that predicts how to publish before the post goes live, keeps tuning the campaign while it runs, and cuts the repetitive work without taking the publish button away.
 
 ---
 

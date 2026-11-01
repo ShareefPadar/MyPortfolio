@@ -16,7 +16,7 @@ export const JOBS: Job[] = [
     role: "Senior UI/UX Designer & UX Engineer",
     company: "Cargoz · Dubai",
     period: "2025 – Present",
-    desc: "Shipped Cargoz Connect, a B2B product for booking warehouse space within 24 hours, from wireframes to live UI. Building the design system for a 6-developer team and shipping front-end code in React and Tailwind.",
+    desc: "Shipped Cargoz Connect, a two-sided B2B warehouse marketplace for booking space within 24 hours, from wireframes to live UI. Building the design system for a 6-developer team and shipping front-end code in React and Tailwind.",
   },
   {
     role: "Senior UI/UX Designer",
@@ -65,13 +65,13 @@ export const PRINCIPLES: Principle[] = [
 ];
 
 export const BIO = [
-  "I'm a Senior Product Designer with six years in B2B SaaS, based in Dubai. Logistics, healthcare, gym management, travel. In most of those rooms I was the only designer, which meant doing the research, making the call, drawing the screens, and then sitting with the engineers while it got built. Most of that work sits under NDA.",
-  "At Cargoz I designed Cargoz Connect, a product that gets a business into warehouse space inside 24 hours, from the first wireframe to the live UI, and built the design system six developers now work from. Before that I ran UX for a gym and healthcare ERP, reporting straight to the CEO, which mostly taught me how to defend a design decision to someone who owns the P&L.",
+  "I'm a Senior Product Designer who designs marketplaces, then the transactional B2B flows around them: booking, payments, billing, and dashboards. Based in Dubai. Six years, usually the only designer in the room. Logistics, healthcare, gym management, travel. Most of that work sits under NDA.",
+  "At Cargoz I designed Cargoz Connect, a two-sided B2B warehouse marketplace that gets a business into warehouse space inside 24 hours, from the first wireframe to the live UI, and built the design system six developers now work from. Before that I ran UX for a gym and healthcare ERP, reporting straight to the CEO, which mostly taught me how to defend a design decision to someone who owns the P&L.",
   "My degree is in computer science, and I treat that as a design advantage. I know what is expensive to build, so I stop proposing it. I can read the codebase to check whether a pattern already exists before inventing another one. And when an idea needs proving, I would rather build it than describe it, which is why the prototypes in the Sanad and Wio case studies are real working software instead of screenshots.",
 ];
 
 export const PHILOSOPHY =
-  "The problems worth taking are the ones where the constraint does not move. You cannot delete the compliance step or shorten the ten-day wait, so the only thing left to design is how it feels to live through. That is the work I want.";
+  "The problems worth taking are the ones where the constraint does not move. You cannot delete the compliance step or shorten the ten-day wait, so the only thing left to design is how it feels to live through. The Sanad and Wio prototypes are that, running. Bring me one of yours on a call.";
 
 export const EDUCATION =
   "B.E. Computer Science & Engineering, Sahyadri College of Engineering & Management (2019) · UX Design, Interaction Design Foundation.";

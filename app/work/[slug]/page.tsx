@@ -6,7 +6,7 @@ import Reveal from "@/components/px/Reveal";
 import ScrollProgress from "@/components/px/ScrollProgress";
 import Button from "@/components/px/Button";
 import { notFound } from "next/navigation";
-import { getStudy, nextStory, slugs } from "@/lib/work";
+import { getStudy, nextStory, slugs, type CaseStudy } from "@/lib/work";
 
 /* Server component. The MDX map resolves through the root mdx-components.tsx,
    which works in RSC where MDXProvider did not. */
@@ -58,6 +58,59 @@ export async function generateMetadata({
   };
 }
 
+type MetaKey = "role" | "type" | "duration" | "stack";
+
+const META_LABEL: Record<MetaKey, string> = {
+  role: "My role",
+  type: "Type",
+  duration: "Period",
+  stack: "Tools",
+};
+
+type HeaderShape = {
+  layout: "grid" | "line";
+  fields: MetaKey[];
+  /** plain keeps the outcome sentence. omit when the lede already says it. */
+  outcome: "plain" | "omit";
+};
+
+/**
+ * This header used to be one shell on every study: "01 OVERVIEW", then
+ * role / type / period / stack, then a labelled Outcome box. The shapes
+ * below keep the facts and stop the pages matching. Stack is not in this
+ * block; tools, including any AI assistant, sit in the study as a footnote.
+ */
+const HEADER: Record<string, HeaderShape> = {
+  freelax: { layout: "grid", fields: ["duration", "role", "type"], outcome: "plain" },
+  sanad: { layout: "line", fields: ["role", "type", "duration"], outcome: "omit" },
+  wio: { layout: "grid", fields: ["type", "duration", "role"], outcome: "plain" },
+  roomy: { layout: "grid", fields: ["role", "type", "duration"], outcome: "plain" },
+  form: { layout: "line", fields: ["duration", "type", "role"], outcome: "omit" },
+  "almosafer-audit": { layout: "line", fields: ["type", "role", "duration"], outcome: "plain" },
+  "google-maps-route-pass": { layout: "line", fields: ["duration", "role", "type"], outcome: "plain" },
+  "omni-cast-ai": { layout: "grid", fields: ["role", "duration", "type"], outcome: "plain" },
+  "instagram-local": { layout: "grid", fields: ["type", "role", "duration"], outcome: "plain" },
+};
+
+const DEFAULT_HEADER: HeaderShape = {
+  layout: "line",
+  fields: ["role", "type"],
+  outcome: "plain",
+};
+
+function metaValue(project: CaseStudy, key: MetaKey): string | undefined {
+  switch (key) {
+    case "role":
+      return project.role;
+    case "type":
+      return project.type;
+    case "duration":
+      return project.duration;
+    case "stack":
+      return project.stack;
+  }
+}
+
 const Meta = ({ label, value }: { label: string; value: string }) => (
   <div>
     <dt className="font-mono text-[9px] tracking-[0.02em] text-mute">{label}</dt>
@@ -76,6 +129,13 @@ export default async function WorkItem({
 
   const next = nextStory(slug);
   const MDXContent = mdxMap[slug] ?? null;
+  const header = HEADER[slug] ?? DEFAULT_HEADER;
+  const fields = header.fields.flatMap((key) => {
+    const value = metaValue(project, key);
+    return value ? [{ key, value }] : [];
+  });
+  const gridCols =
+    fields.length >= 4 ? "sm:grid-cols-4" : fields.length === 3 ? "sm:grid-cols-3" : "sm:grid-cols-2";
 
   return (
     <article>
@@ -95,38 +155,32 @@ export default async function WorkItem({
       </div>
 
       <div className="study">
-        {/* 01 OVERVIEW */}
         <header className="pb-48">
-          <div className="mb-24 flex items-baseline gap-12">
-            <span className="font-pix text-[20px] font-bold leading-none text-blue">01</span>
-            <span className="font-pix text-[14px] leading-[1.8] tracking-[0.02em] text-ink">
-              OVERVIEW
-            </span>
-          </div>
-
           {/* Geist, not Silkscreen: this is a sentence, whatever tag it uses. */}
           <h1 className="mb-32 font-sans text-[28px] font-medium leading-[1.15] tracking-[-0.022em] text-ink md:text-[40px]">
             {project.headline}.
           </h1>
 
-          <dl className="mb-32 grid grid-cols-2 gap-24 border-y border-line py-24 sm:grid-cols-4">
-            <Meta label="My role" value={project.role} />
-            <Meta label="Type" value={project.type} />
-            <Meta label="Period" value={project.duration} />
-            {project.stack && <Meta label="Stack" value={project.stack} />}
-          </dl>
+          {header.layout === "grid" ? (
+            <dl className={`mb-32 grid grid-cols-2 gap-24 border-y border-line py-24 ${gridCols}`}>
+              {fields.map(({ key, value }) => (
+                <Meta key={key} label={META_LABEL[key]} value={value} />
+              ))}
+            </dl>
+          ) : (
+            <p className="mb-32 font-mono text-[11px] leading-[1.5] tracking-[0.02em] text-mute">
+              {fields.map(({ value }) => value).join(" · ")}
+            </p>
+          )}
 
-          <p className="mb-32 max-w-lead font-sans text-[17px] leading-[1.65] text-ink md:text-[19px]">
+          <p className="max-w-lead font-sans text-[17px] leading-[1.65] text-ink md:text-[19px]">
             {project.description}
           </p>
 
-          {project.outcome && (
-            <div className="border-l-[6px] border-lime bg-panel p-16 md:p-24">
-              <p className="mb-8 font-mono text-[9px] tracking-[0.02em] text-mute">
-                Outcome
-              </p>
-              <p className="font-sans text-[16px] leading-[1.7] text-ink">{project.outcome}</p>
-            </div>
+          {header.outcome === "plain" && project.outcome && (
+            <p className="mt-16 max-w-prose font-sans text-[16px] leading-[1.7] text-ink">
+              {project.outcome}
+            </p>
           )}
         </header>
 
@@ -155,12 +209,6 @@ export default async function WorkItem({
       {project.type === "Live product" && (
         <div className="study py-48">
           <div className="border-t border-line pt-32">
-            <div className="mb-24 flex items-baseline gap-12">
-              <span className="font-pix text-[20px] font-bold leading-none text-blue">02</span>
-              <span className="font-pix text-[14px] leading-[1.8] tracking-[0.02em] text-ink">
-                SEE IT LIVE
-              </span>
-            </div>
             <p className="mb-24 max-w-lead font-sans text-[17px] leading-[1.65] text-ink">
               Don&apos;t take the case study&apos;s word for it. Go and use the product.
             </p>

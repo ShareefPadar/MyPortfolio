@@ -193,7 +193,7 @@ export default function KitchenSink() {
           <div>
             <Label>quote · 23px / 19px mobile · 500 · 1.4</Label>
             <p className="mt-8 max-w-prose font-sans text-[23px] font-medium leading-[1.4] text-ink">
-              The bank knew the stage the whole time. That gap is the design problem.
+              The bank knew the stage the whole time. Everything the customer needed already existed internally and never reached the screen.
             </p>
           </div>
           <div>

@@ -4,61 +4,29 @@
  "slug": "form",
  "url": "/work/form",
  "pageTitle": "Form: Privacy-First Health | Shareef Padar",
- "description": "A health tracker built on one insight: removing sign-up friction beats adding features. It works fully offline with no account. Your weight, BMI, and body composition stay on your device and sync only when you choose.",
+ "description": "A health tracker that logs weight, BMI, and macros with no account, and keeps working offline. Sync is optional.",
  "ogImage": "https://www.shareefpadar.com/assets/fitness-tracker-preview.png",
  "head": {
   "number": "01",
-  "label": "Overview",
+  "label": "No account",
   "title": "Health tracking that works offline, with no account.",
   "meta": [
    {
-    "k": "My role",
-    "v": "Product Designer & Builder"
+    "k": "Period",
+    "v": "2-4 weeks"
    },
    {
     "k": "Type",
     "v": "Live product"
    },
    {
-    "k": "Period",
-    "v": "2-4 weeks"
-   },
-   {
-    "k": "Stack",
-    "v": "React + Vite • IndexedDB (Dexie.js) • Supabase • Recharts"
+    "k": "My role",
+    "v": "Product Designer & Builder"
    }
   ],
-  "lead": "A health tracker built on one insight: removing sign-up friction beats adding features. It works fully offline with no account. Your weight, BMI, and body composition stay on your device and sync only when you choose.",
-  "outcome": {
-   "label": "Outcome",
-   "text": "Live and offline-first. Full tracking with no sign-up, and data stays on the device until you choose to sync."
-  },
-  "statement": "Privacy-first doesn't mean feature-poor. Guest Mode plus offline-first architecture delivers a premium UX with zero account friction."
+  "lead": "Most fitness apps want an account before you can log anything, and they stop when the signal does. Form runs fully offline with no account. Weight, BMI, and body composition stay on the device and sync only if you choose."
  },
  "blocks": [
-  {
-   "type": "short",
-   "tab": "The short version",
-   "note": "3 min read",
-   "rows": [
-    {
-     "k": "Problem",
-     "v": "Most fitness apps demand an account before you can log anything, keep your data on their servers, and stop working the moment you lose signal."
-    },
-    {
-     "k": "What I did",
-     "v": "Built a local-first tracker on IndexedDB with opt-in cloud sync, on-device macro calculations, and forecast states that admit when the data cannot support a prediction."
-    },
-    {
-     "k": "Why it was hard",
-     "v": "Making offline-first feel premium, and deciding what a forecast should say when it genuinely does not know."
-    }
-   ]
-  },
-  {
-   "type": "h2",
-   "text": "The Problem"
-  },
   {
    "type": "p",
    "html": "Most fitness apps share one flaw: they want an account before you can do anything. Your data lives on their servers, behind their subscription, under their privacy policy. For anyone privacy-conscious, or just not ready to commit before trying, that's a dealbreaker."
@@ -85,7 +53,7 @@
   },
   {
    "type": "p",
-   "html": "I used <strong>Dexie.js</strong> as the IndexedDB wrapper for its clean promise-based API and live query hooks that re-render React components when data changes. It behaves like Supabase's real-time, but fully offline."
+   "html": "I used <strong>Dexie.js</strong> inside a React and Vite app, as the IndexedDB wrapper for its clean promise-based API and live query hooks that re-render React components when data changes. It behaves like Supabase's real-time, but fully offline."
   },
   {
    "type": "h3",
@@ -199,9 +167,8 @@
    "html": "The Guest/Sync split also taught me that <strong>cutting friction at the top of the funnel beats adding features</strong>. In early testing, the biggest driver of retention was letting people start tracking without an account."
   },
   {
-   "type": "quote",
-   "html": "Privacy-first doesn't mean feature-poor. Guest Mode plus offline-first gives you a premium experience with zero account friction.",
-   "rule": "lime"
+   "type": "p",
+   "html": "You can log weight, BMI, macros, and measurements with no account, including when you have no signal. An account only turns on sync."
   }
  ],
  "ending": {

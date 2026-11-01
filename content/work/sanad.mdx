@@ -5,27 +5,32 @@ import Summary from "@/components/Summary";
 
 
 <Summary
-  readTime="10 min"
-  problem="New businesses cannot move money until they pass KYB verification, so they start it, hit friction, and quit. I hit this same wall myself going through Companies House."
-  approach="Designed the full six-screen verification flow for a concept business bank, built it as a working React prototype, then audited my own build and published what it got wrong."
-  constraint="Regulators require every step, so removing friction was off the table. The process had to feel faster without becoming any less rigorous."
+  title="The wall"
+  rows={[
+    {
+      label: "Where I hit it",
+      text: "New businesses cannot move money until they pass KYB verification, so they start it, hit friction, and quit. I hit this same wall myself going through Companies House.",
+    },
+    {
+      label: "What I built",
+      text: "Designed the full six-screen verification flow for a concept business bank, built it as a working React prototype, then audited my own build and published what it got wrong.",
+    },
+  ]}
 />
 
 New businesses signing up for a fintech product have to prove they're real and legitimate before they can move money. The process is called KYB, Know Your Business. It's slow, document-heavy, and legally mandatory. So businesses start it, hit friction, and give up. The company loses a customer it already paid to acquire, at the worst possible moment.
 
-I know this one firsthand, because it happened to me. Going through Companies House verification in the UK, I didn't know how many steps were coming. I was missing one document. There was no way to save and come back, so stopping halfway meant starting over. And when a document got rejected, I was back at the beginning again, with no way to set aside the one thing I still needed time to track down. The verification itself couldn't change. The experience of it clearly could. That gap is what Sanad exists to close.
+I know this one firsthand, because it happened to me. Going through Companies House verification in the UK, I didn't know how many steps were coming. I was missing one document. There was no way to save and come back, so stopping halfway meant starting over. And when a document got rejected, I was back at the beginning again, with no way to set aside the one thing I still needed time to track down. The verification itself couldn't change. The experience of it could.
 
-So the problem is real. The only invented part is the product wrapper. I designed the full KYB onboarding flow for Sanad, a concept business-banking brand, and built it as a working React prototype. The interesting part isn't the screens. It's the constraint: you're not allowed to make the process easier by making it less rigorous. Every decision lives inside that.
+So the problem is real. The only invented part is the product wrapper. I designed the full KYB onboarding flow for Sanad, a concept business-banking brand, and built it as a working React prototype. One rule sat on every screen: you're not allowed to make the process easier by making it less rigorous.
 
 ---
-
-## The tension that shapes everything
 
 You cannot delete steps. Regulators require this verification, so "reduce friction" in the usual sense is off the table. The real problem is narrower and harder than that:
 
 > How do you make a legally rigid, unavoidable process feel fast, clear, and trustworthy, without weakening what it's legally required to do?
 
-That reframe is the whole project. It rules out the easy answer, fewer fields, and forces every decision to earn its place against a constraint I couldn't move.
+Fewer fields was the easy answer, and it was off the table. Every decision below had to earn its place against a constraint I couldn't move.
 
 **Who I designed for:** a founder or ops lead completing verification for their company. Busy. Not a compliance expert. Often doesn't have every document on hand. And a little distrustful, because they're handing sensitive company and personal data to a product they met ten minutes ago. So I designed for someone impatient, under-informed, and slightly guarded, not a patient user who reads instructions.
 
@@ -115,6 +120,8 @@ Because the prototype is real working code, I could hold it to the same standard
 
 None of these showed up in a screenshot. They only surfaced because the thing runs. Which is the whole argument for designing in code: it makes your claims testable, including against yourself.
 
+The prototype is React and custom CSS. An AI assistant helped me build it. The four failures above are from running it.
+
 ---
 
 ## Two threads that tie it together
@@ -141,4 +148,3 @@ This is a concept, so what I have is design intent, not proof. I'd rather say th
   <SanadPrototype />
 </DeviceFrame>
 
-> Regulators decide what the steps are. Design decides how they feel. That gap is the whole job.
