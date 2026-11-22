@@ -40,9 +40,8 @@ const Hero = () => (
           </h1>
 
           <p className="mb-32 max-w-lead font-sans text-[17px] leading-[1.65] text-ink md:text-[19px]">
-            Six years in B2B UX, from research to shipped interface. I build and ship my own
-            products in React and Tailwind too, which is why the prototypes on this site are
-            real software rather than screenshots.
+            Marketplace and transactional B2B: booking, payments, billing, dashboards. I ship
+            working prototypes, not screenshots.
           </p>
 
           <div className="flex flex-wrap items-center gap-16">

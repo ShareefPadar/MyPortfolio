@@ -3,10 +3,18 @@ import Summary from "@/components/Summary";
 
 
 <Summary
+  title="Handoff"
   readTime="5 min"
-  problem="A multi-stop route planned in Google Maps stays trapped on the passenger phone, so people either shout directions across a language barrier or hand over their number."
-  approach="Designed an encrypted QR handshake that transfers the whole itinerary in one scan, with destination masking, one-time links, and offline Plus Codes."
-  constraint="Privacy was the real blocker, not speed. The handshake had to exchange zero personal data and still beat simply saying an address out loud."
+  rows={[
+    {
+      label: "Stuck on one phone",
+      text: "A multi-stop route planned in Google Maps stays trapped on the passenger phone, so people either shout directions across a language barrier or hand over their number.",
+    },
+    {
+      label: "One scan",
+      text: "Designed an encrypted QR handshake that transfers the whole itinerary in one scan, with destination masking, one-time links, and offline Plus Codes.",
+    },
+  ]}
 />
 
 ## The Friction Gap Nobody Talks About
@@ -112,7 +120,7 @@ The whole thing takes under five seconds.
 
 ## Reflection
 
-The biggest surprise wasn't the navigation frustration. It was the emotional weight of handing over a phone. People didn't call it inconvenient. They called it invasive, and anxious. That one insight moved my whole priority from speed to trust. Privacy wasn't a feature to bolt on at the end. It was the product.
+The biggest surprise was the emotional weight of handing over a phone. People called it invasive, and anxious, not merely inconvenient. I stopped treating speed as the main job and designed the handshake to exchange no personal data.
 
 **Honest limitations.** 19 respondents gives direction, not statistical confidence. A study of 100+ across several cities would put this on firmer ground. And the scan flow and driver screen stay hypotheses until they're tested with real drivers, in moving cars, in different light, on different phones.
 

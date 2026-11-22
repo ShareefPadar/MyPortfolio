@@ -8,9 +8,13 @@
  "ogImage": "https://www.shareefpadar.com/assets/work/freelax-thumb.webp",
  "head": {
   "number": "01",
-  "label": "Overview",
+  "label": "Deadline",
   "title": "Tax that stops being a surprise.",
   "meta": [
+   {
+    "k": "Period",
+    "v": "2026"
+   },
    {
     "k": "My role",
     "v": "Co-founder, Product & Design"
@@ -18,19 +22,11 @@
    {
     "k": "Type",
     "v": "Live product"
-   },
-   {
-    "k": "Period",
-    "v": "2026"
-   },
-   {
-    "k": "Stack",
-    "v": "Next.js · Supabase · Tailwind · Stripe · Claude API"
    }
   ],
   "lead": "From April 2026, HMRC requires every UK sole trader over £50,000 to file quarterly through approved software. The tools waiting for them are built for businesses with payroll and an accountant on retainer, not for one person doing the work and the books at eleven at night. I co-founded Freelax to be the different shape that gap needs, and I own everything you can see.",
   "outcome": {
-   "label": "Outcome",
+   "label": "Where it stands",
    "text": "Live and taking sign-ups. Invoicing, expenses, the tax engine, IR35 and the Self Assessment pack all work. MTD submission is built against HMRC's sandbox and waiting on recognition."
   },
   "statement": "Freelax tells you what you owe. Sometimes it will be wrong, and when it is wrong, the letter from HMRC arrives at the user's house, not ours. That fact sat with me the whole build."
@@ -38,29 +34,25 @@
  "blocks": [
   {
    "type": "short",
-   "tab": "The short version",
+   "tab": "Deadline",
    "note": "8 min read",
    "rows": [
     {
-     "k": "Problem",
+     "k": "Who it's for",
      "v": "From April 2026 every UK sole trader over £50,000 must file quarterly through approved software. The tools waiting for them are built for businesses with payroll and an accountant, not for one person doing the work and the books at eleven at night."
     },
     {
-     "k": "What I did",
+     "k": "My part",
      "v": "Co-founded and designed the whole product: positioning, design system, content design for AI uncertainty, and the interface itself. Live and taking sign-ups."
     },
     {
-     "k": "Why it was hard",
+     "k": "The letter",
      "v": "The deadline is written into law, not chosen. And the product tells people what they owe HMRC. When it is wrong, the letter arrives at their house, not ours."
     }
    ]
   },
   {
    "type": "hr"
-  },
-  {
-   "type": "h2",
-   "text": "A deadline written into law"
   },
   {
    "type": "p",
@@ -268,7 +260,7 @@
   },
   {
    "type": "p",
-   "html": "Showing more is not the same as being clearer. That is the entire product, in one mistake I had to make first."
+   "html": "Showing more is not the same as being clearer."
   },
   {
    "type": "figure",
@@ -375,6 +367,10 @@
   {
    "type": "p",
    "html": "MTD submission is built against HMRC's sandbox and waiting. It unlocks when we are recognised, and recognition needs the company formed first, which makes it the longest thread we are pulling."
+  },
+  {
+   "type": "p",
+   "html": "The copilot calls the Claude API. Invoicing, the tax engine, and the rest of what you can click are Next.js, Supabase, Tailwind, and Stripe."
   },
   {
    "type": "callout",

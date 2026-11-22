@@ -8,9 +8,13 @@
  "ogImage": "https://www.shareefpadar.com/assets/google-maps-preview.png",
  "head": {
   "number": "01",
-  "label": "Overview",
+  "label": "Handoff",
   "title": "Passing a full multi-stop route between phones in one scan.",
   "meta": [
+   {
+    "k": "Period",
+    "v": "4 weeks"
+   },
    {
     "k": "My role",
     "v": "Lead Product Designer"
@@ -18,15 +22,11 @@
    {
     "k": "Type",
     "v": "Product concept"
-   },
-   {
-    "k": "Period",
-    "v": "4 weeks"
    }
   ],
   "lead": "A privacy-first, encrypted handshake for instant multi-stop navigation transfers between passengers and drivers.",
   "outcome": {
-   "label": "Outcome",
+   "label": "What held up",
    "text": "19 commuters tested the concept and every one said they'd use it. The QR handshake is designed to complete in under five seconds."
   },
   "statement": "Treating privacy as a core feature instead of an afterthought is what makes this work for commuters anywhere."
@@ -34,20 +34,16 @@
  "blocks": [
   {
    "type": "short",
-   "tab": "The short version",
+   "tab": "Handoff",
    "note": "5 min read",
    "rows": [
     {
-     "k": "Problem",
+     "k": "Stuck on one phone",
      "v": "A multi-stop route planned in Google Maps stays trapped on the passenger phone, so people either shout directions across a language barrier or hand over their number."
     },
     {
-     "k": "What I did",
+     "k": "One scan",
      "v": "Designed an encrypted QR handshake that transfers the whole itinerary in one scan, with destination masking, one-time links, and offline Plus Codes."
-    },
-    {
-     "k": "Why it was hard",
-     "v": "Privacy was the real blocker, not speed. The handshake had to exchange zero personal data and still beat simply saying an address out loud."
     }
    ]
   },
@@ -254,7 +250,7 @@
   },
   {
    "type": "p",
-   "html": "The biggest surprise wasn't the navigation frustration. It was the emotional weight of handing over a phone. People didn't call it inconvenient. They called it invasive, and anxious. That one insight moved my whole priority from speed to trust. Privacy wasn't a feature to bolt on at the end. It was the product."
+   "html": "The biggest surprise was the emotional weight of handing over a phone. People called it invasive, and anxious, not merely inconvenient. I stopped treating speed as the main job and designed the handshake to exchange no personal data."
   },
   {
    "type": "p",

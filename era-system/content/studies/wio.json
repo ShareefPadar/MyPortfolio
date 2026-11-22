@@ -8,13 +8,9 @@
  "ogImage": "https://www.shareefpadar.com/assets/work/mizan-thumb.png",
  "head": {
   "number": "01",
-  "label": "Overview",
+  "label": "The hold",
   "title": "When the bank knows and the customer doesn't.",
   "meta": [
-   {
-    "k": "My role",
-    "v": "Product Designer & Builder"
-   },
    {
     "k": "Type",
     "v": "Product concept"
@@ -24,13 +20,13 @@
     "v": "2026"
    },
    {
-    "k": "Stack",
-    "v": "React · Custom CSS · AI-assisted build"
+    "k": "My role",
+    "v": "Product Designer & Builder"
    }
   ],
   "lead": "A business account was frozen for an ownership change. Every document went in that day. A month later the account was still frozen, the POS couldn't settle, and support said \"please wait another 24 hours\" on every call for four weeks. The bank knew exactly what stage the review was at. The customer never did. I designed the communication layer that gap leaves missing.",
   "outcome": {
-   "label": "Outcome",
+   "label": "What shipped",
    "text": "A working prototype for the wait itself, not the decision. Built against dated public complaints, and constrained by what compliance genuinely cannot disclose."
   },
   "statement": "Several of the causes here cannot be designed away: mandatory holds, external registry timelines, reasons the bank is not allowed to give. What can be designed is what the customer is told while they wait."
@@ -38,19 +34,19 @@
  "blocks": [
   {
    "type": "short",
-   "tab": "The short version",
+   "tab": "The hold",
    "note": "9 min read",
    "rows": [
     {
-     "k": "Problem",
+     "k": "The reviews",
      "v": "Business accounts get frozen for compliance reviews with no stage, no clock, and a rolling promise of another 24 hours, while the linked POS stops settling."
     },
     {
-     "k": "What I did",
+     "k": "Six screens",
      "v": "Designed and built six screens for the wait itself: a stage tracker, a running clock, a proactive admission when the estimate slips, and a scoped restriction that keeps the business trading."
     },
     {
-     "k": "Why it was hard",
+     "k": "What I couldn't touch",
      "v": "The freeze is often mandatory and the reason legally cannot be disclosed. Only the communication layer was ever mine to change."
     }
    ]
@@ -58,7 +54,7 @@
   {
    "type": "callout",
    "rule": "lime",
-   "label": "On fairness",
+   "label": "",
    "paras": [
     "Wio is one of the UAE's fastest-growing digital banks and has genuine advocates. Its onboarding and app are widely praised, and it publishes strong satisfaction scores. This study isn't a verdict on the bank. It looks at one specific flow that its own public reviews show repeatedly failing, and asks what design could do about it inside constraints that no interface can remove: mandatory compliance holds, external registry timelines, review reasons the bank legally cannot disclose. The rest of this case study is what's left once you accept that."
    ]
@@ -143,7 +139,7 @@
   },
   {
    "type": "p",
-   "html": "That constraint is the whole project. It rules out the obvious answer and forces every decision into the communication layer, which is precisely where the failure actually lives."
+   "html": "I could not lift the freeze, and sometimes I could not publish the reason. The six screens only change what the customer is told while they wait: the stage, a running clock, an admission when the estimate slips, and what the business can still do."
   },
   {
    "type": "p",
@@ -341,6 +337,10 @@
    "html": "<strong>Design the wait, not just the outcome.</strong> The decision was never the broken part. The weeks before it were."
   },
   {
+   "type": "p",
+   "html": "The prototype is React and custom CSS. An AI assistant helped on the boilerplate. The complaints are the public reviews linked above. The screens are my concept."
+  },
+  {
    "type": "hr"
   },
   {
@@ -374,7 +374,7 @@
   },
   {
    "type": "quote",
-   "html": "The bank knew the stage the whole time. Everything the customer needed already existed internally and never reached the screen. That gap is the design problem.",
+   "html": "The bank knew the stage the whole time. Everything the customer needed already existed internally and never reached the screen.",
    "rule": "lime"
   }
  ],

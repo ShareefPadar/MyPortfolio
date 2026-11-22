@@ -4,15 +4,25 @@ import Shot from "@/components/Shot";
 
 
 <Summary
+  title="Deadline"
   readTime="8 min"
-  problem="From April 2026 every UK sole trader over £50,000 must file quarterly through approved software. The tools waiting for them are built for businesses with payroll and an accountant, not for one person doing the work and the books at eleven at night."
-  approach="Co-founded and designed the whole product: positioning, design system, content design for AI uncertainty, and the interface itself. Live and taking sign-ups."
-  constraint="The deadline is written into law, not chosen. And the product tells people what they owe HMRC. When it is wrong, the letter arrives at their house, not ours."
+  rows={[
+    {
+      label: "Who it's for",
+      text: "From April 2026 every UK sole trader over £50,000 must file quarterly through approved software. The tools waiting for them are built for businesses with payroll and an accountant, not for one person doing the work and the books at eleven at night.",
+    },
+    {
+      label: "My part",
+      text: "Co-founded and designed the whole product: positioning, design system, content design for AI uncertainty, and the interface itself. Live and taking sign-ups.",
+    },
+    {
+      label: "The letter",
+      text: "The deadline is written into law, not chosen. And the product tells people what they owe HMRC. When it is wrong, the letter arrives at their house, not ours.",
+    },
+  ]}
 />
 
 ---
-
-## A deadline written into law
 
 Most products get built because someone had an idea. This one has a date.
 
@@ -116,7 +126,7 @@ It stopped trying to show everything and started answering one question: *what d
 
 </Callout>
 
-Showing more is not the same as being clearer. That is the entire product, in one mistake I had to make first.
+Showing more is not the same as being clearer.
 
 <Shot src="/assets/work/freelax-tax.webp" alt="The tax page after the split: four headline figures (tax owed, set aside, take-home, deadline), one suggested next step, and MTD quarters and VAT returns as their own destinations" caption="After the split. Four figures, one suggested action, and VAT returns and MTD submissions demoted to links." />
 
@@ -162,6 +172,8 @@ Freelax is in production and taking sign-ups today. Invoicing, quotes, expenses,
 <Shot src="/assets/work/freelax-invoices.webp" alt="The invoices list: nine invoices with draft, overdue and paid status pills, filter tabs across the top, and unpaid and paid totals" caption="Invoicing, with the state of every invoice readable at a glance." />
 
 MTD submission is built against HMRC's sandbox and waiting. It unlocks when we are recognised, and recognition needs the company formed first, which makes it the longest thread we are pulling.
+
+The copilot calls the Claude API. Invoicing, the tax engine, and the rest of what you can click are Next.js, Supabase, Tailwind, and Stripe.
 
 <Callout label="What this page does not claim" tone="flag">
 

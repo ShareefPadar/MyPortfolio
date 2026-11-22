@@ -8,7 +8,7 @@ import { shell, esc } from './layout.mjs';
 import { filterJS } from '../_shared/client.mjs';
 export const meta = { id: '2002', title: '2002 — Work' };
 
-const TINT = { Fintech: 'blue', Travel: 'teal', Navigation: 'green', Marketing: 'orange', Social: 'pink', 'Co-living': 'teal', Health: 'violet' };
+const TINT = { Billing: 'blue', Onboarding: 'blue', Payments: 'blue', Booking: 'teal', Fintech: 'blue', Travel: 'teal', Navigation: 'green', Marketing: 'orange', Social: 'pink', 'Co-living': 'teal', Health: 'violet' };
 
 export default function render(args) {
   const { content: c, icons, assetBase = '' } = args;

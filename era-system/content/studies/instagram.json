@@ -8,16 +8,16 @@
  "ogImage": "https://www.shareefpadar.com/assets/instagram-local.png",
  "head": {
   "number": "01",
-  "label": "Overview",
+  "label": "Nearby",
   "title": "Giving Instagram a local layer people can actually find.",
   "meta": [
    {
-    "k": "My role",
-    "v": "Product Designer"
-   },
-   {
     "k": "Type",
     "v": "Product concept"
+   },
+   {
+    "k": "My role",
+    "v": "Product Designer"
    },
    {
     "k": "Period",
@@ -26,7 +26,7 @@
   ],
   "lead": "Instagram connects you to the whole world but falls short two streets away. This concept adds a local layer for finding nearby events and businesses.",
   "outcome": {
-   "label": "Outcome",
+   "label": "From 20 people",
    "text": "A 20-user survey found 86% value local content but fewer than half can find it, so I designed two discovery patterns for passive and active browsing."
   },
   "statement": "Uncovered a critical gap: 86% of users value local content, but fewer than half can find it. Surveyed 20 users, designed 2 discovery solutions for passive and active browsing modes."
@@ -34,19 +34,19 @@
  "blocks": [
   {
    "type": "short",
-   "tab": "The short version",
+   "tab": "Nearby",
    "note": "4 min read",
    "rows": [
     {
-     "k": "Problem",
+     "k": "Two streets away",
      "v": "Instagram connects you to the whole world but buries what is happening two streets away under global hashtags. 86% of surveyed users valued local content, fewer than half could find it."
     },
     {
-     "k": "What I did",
+     "k": "Two doors",
      "v": "Designed two discovery entry points for two intents: a Near You feed tab for passive scrolling, and a Near You grid in Explore for people arriving with a plan."
     },
     {
-     "k": "Why it was hard",
+     "k": "Left alone",
      "v": "Adding a local layer without fracturing an app that billions of people already know how to use."
     }
    ]
@@ -196,7 +196,7 @@
   },
   {
    "type": "quote",
-   "html": "86% of users valued local content, but fewer than half could actually find it. The gap wasn't a missing feature. It was a missing layer, sitting inside an app they already open every day.",
+   "html": "86% of users valued local content, but fewer than half could actually find it. The local layer sits inside an app they already open every day.",
    "rule": "lime"
   }
  ],
