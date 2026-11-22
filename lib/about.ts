@@ -13,10 +13,10 @@ export interface Job {
 
 export const JOBS: Job[] = [
   {
-    role: "Senior UI/UX Designer & UX Engineer",
+    role: "Senior Product Designer",
     company: "Cargoz · Dubai",
     period: "2025 – Present",
-    desc: "Shipped Cargoz Connect, a two-sided B2B warehouse marketplace for booking space within 24 hours, from wireframes to live UI. Building the design system for a 6-developer team and shipping front-end code in React and Tailwind.",
+    desc: "Shipped Cargoz Connect, a two-sided B2B warehouse marketplace for booking space within 24 hours, from wireframes to live UI. Building the design system for a 6-developer team, and building working prototypes with Claude Code and Cursor so the team can test real flows before build.",
   },
   {
     role: "Senior UI/UX Designer",
