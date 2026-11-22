@@ -44,6 +44,17 @@ const nextConfig = {
         destination: '/work/wio',
         permanent: true,
       },
+      // Roomy and Form left the portfolio. Old links land on the work index.
+      {
+        source: '/work/roomy',
+        destination: '/work',
+        permanent: true,
+      },
+      {
+        source: '/work/form',
+        destination: '/work',
+        permanent: true,
+      },
     ]
   },
 }

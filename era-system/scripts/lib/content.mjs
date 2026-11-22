@@ -9,7 +9,9 @@ import path from 'node:path';
 export function loadContent(root) {
   const c = JSON.parse(fs.readFileSync(path.join(root, 'content', 'site.json'), 'utf8'));
   const get = id => { const p = c.projects[id]; if (!p) throw new Error(`content: unknown project id "${id}"`); return p; };
-  c.selectedWork.items = c.selectedWork.ids.map(get);
+  // Home cards are the selected ids that are also showOnHome, so a project can
+  // leave the homepage without leaving the work index.
+  c.selectedWork.items = c.selectedWork.ids.map(get).filter(p => p.showOnHome);
   c.workIndex.groups.forEach(g => { g.items = g.ids.map(get); });
   // filter chips: "All" + every domain in first-appearance order across the index
   c.workIndex.filters = [...new Set(c.workIndex.groups.flatMap(g => g.items.map(p => p.domain)))];

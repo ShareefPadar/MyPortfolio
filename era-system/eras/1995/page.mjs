@@ -37,6 +37,10 @@ export default function render(args) {
           </div>
         </div>
       </article>`).join('');
+  const liveSection = c.live.items.length ? `<section class="wrap block" data-guide-id="live" aria-labelledby="l-h">
+    <div class="marker reveal"><span class="t-numeral">02</span><h2 id="l-h">${esc(c.live.heading)}</h2><i></i></div>
+    <div class="cards">${live}</div>
+  </section>` : '';
 
   const main = `<main id="main">
   <section class="hero wrap" data-guide-id="hero" aria-labelledby="hero-title">
@@ -68,10 +72,7 @@ export default function render(args) {
     <a class="underline-link" href="${esc(c.nda.link.href)}">${esc(c.nda.link.label)} ${ic('arrowR')}</a>
   </div></div>
 
-  <section class="wrap block" data-guide-id="live" aria-labelledby="l-h">
-    <div class="marker reveal"><span class="t-numeral">02</span><h2 id="l-h">${esc(c.live.heading)}</h2><i></i></div>
-    <div class="cards">${live}</div>
-  </section>
+  ${liveSection}
 </main>`;
   const pageScript = `  // ── portrait: decoded exactly as live; grey = luminance × 1.12 contrast ──
   const decode = s => { const t = new Uint8Array(P.width * P.height); let r = 0, a = 0;

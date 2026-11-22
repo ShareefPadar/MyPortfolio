@@ -4,7 +4,7 @@ import WorkCard from "@/components/WorkCard";
 import Reveal from "@/components/px/Reveal";
 import PixelIcon from "@/components/px/PixelIcon";
 import DinoRunner from "@/components/px/DinoRunner";
-import { featured, sideProjects } from "@/lib/work";
+import { featured } from "@/lib/work";
 
 /**
  * Homepage (spec §7.1).
@@ -33,7 +33,7 @@ export default function Home() {
       </div>
 
       {/* SELECTED WORK */}
-      <section id="work" data-guide-id="work" className="mx-auto w-full max-w-wide px-16 pt-64 md:pt-96">
+      <section id="work" data-guide-id="work" className="mx-auto w-full max-w-wide px-16 pt-64 pb-96 md:pt-96 md:pb-128">
         <SectionMarker title="SELECTED WORK" />
 
         <div className="grid gap-32 md:grid-cols-2 md:gap-48">
@@ -88,67 +88,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* DESIGNED, BUILT & LIVE */}
-      <section
-        data-guide-id="live"
-        className="mx-auto w-full max-w-wide px-16 pt-64 pb-96 md:pt-96 md:pb-128"
-      >
-        <SectionMarker title="DESIGNED, BUILT & LIVE" />
-
-        <div className="grid gap-32 md:grid-cols-2 md:gap-48">
-          {sideProjects.map((study) => (
-            <Reveal key={study.slug}>
-              {/* h-[calc(100%-17px)], not h-full: mt-17 clears the tab, and the
-                  height has to give that back or the card overhangs its slot. */}
-              <div className="card mt-[17px] flex h-[calc(100%-17px)] flex-col">
-                <span className="card-tab">{study.card.category}</span>
-
-                <div className="card-body m-[10px] flex flex-1 flex-col p-16">
-                  <p className="mb-8 flex items-center gap-8 font-mono text-[9px] tracking-[0.02em] text-mute">
-                    <span className="led inline-block h-8 w-8 bg-lime" aria-hidden="true" />
-                    Live · side project
-                  </p>
-                  <h3 className="mb-4 font-sans text-[19px] font-medium leading-[1.4] text-ink">
-                    {study.card.headline}
-                  </h3>
-                  <p className="mb-12 font-mono text-[9px] tracking-[0.02em] text-mute">
-                    {study.card.title}
-                  </p>
-                  <p className="mb-16 font-sans text-[14px] leading-[1.6] text-ink">
-                    {study.card.description}
-                  </p>
-
-                  {/* Two saturated buttons never sit side by side, so inside a
-                      card the secondary drops to tertiary (§4.1). */}
-                  <div className="mt-auto flex flex-wrap items-center gap-x-24 gap-y-8">
-                    <Link
-                      href={`/work/${study.slug}`}
-                      className="inline-flex min-h-[44px] items-center gap-8 font-pix text-[11px] leading-none text-blue"
-                    >
-                      CASE STUDY
-                    </Link>
-                    {study.liveUrl && (
-                      <a
-                        href={study.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex min-h-[44px] items-center gap-8 font-pix text-[11px] leading-none text-blue"
-                      >
-                        LAUNCH APP
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
       {/* Dino Runner, running along the top of the footer.
           Homepage only, not the layout: <Footer /> renders on every route, so
           putting the game "above the footer" there would drop it at the end of
-          all eight case studies too.
+          every case study too.
 
           NO bottom padding, deliberately. The canvas ends on its ground line
           and the footer starts immediately underneath, so the paper-to-night

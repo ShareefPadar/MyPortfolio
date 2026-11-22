@@ -16,9 +16,7 @@ export type Domain =
   | "BOOKING"
   | "NAVIGATION"
   | "SOCIAL"
-  | "MARKETING"
-  | "CO-LIVING"
-  | "HEALTH";
+  | "MARKETING";
 
 /** Work index tiering (spec §7.2). Tier 1 is the "START HERE" pair. */
 export type Tier = 1 | 2;
@@ -81,6 +79,11 @@ export interface CaseStudy {
 
   domain: Domain;
   tier: Tier;
+  /**
+   * Selected Work on the home page. The work index and the case-study URL
+   * stay either way. A later marketplace study can set this true.
+   */
+  showOnHome: boolean;
   /** Display order in the grids. */
   order: number;
   /**
@@ -125,6 +128,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     },
     domain: "BILLING",
     tier: 1,
+    showOnHome: true,
     order: 1,
     nextOrder: 9,
   },
@@ -166,6 +170,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     },
     domain: "ONBOARDING",
     tier: 1,
+    showOnHome: true,
     order: 2,
     nextOrder: 5,
   },
@@ -203,6 +208,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     },
     domain: "PAYMENTS",
     tier: 1,
+    showOnHome: true,
     order: 3,
     nextOrder: 6,
   },
@@ -232,6 +238,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     },
     domain: "BOOKING",
     tier: 2,
+    showOnHome: true,
     order: 4,
     nextOrder: 3,
   },
@@ -261,6 +268,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     },
     domain: "NAVIGATION",
     tier: 2,
+    showOnHome: false,
     order: 5,
     nextOrder: 1,
   },
@@ -290,6 +298,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     },
     domain: "MARKETING",
     tier: 2,
+    showOnHome: false,
     order: 6,
     nextOrder: 2,
   },
@@ -319,74 +328,9 @@ export const CASE_STUDIES: CaseStudy[] = [
     },
     domain: "SOCIAL",
     tier: 2,
+    showOnHome: false,
     order: 7,
     nextOrder: 4,
-  },
-  {
-    slug: "roomy",
-    title: "Roomy: The Bedspace OS",
-    headline: "Rent, bills, and laundry for 21 flatmates on one ledger",
-    description:
-      "Living with 21 roommates broke every spreadsheet, so I designed and shipped a shared system of record for rent, utilities, and facilities. It's in daily use.",
-    role: "Product Designer & Builder",
-    type: "Live product",
-    duration: "2-4 weeks",
-    outcome:
-      "Running in production for a 21-person flat, with rent, utilities, and laundry on one shared system of record.",
-    stack: "Next.js 16 • React 19 • Tailwind CSS 4",
-    imageUrl: "/assets/roomy-preview.png",
-    bgColor: "#F5F3FF",
-    liveUrl: "https://roomy-delta.vercel.app/",
-    liveLabel: "Launch Live App",
-    repoUrl: "https://github.com/ShareefPadar/Roomy",
-    repoLabel: "View Repository",
-    card: {
-      headline: "Ending spreadsheet chaos for a 21-person flat",
-      title: "Roomy · Bedspace OS",
-      category: "Co-living",
-      badge: "Live",
-      description:
-        "A bedspace management app I designed and built myself. In daily production use.",
-      thumbnail: "/assets/roomy-preview.png",
-    },
-    domain: "CO-LIVING",
-    tier: 2,
-    order: 8,
-    nextOrder: 8,
-  },
-  {
-    slug: "form",
-    title: "Form: Privacy-First Health",
-    headline: "Health tracking that works offline, with no account",
-    description:
-      "Most fitness apps want an account before you can log anything, and they stop when the signal does. Form runs fully offline with no account. Weight, BMI, and body composition stay on the device and sync only if you choose.",
-    metaDescription:
-      "A health tracker that logs weight, BMI, and macros with no account, and keeps working offline. Sync is optional.",
-    role: "Product Designer & Builder",
-    type: "Live product",
-    duration: "2-4 weeks",
-    outcome:
-      "Live and offline-first. Full tracking with no sign-up, and data stays on the device until you choose to sync.",
-    stack: "React + Vite • IndexedDB (Dexie.js) • Supabase • Recharts",
-    imageUrl: "/assets/fitness-tracker-preview.png",
-    bgColor: "#0D1117",
-    liveUrl: "https://fitness-tracker-pi-tan.vercel.app/",
-    liveLabel: "Launch Live App",
-    repoUrl: "https://github.com/ShareefPadar/fitness-tracker",
-    repoLabel: "View Repository",
-    card: {
-      headline: "Health tracking with zero sign-up friction",
-      title: "Form · Privacy-first health",
-      category: "Health",
-      badge: "Live",
-      description:
-        "A privacy-first, offline-first health tracker I designed and built myself.",
-      thumbnail: null,
-    },
-    domain: "HEALTH",
-    tier: 2,
-    order: 9,
-    nextOrder: 7,
   },
 ];
 
@@ -400,12 +344,8 @@ export const slugs = byOrder.map((s) => s.slug);
 export const getStudy = (slug: string): CaseStudy | undefined =>
   CASE_STUDIES.find((s) => s.slug === slug);
 
-/** Homepage: the four featured case studies, then the two live side projects. */
-export const featuredSlugs = ["freelax", "sanad", "wio", "almosafer-audit"];
-export const sideProjectSlugs = ["roomy", "form"];
-
-export const featured = featuredSlugs.map((s) => getStudy(s)!).filter(Boolean);
-export const sideProjects = sideProjectSlugs.map((s) => getStudy(s)!).filter(Boolean);
+/** Homepage Selected Work, in `order`. Freelax is first. */
+export const featured = byOrder.filter((s) => s.showOnHome);
 
 /**
  * Next story. Walks `nextOrder` rather than `order`, preserving exactly where

@@ -19,8 +19,6 @@ const mdxMap: Record<string, React.ComponentType> = {
   "sanad": dynamic(() => import("@/content/work/sanad.mdx")),
   "wio": dynamic(() => import("@/content/work/wio.mdx")),
   "instagram-local": dynamic(() => import("@/content/work/instagram-local.mdx")),
-  "roomy": dynamic(() => import("@/content/work/roomy.mdx")),
-  "form": dynamic(() => import("@/content/work/form.mdx")),
 };
 
 export function generateStaticParams() {
@@ -84,8 +82,6 @@ const HEADER: Record<string, HeaderShape> = {
   freelax: { layout: "grid", fields: ["duration", "role", "type"], outcome: "plain" },
   sanad: { layout: "line", fields: ["role", "type", "duration"], outcome: "omit" },
   wio: { layout: "grid", fields: ["type", "duration", "role"], outcome: "plain" },
-  roomy: { layout: "grid", fields: ["role", "type", "duration"], outcome: "plain" },
-  form: { layout: "line", fields: ["duration", "type", "role"], outcome: "omit" },
   "almosafer-audit": { layout: "line", fields: ["type", "role", "duration"], outcome: "plain" },
   "google-maps-route-pass": { layout: "line", fields: ["duration", "role", "type"], outcome: "plain" },
   "omni-cast-ai": { layout: "grid", fields: ["role", "duration", "type"], outcome: "plain" },

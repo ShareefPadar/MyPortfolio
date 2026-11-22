@@ -28,6 +28,10 @@ const COOKIE = "era";
 
 const isEra = (v: string | null | undefined): v is Era => !!v && (ERAS as readonly string[]).includes(v);
 
+// Retired case studies. Redirect before any era rewrite, so a remembered era
+// cookie cannot send /work/roomy at a missing HTML file.
+const RETIRED_WORK = new Set(["/work/roomy", "/work/form"]);
+
 // the page's file in public/_eras/<era>/
 const fileFor = (pathname: string) => {
   const p = pathname.replace(/\/+$/, "") || "/";
@@ -37,6 +41,13 @@ const fileFor = (pathname: string) => {
 
 export function proxy(request: NextRequest) {
   const { nextUrl, cookies } = request;
+  const path = nextUrl.pathname.replace(/\/+$/, "") || "/";
+  if (RETIRED_WORK.has(path)) {
+    const url = nextUrl.clone();
+    url.pathname = "/work";
+    return NextResponse.redirect(url, 308);
+  }
+
   const asked = nextUrl.searchParams.get("era");
   const picked = isEra(asked) ? asked : null;
   const era: Era = picked ?? (isEra(cookies.get(COOKIE)?.value) ? (cookies.get(COOKIE)!.value as Era) : LIVE);
