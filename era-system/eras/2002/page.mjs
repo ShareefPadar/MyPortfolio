@@ -44,6 +44,10 @@ export default function render(args) {
             </div>
           </div>
         </article>`; }).join('');
+  const liveSection = c.live.items.length ? `<section class="panel b-live reveal" data-guide-id="live" aria-labelledby="l-h">
+        <h2 class="panel-head" id="l-h">${esc(c.live.heading)}</h2>
+        ${live}
+      </section>` : '';
 
   const main = `    <main class="main" id="main">
       <section class="b-intro" data-guide-id="hero" aria-labelledby="hero-title">
@@ -67,10 +71,7 @@ export default function render(args) {
         <a class="more" href="${esc(c.nda.link.href)}">${esc(c.nda.link.label)}</a>
       </div>
 
-      <section class="panel b-live reveal" data-guide-id="live" aria-labelledby="l-h">
-        <h2 class="panel-head" id="l-h">${esc(c.live.heading)}</h2>
-        ${live}
-      </section>
+      ${liveSection}
     </main>`;
 
   const side = `

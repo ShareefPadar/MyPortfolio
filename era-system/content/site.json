@@ -40,8 +40,7 @@
   "sections": {
    "hero": "It looks like you're viewing a portfolio. Shareef designs it and ships the code too.",
    "work": "It looks like you're browsing case studies. Click any card to dig in.",
-   "nda": "It looks like you're wondering what's missing. Six years of it sits under NDA.",
-   "live": "It looks like you want proof. These two are live. Go press some buttons."
+   "nda": "It looks like you're wondering what's missing. Six years of it sits under NDA."
   },
   "idle": [
    "It looks like you're reading. Would you like help reading?",
@@ -67,8 +66,7 @@
    "sections": {
     "hero": "You are standing in a portfolio. A designer is here. He ships the code too.",
     "work": "Four case studies lie ahead. Each one opens onto the full story.",
-    "nda": "A locked door. Six years of client work sit behind it, under NDA.",
-    "live": "Two working apps rest here. They are live. Try them."
+    "nda": "A locked door. Six years of client work sit behind it, under NDA."
    },
    "idle": [
     "Time passes.",
@@ -97,8 +95,7 @@
    "sections": {
     "hero": "Hey! Glad you stopped by. I design products and build them too.",
     "work": "These are my case studies. Tap one for the full story.",
-    "nda": "Most of my client work is under NDA. Happy to talk it through on a call.",
-    "live": "These two are live. Go try them."
+    "nda": "Most of my client work is under NDA. Happy to talk it through on a call."
    },
    "idle": [
     "Still there?",
@@ -119,8 +116,7 @@
    "sections": {
     "hero": "Hey, I'm in here too. Have a look around.",
     "work": "Start with these four. Each one has the full story.",
-    "nda": "Most of my client work is under NDA. Happy to walk you through it on a call.",
-    "live": "These two are live. I built them, go try them."
+    "nda": "Most of my client work is under NDA. Happy to walk you through it on a call."
    },
    "idle": [
     "Just tidying a few things up.",
@@ -147,6 +143,7 @@
  "projects": {
   "freelax": {
    "id": "freelax",
+   "showOnHome": true,
    "domain": "Billing",
    "relevant": true,
    "status": "Billing · Live",
@@ -158,6 +155,7 @@
   },
   "sanad": {
    "id": "sanad",
+   "showOnHome": true,
    "domain": "Onboarding",
    "relevant": true,
    "status": "Onboarding · Concept",
@@ -169,6 +167,7 @@
   },
   "wio": {
    "id": "wio",
+   "showOnHome": true,
    "domain": "Payments",
    "relevant": true,
    "status": "Payments · Concept",
@@ -180,6 +179,7 @@
   },
   "almosafer": {
    "id": "almosafer",
+   "showOnHome": true,
    "domain": "Booking",
    "relevant": false,
    "status": "Booking · Concept",
@@ -191,6 +191,7 @@
   },
   "google-maps": {
    "id": "google-maps",
+   "showOnHome": false,
    "domain": "Navigation",
    "relevant": false,
    "status": "Navigation · Concept",
@@ -201,6 +202,7 @@
   },
   "omnicast": {
    "id": "omnicast",
+   "showOnHome": false,
    "domain": "Marketing",
    "relevant": false,
    "status": "Marketing · Concept",
@@ -211,31 +213,13 @@
   },
   "instagram": {
    "id": "instagram",
+   "showOnHome": false,
    "domain": "Social",
    "relevant": false,
    "status": "Social · Concept",
    "title": "Surfacing the local content the algorithm buries",
    "meta": "Instagram · Local Feed",
    "href": "/work/instagram-local"
-  },
-  "roomy": {
-   "id": "roomy",
-   "domain": "Co-living",
-   "relevant": false,
-   "status": "Co-living · Live",
-   "title": "Ending spreadsheet chaos for a 21-person flat",
-   "meta": "Roomy · Bedspace OS",
-   "href": "/work/roomy",
-   "image": "/assets/roomy-preview.png"
-  },
-  "form": {
-   "id": "form",
-   "domain": "Health",
-   "relevant": false,
-   "status": "Health · Live",
-   "title": "Health tracking with zero sign-up friction",
-   "meta": "Form · Privacy-first health",
-   "href": "/work/form"
   }
  },
  "selectedWork": {
@@ -257,28 +241,7 @@
  },
  "live": {
   "heading": "Designed, built & live",
-  "items": [
-   {
-    "id": "roomy",
-    "tag": "Co-living",
-    "status": "Live · side project",
-    "title": "Ending spreadsheet chaos for a 21-person flat",
-    "meta": "Roomy · Bedspace OS",
-    "summary": "A bedspace management app I designed and built myself. In daily production use.",
-    "caseStudy": "/work/roomy",
-    "launch": "https://roomy-delta.vercel.app/"
-   },
-   {
-    "id": "form",
-    "tag": "Health",
-    "status": "Live · side project",
-    "title": "Health tracking with zero sign-up friction",
-    "meta": "Form · Privacy-first health",
-    "summary": "A privacy-first, offline-first health tracker I designed and built myself.",
-    "caseStudy": "/work/form",
-    "launch": "https://fitness-tracker-pi-tan.vercel.app/"
-   }
-  ]
+  "items": []
  },
  "games": {
   "_note": "One easter-egg game per era at the end of the home page, except Now, which has none. It has no box: the page background is its sky and the footer's top edge is its floor, like live's Dino Runner. 1995 is live's own game.",
@@ -417,9 +380,7 @@
      "almosafer",
      "google-maps",
      "omnicast",
-     "instagram",
-     "roomy",
-     "form"
+     "instagram"
     ]
    }
   ]

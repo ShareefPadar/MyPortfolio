@@ -37,6 +37,10 @@ export default function render(args) {
           <a href="${esc(l.launch)}" target="_blank" rel="noopener">${esc(c.ui.launchApp)}</a>
         </div>
       </article>`).join('');
+  const liveSection = c.live.items.length ? `<section class="section" data-guide-id="live" aria-labelledby="l-h">
+      <div class="section-head"><h2 id="l-h">${esc(c.live.heading)}</h2></div>
+      <div class="stages">${bonus}</div>
+    </section>` : '';
 
   const main = `  <main id="main">
     <section class="title" data-guide-id="hero" aria-labelledby="hero-title">
@@ -63,10 +67,7 @@ export default function render(args) {
       <a class="btn cursor" href="${esc(c.nda.link.href)}">${esc(c.nda.link.label)}</a>
     </div>
 
-    <section class="section" data-guide-id="live" aria-labelledby="l-h">
-      <div class="section-head"><h2 id="l-h">${esc(c.live.heading)}</h2></div>
-      <div class="stages">${bonus}</div>
-    </section>
+    ${liveSection}
   </main>`;
 
   const pageScript = `

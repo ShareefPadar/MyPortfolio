@@ -44,6 +44,10 @@ export default function render(args) {
           </div>
         </div>
       </article>`).join('');
+  const liveSection = c.live.items.length ? `<section class="band grey" data-guide-id="live" aria-labelledby="l-h"><div class="wrap">
+    <div class="band-head reveal"><span class="num" aria-hidden="true">02</span><h2 id="l-h">${esc(c.live.heading)}</h2></div>
+    <div class="cards">${live}</div>
+  </div></section>` : '';
 
   const headCss = `
 .tint-teal .badge { box-shadow: ${longShadow('#005F54')}; }
@@ -75,10 +79,7 @@ export default function render(args) {
     <a class="btn btn-ghost-d" href="${esc(c.nda.link.href)}">${esc(c.nda.link.label)}</a>
   </div></section>
 
-  <section class="band grey" data-guide-id="live" aria-labelledby="l-h"><div class="wrap">
-    <div class="band-head reveal"><span class="num" aria-hidden="true">02</span><h2 id="l-h">${esc(c.live.heading)}</h2></div>
-    <div class="cards">${live}</div>
-  </div></section>
+  ${liveSection}
 ${gameMarkup(c)}
 </main>`;
 

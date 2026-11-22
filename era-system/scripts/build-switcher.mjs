@@ -2,7 +2,7 @@
 /**
  * Builds design-reference/all-eras.html — ONE self-contained file holding every
  * built era page, with a switcher and a phone-width toggle, for comparing eras.
- * A review tool: every page of every era (home, work, about, the 9 case studies) in one file, with era / page /
+ * A review tool: every page of every era (home, work, about, every case study) in one file, with era / page /
  * phone-width toggles. Links inside a page work too — nav, year switcher (with its arrival effect), case-study
  * links, next story — because the tool catches them and swaps the page, since a single file can't navigate.
  * Each era's <style> is stored once and put back when a page is shown, which keeps the file small.

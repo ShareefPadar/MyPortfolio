@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Pulls the 9 case studies from the live site into content/studies/<project id>.json.
+Pulls the case studies from the live site into content/studies/<project id>.json.
 
 The live site is the source of truth for 1995 — re-run this whenever a case study
 changes on shareefpadar.com. Extraction logic: scripts/lib/extract-study.js (runs in the
@@ -17,7 +17,7 @@ from playwright.async_api import async_playwright
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 JS = open(os.path.join(ROOT, 'scripts', 'lib', 'extract-study.js')).read()
 SLUGS = {'freelax': 'freelax', 'sanad': 'sanad', 'wio': 'wio', 'almosafer-audit': 'almosafer', 'google-maps-route-pass': 'google-maps',
-         'omni-cast-ai': 'omnicast', 'instagram-local': 'instagram', 'roomy': 'roomy', 'form': 'form'}
+         'omni-cast-ai': 'omnicast', 'instagram-local': 'instagram'}
 
 def sc(t):
     return t[:1].upper() + t[1:].lower() if t and t.upper() == t and re.search('[A-Z]', t) else t

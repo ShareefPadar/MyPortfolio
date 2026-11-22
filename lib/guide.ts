@@ -39,10 +39,6 @@ export const GUIDE_STOPS: GuideStop[] = [
     id: "nda",
     message: "It looks like you're wondering what's missing. Six years of it sits under NDA.",
   },
-  {
-    id: "live",
-    message: "It looks like you want proof. These two are live. Go press some buttons.",
-  },
 ];
 
 /**

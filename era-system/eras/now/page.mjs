@@ -29,6 +29,11 @@ export default function render(args) {
         <p>${esc(l.summary)}</p>
         <div class="links"><a href="${esc(l.caseStudy)}">${esc(c.ui.caseStudy)}</a><a href="${esc(l.launch)}" target="_blank" rel="noopener">${esc(c.ui.launchApp)}</a></div>
       </article>`).join('');
+  const liveSection = c.live.items.length ? `<section data-guide-id="live" aria-labelledby="live-h">
+    <h2 class="title2" id="live-h">${esc(c.live.heading)}</h2>
+    <div class="group">${live}
+    </div>
+  </section>` : '';
 
   const main = `  <section class="hero" data-guide-id="hero" aria-labelledby="hero-title">
     <div>
@@ -54,11 +59,7 @@ export default function render(args) {
     <a href="${esc(c.nda.link.href)}">${esc(c.nda.link.label)}</a>
   </section>
 
-  <section data-guide-id="live" aria-labelledby="live-h">
-    <h2 class="title2" id="live-h">${esc(c.live.heading)}</h2>
-    <div class="group">${live}
-    </div>
-  </section>`;
+  ${liveSection}`;
 
   return shell({ ...args, title: `${p.name}, Senior Product Designer`, current: '/', main, guideOpening: c.guide.sections.hero });
 }
